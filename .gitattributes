@@ -1,0 +1,16 @@
+# DOS text files: must stay CRLF — DOS tools parse them as text and
+# BUILDIDX computes byte offsets into MSG files.
+*.MSG   text eol=crlf
+*.SKL   text eol=crlf
+*.LBR   text eol=crlf
+*.LNK   text eol=crlf
+*.INF   text eol=crlf
+*.BAT   text eol=crlf
+*.INI   text eol=crlf
+*.IDX   text eol=crlf
+
+# Source files: LF only — CRLF corrupts MASM THEADR records in .OBJ output
+*.ASM   text eol=lf
+*.C     text eol=lf
+*.H     text eol=lf
+*.INC   text eol=lf
