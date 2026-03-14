@@ -2304,6 +2304,13 @@ $$DO56:
 
    EndProc Init
 
+SHARE_HELP_STR DB "Enables file-sharing and locking capabilities.",0Dh,0Ah
+	       DB 0Dh,0Ah
+	       DB "SHARE [/F:filespace] [/L:locks]",0Dh,0Ah
+	       DB 0Dh,0Ah
+	       DB "  /F:n    Space in bytes for file-sharing info (default 2048)",0Dh,0Ah
+	       DB "  /L:n    Number of simultaneous file locks (default 20)",0Dh,0Ah,"$"
+
    Break <SHAREINIT - Share initialization entry point>
 
 ;******************* START OF SPECIFICATIONS ***********************************
@@ -2320,6 +2327,26 @@ $$DO56:
    nop
    nop
 
+  ; Check for /? help (EXE: DS=PSP at entry, CS=SHARE segment)
+  MOV  SI, 081h
+SHARE_SKIP_SP:
+  CMP  BYTE PTR DS:[SI], ' '
+  JNE  SHARE_CHK_SL
+  INC  SI
+  JMP  SHARE_SKIP_SP
+SHARE_CHK_SL:
+  CMP  BYTE PTR DS:[SI], '/'
+  JNE  SHARE_NO_HELP
+  CMP  BYTE PTR DS:[SI+1], '?'
+  JNE  SHARE_NO_HELP
+  PUSH CS
+  POP  DS
+  MOV  DX, OFFSET SHARE_HELP_STR
+  MOV  AH, 09H
+  INT  21H
+  MOV  AX, 4C00H
+  INT  21H
+SHARE_NO_HELP:
 
    PUSH DS				; save PSP segment for later stack     ;AC001;
 					;     relocation
