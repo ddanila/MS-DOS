@@ -580,6 +580,47 @@ Code			Segment public para
 ;  $SALUT (4,4,9,41)
 
 TRANSIENT:
+   ; Check for /? (CONVERT COM: CS=DG after CONVERT far-jmp;
+   ; get PSP via INT 21h/62h->ES; CALL/POP for string addr; PUSH CS/POP DS for print)
+   MOV   AH, 062H
+   INT   21H          ; BX = PSP segment
+   MOV   ES, BX      ; ES = PSP
+   MOV   SI, 081H
+PT_SKIP_SP:
+   CMP   BYTE PTR ES:[SI], ' '
+   JNE   PT_CHK_SL
+   INC   SI
+   JMP   SHORT PT_SKIP_SP
+PT_CHK_SL:
+   CMP   BYTE PTR ES:[SI], '/'
+   JNE   PT_NO_HELP
+   CMP   BYTE PTR ES:[SI+1], '?'
+   JE    PT_DO_HELP
+PT_NO_HELP:
+   JMP   PT_CONTINUE
+PT_DO_HELP:
+   CALL  PT_HELP_END
+PT_HELP_STR DB "PRINT [/D:device] [/B:n] [/U:n] [/M:n] [/S:n] [/Q:n]",0Dh,0Ah
+   DB "      [/T] [/C] [/P] [[drive:][path]filename [...]]",0Dh,0Ah
+   DB 0Dh,0Ah
+   DB "  /D:device   Print device (default PRN)",0Dh,0Ah
+   DB "  /B:n        Internal buffer size (bytes)",0Dh,0Ah
+   DB "  /U:n        Busy-wait tick count",0Dh,0Ah
+   DB "  /M:n        Max ticks per time slice",0Dh,0Ah
+   DB "  /S:n        Time-slice quantum",0Dh,0Ah
+   DB "  /Q:n        Print queue length",0Dh,0Ah
+   DB "  /T          Terminate print queue",0Dh,0Ah
+   DB "  /C          Remove file(s) from queue",0Dh,0Ah
+   DB "  /P          Add file(s) to queue",0Dh,0Ah,"$"
+PT_HELP_END:
+   POP   DX          ; DX = runtime CS-relative addr of PT_HELP_STR
+   PUSH  CS
+   POP   DS          ; DS = CS (DG segment, same segment as string)
+   MOV   AH, 09H
+   INT   21H
+   MOV   AX, 4C00H
+   INT   21H
+PT_CONTINUE:
 					;-------------------------------------
 					; Install Print
 					;-------------------------------------
