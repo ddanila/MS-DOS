@@ -362,7 +362,35 @@ sb_value_extra  dw      ?               ;AN000; UNUSED SPACE FOR VALUE
         mov     ax,cs                   ;AN003; ;load ES to the right area,
         mov     es,ax                   ;AN003;
         mov     ds,ax                   ;AN003;
+
+SORT_HELP_STR   DB "Sorts input and sends output to the screen or a file.",0Dh,0Ah
+                DB 0Dh,0Ah
+                DB "SORT [/R] [/+n]",0Dh,0Ah
+                DB 0Dh,0Ah
+                DB "  /R    Sort in reverse order",0Dh,0Ah
+                DB "  /+n   Sort starting at column n (default is column 1)",0Dh,0Ah,"$"
+
 SORT:
+        ; Check for /? help switch (DS=PSP at EXE startup)
+        mov     si, 081h
+SORT_SKIP_SP:
+        cmp     byte ptr [si], ' '
+        jne     SORT_CHK_SL
+        inc     si
+        jmp     SORT_SKIP_SP
+SORT_CHK_SL:
+        cmp     byte ptr [si], '/'
+        jne     SORT_NO_HELP
+        cmp     byte ptr [si+1], '?'
+        jne     SORT_NO_HELP
+        push    cs
+        pop     ds
+        lea     dx, SORT_HELP_STR
+        mov     ah, 09h
+        int     21h
+        mov     ax, 4C00h
+        int     21h
+SORT_NO_HELP:
         call    sysloadmsg              ;AN000;  Preload messages, Check DOS Version.
                                         ;If Inc DOS Ver or error loading messages,
                                         ;SYSLOADMSG will show msg and terminate for us
