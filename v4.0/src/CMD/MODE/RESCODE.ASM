@@ -202,7 +202,33 @@ first_char_in_command_line  LABEL   BYTE		;location of the command line paramete
 ;command_line		     DB      7FH DUP(?) 	 ;PARM AREA
 
 	ORG	100H
-ENTPT:	JMP	MAIN			;ENTRY POINT, START AT THE MAIN PROCEDURE
+ENTPT:	MOV	SI, 081H		;point to command-line args
+MD_SKIP_SP:
+	CMP	BYTE PTR [SI], ' '	;skip leading spaces
+	JNE	MD_CHK_SL
+	INC	SI
+	JMP	SHORT MD_SKIP_SP
+MD_CHK_SL:
+	CMP	BYTE PTR [SI], '/'	;check for /
+	JNE	MD_NO_HELP
+	CMP	BYTE PTR [SI+1], '?'	;check for ?
+	JNE	MD_NO_HELP
+	MOV	DX, OFFSET MD_HELP_STR
+	MOV	AH, 09H
+	INT	21H
+	MOV	AX, 4C00H
+	INT	21H
+MD_NO_HELP:
+	JMP	MAIN			;ENTRY POINT, START AT THE MAIN PROCEDURE
+MD_HELP_STR DB "MODE device [options]",0Dh,0Ah
+	    DB 0Dh,0Ah
+	    DB "  LPTn[:] [cols] [lpi] [retry]",0Dh,0Ah
+	    DB "  COMn[:] [baud[,parity[,data[,stop[,retry]]]]]",0Dh,0Ah
+	    DB "  CON [cols=c] [lines=n]",0Dh,0Ah
+	    DB "  LPTn[:]=COMn[:]",0Dh,0Ah
+	    DB "  CON CP SELECT=nnn",0Dh,0Ah
+	    DB "  CON CP REFRESH",0Dh,0Ah
+	    DB "  CON CP /STATUS",0Dh,0Ah,"$"
 	SUBTTL	SERIAL RETRY
 	PAGE
 ;THIS PROC WILL BE POINTED TO BY INT VECTOR 14H

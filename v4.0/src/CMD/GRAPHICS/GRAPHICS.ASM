@@ -61,8 +61,32 @@ CODE	SEGMENT PUBLIC 'CODE'          ;;                                       ;AN
 	INCLUDE GRINST.EXT	       ;; Bring in external declarations	;AN000;
 				       ;;  for transient command processing	;AN000;
 START:				       ;;					;AN000;
-				       ;;					;AN000;
+	MOV   SI, 081H		       ;; point to command-line args		;AN000;
+GR_SKIP_SP:			       ;;					;AN000;
+	CMP   BYTE PTR [SI], ' '      ;; skip leading spaces			;AN000;
+	JNE   GR_CHK_SL	       ;;					;AN000;
+	INC   SI		       ;;					;AN000;
+	JMP   SHORT GR_SKIP_SP	       ;;					;AN000;
+GR_CHK_SL:			       ;;					;AN000;
+	CMP   BYTE PTR [SI], '/'      ;; check for /				;AN000;
+	JNE   GR_NO_HELP	       ;;					;AN000;
+	CMP   BYTE PTR [SI+1], '?'    ;; check for ?				;AN000;
+	JNE   GR_NO_HELP	       ;;					;AN000;
+	MOV   DX, OFFSET GR_HELP_STR  ;;					;AN000;
+	MOV   AH, 09H		       ;;					;AN000;
+	INT   21H		       ;;					;AN000;
+	MOV   AX, 4C00H	       ;;					;AN000;
+	INT   21H		       ;;					;AN000;
+GR_NO_HELP:			       ;;					;AN000;
 	JMP   GRAPHICS_INSTALL	       ;;					;AN000;
+GR_HELP_STR DB "GRAPHICS [type] [[drive:][path]filename] [/R] [/B] [/LCD] [/PB:id]",0Dh,0Ah
+	    DB 0Dh,0Ah
+	    DB "  type      Printer type",0Dh,0Ah
+	    DB "  filename  Graphics profile file",0Dh,0Ah
+	    DB "  /R        Print black/white reversed",0Dh,0Ah
+	    DB "  /B        Print background colour",0Dh,0Ah
+	    DB "  /LCD      Use LCD aspect ratio",0Dh,0Ah
+	    DB "  /PB:id    Print box id",0Dh,0Ah,"$"
 				       ;;					;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;					;AN000;
 ;;

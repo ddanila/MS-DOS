@@ -62,8 +62,31 @@ CODE    SEGMENT PUBLIC 'CODE' BYTE     ;;
                                        ;;
                                        ;;
 START:                                 ;;
-                                       ;;
+        MOV   SI, 081H                 ;; point to command-line args
+KB_SKIP_SP:                            ;;
+        CMP   BYTE PTR [SI], ' '       ;; skip leading spaces
+        JNE   KB_CHK_SL               ;;
+        INC   SI                       ;;
+        JMP   SHORT KB_SKIP_SP         ;;
+KB_CHK_SL:                             ;;
+        CMP   BYTE PTR [SI], '/'       ;; check for /
+        JNE   KB_NO_HELP               ;;
+        CMP   BYTE PTR [SI+1], '?'     ;; check for ?
+        JNE   KB_NO_HELP               ;;
+        MOV   DX, OFFSET KB_HELP_STR   ;;
+        MOV   AH, 09H                  ;;
+        INT   21H                      ;;
+        MOV   AX, 4C00H                ;;
+        INT   21H                      ;;
+KB_NO_HELP:                            ;;
         JMP   KEYB_COMMAND             ;;
+KB_HELP_STR DB "KEYB [xx[,[yyy][,[drive:][path]filename]]] [/E] [/ID:nnn]",0Dh,0Ah
+            DB 0Dh,0Ah
+            DB "  xx        Two-letter keyboard code",0Dh,0Ah
+            DB "  yyy       Code page",0Dh,0Ah
+            DB "  filename  Keyboard definition file",0Dh,0Ah
+            DB "  /E        Enhanced keyboard",0Dh,0Ah
+            DB "  /ID:nnn   Keyboard ID number",0Dh,0Ah,"$"
                                        ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
