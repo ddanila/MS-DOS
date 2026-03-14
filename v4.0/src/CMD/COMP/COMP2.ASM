@@ -400,6 +400,10 @@ qlist_ea ea	<EAISBINARY,EASYSTEM,?,2,2,"CP",?> ;AN001; ;return code page in this
 ;***********************************
 
 
+COMP_HELP_STR DB "Compares the contents of two files or sets of files.",0Dh,0Ah
+	      DB 0Dh,0Ah
+	      DB "COMP [data1] [data2]",0Dh,0Ah,"$"
+
 ;-----------------------------------------------------------------------------
 ; INIT - Fill in fill_seg, fill_off in all msg sublists with current seg_id
 ;	 and offset. Also calls the system load massage function so it can
@@ -408,6 +412,25 @@ qlist_ea ea	<EAISBINARY,EASYSTEM,?,2,2,"CP",?> ;AN001; ;return code page in this
 ;-----------------------------------------------------------------------------
 init	proc	near			;AC000;
 	public	init			;AN000;
+
+  ; Check for /? help (COM file: CS=DS=PSP at entry)
+  MOV  SI, 081h
+COMP_SKIP_SP:
+  CMP  BYTE PTR [SI], ' '
+  JNE  COMP_CHK_SL
+  INC  SI
+  JMP  COMP_SKIP_SP
+COMP_CHK_SL:
+  CMP  BYTE PTR [SI], '/'
+  JNE  COMP_NO_HELP
+  CMP  BYTE PTR [SI+1], '?'
+  JNE  COMP_NO_HELP
+  MOV  DX, OFFSET COMP_HELP_STR
+  MOV  AH, 09H
+  INT  21H
+  MOV  AX, 4C00H
+  INT  21H
+COMP_NO_HELP:
 
 	mov	sp,offset End_Stack_Area ;Big Stack
 	push	ax			;AN000; ;on entry--ax (should) = valid drive parm
@@ -1684,7 +1707,7 @@ Check_DBCS_slash proc near		;AN006;
 	mov	di,offset dstring	;AN006; ;dstring will correspond to the string pointed to by
 	mov	al,00			;AN006; ;string_seg:string_off and for each character in the string
 	rep	stosb			;AN006; ;that is DBCS a corresponding "D" will be stored in dstring.
-					;AN006; ;example:    string : [c:\Å\Å\ ]
+					;AN006; ;example:    string : [c:\ÔøΩ\ÔøΩ\ ]
 					;	     dstring: [   D D  ] (there are two DBCS characters)
 ;
 	sub	si,string_off		;AN006; ;si will equal length of string from beginning to character that may be a slash.
