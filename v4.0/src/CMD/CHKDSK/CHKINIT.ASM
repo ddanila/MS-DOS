@@ -238,6 +238,38 @@ endif
 ;*****************************************************************************	;an000;bgb
 										;an000;bgb
 Procedure Main_Init				;				;an000;bgb;AN000;
+	; Check for /? (CONVERT COM: CS=DG after CONVERT far-jmp)
+	MOV	AH, 062H
+	INT	21H			; BX = PSP segment
+	MOV	ES, BX			; ES = PSP
+	MOV	SI, 081H
+CK_SKIP_SP:
+	CMP	BYTE PTR ES:[SI], ' '
+	JNE	CK_CHK_SL
+	INC	SI
+	JMP	SHORT CK_SKIP_SP
+CK_CHK_SL:
+	CMP	BYTE PTR ES:[SI], '/'
+	JNE	CK_NO_HELP
+	CMP	BYTE PTR ES:[SI+1], '?'
+	JE	CK_DO_HELP
+CK_NO_HELP:
+	JMP	CK_CONTINUE
+CK_DO_HELP:
+	CALL	CK_HELP_END
+CK_HELP_STR DB "CHKDSK [drive:][[path]filename] [/F] [/V]",0Dh,0Ah
+	DB 0Dh,0Ah
+	DB "  /F   Fix errors on the disk",0Dh,0Ah
+	DB "  /V   Display the full path and name of every file on the disk",0Dh,0Ah,"$"
+CK_HELP_END:
+	POP	DX
+	PUSH	CS
+	POP	DS			; DS = CS = DG
+	MOV	AH, 09H
+	INT	21H
+	MOV	AX, 4C00H
+	INT	21H
+CK_CONTINUE:
 	Set_Data_Segment			;Setup addressibility		;an000;bgb;AN000;
 	call get_psp								;an000;bgb
 ;;;;;;;;DOS_Call GetCurrentPSP			;Get PSP segment address	;an000;bgb;ac034;bgb
