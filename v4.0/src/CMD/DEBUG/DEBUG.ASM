@@ -231,6 +231,40 @@ START:
 HEADER	DB	"Vers 2.40"
 
 DSTRT:
+; --- /? help (before sysloadmsg so it works on any DOS version) ---
+	MOV	AH, 062H
+	INT	21H			; BX = PSP segment
+	MOV	ES, BX			; ES = PSP
+	MOV	SI, 081H		; SI = offset of command line in PSP
+HELP_SKIP_SP:
+	CMP	BYTE PTR ES:[SI], ' '
+	JNE	HELP_CHK_SL
+	INC	SI
+	JMP	SHORT HELP_SKIP_SP
+HELP_CHK_SL:
+	CMP	BYTE PTR ES:[SI], '/'
+	JE	HELP_CHK_Q
+	JMP	HELP_NO			; not '/' — skip help block
+HELP_CHK_Q:
+	CMP	BYTE PTR ES:[SI+1], '?'
+	JE	DO_HELP
+	JMP	HELP_NO			; not '?' — skip help block
+DO_HELP:
+	CALL	HELP_DONE		; push runtime addr of HELP_STR
+HELP_STR DB	"Starts Debug, a program testing and editing tool.",CR,LF
+	DB	CR,LF
+	DB	"DEBUG [drive:][path]filename [testfile-parameters]",CR,LF,"$"
+HELP_DONE:
+	POP	DX			; DX = runtime addr of HELP_STR
+	PUSH	CS
+	POP	DS
+	MOV	AH, 09H
+	INT	21H
+	MOV	AX, 4C00H
+	INT	21H
+HELP_NO:
+; --- end /? help ---
+
 ;=========================================================================
 ; invoke PRE_LOAD_MESSAGE here.  If the messages were not loaded we will
 ; exit with an appropriate error message.
@@ -482,7 +516,6 @@ NOLIST:
 	ENDIF
 
 PARSCHK:
-
 
 	call	DEBUG_LEAD_BYTE 	;an000;build the dbcs env. table
 					;      of valid dbcs lead bytes
