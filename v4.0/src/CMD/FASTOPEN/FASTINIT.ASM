@@ -821,8 +821,34 @@ Value_sw1     label   byte   ; switch parameter value expected					   ;AN000;
 ;
 ;-----------------------------------------------------------------------------
 
+FASTOPEN_HELP_STR  DB  "FASTOPEN drive:[=n] [...] [/X]",0Dh,0Ah
+		   DB  0Dh,0Ah
+		   DB  "  drive:[=n]   Drive to cache, with optional entry count (10-999)",0Dh,0Ah
+		   DB  "  /X           Create name cache in expanded memory",0Dh,0Ah,"$"
+
 START:
 					; on entry DS and ES -->PSP				   ;AN000;
+	; Check for /? (EXE file: DS=PSP at entry)
+	MOV	SI, 081h
+FO_SKIP_SP:
+	CMP	BYTE PTR DS:[SI], ' '
+	JNE	FO_CHK_SL
+	INC	SI
+	JMP	SHORT FO_SKIP_SP
+FO_CHK_SL:
+	CMP	BYTE PTR DS:[SI], '/'
+	JNE	FO_NO_HELP
+	CMP	BYTE PTR DS:[SI+1], '?'
+	JNE	FO_NO_HELP
+	PUSH	CS
+	POP	DS
+	ASSUME	DS:cseg_init
+	MOV	DX, OFFSET FASTOPEN_HELP_STR
+	MOV	AH, 09H
+	INT	21H
+	MOV	AX, 4C00H
+	INT	21H
+FO_NO_HELP:
 	push	cs			; DS-->Cseg_Init					   ;AN000;
 	pop	ds										   ;AN000;
 	ASSUME	ds:cseg_init									   ;AN000;
