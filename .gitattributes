@@ -1,6 +1,9 @@
 # DOS text files: must stay CRLF — DOS tools parse them as text and
 # BUILDIDX computes byte offsets into MSG files.
-*.MSG   text eol=crlf
+# *.MSG uses binary (not text eol=crlf) so git stores the blob as-is;
+# the upstream blob already has CRLF bytes, and binary prevents the
+# normalization mismatch that causes USA-MS.MSG to always show as modified.
+*.MSG   binary
 *.SKL   text eol=crlf
 *.LBR   text eol=crlf
 *.LNK   text eol=crlf
