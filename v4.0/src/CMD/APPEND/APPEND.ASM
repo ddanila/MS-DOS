@@ -2448,7 +2448,37 @@ page
 ;	or displaying appended directory list.
 ;-----------------------------------------------------------------------------
 
+APPEND_HELP_STR DB "Allows programs to open data files in specified directories as if they",0Dh,0Ah
+		DB "were in the current directory.",0Dh,0Ah
+		DB 0Dh,0Ah
+		DB "APPEND [[drive:]path[;...]] [/X[:ON|OFF]] [/PATH:ON|OFF] [/E]",0Dh,0Ah
+		DB 0Dh,0Ah
+		DB "  /X[:ON|OFF]    Extend file search to EXEC and file-find",0Dh,0Ah
+		DB "  /PATH:ON|OFF   Search appended dirs for files with explicit paths",0Dh,0Ah
+		DB "  /E             Store path list in APPEND environment variable",0Dh,0Ah,"$"
+
 main_begin:				; DOS entry point
+
+  ; Check for /? help (EXE: DS=PSP at entry, CS=cseg)
+  MOV  SI, 081h
+APND_SKIP_SP:
+  CMP  BYTE PTR DS:[SI], ' '
+  JNE  APND_CHK_SL
+  INC  SI
+  JMP  APND_SKIP_SP
+APND_CHK_SL:
+  CMP  BYTE PTR DS:[SI], '/'
+  JNE  APND_NO_HELP
+  CMP  BYTE PTR DS:[SI+1], '?'
+  JNE  APND_NO_HELP
+  PUSH CS
+  POP  DS
+  MOV  DX, OFFSET APPEND_HELP_STR
+  MOV  AH, 09H
+  INT  21H
+  MOV  AX, 4C00H
+  INT  21H
+APND_NO_HELP:
 
 	mov	ax,seg mystack		; set up stack
 	mov	ss,ax
