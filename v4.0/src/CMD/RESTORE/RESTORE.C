@@ -92,6 +92,9 @@
 /*		;AN005;   Replace COM_STRRCHR dbcs routine, fixes p5029
 /*****************  END OF SPECIFICATION    *********************************/
 
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 #include "rt.h"
 #include "rt1.h"
 #include "rt2.h"
@@ -165,6 +168,21 @@ void main(argc,argv)  /* wrw! */
    DWORD drive_map;
    DWORD prev_address;
    WORD  prev_action;
+
+   if (argc >= 2 && strcmp(argv[1], "/?") == 0) {
+      printf("Restores files that were backed up by using the BACKUP command.\n\n");
+      printf("RESTORE source: dest [/S] [/P] [/M] [/N] [/B:date] [/A:date]\n");
+      printf("               [/E:time] [/L:time]\n\n");
+      printf("  /S        Restore subdirectories\n");
+      printf("  /P        Prompt before restoring over read-only or changed files\n");
+      printf("  /M        Restore only files modified since backup\n");
+      printf("  /N        Restore only files that no longer exist on destination\n");
+      printf("  /B:date   Restore only files last modified on or before date\n");
+      printf("  /A:date   Restore only files last modified on or after date\n");
+      printf("  /E:time   Restore only files last modified at or before time\n");
+      printf("  /L:time   Restore only files last modified at or after time\n");
+      exit(0);
+   }
 
 /**********************************/
 /**	PRELOAD MESSAGES	 **/
