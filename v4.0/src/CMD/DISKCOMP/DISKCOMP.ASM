@@ -515,6 +515,13 @@ TAddress_off	     dw  ?
 TAddress_seg	     dw  ?
 
 ;(deleted ;AN011;) MEDIA_ID_BUFFER A_MEDIA_ID_INFO <> ;BUFFER FOR GET/SET MEDIA ID ;AN000;
+DISKCOMP_HELP_STR DB "Compares the contents of two floppy disks.",0Dh,0Ah
+		  DB 0Dh,0Ah
+		  DB "DISKCOMP [d1:] [d2:] [/1] [/8]",0Dh,0Ah
+		  DB 0Dh,0Ah
+		  DB "  /1    Compare only the first side of each disk",0Dh,0Ah
+		  DB "  /8    Compare only 8 sectors per track",0Dh,0Ah,"$"
+
 		     PATHLABL DISKCOMP ;AN013;
 		     HEADER <BEGIN - VERSION CHECK, SYSMSG INIT, EXIT TO DOS> ; ;AN000;
 		     PUBLIC DISKCOMP_BEGIN ;					;AN000;
@@ -529,6 +536,25 @@ DISKCOMP_BEGIN	     LABEL BYTE
 BEGIN PROC NEAR
    PUBLIC BEGIN 		   ;						;AN000;
 ;OUTPUT - "EXITFL" HAS ERRORLEVEL RETURN CODE
+
+  ; Check for /? help (COM file: CS=DS=PSP throughout)
+  MOV  SI, 081h
+DCOMP_SKIP_SP:
+  CMP  BYTE PTR [SI], ' '
+  JNE  DCOMP_CHK_SL
+  INC  SI
+  JMP  DCOMP_SKIP_SP
+DCOMP_CHK_SL:
+  CMP  BYTE PTR [SI], '/'
+  JNE  DCOMP_NO_HELP
+  CMP  BYTE PTR [SI+1], '?'
+  JNE  DCOMP_NO_HELP
+  MOV  DX, OFFSET DISKCOMP_HELP_STR
+  MOV  AH, 09H
+  INT  21H
+  MOV  AX, 4C00H
+  INT  21H
+DCOMP_NO_HELP:
 
    MOV	 SP, OFFSET MY_STACK_PTR   ;MOVE SP TO MY STACK AREA
    CALL  SYSLOADMSG		   ;INIT SYSMSG HANDLER 			;AN000;
