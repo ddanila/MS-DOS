@@ -681,7 +681,39 @@ DEFAULT_DFLCount DB	4								 ;AN000;
 ;****************************************************************************** 	 ;AN000;
 											 ;AN000;
 IFSFUNCINIT:										 ;AN000;
-											 ;AN000;
+
+; --- /? help (before sysloadmsg so it works on any DOS version) ---
+; DS = PSP segment at EXE entry; DS:[81H] = command line
+	MOV	SI, 081H
+IFS_SKIP_SP:
+	CMP	BYTE PTR DS:[SI], ' '
+	JNE	IFS_CHK_SL
+	INC	SI
+	JMP	SHORT IFS_SKIP_SP
+IFS_CHK_SL:
+	CMP	BYTE PTR DS:[SI], '/'
+	JE	IFS_CHK_Q
+	JMP	IFS_NO_HELP			; not '/' - skip help
+IFS_CHK_Q:
+	CMP	BYTE PTR DS:[SI+1], '?'
+	JE	IFS_DO_HELP
+	JMP	IFS_NO_HELP			; not '?' - skip help
+IFS_DO_HELP:
+	CALL	IFS_HELP_DONE			; push runtime addr of IFS_HELP_STR
+IFS_HELP_STR DB	"Manages installable file system drivers.",c_CR,c_LF
+	DB	c_CR,c_LF
+	DB	"IFSFUNC [/NAMES:n]",c_CR,c_LF,"$"
+IFS_HELP_DONE:
+	POP	DX				; DX = runtime addr of IFS_HELP_STR
+	PUSH	CS
+	POP	DS
+	MOV	AH, 09H
+	INT	21H
+	MOV	AX, 4C00H
+	INT	21H
+IFS_NO_HELP:
+; --- end /? help ---
+
 	CALL	SYSLOADMSG								 ;AN000;
 	JNC	I_20									 ;AN000;
 	SaveReg <CS>									 ;AN006;
@@ -1027,29 +1059,29 @@ BREAK <AUTO_ATTACH -- Attempt attaches of non-FAT physical drives>			 ;AN000;
 ;	Get addressability to CDS structure  (SYSVARS - IBMDOS/BIO)			 ;AN000;
 ;	FOR I = 1 to # CDS								 ;AN000;
 ;	   DO										 ;AN000;
-;	   ³   Drive = I - 1  (0-A,1-B,...)						 ;AN000;
-;	   ³   IF (curdir_inuse == 0 & curdir_devptr .NOT. 0) THEN			 ;AN000;
-;	   ³	   DO									 ;AN000;
-;	   ³	   ³   Get pointer to 1st IFS header					 ;AN000;
-;	   ³	   ³   WHILE pointer .NOT. 0FFFFH					 ;AN000;
-;	   ³	   ³	   DO								 ;AN000;
-;	   ³	   ³	       START ATTACH						 ;AN000;
-;	   ³	   ³		   (IFSR_TYPE	=  2					 ;AN000;
-;	   ³	   ³		    IFSR_PARMS@ -> IFS name, 0 parms)			 ;AN000;
-;	   ³	   ³	       IF Attach successful THEN				 ;AN000;
-;	   ³	   ³		  DO							 ;AN000;
-;	   ³	   ³		    IF IFSUSESHARE set THEN				 ;AN000;
-;	   ³	   ³		       Set share flag					 ;AN000;
-;	   ³	   ³		    ENDIF						 ;AN000;
-;	   ³	   ³		    LEAVE While 					 ;AN000;
-;	   ³	   ³		  ENDDO 						 ;AN000;
-;	   ³	   ³	       ELSE							 ;AN000;
-;	   ³	   ³		   Get pointer to next IFS header			 ;AN000;
-;	   ³	   ³	       ENDIF							 ;AN000;
-;	   ³	   ³	   ENDDO							 ;AN000;
-;	   ³	   ³   ENDWHILE 							 ;AN000;
-;	   ³	   ENDDO								 ;AN000;
-;	   ³   ENDIF									 ;AN000;
+;	   ï¿½   Drive = I - 1  (0-A,1-B,...)						 ;AN000;
+;	   ï¿½   IF (curdir_inuse == 0 & curdir_devptr .NOT. 0) THEN			 ;AN000;
+;	   ï¿½	   DO									 ;AN000;
+;	   ï¿½	   ï¿½   Get pointer to 1st IFS header					 ;AN000;
+;	   ï¿½	   ï¿½   WHILE pointer .NOT. 0FFFFH					 ;AN000;
+;	   ï¿½	   ï¿½	   DO								 ;AN000;
+;	   ï¿½	   ï¿½	       START ATTACH						 ;AN000;
+;	   ï¿½	   ï¿½		   (IFSR_TYPE	=  2					 ;AN000;
+;	   ï¿½	   ï¿½		    IFSR_PARMS@ -> IFS name, 0 parms)			 ;AN000;
+;	   ï¿½	   ï¿½	       IF Attach successful THEN				 ;AN000;
+;	   ï¿½	   ï¿½		  DO							 ;AN000;
+;	   ï¿½	   ï¿½		    IF IFSUSESHARE set THEN				 ;AN000;
+;	   ï¿½	   ï¿½		       Set share flag					 ;AN000;
+;	   ï¿½	   ï¿½		    ENDIF						 ;AN000;
+;	   ï¿½	   ï¿½		    LEAVE While 					 ;AN000;
+;	   ï¿½	   ï¿½		  ENDDO 						 ;AN000;
+;	   ï¿½	   ï¿½	       ELSE							 ;AN000;
+;	   ï¿½	   ï¿½		   Get pointer to next IFS header			 ;AN000;
+;	   ï¿½	   ï¿½	       ENDIF							 ;AN000;
+;	   ï¿½	   ï¿½	   ENDDO							 ;AN000;
+;	   ï¿½	   ï¿½   ENDWHILE 							 ;AN000;
+;	   ï¿½	   ENDDO								 ;AN000;
+;	   ï¿½   ENDIF									 ;AN000;
 ;	   ENDDO									 ;AN000;
 ;	IF Share flag set THEN								 ;AN000;
 ;	   DO										 ;AN000;
