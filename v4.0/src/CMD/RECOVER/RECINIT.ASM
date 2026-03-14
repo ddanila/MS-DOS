@@ -112,6 +112,37 @@ public	exitpgm 								;an026;bgb
 ;	Exit program
 ;*****************************************************************************
 procedure Main_Init			;;AN000;
+	; Check for /? (CONVERT COM: CS=DG after CONVERT far-jmp, DS=DG)
+	MOV	AH, 062H
+	INT	21H			; BX = PSP segment
+	MOV	ES, BX			; ES = PSP
+	MOV	SI, 081H
+RC_SKIP_SP:
+	CMP	BYTE PTR ES:[SI], ' '
+	JNE	RC_CHK_SL
+	INC	SI
+	JMP	SHORT RC_SKIP_SP
+RC_CHK_SL:
+	CMP	BYTE PTR ES:[SI], '/'
+	JNE	RC_NO_HELP
+	CMP	BYTE PTR ES:[SI+1], '?'
+	JE	RC_DO_HELP
+RC_NO_HELP:
+	JMP	RC_CONTINUE
+RC_DO_HELP:
+	CALL	RC_HELP_END
+RC_HELP_STR DB "RECOVER [drive:][path]filename",0Dh,0Ah
+	DB 0Dh,0Ah
+	DB "  Recovers readable information from a bad-sector disk.",0Dh,0Ah,"$"
+RC_HELP_END:
+	POP	DX
+	PUSH	CS
+	POP	DS			; DS = CS = DG
+	MOV	AH, 09H
+	INT	21H
+	MOV	AX, 4C00H
+	INT	21H
+RC_CONTINUE:
 	xor	bp,bp
 	Set_Data_Segment		;Set DS,ES to Data segment	;AN000;bgb
 	call	get_psp
