@@ -77,6 +77,7 @@
 /*****************************************************************
 
 				/* "C" supplied include files */
+#include <stdio.h>
 #include <process.h>
 #include <malloc.h>
 #include <direct.h>		/*;AN000;*/
@@ -245,6 +246,19 @@ main(argc,argv)
 int	argc;
 char	*argv[];
 {
+	if (argc >= 2 && strcmp(argv[1], "/?") == 0) {
+		printf("Backs up one or more files from one disk to another.\n\n");
+		printf("BACKUP source dest: [/S] [/M] [/A] [/F[:size]] [/D:date] [/T:time]\n");
+		printf("                    [/L:[path]logfile]\n\n");
+		printf("  /S             Back up subdirectories\n");
+		printf("  /M             Back up only files modified since last backup\n");
+		printf("  /A             Add to existing backup set (don't reformat)\n");
+		printf("  /F[:size]      Format target disk if needed (size optional)\n");
+		printf("  /D:date        Back up files modified on or after date\n");
+		printf("  /T:time        Back up files modified at or after time\n");
+		printf("  /L:[path]file  Write backup log to file\n");
+		exit(0);
+	}
 	init(); 				/*;AN000;6 Mundane initializization of data structures, */
 						/*	   check DOS version,preload messages */
 	def_drive = get_current_drive();	/* Save default drive number*/
