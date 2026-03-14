@@ -515,6 +515,13 @@ TAddress_seg	     dw  ?	   ;
 ;			(USED BY VOLSER PROC)
 ;(Deleted ;AN013;) MEDIA_ID_BUF A_MEDIA_ID_INFO <> ;				;AN000;
 ;  =  =  =  =  =  =  =	=  =  =  =  =
+DISKCOPY_HELP_STR DB "Copies the contents of one floppy disk to another.",0Dh,0Ah
+		  DB 0Dh,0Ah
+		  DB "DISKCOPY [d1:] [d2:] [/1] [/V]",0Dh,0Ah
+		  DB 0Dh,0Ah
+		  DB "  /1    Copy only the first side of the disk",0Dh,0Ah
+		  DB "  /V    Verify that the information is copied correctly",0Dh,0Ah,"$"
+
 		     PATHLABL DISKCOPY ;AN015;
 		     HEADER <BEGIN - VERSION CHECK, SYSMSG INIT, EXIT TO DOS> ;AN000;
 		     PUBLIC DISKCOPY_BEGIN ;
@@ -529,6 +536,25 @@ DISKCOPY_BEGIN	     LABEL NEAR    ;
 BEGIN PROC NEAR 		   ;
    PUBLIC BEGIN 		   ;AN000;
 ;OUTPUT - "EXITFL" HAS ERRORLEVEL RETURN CODE
+
+  ; Check for /? help (COM file: CS=DS=PSP throughout)
+  MOV  SI, 081h
+DCOPY_SKIP_SP:
+  CMP  BYTE PTR [SI], ' '
+  JNE  DCOPY_CHK_SL
+  INC  SI
+  JMP  DCOPY_SKIP_SP
+DCOPY_CHK_SL:
+  CMP  BYTE PTR [SI], '/'
+  JNE  DCOPY_NO_HELP
+  CMP  BYTE PTR [SI+1], '?'
+  JNE  DCOPY_NO_HELP
+  MOV  DX, OFFSET DISKCOPY_HELP_STR
+  MOV  AH, 09H
+  INT  21H
+  MOV  AX, 4C00H
+  INT  21H
+DCOPY_NO_HELP:
 
    MOV	 SP, OFFSET MY_STACK_PTR   ;MOVE SP TO MY STACK PTR
    CALL  SYSLOADMSG		   ;AN000;INIT SYSMSG HANDLER
