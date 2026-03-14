@@ -330,7 +330,37 @@ ASSUME	CS:DG,DS:NOTHING,ES:NOTHING,SS:CStack
 	ENDIF
 
 EDLIN:
-	JMP	SHORT SIMPED
+	; Check for /? (CONVERT COM: CS=DG after CONVERT far-jmp)
+	MOV	AH, 062H
+	INT	21H			; BX = PSP segment
+	MOV	ES, BX			; ES = PSP
+	MOV	SI, 081H
+EL_SKIP_SP:
+	CMP	BYTE PTR ES:[SI], ' '
+	JNE	EL_CHK_SL
+	INC	SI
+	JMP	SHORT EL_SKIP_SP
+EL_CHK_SL:
+	CMP	BYTE PTR ES:[SI], '/'
+	JNE	EL_NO_HELP
+	CMP	BYTE PTR ES:[SI+1], '?'
+	JE	EL_DO_HELP
+EL_NO_HELP:
+	JMP	SIMPED
+EL_DO_HELP:
+	CALL	EL_HELP_END
+EL_HELP_STR DB "EDLIN [drive:][path]filename [/B]",0Dh,0Ah
+	DB 0Dh,0Ah
+	DB "  /B    Treat Ctrl-Z as a normal character (binary mode)",0Dh,0Ah,"$"
+EL_HELP_END:
+	POP	DX			; runtime addr of EL_HELP_STR
+	PUSH	CS
+	POP	DS			; DS = CS = DG (segment containing string)
+	MOV	AH, 09H
+	INT	21H
+	MOV	AX, 4C00H
+	INT	21H
+
 
 std_printf	proc	near			;ac000;convert to proc
 
