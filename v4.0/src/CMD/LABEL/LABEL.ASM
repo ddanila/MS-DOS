@@ -316,6 +316,10 @@ SerNum		   dd	0	   ;AN000;S Serial #
 DBCSev_Off	   dw	0	   ;AC000;D offset of DBCS EV
 DBCSev_Seg	   dw	0	   ;AC000;D segment of DBCS EV
 
+LABEL_HELP_STR DB "Creates, changes, or deletes the volume label of a disk.",0Dh,0Ah
+	       DB 0Dh,0Ah
+	       DB "LABEL [drive:][label]",0Dh,0Ah,"$"
+
 		   HEADER <MAIN_BEGIN - HIGH LEVEL FUNCTION CONTROL>
 ;  $SALUT (4,4,9,36)		   ;AN000;K
 ;*****************************************************************************
@@ -356,6 +360,24 @@ DBCSev_Seg	   dw	0	   ;AC000;D segment of DBCS EV
 ;*****************************************************************************
    PUBLIC MAIN_BEGIN
 Main_Begin Proc Near
+  ; Check for /? help (COM file: CS=DS=PSP at entry)
+  MOV  SI, 081h
+LABEL_SKIP_SP:
+  CMP  BYTE PTR [SI], ' '
+  JNE  LABEL_CHK_SL
+  INC  SI
+  JMP  LABEL_SKIP_SP
+LABEL_CHK_SL:
+  CMP  BYTE PTR [SI], '/'
+  JNE  LABEL_NO_HELP
+  CMP  BYTE PTR [SI+1], '?'
+  JNE  LABEL_NO_HELP
+  MOV  DX, OFFSET LABEL_HELP_STR
+  MOV  AH, 09H
+  INT  21H
+  MOV  AX, 4C00H
+  INT  21H
+LABEL_NO_HELP:
    mov	sp,offset End_Stack_Area   ;Move stack to user area(Added in DOS 3.20)
    cld
    call Preload_Messages	   ;AN000;M Check DOS version & load msgs
