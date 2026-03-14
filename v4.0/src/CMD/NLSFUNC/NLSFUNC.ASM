@@ -420,6 +420,12 @@ NLS_BUFFER	db	BUFFSIZE dup (?)  ;NLS BUFFER to transfer data
 
 DATASIZE	equ	$-NLS_DATA
 
+NLSFUNC_HELP_STR DB "Loads country-specific information for national language support.",0Dh,0Ah
+		DB 0Dh,0Ah
+		DB "NLSFUNC [[drive:][path]filename]",0Dh,0Ah
+		DB 0Dh,0Ah
+		DB "  filename   National Language Support definition file (default: COUNTRY.SYS)",0Dh,0Ah,"$"
+
 NLS_DATA ENDS
 
 NLS_INIT_CODE	SEGMENT BYTE PUBLIC 'CODE'
@@ -1381,6 +1387,26 @@ page
 
 MAIN		PROC	FAR
 
+		; Check for /? help (DS=PSP at EXE startup, before DS is changed)
+		mov	si, 081h
+NLSFUNC_SKIP_SP:
+		cmp	byte ptr [si], ' '
+		jne	NLSFUNC_CHK_SL
+		inc	si
+		jmp	NLSFUNC_SKIP_SP
+NLSFUNC_CHK_SL:
+		cmp	byte ptr [si], '/'
+		jne	NLSFUNC_NO_HELP
+		cmp	byte ptr [si+1], '?'
+		jne	NLSFUNC_NO_HELP
+		mov	ax, NLS_DATA
+		mov	ds, ax
+		lea	dx, NLSFUNC_HELP_STR
+		mov	ah, 09h
+		int	21h
+		mov	ax, 4C00h
+		int	21h
+NLSFUNC_NO_HELP:
 		mov	ax,NLS_DATA		;set up data segment
 		mov	ds,ax
 		assume	ds:NLS_DATA
