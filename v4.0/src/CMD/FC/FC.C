@@ -274,6 +274,22 @@ byte *v[];
 
 
 
+      /* /? help */
+        if (c >= 2 && v[1][0] == '/' && v[1][1] == '?') {
+            printf("Compares two files or sets of files.\r\n\r\n");
+            printf("FC [/A] [/B] [/C] [/L] [/LBn] [/N] [/T] [/W] [/nnnn] file1 file2\r\n\r\n");
+            printf("  /A     Show only first and last lines of each set of differences\r\n");
+            printf("  /B     Binary comparison\r\n");
+            printf("  /C     Case-insensitive comparison\r\n");
+            printf("  /L     Compare as ASCII text\r\n");
+            printf("  /LBn   Set internal line buffer to n lines\r\n");
+            printf("  /N     Display line numbers (ASCII mode)\r\n");
+            printf("  /T     No tab expansion\r\n");
+            printf("  /W     Compress whitespace for comparison\r\n");
+            printf("  /nnnn  Number of consecutive lines that must match to resync\r\n");
+            exit(0);
+            }
+
       /* Issue error message if DOS version is not within valid range. */
         version = ((word)_osmajor << 8) + (word)_osminor;
         if (( LOWVERSION >  version) || (version >  HIGHVERSION))
