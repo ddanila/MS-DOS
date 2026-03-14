@@ -161,6 +161,17 @@ BEGIN
     char       temp;                                                    /* AN000 */
     unsigned   input;
 
+    if (argc >= 2 && argv[1][0] == '/' && argv[1][1] == '?') {          /* /? help */
+        printf("Sets up or modifies hard disk partitions.\r\n\r\n");
+        printf("FDISK [drivenum] [/PRI:mbytes] [/EXT:mbytes] [/LOG:mbytes] [/Q]\r\n\r\n");
+        printf("  drivenum   Number of the drive (1 or 2) to partition\r\n");
+        printf("  /PRI:n     Create a Primary DOS partition of n megabytes\r\n");
+        printf("  /EXT:n     Create an Extended DOS partition of n megabytes\r\n");
+        printf("  /LOG:n     Create a Logical DOS Drive of n megabytes\r\n");
+        printf("  /Q         Suppress reboot after partition changes\r\n");
+        exit(0);
+        }                                                                /* /? help */
+
     /* DISABLE CNTL-BREAK HERE */
     /* Gets defines from signal.h */
     signal( (int) SIGINT, SIG_IGN );                                    /* AN000 */
