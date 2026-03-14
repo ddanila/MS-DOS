@@ -1130,7 +1130,32 @@ INCLUDE ASSGMSG.INC				;AN000;
 
 assume	cs:code, ds:code, ss:code, es:code
 
+ASSIGN_HELP_STR DB "Redirects requests for disk operations on one drive to a different drive.",0Dh,0Ah
+		DB 0Dh,0Ah
+		DB "ASSIGN [x[:]=y[:] [...]] [/STATUS]",0Dh,0Ah
+		DB 0Dh,0Ah
+		DB "  /STATUS   Display current drive assignments",0Dh,0Ah,"$"
+
 INITIALIZATION:
+
+  ; Check for /? help (COM file: CS=DS=PSP at entry)
+  MOV  SI, 081h
+ASGN_SKIP_SP:
+  CMP  BYTE PTR [SI], ' '
+  JNE  ASGN_CHK_SL
+  INC  SI
+  JMP  ASGN_SKIP_SP
+ASGN_CHK_SL:
+  CMP  BYTE PTR [SI], '/'
+  JNE  ASGN_NO_HELP
+  CMP  BYTE PTR [SI+1], '?'
+  JNE  ASGN_NO_HELP
+  MOV  DX, OFFSET ASSIGN_HELP_STR
+  MOV  AH, 09H
+  INT  21H
+  MOV  AX, 4C00H
+  INT  21H
+ASGN_NO_HELP:
 
 	push	ax				;an000; save ax
 	mov	ax,ds				;an000; get the current ds
