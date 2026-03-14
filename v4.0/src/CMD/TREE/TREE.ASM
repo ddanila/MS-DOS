@@ -46,40 +46,40 @@ LISTPARM =	1			;AN000;0=SUPPRESS LIST; 1=ALLOW LIST
 ;		    1. NO FILES, JUST SUBDIRECTORIES
 
 ;		 D:\ROOT
-;		 ÃÄÄÄSUBDIR1
-;		 ÃÄÄÄSUBDIR2
-;		 ³   ÃÄÄÄSUBDIR21
-;		 ³   ÀÄÄÄSUBDIR22
-;		 ÀÄÄÄSUBDIR3
-;		     ÃÄÄÄSUBDIR31
-;		     ÀÄÄÄSUBDIR32
+;		 ï¿½ï¿½ï¿½ï¿½SUBDIR1
+;		 ï¿½ï¿½ï¿½ï¿½SUBDIR2
+;		 ï¿½   ï¿½ï¿½ï¿½ï¿½SUBDIR21
+;		 ï¿½   ï¿½ï¿½ï¿½ï¿½SUBDIR22
+;		 ï¿½ï¿½ï¿½ï¿½SUBDIR3
+;		     ï¿½ï¿½ï¿½ï¿½SUBDIR31
+;		     ï¿½ï¿½ï¿½ï¿½SUBDIR32
 
 ;		    2. FILES AND SUBDIRECTORIES
 
 ;		 D:\ROOT
-;		 ³   MAINFIL1
-;		 ³   MAINFIL2
-;		 ³
-;		 ÃÄÄÄSUBDIR1
-;		 ³	 FILE1
-;		 ³	 FILE2
-;		 ³
-;		 ÃÄÄÄSUBDIR2
-;		 ³   ³	 FILE2A
-;		 ³   ³	 FILE2B
-;		 ³   ³
-;		 ³   ÃÄÄÄSUBDIR21
-;		 ³   ³	     FILEA
-;		 ³   ³	     FILEB
-;		 ³   ³
-;		 ³   ÀÄÄÄSUBDIR22
-;		 ³	     FILEC
-;		 ³	     FILED
-;		 ³	     FILEF
-;		 ³
-;		 ÀÄÄÄSUBDIR3
-;		     ÃÄÄÄSUBDIR31
-;		     ÀÄÄÄSUBDIR32
+;		 ï¿½   MAINFIL1
+;		 ï¿½   MAINFIL2
+;		 ï¿½
+;		 ï¿½ï¿½ï¿½ï¿½SUBDIR1
+;		 ï¿½	 FILE1
+;		 ï¿½	 FILE2
+;		 ï¿½
+;		 ï¿½ï¿½ï¿½ï¿½SUBDIR2
+;		 ï¿½   ï¿½	 FILE2A
+;		 ï¿½   ï¿½	 FILE2B
+;		 ï¿½   ï¿½
+;		 ï¿½   ï¿½ï¿½ï¿½ï¿½SUBDIR21
+;		 ï¿½   ï¿½	     FILEA
+;		 ï¿½   ï¿½	     FILEB
+;		 ï¿½   ï¿½
+;		 ï¿½   ï¿½ï¿½ï¿½ï¿½SUBDIR22
+;		 ï¿½	     FILEC
+;		 ï¿½	     FILED
+;		 ï¿½	     FILEF
+;		 ï¿½
+;		 ï¿½ï¿½ï¿½ï¿½SUBDIR3
+;		     ï¿½ï¿½ï¿½ï¿½SUBDIR31
+;		     ï¿½ï¿½ï¿½ï¿½SUBDIR32
 ;			     FILE32A
 ;			     FILE32B
 
@@ -276,10 +276,10 @@ START:	     JMP  BEGIN 	   ;AN000;DOS ENTRY POINT
 ;NATIONAL CHARACTER CODEPAGE SET.
 GRAF_TABLE   LABEL BYTE 	   ;AN002;DEFINITION OF FOUR GRAPHIC CHARACTERS
 	     PUBLIC GRAF_TABLE	   ;AN002;
-GRAF_ELBO    DB   "À"		   ;AN000;192 DECIMAL ASCII VAL
-GRAF_DASH    DB   "Ä"		   ;AN000;196 DECIMAL ASCII VALUE
-GRAF_TEE     DB   "Ã"		   ;AN000;195 DECIMAL ASCII VALUE
-GRAF_BAR     DB   "³"		   ;AN000;179 DECIMAL ASCII VALUE
+GRAF_ELBO    DB   "ï¿½"		   ;AN000;192 DECIMAL ASCII VAL
+GRAF_DASH    DB   "ï¿½"		   ;AN000;196 DECIMAL ASCII VALUE
+GRAF_TEE     DB   "ï¿½"		   ;AN000;195 DECIMAL ASCII VALUE
+GRAF_BAR     DB   "ï¿½"		   ;AN000;179 DECIMAL ASCII VALUE
 
 
 ;		ALTERNATE SET OF GRAPHIC CHARACTERS
@@ -359,6 +359,12 @@ START_PATH   DB   PERIOD	   ;AN000;AREA TO RECEIVE STARTING PATH ASCIIZ
 	     DB   (MAX_PATH+SIZE FIX_DTA_FILN) DUP(0) ;AN000;
 JUSTIN_CASE3 DB   64 DUP(0)	   ;AN000;CATCHES THE OVERFLOW
 ;	END OF CONTIGUOUS WORKSPACE DEFINING PATH
+TREE_HELP_STR DB "Graphically displays the directory structure of a drive or path.",0Dh,0Ah
+	      DB 0Dh,0Ah
+	      DB "TREE [drive:][path] [/F] [/A]",0Dh,0Ah
+	      DB 0Dh,0Ah
+	      DB "  /F    Display the names of the files in each directory",0Dh,0Ah
+	      DB "  /A    Use ASCII characters instead of extended characters",0Dh,0Ah,"$"
 ; =  =	=  =  =  =  =  =  =  =	=  =
 	     PATHLABL TREE	   ;AN013;
 	     HEADER <BEGIN - VERSION CHECK, SYSMSG INIT, EXIT TO DOS> ;AN000;
@@ -371,6 +377,24 @@ BEGIN PROC NEAR 		   ;AN000;
 ;OUTPUT - "EXITFL" HAS ERRORLEVEL RETURN CODE
 ; =  =	=  =  =  =  =  =  =  =	=  =
 
+  ; Check for /? help (COM file: CS=DS=PSP throughout)
+  MOV  SI, 081h
+TREE_SKIP_SP:
+  CMP  BYTE PTR [SI], ' '
+  JNE  TREE_CHK_SL
+  INC  SI
+  JMP  TREE_SKIP_SP
+TREE_CHK_SL:
+  CMP  BYTE PTR [SI], '/'
+  JNE  TREE_NO_HELP
+  CMP  BYTE PTR [SI+1], '?'
+  JNE  TREE_NO_HELP
+  MOV  DX, OFFSET TREE_HELP_STR
+  MOV  AH, 09H
+  INT  21H
+  MOV  AX, 4C00H
+  INT  21H
+TREE_NO_HELP:
   MOV  ORIG_AX,AX		   ;AN000;SAVE ORIGINAL VALUE OF AX
 
 ;SINCE THIS IS A .COM STYLE UTILITY, THE SEG ID IN THE MSG SUBLIST
@@ -1208,9 +1232,9 @@ SHOW_FN PROC NEAR		   ;AN000;
 ;"FLN_INDENT" IS THE NUMBER OF SPACES TO BE PUT RIGHT IN FRONT OF A
 ;   FILENAME.  FOR SUBDIRS, THERE IS NO SUCH FIELD
 ;EXAMPLE, FOR SUBDIRS
-;      ÀÄÄÄDIR_FILN
+;      ï¿½ï¿½ï¿½ï¿½DIR_FILN
 ;	  FOR ORDINARY FILES
-;      ³xxxssssANY_FILN.EXT  (WHERE x AND s ARE SPACES)
+;      ï¿½xxxssssANY_FILN.EXT  (WHERE x AND s ARE SPACES)
 ; =  =	=  =  =  =  =  =  =  =	=  =
 
   CMP  FIX_DTA_FILN,PERIOD	   ;AN000;DOES FILENAME START WITH PERIOD?
