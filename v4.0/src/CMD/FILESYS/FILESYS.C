@@ -186,6 +186,14 @@ char    *argv[];                /* array of pointer to arguments */             
 |       get started by calling the parser                               |
 +----------------------------------------------------------------------*/
                                                                                                                                  /* ;an000; */
+  if (argc >= 2 && argv[1][0] == '/' && argv[1][1] == '?') {                  /* /? help */
+    printf("Assigns an IFS drive or device to a drive letter.\r\n\r\n");
+    printf("FILESYS [drive:] device IFSname [/parameters]\r\n");
+    printf("FILESYS drive: /d\r\n");
+    printf("FILESYS [drive:]\r\n");
+    exit(0);
+    }                                                                           /* /? help */
+
   sysloadmsg(&inregs, &outregs);                                                /* load the messages                    */       /* ;an000; */
   if ((outregs.x.cflag & CARRY_FLAG) == CARRY_FLAG)                             /* error?                               */       /* ;an000; */
          sysdispmsg(&outregs,&outregs);                                         /* tell user error and exit             */       /* ;an000; */
