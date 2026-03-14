@@ -10,34 +10,34 @@
 ;
 ;
 ;
-; зддддддддддд©
-; Ё Main_Init Ё
-; юдбддддддддды
-;   Ё
-;   Ёзддддддддддддддддд©     здддддддддддддддд©
-;   ц╢Init_Input_Outputцддддб╢Preload_MessagesЁ
-;   Ёюддддддддддддддддды    Ёюдддддддддддддддды
-;   Ё			    Ёзддддддддддддддддддд©   зддддддддддддддддддд©
-;   Ё			    ц╢Check_For_FS_Switchцддб╢Parse_For_FS_SwitchЁ
-;   Ё			    Ёюддддддддддддддддддды  Ёюддддддддддддддддддды
-;   Ё			    Ё			    Ёздддддддддддддд©
-;   Ё			    Ё			    ю╢EXEC_FS_FormatЁ
-;   Ё			    Ё			     юдддддддддддддды
-;   Ё			    Ёзддддддддддддддддддд©   зддддддддддддддд©
-;   Ё			    ю╢Parse_Command_Line цддд╢Interpret_ParseЁ
-;   Ё			     юддддддддддддддддддды   юддддддддддддддды
-;   Ёзддддддддддддддддддддд© здддддддддддддддддд©
-;   ц╢Validate_Target_Driveцб╢Check_Target_DriveЁ
-;   ЁюдддддддддддддддддддддыЁюдддддддддддддддддды
-;   Ё			    Ёзддддддддддддддддд©
-;   Ё			    ц╢Check_For_NetworkЁ
-;   Ё			    Ёюддддддддддддддддды
-;   Ё			    Ёзддддддддддддддддддддд©
-;   Ё			    ю╢Check_Translate_DriveЁ
-;   Ё			     юддддддддддддддддддддды
-;   Ёздддддддддддд©
-;   ю╢Hook_CNTRL_CЁ
-;    юдддддддддддды
+; О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫д©
+; О©╫ Main_Init О©╫
+; О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
+;   О©╫
+;   О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫д©     О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫д©
+;   ц╢Init_Input_OutputО©╫О©╫О©╫О©╫О©╫б╢Preload_MessagesО©╫
+;   О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫    О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
+;   О©╫			    О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫д©   О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫д©
+;   О©╫			    ц╢Check_For_FS_SwitchО©╫О©╫О©╫б╢Parse_For_FS_SwitchО©╫
+;   О©╫			    О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫  О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
+;   О©╫			    О©╫			    О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫д©
+;   О©╫			    О©╫			    О©╫О©╫EXEC_FS_FormatО©╫
+;   О©╫			    О©╫			     О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
+;   О©╫			    О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫д©   О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫д©
+;   О©╫			    О©╫О©╫Parse_Command_Line О©╫О©╫О©╫д╢Interpret_ParseО©╫
+;   О©╫			     О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫   О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
+;   О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫д© О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫д©
+;   ц╢Validate_Target_DriveО©╫б╢Check_Target_DriveО©╫
+;   О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ыЁО©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
+;   О©╫			    О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫д©
+;   О©╫			    ц╢Check_For_NetworkО©╫
+;   О©╫			    О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
+;   О©╫			    О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫д©
+;   О©╫			    О©╫О©╫Check_Translate_DriveО©╫
+;   О©╫			     О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
+;   О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫д©
+;   О©╫О©╫Hook_CNTRL_CО©╫
+;    О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 ;
 ;
 ; Change List: AN000 - New code DOS 3.3 spec additions
@@ -69,6 +69,23 @@ Command_Line_Length equ $ - Command_Line_Buffer ;				;AN000;
 Fatal_Error db	0				;				;AN000;
 
 Command_Old_Ptr dw	?
+
+Format_Help_Msg DB "Formats a disk for use with MS-DOS.",0Dh,0Ah
+		DB 0Dh,0Ah
+		DB "FORMAT drive: [/V[:label]] [/S] [/B]",0Dh,0Ah
+		DB "FORMAT drive: [/S] [/1] [/4] [/8]",0Dh,0Ah
+		DB "FORMAT drive: [/V[:label]] [/S] [/T:tracks /N:sectors]",0Dh,0Ah
+		DB "FORMAT drive: [/V[:label]] [/S] [/F:size]",0Dh,0Ah
+		DB 0Dh,0Ah
+		DB "  /V[:label]  Volume label",0Dh,0Ah
+		DB "  /S          Copy system files to disk",0Dh,0Ah
+		DB "  /B          Reserve space for system files",0Dh,0Ah
+		DB "  /1          Format single side",0Dh,0Ah
+		DB "  /4          Format 5.25"" 360KB disk in high-density drive",0Dh,0Ah
+		DB "  /8          Format 8 sectors per track",0Dh,0Ah
+		DB "  /T:tracks   Number of tracks per side",0Dh,0Ah
+		DB "  /N:sectors  Number of sectors per track",0Dh,0Ah
+		DB "  /F:size     Floppy size (160, 180, 320, 360, 720, 1200, 1440)",0Dh,0Ah,"$"
 
 data	ends
 
@@ -211,6 +228,28 @@ Procedure Main_Init				;				;AN000;
 	Set_Data_Segment			;Set DS,ES to Data segment	;AN000;
 	DOS_Call GetCurrentPSP			;Get PSP segment address
 	mov	PSP_Segment,bx			;Save it for later
+	; Check for /? help switch (DS=data, BX=PSP segment)
+	push	es
+	mov	es, bx				;ES=PSP segment
+	mov	si, 81h				;SI=command tail offset
+Format_Skip_Sp:
+	cmp	byte ptr es:[si], ' '
+	jne	Format_Chk_Sl
+	inc	si
+	jmp	Format_Skip_Sp
+Format_Chk_Sl:
+	cmp	byte ptr es:[si], '/'
+	jne	Format_No_Help
+	cmp	byte ptr es:[si+1], '?'
+	jne	Format_No_Help
+	pop	es
+	lea	dx, Format_Help_Msg
+	mov	ah, 09h
+	int	21h
+	mov	ax, 4C00h
+	int	21h
+Format_No_Help:
+	pop	es
 	mov	Fatal_Error,No			;Init the error flag		;AN000;
 	call	Init_Input_Output		;Setup messages and parse	;AN000;
 	cmp	Fatal_Error,Yes 		;Error occur?			;AN000;

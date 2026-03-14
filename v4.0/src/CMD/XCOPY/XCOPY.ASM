@@ -610,6 +610,19 @@ FILE_DTA Find_DTA <>			;DTA for find file
 DTAS	Find_DTA 32 dup (<>)		;DTA STACK for find dir
 ;** Througout the program BP will be used for referencing fieldsname in DTAS.
 ;For example, DS:[BP].dta_filename.
+XCOPY_HELP_STR	DB "Copies files and directory trees.",0Dh,0Ah
+		DB 0Dh,0Ah
+		DB "XCOPY source [dest] [/A|/M] [/D[:date]] [/P] [/S [/E]] [/V] [/W]",0Dh,0Ah
+		DB 0Dh,0Ah
+		DB "  /A      Copy files with archive attribute set (don't clear it)",0Dh,0Ah
+		DB "  /M      Copy files with archive attribute set (clear it)",0Dh,0Ah
+		DB "  /D:date Copy files changed on or after the specified date",0Dh,0Ah
+		DB "  /P      Prompt before creating each destination file",0Dh,0Ah
+		DB "  /S      Copy directories and subdirectories except empty ones",0Dh,0Ah
+		DB "  /E      Copy subdirectories, including empty ones (use with /S)",0Dh,0Ah
+		DB "  /V      Verify each new file",0Dh,0Ah
+		DB "  /W      Wait for a keypress before starting to copy files",0Dh,0Ah,"$"
+
 DSEG	ENDS
 
 ;******************************************************************************
@@ -658,6 +671,26 @@ SAV_INT24_SEG DW 0
 	ASSUME	ES:NOTHING		;AN000;
 MAIN	PROC	FAR
 	PUSH	AX			;AN000;PRESERVE FOR INIT DRV VALIDITY
+	; Check for /? help switch (DS=PSP at EXE startup)
+	MOV	SI, 81H
+XCOPY_SKIP_SP:
+	CMP	BYTE PTR DS:[SI], ' '
+	JNE	XCOPY_CHK_SL
+	INC	SI
+	JMP	XCOPY_SKIP_SP
+XCOPY_CHK_SL:
+	CMP	BYTE PTR DS:[SI], '/'
+	JNE	XCOPY_NO_HELP
+	CMP	BYTE PTR DS:[SI+1], '?'
+	JNE	XCOPY_NO_HELP
+	MOV	AX, DGROUP
+	MOV	DS, AX
+	LEA	DX, XCOPY_HELP_STR
+	MOV	AH, 09H
+	INT	21H
+	MOV	AX, 4C00H
+	INT	21H
+XCOPY_NO_HELP:
 	MOV	BX,DGROUP
 	MOV	ES,BX			;AN000;SET UP ADDRESS OF DSEG IN ES
 	ASSUME	ES:DGROUP		;AN000;
