@@ -197,10 +197,33 @@ MSG_SERVICES <EXE2BIN.CTL>						;AN000;
 ;
 ;*****************************************************************************
 
+E2B_HELP_STR	DB  "EXE2BIN [drive:][path]input[.EXE] [[drive:][path]output[.BIN]]",0Dh,0Ah,"$"
+
 procedure Main_Init near		;				;AN000;
 
 	ASSUME	DS:NOTHING		; THIS IS WHAT dos GIVES YOU	;AN000;
 	ASSUME	ES:NOTHING						;AN000;
+
+	; Check for /? (EXE file: DS=PSP at entry)
+	MOV	SI, 081h
+E2B_SKIP_SP:
+	CMP	BYTE PTR DS:[SI], ' '
+	JNE	E2B_CHK_SL
+	INC	SI
+	JMP	SHORT E2B_SKIP_SP
+E2B_CHK_SL:
+	CMP	BYTE PTR DS:[SI], '/'
+	JNE	E2B_NO_HELP
+	CMP	BYTE PTR DS:[SI+1], '?'
+	JNE	E2B_NO_HELP
+	PUSH	CS
+	POP	DS
+	MOV	DX, OFFSET E2B_HELP_STR
+	MOV	AH, 09H
+	INT	21H
+	MOV	AX, 4C00H
+	INT	21H
+E2B_NO_HELP:
 
 	PUSH	DS							;AN000;
 	mov	psp_ptr,ds						;AN000;

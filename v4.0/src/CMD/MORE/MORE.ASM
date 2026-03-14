@@ -51,9 +51,28 @@ CODE	SEGMENT PUBLIC
 ASSUME	CS:CODE,DS:CODE,ES:CODE,SS:CODE
 
 
-START:	JMP	START1				 ;AC000;
-;;;	DB	" The DOS 4.0 MORE Filter"       ;AC003;
-
+START:
+	; Check for /? (COM file: CS=DS=PSP at entry)
+	MOV	SI, 081h
+MORE_SKIP_SP:
+	CMP	BYTE PTR [SI], ' '
+	JNE	MORE_CHK_SL
+	INC	SI
+	JMP	SHORT MORE_SKIP_SP
+MORE_CHK_SL:
+	CMP	BYTE PTR [SI], '/'
+	JNE	MORE_NO_HELP
+	CMP	BYTE PTR [SI+1], '?'
+	JNE	MORE_NO_HELP
+	MOV	DX, OFFSET MORE_HELP_STR
+	MOV	AH, 09H
+	INT	21H
+	MOV	AX, 4C00H
+	INT	21H
+MORE_NO_HELP:
+	JMP	START1				 ;AC000;
+MORE_HELP_STR	DB  "MORE",0Dh,0Ah
+		DB  "(reads stdin, displays one screenful at a time)",0Dh,0Ah,"$"
 
 ;----------------------------------------
 ;- STRUCTURE TO QUERY EXTENDED ATTRIBUTES

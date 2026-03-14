@@ -355,7 +355,28 @@ CODE			SEGMENT PARA PUBLIC
 
 PSP_PRAM		DB   128 DUP(?)
 
-START:			JMP  BEGIN
+START:
+	; Check for /? (COM file: CS=DS=PSP at entry)
+	MOV	SI, 081h
+SYS_SKIP_SP:
+	CMP	BYTE PTR [SI], ' '
+	JNE	SYS_CHK_SL
+	INC	SI
+	JMP	SHORT SYS_SKIP_SP
+SYS_CHK_SL:
+	CMP	BYTE PTR [SI], '/'
+	JNE	SYS_NO_HELP
+	CMP	BYTE PTR [SI+1], '?'
+	JNE	SYS_NO_HELP
+	MOV	DX, OFFSET SYS_HELP_STR
+	MOV	AH, 09H
+	INT	21H
+	MOV	AX, 4C00H
+	INT	21H
+SYS_NO_HELP:
+	JMP	BEGIN
+
+SYS_HELP_STR		DB   "SYS [source] drive:",0Dh,0Ah,"$"
 
 			DB   " - SYS - Utility "
 			DB   01Ah
@@ -1230,9 +1251,9 @@ $$EN59:
 ;							IBMBIO looks like this:
 ;
 ;				       1	2	 3	  4	  5
-;				  зддддддддбддддддддбддддддддбддддддддбдддддддбд
-;				  Ё  JMP   Ё   LO   Ё	HI   Ёextected_versionЁ
-;				  юддддддддаддддддддаддддддддаддддддддадддддддад
+;				  О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
+;				  О©╫  JMP   О©╫   LO   О©╫	HI   О©╫extected_versionО©╫
+;				  О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 ;******************* END OF SPECIFICATIONS *************************************
 ;******************+ START OF PSEUDOCODE +**************************************
 ;
