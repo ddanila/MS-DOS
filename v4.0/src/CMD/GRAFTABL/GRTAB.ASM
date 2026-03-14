@@ -408,6 +408,14 @@ EXITFL		DB   EXDOS     ;ERRORLEVEL RETURN CODE, INITIALLY SET TO "EXDOS"
 		PUBLIC EXITFL
 BAD1F		DB   0	       ;FLAG, GET SET TO "RESET" IF GRAFTABL FONT IS
 RESET		EQU  1	       ; LOADED, BUT 1FH DOES NOT POINT TO IT
+
+GRTAB_HELP_STR DB "Loads an additional character set for graphics mode.",0Dh,0Ah
+	       DB 0Dh,0Ah
+	       DB "GRAFTABL [nnn] [/STATUS]",0Dh,0Ah
+	       DB 0Dh,0Ah
+	       DB "  nnn       Code page number to load (e.g., 437, 850, 860, 863, 865)",0Dh,0Ah
+	       DB "  /STATUS   Display the currently loaded code page",0Dh,0Ah,"$"
+
 ; = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 		PATHLABL GRTAB ;AN006;
 ;  $SALUT (3,4,9,32)
@@ -416,6 +424,25 @@ MAIN PROC NEAR
 ENTRY_POINT LABEL NEAR	       ;JUMPED TO FROM ENTRY POINT IN GRTABHAN
    PUBLIC ENTRY_POINT
 ;VERSION CHECKING AND SYSTEM MESSAGE INITIALIZATION
+
+  ; Check for /? help (COM file: CS=DS=PSP at entry)
+  MOV  SI, 081h
+GRTAB_SKIP_SP:
+  CMP  BYTE PTR [SI], ' '
+  JNE  GRTAB_CHK_SL
+  INC  SI
+  JMP  GRTAB_SKIP_SP
+GRTAB_CHK_SL:
+  CMP  BYTE PTR [SI], '/'
+  JNE  GRTAB_NO_HELP
+  CMP  BYTE PTR [SI+1], '?'
+  JNE  GRTAB_NO_HELP
+  MOV  DX, OFFSET GRTAB_HELP_STR
+  MOV  AH, 09H
+  INT  21H
+  MOV  AX, 4C00H
+  INT  21H
+GRTAB_NO_HELP:
 
    CALL SYSLOADMSG	       ; INIT SYSMSG HANDLER				;AN000;
 
