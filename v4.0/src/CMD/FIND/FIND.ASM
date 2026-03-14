@@ -471,8 +471,36 @@ crlf            db      CR,LF   ;AN000;
 
         MSG_SERVICES <FIND.ctl,FIND.cla,FIND.cl1,FIND.cl2>      ;AN000;
         MSG_SERVICES <DISPLAYmsg,LOADmsg,CHARmsg,NOCHECKSTDIN>  ;AN003; Make retriever services available
-START:
 
+FIND_HELP_STR   DB "Searches for a text string in a file or files.",0Dh,0Ah
+                DB 0Dh,0Ah
+                DB "FIND [/V] [/C] [/N] ""string"" [[drive:][path]filename [...]]",0Dh,0Ah
+                DB 0Dh,0Ah
+                DB "  /V    Display all lines not containing the specified string",0Dh,0Ah
+                DB "  /C    Display only the count of matching lines",0Dh,0Ah
+                DB "  /N    Display line numbers with matched lines",0Dh,0Ah,"$"
+
+START:
+        ; Check for /? help (DS=PSP at EXE startup, before DS is changed)
+        mov     si, 081h
+FIND_SKIP_SP:
+        cmp     byte ptr [si], ' '
+        jne     FIND_CHK_SL
+        inc     si
+        jmp     FIND_SKIP_SP
+FIND_CHK_SL:
+        cmp     byte ptr [si], '/'
+        jne     FIND_NO_HELP
+        cmp     byte ptr [si+1], '?'
+        jne     FIND_NO_HELP
+        mov     ax, cs
+        mov     ds, ax
+        lea     dx, FIND_HELP_STR
+        mov     ah, 09h
+        int     21h
+        mov     ax, 4C00h
+        int     21h
+FIND_NO_HELP:
         mov     ax,cs                   ;load ES to the right area,
         mov     es,ax                   ;
         mov     ds,ax                   ;
