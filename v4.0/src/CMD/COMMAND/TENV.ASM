@@ -72,7 +72,40 @@ ASSUME DS:TRANGROUP
 	break	Prompt command
 assume	ds:trangroup,es:trangroup
 
+PROMPT_HELP_STR	DB	"Changes the MS-DOS command prompt.", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"PROMPT [text]", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"  text  Specifies a new command prompt.", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"Prompt can be made up of normal characters and the following special codes:", 0DH, 0AH
+		DB	"  $Q  = (equal sign)     $$ $ (dollar sign)   $T  Current time", 0DH, 0AH
+		DB	"  $D  Current date       $P  Current drive and path", 0DH, 0AH
+		DB	"  $V  MS-DOS version     $N  Current drive     $G  > (greater-than sign)", 0DH, 0AH
+		DB	"  $L  < (less-than sign) $B  | (pipe)         $H  Backspace", 0DH, 0AH
+		DB	"  $E  Escape code        $_  ENTER", 0DH, 0AH, "$"
+
 ADD_PROMPT:
+	mov	si, 81H
+PROMPT_SPC:
+	mov	al, [si]
+	cmp	al, ' '
+	jz	PROMPT_SK
+	cmp	al, 9
+	jnz	PROMPT_CSW
+PROMPT_SK:
+	inc	si
+	jmp	short PROMPT_SPC
+PROMPT_CSW:
+	cmp	al, '/'
+	jnz	PROMPT_NORM
+	cmp	byte ptr [si+1], '?'
+	jnz	PROMPT_NORM
+	mov	dx, offset trangroup:PROMPT_HELP_STR
+	mov	ah, 09H
+	int	int_command
+	return
+PROMPT_NORM:
 	CALL	DELETE_PROMPT			; DELETE ANY EXISTING PROMPT
 	CALL	SCAN_DOUBLE_NULL
 
@@ -84,7 +117,7 @@ ADD_PROMPT2:
 	CALL	MOVE_NAME			; MOVE IN NAME
 	CALL	GETARG
 	PUSH	SI
-	JMP	SHORT ADD_NAME
+	JMP	ADD_NAME
 
 
 	break	The SET command
@@ -96,10 +129,39 @@ assume	ds:trangroup,es:trangroup
 ;	  otherwise name is added to environment
 ;
 
+SET_HELP_STR	DB	"Displays, sets, or removes MS-DOS environment variables.", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"SET [variable=[string]]", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"  variable  Specifies the environment-variable name.", 0DH, 0AH
+		DB	"  string    Specifies a series of characters to assign to the variable.", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"Type SET without parameters to display the current environment variables.", 0DH, 0AH, "$"
+
 DISP_ENVj:
 	jmp	DISP_ENV
 
 ADD_NAME_TO_ENVIRONMENT:
+	mov	si, 81H
+SET_SPC:
+	mov	al, [si]
+	cmp	al, ' '
+	jz	SET_SK
+	cmp	al, 9
+	jnz	SET_CSW
+SET_SK:
+	inc	si
+	jmp	short SET_SPC
+SET_CSW:
+	cmp	al, '/'
+	jnz	SET_NORM
+	cmp	byte ptr [si+1], '?'
+	jnz	SET_NORM
+	mov	dx, offset trangroup:SET_HELP_STR
+	mov	ah, 09H
+	int	int_command
+	return
+SET_NORM:
 	CALL	GETARG
 	JZ	DISP_ENVj
 ;

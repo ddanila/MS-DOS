@@ -111,7 +111,36 @@ assume	ds:trangroup,es:trangroup
 ; *
 ; ****************************************************************
 
+DIR_HELP_STR	DB	"Displays a list of files and subdirectories in a directory.", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"DIR [drive:][path][filename] [/P] [/W]", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"  [drive:][path][filename]  Specifies drive, directory, and/or files", 0DH, 0AH
+		DB	"                            to list.", 0DH, 0AH
+		DB	"  /P  Pauses after each screenful of information.", 0DH, 0AH
+		DB	"  /W  Uses wide list format.", 0DH, 0AH, "$"
+
 CATALOG:
+	mov	si, 81H
+DIR_SPC:
+	mov	al, [si]
+	cmp	al, ' '
+	jz	DIR_SK
+	cmp	al, 9
+	jnz	DIR_CSW
+DIR_SK:
+	inc	si
+	jmp	short DIR_SPC
+DIR_CSW:
+	cmp	al, '/'
+	jnz	DIR_NORM
+	cmp	byte ptr [si+1], '?'
+	jnz	DIR_NORM
+	mov	dx, offset trangroup:DIR_HELP_STR
+	mov	ah, 09H
+	int	int_command
+	return
+DIR_NORM:
 
 ;
 ; Set up DTA for dir search firsts

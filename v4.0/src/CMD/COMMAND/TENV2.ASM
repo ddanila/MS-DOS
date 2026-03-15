@@ -95,8 +95,39 @@ break	$Chdir
 
 assume	ds:trangroup,es:trangroup
 
-$CHDIR:
+CHDIR_HELP_STR	DB	"Displays the name of or changes the current directory.", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"CHDIR [drive:][path]", 0DH, 0AH
+		DB	"CHDIR [..]", 0DH, 0AH
+		DB	"CD [drive:][path]", 0DH, 0AH
+		DB	"CD [..]", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"  ..  Specifies that you want to change to the parent directory.", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"Type CD drive: to display the current directory in the specified drive.", 0DH, 0AH
+		DB	"Type CD without parameters to display the current drive and directory.", 0DH, 0AH, "$"
 
+$CHDIR:
+	mov	si, 81H
+CD_SPC:
+	mov	al, [si]
+	cmp	al, ' '
+	jz	CD_SK
+	cmp	al, 9
+	jnz	CD_CSW
+CD_SK:
+	inc	si
+	jmp	short CD_SPC
+CD_CSW:
+	cmp	al, '/'
+	jnz	CD_NORM
+	cmp	byte ptr [si+1], '?'
+	jnz	CD_NORM
+	mov	dx, offset trangroup:CHDIR_HELP_STR
+	mov	ah, 09H
+	int	int_command
+	return
+CD_NORM:
 	mov	si,81H
 	mov	di,offset trangroup:parse_chdir ;AN000; Get adderss of PARSE_CHDIR
 	xor	cx,cx				;AN000; clear cx,dx
@@ -158,7 +189,32 @@ break	$Mkdir
 
 assume	ds:trangroup,es:trangroup
 
+MKDIR_HELP_STR	DB	"Creates a directory.", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"MKDIR [drive:]path", 0DH, 0AH
+		DB	"MD [drive:]path", 0DH, 0AH, "$"
+
 $MKDIR:
+	mov	si, 81H
+MD_SPC:
+	mov	al, [si]
+	cmp	al, ' '
+	jz	MD_SK
+	cmp	al, 9
+	jnz	MD_CSW
+MD_SK:
+	inc	si
+	jmp	short MD_SPC
+MD_CSW:
+	cmp	al, '/'
+	jnz	MD_NORM
+	cmp	byte ptr [si+1], '?'
+	jnz	MD_NORM
+	mov	dx, offset trangroup:MKDIR_HELP_STR
+	mov	ah, 09H
+	int	int_command
+	return
+MD_NORM:
 	CALL	SETRMMK
 	JC	MkDirErr
 	MOV	AH,MKDIR
@@ -251,7 +307,32 @@ break	$Rmdir
 
 assume	ds:trangroup,es:trangroup
 
+RMDIR_HELP_STR	DB	"Removes (deletes) a directory.", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"RMDIR [drive:]path", 0DH, 0AH
+		DB	"RD [drive:]path", 0DH, 0AH, "$"
+
 $RMDIR:
+	mov	si, 81H
+RD_SPC:
+	mov	al, [si]
+	cmp	al, ' '
+	jz	RD_SK
+	cmp	al, 9
+	jnz	RD_CSW
+RD_SK:
+	inc	si
+	jmp	short RD_SPC
+RD_CSW:
+	cmp	al, '/'
+	jnz	RD_NORM
+	cmp	byte ptr [si+1], '?'
+	jnz	RD_NORM
+	mov	dx, offset trangroup:RMDIR_HELP_STR
+	mov	ah, 09H
+	int	int_command
+	return
+RD_NORM:
 	CALL	SETRMMK
 	JC	RmDirErr
 	JNZ	BADRDERR

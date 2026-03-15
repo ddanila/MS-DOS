@@ -142,7 +142,39 @@ ASSUME	CS:TRANGROUP,DS:TRANGROUP,ES:TRANGROUP,SS:NOTHING
 	break	Copy
 assume	ds:trangroup,es:trangroup
 
+COPY_HELP_STR	DB	"Copies one or more files to another location.", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"COPY [/A | /B] source [/A | /B] [+ source [/A | /B] [+ ...]]", 0DH, 0AH
+		DB	"     [destination [/A | /B]] [/V]", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"  source       Specifies the file or files to be copied.", 0DH, 0AH
+		DB	"  /A           Indicates an ASCII text file.", 0DH, 0AH
+		DB	"  /B           Indicates a binary file.", 0DH, 0AH
+		DB	"  destination  Specifies the directory and/or filename for the new file(s).", 0DH, 0AH
+		DB	"  /V           Verifies that new files are written correctly.", 0DH, 0AH, "$"
+
 COPY:
+	; Check for /?
+	mov	si, 81H
+COPY_SPC:
+	mov	al, [si]
+	cmp	al, ' '
+	jz	COPY_SK
+	cmp	al, 9
+	jnz	COPY_CSW
+COPY_SK:
+	inc	si
+	jmp	short COPY_SPC
+COPY_CSW:
+	cmp	al, '/'
+	jnz	COPY_NORM
+	cmp	byte ptr [si+1], '?'
+	jnz	COPY_NORM
+	mov	dx, offset trangroup:COPY_HELP_STR
+	mov	ah, 09H
+	int	int_command
+	return
+COPY_NORM:
 ; First order of buisness is to find out about the destination
 ;
 ; initialize all internal variables

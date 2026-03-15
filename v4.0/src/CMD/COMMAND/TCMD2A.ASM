@@ -295,7 +295,36 @@ dpbisok:
 	break	Path
 assume	ds:trangroup,es:trangroup
 
+PATH_HELP_STR	DB	"Displays or sets a search path for executable files.", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"PATH [[drive:]path[;...]]", 0DH, 0AH
+		DB	"PATH ;", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"Type PATH ; to clear all search-path settings and direct MS-DOS", 0DH, 0AH
+		DB	"to search only in the current directory.", 0DH, 0AH
+		DB	"Type PATH without parameters to display the current path.", 0DH, 0AH, "$"
+
 PATH:
+	mov	si, 81H
+PATH_SPC:
+	mov	al, [si]
+	cmp	al, ' '
+	jz	PATH_SK
+	cmp	al, 9
+	jnz	PATH_CSW
+PATH_SK:
+	inc	si
+	jmp	short PATH_SPC
+PATH_CSW:
+	cmp	al, '/'
+	jnz	PATH_NORM
+	cmp	byte ptr [si+1], '?'
+	jnz	PATH_NORM
+	mov	dx, offset trangroup:PATH_HELP_STR
+	mov	ah, 09H
+	int	int_command
+	return
+PATH_NORM:
 	xor	al,al				;AN049; Set up holding buffer
 	mov	di,offset Trangroup:srcxname	;AN049;   for PATH while parsing
 	stosb					;AN049; Initialize PATH to null
