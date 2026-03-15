@@ -34,6 +34,44 @@ public PRINTID, FIGREC, Main_Routine, checkit
 
 	pathlabl chkdsk1
 CHKDSK:
+; --- /? help (before memory setup so it works on any DOS version) ---
+	MOV	AH, 062H
+	INT	21H			; BX = PSP segment
+	MOV	ES, BX			; ES = PSP
+	MOV	SI, 081H		; SI = command line in PSP
+CK_SKIP_SP:
+	CMP	BYTE PTR ES:[SI], ' '
+	JNE	CK_CHK_SL
+	INC	SI
+	JMP	SHORT CK_SKIP_SP
+CK_CHK_SL:
+	CMP	BYTE PTR ES:[SI], '/'
+	JE	CK_CHK_Q
+	JMP	CK_NO_HELP
+CK_CHK_Q:
+	CMP	BYTE PTR ES:[SI+1], '?'
+	JE	CK_DO_HELP
+	JMP	CK_NO_HELP
+CK_DO_HELP:
+	CALL	CK_HELP_END
+CK_HELP_STR DB "Checks a disk and displays a status report.",0Dh,0Ah
+	DB	0Dh,0Ah
+	DB	"CHKDSK [drive:][path][filename] [/F] [/V]",0Dh,0Ah
+	DB	0Dh,0Ah
+	DB	"  [drive:][path]  Drive and directory to check.",0Dh,0Ah
+	DB	"  [filename]      File(s) to check for fragmentation.",0Dh,0Ah
+	DB	"  /F              Fixes errors on the disk.",0Dh,0Ah
+	DB	"  /V              Displays every file on the disk.",0Dh,0Ah,"$"
+CK_HELP_END:
+	POP	DX
+	PUSH	CS
+	POP	DS
+	MOV	AH, 09H
+	INT	21H
+	MOV	AX, 4C00H
+	INT	21H
+CK_NO_HELP:
+; --- end /? help ---
 ; find out if we have enough memory to do the job
     mov     cs:save_drive,al		;save drive validity
 ;;;;int     12h 			;1k blocks (640k = 280h)		;an054;bgb;an050;bgb
