@@ -361,7 +361,31 @@ DATINIT ENDP
 
 assume	ds:trangroup,es:trangroup
 
+DATE_HELP_STR	DB	"Displays or sets the date.", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"DATE [date]", 0DH, 0AH, "$"
+
 DATE:
+	mov	si, 81H
+DATE_SPC:
+	mov	al, [si]
+	cmp	al, ' '
+	jz	DATE_SK
+	cmp	al, 9
+	jnz	DATE_CSW
+DATE_SK:
+	inc	si
+	jmp	short DATE_SPC
+DATE_CSW:
+	cmp	al, '/'
+	jnz	DATE_NORM
+	cmp	byte ptr [si+1], '?'
+	jnz	DATE_NORM
+	mov	dx, offset trangroup:DATE_HELP_STR
+	mov	ah, 09H
+	int	int_command
+	return
+DATE_NORM:
 	MOV	SI,81H				; Accepting argument for date inline
 	mov	di,offset trangroup:parse_date	;AN000; Get adderss of PARSE_DATE
 	xor	cx,cx				;AN000; clear counter for positionals
@@ -441,7 +465,31 @@ DATERR:
 
 assume	ds:trangroup,es:trangroup
 
+TIME_HELP_STR	DB	"Displays or sets the system time.", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"TIME [time]", 0DH, 0AH, "$"
+
 CTIME:
+	mov	si, 81H
+TIME_SPC:
+	mov	al, [si]
+	cmp	al, ' '
+	jz	TIME_SK
+	cmp	al, 9
+	jnz	TIME_CSW
+TIME_SK:
+	inc	si
+	jmp	short TIME_SPC
+TIME_CSW:
+	cmp	al, '/'
+	jnz	TIME_NORM
+	cmp	byte ptr [si+1], '?'
+	jnz	TIME_NORM
+	mov	dx, offset trangroup:TIME_HELP_STR
+	mov	ah, 09H
+	int	int_command
+	return
+TIME_NORM:
 	MOV	SI,81H				; Accepting argument for time inline
 	mov	di,offset trangroup:parse_time	;AN000; Get adderss of PARSE_time
 	xor	cx,cx				;AN000; clear counter for positionals

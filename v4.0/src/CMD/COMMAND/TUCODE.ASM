@@ -246,7 +246,35 @@ good_erase_exit:
 
 assume	ds:trangroup,es:trangroup
 
+ECHO_HELP_STR	DB	"Displays messages, or turns command echoing on or off.", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"  ECHO [ON | OFF]", 0DH, 0AH
+		DB	"  ECHO [message]", 0DH, 0AH
+		DB	"  ECHO.", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"Type ECHO without parameters to display the current echo setting.", 0DH, 0AH, "$"
+
 ECHO:
+	mov	si, 81H
+ECHO_SPC:
+	mov	al, [si]
+	cmp	al, ' '
+	jz	ECHO_SK
+	cmp	al, 9
+	jnz	ECHO_CSW
+ECHO_SK:
+	inc	si
+	jmp	short ECHO_SPC
+ECHO_CSW:
+	cmp	al, '/'
+	jnz	ECHO_NORM
+	cmp	byte ptr [si+1], '?'
+	jnz	ECHO_NORM
+	mov	dx, offset trangroup:ECHO_HELP_STR
+	mov	ah, 09H
+	int	int_command
+	return
+ECHO_NORM:
 	CALL	ON_OFF
 	JC	DOEMES
 	MOV	DS,[RESSEG]
@@ -285,12 +313,38 @@ ASSUME	DS:RESGROUP
 ASSUME	DS:TRANGROUP
 	AND	BL,1
 	MOV	DX,OFFSET TRANGROUP:ECHOMES_ptr
-	JMP	SHORT PYN
+	JMP	PYN
 
 	break	Break
 assume	ds:trangroup,es:trangroup
 
+BREAK_HELP_STR	DB	"Sets or clears extended CTRL+C checking.", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"BREAK [ON | OFF]", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"Type BREAK without a parameter to display the current BREAK setting.", 0DH, 0AH, "$"
+
 CNTRLC:
+	mov	si, 81H
+BRKC_SPC:
+	mov	al, [si]
+	cmp	al, ' '
+	jz	BRKC_SK
+	cmp	al, 9
+	jnz	BRKC_CSW
+BRKC_SK:
+	inc	si
+	jmp	short BRKC_SPC
+BRKC_CSW:
+	cmp	al, '/'
+	jnz	BRKC_NORM
+	cmp	byte ptr [si+1], '?'
+	jnz	BRKC_NORM
+	mov	dx, offset trangroup:BREAK_HELP_STR
+	mov	ah, 09H
+	int	int_command
+	return
+BRKC_NORM:
 	CALL	ON_OFF
 	MOV	AX,(SET_CTRL_C_TRAPPING SHL 8) OR 1
 	JC	PCNTRLC
@@ -306,7 +360,8 @@ CNTRLC_OFF:
 
 PCNTRLC:
 	CMP	CL,0				;AC000; rest of line blank?
-	JNZ	CERRORJ 			; no, oops!
+	JZ	pccont				; zero: blank line, continue
+	JMP	CERROR				; non-zero: oops!
 
 pccont:
 	XOR	AL,AL
@@ -337,7 +392,34 @@ PRINTVAL:
 	break	Verify
 assume	ds:trangroup,es:trangroup
 
+VERIFY_HELP_STR	DB	"Tells MS-DOS whether to verify that your files are written correctly", 0DH, 0AH
+		DB	"to a disk.", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"VERIFY [ON | OFF]", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"Type VERIFY without a parameter to display the current VERIFY setting.", 0DH, 0AH, "$"
+
 VERIFY:
+	mov	si, 81H
+VFY_SPC:
+	mov	al, [si]
+	cmp	al, ' '
+	jz	VFY_SK
+	cmp	al, 9
+	jnz	VFY_CSW
+VFY_SK:
+	inc	si
+	jmp	short VFY_SPC
+VFY_CSW:
+	cmp	al, '/'
+	jnz	VFY_NORM
+	cmp	byte ptr [si+1], '?'
+	jnz	VFY_NORM
+	mov	dx, offset trangroup:VERIFY_HELP_STR
+	mov	ah, 09H
+	int	int_command
+	return
+VFY_NORM:
 	CALL	ON_OFF
 	MOV	AX,(SET_VERIFY_ON_WRITE SHL 8) OR 1
 	JC	PVERIFY
@@ -352,7 +434,9 @@ VER_OFF:
 
 PVERIFY:
 	CMP	CL,0				;AC000; is rest of line blank?
-	JNZ	CERRORJ 			; nope...
+	JZ	pverify_cont			; zero: blank line, continue
+	JMP	CERROR				; non-zero: error
+pverify_cont:
 	MOV	AH,GET_VERIFY_ON_WRITE
 	INT	21H
 	MOV	BL,AL

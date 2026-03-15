@@ -98,7 +98,32 @@ assume	ds:trangroup,es:trangroup
 	break	Pause
 assume	ds:trangroup,es:trangroup
 
+PAUSE_HELP_STR	DB	"Suspends processing of a batch program and displays the message", 0DH, 0AH
+		DB	"  Press any key to continue . . .", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"PAUSE", 0DH, 0AH, "$"
+
 PAUSE:
+	mov	si, 81H
+PAUSE_SPC:
+	mov	al, [si]
+	cmp	al, ' '
+	jz	PAUSE_SK
+	cmp	al, 9
+	jnz	PAUSE_CSW
+PAUSE_SK:
+	inc	si
+	jmp	short PAUSE_SPC
+PAUSE_CSW:
+	cmp	al, '/'
+	jnz	PAUSE_NORM
+	cmp	byte ptr [si+1], '?'
+	jnz	PAUSE_NORM
+	mov	dx, offset trangroup:PAUSE_HELP_STR
+	mov	ah, 09H
+	int	int_command
+	return
+PAUSE_NORM:
 	mov	dx,offset trangroup:pausemes_ptr
 	call	std_printf
 	invoke	GetKeystroke
@@ -127,7 +152,35 @@ PAUSE:
 
 assume	ds:trangroup,es:trangroup
 
+ERASE_HELP_STR	DB	"Deletes one or more files.", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"DEL [drive:][path]filename [/P]", 0DH, 0AH
+		DB	"ERASE [drive:][path]filename [/P]", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"  [drive:][path]filename  Specifies the file(s) to delete.", 0DH, 0AH
+		DB	"  /P  Prompts for confirmation before deleting each file.", 0DH, 0AH, "$"
+
 ERASE:
+	mov	si, 81H
+ERASE_SPC:
+	mov	al, [si]
+	cmp	al, ' '
+	jz	ERASE_SK
+	cmp	al, 9
+	jnz	ERASE_CSW
+ERASE_SK:
+	inc	si
+	jmp	short ERASE_SPC
+ERASE_CSW:
+	cmp	al, '/'
+	jnz	ERASE_NORM
+	cmp	byte ptr [si+1], '?'
+	jnz	ERASE_NORM
+	mov	dx, offset trangroup:ERASE_HELP_STR
+	mov	ah, 09H
+	int	int_command
+	return
+ERASE_NORM:
 	mov	si,81H				;AC000; get command line
 	mov	comsw,0 			;AN000; clear switch indicator
 	mov	di,offset trangroup:parse_erase ;AN000; Get adderss of PARSE_erase
@@ -219,8 +272,34 @@ errj2:						;AC022; exit jump
 
 assume	ds:trangroup,es:trangroup
 
-CRENAME:
+CRENAME_HELP_STR	DB	"Renames a file or files.", 0DH, 0AH
+			DB	0DH, 0AH
+			DB	"RENAME [drive:][path]filename1 filename2", 0DH, 0AH
+			DB	"REN [drive:][path]filename1 filename2", 0DH, 0AH
+			DB	0DH, 0AH
+			DB	"Note that you cannot specify a new drive or path for your destination.", 0DH, 0AH, "$"
 
+CRENAME:
+	mov	si, 81H
+CRENAME_SPC:
+	mov	al, [si]
+	cmp	al, ' '
+	jz	CRENAME_SK
+	cmp	al, 9
+	jnz	CRENAME_CSW
+CRENAME_SK:
+	inc	si
+	jmp	short CRENAME_SPC
+CRENAME_CSW:
+	cmp	al, '/'
+	jnz	CRENAME_NORM
+	cmp	byte ptr [si+1], '?'
+	jnz	CRENAME_NORM
+	mov	dx, offset trangroup:CRENAME_HELP_STR
+	mov	ah, 09H
+	int	int_command
+	return
+CRENAME_NORM:
 	mov	si,81H				;AC000; Point to command line
 	mov	di,offset trangroup:parse_rename;AN000; Get adderss of PARSE_RENAME
 	xor	cx,cx				;AN000; clear cx,dx
@@ -285,11 +364,15 @@ ren_no_drive:
 
 	invoke	pathcrunch
 	mov	dx,offset trangroup:badcpmes_ptr
-	jz	errj2				; If 1st parm a dir, print error msg
+	jnz	crj_notdir			; If non-zero: first parm is not a dir
+	jmp	errj2				; If 1st parm a dir, print error msg
+crj_notdir:
 	jnc	notest3
 	mov	ax,[msg_numb]			;AN022; get message number
 	cmp	ax,0				;AN022; was message flag set?
-	jnz	extend_setup			;AN022; yes - print out message
+	jz	crj_no_extset			;AN022; zero: no extended error
+	jmp	extend_setup			;AN022; yes - print out message
+crj_no_extset:
 	cmp	[destisdir],0			; No CHDIRs worked
 	jz	notest3 			; see if they should have
 	Jmp	badpath_err			;AC022; set up error
@@ -353,7 +436,31 @@ ret56:	ret
 
 assume	ds:trangroup,es:trangroup
 
+TYPEFIL_HELP_STR	DB	"Displays the contents of a text file.", 0DH, 0AH
+			DB	0DH, 0AH
+			DB	"TYPE [drive:][path]filename", 0DH, 0AH, "$"
+
 TYPEFIL:
+	mov	si, 81H
+TYPEFIL_SPC:
+	mov	al, [si]
+	cmp	al, ' '
+	jz	TYPEFIL_SK
+	cmp	al, 9
+	jnz	TYPEFIL_CSW
+TYPEFIL_SK:
+	inc	si
+	jmp	short TYPEFIL_SPC
+TYPEFIL_CSW:
+	cmp	al, '/'
+	jnz	TYPEFIL_NORM
+	cmp	byte ptr [si+1], '?'
+	jnz	TYPEFIL_NORM
+	mov	dx, offset trangroup:TYPEFIL_HELP_STR
+	mov	ah, 09H
+	int	int_command
+	return
+TYPEFIL_NORM:
 	mov	si,81H
 	mov	di,offset trangroup:parse_mrdir ;AN000; Get adderss of PARSE_MRDIR
 	xor	cx,cx				;AN000; clear cx,dx
@@ -471,8 +578,31 @@ assume	ds:trangroup,es:trangroup
 ;
 ; VOLUME command displays the volume ID on the specified drive
 ;
-VOLUME:
+VOLUME_HELP_STR	DB	"Displays the disk volume label and serial number, if they exist.", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"VOL [drive:]", 0DH, 0AH, "$"
 
+VOLUME:
+	mov	si, 81H
+VOLUME_SPC:
+	mov	al, [si]
+	cmp	al, ' '
+	jz	VOLUME_SK
+	cmp	al, 9
+	jnz	VOLUME_CSW
+VOLUME_SK:
+	inc	si
+	jmp	short VOLUME_SPC
+VOLUME_CSW:
+	cmp	al, '/'
+	jnz	VOLUME_NORM
+	cmp	byte ptr [si+1], '?'
+	jnz	VOLUME_NORM
+	mov	dx, offset trangroup:VOLUME_HELP_STR
+	mov	ah, 09H
+	int	int_command
+	return
+VOLUME_NORM:
 	mov	si,81H
 	mov	di,offset trangroup:parse_vol	;AN000; Get adderss of PARSE_VOL
 	xor	cx,cx				;AN000; clear cx,dx
