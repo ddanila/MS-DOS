@@ -200,17 +200,6 @@ ASSUME	CS:RESGROUP,DS:RESGROUP,ES:RESGROUP,SS:RESGROUP
 ZERO	=	$
 
 
-CMD_HELP_STR	DB  "Starts a new instance of the MS-DOS command interpreter.", 0DH, 0AH
-		DB  0DH, 0AH
-		DB  "COMMAND [[drive:]path] [device] [/E:nnnnn] [/P] [/MSG] [/C string]", 0DH, 0AH
-		DB  0DH, 0AH
-		DB  "  [drive:]path  Directory containing COMMAND.COM.", 0DH, 0AH
-		DB  "  device        Device to use for command input and output.", 0DH, 0AH
-		DB  "  /E:nnnnn      Sets the environment size in bytes.", 0DH, 0AH
-		DB  "  /P            Makes the new command interpreter permanent.", 0DH, 0AH
-		DB  "  /MSG          Stores error messages in memory.", 0DH, 0AH
-		DB  "  /C string     Runs the specified command string, then returns.", 0DH, 0AH, "$"
-
 CONPROC:
 	MOV	SP,OFFSET RESGROUP:RSTACK	; MUST be first instruction
 
@@ -238,6 +227,20 @@ CMD_HLP_CSW:
 	INT	21H
 CMD_HLP_DONE:
 
+	JMP	CMD_HLP_PAST			; skip help string data
+
+CMD_HELP_STR	DB  "Starts a new instance of the MS-DOS command interpreter.", 0DH, 0AH
+		DB  0DH, 0AH
+		DB  "COMMAND [[drive:]path] [device] [/E:nnnnn] [/P] [/MSG] [/C string]", 0DH, 0AH
+		DB  0DH, 0AH
+		DB  "  [drive:]path  Directory containing COMMAND.COM.", 0DH, 0AH
+		DB  "  device        Device to use for command input and output.", 0DH, 0AH
+		DB  "  /E:nnnnn      Sets the environment size in bytes.", 0DH, 0AH
+		DB  "  /P            Makes the new command interpreter permanent.", 0DH, 0AH
+		DB  "  /MSG          Stores error messages in memory.", 0DH, 0AH
+		DB  "  /C string     Runs the specified command string, then returns.", 0DH, 0AH, "$"
+
+CMD_HLP_PAST:
 	CALL	SYSLOADMSG			;AN000; check dos version
 	JNC	OKDOS				;AN000; if no problem - continue
 
