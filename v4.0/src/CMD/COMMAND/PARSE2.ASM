@@ -279,7 +279,7 @@ newarg:
 	mov	DI, argbufptr			; load the argbuf pointer and make
 	add	DI, CX				; sure we're not about to run off
 	cmp	DI, OFFSET TRANGROUP:arg.argbuf+ARGBLEN-1
-	jge	buf_ovflow			; the end of the buffer (plus null byte)
+	jae	buf_ovflow			; the end of the buffer (plus null byte)
 	sub	DI, CX				; adjust the pointer
 	cld
 	rep	movsb				; and save the string in argbuffer
