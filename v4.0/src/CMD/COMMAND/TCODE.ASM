@@ -153,6 +153,8 @@ ASSUME	DS:RESGROUP
 	INT	int_command
 
 NOSETVER2:
+	PUSH	CS				; Ensure ES=TRANGROUP — handlers
+	POP	ES				; may return with ES corrupted
 	CALL	[HEADCALL]			; Make sure header fixed
 	XOR	BP,BP				; Flag transient not read
 	CMP	[SINGLECOM],-1

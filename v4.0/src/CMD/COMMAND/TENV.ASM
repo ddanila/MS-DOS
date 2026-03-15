@@ -113,6 +113,8 @@ ADD_PROMPT2:
 	PUSH	SI
 	CALL	GETARG
 	POP	SI
+	push	cs			; Restore ES=TRANGROUP (SCAN_DOUBLE_NULL
+	pop	es			; sets ES=ENVIRSEG)
 	retz					; PRE SCAN FOR ARGUMENTS
 	CALL	MOVE_NAME			; MOVE IN NAME
 	CALL	GETARG
@@ -194,6 +196,8 @@ ONEQ:
 	CALL	DELETE_NAME_IN_ENVIRONMENT
 	POP	BX
 	DEC	BH
+	push	cs			; Restore ES=TRANGROUP (DELETE_NAME
+	pop	es			; sets ES=ENVIRSEG via FIND)
 	retz
 
 	CALL	SCAN_DOUBLE_NULL
@@ -233,6 +237,8 @@ add_name1:
 add_name_ret:
 	pop	si
 	cmp	comspec_flag,0			; If the new env var is comspec,
+	push	cs			; Restore ES=TRANGROUP (was ENVIRSEG
+	pop	es			; from SCAN_DOUBLE_NULL)
 	retz					;  copy the value into the
 ;
 ; We have changed the COMSPEC variable.  We need to update the resident
@@ -296,6 +302,8 @@ CopyDone:
 	dec	di
 	mov	comspec_end,di
 
+	push	cs			; Restore ES=TRANGROUP (was RESGROUP
+	pop	es			; from COMSPEC handling)
 	ret
 
 DISP_ENV:
@@ -641,6 +649,8 @@ ENVNOSET:
 	POP	AX
 	JNC	STORE1
 	POP	ES				;AN056;
+	push	cs			; Restore ES=TRANGROUP before error
+	pop	es			; path — CERROR/TCOMMAND need ES=TRANGROUP
 	MOV	DX,OFFSET TRANGROUP:ENVERR_ptr
 	JMP	CERROR
 STORE1:
