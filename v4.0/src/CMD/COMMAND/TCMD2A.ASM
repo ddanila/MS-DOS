@@ -453,7 +453,31 @@ assume	ds:trangroup,es:trangroup
 
 ANSI_installed		equ    0ffh
 
+CLS_HELP_STR	DB	"Clears the screen.", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"CLS", 0DH, 0AH, "$"
+
 CLS:
+	mov	si, 81H
+CLS_SPC:
+	mov	al, [si]
+	cmp	al, ' '
+	jz	CLS_SK
+	cmp	al, 9
+	jnz	CLS_CSW
+CLS_SK:
+	inc	si
+	jmp	short CLS_SPC
+CLS_CSW:
+	cmp	al, '/'
+	jnz	CLS_NORM
+	cmp	byte ptr [si+1], '?'
+	jnz	CLS_NORM
+	mov	dx, offset trangroup:CLS_HELP_STR
+	mov	ah, 09H
+	int	int_command
+	return
+CLS_NORM:
 	mov	ah,Mult_ANSI			;AN000; see if ANSI.SYS installed
 	mov	al,0				;AN000;
 	int	2fh				;AN000;

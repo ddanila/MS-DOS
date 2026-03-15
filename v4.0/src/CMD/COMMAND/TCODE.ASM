@@ -93,6 +93,7 @@ ASSUME	CS:TRANGROUP,DS:NOTHING,ES:NOTHING,SS:NOTHING
 	PUBLIC	DOCOM1
 	PUBLIC	NOPIPEPROC
 	PUBLIC	TCOMMAND
+	PUBLIC	REM_HANDLER
 
 	IF  IBM
 	PUBLIC	ROM_EXEC
@@ -103,6 +104,35 @@ ASSUME	CS:TRANGROUP,DS:NOTHING,ES:NOTHING,SS:NOTHING
 ZERO	=	$
 
 	ORG	100H				; Allow for 100H parameter area
+
+assume	ds:trangroup,es:trangroup
+
+REM_HELP_STR	DB	"Records comments (remarks) in a batch file or CONFIG.SYS.", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"REM [comment]", 0DH, 0AH, "$"
+
+REM_HANDLER:
+	mov	si, 81H
+REM_SPC:
+	mov	al, [si]
+	cmp	al, ' '
+	jz	REM_SK
+	cmp	al, 9
+	jnz	REM_CSW
+REM_SK:
+	inc	si
+	jmp	short REM_SPC
+REM_CSW:
+	cmp	al, '/'
+	jnz	REM_NORM
+	cmp	byte ptr [si+1], '?'
+	jnz	REM_NORM
+	mov	dx, offset trangroup:REM_HELP_STR
+	mov	ah, 09H
+	int	int_command
+	return
+REM_NORM:
+	jmp	TCOMMAND
 
 SETDRV:
 	MOV	AH,SET_DEFAULT_DRIVE

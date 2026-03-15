@@ -162,6 +162,12 @@ GetByteDone:
 
 EndProc GetBatByt
 
+IF_HELP_STR	DB	"Performs conditional processing in batch programs.", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"IF [NOT] ERRORLEVEL number command", 0DH, 0AH
+		DB	"IF [NOT] string1==string2 command", 0DH, 0AH
+		DB	"IF [NOT] EXIST filename command", 0DH, 0AH, "$"
+
 	break	<$If - conditional execution>
 assume	ds:trangroup,es:trangroup
 
@@ -173,6 +179,26 @@ FORERROR:
 	JMP	CERROR
 
 $IF:
+	mov	si, 81H
+IF_SPC:
+	mov	al, [si]
+	cmp	al, ' '
+	jz	IF_SK
+	cmp	al, 9
+	jnz	IF_CSW
+IF_SK:
+	inc	si
+	jmp	short IF_SPC
+IF_CSW:
+	cmp	al, '/'
+	jnz	IF_NORM
+	cmp	byte ptr [si+1], '?'
+	jnz	IF_NORM
+	mov	dx, offset trangroup:IF_HELP_STR
+	mov	ah, 09H
+	int	int_command
+	return
+IF_NORM:
 ;
 ; Turn off any pipes in progress.
 ;
@@ -255,7 +281,9 @@ IFSTRING:
 FIRST_STRING:
 	LODSB					; get character
 	CMP	AL,0DH				; end of line?
-	JZ	IFERRORP			; yes => error
+	JNZ	ifs_not_eol
+	JMP	IFERRORP			; yes => error
+ifs_not_eol:
 	invoke	DELIM				; is it a delimiter?
 	JZ	EQUAL_CHECK			; yes, go find equal sign
 	INC	CX				; remember 1 byte for the length
@@ -443,8 +471,32 @@ assume	ds:trangroup,es:trangroup
 ; This is a NOP if no batch in progress.
 ;
 
+SHIFT_HELP_STR	DB	"Changes the position of replaceable parameters in a batch file.", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"SHIFT", 0DH, 0AH, "$"
+
 Procedure   Shift,NEAR
 
+	mov	si, 81H
+SHIFT_SPC:
+	mov	al, [si]
+	cmp	al, ' '
+	jz	SHIFT_SK
+	cmp	al, 9
+	jnz	SHIFT_CSW
+SHIFT_SK:
+	inc	si
+	jmp	short SHIFT_SPC
+SHIFT_CSW:
+	cmp	al, '/'
+	jnz	SHIFT_NORM
+	cmp	byte ptr [si+1], '?'
+	jnz	SHIFT_NORM
+	mov	dx, offset trangroup:SHIFT_HELP_STR
+	mov	ah, 09H
+	int	int_command
+	return
+SHIFT_NORM:
 	MOV	DS,[RESSEG]
 ASSUME	DS:RESGROUP
 	MOV	AX,[BATCH]			; get batch pointer
@@ -524,7 +576,31 @@ EndProc SkipDelim
 ;  DOCOM1 in TCODE to reprocess the command line and execute the file
 ;  being CALLed.
 
+CALL_HELP_STR	DB	"Calls one batch program from another.", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"CALL [drive:][path]filename [batch-parameters]", 0DH, 0AH, "$"
+
 $CALL:
+	mov	si, 81H
+CALL_SPC:
+	mov	al, [si]
+	cmp	al, ' '
+	jz	CALL_SK
+	cmp	al, 9
+	jnz	CALL_CSW
+CALL_SK:
+	inc	si
+	jmp	short CALL_SPC
+CALL_CSW:
+	cmp	al, '/'
+	jnz	CALL_NORM
+	cmp	byte ptr [si+1], '?'
+	jnz	CALL_NORM
+	mov	dx, offset trangroup:CALL_HELP_STR
+	mov	ah, 09H
+	int	int_command
+	return
+CALL_NORM:
 
 ;  strip off CALL from command line
 
@@ -565,9 +641,37 @@ NoPipe:
 
 	break	Goto
 
+GOTO_HELP_STR	DB	"Directs MS-DOS to a labeled line in a batch program.", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"GOTO label", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"  label  Specifies a text string used in the batch program as a label.", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"You type a label on a line by itself, beginning with a colon.", 0DH, 0AH, "$"
+
 GOTO:
 
 assume	ds:trangroup,es:trangroup
+	mov	si, 81H
+GOTO_SPC:
+	mov	al, [si]
+	cmp	al, ' '
+	jz	GOTO_SK
+	cmp	al, 9
+	jnz	GOTO_CSW
+GOTO_SK:
+	inc	si
+	jmp	short GOTO_SPC
+GOTO_CSW:
+	cmp	al, '/'
+	jnz	GOTO_NORM
+	cmp	byte ptr [si+1], '?'
+	jnz	GOTO_NORM
+	mov	dx, offset trangroup:GOTO_HELP_STR
+	mov	ah, 09H
+	int	int_command
+	return
+GOTO_NORM:
 	MOV	DS,[RESSEG]
 ASSUME	DS:RESGROUP
 	TEST	[BATCH],-1

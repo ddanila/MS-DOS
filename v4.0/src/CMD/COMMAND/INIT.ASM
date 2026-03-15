@@ -200,8 +200,43 @@ ASSUME	CS:RESGROUP,DS:RESGROUP,ES:RESGROUP,SS:RESGROUP
 ZERO	=	$
 
 
+CMD_HELP_STR	DB  "Starts a new instance of the MS-DOS command interpreter.", 0DH, 0AH
+		DB  0DH, 0AH
+		DB  "COMMAND [[drive:]path] [device] [/E:nnnnn] [/P] [/MSG] [/C string]", 0DH, 0AH
+		DB  0DH, 0AH
+		DB  "  [drive:]path  Directory containing COMMAND.COM.", 0DH, 0AH
+		DB  "  device        Device to use for command input and output.", 0DH, 0AH
+		DB  "  /E:nnnnn      Sets the environment size in bytes.", 0DH, 0AH
+		DB  "  /P            Makes the new command interpreter permanent.", 0DH, 0AH
+		DB  "  /MSG          Stores error messages in memory.", 0DH, 0AH
+		DB  "  /C string     Runs the specified command string, then returns.", 0DH, 0AH, "$"
+
 CONPROC:
 	MOV	SP,OFFSET RESGROUP:RSTACK	; MUST be first instruction
+
+	; Check for /? before sysloadmsg (which checks DOS version).
+	; At entry DS=CS=RESGROUP=PSP segment, so DS:[81H] is the command tail.
+	MOV	SI, 81H
+CMD_HLP_SPC:
+	MOV	AL, [SI]
+	CMP	AL, ' '
+	JZ	CMD_HLP_SK
+	CMP	AL, 9
+	JNZ	CMD_HLP_CSW
+CMD_HLP_SK:
+	INC	SI
+	JMP	SHORT CMD_HLP_SPC
+CMD_HLP_CSW:
+	CMP	AL, '/'
+	JNZ	CMD_HLP_DONE
+	CMP	BYTE PTR [SI+1], '?'
+	JNZ	CMD_HLP_DONE
+	MOV	DX, OFFSET RESGROUP:CMD_HELP_STR
+	MOV	AH, 09H
+	INT	21H
+	MOV	AX, 4C00H
+	INT	21H
+CMD_HLP_DONE:
 
 	CALL	SYSLOADMSG			;AN000; check dos version
 	JNC	OKDOS				;AN000; if no problem - continue

@@ -312,6 +312,13 @@ noecho3:					; run silent, run deep...
 	assume	DS:trangroup
 	jmp	docom1
 
+FOR_HELP_STR	DB	"Runs a specified command for each file in a set of files.", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"FOR %variable IN (set) DO command [command-parameters]", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"  %variable  Specifies a replaceable parameter.", 0DH, 0AH
+		DB	"  (set)      Specifies a set of one or more files.", 0DH, 0AH
+		DB	"  command    Specifies the command to carry out for each file.", 0DH, 0AH, "$"
 
 fornesterrj:					; no multi-loop processing... yet!
 assume	ES:resgroup
@@ -325,6 +332,26 @@ forerrorj:
 assume	ds:trangroup,es:trangroup
 
 $for:
+	mov	si, 81H
+FOR_SPC:
+	mov	al, [si]
+	cmp	al, ' '
+	jz	FOR_SK
+	cmp	al, 9
+	jnz	FOR_CSW
+FOR_SK:
+	inc	si
+	jmp	short FOR_SPC
+FOR_CSW:
+	cmp	al, '/'
+	jnz	FOR_NORM
+	cmp	byte ptr [si+1], '?'
+	jnz	FOR_NORM
+	mov	dx, offset trangroup:FOR_HELP_STR
+	mov	ah, 09H
+	int	int_command
+	return
+FOR_NORM:
 	mov	ES, [RESSEG]
 assume	ES:resgroup
 
@@ -399,7 +426,9 @@ for_list_not_empty:
 
 for_paren_token:
 	call	nextarg 			; what have we in our <list>?
-	jc	forerrorj
+	jnc	for_pt_ok
+	jmp	forerrorj
+for_pt_ok:
 	cmp	ax, nullrparen			; special case:  null list
 	jne	for_list
 	jmp	forterm

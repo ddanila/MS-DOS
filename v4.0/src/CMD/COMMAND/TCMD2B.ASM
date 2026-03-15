@@ -100,7 +100,33 @@ assume	ds:trangroup,es:trangroup
 ; *
 ; ****************************************************************
 
+CTTY_HELP_STR	DB	"Changes the terminal device used to control your system.", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"CTTY device", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"  device  The terminal device you want to use, such as COM1.", 0DH, 0AH, "$"
+
 CTTY:
+	mov	si, 81H
+CTTY_SPC:
+	mov	al, [si]
+	cmp	al, ' '
+	jz	CTTY_SK
+	cmp	al, 9
+	jnz	CTTY_CSW
+CTTY_SK:
+	inc	si
+	jmp	short CTTY_SPC
+CTTY_CSW:
+	cmp	al, '/'
+	jnz	CTTY_NORM
+	cmp	byte ptr [si+1], '?'
+	jnz	CTTY_NORM
+	mov	dx, offset trangroup:CTTY_HELP_STR
+	mov	ah, 09H
+	int	int_command
+	return
+CTTY_NORM:
 	push	ds				;AN000; Get local ES
 	pop	es				;AN000;
 	mov	si,81H				;AC000; Get command argument for CTTY
@@ -227,7 +253,35 @@ get_global_cp		equ    1
 
 assume	ds:trangroup,es:trangroup
 
+CHCP_HELP_STR	DB	"Displays or sets the active code page number.", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"CHCP [nnn]", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"  nnn  Specifies a code page number.", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"Type CHCP without a parameter to display the active code page number.", 0DH, 0AH, "$"
+
 CHCP:
+	mov	si, 81H
+CHCP_SPC:
+	mov	al, [si]
+	cmp	al, ' '
+	jz	CHCP_SK
+	cmp	al, 9
+	jnz	CHCP_CSW
+CHCP_SK:
+	inc	si
+	jmp	short CHCP_SPC
+CHCP_CSW:
+	cmp	al, '/'
+	jnz	CHCP_NORM
+	cmp	byte ptr [si+1], '?'
+	jnz	CHCP_NORM
+	mov	dx, offset trangroup:CHCP_HELP_STR
+	mov	ah, 09H
+	int	int_command
+	return
+CHCP_NORM:
 	push	ds				;AN000; Get local ES
 	pop	es				;AN000;
 	mov	si,81H				;AC000; Get command argument for CHCP
@@ -344,7 +398,31 @@ chcp_return:
 
 assume	ds:trangroup,es:trangroup		;AN000;
 
+TRUENAME_HELP_STR	DB	"Returns the full path of a file or directory.", 0DH, 0AH
+			DB	0DH, 0AH
+			DB	"TRUENAME [drive:][path][filename]", 0DH, 0AH, "$"
+
 TRUENAME:					;AN000; TRUENAME entry point
+	mov	si, 81H
+TRUENAME_SPC:
+	mov	al, [si]
+	cmp	al, ' '
+	jz	TRUENAME_SK
+	cmp	al, 9
+	jnz	TRUENAME_CSW
+TRUENAME_SK:
+	inc	si
+	jmp	short TRUENAME_SPC
+TRUENAME_CSW:
+	cmp	al, '/'
+	jnz	TRUENAME_NORM
+	cmp	byte ptr [si+1], '?'
+	jnz	TRUENAME_NORM
+	mov	dx, offset trangroup:TRUENAME_HELP_STR
+	mov	ah, 09H
+	int	int_command
+	return
+TRUENAME_NORM:
 	push	ds				;AN000; Get local ES
 	pop	es				;AN000;
 	mov	si,81H				;AN000; Get command line
@@ -424,7 +502,31 @@ tn_print_xname: 				;AN000;
 
 assume	ds:trangroup,es:trangroup
 
+EXIT_HELP_STR	DB	"Quits the CMD.EXE program (command interpreter).", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"EXIT", 0DH, 0AH, "$"
+
 $EXIT:
+	mov	si, 81H
+EXIT_SPC:
+	mov	al, [si]
+	cmp	al, ' '
+	jz	EXIT_SK
+	cmp	al, 9
+	jnz	EXIT_CSW
+EXIT_SK:
+	inc	si
+	jmp	short EXIT_SPC
+EXIT_CSW:
+	cmp	al, '/'
+	jnz	EXIT_NORM
+	cmp	byte ptr [si+1], '?'
+	jnz	EXIT_NORM
+	mov	dx, offset trangroup:EXIT_HELP_STR
+	mov	ah, 09H
+	int	int_command
+	return
+EXIT_NORM:
 	push	ds				;AN000; save data segment
 	mov	ds,[resseg]			;AN000; get resident data segment
 
