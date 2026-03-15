@@ -84,7 +84,33 @@ transpace	ends
 	break	Version
 assume	ds:trangroup,es:trangroup
 
+VER_HELP_STR	DB	"Displays the MS-DOS version.", 0DH, 0AH
+		DB	0DH, 0AH
+		DB	"VER", 0DH, 0AH, "$"
+
 VERSION:
+	; Check for /?
+	mov	si, 81H			; command tail
+VER_SKIP_SPC:
+	mov	al, [si]
+	cmp	al, ' '
+	jz	VER_SKIP1
+	cmp	al, 9			; tab
+	jnz	VER_CHECK_SW
+VER_SKIP1:
+	inc	si
+	jmp	short VER_SKIP_SPC
+VER_CHECK_SW:
+	cmp	al, '/'
+	jnz	VER_NORMAL
+	cmp	byte ptr [si+1], '?'
+	jnz	VER_NORMAL
+	; Print help string and return
+	mov	dx, offset trangroup:VER_HELP_STR
+	mov	ah, 09H
+	int	int_command
+	return
+VER_NORMAL:
 	call	crlf2
 	call	print_version
 	jmp	crlf2
