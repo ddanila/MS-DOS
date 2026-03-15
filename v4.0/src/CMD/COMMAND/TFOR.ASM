@@ -323,9 +323,13 @@ FOR_HELP_STR	DB	"Runs a specified command for each file in a set of files.", 0DH
 fornesterrj:					; no multi-loop processing... yet!
 assume	ES:resgroup
 	call	ForOff
+	push	cs			; Restore ES to TRANGROUP before error
+	pop	es			; path — CERROR/TCOMMAND need ES=TRANGROUP
 	jmp	fornesterr
 
 forerrorj:
+	push	cs			; Restore ES to TRANGROUP (set to RESGROUP
+	pop	es			; by $for before arg validation)
 	jmp	forerror
 
 	break	$For
@@ -434,6 +438,8 @@ for_pt_ok:
 	jmp	forterm
 
 forerrorjj:
+	push	cs			; Restore ES to TRANGROUP before error
+	pop	es
 	jmp	forerror
 
 for_list:					; skip over rest of <list>
@@ -513,9 +519,13 @@ assume	ES:resgroup
 	jnz	for_ret
 	mov	[SINGLECOM], 0FF00H
 for_ret:
+	push	cs			; Restore ES to TRANGROUP — callers
+	pop	es			; (TCOMMAND) need ES=TRANGROUP for HEADCALL
 	ret
 
 for_alloc_err:
+	push	cs			; Restore ES to TRANGROUP after FREE_TPA
+	pop	es
 	mov	msg_disp_class,ext_msg_class	;AN000; set up extended error msg class
 	mov	dx,offset TranGroup:Extend_Buf_ptr     ;AC000; get extended message pointer
 	mov	Extend_Buf_ptr,error_not_enough_memory ;AN000; get message number in control block
