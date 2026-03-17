@@ -52,6 +52,10 @@ v4.0/src/MAPPER/MAPPER.LIB
 v4.0/src/INC/boot.inc
 v4.0/src/INC/0*
 
+# EDLIN temporary/backup files
+v4.0/src/**/*.$$$
+v4.0/src/**/*.BAK
+
 # Intermediate build artifacts
 v4.0/src/**/*.OBJ
 v4.0/src/**/*.MAP
