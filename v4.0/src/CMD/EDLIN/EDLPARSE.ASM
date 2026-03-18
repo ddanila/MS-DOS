@@ -259,9 +259,9 @@ build_fs	endp				;an000;end proc
 ;=========================================================================
 
 val_sw		proc	near			;an000;switch determination
-
-	mov	dg:parse_switch_b,true		;an000;only switch is /B; signal found
-
+	assume	ds:nothing			;DS is org_ds at runtime, not DG
+	mov	byte ptr cs:[parse_switch_b],true ;CS: override - writes to DG group
+	assume	ds:dg				;restore for following code
 	ret					;an000;return to caller
 
 val_sw		endp				;an000;end proc
