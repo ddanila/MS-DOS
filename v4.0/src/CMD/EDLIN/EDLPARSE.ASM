@@ -260,16 +260,7 @@ build_fs	endp				;an000;end proc
 
 val_sw		proc	near			;an000;switch determination
 
-	cmp	es:parse_sw_syn,offset es:sw_b_switch	;an000;/B switch?
-;	$if	e				;an000;compare good
-	JNE $$IF9
-		mov	dg:parse_switch_b,true	;an000;signal /B found
-;	$else					;an000;
-	JMP SHORT $$EN9
-$$IF9:
-		mov	dg:parse_switch_b,false ;an000;signal /B not found
-;	$endif					;an000;
-$$EN9:
+	mov	dg:parse_switch_b,true		;an000;only switch is /B; signal found
 
 	ret					;an000;return to caller
 
