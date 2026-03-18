@@ -46,7 +46,7 @@ char            temp_disk;
                 /* the logical drive based on the start of the extended partition, but there isn't one */
                 /* because it has already been deleted already. Bad things happen - PTM P941  */
 
-                if (find_partition_type(uc(EXTENDED)));                 /* AC000 */
+                if (find_partition_type(uc(EXTENDED)))                  /* AC000 */
                    BEGIN
                     /* See if any extended partitions need to be updated */
                     changed_flag = FALSE;

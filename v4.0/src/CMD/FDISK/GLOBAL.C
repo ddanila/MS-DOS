@@ -11,6 +11,7 @@
 
 
 
+char    _fdisk_pad[8];         /* pad to push globals past MSC null-ptr sentinel area */
 char    cur_disk;
 char    good_disk[2];
 unsigned char    number_of_drives;
