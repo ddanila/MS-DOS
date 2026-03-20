@@ -255,10 +255,6 @@ AccessDisk endp
 Public	CHeckSwitches
 CheckSwitches proc near
 
-SwitchError:
-	stc
-	ret
-
 CheckExcl:
 
 	test	SwitchMap,Switch_F		;Specify size?			;AN001;
