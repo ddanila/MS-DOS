@@ -126,7 +126,7 @@
 /*                                                                        */
 /*         or                                                             */
 /*                                                                        */
-/*         [d:][path]FDISK  d  [/PRI:m  |  /EXT:n  |  /LOG:o |  /Q ...]   */
+/*         [d:][path]FDISK  d  [/PRI:m  |  /EXT:n  |  /LOG:o |  /Q]      */
 /*                                                                        */
 /*         d:      Drive to load FDISK utility from                       */
 /*                                                                        */
