@@ -702,7 +702,7 @@ IFS_DO_HELP:
 	CALL	IFS_HELP_DONE			; push runtime addr of IFS_HELP_STR
 IFS_HELP_STR DB	"Manages installable file system drivers.",c_CR,c_LF
 	DB	c_CR,c_LF
-	DB	"IFSFUNC [/NAMES:n]",c_CR,c_LF,"$"
+	DB	"IFSFUNC [NAMES=n]",c_CR,c_LF,"$"
 IFS_HELP_DONE:
 	POP	DX				; DX = runtime addr of IFS_HELP_STR
 	PUSH	CS

@@ -2306,10 +2306,11 @@ $$DO56:
 
 SHARE_HELP_STR DB "Enables file-sharing and locking capabilities.",0Dh,0Ah
 	       DB 0Dh,0Ah
-	       DB "SHARE [/F:filespace] [/L:locks]",0Dh,0Ah
+	       DB "SHARE [/F:filespace] [/L:locks] [/NC]",0Dh,0Ah
 	       DB 0Dh,0Ah
 	       DB "  /F:n    Space in bytes for file-sharing info (default 2048)",0Dh,0Ah
-	       DB "  /L:n    Number of simultaneous file locks (default 20)",0Dh,0Ah,"$"
+	       DB "  /L:n    Number of simultaneous file locks (default 20)",0Dh,0Ah
+	       DB "  /NC     Disable network path checking",0Dh,0Ah,"$"
 
    Break <SHAREINIT - Share initialization entry point>
 

@@ -189,7 +189,7 @@ char    *argv[];                /* array of pointer to arguments */             
   if (argc >= 2 && argv[1][0] == '/' && argv[1][1] == '?') {                  /* /? help */
     printf("Assigns an IFS drive or device to a drive letter.\r\n\r\n");
     printf("FILESYS [drive:] device IFSname [/parameters]\r\n");
-    printf("FILESYS drive: /d\r\n");
+    printf("FILESYS drive: /D\r\n");
     printf("FILESYS [drive:]\r\n");
     exit(0);
     }                                                                           /* /? help */
