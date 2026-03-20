@@ -255,14 +255,7 @@ AccessDisk endp
 Public	CHeckSwitches
 CheckSwitches proc near
 
-
-; Disallow /C
-						;lea	 dx, msgInvalidParameter					 ;AC000;
-	test	switchmap, SWITCH_C
-	jz	CheckExcl
-	Message msgInvalidParameter		;AC000;
 SwitchError:
-						;call	 PrintString							 ;AC000;
 	stc
 	ret
 

@@ -2264,11 +2264,6 @@ DiskFormat proc near
 NotBig: stosw
 	pop	es
 
-; don't bother to do the formatting if /c was given
-	test	switchmap, SWITCH_C
-	jz	Keep_Going
-	jmp	FormatDone			;FormatDone is to far away
-
 Keep_Going:
 foofoo	=	INSTALL_FAKE_BPB or TRACKLAYOUT_IS_GOOD
 	mov	deviceParameters.DP_SpecialFunctions, foofoo
@@ -2428,10 +2423,6 @@ DiskFormat endp
 
 BadSector proc	near
 
-
-; don't bother to do the formatting if /c was given
-	test	switchmap, SWITCH_C
-	jnz	NoMoreTracks
 
 	test	formatError, 0ffH
 	jz	ContinueFormat
