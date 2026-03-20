@@ -37,7 +37,6 @@ page	58,132
 ;	      segment.	There is a duplication of routines for getting the a20
 ;	      state. (ISP)
 ;******************************************************************************
-.lfcond 				; list false conditionals
 .386p
 	page
 ;******************************************************************************
@@ -58,8 +57,8 @@ page	58,132
 ;******************************************************************************
 ;			E X T E R N A L   R E F E R E N C E S
 ;******************************************************************************
-	include VDMseg.inc
-	include VDMsel.inc
+	include VDMSEG.INC
+	include VDMSEL.INC
 ;
 _DATA	segment
 ;	(none)

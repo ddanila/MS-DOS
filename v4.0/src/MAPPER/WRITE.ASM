@@ -26,7 +26,7 @@ dosxxx  segment byte public 'dos'
             public   doswrite
             .sall
             .xlist
-            include  macros.inc
+            include  MACROS.INC
             .list
 
 str         struc

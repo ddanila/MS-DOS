@@ -17,8 +17,8 @@ page	,132	;								;an000;bgb
 ; Include Files 								;an000;bgb
 ;*****************************************************************************	;an000;bgb
 .xlist										;an000;bgb
-include pathmac.inc								;an040;bgb
-include chkseg.inc								;an000;bgb
+include PATHMAC.INC								;an040;bgb
+include CHKSEG.INC								;an000;bgb
 INCLUDE CPMFCB.INC								;an000;bgb
 INCLUDE CHKEQU.INC								;an000;bgb
 .list										;an000;bgb
@@ -133,7 +133,7 @@ Display_Interface   proc			;				;an000;bgb;AN000;
 	ret					;All done			;an000;bgb;AN000;
 Display_Interface      endp			;				;an000;bgb;AN000;
 										;an000;bgb
-include msgdcl.inc
+include MSGDCL.INC
 
 code	ends									;an000;bgb
 	end									;an000;bgb

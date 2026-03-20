@@ -6,15 +6,13 @@ TITLE	PART4 COMMAND Transient routines.
 ;	Internal commands DIR,PAUSE,ERASE,TYPE,VOL,VER
 
 .xlist
-.xcref
 	INCLUDE DOSSYM.INC
-	INCLUDE comseg.asm
-	INCLUDE comsw.asm		;AC000;
-	INCLUDE comequ.asm
-	INCLUDE ioctl.inc		;AN000;
-	INCLUDE ea.inc			;AN030;
+	INCLUDE COMSEG.ASM
+	INCLUDE COMSW.ASM		;AC000;
+	INCLUDE COMEQU.ASM
+	INCLUDE IOCTL.INC		;AN000;
+	INCLUDE EA.INC			;AN030;
 .list
-.cref
 
 
 TRANDATA	SEGMENT PUBLIC BYTE	;AC000;
@@ -574,6 +572,28 @@ typelp_ret:
 
 	break	Volume
 assume	ds:trangroup,es:trangroup
+EXTRN	GetKeystroke:NEAR
+EXTRN	crlf2:NEAR
+EXTRN	move_to_srcbuf:NEAR
+EXTRN	parse_check_eol:NEAR
+EXTRN	parse_with_msg:NEAR
+EXTRN	pathchrcmp:NEAR
+EXTRN	pathcrunch:NEAR
+EXTRN	print_char:NEAR
+EXTRN	restudir:NEAR
+EXTRN	setpath:NEAR
+EXTRN	setup_parse_error_msg:NEAR
+EXTRN	GetKeystroke:NEAR
+EXTRN	crlf2:NEAR
+EXTRN	move_to_srcbuf:NEAR
+EXTRN	parse_check_eol:NEAR
+EXTRN	parse_with_msg:NEAR
+EXTRN	pathchrcmp:NEAR
+EXTRN	pathcrunch:NEAR
+EXTRN	print_char:NEAR
+EXTRN	restudir:NEAR
+EXTRN	setpath:NEAR
+EXTRN	setup_parse_error_msg:NEAR
 
 ;
 ; VOLUME command displays the volume ID on the specified drive

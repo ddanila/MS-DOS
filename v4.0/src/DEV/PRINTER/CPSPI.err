@@ -1,0 +1,28 @@
+CPSPEQU.INC(65): Error! E065: Operator is expected
+CPSPEQU.INC(65): Note! N290: included by file CPSPI.ASM(25)
+CPSPEQU.INC(65): Error! E021: Expecting number
+CPSPEQU.INC(65): Note! N290: included by file CPSPI.ASM(25)
+CPSPEQU.INC(82): Error! E065: Operator is expected
+CPSPEQU.INC(82): Note! N290: included by file CPSPI.ASM(25)
+CPSPEQU.INC(82): Error! E021: Expecting number
+CPSPEQU.INC(82): Note! N290: included by file CPSPI.ASM(25)
+CPSPEQU.INC(99): Error! E065: Operator is expected
+CPSPEQU.INC(99): Note! N290: included by file CPSPI.ASM(25)
+CPSPEQU.INC(99): Error! E021: Expecting number
+CPSPEQU.INC(99): Note! N290: included by file CPSPI.ASM(25)
+CPSPEQU.INC(218): Error! E065: Operator is expected
+CPSPEQU.INC(218): Note! N290: included by file CPSPI.ASM(25)
+CPSPEQU.INC(426): Error! E065: Operator is expected
+CPSPEQU.INC(426): Note! N290: included by file CPSPI.ASM(25)
+CPSPEQU.INC(426): Error! E021: Expecting number
+CPSPEQU.INC(426): Note! N290: included by file CPSPI.ASM(25)
+CPSPEQU.INC(454): Error! E065: Operator is expected
+CPSPEQU.INC(454): Note! N290: included by file CPSPI.ASM(25)
+CPSPEQU.INC(454): Error! E021: Expecting number
+CPSPEQU.INC(454): Note! N290: included by file CPSPI.ASM(25)
+CPSPI.ASM(773): Error! E299: 'HWCP_1' is already defined
+CPSPI.ASM(782): Error! E002: Invalid instruction with current CPU setting
+CPSPI.ASM(785): Error! E040: Invalid instruction operands
+CPSPI.ASM(794): Error! E040: Invalid instruction operands
+CPSPI.ASM(796): Error! E299: 'HWCP_2' is already defined
+CPSPI.ASM(955): Error! E021: Expecting number

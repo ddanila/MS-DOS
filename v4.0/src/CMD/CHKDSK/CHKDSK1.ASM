@@ -2,15 +2,15 @@
 page	,132					;
 
 	.xlist
-	include chkseg.inc							;an005;bgb
+	include CHKSEG.INC							;an005;bgb
 	INCLUDE CHKCHNG.INC
 	INCLUDE DOSSYM.INC
-	INCLUDE syscall.inc							;an041;bgb
-	INCLUDE ioctl.inc							;an041;bgb;an041;bgb
+	INCLUDE SYSCALL.INC							;an041;bgb
+	INCLUDE IOCTL.INC							;an041;bgb;an041;bgb
 	INCLUDE CHKEQU.INC
 	INCLUDE CHKMACRO.INC
-	include chkdata.inc							;an005;bgb
-	include pathmac.inc
+	include CHKDATA.INC							;an005;bgb
+	include PATHMAC.INC
 
 CODE	SEGMENT PUBLIC PARA 'CODE'
 ASSUME	CS:DG,DS:NOTHING,ES:DG,SS:dg
@@ -640,6 +640,8 @@ SUBTTL	PRINTID - Print Volume ID info
 PAGE
 PRINTID:
 ASSUME	DS:DG
+EXTRN	printf_crlf:NEAR
+EXTRN	printf_crlf:NEAR
 	call	docrlf				;				;AN000;
 ;get volume name								;an012;bgb
 	xor	si,si			;Point at DTA where find first just done;;an005;bgb

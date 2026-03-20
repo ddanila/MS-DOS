@@ -27,19 +27,17 @@ NAME    ROM
 ; get the appropriate segment definitions
 ;
 .xlist
-include dosseg.asm
-include fastseek.inc			       ; DOS 4.00
-include fastxxxx.inc			       ; DOS 4.00
-include version.inc
+include DOSSEG.ASM
+include FASTSEEK.INC			       ; DOS 4.00
+include FASTXXXX.INC			       ; DOS 4.00
+include VERSION.INC
 
 CODE    SEGMENT BYTE PUBLIC  'CODE'
         ASSUME  SS:DOSGROUP,CS:DOSGROUP
 
-.xcref
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
-include EA.inc
-.cref
+include EA.INC
 .list
 
         i_need  CLUSNUM,WORD
@@ -919,6 +917,28 @@ Break   <FS_TRUNC_EOF - truncate EOF for Fastseek>
 
         procedure   FS_TRUNC_EOF,NEAR
         ASSUME  ES:NOTHING,DS:NOTHING
+EXTRN	FastSeek_Insert:NEAR
+EXTRN	FastSeek_Lookup:NEAR
+EXTRN	FastSeek_Open:NEAR
+EXTRN	FastSeek_Truncate:NEAR
+EXTRN	GETBUFFR:NEAR
+EXTRN	INC_DIRTY_COUNT:NEAR
+EXTRN	IsEOF:NEAR
+EXTRN	PACK:NEAR
+EXTRN	PLACEBUF:NEAR
+EXTRN	PLACEHEAD:NEAR
+EXTRN	UNPACK:NEAR
+EXTRN	FastSeek_Insert:NEAR
+EXTRN	FastSeek_Lookup:NEAR
+EXTRN	FastSeek_Open:NEAR
+EXTRN	FastSeek_Truncate:NEAR
+EXTRN	GETBUFFR:NEAR
+EXTRN	INC_DIRTY_COUNT:NEAR
+EXTRN	IsEOF:NEAR
+EXTRN	PACK:NEAR
+EXTRN	PLACEBUF:NEAR
+EXTRN	PLACEHEAD:NEAR
+EXTRN	UNPACK:NEAR
 
         MOV     BX,DI                             ; get beginning physical#     ;AN000;
         DOSInvoke  IsEOF                             ; is EOF                      ;AN000;

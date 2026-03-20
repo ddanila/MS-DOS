@@ -1,0 +1,10 @@
+PRINT.ASM(45): Error! E040: Invalid instruction operands
+PRINT.ASM(45): Note! N290: included by file SHRPRINT.ASM(29)
+PRINT.ASM(70): Error! E040: Invalid instruction operands
+PRINT.ASM(70): Note! N290: included by file SHRPRINT.ASM(29)
+PRINT.ASM(95): Error! E040: Invalid instruction operands
+PRINT.ASM(95): Note! N290: included by file SHRPRINT.ASM(29)
+PRINT.ASM(122): Error! E040: Invalid instruction operands
+PRINT.ASM(122): Note! N290: included by file SHRPRINT.ASM(29)
+PRINT.ASM(140): Error! E040: Invalid instruction operands
+PRINT.ASM(140): Note! N290: included by file SHRPRINT.ASM(29)

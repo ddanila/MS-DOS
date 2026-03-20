@@ -129,7 +129,6 @@
 ;
 ;
 ;******************************************************************************
-.lfcond
 .386p
 	page
 ;******************************************************************************
@@ -156,9 +155,9 @@
 ;			L O C A L   C O N S T A N T S
 ;******************************************************************************
 ;
-	include	driver.equ
-	include	driver.str
-	include	vdmseg.inc
+	include	DRIVER.EQU
+	include	DRIVER.STR
+	include	VDMSEG.INC
 
 FALSE	equ	0
 TRUE	equ	not FALSE

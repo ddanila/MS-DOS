@@ -167,7 +167,7 @@ code	ends									;an040;bgb
 										;an040;bgb
 										;an040;bgb
 data	segment PUBLIC para 'DATA'                                              ;an040;bgb
-include psdata.inc								;an040;bgb
+include PSDATA.INC								;an040;bgb
 data	ends									;an040;bgb
 										;an040;bgb
 code	segment PUBLIC para 'CODE'                                              ;an040;bgb

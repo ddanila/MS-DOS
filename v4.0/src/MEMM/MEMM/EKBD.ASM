@@ -35,8 +35,8 @@
 	page
 .386P
 ;
-	include vdmseg.inc
-	include kbd.inc
+	include VDMSEG.INC
+	include KBD.INC
 ;******************************************************************************
 ;	Public Declarations
 ;******************************************************************************

@@ -235,7 +235,7 @@ doscall macro	func,subfunc		;AN000;
 ; Include equates
 ;***********************************
 
-	include compeq.inc		;AN000; ;include some equates
+	include COMPEQ.INC		;AN000; ;include some equates
 
 ;***********************************
 ; Extended attribute structures

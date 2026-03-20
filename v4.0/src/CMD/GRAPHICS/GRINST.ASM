@@ -967,7 +967,7 @@ DISP_ERROR    PROC   NEAR							;AN000;
 	RET									;AN000;
 DISP_ERROR    ENDP								;AN000;
 
-include msgdcl.inc										;AN000;
+include MSGDCL.INC										;AN000;
 										;AN000;
 CODE   ENDS									;AN000;
        END									;AN000;

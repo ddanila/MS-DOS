@@ -151,7 +151,7 @@ code	segment public	byte			;an000;code segment
 ;======================= begin main routine ==============================
 .xlist
 
-include parse.asm				;an000;parser
+include PARSE.ASM				;an000;parser
 
 .list
 

@@ -957,7 +957,7 @@ MSG_SERVICES <DISPLAY.CL2>		; WGR				       ;AN000;
 MSG_SERVICES <DISPLAY.CLA>		; WGR				       ;AN000;
 .LIST					;
 					;
-include msgdcl.inc			;
+include MSGDCL.INC			;
 					;
 CODE	ENDS				;
 	END				;

@@ -61,7 +61,7 @@ ERRNZ				   Macro x
 				   ; segment ordering for MSDOS
 
 				   ;---------------------------------------
-	include dosseg.asm
+	include DOSSEG.ASM
 
 	CONSTANTS SEGMENT
 
@@ -89,7 +89,7 @@ ERRNZ				   Macro x
 
 	    extrn   BugLev:WORD
 	    extrn   BugTyp:WORD
-	    include bugtyp.asm
+	    include BUGTYP.ASM
 
 	ENDIF
 
@@ -124,7 +124,7 @@ ERRNZ				   Macro x
 	Extrn	Set_Mult_Block:NEAR,Clr_Mult_Block:NEAR,Chk_Block:NEAR
 	Extrn	MFT_Get:NEAR
 
-	include mft.inc
+	include MFT.INC
 
 ;  $SALUT (4,4,9,41)
 
@@ -2992,7 +2992,11 @@ Parse_Ret_Code label byte
 
    EndProc ShComndParse 		;				       ;AN000;
 
-   include msgdcl.inc
+   include MSGDCL.INC
+EXTRN	EcritShare:NEAR
+EXTRN	LcritShare:NEAR
+EXTRN	EcritShare:NEAR
+EXTRN	LcritShare:NEAR
 
    SHARE ENDS
 

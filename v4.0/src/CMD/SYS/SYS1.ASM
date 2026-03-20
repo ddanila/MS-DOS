@@ -1,6 +1,6 @@
 	TITLE	SYS-1-	Program
 	INCLUDE SYSHDR.INC
-	include version.inc
+	include VERSION.INC
 	page	80,132
 
 false	= 0
@@ -176,7 +176,7 @@ fat_16			DB   "FAT16   " ; 16 or 32 bit FAT
 					;---------------------------------------
 
 .xlist
-			include sysmsg.inc
+			include SYSMSG.INC
 
 			MSG_UTILNAME <SYS> ;				       ;AN000;
 
@@ -3724,7 +3724,7 @@ $$EN212:
 
    CODE ENDS
 
-   include msgdcl.inc
+   include MSGDCL.INC
 
    END	START
 

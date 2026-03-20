@@ -1,0 +1,2 @@
+DCOPYPAR.ASM(389): Error! E050: Offset cannot be smaller than WORD size
+DCOPYPAR.ASM(413): Warning! W249: End directive required at end of file

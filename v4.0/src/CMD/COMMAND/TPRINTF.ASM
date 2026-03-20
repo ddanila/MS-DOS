@@ -31,14 +31,12 @@ TITLE	COMMAND Transient Printf routine
 ;****************************************************************
 
 .xlist
-.xcref
-	INCLUDE comsw.asm		;AC000;
+	INCLUDE COMSW.ASM		;AC000;
 	INCLUDE DOSSYM.INC
-	INCLUDE comseg.asm
-	INCLUDE comequ.asm		;AN000;
+	INCLUDE COMSEG.ASM
+	INCLUDE COMEQU.ASM		;AN000;
 	INCLUDE SYSMSG.INC		;AN000;
 .list
-.cref
 
 datares segment public
 	extrn	pipeflag:byte
@@ -358,7 +356,9 @@ MSG_SERVICES <COMT,NEARmsg,SETSTDIO,DISPLAYmsg,CHARmsg,NUMmsg,TIMEmsg,DATEmsg>	 
 
 PRINTF_LAST LABEL   WORD
 
-include msgdcl.inc
+include MSGDCL.INC
+EXTRN	PipeOff:NEAR
+EXTRN	PipeOff:NEAR
 
 
 TRANCODE    ENDS

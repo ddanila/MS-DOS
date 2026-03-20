@@ -29,7 +29,7 @@ dosxxx  segment byte public 'dos'
 ;
             public   dosgetctryinfo
             .sall
-            include  macros.inc
+            include  MACROS.INC
 
 ;
 str         struc

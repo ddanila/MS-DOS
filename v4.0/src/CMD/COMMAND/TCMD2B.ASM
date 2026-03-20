@@ -4,13 +4,11 @@
 TITLE	PART5 COMMAND Transient routines.
 
 .xlist
-.xcref
-	INCLUDE comsw.asm
+	INCLUDE COMSW.ASM
 	INCLUDE DOSSYM.INC
-	INCLUDE comseg.asm
-	INCLUDE comequ.asm
+	INCLUDE COMSEG.ASM
+	INCLUDE COMEQU.ASM
 .list
-.cref
 
 
 CODERES 	SEGMENT PUBLIC BYTE	;AC000;
@@ -675,6 +673,18 @@ parse_with_msg endp				;AN018;
 ; ****************************************************************
 
 ASSUME	CS:TRANGROUP,DS:TRANGROUP,ES:NOTHING	;AN018;
+EXTRN	Set_ext_error_msg:NEAR
+EXTRN	Tsysgetmsg:NEAR
+EXTRN	cmd_parse:NEAR
+EXTRN	crlf2:NEAR
+EXTRN	printf_crlf:NEAR
+EXTRN	std_printf:NEAR
+EXTRN	Set_ext_error_msg:NEAR
+EXTRN	Tsysgetmsg:NEAR
+EXTRN	cmd_parse:NEAR
+EXTRN	crlf2:NEAR
+EXTRN	printf_crlf:NEAR
+EXTRN	std_printf:NEAR
 
 SETUP_PARSE_ERROR_MSG	Proc near		;AN018;
 

@@ -366,7 +366,7 @@ INITIALIZATION: 						;AN000;
 
 SELECT	ENDS							;AN000;
 
-include msgdcl.inc
+include MSGDCL.INC
 
 	END	INSTALL 					;AN000;
 

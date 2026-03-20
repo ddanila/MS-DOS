@@ -5,13 +5,11 @@ Title	COMMAND Language midifiable Code Transient
 
 
 .xlist
-.xcref
-	INCLUDE dossym.inc
-	INCLUDE comsw.asm
-	INCLUDE comseg.asm
-	INCLUDE comequ.asm
+	INCLUDE DOSSYM.INC
+	INCLUDE COMSW.ASM
+	INCLUDE COMSEG.ASM
+	INCLUDE COMEQU.ASM
 .list
-.cref
 
 
 DATARES 	SEGMENT PUBLIC BYTE	;AC000;
@@ -588,6 +586,28 @@ GetDate:
 ;g
 
 assume	ds:trangroup
+EXTRN	CRPRINT:NEAR
+EXTRN	RESTUDIR:NEAR
+EXTRN	Tsysgetmsg:NEAR
+EXTRN	build_dir_string:NEAR
+EXTRN	cmd_parse:NEAR
+EXTRN	fcb_to_ascz:NEAR
+EXTRN	get_ext_error_number:NEAR
+EXTRN	restudir:NEAR
+EXTRN	scanoff:NEAR
+EXTRN	set_ext_error_msg:NEAR
+EXTRN	std_printf:NEAR
+EXTRN	CRPRINT:NEAR
+EXTRN	RESTUDIR:NEAR
+EXTRN	Tsysgetmsg:NEAR
+EXTRN	build_dir_string:NEAR
+EXTRN	cmd_parse:NEAR
+EXTRN	fcb_to_ascz:NEAR
+EXTRN	get_ext_error_number:NEAR
+EXTRN	restudir:NEAR
+EXTRN	scanoff:NEAR
+EXTRN	set_ext_error_msg:NEAR
+EXTRN	std_printf:NEAR
 
 char_in_xlat	proc	near
 

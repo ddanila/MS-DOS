@@ -4,18 +4,16 @@ TITLE	RECPROC.SAL
 ; Include files
 ;*****************************************************************************
 .xlist
-	include recseg.inc		;AN000;bgb
- include dossym.inc	;AN000;bgb
+	include RECSEG.INC		;AN000;bgb
+ include DOSSYM.INC	;AN000;bgb
  INCLUDE SYSCALL.INC	;AN000;bgb
  INCLUDE RECMACRO.INC	;AN000;bgb
- include recequ.inc	;AN000;bgb
-	include pathmac.inc
-.xcref
+ include RECEQU.INC	;AN000;bgb
+	include PATHMAC.INC
 BREAK	MACRO	subtitle
 	SUBTTL	subtitle
 	PAGE
 ENDM
-.cref
 ;
 ;*****************************************************************************
 ; Extrn Declarations

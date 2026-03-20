@@ -56,9 +56,8 @@ ENDM
 ; call a procedure that may be external.  The call will be short.
 ;
 DOSInvoke  MACRO   name
-	IFNDEF name
-	EXTRN   name:NEAR
-	ENDIF
+	;; IFNDEF/EXTRN removed for WASM: forward refs resolved within segment;
+	;; truly external symbols need explicit EXTRN at file level.
 	CALL    name
 ENDM
 
@@ -67,9 +66,6 @@ PAGE
 ; jump to a label that may be external.  The jump will be near.
 ;
 transfer    MACRO   name
-	IFNDEF name
-	EXTRN   name:NEAR
-	ENDIF
 	JUMP    name
 ENDM
 
@@ -78,9 +74,6 @@ ENDM
 ;
 short_addr  MACRO   name
     IFDIF   <name>,<?>
-	IFNDEF name
-	EXTRN   name:NEAR
-	ENDIF
 	DW  OFFSET DOSGROUP:name
     ELSE
 	DW  ?
@@ -91,9 +84,6 @@ ENDM
 ; get a long address in a dword
 ;
 long_addr   MACRO   name
-	IFNDEF name
-	EXTRN   name:NEAR
-	ENDIF
 	DD  name
 ENDM
 
@@ -104,6 +94,7 @@ ENDM
 ?aframe       =   0                     ; initial
 ?stackdepth   =   0                     ; initial stack size
 ?initstack    =   0                     ; initial stack size
+
 
 procedure   MACRO   name,distance
 	?frame =    0
@@ -213,26 +204,11 @@ BREAK <CONDRET - conditional return>
 
 condret macro   cc,ncc
     local   a
-    ifdef   ret_l                       ;; if ret_l is defined
-	if (($ - ret_l) le 126) and ($ gt ret_l)
-				;;     if ret_l is near enough then
-	    a:  j&cc    ret_l           ;;         a: j<CC> to ret_l
-	    ret_&cc = a                 ;;         define ret_<CC> to be a:
-	    exitm
-	endif
-    endif
-    ifdef   ret_&cc                     ;; if ret_<CC> defined
-	if (($ - ret_&cc) le 126) and ($ gt ret_&cc)
-				;;     if ret_<CC> is near enough
-	    a:  j&cc    ret_&cc         ;;         a: j<CC> to ret_<CC>
-	    ret_&cc = a                 ;;         define ret_<CC> to be a:
-	    exitm
-	endif
-    endif
-    j&ncc   a                           ;; j<NCC> a:
-    return                              ;; return
-    a:                                  ;; a:
-    ret_&cc = ret_l                     ;; define ret_<CC> to be ret_l
+    ;; Short-jump optimizer removed for WASM single-pass compatibility.
+    ;; Always emit: j<NCC> over RET.
+    j&ncc   a
+    return
+    a:
 endm
 
 BREAK <RETZ - return if zero, links up shortwise if necessary>
@@ -508,13 +484,15 @@ local   a
 	endif
 endm
 
-enter   macro
+;; enter/leave renamed to FrameEnter/FrameLeave: WASM treats enter/leave as
+;; 80186 instructions and ignores user macro definitions with those names.
+FrameEnter   macro
 	push    bp
 	mov     bp,sp
 	sub     sp,?frame
 endm
 
-leave   macro
+FrameLeave   macro
 	mov     sp,bp
 	pop     bp
 endm

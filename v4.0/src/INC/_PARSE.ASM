@@ -48,8 +48,7 @@ _TEXT   segment byte public 'CODE'
         ASSUME  DS: _DATA
 
 ;-------------------------------------------------------------------
-include parse.asm               ; include the parser
-;-------------------------------------------------------------------
+include PARSE.ASM               ; include the parser;-------------------------------------------------------------------
 
 _parse  proc    near
 

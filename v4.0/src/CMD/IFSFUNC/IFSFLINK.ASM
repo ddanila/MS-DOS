@@ -4,16 +4,14 @@ TITLE	IFSFUNC LINK FIX ROUTINES - Routines to resolve ifsfunc externals
 NAME	IFSFLINK
 
 .xlist
-.xcref
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
-.cref
 .list
 
 CODE	SEGMENT BYTE PUBLIC 'CODE'
 code	ENDS
 
-include dosseg.asm
+include DOSSEG.ASM
 
 code	SEGMENT BYTE PUBLIC 'code'
 	ASSUME	CS:dosgroup

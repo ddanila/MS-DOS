@@ -2,7 +2,7 @@ page 80,132
 
 title CP/DOS  DosFindClose  mapper
 
-        include find.inc
+        include FIND.INC
 
 
 FindSegment     segment word public 'find'
@@ -48,7 +48,7 @@ FindSegment     ends
         public  DosFindClose
         .sall
         .xlist
-        include macros.inc
+        include MACROS.INC
         .list
 
 str     struc

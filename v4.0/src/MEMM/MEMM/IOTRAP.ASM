@@ -38,7 +38,6 @@
 ;   routine calls the appropriate I/O trap handler for the I/O address.
 ;
 ;******************************************************************************
-.lfcond 				; list false conditionals
 .386p
 	page
 	page
@@ -55,8 +54,8 @@
 FALSE	equ	0
 TRUE	equ	not FALSE
 
-	include VDMseg.inc
-	include VDMsel.inc
+	include VDMSEG.INC
+	include VDMSEL.INC
 
 ;******************************************************************************
 ;			E X T E R N A L   R E F E R E N C E S

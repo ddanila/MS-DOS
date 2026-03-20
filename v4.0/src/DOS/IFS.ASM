@@ -2,15 +2,13 @@
 
 
 .xlist									  ;AN000;
-include    dosseg.asm							  ;AN000;
+include    DOSSEG.ASM							  ;AN000;
 
 CODE	SEGMENT BYTE PUBLIC  'CODE'                                       ;AN000;
 	ASSUME	CS:DOSGROUP,  SS:DOSGROUP				  ;AN000;
-.xcref									  ;AN000;
-include    dossym.inc							  ;AN000;
-include    devsym.inc							  ;AN000;
-include    doscntry.inc 						  ;AN000;
-.cref									  ;AN000;
+include    DOSSYM.INC							  ;AN000;
+include    DEVSYM.INC							  ;AN000;
+include    DOSCNTRY.INC 						  ;AN000;
 .list
 StackSize   =	180h			; gross but effective
 
@@ -153,6 +151,16 @@ not_stack:			;					  ;AN000;
 withSS_SP:			;					  ;AN000;
 	 STI								  ;AN000;
  ASSUME DS:NOTHING							  ;AN000;
+EXTRN	ReadTime:NEAR
+EXTRN	SYS_RET_ERR:NEAR
+EXTRN	SYS_RET_OK:NEAR
+EXTRN	strcmp:NEAR
+EXTRN	strcpy:NEAR
+EXTRN	ReadTime:NEAR
+EXTRN	SYS_RET_ERR:NEAR
+EXTRN	SYS_RET_OK:NEAR
+EXTRN	strcmp:NEAR
+EXTRN	strcpy:NEAR
 ;	 OR	 [DOS34_FLAG],Force_I24_Fail				  ;AN000;
 ;									  ;AN000;
 ;	 cmp	 ah,0		 ; call Strategy routine ??		  ;AN000;

@@ -20,18 +20,16 @@ NAME	DOS_OPEN
 ; get the appropriate segment definitions
 ;
 .xlist
-include dosseg.asm
+include DOSSEG.ASM
 
 CODE	SEGMENT BYTE PUBLIC  'CODE'
 	ASSUME	SS:DOSGROUP,CS:DOSGROUP
 
-.xcref
-include dossym.inc
-include devsym.inc
-include fastopen.inc
-include fastxxxx.inc		       ;AN000;
-include ifssym.inc		       ;AN000;
-.cref
+include DOSSYM.INC
+include DEVSYM.INC
+include FASTOPEN.INC
+include FASTXXXX.INC		       ;AN000;
+include IFSSYM.INC		       ;AN000;
 .list
 
 Installed = TRUE
@@ -136,8 +134,8 @@ IFS_extopen:									;AN000;
 	INT	2FH			    ;FT.				;AN000;
 	POP	BX			    ;FT. trash bx			;AN000;
 	MOV	[EXTOPEN_ON],0		    ;FT.				;AN000;
-	JNC	update_size		    ;IFS. file may be opened		;AN000;
-	return				    ;FT.				;AN000;
+	JC	NOEXTOP			    ;IFS. open failed, skip update	;AN000;
+	JMP	update_size		    ;IFS. file may be opened		;AN000;
 NOEXTOP:
 ;Extended open hooks
 
@@ -549,6 +547,40 @@ EndProc Check_Access_AX
 procedure Code_Page_Mismatched_Error,NEAR		 ;AN000;
 	DOSAssume   CS,<DS>,"Code_Page_Mismatched_Error" ;AN000;
 	ASSUME	ES:NOTHING				 ;AN000;
+EXTRN	DEV_OPEN_SFT:NEAR
+EXTRN	DOOPEN:NEAR
+EXTRN	EcritDisk:NEAR
+EXTRN	FastSeek_Open:NEAR
+EXTRN	GetPath:NEAR
+EXTRN	Idle:NEAR
+EXTRN	LcritDisk:NEAR
+EXTRN	NET_OPEN:NEAR
+EXTRN	NET_SEQ_OPEN:NEAR
+EXTRN	SHARE_CHECK:NEAR
+EXTRN	SHARE_VIOLATION:NEAR
+EXTRN	DEV_OPEN_SFT:NEAR
+EXTRN	DOOPEN:NEAR
+EXTRN	EcritDisk:NEAR
+EXTRN	FastSeek_Open:NEAR
+EXTRN	GetPath:NEAR
+EXTRN	Idle:NEAR
+EXTRN	LcritDisk:NEAR
+EXTRN	NET_OPEN:NEAR
+EXTRN	NET_SEQ_OPEN:NEAR
+EXTRN	SHARE_CHECK:NEAR
+EXTRN	SHARE_VIOLATION:NEAR
+EXTRN	DEV_OPEN_SFT:NEAR
+EXTRN	DOOPEN:NEAR
+EXTRN	EcritDisk:NEAR
+EXTRN	FastSeek_Open:NEAR
+EXTRN	GetPath:NEAR
+EXTRN	Idle:NEAR
+EXTRN	LcritDisk:NEAR
+EXTRN	NET_OPEN:NEAR
+EXTRN	NET_SEQ_OPEN:NEAR
+EXTRN	SHARE_CHECK:NEAR
+EXTRN	SHARE_VIOLATION:NEAR
+EXTRN	update_size:NEAR
 
 ;	PUSH	DS		       ;FT.					;AN000;
 ;	Context DS		       ;FT. ds=cs				;AN000;

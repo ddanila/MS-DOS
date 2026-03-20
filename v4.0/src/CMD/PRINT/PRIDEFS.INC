@@ -468,7 +468,6 @@ Std_Out_Dev             equ  1
 ;                                       $SALUT (0,41,46,52)
 
 .xlist
-.xcref
 BREAK                                   MACRO subtitle
                                         SUBTTL subtitle
                                         PAGE
@@ -479,7 +478,6 @@ IRP                                     reg,<reglist>
                                         PUSH reg
 ENDM
 ENDM
-.xcref                                  SaveReg
 
 RestoreReg                              MACRO reglist ;; pop those registers
 IRP                                     reg,<reglist>
@@ -492,14 +490,13 @@ ENDM
                         INCLUDE SYSCALL.INC
                         INCLUDE ERROR.INC
                         INCLUDE FIND.INC
-                        include dpl.asm
+                        include DPL.ASM
                         INCLUDE PDB.INC
                         INCLUDE SYSCALL.INC
                         INCLUDE MI.INC
                         INCLUDE SYSMSG.INC
-                        include versiona.inc
+                        include VERSIONA.INC
 .list
-.cref
 
 
                         MSG_UTILNAME <PRINT>

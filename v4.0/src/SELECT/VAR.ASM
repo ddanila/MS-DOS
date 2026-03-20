@@ -940,7 +940,7 @@ SEARCH_FILE	DW	?			      ;AN000;JW Holds offset of file to search for
 	PUBLIC	SUB_ERROR			      ;AN000;JW Holds error code of sub process
 SUB_ERROR	DB	?			      ;AN000;JW
 
-include msgdcl.inc
+include MSGDCL.INC
 						      ;
 DATA	ENDS					      ;AN000;
 	END					      ;AN000;

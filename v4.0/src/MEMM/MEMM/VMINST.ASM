@@ -63,7 +63,6 @@ page	58,132
 ;	overrides are not yet supported.
 ;
 ;******************************************************************************
-.lfcond 				; list false conditionals
 .386p
 	page
 ;******************************************************************************
@@ -101,13 +100,13 @@ _TEXT	 ends
 ;			I N C L U D E	F I L E S
 ;******************************************************************************
 
-include VDMseg.inc
-include desc.inc
-include VDMsel.inc
-include vm386.inc
-include loadall.inc
-include instr386.inc
-include oemdep.inc
+include VDMSEG.INC
+include DESC.INC
+include VDMSEL.INC
+include VM386.INC
+include LOADALL.INC
+include INSTR386.INC
+include OEMDEP.INC
 ;******************************************************************************
 ;			L O C A L   C O N S T A N T S
 ;******************************************************************************

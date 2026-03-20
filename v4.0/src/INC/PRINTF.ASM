@@ -49,9 +49,7 @@ TITLE	PRINTF ROUITNE FOR MS-DOS
 ;   The arguments are used in one-to-one correspondence to % specifiers.
 
 .xlist
-.xcref
-	INCLUDE dossym.asm
-.cref
+	INCLUDE DOSSYM.ASM.CREF
 .list
 
 printf_CODE SEGMENT public byte

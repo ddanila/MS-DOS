@@ -1,0 +1,4 @@
+DEBEQU.ASM(48): Error! E230: Label 'IBMJAPAN' is already defined
+DEBEQU.ASM(48): Note! N290: included by file DEBCOM1.ASM(55)
+DEBCOM1.ASM(313): Error! E066: Operand is expected
+DEBCOM1.ASM(969): Warning! W249: End directive required at end of file

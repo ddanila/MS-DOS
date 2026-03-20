@@ -126,17 +126,17 @@ IFNDEF	DEBUG
     DEBUG	= FALSE
 ENDIF
 
-INCLUDE    dosmac.inc										   ;AN000;
-INCLUDE    vector.inc										   ;AN000;
-INCLUDE    filemode.inc 									   ;AN000;
-INCLUDE    mult.inc										   ;AN000;
-include	   version.inc
+INCLUDE    DOSMAC.INC										   ;AN000;
+INCLUDE    VECTOR.INC										   ;AN000;
+INCLUDE    FILEMODE.INC 									   ;AN000;
+INCLUDE    MULT.INC										   ;AN000;
+include	   VERSION.INC
 
 .LIST
 .CREF
 
-INCLUDE    fastsegs.inc 									   ;AN000;
-INCLUDE    fastopen.inc 									   ;AN000;
+INCLUDE    FASTSEGS.INC 									   ;AN000;
+INCLUDE    FASTOPEN.INC 									   ;AN000;
 INCLUDE    SYSCALL.INC ;									   ;AN000;
 
 ;-----------------------------------------------------------------------

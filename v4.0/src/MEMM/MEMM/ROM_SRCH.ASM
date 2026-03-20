@@ -89,9 +89,9 @@ FIRST_RAM	=	0C000H		; Seg address of 1st possible RAM addr
 LAST_RAM	=	0EF80H		; Seg addr of last possible RAM addr
 NOT_FOUND_INCR  =	0800H		; Amount to skip if no ROM found.
 ;
-	include emmdef.inc
-	include	vdmseg.inc
-	include	romstruc.equ		; Option ROM structure.
+	include EMMDEF.INC
+	include	VDMSEG.INC
+	include	ROMSTRUC.EQU		; Option ROM structure.
 PF_LENGTH	equ	0400h		; length of a page frame (*16)
 ;
 ;******************************************************************************

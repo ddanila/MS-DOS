@@ -30,7 +30,7 @@ kbdxxx	segment byte public 'kbd'
 	public kbdcharin
 	.sall
 	.xlist
-	include kbd.inc
+	include KBD.INC
 	.list
 	extrn	savedkbdinput:word
 

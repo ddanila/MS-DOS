@@ -30,7 +30,7 @@ vioxxx  segment byte public 'vio'
         public  viowrtcharstratt
         .sall
         .xlist
-        include macros.inc
+        include MACROS.INC
         .list
 
 full_scr_err equ 0001h

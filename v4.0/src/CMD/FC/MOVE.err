@@ -1,0 +1,82 @@
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(15): Error! E230: Label 'memS' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(15): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(31)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(15): Note! N290: included by file MOVE.ASM(7)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(860): Error! E032: Syntax error
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(860): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(836)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(860): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(898)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(860): Note! N290: included by file MOVE.ASM(7)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(861): Error! E032: Syntax error
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(861): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(836)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(861): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(898)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(861): Note! N290: included by file MOVE.ASM(7)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(863): Error! E032: Syntax error
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(863): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(836)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(863): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(898)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(863): Note! N290: included by file MOVE.ASM(7)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(867): Error! E032: Syntax error
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(867): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(836)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(867): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(898)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(867): Note! N290: included by file MOVE.ASM(7)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(868): Error! E032: Syntax error
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(868): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(836)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(868): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(898)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(868): Note! N290: included by file MOVE.ASM(7)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(881): Error! E032: Syntax error
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(881): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(848)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(881): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(898)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(881): Note! N290: included by file MOVE.ASM(7)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(888): Error! E032: Syntax error
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(888): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(882)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(888): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(848)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(888): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(898)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(888): Note! N290: included by file MOVE.ASM(7)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(889): Error! E207: Ends a segment which is not opened
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(889): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(882)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(889): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(848)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(889): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(898)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(889): Note! N290: included by file MOVE.ASM(7)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(860): Error! E032: Syntax error
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(860): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(839)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(860): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(899)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(860): Note! N290: included by file MOVE.ASM(7)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(861): Error! E032: Syntax error
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(861): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(839)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(861): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(899)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(861): Note! N290: included by file MOVE.ASM(7)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(863): Error! E032: Syntax error
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(863): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(839)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(863): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(899)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(863): Note! N290: included by file MOVE.ASM(7)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(867): Error! E032: Syntax error
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(867): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(839)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(867): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(899)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(867): Note! N290: included by file MOVE.ASM(7)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(868): Error! E032: Syntax error
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(868): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(839)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(868): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(899)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(868): Note! N290: included by file MOVE.ASM(7)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(881): Error! E032: Syntax error
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(881): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(848)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(881): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(899)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(881): Note! N290: included by file MOVE.ASM(7)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(888): Error! E032: Syntax error
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(888): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(882)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(888): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(848)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(888): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(899)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(888): Note! N290: included by file MOVE.ASM(7)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(889): Error! E206: Block nesting error
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(889): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(882)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(889): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(848)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(889): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(899)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(889): Note! N290: included by file MOVE.ASM(7)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(874): Error! E032: Syntax error
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(874): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(878)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(874): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(907)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(874): Note! N290: included by file MOVE.ASM(7)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(874): Error! E032: Syntax error
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(874): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(878)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(874): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(909)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(874): Note! N290: included by file MOVE.ASM(7)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(913): Error! E066: Operand is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(913): Note! N290: included by file MOVE.ASM(7)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/CMACROS.INC(915):   273: Too many errors

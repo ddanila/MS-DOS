@@ -1410,7 +1410,7 @@ MSG_SERVICES <PRINTER.CL2>		  ; WGR 				    ;AN000;
 MSG_SERVICES <PRINTER.CLA>		  ; WGR 				    ;AN000;
 .LIST
 
-include msgdcl.inc
+include MSGDCL.INC
 
 CSEG	ENDS
 	END

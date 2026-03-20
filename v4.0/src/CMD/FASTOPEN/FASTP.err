@@ -1,0 +1,12 @@
+FASTP.ASM(90): Error! E032: Syntax error
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(1039): Error! E066: Operand is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(1039): Note! N290: included by file FASTP.ASM(129)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2255): Error! E066: Operand is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2255): Note! N290: included by file FASTP.ASM(129)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2582): Error! E066: Operand is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2582): Note! N290: included by file FASTP.ASM(129)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2588): Error! E066: Operand is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2588): Note! N290: included by file FASTP.ASM(129)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2953): Error! E066: Operand is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2953): Note! N290: included by file FASTP.ASM(129)
+FASTP.ASM(131): Error! E300: 1 unclosed conditional directive(s) detected

@@ -1,8 +1,7 @@
 page	60,120
 ;
-.sall
 title	APPEND
-include sysmsg.inc
+include SYSMSG.INC
 msg_utilname<APPEND>
 ;-----------------------------------------------------------------------------
 ;
@@ -109,9 +108,9 @@ DPL_XID 	DW	0		;RESERVED
 DPL_UID 	DW	0		;SERVER USER ID
 DPL_PID 	DW	0		;REDIRECTOR PROCESS ID
 DPL		ENDS
-include sysmac.lib
-include versiona.inc
-include appendp.inc			; parseing stuff for append			 ;AN004;
+include SYSMAC.LIB
+include VERSIONA.INC
+include APPENDP.INC			; parseing stuff for append			 ;AN004;
 .list
 ;		extrn	end_address:near	; end of stay resident stuff
 
@@ -212,7 +211,7 @@ break	macro			; this is a dummy break macro so PDB.INC
 
 ;	define some things for PDB (PSP)						  ;AN002;
 											  ;AN002;
-include pdb.inc 									  ;AN002;
+include PDB.INC 									  ;AN002;
 											  ;AN002;
 true_name_flag		equ	01h	; flag for true name function			  ;AN002;
 eo_create		equ	00f0h	; mask to check extended opens for create	  ;AN003;
@@ -3476,8 +3475,8 @@ MSG_SERVICES <APPEND.CLB,APPEND.CL2,APPEND.CTL>
 
 end_address:				; this is the end of the TSR stuff		 ;AN004;
 
-include parse.asm			; include the parser code
-include msgdcl.inc
+include PARSE.ASM			; include the parser code
+include MSGDCL.INC
 
 cseg	ends
 sseg	segment para stack 'STACK'

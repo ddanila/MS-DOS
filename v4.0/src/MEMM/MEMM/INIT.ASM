@@ -44,7 +44,6 @@
 ;   for EMM and VDM.
 ;
 ;******************************************************************************
-.lfcond
 .386p
 	page
 ;******************************************************************************
@@ -72,13 +71,13 @@
 ;			L O C A L   C O N S T A N T S
 ;******************************************************************************
 ;
-	include vdmseg.inc
-	include vdmsel.inc	; for Deb386 Init
-	include desc.inc	; "   "      "
-	include emm386.inc
-	include driver.equ
-	include driver.str
-	include ascii_sm.equ
+	include VDMSEG.INC
+	include VDMSEL.INC	; for Deb386 Init
+	include DESC.INC	; "   "      "
+	include EMM386.INC
+	include DRIVER.EQU
+	include DRIVER.STR
+	include ASCII_SM.EQU
 ;
 ;  maximum value for SIZE parameter
 ;

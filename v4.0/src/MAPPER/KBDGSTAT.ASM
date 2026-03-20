@@ -5,7 +5,7 @@ title CP/DOS KbdGetStatus
 ;
 	.sall
 	.xlist
-	include kbd.inc
+	include KBD.INC
 	.list
 
 kbddata segment word public 'kbddata'

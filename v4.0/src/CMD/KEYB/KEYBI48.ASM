@@ -50,8 +50,8 @@
         INCLUDE KEYBMAC.INC            ;;
         INCLUDE KEYBCMD.INC            ;;
         INCLUDE KEYBCPSD.INC           ;;
-        INCLUDE POSTEQU.inc            ;;
-        INCLUDE DSEG.inc               ;;
+        INCLUDE POSTEQU.INC            ;;
+        INCLUDE DSEG.INC               ;;
                                        ;;
         PUBLIC KEYB_INT_48             ;;
                                        ;;

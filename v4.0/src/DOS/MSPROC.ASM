@@ -4,12 +4,10 @@
 ;
 
 .xlist
-.xcref
-include mssw.asm
-.cref
+include MSSW.ASM
 .list
 
 TITLE	IBMPROC - process maintenance
 NAME	IBMPROC
 
-include proc.asm
+include PROC.ASM

@@ -92,7 +92,7 @@ goboot:
         db 0eah
         dw 7c00h,0
 
-include fdisk5.cl1
+include FDISK5.CL1
 
         org 7beh
 tab:                    ;partition table

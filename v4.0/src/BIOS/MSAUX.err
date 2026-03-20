@@ -1,0 +1,10 @@
+JUMPMAC.INC(25): Error! E236: Procedure is already defined
+JUMPMAC.INC(25): Note! N290: included by file MSAUX.ASM(49)
+JUMPMAC.INC(12): Error! E074: Constant operand is expected
+JUMPMAC.INC(12): Note! N291: macro called from file MSAUX.ASM(193)
+JUMPMAC.INC(12): Error! E074: Constant operand is expected
+JUMPMAC.INC(12): Note! N291: macro called from file MSAUX.ASM(230)
+JUMPMAC.INC(12): Error! E074: Constant operand is expected
+JUMPMAC.INC(12): Note! N291: macro called from file MSAUX.ASM(256)
+JUMPMAC.INC(12): Error! E074: Constant operand is expected
+JUMPMAC.INC(12): Note! N291: macro called from file MSAUX.ASM(261)

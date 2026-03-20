@@ -160,7 +160,7 @@ CALL  SYSLOADMSG		    ;load the message text
 INT	21H			 ;TERMINATE RETURNING ERRORLEVEL INDICATING success
 RET
 
-include msgdcl.inc
+include MSGDCL.INC
 
 main  ENDP
 

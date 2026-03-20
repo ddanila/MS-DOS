@@ -18,7 +18,7 @@ dosxxx	segment byte public 'dos'
 	    public   dosgetmachinemode
 	    .sall
 	    .xlist
-	    include  macros.inc
+	    include  MACROS.INC
 	    .list
 
 str	    struc

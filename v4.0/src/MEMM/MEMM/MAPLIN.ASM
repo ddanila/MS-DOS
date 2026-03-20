@@ -38,7 +38,6 @@ page	58,132
 ;
 ;
 ;******************************************************************************
-.lfcond 				; list false conditionals
 .386p
 	page
 ;******************************************************************************
@@ -54,10 +53,10 @@ page	58,132
 ;			I N C L U D E	F I L E S
 ;******************************************************************************
 
-	include vdmseg.inc
-	include vdmsel.inc
-	include instr386.inc
-	include oemdep.inc
+	include VDMSEG.INC
+	include VDMSEL.INC
+	include INSTR386.INC
+	include OEMDEP.INC
 
 ;******************************************************************************
 ;			E X T E R N A L   R E F E R E N C E S

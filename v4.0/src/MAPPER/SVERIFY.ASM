@@ -23,7 +23,7 @@ dosxxx  segment byte public 'dos'
             public   dossetverify
             .sall
             .xlist
-            include  macros.inc
+            include  MACROS.INC
             .list
 
 error_code  equ      0002h

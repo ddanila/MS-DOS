@@ -35,7 +35,6 @@
 ;   depending on the results of the parsing and call to ELIM_Entry.
 ;
 ;******************************************************************************
-.lfcond 				; list false conditionals
 .386p
 	page
 ;******************************************************************************
@@ -63,7 +62,7 @@ _TEXT	ends
 ;
 MSDOS		equ	21h			; MS-DOS function call
 
-	include ascii_sm.equ
+	include ASCII_SM.EQU
 
 ;******************************************************************************
 ;			S E G M E N T	D E F I N I T I O N
@@ -76,7 +75,7 @@ _TEXT	segment byte use16 public 'CODE'
 ;			L O C A L   D A T A   A R E A
 ;******************************************************************************
 ;
-	include 	memm_msg.inc
+	include 	MEMM_MSG.INC
 ;
 msg_tbl 	label	word		; table of final messages to display
 		dw	offset vmode	; on

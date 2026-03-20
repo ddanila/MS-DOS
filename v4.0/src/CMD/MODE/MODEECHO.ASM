@@ -5,7 +5,7 @@ TITLE MODEECHO - REDIRECT PRINTER OUTPUT FROM PARALLEL TO SERIAL
 INCLUDE STRUC.INC
 .LIST
 
-INCLUDE common.stc	;definition of parm_list_entry struc
+INCLUDE COMMON.STC	;definition of parm_list_entry struc
 
 DISPLAY 	MACRO	MSG
 	MOV	DX,OFFSET MSG

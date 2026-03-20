@@ -35,17 +35,16 @@ page	58,132
 ;   Functional Description:
 ;
 ;******************************************************************************
-.lfcond 				; list false conditionals
 .386p
 
 NAME	tabdef
 ;
 
 .xlist
-	include VDMseg.inc
-	include VDMsel.inc
-	include desc.inc
-	include page.inc
+	include VDMSEG.INC
+	include VDMSEL.INC
+	include DESC.INC
+	include PAGE.INC
 .list
 
 

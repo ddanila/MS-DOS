@@ -1,0 +1,8 @@
+INDEDAT.INC(351): Error! E094: This instruction is not supported
+INDEDAT.INC(351): Note! N290: included by file INDEDMA.ASM(101)
+INDEDAT.INC(419): Error! E065: Operator is expected
+INDEDAT.INC(419): Note! N290: included by file INDEDMA.ASM(101)
+INDEDAT.INC(424): Error! E065: Operator is expected
+INDEDAT.INC(424): Note! N290: included by file INDEDMA.ASM(101)
+INDEDAT.INC(426): Error! E065: Operator is expected
+INDEDAT.INC(426): Note! N290: included by file INDEDMA.ASM(101)

@@ -1,0 +1,7 @@
+ASSGPARM.ASM(97): Error! E032: Syntax error
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(1039): Error! E066: Operand is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(1039): Note! N290: included by file ASSGPARM.ASM(136)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2953): Error! E066: Operand is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2953): Note! N290: included by file ASSGPARM.ASM(136)
+ASSGPARM.ASM(140): Error! E300: 1 unclosed conditional directive(s) detected
+ASSGPARM.ASM(141): Warning! W249: End directive required at end of file

@@ -30,7 +30,6 @@
 ;
 ;******************************************************************************
 ;
-.lfcond 				; list false conditionals
 .386p
 	page
 ;******************************************************************************
@@ -49,14 +48,14 @@
 ; % - how many of these are actually needed?
 ; % - Need any includes from Win/386 DMA code - trapdef.asm ?
 
-	include VDMseg.inc
-	include VDMsel.inc
-	include desc.inc
-	include elim.inc
-	include page.inc
-	include oemdep.inc
-	include instr386.inc
-	include vm386.inc
+	include VDMSEG.INC
+	include VDMSEL.INC
+	include DESC.INC
+	include ELIM.INC
+	include PAGE.INC
+	include OEMDEP.INC
+	include INSTR386.INC
+	include VM386.INC
 ;
 ;******************************************************************************
 ;			E X T E R N A L   R E F E R E N C E S

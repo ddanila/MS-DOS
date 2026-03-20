@@ -4,14 +4,12 @@
 ;
 debug=0
 .xlist
-.xcref
-include mssw.asm
-include dosseg.asm
-.cref
+include MSSW.ASM
+include DOSSEG.ASM
 .list
 
 TITLE   IBMDOSMES - DOS OEM dependancies
 NAME    IBMDOSMES
 
-include dosmes.asm
+include DOSMES.ASM
 

@@ -4,10 +4,8 @@
 TITLE	COMMAND interface to SYSPARSE
 
 .xlist
-.xcref
-	INCLUDE comseg.asm		;AN000;
+	INCLUDE COMSEG.ASM		;AN000;
 .list
-.cref
 
 
 INIT		SEGMENT PUBLIC PARA	;AN000;
@@ -27,10 +25,8 @@ ASSUME	CS:RESGROUP,DS:RESGROUP,ES:NOTHING,SS:NOTHING	;AN000;
 	DrvSW	equ	0		;AN025; do not include drive only
 
 .xlist
-.xcref
 ;AD054; INCLUDE parse.asm		;AN000;
 .list
-.cref
 
 
 INIT	    ends			;AN000;

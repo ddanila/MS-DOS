@@ -52,7 +52,7 @@
 ;	create country.sys file
 ;
 ;
-	include mkcntry.inc
+	include MKCNTRY.INC
 ;
 cseg	segment para public 'code'
 	assume	cs:cseg,ds:dseg
@@ -2351,7 +2351,7 @@ page
 ; ---------------------------------------------------------------
 
 
-include copyrigh.inc
+include COPYRIGH.INC
 
 cdiend		label	word
 ;

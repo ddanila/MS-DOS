@@ -1,0 +1,4 @@
+DCOMPPAR.ASM(357): Error! E066: Operand is expected
+DCOMPPAR.ASM(359): Error! E066: Operand is expected
+DCOMPPAR.ASM(405): Error! E050: Offset cannot be smaller than WORD size
+DCOMPPAR.ASM(427): Warning! W249: End directive required at end of file

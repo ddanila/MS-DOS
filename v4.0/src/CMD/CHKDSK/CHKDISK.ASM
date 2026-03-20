@@ -2,12 +2,12 @@ TITLE	CHKDISK  - procedures that read or write to the disk
 page	,132					;
 
 	.xlist
-	include chkseg.inc							;an005;bgb
+	include CHKSEG.INC							;an005;bgb
 	INCLUDE CHKCHNG.INC
 	INCLUDE DOSSYM.INC
 	INCLUDE CHKEQU.INC
 	INCLUDE CHKMACRO.INC
-	include pathmac.inc
+	include PATHMAC.INC
 
 
 CONST	SEGMENT PUBLIC PARA  'DATA'

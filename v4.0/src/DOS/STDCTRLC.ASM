@@ -4,12 +4,10 @@
 ;
 
 .xlist
-.xcref
-include stdsw.asm
-.cref
+include STDSW.ASM
 .list
 
 TITLE   Control C detection, Hard error and EXIT routines
 NAME    STDCTRLC
 
-include ctrlc.asm
+include CTRLC.ASM

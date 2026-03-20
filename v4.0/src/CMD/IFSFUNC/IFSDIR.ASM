@@ -24,12 +24,10 @@ NAME	NETDIR										 ;AN000;
 ;************************************************************************************	 ;AN000;
 											 ;AN000;
 .xlist											 ;AN000;
-.xcref											 ;AN000;
 INCLUDE IFSSYM.INC									 ;AN000;
 INCLUDE IFSFSYM.INC									 ;AN000;
 INCLUDE DOSSYM.INC									 ;AN000;
 INCLUDE DEVSYM.INC									 ;AN000;
-.cref											 ;AN000;
 .list											 ;AN000;
 											 ;AN000;
 AsmVars <IBM, Installed, Debug> 							 ;AN000;
@@ -41,7 +39,7 @@ ifsseg	ENDS										 ;AN000;
 											 ;AN000;
 ; include the rest of the segment definitions for normal MSDOS				 ;AN000;
 											 ;AN000;
-include dosseg.asm									 ;AN000;
+include DOSSEG.ASM									 ;AN000;
 											 ;AN000;
 DATA		SEGMENT WORD PUBLIC 'DATA'                                               ;AN000;
 											 ;AN000;
@@ -56,6 +54,16 @@ DATA		ENDS									 ;AN000;
 											 ;AN000;
 ifsseg	SEGMENT BYTE PUBLIC 'ifsseg'                                                     ;AN000;
 	ASSUME	SS:DOSGROUP,CS:ifsseg							 ;AN000;
+EXTRN	CALL_IFS:NEAR
+EXTRN	CDS_TO_CD:NEAR
+EXTRN	CD_TO_CDS:NEAR
+EXTRN	PREP_IFSR:NEAR
+EXTRN	STRIP_WFP_START:NEAR
+EXTRN	CALL_IFS:NEAR
+EXTRN	CDS_TO_CD:NEAR
+EXTRN	CD_TO_CDS:NEAR
+EXTRN	PREP_IFSR:NEAR
+EXTRN	STRIP_WFP_START:NEAR
 											 ;AN000;
 	;IFS Data									 ;AN000;
 	Extrn	IFSR:WORD								 ;AN000;

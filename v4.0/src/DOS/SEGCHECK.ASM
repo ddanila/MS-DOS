@@ -9,7 +9,7 @@ INCLUDE DEVSYM.INC
 ShareF  = FALSE
 
 IF NOT SHAREF
-include dosseg.asm
+include DOSSEG.ASM
 ENDIF
 .list
 
@@ -94,6 +94,16 @@ segFrame    ENDS
 
 Procedure   SegCheck,NEAR
 	ASSUME  DS:NOTHING,ES:NOTHING,SS:NOTHING
+EXTRN	PFMT:NEAR
+EXTRN	PointComp:NEAR
+EXTRN	SFFromSFN:NEAR
+EXTRN	PFMT:NEAR
+EXTRN	PointComp:NEAR
+EXTRN	SFFromSFN:NEAR
+EXTRN	buf_link:NEAR
+EXTRN	PFMT:NEAR
+EXTRN	PointComp:NEAR
+EXTRN	SFFromSFN:NEAR
 	SaveReg <BP>
 	MOV     BP,SP                   ; set up addressing
 	PUSHF

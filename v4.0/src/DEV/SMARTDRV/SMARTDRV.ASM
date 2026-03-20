@@ -183,9 +183,9 @@ R_Mode_IDT  segment at 0h
 R_mode_IDT  ends
 ;
 .xlist
-	include devsym.asm
-	include syscall.asm
-	include mi.asm
+	include DEVSYM.ASM
+	include SYSCALL.ASM
+	include MI.ASM
 .list
 
 ; The INT13 device driver has 2 basic configurations.
@@ -205,13 +205,13 @@ R_mode_IDT  ends
 ;    control access to the available memory
 ;
 
-	include emm.asm
+	include EMM.ASM
 
-	include loadall.asm
+	include LOADALL.ASM
 
-	include above.asm
+	include ABOVE.ASM
 
-	include ab_macro.asm
+	include AB_MACRO.ASM
 
 BREAK	<I/O Packet offset declarations>
 

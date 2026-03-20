@@ -5,7 +5,7 @@ title CP/DOS KbdSetStatus
 
         .sall
         .xlist
-        include kbd.inc       ; kbd set status data structure
+        include KBD.INC       ; kbd set status data structure
         .list
 
 kbddata segment word public 'kbddata'

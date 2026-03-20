@@ -134,7 +134,6 @@ BREAK	MACRO	subtitle
 .LIST
 	PAGE
 	ENDM
-.xcref	break
 ; = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 CallOperRange macro low,high,routine	;;NS-macro to call subroutines
 ?call	=	low			;;NS-in the given call range
@@ -170,7 +169,6 @@ IRP	reg,<reglist>
 	PUSH	reg
 ENDM
 ENDM
-.xcref	SaveReg
 ; = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 RestoreReg MACRO reglist		;; pop those registers
 IRP	reg,<reglist>
@@ -178,7 +176,6 @@ IRP	reg,<reglist>
 	POP	reg
 ENDM
 ENDM
-.xcref	RestoreReg
 
 ; = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 ; = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -1789,7 +1786,7 @@ msg_services <assign.cla,assign.cl1>
 msg_services <assign.cl2>
 .list
 
-include msgdcl.inc
+include MSGDCL.INC
 
 code	ends
 	end	ENTRY_POINT

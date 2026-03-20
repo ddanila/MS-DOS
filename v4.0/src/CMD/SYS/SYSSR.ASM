@@ -3,11 +3,9 @@
 ; include SYSMSG.INC
 
 .xlist
-.xcref
 
 	include SYSMSG.INC		;				       ;AN000;
 
-.cref
 .list
 
 	MSG_UTILNAME <SYS>		;				       ;AN000;
@@ -24,21 +22,17 @@ ASSUME	CS:CODE,DS:nothing,ES:nothing
 ;  MSG_SERVICES <SYS.CL1,SYS.CL2,SYS.CLA,SYS.CLB,SYS.CLC,SYS.CLD>		;AN000;
 
 .xlist
-.xcref
 
 	MSG_SERVICES <SYS.CL1,SYS.CL2,SYS.CLA,SYS.CLB,SYS.CLC,SYS.CLD> ;       ;AN000;
 
-.cref
 .list
 
 ;  MSG_SERVICES <LOADmsg,DISPLAYmsg,INPUTmsg,CHARmsg,NOVERCHECKmsg>
 
 .xlist
-.xcref
 
 	MSG_SERVICES <LOADmsg,DISPLAYmsg,INPUTmsg,CHARmsg,NOVERCHECKmsg> ;		     ;AN000;
 
-.cref
 .list
 
 
@@ -64,9 +58,8 @@ ASSUME	CS:CODE,DS:CODE,ES:nothing
 ;xlist
 ;xcref
 
-include parse.asm			;				       ;AN000;
+include PARSE.ASM			;				       ;AN000;
 
-.cref
 .list
 
 Data_Space LABEL BYTE			;				       ;AN000;
@@ -75,7 +68,7 @@ Data_Space LABEL BYTE			;				       ;AN000;
 
 CODE	Ends
 
-include msgdcl.inc
+include MSGDCL.INC
 
 	End
 

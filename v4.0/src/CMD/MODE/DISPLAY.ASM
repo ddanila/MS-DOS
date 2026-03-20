@@ -45,7 +45,7 @@ Entry7	dw	0				;				;AN000;
 						;
 Message_Table ends				;				;AN000;
 
-include common.stc	      ;contains the following structure
+include COMMON.STC	      ;contains the following structure
 
 ;sublist_def  STRUC
 

@@ -39,16 +39,15 @@ page	58,132
 ;
 ;
 ;******************************************************************************
-.lfcond 				; list false conditionals
 .386p
 	page
 
 ;******************************************************************************
 ;			I N C L U D E	F I L E S
 ;
-	include VDMseg.inc
-	include VDMsel.inc
-	include desc.inc
+	include VDMSEG.INC
+	include VDMSEL.INC
+	include DESC.INC
 	include INSTR386.INC
 	include VM386.INC
 ;

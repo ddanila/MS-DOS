@@ -1,0 +1,10 @@
+VDISK.ASM(84): Error! E065: Operator is expected
+VDISK.ASM(84): Error! E021: Expecting number
+VDISK.ASM(102): Error! E065: Operator is expected
+VDISK.ASM(102): Error! E021: Expecting number
+VDISK.ASM(110): Error! E065: Operator is expected
+VDISK.ASM(110): Error! E021: Expecting number
+VDISK.ASM(121): Error! E065: Operator is expected
+VDISK.ASM(121): Error! E021: Expecting number
+VDISK.ASM(1348): Error! E004: REP prefix is not allowed on this instruction
+VDISK.ASM(1800): Error! E050: Offset cannot be smaller than WORD size

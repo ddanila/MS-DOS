@@ -36,13 +36,12 @@ page	58,132
 ;
 ;
 ;******************************************************************************
-.lfcond					; list false conditionals
 .386p
 ;	include	protseg.inc
-	include vdmseg.inc
-	include vdmsel.inc
-	include page.inc
-	include	emmdef.inc
+	include VDMSEG.INC
+	include VDMSEL.INC
+	include PAGE.INC
+	include	EMMDEF.INC
 
 _DATA	SEGMENT
 

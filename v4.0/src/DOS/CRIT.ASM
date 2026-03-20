@@ -15,14 +15,12 @@ NAME  CRIT
 ;
 ; get the appropriate segment definitions
 ;
-include dosseg.asm
+include DOSSEG.ASM
 
 CODE    SEGMENT BYTE PUBLIC  'CODE'
 	ASSUME  SS:NOTHING,CS:DOSGROUP
 
-.xcref
 INCLUDE DOSSYM.INC
-.cref
 .list
 
 	I_need  User_In_AX,WORD
@@ -30,7 +28,7 @@ INCLUDE DOSSYM.INC
 if debug
 	I_need  BugLev,WORD
 	I_need  BugTyp,WORD
-include bugtyp.asm
+include BUGTYP.ASM
 endif
 
 Break   <Critical section handlers>

@@ -70,7 +70,7 @@ INDEMSG    LABEL   NEAR 						;   D0A
 									;   D0A
 	   INCLUDE INDEMSUS.INC 	; Use the US messages		    D0A
 									;   D0A
-	   include copyrigh.inc 					; DCL p1821
+	   include COPYRIGH.INC 					; DCL p1821
 									;
 PROG	   ENDS 							;   D0A
 	   END								;   D0A

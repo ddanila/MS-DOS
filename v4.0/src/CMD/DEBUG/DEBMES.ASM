@@ -63,7 +63,7 @@ PAGE	60,132				;
 ;******************** END OF SPECIFICATIONS ******************************
 .xlist
 
-	include sysmsg.inc		;an000;message retriever
+	include SYSMSG.INC		;an000;message retriever
 
 .list
 
@@ -250,7 +250,7 @@ $$IF1:
 
 PRE_LOAD_MESSAGE	endp			;an000;end proc
 
-include msgdcl.inc
+include MSGDCL.INC
 
 code	ends				;an000;end code segment
 

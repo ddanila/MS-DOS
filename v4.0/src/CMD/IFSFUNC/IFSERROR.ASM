@@ -29,14 +29,12 @@ NAME	IFSERROR									 ;AN000;
 ;************************************************************************************	 ;AN000;
 											 ;AN000;
 .xlist											 ;AN000;
-.xcref											 ;AN000;
 INCLUDE IFSSYM.INC									 ;AN000;
 INCLUDE IFSFSYM.INC									 ;AN000;
 INCLUDE DOSSYM.INC									 ;AN000;
 INCLUDE DEVSYM.INC									 ;AN000;
 INCLUDE SYSMSG.INC
 msg_utilname <IFSFUNC>
-.cref											 ;AN000;
 .list											 ;AN000;
 											 ;AN000;
 AsmVars <IBM, Installed, Debug> 							 ;AN000;
@@ -48,7 +46,7 @@ IFSSEG	ENDS										 ;AN000;
 											 ;AN000;
 ; include the rest of the segment definitions for normal MSDOS				 ;AN000;
 											 ;AN000;
-include dosseg.asm									 ;AN000;
+include DOSSEG.ASM									 ;AN000;
 											 ;AN000;
 DATA		SEGMENT WORD PUBLIC 'DATA'                                               ;AN000;
 	; DOSGROUP Data 								 ;AN000;
@@ -125,10 +123,8 @@ MAXERR	EQU	89		; Don't know errors above 79                             ;AN000;
 											 ;AN000;
 	PUBLIC	 RODS_LABEL
 RODS_LABEL	LABEL	BYTE
-.xcref											 ;AN000;
 .xlist
 MSG_SERVICES <IFSFUNC.CL1>
-.cref											 ;AN000;
 .list
 
 ;
@@ -631,7 +627,11 @@ ASSUME	DS:DOSGROUP,ES:NOTHING								 ;AN000;
 											 ;AN000;
 EndProc PHONEY_DPB									 ;AN000;
 
-include msgdcl.inc											 ;AN000;
+include MSGDCL.INC											 ;AN000;
+EXTRN	CALL_IFS:NEAR
+EXTRN	PREP_IFSR:NEAR
+EXTRN	CALL_IFS:NEAR
+EXTRN	PREP_IFSR:NEAR
 											 ;AN000;
 IFSSEG	ENDS										 ;AN000;
     END 										 ;AN000;

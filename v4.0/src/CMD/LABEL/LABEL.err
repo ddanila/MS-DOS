@@ -1,0 +1,6 @@
+LABEL.ASM(127): Error! E032: Syntax error
+LABEL.ASM(1275): Error! E066: Operand is expected
+LABEL.ASM(1276): Error! E066: Operand is expected
+LABEL.ASM(1281): Error! E066: Operand is expected
+LABEL.ASM(1282): Error! E066: Operand is expected
+LABEL.ASM(1373): Warning! W249: End directive required at end of file

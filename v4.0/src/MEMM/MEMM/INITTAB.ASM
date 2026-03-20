@@ -45,7 +45,6 @@ page	58,132
 ;   Diagnostics byte segment.
 ;
 ;******************************************************************************
-.lfcond 				; list false conditionals
 .386p
 	page
 ;******************************************************************************
@@ -61,12 +60,12 @@ page	58,132
 ;
 OEM_MEM_HI	equ	80c0h		; Upper 16 bits of high mem physical adr
 
-	include VDMseg.inc
-	include VDMsel.inc
-	include desc.inc
-	include page.inc
-	include instr386.inc
-	include oemdep.inc
+	include VDMSEG.INC
+	include VDMSEL.INC
+	include DESC.INC
+	include PAGE.INC
+	include INSTR386.INC
+	include OEMDEP.INC
 ;
 ;******************************************************************************
 ;			E X T E R N A L   R E F E R E N C E S

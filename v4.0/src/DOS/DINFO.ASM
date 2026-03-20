@@ -16,15 +16,13 @@ NAME	DISK_INFO
 ; get the appropriate segment definitions
 ;
 .xlist
-include dosseg.asm
+include DOSSEG.ASM
 
 CODE	SEGMENT BYTE PUBLIC  'CODE'
 	ASSUME	SS:DOSGROUP,CS:DOSGROUP
 
-.xcref
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
-.cref
 .list
 
 Installed = TRUE
@@ -35,7 +33,7 @@ Installed = TRUE
 if debug
 	I_need	BugLev,WORD
 	I_need	BugTyp,WORD
-include bugtyp.asm
+include BUGTYP.ASM
 endif
 
 Break	<DISK_INFO -- Get Disk Drive Information>
@@ -78,6 +76,18 @@ LOCAL_INFO:
 	JC	CRIT_LEAVE
 	LDS	SI,[CURBUF]
 ASSUME	DS:NOTHING
+EXTRN	EcritDisk:NEAR
+EXTRN	FATREAD_CDS:NEAR
+EXTRN	LcritDisk:NEAR
+EXTRN	NET_DISK_INFO:NEAR
+EXTRN	TestNet:NEAR
+EXTRN	UNPACK:NEAR
+EXTRN	EcritDisk:NEAR
+EXTRN	FATREAD_CDS:NEAR
+EXTRN	LcritDisk:NEAR
+EXTRN	NET_DISK_INFO:NEAR
+EXTRN	TestNet:NEAR
+EXTRN	UNPACK:NEAR
 	MOV	AH,[SI].bufinsiz	; get FAT ID BYTE
 	context DS
 	MOV	CX,ES:[BP.dpb_max_cluster]

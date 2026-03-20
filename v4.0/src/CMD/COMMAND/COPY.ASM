@@ -33,13 +33,11 @@ TITLE	COMMAND COPY routines.
 
 
 .xlist
-.xcref
-	INCLUDE comsw.asm
+	INCLUDE COMSW.ASM
 	INCLUDE DOSSYM.INC
-	INCLUDE comseg.asm
-	INCLUDE comequ.asm
+	INCLUDE COMSEG.ASM
+	INCLUDE COMEQU.ASM
 .list
-.cref
 
 
 DATARES 	SEGMENT PUBLIC BYTE	;AC000;
@@ -1022,6 +1020,44 @@ Deallocate_Src_XA  proc    near 		;AN030;
 	mov	[rsrc_xa_seg],no_xa_seg 	;AN030; reset to no segment
 	pop	ds				;AN030;
 	assume	ds:trangroup			;AN030;
+EXTRN	BUILDNAME:NEAR
+EXTRN	BUILDPATH:NEAR
+EXTRN	CPARSE:NEAR
+EXTRN	CRLF2:NEAR
+EXTRN	FCB_TO_ASCZ:NEAR
+EXTRN	FLSHFIL:NEAR
+EXTRN	RESTUDIR1:NEAR
+EXTRN	SETASC:NEAR
+EXTRN	SETSTARS:NEAR
+EXTRN	SWITCH:NEAR
+EXTRN	Setup_parse_error_msg:NEAR
+EXTRN	TRYFLUSH:NEAR
+EXTRN	alloc_tpa:NEAR
+EXTRN	free_tpa:NEAR
+EXTRN	get_file_code_page_tag:NEAR
+EXTRN	set_ext_error_msg:NEAR
+EXTRN	std_Eprintf:NEAR
+EXTRN	std_eprintf:NEAR
+EXTRN	std_printf:NEAR
+EXTRN	BUILDNAME:NEAR
+EXTRN	BUILDPATH:NEAR
+EXTRN	CPARSE:NEAR
+EXTRN	CRLF2:NEAR
+EXTRN	FCB_TO_ASCZ:NEAR
+EXTRN	FLSHFIL:NEAR
+EXTRN	RESTUDIR1:NEAR
+EXTRN	SETASC:NEAR
+EXTRN	SETSTARS:NEAR
+EXTRN	SWITCH:NEAR
+EXTRN	Setup_parse_error_msg:NEAR
+EXTRN	TRYFLUSH:NEAR
+EXTRN	alloc_tpa:NEAR
+EXTRN	free_tpa:NEAR
+EXTRN	get_file_code_page_tag:NEAR
+EXTRN	set_ext_error_msg:NEAR
+EXTRN	std_Eprintf:NEAR
+EXTRN	std_eprintf:NEAR
+EXTRN	std_printf:NEAR
 no_src_xa:					;AN030;
 
 	ret					;AN030; return to caller

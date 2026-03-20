@@ -188,10 +188,10 @@ IF1
 ENDIF
 
 .xlist
-	include devsym.inc
-	include syscall.inc
-	include dirent.inc
-	include mi.inc
+	include DEVSYM.INC
+	include SYSCALL.INC
+	include DIRENT.INC
+	include MI.INC
 .list
 
 ; The RAMDrive device driver has 4 basic configurations.
@@ -220,13 +220,13 @@ ENDIF
 ; The TYPE 1 and TYPE 3 configurations use the EMM control sector to
 ;    control access to the available memory
 
-	include emm.inc
+	include EMM.INC
 
-	include loadall.inc
+	include LOADALL.INC
 
-	include above.inc
+	include ABOVE.INC
 
-	include ab_macro.inc
+	include AB_MACRO.INC
 
 BREAK	<I/O Packet offset declarations>
 

@@ -1,16 +1,13 @@
  page 80,132
 ;	SCCSID = @(#)parse.asm	1.1 85/05/14
 ;	SCCSID = @(#)parse.asm	1.1 85/05/14
-.sall
 .xlist
-.xcref
     INCLUDE DOSSYM.INC
     INCLUDE DEVSYM.INC
-    include comsw.asm
-    include comseg.asm
-    include comequ.asm
+    include COMSW.ASM
+    include COMSEG.ASM
+    include COMEQU.ASM
 .list
-.cref
 
 
 break <Parse.Asm>
@@ -170,6 +167,10 @@ parseline:
 	cmp	FORFLAG,0
 	pop	ds
 	assume	ds:trangroup
+EXTRN	cparse:NEAR
+EXTRN	scanoff:NEAR
+EXTRN	cparse:NEAR
+EXTRN	scanoff:NEAR
 	jnz	pcont
 	mov	di,OFFSET TRANGROUP:arg.argforcombuf
 	xor	ch,ch

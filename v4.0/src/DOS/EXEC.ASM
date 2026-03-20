@@ -81,7 +81,7 @@ PAGE
 ;	 A000	version 4.00  Jan. 1988
 ;
 include EA.INC
-include version.inc
+include VERSION.INC
 
 	I_Need	   Temp_Var2,WORD	     ;AN000;file type from $open
 	I_Need	   Special_Entries,WORD      ;AN007;address of special entries
@@ -127,7 +127,6 @@ exec_internal_buffer_size   EQU (128+128+53+curdirLEN)
 
 TABLE	ENDS
 
-.sall
 
 procedure   $Exec,NEAR
 	ASSUME	DS:NOTHING, ES:NOTHING
@@ -146,7 +145,7 @@ EXEC001S:
 	LocalVar    execNameLen,WORD
 	LocalVar    execName,DWORD
 EXEC001E:
-	Enter
+	FrameEnter
 ;
 ; validate function
 ;
@@ -159,7 +158,7 @@ exec_bad_fun:
 	mov	al,error_invalid_function
 
 exec_ret_err:
-	Leave
+	FrameLeave
 	transfer    SYS_RET_ERR
 
 exec_check_2:
@@ -622,7 +621,7 @@ exec_set_PDB:
 	JZ	exec_build_header
 	CALL	Scan_Execname		;MS.;AN007;
 	CALL	Scan_Special_Entries	;MS.;AN007;
-	Leave
+	FrameLeave
 	transfer    SYS_RET_OK		; overlay load -> done
 
 exec_build_header:
@@ -772,7 +771,7 @@ exec_set_return:
 	MOV	ES:[DI].exec1_CS,DS	; initial entry stuff
 
 	MOV	ES:[DI].exec1_IP,AX
-	Leave
+	FrameLeave
 	transfer    SYS_RET_OK
 
 exec_go:
@@ -819,6 +818,31 @@ EndProc ExecRead
 
 procedure   exec_dealloc,near
 	ASSUME	    DS:NOTHING,ES:NOTHING
+EXTRN	$ALLOC:NEAR
+EXTRN	$CLOSE:NEAR
+EXTRN	$Dup_PDB:NEAR
+EXTRN	$IOCTL:NEAR
+EXTRN	$LSEEK:NEAR
+EXTRN	$OPEN:NEAR
+EXTRN	$READ:NEAR
+EXTRN	DStrLen:NEAR
+EXTRN	ECritMEM:NEAR
+EXTRN	GetVisDrv:NEAR
+EXTRN	LCritMEM:NEAR
+EXTRN	LCritMem:NEAR
+EXTRN	SYS_RET_ERR:NEAR
+EXTRN	SYS_RET_OK:NEAR
+EXTRN	get_user_stack:NEAR
+EXTRN	restore_user_map:NEAR
+EXTRN	DStrLen:NEAR
+EXTRN	ECritMEM:NEAR
+EXTRN	GetVisDrv:NEAR
+EXTRN	LCritMEM:NEAR
+EXTRN	LCritMem:NEAR
+EXTRN	SYS_RET_ERR:NEAR
+EXTRN	SYS_RET_OK:NEAR
+EXTRN	get_user_stack:NEAR
+EXTRN	restore_user_map:NEAR
 	PUSH	    BX
 	MOV	    BX,arena_owner_system
 	EnterCrit   CritMEM

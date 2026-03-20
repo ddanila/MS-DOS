@@ -68,16 +68,16 @@ DOSSIZE EQU	0A000H
 
 .xlist
 ;	INCLUDE dossym.INC
-	include smdossym.inc	;J.K. Reduced version of DOSSYM.INC
-	INCLUDE devsym.INC
-	include ioctl.INC
+	include SMDOSSYM.INC	;J.K. Reduced version of DOSSYM.INC
+	INCLUDE DEVSYM.INC
+	include IOCTL.INC
 	include BIOSTRUC.INC
-	include smifssym.inc		;AN000;
-	include defems.inc		;AN010;
-	include DEVMARK.inc		;AN005;
-	include cputype.inc
+	include SMIFSSYM.INC		;AN000;
+	include DEFEMS.INC		;AN010;
+	include DEVMARK.INC		;AN005;
+	include CPUTYPE.INC
 
-	include version.inc
+	include VERSION.INC
 
 .list
 
@@ -210,11 +210,9 @@ ASSUME	CS:SYSINITSEG,DS:NOTHING,ES:NOTHING,SS:NOTHING
 ;
 SYSINIT$:
 	IF	STACKSW
-.SALL
 	  include MSSTACK.INC		;Main stack program and data definitions
 ;	  include STKMES.INC		;Fatal stack error message
 	  include MSBIO.CL5		;Fatal stack error message
-.XALL
 	    public Endstackcode
 Endstackcode	label byte
 	ENDIF
@@ -2265,6 +2263,12 @@ Set_EMS_Buffer	    proc    near
 ;*******************************************************************************
 
 	assume	ds:nothing			;AN000;to make sure.
+EXTRN	PRINT:NEAR
+EXTRN	Print:NEAR
+EXTRN	Round:NEAR
+EXTRN	PRINT:NEAR
+EXTRN	Print:NEAR
+EXTRN	Round:NEAR
 
 IF	BUFFERFLAG
 
@@ -2567,11 +2571,9 @@ Roundup endp
 ;------------------------------------------------------------------------------
 ;J.K. 5/6/86. IBMSTACK initialization routine.
 	IF	STACKSW
-.SALL
 
 INCLUDE STKINIT.INC
 
-.XALL
 	ENDIF
 ;------------------------------------------------------------------------------
 	public	SetDevMark

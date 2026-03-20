@@ -48,12 +48,12 @@ page	58,132
 ;****************************************
 ;	D E F I N E S
 ;****************************************
-	include vdmseg.inc
-	include vdmsel.inc
-	include desc.inc
-	include instr386.inc
-	include oemdep.inc
-	include vm386.inc
+	include VDMSEG.INC
+	include VDMSEL.INC
+	include DESC.INC
+	include INSTR386.INC
+	include OEMDEP.INC
+	include VM386.INC
 
 TRUE	equ	0FFh
 FALSE	equ	00h

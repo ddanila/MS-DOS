@@ -22,7 +22,7 @@ NAME	FCB
 ; get the appropriate segment definitions
 ;
 .xlist
-include dosseg.asm
+include DOSSEG.ASM
 
 
 TableLook   equ -1
@@ -34,11 +34,9 @@ Table	ENDS
 CODE	SEGMENT BYTE PUBLIC  'CODE'
 	ASSUME	SS:DOSGROUP,CS:DOSGROUP
 
-.xcref
-include dossym.inc
-include devsym.inc
-include doscntry.inc			;AN000; 	2/12/KK
-.cref
+include DOSSYM.INC
+include DEVSYM.INC
+include DOSCNTRY.INC			;AN000; 	2/12/KK
 .list
 
 	i_need	Name1,BYTE
@@ -240,6 +238,8 @@ EndProc MakeFCB
 ;   Registers modified: DI,AX,DX,CX
 procedure   NameTrans,near
 	ASSUME	DS:NOTHING,ES:NOTHING
+EXTRN	GetVisDrv:NEAR
+EXTRN	GetVisDrv:NEAR
 	MOV	BYTE PTR [SpaceFlag],1
 	context ES
 	MOV	DI,OFFSET DOSGROUP:NAME1

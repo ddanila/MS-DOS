@@ -23,7 +23,7 @@ dosxxx  segment
 
             public   dossetctrycode
             .sall
-            include  macros.inc
+            include  MACROS.INC
 
 str         struc
 Old_bp      dw       ?

@@ -31,19 +31,16 @@ NAME	HANDLE
 ;
 ; get the appropriate segment definitions
 ;
-include dosseg.asm
+include DOSSEG.ASM
 
 CODE	SEGMENT BYTE PUBLIC  'CODE'
 	ASSUME	SS:DOSGROUP,CS:DOSGROUP
 
-.xcref
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
-include EA.inc
-include version.inc
-.cref
+include EA.INC
+include VERSION.INC
 .list
-.sall
 
 	EXTRN	DOS_Read:NEAR, DOS_Write:NEAR
 
@@ -91,7 +88,7 @@ ENDIF
 if debug
 	I_need	BugLev,WORD
 	I_need	BugTyp,WORD
-include bugtyp.asm
+include BUGTYP.ASM
 endif
 
 BREAK <$Close - return a handle to the system>
@@ -765,6 +762,52 @@ Break	<CheckOwner - verify ownership of handles from server>
 
 Procedure   CheckOwner,NEAR
 	ASSUME	CS:DOSGROUP,DS:NOTHING,ES:NOTHING,SS:DOSGROUP
+EXTRN	$ALLOC:NEAR
+EXTRN	$DEALLOC:NEAR
+EXTRN	DOS_COMMIT:NEAR
+EXTRN	DOS_Close:NEAR
+EXTRN	DOS_Dup_Direct:NEAR
+EXTRN	EcritSFT:NEAR
+EXTRN	GetSet_XA:NEAR
+EXTRN	Get_user_stack:NEAR
+EXTRN	JFNFree:NEAR
+EXTRN	LcritSFT:NEAR
+EXTRN	SFFromHandle:NEAR
+EXTRN	SYS_RET_ERR:NEAR
+EXTRN	SYS_RET_OK:NEAR
+EXTRN	Sys_Ret_Err:NEAR
+EXTRN	Sys_Ret_OK:NEAR
+EXTRN	Sys_Ret_Ok:NEAR
+EXTRN	pJFNFromHandle:NEAR
+EXTRN	sys_ret_ok:NEAR
+EXTRN	DOS_COMMIT:NEAR
+EXTRN	DOS_Close:NEAR
+EXTRN	DOS_Dup_Direct:NEAR
+EXTRN	EcritSFT:NEAR
+EXTRN	GetSet_XA:NEAR
+EXTRN	Get_user_stack:NEAR
+EXTRN	JFNFree:NEAR
+EXTRN	LcritSFT:NEAR
+EXTRN	SFFromHandle:NEAR
+EXTRN	SYS_RET_ERR:NEAR
+EXTRN	SYS_RET_OK:NEAR
+EXTRN	Sys_Ret_Err:NEAR
+EXTRN	Sys_Ret_OK:NEAR
+EXTRN	Sys_Ret_Ok:NEAR
+EXTRN	pJFNFromHandle:NEAR
+EXTRN	sys_ret_ok:NEAR
+EXTRN	DOS_Dup_Direct:NEAR
+EXTRN	EcritSFT:NEAR
+EXTRN	GetSet_XA:NEAR
+EXTRN	JFNFree:NEAR
+EXTRN	LcritSFT:NEAR
+EXTRN	SFFromHandle:NEAR
+EXTRN	DOS_COMMIT:NEAR
+EXTRN	DOS_Close:NEAR
+EXTRN	Get_user_stack:NEAR
+EXTRN	Sys_Ret_Err:NEAR
+EXTRN	Sys_Ret_OK:NEAR
+EXTRN	pJFNFromHandle:NEAR
 	DOSInvoke	SFFromHandle
 	retc
 	push	ax

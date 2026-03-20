@@ -146,7 +146,7 @@ COPYRIGHT  LABEL BYTE		   ;AN006;
 
 CSEG	   ENDS 		   ;AN000;
 
-include msgdcl.inc
+include MSGDCL.INC
 
 	   END			   ;AN000;
 

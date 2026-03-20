@@ -4,7 +4,7 @@ page 80,132
 title CP/DOS  DosFindNext   mapper
 ;
 
-        include find.inc
+        include FIND.INC
 
 FindSegment     segment word public 'find'
 
@@ -71,7 +71,7 @@ dosxxx  segment byte public 'dos'
         public  DosFindNext
         .sall
         .xlist
-        include macros.inc
+        include MACROS.INC
         .list
 ;
 

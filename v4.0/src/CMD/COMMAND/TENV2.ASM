@@ -5,15 +5,13 @@ TITLE	Part6 COMMAND Transient routines.
 
 ;	Environment utilities and misc. routines
 
-	INCLUDE comsw.asm
+	INCLUDE COMSW.ASM
 
 .xlist
-.xcref
 	INCLUDE DOSSYM.INC
-	INCLUDE comseg.asm
-	INCLUDE comequ.asm
+	INCLUDE COMSEG.ASM
+	INCLUDE COMEQU.ASM
 .list
-.cref
 
 
 DATARES SEGMENT PUBLIC BYTE		;AC000;
@@ -572,6 +570,30 @@ GO_TO_ERROR:
 	JMP	CERROR
 
 ASSUME	DS:TRANGROUP,ES:TRANGROUP
+EXTRN	PipeOff:NEAR
+EXTRN	SETPATH:NEAR
+EXTRN	SETREST1:NEAR
+EXTRN	STD_Eprintf:NEAR
+EXTRN	Std_Eprintf:NEAR
+EXTRN	TESTKANJ:NEAR
+EXTRN	build_dir_for_chdir:NEAR
+EXTRN	get_ext_error_number:NEAR
+EXTRN	move_to_srcbuf:NEAR
+EXTRN	parse_check_eol:NEAR
+EXTRN	parse_with_msg:NEAR
+EXTRN	std_printf:NEAR
+EXTRN	PipeOff:NEAR
+EXTRN	SETPATH:NEAR
+EXTRN	SETREST1:NEAR
+EXTRN	STD_Eprintf:NEAR
+EXTRN	Std_Eprintf:NEAR
+EXTRN	TESTKANJ:NEAR
+EXTRN	build_dir_for_chdir:NEAR
+EXTRN	get_ext_error_number:NEAR
+EXTRN	move_to_srcbuf:NEAR
+EXTRN	parse_check_eol:NEAR
+EXTRN	parse_with_msg:NEAR
+EXTRN	std_printf:NEAR
 
 PATHCHRCMP:
 ;---- Mod for path invocation ----

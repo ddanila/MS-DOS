@@ -66,7 +66,6 @@ page	58,132
 ;	    unmapped, in which case no relocation is necessary)
 ;
 ;******************************************************************************
-.lfcond 				; list false conditionals
 .386p
 	page
 ;******************************************************************************
@@ -82,13 +81,13 @@ page	58,132
 ;			L O C A L   C O N S T A N T S
 ;******************************************************************************
 ;
-	include VDMseg.inc
-	include VDMsel.inc
-	include desc.inc
-	include page.inc
-	include	instr386.inc
-	include	vm386.inc
-	include emmdef.inc
+	include VDMSEG.INC
+	include VDMSEL.INC
+	include DESC.INC
+	include PAGE.INC
+	include	INSTR386.INC
+	include	VM386.INC
+	include EMMDEF.INC
 ;
 ;******************************************************************************
 ;			E X T E R N A L   R E F E R E N C E S

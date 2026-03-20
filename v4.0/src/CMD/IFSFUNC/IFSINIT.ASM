@@ -29,23 +29,20 @@ NAME	IFSINIT 									 ;AN000;
 ;***********************************************************************************
 											 ;AN000;
 .xlist											 ;AN000;
-.xcref											 ;AN000;
 INCLUDE IFSFSYM.INC									 ;AN000;
 INCLUDE IFSSYM.INC									 ;AN000;
 INCLUDE DOSSYM.INC									 ;AN000;
 INCLUDE DEVSYM.INC									 ;AN000;
-include sysmsg.inc								 ;AN000;
+include SYSMSG.INC								 ;AN000;
 msg_utilname <IFSFUNC>			; resident msgret stuff 		 ;AN000;
-.cref											 ;AN000;
 .list											 ;AN000;
-.sall											 ;AN000;
 											 ;AN000;
 AsmVars <IBM, INSTALLED, DEBUG, PATHGEN>						 ;AN000;
 											 ;AN000;
 IFSSEG	SEGMENT BYTE PUBLIC 'IFSSEG'                                                     ;AN000;
 IFSSEG	ENDS										 ;AN000;
 											 ;AN000;
-include dosseg.asm									 ;AN000;
+include DOSSEG.ASM									 ;AN000;
 											 ;AN000;
 DATA		SEGMENT WORD PUBLIC 'DATA'                                               ;AN000;
 	; DOSGROUP data 								 ;AN000;
@@ -471,11 +468,9 @@ ASSUME	DS:IFSSEG									 ;AN000;
 	ASSUME	CS:IFSSEG,DS:IFSSEG,ES:NOTHING,SS:STACK 				 ;AN000;
 											 ;AN000;
 .xlist											 ;AN000;
-.xcref											 ;AN000;
 	msg_services <MSGDATA>								 ;AN007;
 	PUBLIC	SYSGETMSG
 	msg_services <GETmsg>
-.cref											 ;AN000;
 .list											 ;AN000;
 											 ;AN000;
 Break	<Installable Network INIT>							 ;AN000;
@@ -669,11 +664,9 @@ DEFAULT_DFLCount DB	4								 ;AN000;
 											 ;AN000;
 	ASSUME	CS:IFSSEG,DS:NOTHING							 ;AN000;
 .xlist											 ;AN000;
-.xcref											 ;AN000;
 	INCLUDE IFSPARSE.INC								 ;AN000;
 	msg_services <DISPLAYmsg,CHARmsg,LOADmsg>					 ;AN000;
 	msg_services <ifsfunc.cla,ifsfunc.cl2>	; parse/install msgs			 ;AN000;
-.cref											 ;AN000;
 .list											 ;AN000;
 											 ;AN000;
 ;****************************************************************************** 	 ;AN000;
@@ -1390,7 +1383,19 @@ CUP_1000:										 ;AN000;
 	RestoreReg <BX,DI,ES,DS>		; restore ds - psp,esdi - storage	 ;AN000;
 	return										 ;AN000;
 
-include msgdcl.inc
+include MSGDCL.INC
+EXTRN	CALL_IFS:NEAR
+EXTRN	CDS_TO_CD:NEAR
+EXTRN	CD_TO_CDS:NEAR
+EXTRN	PREP_IFSR:NEAR
+EXTRN	SERVER_IFSFUNC_DATA_AREA:NEAR
+EXTRN	SET_IFS_DOSCALL:NEAR
+EXTRN	CALL_IFS:NEAR
+EXTRN	CDS_TO_CD:NEAR
+EXTRN	CD_TO_CDS:NEAR
+EXTRN	PREP_IFSR:NEAR
+EXTRN	SERVER_IFSFUNC_DATA_AREA:NEAR
+EXTRN	SET_IFS_DOSCALL:NEAR
 											 ;AN000;
 EndProc CHECK_UNC_PRESENCE								 ;AN000;
 											 ;AN000;

@@ -4,13 +4,11 @@
 ;
 
 .xlist
-.xcref
-include mssw.asm
-.cref
+include MSSW.ASM
 .list
 
 TITLE	IBMTABLE - Table segment for DOS
 NAME	IBMTABLE
 
-include ms_table.asm
+include MS_TABLE.ASM
 	END

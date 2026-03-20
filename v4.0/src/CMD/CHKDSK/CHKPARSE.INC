@@ -275,7 +275,7 @@ code	ends									;an028;bgb
 
 
 data	segment PUBLIC para 'DATA'                                              ;an028;bgb
-include psdata.inc								;an028;bgb
+include PSDATA.INC								;an028;bgb
 data	ends									;an028;bgb
 
 code	segment PUBLIC para 'CODE'                                              ;an028;bgb

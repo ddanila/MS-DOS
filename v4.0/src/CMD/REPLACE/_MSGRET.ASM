@@ -243,7 +243,7 @@ _sysdispmsg proc near								;AN000;
 
 _sysdispmsg endp								;AN000;
 
-include msgdcl.inc
+include MSGDCL.INC
 
 _TEXT	ends				; end code segment			;AN000;
 	end									;AN000;

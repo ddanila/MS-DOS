@@ -1,15 +1,12 @@
  page 80,132
 ;	SCCSID = @(#)path1.asm	1.1 85/05/14
 ;	SCCSID = @(#)path1.asm	1.1 85/05/14
-.sall
 .xlist
-.xcref
 INCLUDE DOSSYM.INC
-    include comsw.asm
-    include comseg.asm
-    include comequ.asm
+    include COMSW.ASM
+    include COMSEG.ASM
+    include COMEQU.ASM
 .list
-.cref
 
 break <Path.Asm>
 ;----------------------------------------------------------------------------
@@ -74,6 +71,18 @@ TRANSPACE	ENDS
 TRANCODE	SEGMENT PUBLIC BYTE	;AC000;
 
 assume cs:trangroup, ds:trangroup, es:trangroup, ss:nothing
+EXTRN	DStrlen:NEAR
+EXTRN	find_path:NEAR
+EXTRN	pathchrcmp:NEAR
+EXTRN	search:NEAR
+EXTRN	strip:NEAR
+EXTRN	testkanj:NEAR
+EXTRN	DStrlen:NEAR
+EXTRN	find_path:NEAR
+EXTRN	pathchrcmp:NEAR
+EXTRN	search:NEAR
+EXTRN	strip:NEAR
+EXTRN	testkanj:NEAR
 
 break <Path_Search>
 ;------------------------------------------------------------------------------

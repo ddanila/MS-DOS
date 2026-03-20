@@ -28,20 +28,17 @@ NAME	FILE
 ;
 ; get the appropriate segment definitions
 ;
-include dosseg.asm
+include DOSSEG.ASM
 
 CODE	SEGMENT BYTE PUBLIC  'CODE'
 	ASSUME	SS:DOSGroup,CS:DOSGroup
 
-.xcref
-include dossym.inc
-include devsym.inc
-include fastopen.inc
-include EA.inc			     ;AN000;
-include version.inc
-.cref
+include DOSSYM.INC
+include DEVSYM.INC
+include FASTOPEN.INC
+include EA.INC			     ;AN000;
+include VERSION.INC
 .list
-.sall
 
 	EXTRN	DOS_OPEN:NEAR,DOS_CREATE:NEAR,DOS_Create_New:NEAR
 
@@ -84,7 +81,7 @@ ENDIF
 if debug
 	I_need	BugLev,WORD
 	I_need	BugTyp,WORD
-include bugtyp.asm
+include BUGTYP.ASM
 endif
 
 BREAK <$Open - open a file from a path string>
@@ -526,7 +523,7 @@ FILE001S:
 	LocalVar    FilPtr,DWORD
 	LocalVar    Attr,WORD
 FILE001E:
-	Enter
+	FrameEnter
 	TEST	CX,NOT attr_changeable
 	JZ	OKatts			; Ok if no non-changeable bits set
 ;
@@ -624,7 +621,7 @@ ASSUME	DS:NOTHING
 SETTMPERR:
 	STC
 CreateDone:
-	Leave
+	FrameLeave
 	JC	CreateFail
 	transfer    Sys_Ret_OK		; success!
 CreateFail:
@@ -678,6 +675,51 @@ Break	<Extended_Open- Extended open the file>
 
 procedure   $Extended_Open,NEAR 			       ;AN000;
 	ASSUME	CS:DOSGROUP,DS:NOTHING,ES:NOTHING,SS:DOSGROUP  ;AN000;
+EXTRN	$close:NEAR
+EXTRN	DOS_Delete:NEAR
+EXTRN	DOS_Rename:NEAR
+EXTRN	EcritSFT:NEAR
+EXTRN	From_GetSet:NEAR
+EXTRN	GetCDSFromDrv:NEAR
+EXTRN	Get_File_Info:NEAR
+EXTRN	Get_User_stack:NEAR
+EXTRN	JFNFree:NEAR
+EXTRN	LcritSFT:NEAR
+EXTRN	PathChrCmp:NEAR
+EXTRN	ReadTime:NEAR
+EXTRN	SFNFree:NEAR
+EXTRN	SYS_RET_ERR:NEAR
+EXTRN	SYS_RET_OK:NEAR
+EXTRN	Set_File_Attribute:NEAR
+EXTRN	StrCmp:NEAR
+EXTRN	Sys_Ret_Err:NEAR
+EXTRN	Sys_Ret_OK:NEAR
+EXTRN	TransPath:NEAR
+EXTRN	TransPathSet:NEAR
+EXTRN	get_user_stack:NEAR
+EXTRN	testkanj:NEAR
+EXTRN	DOS_Delete:NEAR
+EXTRN	DOS_Rename:NEAR
+EXTRN	EcritSFT:NEAR
+EXTRN	From_GetSet:NEAR
+EXTRN	GetCDSFromDrv:NEAR
+EXTRN	Get_File_Info:NEAR
+EXTRN	Get_User_stack:NEAR
+EXTRN	JFNFree:NEAR
+EXTRN	LcritSFT:NEAR
+EXTRN	PathChrCmp:NEAR
+EXTRN	ReadTime:NEAR
+EXTRN	SFNFree:NEAR
+EXTRN	SYS_RET_ERR:NEAR
+EXTRN	SYS_RET_OK:NEAR
+EXTRN	Set_File_Attribute:NEAR
+EXTRN	StrCmp:NEAR
+EXTRN	Sys_Ret_Err:NEAR
+EXTRN	Sys_Ret_OK:NEAR
+EXTRN	TransPath:NEAR
+EXTRN	TransPathSet:NEAR
+EXTRN	get_user_stack:NEAR
+EXTRN	testkanj:NEAR
 
 	MOV	[XA_from],0		  ;AN000;EO. init for set XA
 	MOV	[EXTOPEN_FLAG],DX	  ;AN000;EO. save ext. open flag

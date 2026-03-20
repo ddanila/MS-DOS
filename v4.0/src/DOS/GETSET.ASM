@@ -33,7 +33,7 @@ NAME   GETSET
 ;
 ; get the appropriate segment definitions
 ;
-include dosseg.asm
+include DOSSEG.ASM
 
 IFNDEF	ALTVECT
 ALTVECT EQU	0			; FALSE
@@ -42,11 +42,9 @@ ENDIF
 CODE	SEGMENT BYTE PUBLIC  'CODE'
 	ASSUME	SS:DOSGROUP,CS:DOSGROUP
 
-.xcref
-include dossym.inc
-include devsym.inc
-include doscntry.inc
-.cref
+include DOSSYM.INC
+include DEVSYM.INC
+include DOSCNTRY.INC
 .list
 
 	i_need	USERNUM,WORD
@@ -824,6 +822,28 @@ EndProc Get_Global_CdPg
 BREAK	<ECS_call - Extended Code System support function>
 
 ASSUME	DS:NOTHING, ES:NOTHING
+EXTRN	DISK_INFO:NEAR
+EXTRN	FCB_RET_ERR:NEAR
+EXTRN	From_GetSet:NEAR
+EXTRN	GETLET3:NEAR
+EXTRN	GetThisDrv:NEAR
+EXTRN	GetVisDrv:NEAR
+EXTRN	Get_User_Stack:NEAR
+EXTRN	SYS_RET_ERR:NEAR
+EXTRN	SYS_RET_OK:NEAR
+EXTRN	TESTKANJ:NEAR
+EXTRN	get_user_stack:NEAR
+EXTRN	DISK_INFO:NEAR
+EXTRN	FCB_RET_ERR:NEAR
+EXTRN	From_GetSet:NEAR
+EXTRN	GETLET3:NEAR
+EXTRN	GetThisDrv:NEAR
+EXTRN	GetVisDrv:NEAR
+EXTRN	Get_User_Stack:NEAR
+EXTRN	SYS_RET_ERR:NEAR
+EXTRN	SYS_RET_OK:NEAR
+EXTRN	TESTKANJ:NEAR
+EXTRN	get_user_stack:NEAR
 
 	procedure   $ECS_call,NEAR
 

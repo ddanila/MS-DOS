@@ -3,16 +3,14 @@
 ;	SCCSID = @(#)tcmd2a.asm 4.1 85/06/25
 TITLE	PART5 COMMAND Transient routines.
 
-	INCLUDE comsw.asm
+	INCLUDE COMSW.ASM
 
 .xlist
-.xcref
 	INCLUDE DOSSYM.INC
-	INCLUDE comequ.asm
-	INCLUDE comseg.asm
-	include ioctl.inc
+	INCLUDE COMEQU.ASM
+	INCLUDE COMSEG.ASM
+	include IOCTL.INC
 .list
-.cref
 
 
 CODERES 	SEGMENT PUBLIC BYTE	;AC000;
@@ -450,6 +448,28 @@ ASSUME	DS:TRANGROUP
 ; ****************************************************************
 
 assume	ds:trangroup,es:trangroup
+EXTRN	PGetarg:NEAR
+EXTRN	delete_path:NEAR
+EXTRN	delim:NEAR
+EXTRN	find_path:NEAR
+EXTRN	find_prompt:NEAR
+EXTRN	move_name:NEAR
+EXTRN	scan_double_null:NEAR
+EXTRN	scasb2:NEAR
+EXTRN	store_char:NEAR
+EXTRN	testkanj:NEAR
+EXTRN	upconv:NEAR
+EXTRN	PGetarg:NEAR
+EXTRN	delete_path:NEAR
+EXTRN	delim:NEAR
+EXTRN	find_path:NEAR
+EXTRN	find_prompt:NEAR
+EXTRN	move_name:NEAR
+EXTRN	scan_double_null:NEAR
+EXTRN	scasb2:NEAR
+EXTRN	store_char:NEAR
+EXTRN	testkanj:NEAR
+EXTRN	upconv:NEAR
 
 ANSI_installed		equ    0ffh
 

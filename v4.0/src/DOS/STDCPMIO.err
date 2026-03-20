@@ -1,0 +1,17 @@
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Error! E230: Label 'TRUE' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Note! N290: included by file CPMIO.ASM(42)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Note! N290: included by file STDCPMIO.ASM(14)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Error! E230: Label 'FALSE' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Note! N290: included by file CPMIO.ASM(42)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Note! N290: included by file STDCPMIO.ASM(14)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(44): Error! E230: Label 'IBM' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(44): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSVAR.INC(2)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(44): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(69)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(44): Note! N290: included by file CPMIO.ASM(42)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(44): Note! N290: included by file STDCPMIO.ASM(14)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSCNTRY.INC(96): Error! E065: Operator is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSCNTRY.INC(96): Note! N290: included by file CPMIO.ASM(44)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSCNTRY.INC(96): Note! N290: included by file STDCPMIO.ASM(14)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSCNTRY.INC(97): Error! E065: Operator is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSCNTRY.INC(97): Note! N290: included by file CPMIO.ASM(44)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSCNTRY.INC(97): Note! N290: included by file STDCPMIO.ASM(14)

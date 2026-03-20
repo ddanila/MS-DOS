@@ -40,7 +40,6 @@
 ;   and sets the current emm data break address (_emm_brk).
 ;
 ;******************************************************************************
-.lfcond
 .386p
 	page
 ;******************************************************************************
@@ -53,8 +52,8 @@
 ;			L O C A L   C O N S T A N T S
 ;******************************************************************************
 ;
-	include	vdmseg.inc
-	include emmdef.inc
+	include	VDMSEG.INC
+	include EMMDEF.INC
 
 FALSE	equ	0
 TRUE	equ	not FALSE

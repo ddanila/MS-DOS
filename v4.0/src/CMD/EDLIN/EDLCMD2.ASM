@@ -43,7 +43,7 @@ TITLE Edlcmd2 - PART2 procedures called from EDLIN
 ;
 ;======================= END OF SPECIFICATIONS ===========================
 
-include edlequ.asm
+include EDLEQU.ASM
 
 CODE	SEGMENT PUBLIC
 CODE	ENDS

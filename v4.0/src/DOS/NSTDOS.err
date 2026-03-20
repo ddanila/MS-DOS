@@ -1,0 +1,32 @@
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Error! E230: Label 'TRUE' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSHEAD.ASM(111)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Note! N290: included by file MSCONST.ASM(5)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Note! N290: included by file NSTDOS.ASM(6)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Error! E230: Label 'FALSE' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSHEAD.ASM(111)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Note! N290: included by file MSCONST.ASM(5)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Note! N290: included by file NSTDOS.ASM(6)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(44): Error! E230: Label 'IBM' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(44): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSVAR.INC(2)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(44): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(69)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(44): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSHEAD.ASM(111)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(44): Note! N290: included by file MSCONST.ASM(5)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(44): Note! N290: included by file NSTDOS.ASM(6)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BUGTYP.ASM(39): Error! E230: Label 'LevLog' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BUGTYP.ASM(39): Note! N290: included by file MSCONST.ASM(49)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BUGTYP.ASM(39): Note! N290: included by file NSTDOS.ASM(6)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BUGTYP.ASM(42): Error! E230: Label 'LevLog' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BUGTYP.ASM(42): Note! N290: included by file MSCONST.ASM(49)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BUGTYP.ASM(42): Note! N290: included by file NSTDOS.ASM(6)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BUGTYP.ASM(45): Error! E230: Label 'LevLog' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BUGTYP.ASM(45): Note! N290: included by file MSCONST.ASM(49)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BUGTYP.ASM(45): Note! N290: included by file NSTDOS.ASM(6)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BUGTYP.ASM(48): Error! E230: Label 'LevLog' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BUGTYP.ASM(48): Note! N290: included by file MSCONST.ASM(49)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BUGTYP.ASM(48): Note! N290: included by file NSTDOS.ASM(6)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(155): Error! E045: Initializer value too large
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(155): Note! N291: macro called from file MSCONST.ASM(58)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(155): Note! N290: included by file NSTDOS.ASM(6)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(155): Error! E045: Initializer value too large
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(155): Note! N291: macro called from file MSCONST.ASM(69)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(155): Note! N290: included by file NSTDOS.ASM(6)

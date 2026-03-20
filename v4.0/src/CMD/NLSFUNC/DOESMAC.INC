@@ -3,7 +3,6 @@ BREAK	MACRO	subtitle
 	SUBTTL	subtitle
 	PAGE
 ENDM
-.xcref	break
 IF Installed
     IFNB    <save>
 	SaveReg <save>
@@ -26,7 +25,6 @@ IRP reg,<reglist>
 	PUSH	reg
 ENDM
 ENDM
-.xcref	SaveReg
 
 BREAK <RestoreReg - unsave some registers>
 
@@ -36,5 +34,4 @@ IRP reg,<reglist>
 	POP	reg
 ENDM
 ENDM
-.xcref	RestoreReg
 

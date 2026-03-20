@@ -1,0 +1,2 @@
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(59): Error! E251: Symbol $SETDPB is not defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(59): Note! N291: macro called from file FAT.ASM(689)

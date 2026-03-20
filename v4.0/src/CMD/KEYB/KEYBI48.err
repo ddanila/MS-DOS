@@ -1,0 +1,12 @@
+KEYBSHAR.INC(274): Error! E065: Operator is expected
+KEYBSHAR.INC(274): Note! N290: included by file KEYBI48.ASM(49)
+KEYBSHAR.INC(274): Error! E050: Offset cannot be smaller than WORD size
+KEYBSHAR.INC(274): Note! N290: included by file KEYBI48.ASM(49)
+KEYBSHAR.INC(281): Error! E065: Operator is expected
+KEYBSHAR.INC(281): Note! N290: included by file KEYBI48.ASM(49)
+KEYBSHAR.INC(281): Error! E050: Offset cannot be smaller than WORD size
+KEYBSHAR.INC(281): Note! N290: included by file KEYBI48.ASM(49)
+KEYBMAC.INC(259): Error! E094: This instruction is not supported
+KEYBMAC.INC(259): Note! N290: included by file KEYBI48.ASM(50)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/POSTEQU.INC(162): Error! E230: Label 'KB_ERR' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/POSTEQU.INC(162): Note! N290: included by file KEYBI48.ASM(53)

@@ -1,0 +1,3 @@
+FCBIO2.ASM(226): Error! E040: Invalid instruction operands
+FCBIO2.ASM(433): Error! E002: Invalid instruction with current CPU setting
+FCBIO2.ASM(719): Warning! W249: End directive required at end of file

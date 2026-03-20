@@ -4,13 +4,11 @@
 ;
 
 .xlist
-.xcref
-include stdsw.asm
-include dosseg.asm
-.cref
+include STDSW.ASM
+include DOSSEG.ASM
 .list
 
 TITLE   STDCPMIO - device IO for MSDOS
 NAME    STDCPMIO
 
-include cpmio.asm
+include CPMIO.ASM

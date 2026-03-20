@@ -13,8 +13,8 @@
 ;		    AX,BX,CX,DX,DI,SI,DS are destroyed			;
 ;-----------------------------------------------------------------------;
 
-include xma2emsp.inc			; include parser things
-include parse.asm
+include XMA2EMSP.INC			; include parser things
+include PARSE.ASM
 
 GET_PARMS PROC
 	LDS	BX,CS:RH_PTRA		;make ds:bx point to request header

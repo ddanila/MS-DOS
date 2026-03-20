@@ -65,7 +65,7 @@ ENDM															   ;AN000;
 ;ษอออออออออออออออออออออออออออออออ  E Q U A T E S  ออออออออออออออออออออออออออออออออออออออออป				   ;AN000;
 ;บ											  บ				   ;AN000;
 															   ;AN000;
-INCLUDE modequat.inc													   ;AN000;
+INCLUDE MODEQUAT.INC													   ;AN000;
 															   ;AN000;
 ANSIINT2F   EQU   1AH	   ;INT 2F multiplex number for ANSI.SYS							   ;AC005;
 ASCII_0  EQU   "0"         ;change one based binary printer number into ASCII printer number                               ;AN000;

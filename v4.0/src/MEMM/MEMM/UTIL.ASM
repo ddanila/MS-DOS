@@ -39,7 +39,6 @@ page	58,132
 ;
 ;
 ;******************************************************************************
-.lfcond 				; list false conditionals
 .386p
 
 	public	GoVirtual
@@ -49,11 +48,11 @@ page	58,132
 ;******************************************************************************
 ;	D E F I N E S
 ;******************************************************************************
-	include VDMseg.inc
-	include VDMsel.inc
-	include desc.inc
-	include instr386.inc
-	include oemdep.inc
+	include VDMSEG.INC
+	include VDMSEL.INC
+	include DESC.INC
+	include INSTR386.INC
+	include OEMDEP.INC
 
 FALSE		equ	0
 TRUE		equ	not FALSE

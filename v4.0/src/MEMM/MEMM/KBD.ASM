@@ -105,12 +105,11 @@ page	58,132
 ;	Written June 1984 by Chris Peters
 ;
 ;******************************************************************************
-.lfcond 				; list false conditionals
 .386p
 
-include VDMseg.inc
-include desc.inc
-include kbd.inc
+include VDMSEG.INC
+include DESC.INC
+include KBD.INC
 
 
 MASTER_IMR	equ	21h		; mask port for master 8259

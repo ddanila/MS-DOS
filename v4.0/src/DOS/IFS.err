@@ -1,0 +1,6 @@
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSCNTRY.INC(96): Error! E065: Operator is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSCNTRY.INC(96): Note! N290: included by file IFS.ASM(11)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSCNTRY.INC(97): Error! E065: Operator is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSCNTRY.INC(97): Note! N290: included by file IFS.ASM(11)
+IFS.ASM(52): Error! E032: Syntax error
+IFS.ASM(518): Error! E032: Syntax error

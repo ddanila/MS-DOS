@@ -25,7 +25,7 @@ dosxxx	segment byte public 'dos'
 
 	    public   dosdevconfig
 	    .sall
-	    include  macros.inc
+	    include  MACROS.INC
 
 inv_parm    equ      0002h
 model_byte  equ      0fffeh

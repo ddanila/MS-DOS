@@ -163,7 +163,7 @@ data_sysdispmsg proc far
 
 data_sysdispmsg endp
 
-include msgdcl.inc
+include MSGDCL.INC
 
 
 _DATA	ends			; end code segment

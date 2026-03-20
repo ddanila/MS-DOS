@@ -86,12 +86,10 @@ NAME	IFSUTIL 									 ;AN000;
 ;************************************************************************************	 ;AN000;
 											 ;AN000;
 .xlist											 ;AN000;
-.xcref											 ;AN000;
 INCLUDE IFSSYM.INC									 ;AN000;
 INCLUDE IFSFSYM.INC									 ;AN000;
 INCLUDE DOSSYM.INC									 ;AN000;
 INCLUDE DEVSYM.INC									 ;AN000;
-.cref											 ;AN000;
 .list											 ;AN000;
 											 ;AN000;
 AsmVars <IBM, Installed, DEBUG> 							 ;AN000;
@@ -103,7 +101,7 @@ IFSSEG	ENDS										 ;AN000;
 											 ;AN000;
 ; include the rest of the segment definitions for normal MSDOS				 ;AN000;
 											 ;AN000;
-include dosseg.asm									 ;AN000;
+include DOSSEG.ASM									 ;AN000;
 											 ;AN000;
 DATA		SEGMENT WORD PUBLIC 'DATA'                                               ;AN000;
 	;DOSGROUP Data									 ;AN000;
@@ -131,7 +129,7 @@ DATA		SEGMENT WORD PUBLIC 'DATA'                                               ;
 if debug										 ;AN000;
 	Extrn	BugLev:WORD								 ;AN000;
 	Extrn	BugTyp:WORD								 ;AN000;
-	include bugtyp.asm								 ;AN000;
+	include BUGTYP.ASM								 ;AN000;
 endif											 ;AN000;
 DATA		ENDS									 ;AN000;
 											 ;AN000;
@@ -2605,6 +2603,22 @@ BREAK <NET_TRANS -- A Routine which does NAMETRANS on session start strings>		 ;
 											 ;AN000;
 	procedure NET_TRANS,NEAR							 ;AN000;
 ASSUME	DS:NOTHING,ES:NOTHING								 ;AN000;
+EXTRN	DEVICE2EXTERR:NEAR
+EXTRN	EcritIFS:NEAR
+EXTRN	EcritNET:NEAR
+EXTRN	IFS_I24:NEAR
+EXTRN	LcritIFS:NEAR
+EXTRN	LcritNET:NEAR
+EXTRN	PHONEY_DPB:NEAR
+EXTRN	SET_EXTERR_INFO:NEAR
+EXTRN	DEVICE2EXTERR:NEAR
+EXTRN	EcritIFS:NEAR
+EXTRN	EcritNET:NEAR
+EXTRN	IFS_I24:NEAR
+EXTRN	LcritIFS:NEAR
+EXTRN	LcritNET:NEAR
+EXTRN	PHONEY_DPB:NEAR
+EXTRN	SET_EXTERR_INFO:NEAR
 											 ;AN000;
 	SaveReg <DS,SI,AX,BX>								 ;AC001;
 											 ;AN000;

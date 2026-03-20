@@ -23,18 +23,15 @@ NAME Alloc
 ;
 ; get the appropriate segment definitions
 ;
-include dosseg.asm
+include DOSSEG.ASM
 
 CODE    SEGMENT BYTE PUBLIC  'CODE'
 	ASSUME  SS:DOSGROUP,CS:DOSGROUP
 
-.xcref
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
-.cref
 .list
 
-.lall
 
 SUBTTL memory allocation utility routines
 PAGE
@@ -374,6 +371,21 @@ PAGE
 ;
 	procedure   $AllocOper,NEAR
 	ASSUME  DS:NOTHING,ES:NOTHING
+EXTRN	EcritMem:NEAR
+EXTRN	LcritMem:NEAR
+EXTRN	SYS_RET_ERR:NEAR
+EXTRN	SYS_RET_OK:NEAR
+EXTRN	get_user_stack:NEAR
+EXTRN	EcritMem:NEAR
+EXTRN	LcritMem:NEAR
+EXTRN	SYS_RET_ERR:NEAR
+EXTRN	SYS_RET_OK:NEAR
+EXTRN	get_user_stack:NEAR
+EXTRN	EcritMem:NEAR
+EXTRN	LcritMem:NEAR
+EXTRN	SYS_RET_ERR:NEAR
+EXTRN	SYS_RET_OK:NEAR
+EXTRN	get_user_stack:NEAR
 	CMP     AL,1
 	JB      AllocOperGet
 	JZ      AllocOperSet

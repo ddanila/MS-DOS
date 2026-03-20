@@ -23,15 +23,13 @@ NAME	IBMPROC
 ;
 ; get the appropriate segment definitions
 ;
-include dosseg.asm
+include DOSSEG.ASM
 
 CODE	SEGMENT BYTE PUBLIC  'CODE'
 	ASSUME	SS:DOSGROUP,CS:DOSGROUP
 
-.xcref
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
-.cref
 .list
 
 SAVEXIT 	EQU	10
@@ -66,7 +64,7 @@ PAGE
 	transfer    SYS_RET_OK
 EndProc $WAIT
 
-include exec.asm
+include EXEC.ASM
 
 SUBTTL Terminate and stay resident handler
 PAGE
@@ -155,6 +153,17 @@ BREAK <$ABORT -- Terminate a process>
 
 	procedure   $ABORT,NEAR
 ASSUME	DS:NOTHING,ES:NOTHING
+EXTRN	$SETBLOCK:NEAR
+EXTRN	COMMAND:NEAR
+EXTRN	Get_user_stack:NEAR
+EXTRN	SYS_RET_OK:NEAR
+EXTRN	get_user_stack:NEAR
+EXTRN	reset_environment:NEAR
+EXTRN	COMMAND:NEAR
+EXTRN	Get_user_stack:NEAR
+EXTRN	SYS_RET_OK:NEAR
+EXTRN	get_user_stack:NEAR
+EXTRN	reset_environment:NEAR
 
 	XOR	AL,AL
 	MOV	[exit_type],exit_abort

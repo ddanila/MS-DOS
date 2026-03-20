@@ -26,8 +26,7 @@ ifndef incsw				;AN000; (tm03) Someone doesn't want to include psdata
    incsw equ	 1			;AN000; include psdata.inc (tm03)
 endif					;AN000; (tm03)
 if incsw				;AN000; If incsw = 1 then (tm03)
-   include psdata.inc			;AN000;    include psdata.inc (tm03)
-endif					;AN000; endif		  (tm03)
+   include PSDATA.INC			;AN000;    include psdata.inc (tm03)endif					;AN000; endif		  (tm03)
    PAGE 				;AN000;
 IF1					;AN000;
    ;%OUT INCLUDING COMP=COMMON DSN=PARSE.ASM...;AN000;

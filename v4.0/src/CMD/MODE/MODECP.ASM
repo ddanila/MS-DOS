@@ -80,7 +80,7 @@ EXTRN	 sublist_cpmsg17:BYTE	 ;AN001;
 ;ศอออออออออออออออออออออออออออออออ  E X T R N S	ออออออออออออออออออออออออออออออออออออออออออผ
 
 
-INCLUDE  common.stc	   ;AN001;includes the following structures
+INCLUDE  COMMON.STC	   ;AN001;includes the following structures
 
 
 ;bogus	  EQU	88H	 ;totally invalid value

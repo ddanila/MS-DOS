@@ -1,5 +1,5 @@
 	TITLE	SYS-2-	Program
-	include version.inc
+	include VERSION.INC
 	INCLUDE SYSHDR.INC
 
 	page	80,132

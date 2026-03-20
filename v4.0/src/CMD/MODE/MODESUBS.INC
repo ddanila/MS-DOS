@@ -42,7 +42,7 @@ PUBLIC	 Utility_Msg_Class		  ;AN001;
 ;*****************************************************************************
 ;
 
-INCLUDE  common.stc	   ;contains the following structure
+INCLUDE  COMMON.STC	   ;contains the following structure
 
 ;sublist_def  STRUC
 
@@ -60,7 +60,7 @@ INCLUDE  common.stc	   ;contains the following structure
 
 
 
-INCLUDE  modequat.inc	   ;contains the following two equates for this file
+INCLUDE  MODEQUAT.INC	   ;contains the following two equates for this file
 
 ;FLAGS field bit(s) values
 

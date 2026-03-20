@@ -4,12 +4,10 @@
 ;
 
 .xlist
-.xcref
-include stdsw.asm
-.cref
+include STDSW.ASM
 .list
 
 TITLE   STDPROC - process maintenance for MSDOS
 NAME    STDPROC
 
-include proc.asm
+include PROC.ASM

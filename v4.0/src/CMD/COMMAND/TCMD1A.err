@@ -1,0 +1,41 @@
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Error! E230: Label 'TRUE' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Note! N290: included by file TCMD1A.ASM(10)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Error! E230: Label 'FALSE' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Note! N290: included by file TCMD1A.ASM(10)
+COMEQU.ASM(195): Error! E066: Operand is expected
+COMEQU.ASM(195): Note! N290: included by file TCMD1A.ASM(12)
+COMEQU.ASM(195): Error! E021: Expecting number
+COMEQU.ASM(195): Note! N290: included by file TCMD1A.ASM(12)
+COMEQU.ASM(196): Error! E066: Operand is expected
+COMEQU.ASM(196): Note! N290: included by file TCMD1A.ASM(12)
+COMEQU.ASM(196): Error! E021: Expecting number
+COMEQU.ASM(196): Note! N290: included by file TCMD1A.ASM(12)
+COMEQU.ASM(197): Error! E066: Operand is expected
+COMEQU.ASM(197): Note! N290: included by file TCMD1A.ASM(12)
+COMEQU.ASM(197): Error! E021: Expecting number
+COMEQU.ASM(197): Note! N290: included by file TCMD1A.ASM(12)
+COMEQU.ASM(198): Error! E066: Operand is expected
+COMEQU.ASM(198): Note! N290: included by file TCMD1A.ASM(12)
+COMEQU.ASM(198): Error! E021: Expecting number
+COMEQU.ASM(198): Note! N290: included by file TCMD1A.ASM(12)
+COMEQU.ASM(199): Error! E066: Operand is expected
+COMEQU.ASM(199): Note! N290: included by file TCMD1A.ASM(12)
+COMEQU.ASM(199): Error! E021: Expecting number
+COMEQU.ASM(199): Note! N290: included by file TCMD1A.ASM(12)
+COMEQU.ASM(200): Error! E066: Operand is expected
+COMEQU.ASM(200): Note! N290: included by file TCMD1A.ASM(12)
+COMEQU.ASM(200): Error! E021: Expecting number
+COMEQU.ASM(200): Note! N290: included by file TCMD1A.ASM(12)
+COMEQU.ASM(205): Error! E066: Operand is expected
+COMEQU.ASM(205): Note! N290: included by file TCMD1A.ASM(12)
+COMEQU.ASM(205): Error! E021: Expecting number
+COMEQU.ASM(205): Note! N290: included by file TCMD1A.ASM(12)
+COMEQU.ASM(206): Error! E066: Operand is expected
+COMEQU.ASM(206): Note! N290: included by file TCMD1A.ASM(12)
+COMEQU.ASM(206): Error! E021: Expecting number
+COMEQU.ASM(206): Note! N290: included by file TCMD1A.ASM(12)
+COMEQU.ASM(211): Error! E094: This instruction is not supported
+COMEQU.ASM(211): Note! N290: included by file TCMD1A.ASM(12)
+TCMD1A.ASM(317): Warning! W096: size not specified -- WORD PTR is assumed
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(59): Error! E040: Invalid instruction operands
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(59): Note! N291: macro called from file TCMD1A.ASM(618)

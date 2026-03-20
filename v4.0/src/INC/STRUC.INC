@@ -97,7 +97,6 @@ endm
 
 $Poke	macro	n,m
 	$st&n	= m
-.xcref	$st&n
 endm
 
 $Peek	macro	x,n
@@ -677,17 +676,6 @@ $Pop	$Temp
 if	$st ne 0
      $StrucError <open structure(s)>
 endif
-.xcref $NoConj,$And,$Or,$Short,$Near,$NearToShort,$AndOr,$Temp,$Temp2,$Dist
-.xcref $NoType,$ConjIfType,$IfType,$ElseType,$WhileType,$ConjWhileType
-.xcref $RepeatType,$ConjUntilType,$ForType,$ConjLeaveType,jncxz
-.xcref $SelectType,$WhenType,$OtherwiseType,$ConjWhenType
-.xcref jeq,jgt,jlt,jneq,jngt,jnlt,jnna,jnnae,jnnb,jnnbe,jnnc,jnncxz
-.xcref jnne,jnng,jnnge,jnnl,jnnle,jnno,jnnp,jnns,jnnz,jnpe,jnpo,$BuildJump
-.xcref $GetConj,$GetDist,$Poke,$Peek,$Push,$Pop,$Label,$CondJump,$CondLoop,$Test
-.xcref $TopTest,$leave2,$until2,$StrucError,j,jn,jand,jnand,jnnand
-.xcref jnnonzero,jnonzero,jnzero,jzero
-.xcref $st,$sn,$OrFound,$LoopEnd,$LeaveFound,$DefDist
-.xcref $LastLabel,$LastLabelOrg,$EquateLabel,$TraceLabel,$CondJump2,$ncxz
 endif
 
 

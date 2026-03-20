@@ -34,7 +34,6 @@ page	58,132
 ;   Functional Description:
 ;
 ;******************************************************************************
-.lfcond 				; list false conditionals
 .386p
 
 	public	PrintString
@@ -47,9 +46,9 @@ NAME	print
 
 ;**	print - cga simple print routines
 ;
-	include VDMseg.inc
-	include VDMsel.inc
-	include desc.inc
+	include VDMSEG.INC
+	include VDMSEL.INC
+	include DESC.INC
 
 ;***	IsReal - determine mode of cpu
 ;

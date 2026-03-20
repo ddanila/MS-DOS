@@ -3,7 +3,6 @@ TITLE MODEPRIN.SAL - PRINTER SUPPORT FOR THE MODE COMMAND
 .XLIST
 INCLUDE STRUC.INC
 .LIST
-.SALL
 
 
 ;ษออออออออออออออออออออออออออออออออ  P R O L O G  อออออออออออออออออออออออออออออออออออออออออป				   ;AN000;
@@ -89,7 +88,7 @@ ENDM												  ;AN001;
 ;ษอออออออออออออออออออออออออออออ  S T R U C T U R E S  ออออออออออออออออออออออออออออออออออออป
 ;บ											  บ
 
-INCLUDE  common.stc	   ;contains the following structure
+INCLUDE  COMMON.STC	   ;contains the following structure
 
 
 ;parm_list_entry   STRUC		   ;used by parse_parameters and invoke

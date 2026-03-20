@@ -120,8 +120,7 @@ Break <SEGMENT DECLARATIONS>
 ; segment ordering for MSDOS
 ;
 
-include dosseg.asm
-
+include DOSSEG.ASM
 AsmVar	<Installed>
 
 START		SEGMENT BYTE PUBLIC 'START'

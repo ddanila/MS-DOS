@@ -25,7 +25,6 @@
 ;******************************************************************************
 ;
 .386p
-.lfcond 				; list false conditionals
 
 public	VerifyMachine
 public	MaskIntAll
@@ -66,12 +65,12 @@ public	UnLockROM
 
 endif
 
-	include page.inc
-	include vdmseg.inc
-	include VDMsel.inc
-	include desc.inc
-	include Instr386.inc
-	include romxbios.equ
+	include PAGE.INC
+	include VDMSEG.INC
+	include VDMSEL.INC
+	include DESC.INC
+	include INSTR386.INC
+	include ROMXBIOS.EQU
 
 
 ;******************************************************************************

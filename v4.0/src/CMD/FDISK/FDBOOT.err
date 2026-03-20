@@ -1,0 +1,2 @@
+FDBOOT.ASM(30): Error! E101: REPZ, REPNZ, REPE or REPNE prefix is not allowed on this instruction
+FDBOOT.ASM(119): Warning! W249: End directive required at end of file

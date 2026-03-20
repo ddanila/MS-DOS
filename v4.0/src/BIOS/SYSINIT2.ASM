@@ -52,10 +52,10 @@ DOSSIZE EQU	0A000H
 
 .xlist
 ;	INCLUDE dossym.INC
-	include smdossym.inc	;J.K. Reduced version of DOSSYM.INC
-	INCLUDE devsym.INC
-	include ioctl.INC
-	include DEVMARK.inc
+	include SMDOSSYM.INC	;J.K. Reduced version of DOSSYM.INC
+	INCLUDE DEVSYM.INC
+	include IOCTL.INC
+	include DEVMARK.INC
 .list
 
 	IF	NOT IBM
@@ -1472,7 +1472,13 @@ BOOTMES DB	13,10,"MS-DOS version "
 	DB	"Copyright 1981,88 Microsoft Corp.",13,10,"$"
 	ENDIF
 
-include copyrigh.inc			;P1821; Copyright statement
+include COPYRIGH.INC			;P1821; Copyright statement
+EXTRN	GETCHR:NEAR
+EXTRN	ParaRound:NEAR
+EXTRN	getchr:NEAR
+EXTRN	GETCHR:NEAR
+EXTRN	ParaRound:NEAR
+EXTRN	getchr:NEAR
 
 NULDEV	DB	"NUL",0
 CONDEV	DB	"CON",0

@@ -30,7 +30,7 @@ cseg	segment public para 'CODE'
 cr	equ	13
 lf	equ	10
 
-include appendm.inc
+include APPENDM.INC
 
 cseg		ends
 		end

@@ -4,14 +4,12 @@
 ;
 
 .xlist
-.xcref
-include mssw.asm
-include dosseg.asm
-.cref
+include MSSW.ASM
+include DOSSEG.ASM
 .list
 
 TITLE	IBMCPMIO - device IO for MSDOS
 NAME	IBMCPMIO
 
-include cpmio.asm
+include CPMIO.ASM
 

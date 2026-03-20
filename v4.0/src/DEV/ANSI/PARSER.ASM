@@ -319,7 +319,7 @@ Got_CR: 				   ;AN001;
 	      RET									 ;AN000;
 PARM_ERROR    ENDP
 
-include msgdcl.inc
+include MSGDCL.INC
 
 CODE	      ENDS
 	      END

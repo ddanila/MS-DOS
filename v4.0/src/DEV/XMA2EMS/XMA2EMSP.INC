@@ -15,7 +15,7 @@ VAL1SW	EQU	1			;SUPPORT  VALUE DEFINITION 1		 ;AN000;
 VAL2SW	EQU	1	;		;SUPPRESS SUPPORT  OF VALUE DEFINITION 2 ;AN000;
 VAL3SW	EQU	1			;DO SUPPORT VALUE DEFINITION 3
 
-include psdata.inc
+include PSDATA.INC
 
 ;***********************************************************************
 

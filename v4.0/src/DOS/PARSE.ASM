@@ -16,19 +16,16 @@ NAME  PARSE
 ;
 ; get the appropriate segment definitions
 ;
-include dosseg.asm
+include DOSSEG.ASM
 
 CODE    SEGMENT BYTE PUBLIC  'CODE'
 	ASSUME  SS:DOSGROUP,CS:DOSGROUP
 
-.xcref
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
-.cref
 .list
 
 BOGUS =FALSE
-.lall
 	I_Need  chSwitch,BYTE
 
 BREAK <$Parse_File_Descriptor -- Parse an arbitrary string into an FCB>
@@ -52,6 +49,18 @@ BREAK <$Parse_File_Descriptor -- Parse an arbitrary string into an FCB>
 
 	procedure   $PARSE_FILE_DESCRIPTOR,NEAR
 ASSUME  DS:NOTHING,ES:NOTHING
+EXTRN	Get_user_stack:NEAR
+EXTRN	GetthisDrv:NEAR
+EXTRN	MAKEFCB:NEAR
+EXTRN	get_user_stack:NEAR
+EXTRN	sys_ret_ok:NEAR
+EXTRN	Get_user_stack:NEAR
+EXTRN	GetthisDrv:NEAR
+EXTRN	MAKEFCB:NEAR
+EXTRN	get_user_stack:NEAR
+EXTRN	sys_ret_ok:NEAR
+EXTRN	MAKEFCB:NEAR
+EXTRN	get_user_stack:NEAR
 
 	DOSInvoke  MAKEFCB
 	PUSH    SI

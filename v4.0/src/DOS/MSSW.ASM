@@ -1,6 +1,6 @@
 ;	SCCSID = @(#)ibmsw.asm	1.1 85/04/10
 
-include version.inc
+include VERSION.INC
 
 IBM		EQU	ibmver
 WANG		EQU	FALSE

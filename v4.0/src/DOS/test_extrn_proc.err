@@ -1,0 +1,2 @@
+/tmp/test_extrn_proc.asm(13): Error! E299: 'PROC_B' is already defined
+/tmp/test_extrn_proc.asm(15): Error! E206: Block nesting error

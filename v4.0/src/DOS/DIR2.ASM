@@ -26,16 +26,14 @@ NAME	Dir2
 ; get the appropriate segment definitions
 ;
 .xlist
-include dosseg.asm
+include DOSSEG.ASM
 
 CODE	SEGMENT BYTE PUBLIC  'CODE'
 	ASSUME	SS:DOSGROUP,CS:DOSGROUP
 
-.xcref
-include dossym.inc
-include devsym.inc
-include fastopen.inc		       ;DOS 3.3
-.cref
+include DOSSYM.INC
+include DEVSYM.INC
+include FASTOPEN.INC		       ;DOS 3.3
 .list
 
 asmvar	Kanji
@@ -972,7 +970,7 @@ DIR2001S:
 	LocalVar    Temp,WORD
 	LocalVar    SaveCDS,DWORD
 DIR2001E:
-	Enter
+	FrameEnter
 	MOV	Temp,DI
 	LDS	SI,ThisCDS
 	MOV	SaveCDSL,SI
@@ -1037,7 +1035,7 @@ RestoreCDS:
 FatFail:
 	LeaveCrit   critDisk
 	LES	DI,SaveCDS
-	Leave
+	FrameLeave
 	return
 EndProc ValidateCDS
 
@@ -1323,6 +1321,44 @@ ASSUME DS:NOTHING
 	MOV    DS,WORD PTR [CURBUF+2]
 	MOV    DI,BX			; DS:DI -> dir entry info
 ASSUME DS:NOTHING
+EXTRN	DATE16:NEAR
+EXTRN	DOS_ChDir:NEAR
+EXTRN	EcritDisk:NEAR
+EXTRN	FINDENTRY:NEAR
+EXTRN	FStrCpy:NEAR
+EXTRN	FStrcpy:NEAR
+EXTRN	FatRead_CDS:NEAR
+EXTRN	GETBUFFR:NEAR
+EXTRN	GETLET:NEAR
+EXTRN	LcritDisk:NEAR
+EXTRN	NameTrans:NEAR
+EXTRN	PATHCHRCMP:NEAR
+EXTRN	PathChrCmp:NEAR
+EXTRN	SETDIRSRCH:NEAR
+EXTRN	SETROOTSRCH:NEAR
+EXTRN	SET_BUF_AS_DIR:NEAR
+EXTRN	Splice:NEAR
+EXTRN	TestKanj:NEAR
+EXTRN	Testkanj:NEAR
+EXTRN	DATE16:NEAR
+EXTRN	DOS_ChDir:NEAR
+EXTRN	EcritDisk:NEAR
+EXTRN	FINDENTRY:NEAR
+EXTRN	FStrCpy:NEAR
+EXTRN	FStrcpy:NEAR
+EXTRN	FatRead_CDS:NEAR
+EXTRN	GETBUFFR:NEAR
+EXTRN	GETLET:NEAR
+EXTRN	LcritDisk:NEAR
+EXTRN	NameTrans:NEAR
+EXTRN	PATHCHRCMP:NEAR
+EXTRN	PathChrCmp:NEAR
+EXTRN	SETDIRSRCH:NEAR
+EXTRN	SETROOTSRCH:NEAR
+EXTRN	SET_BUF_AS_DIR:NEAR
+EXTRN	Splice:NEAR
+EXTRN	TestKanj:NEAR
+EXTRN	Testkanj:NEAR
 	CMP    DS:[DI.dir_first],0	; never insert info when file is empty
 	JZ     SKIP_INSERT		; e.g. newly created file
 

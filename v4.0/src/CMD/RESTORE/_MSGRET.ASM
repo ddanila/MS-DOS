@@ -234,7 +234,7 @@ _sysdispmsg proc near
 
 _sysdispmsg endp
 
-include msgdcl.inc
+include MSGDCL.INC
 
 _TEXT	ends				; end code segment
 	end

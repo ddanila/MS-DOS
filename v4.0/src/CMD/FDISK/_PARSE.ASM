@@ -60,7 +60,7 @@ _DATA   segment word public 'DATA'
 
 ;-------------------------------------------------------------------
 .xlist
-include parse.asm               ; include the parser
+include PARSE.ASM               ; include the parser
 .list
 ;-------------------------------------------------------------------
 

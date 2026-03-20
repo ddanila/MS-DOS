@@ -30,17 +30,16 @@ page	58,132
 ;	This file contains the EMM functions which require greatest efficiency.
 ;
 ;******************************************************************************
-.lfcond					; list false conditionals
 .386p
 
 ;	include	protseg.inc
-	include vdmseg.inc
-	include page.inc
+	include VDMSEG.INC
+	include PAGE.INC
 ;	include vdmm.inc
-	include vm386.inc
-	include	vdmsel.inc
-	include emmdef.inc
-	include	desc.inc
+	include VM386.INC
+	include	VDMSEL.INC
+	include EMMDEF.INC
+	include	DESC.INC
 ;	include vmdm.inc
 ;	include vpicd.inc
 ;	include vdmmmac.inc

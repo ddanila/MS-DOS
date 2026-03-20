@@ -1,0 +1,15 @@
+MSSW.ASM(5): Error! E230: Label 'IBM' is already defined
+MSSW.ASM(5): Note! N290: included by file MSCPMIO.ASM(7)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Error! E230: Label 'TRUE' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Note! N290: included by file CPMIO.ASM(42)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Note! N290: included by file MSCPMIO.ASM(14)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Error! E230: Label 'FALSE' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Note! N290: included by file CPMIO.ASM(42)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Note! N290: included by file MSCPMIO.ASM(14)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSCNTRY.INC(96): Error! E065: Operator is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSCNTRY.INC(96): Note! N290: included by file CPMIO.ASM(44)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSCNTRY.INC(96): Note! N290: included by file MSCPMIO.ASM(14)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSCNTRY.INC(97): Error! E065: Operator is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSCNTRY.INC(97): Note! N290: included by file CPMIO.ASM(44)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSCNTRY.INC(97): Note! N290: included by file MSCPMIO.ASM(14)
+MSCPMIO.ASM(15): Warning! W249: End directive required at end of file

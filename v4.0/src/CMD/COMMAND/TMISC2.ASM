@@ -7,14 +7,12 @@ TITLE	Part7 COMMAND Transient Routines
 
 
 .xlist
-.xcref
-	INCLUDE comsw.asm
+	INCLUDE COMSW.ASM
 	INCLUDE DOSSYM.INC
-	INCLUDE comseg.asm
-	INCLUDE comequ.asm
-	INCLUDE ioctl.inc
+	INCLUDE COMSEG.ASM
+	INCLUDE COMEQU.ASM
+	INCLUDE IOCTL.INC
 .list
-.cref
 
 
 CODERES 	SEGMENT PUBLIC BYTE	;AC000;

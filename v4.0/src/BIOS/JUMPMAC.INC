@@ -6,7 +6,6 @@
 
 jump	macro lbl
 	local a
-.xcref
 
 	ifndef lbl&_j			;; is this the first invocation
 a:
@@ -21,9 +20,7 @@ a:
 	    ENDIF
 	ENDIF
 lbl&_j = a
-.cref
 	endm
-.xcref	jump
 ;REDEFINE THE ABOVE MACRO TO ALWAYS TRY A 3 BYTE NEAR JUMP		 
 JUMP MACRO LBL								 
 					JMP LBL 			 

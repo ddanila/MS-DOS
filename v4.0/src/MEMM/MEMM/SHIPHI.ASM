@@ -33,7 +33,6 @@
 ;   shipping a segment up hi
 ;
 ;******************************************************************************
-.lfcond
 .386p
 
 	page
@@ -57,9 +56,9 @@
 ;******************************************************************************
 ;			INCLUDE FILES
 ;******************************************************************************
-    include  vdmseg.inc     ; segment definitions
-    include  desc.inc	    ;
-    include  page.inc
+    include  VDMSEG.INC     ; segment definitions
+    include  DESC.INC	    ;
+    include  PAGE.INC
 
 	page
 ;******************************************************************************

@@ -61,8 +61,8 @@ Val3SW				   equ	false
 				   ; include parse.asm
 				   .xlist
 				   .xcref
-				   include parse.asm
-				   include msgdcl.inc
+				   include PARSE.ASM
+				   include MSGDCL.INC
 				   .cref
 				   .list
 

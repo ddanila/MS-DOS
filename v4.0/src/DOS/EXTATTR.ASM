@@ -30,18 +30,15 @@ NAME	EXTATTR
 ;
 ; get the appropriate segment definitions
 ;
-include dosseg.asm			     ;AN000;
+include DOSSEG.ASM			     ;AN000;
 
 CODE	SEGMENT BYTE PUBLIC  'CODE'          ;AN000;
 	ASSUME	SS:DOSGROUP,CS:DOSGROUP      ;AN000;
 
-.xcref
 INCLUDE DOSSYM.INC			     ;AN000;
 INCLUDE DEVSYM.INC			     ;AN000;
-include EA.inc				     ;AN000;
-.cref
+include EA.INC				     ;AN000;
 .list
-.sall
 
 
 ;	I_need	XA_from,BYTE		;AN000;
@@ -93,6 +90,9 @@ BREAK <GetSet_EA get or set extended attributes by handle>			;AN000;
 										;AN000;
 procedure   GetSet_XA,near					   ;AN000;
 	ASSUME	CS:DOSGROUP,DS:NOTHING,ES:NOTHING,SS:DOSGROUP	   ;AN000;
+EXTRN	get_user_stack:NEAR
+EXTRN	get_user_stack:NEAR
+EXTRN	get_user_stack:NEAR
 
 
 	LES    DI,DWORD PTR [SAVE_DI]  ;AN000;;FT. ES:DI -> query list

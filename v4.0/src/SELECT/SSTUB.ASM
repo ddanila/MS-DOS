@@ -201,7 +201,7 @@ CHECK_DISKETTE ENDP		 ;AN000;
 
 DTA	 DB	 ?		 ;AN000;start of dummy DTA for find first
 
-include msgdcl.inc
+include MSGDCL.INC
 
 MAIN	 ENDP			 ;AN000;
 CODE	 ENDS			 ;AN000;

@@ -153,7 +153,7 @@ COPYRIGHT  DB	 "The DOS COMP Utility" 	       ;AN000;
 ; = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =	 ;AN000;
 CSEG	   ENDS 							 ;AN000;
 
-	include msgdcl.inc
+	include MSGDCL.INC
 
 	   END								 ;AN000;
 

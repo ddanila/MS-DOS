@@ -48,7 +48,6 @@
 ;		"high" memory.
 ;
 ;******************************************************************************
-.lfcond
 .386p
 ;
 ;
@@ -68,16 +67,16 @@
 ;			L O C A L   C O N S T A N T S
 ;******************************************************************************
 ;
-	include vdmseg.inc
-	include vdmsel.inc
-	include emm386.inc
-	include driver.equ
-	include driver.str
-	include romxbios.equ
-	include desc.inc
-	include ascii_sm.equ
-	include oemdep.inc
-	include emmdef.inc
+	include VDMSEG.INC
+	include VDMSEL.INC
+	include EMM386.INC
+	include DRIVER.EQU
+	include DRIVER.STR
+	include ROMXBIOS.EQU
+	include DESC.INC
+	include ASCII_SM.EQU
+	include OEMDEP.INC
+	include EMMDEF.INC
 ;
 EXT_RES 	equ	10h		; must be a power of 2.
 ;

@@ -3,14 +3,12 @@
 ;	SCCSID = @(#)tcode.asm	1.1 85/05/14
 TITLE	Part1 COMMAND Transient Routines
 
-	INCLUDE comsw.asm
+	INCLUDE COMSW.ASM
 .xlist
-.xcref
 	INCLUDE DOSSYM.INC
-	INCLUDE comseg.asm
-	INCLUDE comequ.asm
+	INCLUDE COMSEG.ASM
+	INCLUDE COMEQU.ASM
 .list
-.cref
 
 
 CODERES 	SEGMENT PUBLIC BYTE	;AC000;
@@ -552,6 +550,18 @@ externalj1:
 nullcom:
 	MOV	DS,[RESSEG]
 ASSUME	DS:RESGROUP
+EXTRN	SETSTDINOFF:NEAR
+EXTRN	SETSTDOUTOFF:NEAR
+EXTRN	TSYSLOADMSG:NEAR
+EXTRN	delim:NEAR
+EXTRN	parseline:NEAR
+EXTRN	scanoff:NEAR
+EXTRN	SETSTDINOFF:NEAR
+EXTRN	SETSTDOUTOFF:NEAR
+EXTRN	TSYSLOADMSG:NEAR
+EXTRN	delim:NEAR
+EXTRN	parseline:NEAR
+EXTRN	scanoff:NEAR
 	TEST	[BATCH], -1			;G Are we in a batch file?
 	JZ	nosetflag			;G only set flag if in batch
 	mov	nullflag,nullcommand		;G set flag to indicate no command
@@ -565,7 +575,7 @@ EXITJ:
 	JMP	$EXITPREP
 
 IF IBM
-	include mshalo.asm
+	include MSHALO.ASM
 ENDIF
 
 TRANCODE	ENDS

@@ -2,6 +2,6 @@
 TITLE   MS-DOS
 NAME    MSDOS_3
 
-include stdsw.asm
-include msconst.asm
+include STDSW.ASM
+include MSCONST.ASM
 	END

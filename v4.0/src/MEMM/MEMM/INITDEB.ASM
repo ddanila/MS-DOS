@@ -35,7 +35,6 @@ page	58,132
 ;    InitDeb calls the debugger initialization routine.
 ;
 ;******************************************************************************
-.lfcond 				; list false conditionals
 .386p
 ;******************************************************************************
 ;	P U B L I C S
@@ -46,8 +45,8 @@ page	58,132
 ;******************************************************************************
 ;	D E F I N E S
 ;******************************************************************************
-	include VDMseg.inc
-	include VDMsel.inc
+	include VDMSEG.INC
+	include VDMSEL.INC
 
 FALSE		equ	0
 TRUE		equ	not FALSE

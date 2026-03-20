@@ -1,0 +1,10 @@
+MSSW.ASM(5): Error! E230: Label 'IBM' is already defined
+MSSW.ASM(5): Note! N290: included by file MSCTRLC.ASM(7)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Error! E230: Label 'TRUE' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Note! N290: included by file CTRLC.ASM(32)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Note! N290: included by file MSCTRLC.ASM(13)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Error! E230: Label 'FALSE' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Note! N290: included by file CTRLC.ASM(32)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Note! N290: included by file MSCTRLC.ASM(13)
+CTRLC.ASM(769): Warning! W249: End directive required at end of file
+CTRLC.ASM(769): Note! N290: included by file MSCTRLC.ASM(13)

@@ -68,7 +68,6 @@
 ;
 ;******************************************************************************
 
-.lfcond 				; list false conditionals
 .386p
 
 	page
@@ -130,16 +129,16 @@
 ;			L O C A L   C O N S T A N T S
 ;******************************************************************************
 ;
-	include VDMseg.inc
-	include VDMsel.inc
-	include desc.inc
-	include elim.inc
-	include mach_id.inc
-	include page.inc
-	include oemdep.inc
-	include instr386.inc
-	include vm386.inc
-	include emmdef.inc
+	include VDMSEG.INC
+	include VDMSEL.INC
+	include DESC.INC
+	include ELIM.INC
+	include MACH_ID.INC
+	include PAGE.INC
+	include OEMDEP.INC
+	include INSTR386.INC
+	include VM386.INC
+	include EMMDEF.INC
 
 ;******************************************************************************
 ;

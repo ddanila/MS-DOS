@@ -20,7 +20,7 @@ LF	EQU	0AH		;line feed
 CR	EQU	0DH		;carriage return
 
 
-include vdiskmsg.inc
+include VDISKMSG.INC
 
 MSGEND	LABEL	BYTE				;must be last in module
 CSEG	ENDS

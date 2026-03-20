@@ -50,8 +50,8 @@ dosxxx	segment byte public 'dos'
 	public	DosQFsInfo
 	.sall
 	.xlist
-	include macros.inc
-	include error.inc
+	include MACROS.INC
+	include ERROR.INC
 	.list
 
 str	struc

@@ -2,6 +2,6 @@
 TITLE	NIBDOS
 NAME	MSDOS_3
 
-include mssw.asm
-include msconst.asm
+include MSSW.ASM
+include MSCONST.ASM
 	END

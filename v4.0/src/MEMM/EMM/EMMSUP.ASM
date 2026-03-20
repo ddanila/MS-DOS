@@ -50,7 +50,6 @@ page	58,132
 ;
 ;
 ;******************************************************************************
-.lfcond					; list false conditionals
 .386p
 
 ;******************************************************************************
@@ -70,12 +69,12 @@ page	58,132
 ;	 D E F I N E S
 ;******************************************************************************
 
-	include	vdmseg.inc
-	include vdmsel.inc
-	include desc.inc
-	include page.inc
+	include	VDMSEG.INC
+	include VDMSEL.INC
+	include DESC.INC
+	include PAGE.INC
 ;	include instr386.inc
-	include	emmdef.inc
+	include	EMMDEF.INC
 
 FALSE		equ	0
 TRUE		equ	not FALSE

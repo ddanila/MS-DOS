@@ -58,13 +58,11 @@ NAME    IFSFILE                                                                 
 ;************************************************************************************
 
 .xlist                                                                                   ;AN000;
-.xcref                                                                                   ;AN000;
 INCLUDE IFSSYM.INC                                                                       ;AN000;
 INCLUDE IFSFSYM.INC                                                                      ;AN000;
 INCLUDE DOSSYM.INC                                                                       ;AN000;
 INCLUDE DEVSYM.INC                                                                       ;AN000;
 INCLUDE DOSCNTRY.INC
-.cref                                                                                    ;AN000;
 .list                                                                                    ;AN000;
                                                                                          ;AN000;
 AsmVars <IBM, Installed, DEBUG>                                                          ;AN000;
@@ -76,7 +74,7 @@ IFSSEG  ENDS                                                                    
                                                                                          ;AN000;
 ; include the rest of the segment definitions for normal MSDOS                           ;AN000;
                                                                                          ;AN000;
-include dosseg.asm                                                                       ;AN000;
+include DOSSEG.ASM                                                                       ;AN000;
                                                                                          ;AN000;
 DATA            SEGMENT WORD PUBLIC 'DATA'                                               ;AN000;
         ;DOSGROUP Data                                                                   ;AN000;
@@ -102,7 +100,7 @@ DATA            SEGMENT WORD PUBLIC 'DATA'                                      
 if debug                                                                                 ;AN000;
         Extrn   BugLev:WORD                                                              ;AN000;
         Extrn   BugTyp:WORD                                                              ;AN000;
-        include bugtyp.asm                                                               ;AN000;
+        include BUGTYP.ASM                                                               ;AN000;
 endif                                                                                    ;AN000;
 DATA            ENDS                                                                     ;AN000;
                                                                                          ;AN000;
@@ -1760,6 +1758,40 @@ ASSUME  DS:DOSGROUP,ES:NOTHING                                                  
         PUSH    ES                                                                       ;AN000;
         POP     DS                                                                       ;AN000;
 ASSUME  DS:DOSGROUP                                                                      ;AN000;
+EXTRN	CALL_IFS:NEAR
+EXTRN	CDS_TO_CD:NEAR
+EXTRN	CD_TO_CDS:NEAR
+EXTRN	CHECK_SEQ:NEAR
+EXTRN	DFL_SINGLE_FILE_CHECK:NEAR
+EXTRN	DF_TO_DFL:NEAR
+EXTRN	DRIVE_FROM_CDS:NEAR
+EXTRN	IFSDrvFromCDS:NEAR
+EXTRN	PREP_IFSR:NEAR
+EXTRN	SET_EXTERR_INFO:NEAR
+EXTRN	SET_THISIFS_UNC:NEAR
+EXTRN	SFF_TO_SFT:NEAR
+EXTRN	SFT_TO_SFF:NEAR
+EXTRN	STRIP_WFP_START:NEAR
+EXTRN	XCHGP:NEAR
+EXTRN	ifs_980:NEAR
+EXTRN	ifs_990:NEAR
+EXTRN	CALL_IFS:NEAR
+EXTRN	CDS_TO_CD:NEAR
+EXTRN	CD_TO_CDS:NEAR
+EXTRN	CHECK_SEQ:NEAR
+EXTRN	DFL_SINGLE_FILE_CHECK:NEAR
+EXTRN	DF_TO_DFL:NEAR
+EXTRN	DRIVE_FROM_CDS:NEAR
+EXTRN	IFSDrvFromCDS:NEAR
+EXTRN	PREP_IFSR:NEAR
+EXTRN	SET_EXTERR_INFO:NEAR
+EXTRN	SET_THISIFS_UNC:NEAR
+EXTRN	SFF_TO_SFT:NEAR
+EXTRN	SFT_TO_SFF:NEAR
+EXTRN	STRIP_WFP_START:NEAR
+EXTRN	XCHGP:NEAR
+EXTRN	ifs_980:NEAR
+EXTRN	ifs_990:NEAR
         MOV     [ATTRIB],attr_hidden + attr_system + attr_directory                      ;AN000;
                                 ; Must set this to something interesting                 ;AN000;
                                 ; to call DEVNAME.                                       ;AN000;

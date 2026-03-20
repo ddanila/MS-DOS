@@ -16,15 +16,13 @@ NAME	DOS_DUP
 ; get the appropriate segment definitions
 ;
 .xlist
-include dosseg.asm
+include DOSSEG.ASM
 
 CODE	SEGMENT BYTE PUBLIC  'CODE'
 	ASSUME	SS:DOSGROUP,CS:DOSGROUP
 
-.xcref
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
-.cref
 .list
 
 	i_need	THISSFT,DWORD
@@ -49,6 +47,12 @@ BREAK <DOS_DUP -- DUP SFT across network>
 
 	procedure   DOS_DUP,NEAR
 	ASSUME	ES:NOTHING,SS:NOTHING
+EXTRN	DEV_OPEN_SFT:NEAR
+EXTRN	IsSFTNet:NEAR
+EXTRN	DEV_OPEN_SFT:NEAR
+EXTRN	IsSFTNet:NEAR
+EXTRN	DEV_OPEN_SFT:NEAR
+EXTRN	IsSFTNet:NEAR
 
 	LES	DI,ThisSFT
 	Entry	Dos_Dup_Direct

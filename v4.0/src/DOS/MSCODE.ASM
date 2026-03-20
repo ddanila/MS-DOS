@@ -7,10 +7,8 @@ NAME	IBMCODE
 ;
 
 .xlist
-.xcref
-include mssw.asm
-.cref
+include MSSW.ASM
 .list
 
-include ms_code.asm
+include MS_CODE.ASM
 	END

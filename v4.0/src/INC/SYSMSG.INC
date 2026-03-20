@@ -281,8 +281,7 @@ ENDM
 				       ;
 MSG_UTILNAME  Macro   utilname	       ;
 				       ;
-   INCLUDE &utilname.CTL	       ;  Include the control file for the utility
-   $M_STRUC = TRUE		       ;
+   INCLUDE &UTILNAME.CTL	       ;  Include the control file for the utility   $M_STRUC = TRUE		       ;
    INCLUDE MSGSERV.ASM		       ;  Get structure definitions
 				       ;
 ENDM				       ;
@@ -359,8 +358,7 @@ ENDM					  ;
 						 ;
 $M_INC	Macro	ext				 ;
 						 ;
-INCLUDE &ext					 ;
-						 ;
+INCLUDE &EXT					 ;						 ;
 ENDM						 ;
 						 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -5,12 +5,10 @@
 ;         A006   DCR 503 - fake version for IBMCACHE
 ;         A008   PTM 4070 - fake version for MS WINDOWS
 .xlist
-.xcref
-include dosseg.asm
-include EA.inc                           ;AN000;; for Extended Attributes
-include fastopen.inc                     ;AN000;; for Extended Attributes
-include dossym.inc
-.cref
+include DOSSEG.ASM
+include EA.INC                           ;AN000;; for Extended Attributes
+include FASTOPEN.INC                     ;AN000;; for Extended Attributes
+include DOSSYM.INC
 .list
 
         AsmVars <Kanji, Debug, Redirector, ShareF>
@@ -522,7 +520,7 @@ ENDIF
 
 MSTAB001E       label byte
 
-include copyrigh.inc                                                            ;AN000;
+include COPYRIGH.INC                                                            ;AN000;
 
 ; SYS init extended table,   DOS 3.3   F.C. 5/29/86
 ;

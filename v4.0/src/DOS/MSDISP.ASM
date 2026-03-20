@@ -7,11 +7,9 @@ NAME	DISP
 ;
 
 .xlist
-.xcref
-include mssw.asm
-.cref
+include MSSW.ASM
 .list
 
-include disp.asm
+include DISP.ASM
 	END
 

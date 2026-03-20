@@ -17,9 +17,9 @@ IFNDEF	Rainbow
 Rainbow EQU FALSE
 ENDIF
 
-include dossym.inc
-include dosmac.inc
-include doscntry.inc
+include DOSSYM.INC
+include DOSMAC.INC
+include DOSCNTRY.INC
 
 CONSTANTS	SEGMENT WORD PUBLIC 'CONST'
 
@@ -211,8 +211,8 @@ DBCS_TAB	label byte		;AN000;  2/12/KK
 ;		db	0,0		;  2/12/KK
 ;
 ;
-include divmes.asm
-include yesno.asm
+include DIVMES.ASM
+include YESNO.ASM
 
 TABLE		ENDS
 
@@ -358,6 +358,11 @@ TABLE	ENDS
 
 Procedure   OEMFunctionKey,NEAR
 	ASSUME	DS:NOTHING,ES:NOTHING,SS:DOSGROUP
+EXTRN	$std_con_input_no_echo:NEAR
+EXTRN	GetCh:NEAR
+EXTRN	address:NEAR
+EXTRN	GetCh:NEAR
+EXTRN	address:NEAR
  IF  DBCS				;AN000;
 extrn	intCNE0:near			;AN000; 2/17/KK
 	CALL	intCNE0 		;AN000; 2/17/KK

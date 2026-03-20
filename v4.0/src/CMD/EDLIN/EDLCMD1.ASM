@@ -41,7 +41,7 @@
 ;
 ;======================= END OF SPECIFICATIONS ===========================
 
-include edlequ.asm
+include EDLEQU.ASM
 
 SUBTTL	Contants and Data areas
 PAGE

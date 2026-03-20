@@ -4,16 +4,14 @@ TITLE   SHARELNK LINK FIX ROUTINES - Routines to resolve SHARE externals
 NAME    SHARELNK
 
 .xlist
-.xcref
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
-.cref
 .list
 
 CODE    SEGMENT BYTE PUBLIC 'CODE'
 code    ENDS
 
-include dosseg.asm
+include DOSSEG.ASM
 
 
 code    SEGMENT BYTE PUBLIC 'code'

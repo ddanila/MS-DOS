@@ -44,7 +44,6 @@ page	58,132
 ;   to the calling routine in Virtual Mode.
 ;
 ;******************************************************************************
-.lfcond 				; list false conditionals
 .386p
 ;******************************************************************************
 ;	P U B L I C S
@@ -58,11 +57,11 @@ page	58,132
 ;******************************************************************************
 ;	D E F I N E S
 ;******************************************************************************
-	include VDMseg.inc
-	include VDMsel.inc
-	include desc.inc
-	include instr386.inc
-	include page.inc
+	include VDMSEG.INC
+	include VDMSEL.INC
+	include DESC.INC
+	include INSTR386.INC
+	include PAGE.INC
 
 FALSE		equ	0
 TRUE		equ	not FALSE

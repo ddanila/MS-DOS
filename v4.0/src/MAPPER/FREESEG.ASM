@@ -29,7 +29,7 @@ dosxxx  segment byte public 'dos'
         public  dosfreeseg
         .sall
         .xlist
-        include macros.inc
+        include MACROS.INC
         .list
 
 invalid_selector equ 0006h

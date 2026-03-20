@@ -1,3 +1,5 @@
+ifndef VERSION_INC_INCLUDED
+VERSION_INC_INCLUDED = 1
 ; Some modules really want TRUE to be 0FFH.  Best to let them have their way.
 ifndef TRUE
 	TRUE	   EQU	   0FFFFh
@@ -83,3 +85,5 @@ endif
  JAPAN	   EQU	   FALSE
 	ENDIF
 ;
+
+endif ; VERSION_INC_INCLUDED

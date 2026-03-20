@@ -5,19 +5,17 @@ TITLE	COMMAND Language modifiable Code Resident
 
 
 .xlist
-.xcref
 INCLUDE DOSSYM.INC			;AC000;
-include doscntry.inc			;AC000;
+include DOSCNTRY.INC			;AC000;
 DEBUG = 0				; NEED TO SET IT TO WHAT IT IS IN DOSSYM.INC
 
 
 	INCLUDE DEVSYM.INC
-	INCLUDE comsw.asm
-	INCLUDE comseg.asm
-	INCLUDE comequ.asm
-	include resmsg.equ		;AN000;
+	INCLUDE COMSW.ASM
+	INCLUDE COMSEG.ASM
+	INCLUDE COMEQU.ASM
+	include RESMSG.EQU		;AN000;
 .list
-.cref
 
 
 Tokenized   =	FALSE
@@ -719,12 +717,10 @@ PUBLIC	SYSGETMSG,SYSDISPMSG
 ASSUME	DS:RESGROUP, ES:RESGROUP
 
 .xlist
-.xcref
 
 INCLUDE SYSMSG.INC				;AN000; include message services
 
 .list
-.cref
 
 MSG_UTILNAME <COMMAND>				;AN000; define utility name
 
@@ -733,7 +729,11 @@ MSG_SERVICES <COMR,NEARmsg,DISK_PROC,GETmsg,DISPLAYmsg,CHARmsg,NUMmsg> ;AC060; i
 PUBLIC		RES_CODE_END			;AN000;
 RES_CODE_END	LABEL	BYTE			;AN000;
 
-include msgdcl.inc
+include MSGDCL.INC
+EXTRN	ResPipeOff:NEAR
+EXTRN	TestKanjR:NEAR
+EXTRN	ResPipeOff:NEAR
+EXTRN	TestKanjR:NEAR
 
 CODERES ENDS
 	END

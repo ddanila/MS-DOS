@@ -201,7 +201,7 @@ ENDM									;AN000;
 ;º											  º
 
 
-INCLUDE modequat.inc
+INCLUDE MODEQUAT.INC
 
 
 addd		     EQU   0  ;;AN000;used for "seperator_list"

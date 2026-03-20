@@ -51,7 +51,6 @@
 ;   INT 67H).
 ;
 ;******************************************************************************
-.lfcond
 .386p
 	page
 ;******************************************************************************
@@ -69,12 +68,12 @@
 ;			L O C A L   C O N S T A N T S
 ;******************************************************************************
 ;
-	include vdmseg.inc
-	include vdmsel.inc
-	include vm386.inc
+	include VDMSEG.INC
+	include VDMSEL.INC
+	include VM386.INC
 ;	include instr386.inc
-	include oemdep.inc
-	include emmdef.inc
+	include OEMDEP.INC
+	include EMMDEF.INC
 
 FALSE	equ	0
 TRUE	equ	not FALSE

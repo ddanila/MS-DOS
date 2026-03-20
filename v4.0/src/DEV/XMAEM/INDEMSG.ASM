@@ -90,7 +90,7 @@ INDEMSG    LABEL   NEAR 						;   D0A
 CR	   EQU	   13	     ; ASCII for a carriage return		;  @P2A
 LF	   EQU	   10	     ; ASCII for a line feed			;  @P2A
 									;   P2A
-INCLUDE    xmaem.cl1
+INCLUDE    XMAEM.CL1
 
 PROG	   ENDS 							;   D0A
 	   END								;   D0A

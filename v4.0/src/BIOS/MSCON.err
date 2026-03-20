@@ -1,0 +1,9 @@
+JUMPMAC.INC(25): Error! E236: Procedure is already defined
+JUMPMAC.INC(25): Note! N290: included by file MSCON.ASM(13)
+MSCON.ASM(163): Warning! W096: size not specified -- WORD PTR is assumed
+JUMPMAC.INC(12): Error! E074: Constant operand is expected
+JUMPMAC.INC(12): Note! N291: macro called from file MSCON.ASM(212)
+JUMPMAC.INC(12): Error! E074: Constant operand is expected
+JUMPMAC.INC(12): Note! N291: macro called from file MSCON.ASM(225)
+JUMPMAC.INC(12): Error! E074: Constant operand is expected
+JUMPMAC.INC(12): Note! N291: macro called from file MSCON.ASM(259)

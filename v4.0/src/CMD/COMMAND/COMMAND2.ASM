@@ -6,9 +6,9 @@ NAME	COMMAND2
 .XCREF
 .XLIST
 	INCLUDE DOSSYM.INC
-	INCLUDE comsw.asm
-	INCLUDE comequ.asm
-	INCLUDE resmsg.equ		;AN000;
+	INCLUDE COMSW.ASM
+	INCLUDE COMEQU.ASM
+	INCLUDE RESMSG.EQU		;AN000;
 .LIST
 .CREF
 
@@ -574,6 +574,12 @@ ENDINIT:
 	mov	DS:[PDB_environ],es	;g put new environment in my header	   ;AM067;
 	mov	ds,oldenv		;g source environment segment		   ;AM067;
 	ASSUME	DS:NOTHING							   ;AM067;
+EXTRN	RPRINT:NEAR
+EXTRN	reset_msg_pointers:NEAR
+EXTRN	rprint:NEAR
+EXTRN	RPRINT:NEAR
+EXTRN	reset_msg_pointers:NEAR
+EXTRN	rprint:NEAR
 	xor	si,si			;g set up offsets to start of segments	   ;AM067;
 	xor	di,di			;g					   ;AM067;
 	cld				;g make sure we move the right way!	   ;AM067;

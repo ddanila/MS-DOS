@@ -26,16 +26,14 @@ NAME	Dev
 ; get the appropriate segment definitions
 ;
 .xlist
-include dosseg.asm
+include DOSSEG.ASM
 
 CODE	SEGMENT BYTE PUBLIC  'CODE'
 	ASSUME	SS:DOSGROUP,CS:DOSGROUP
 
-.xcref
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
-include version.inc
-.cref
+include VERSION.INC
 .list
 
 	i_need	IOXAD,DWORD
@@ -803,6 +801,34 @@ Break	<SC2BUF- move data from SC to buffer>
 
 	procedure   SC2BUF,NEAR 	    ;AN000;
 ASSUME	DS:NOTHING,ES:NOTHING		    ;AN000;
+EXTRN	CHARHARD:NEAR
+EXTRN	DOS_READ:NEAR
+EXTRN	DOS_WRITE:NEAR
+EXTRN	EcritDevice:NEAR
+EXTRN	LcritDevice:NEAR
+EXTRN	Restore_World:NEAR
+EXTRN	Save_World:NEAR
+EXTRN	Test_IFS_Remote:NEAR
+EXTRN	restore_world:NEAR
+EXTRN	save_world:NEAR
+EXTRN	CHARHARD:NEAR
+EXTRN	DOS_READ:NEAR
+EXTRN	DOS_WRITE:NEAR
+EXTRN	EcritDevice:NEAR
+EXTRN	LcritDevice:NEAR
+EXTRN	Restore_World:NEAR
+EXTRN	Save_World:NEAR
+EXTRN	Test_IFS_Remote:NEAR
+EXTRN	restore_world:NEAR
+EXTRN	save_world:NEAR
+EXTRN	CHARHARD:NEAR
+EXTRN	DOS_READ:NEAR
+EXTRN	DOS_WRITE:NEAR
+EXTRN	EcritDevice:NEAR
+EXTRN	LcritDevice:NEAR
+EXTRN	Test_IFS_Remote:NEAR
+EXTRN	restore_world:NEAR
+EXTRN	save_world:NEAR
 
 	CALL	IN_SC			    ;AN000;;LB. in secondary cache
 	JC	noSC			    ;AN000;;LB. no

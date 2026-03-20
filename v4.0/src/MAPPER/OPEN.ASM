@@ -65,7 +65,7 @@ dosxxx	segment byte public 'dos'
 	public	DosOpen
 	.sall
 	.xlist
-	include macros.inc
+	include MACROS.INC
 	.list
 
 ACT_FileExisted 	equ	1

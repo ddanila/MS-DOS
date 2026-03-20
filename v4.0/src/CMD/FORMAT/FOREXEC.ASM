@@ -198,6 +198,8 @@ data	ends
 
 code	segment public para 'code'
 	assume	cs:code,ds:data
+EXTRN	SYS_RET_ERR:NEAR
+EXTRN	SYS_RET_ERR:NEAR
 
 ;
 ;****************************************************************************

@@ -7,7 +7,7 @@ memS	EQU	1		; Small model
 ?PLM	=	0		; Standard 'C'
 ?WIN	=	0		; Not windows
 
-include cmacros.inc
+include CMACROS.INC
 
 ;extern int	 IOCTLOpen(char *);
 ;extern int	 IOCTLWrite(int,char *,int);

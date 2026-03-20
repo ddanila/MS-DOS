@@ -3,9 +3,9 @@
 ; AN000 version 4.0 Jan. 1988
 ; AN007 PTM 3957 - fake version for IBMCACHE.COM
 ; AN008 PTM 4070 - fake version for MS WINDOWS
-include sysvar.inc
-include doscntry.inc
-include fastopen.inc
+include SYSVAR.INC
+include DOSCNTRY.INC
+include FASTOPEN.INC
 
 	I_need	DMAAdd,DWORD		; current dma address
 	I_need	DPBHead,DWORD		; long pointer to DPB chain
@@ -619,6 +619,16 @@ ASSUME	ES:DOSGROUP
 
 CHARINIT:
 ASSUME	DS:NOTHING,ES:NOTHING
+EXTRN	$Dup_PDB:NEAR
+EXTRN	$SETDPB:NEAR
+EXTRN	DEVIOCALL2:NEAR
+EXTRN	NETWINIT:NEAR
+EXTRN	OUT:NEAR
+EXTRN	SETMEM:NEAR
+EXTRN	DEVIOCALL2:NEAR
+EXTRN	NETWINIT:NEAR
+EXTRN	OUT:NEAR
+EXTRN	SETMEM:NEAR
 ; DS:SI Points to device header
 	MOV	[DEVCALL.REQLEN],DINITHL
 	MOV	[DEVCALL.REQUNIT],0

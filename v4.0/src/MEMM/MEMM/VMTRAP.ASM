@@ -50,7 +50,6 @@ page	58,132
 ;   "to do:" marks potential holes/things to consider
 ;
 ;******************************************************************************
-.lfcond 				; list false conditionals
 .386p
 	page
 ;******************************************************************************
@@ -111,12 +110,12 @@ _TEXT	 ends
 ;			I N C L U D E	F I L E S
 ;******************************************************************************
 ;
-include VDMseg.inc
-include VDMsel.inc
-include vm386.inc
-include pic_def.equ
-include instr386.inc
-include oemdep.inc
+include VDMSEG.INC
+include VDMSEL.INC
+include VM386.INC
+include PIC_DEF.EQU
+include INSTR386.INC
+include OEMDEP.INC
 
 	page
 ;******************************************************************************

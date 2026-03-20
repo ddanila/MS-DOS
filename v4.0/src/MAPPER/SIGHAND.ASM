@@ -2,7 +2,7 @@ page 80,132
 
 title CP/DOS DosSetSigHandler  mapper
 
-        include msc.inc
+        include MSC.INC
 
 dosxxx  segment byte public 'dos'
         assume  cs:dosxxx,ds:nothing,es:nothing,ss:nothing
@@ -28,7 +28,7 @@ dosxxx  segment byte public 'dos'
             public   dossetsighandler
             .sall
             .xlist
-            include  macros.inc
+            include  MACROS.INC
             .list
 
 str         struc

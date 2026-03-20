@@ -1,15 +1,12 @@
  page 80,132
 ;	SCCSID = @(#)path2.asm	1.1 85/05/14
 ;	SCCSID = @(#)path2.asm	1.1 85/05/14
-.sall
 .xlist
-.xcref
 INCLUDE DOSSYM.INC
-    include comsw.asm
-    include comseg.asm
-    include comequ.asm
+    include COMSW.ASM
+    include COMSEG.ASM
+    include COMEQU.ASM
 .list
-.cref
 
 
 DATARES SEGMENT PUBLIC BYTE
@@ -431,6 +428,10 @@ save_ptr_loop:
 save_done:
 	pop	ES				; back we go to TRANGROUP
 assume	ES:trangroup
+EXTRN	argv_calc:NEAR
+EXTRN	std_printf:NEAR
+EXTRN	argv_calc:NEAR
+EXTRN	std_printf:NEAR
 	mov	AX, BP				; restore segment id
 	jmp	short save_ok
 

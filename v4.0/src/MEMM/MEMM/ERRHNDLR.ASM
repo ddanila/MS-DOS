@@ -41,10 +41,10 @@
 	page
 .386P
 ;
- 	include	vdmseg.inc
-	include	vdmsel.inc
-	include	vm386.inc
-	include	kbd.inc
+ 	include	VDMSEG.INC
+	include	VDMSEL.INC
+	include	VM386.INC
+	include	KBD.INC
 ;******************************************************************************
 ;  	Public Declarations
 ;******************************************************************************

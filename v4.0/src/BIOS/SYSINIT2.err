@@ -1,0 +1,35 @@
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SMDOSSYM.INC(4): Error! E230: Label 'TRUE' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SMDOSSYM.INC(4): Note! N290: included by file SYSINIT2.ASM(55)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SMDOSSYM.INC(5): Error! E230: Label 'FALSE' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SMDOSSYM.INC(5): Note! N290: included by file SYSINIT2.ASM(55)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(36): Error! E230: Label 'IBMVER' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(36): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSVAR.INC(2)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(36): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SMDOSSYM.INC(67)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(36): Note! N290: included by file SYSINIT2.ASM(55)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(44): Error! E230: Label 'IBM' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(44): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSVAR.INC(2)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(44): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SMDOSSYM.INC(67)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(44): Note! N290: included by file SYSINIT2.ASM(55)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(57): Error! E230: Label 'IBMJAPVER' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(57): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSVAR.INC(2)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(57): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SMDOSSYM.INC(67)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(57): Note! N290: included by file SYSINIT2.ASM(55)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(68): Error! E230: Label 'KANJI' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(68): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSVAR.INC(2)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(68): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SMDOSSYM.INC(67)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(68): Note! N290: included by file SYSINIT2.ASM(55)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSCNTRY.INC(96): Error! E065: Operator is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSCNTRY.INC(96): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SMDOSSYM.INC(150)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSCNTRY.INC(96): Note! N290: included by file SYSINIT2.ASM(55)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSCNTRY.INC(97): Error! E065: Operator is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSCNTRY.INC(97): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SMDOSSYM.INC(150)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSCNTRY.INC(97): Note! N290: included by file SYSINIT2.ASM(55)
+SYSINIT2.ASM(81): Error! E214: Colon is expected
+SYSINIT2.ASM(88): Error! E214: Colon is expected
+SYSINIT2.ASM(132): Error! E040: Invalid instruction operands
+SYSINIT2.ASM(201): Error! E040: Invalid instruction operands
+SYSINIT2.ASM(348): Error! E101: REPZ, REPNZ, REPE or REPNE prefix is not allowed on this instruction
+SYSINIT2.ASM(351): Error! E040: Invalid instruction operands
+SYSINIT2.ASM(356): Error! E040: Invalid instruction operands
+SYSINIT2.ASM(727): Error! E094: This instruction is not supported
+SYSINIT2.ASM(1161): Error! E250: Nesting level too deep

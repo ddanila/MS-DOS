@@ -3,15 +3,13 @@
 ;	SCCSID = @(#)tbatch2.asm	4.2 85/07/22
 TITLE	Batch processing routines part II
 
-	INCLUDE comsw.asm
+	INCLUDE COMSW.ASM
 
 .xlist
-.xcref
 	INCLUDE DOSSYM.INC
-	INCLUDE comseg.asm
-	INCLUDE comequ.asm
+	INCLUDE COMSEG.ASM
+	INCLUDE COMEQU.ASM
 .list
-.cref
 
 
 DATARES 	SEGMENT PUBLIC BYTE	;AC000;
@@ -829,6 +827,30 @@ ASSUME	DS:NOTHING
 	MOV	CX,WORD PTR DS:[BatSeek+2]
 	POP	DS
 ASSUME	DS:RESGROUP
+EXTRN	BatchOff:NEAR
+EXTRN	DELIM:NEAR
+EXTRN	Delim:NEAR
+EXTRN	PipeDel:NEAR
+EXTRN	SCANOFF:NEAR
+EXTRN	argv_calc:NEAR
+EXTRN	delim:NEAR
+EXTRN	get_ext_error_number:NEAR
+EXTRN	output_batch_name:NEAR
+EXTRN	promptBat:NEAR
+EXTRN	scanoff:NEAR
+EXTRN	std_eprintf:NEAR
+EXTRN	BatchOff:NEAR
+EXTRN	DELIM:NEAR
+EXTRN	Delim:NEAR
+EXTRN	PipeDel:NEAR
+EXTRN	SCANOFF:NEAR
+EXTRN	argv_calc:NEAR
+EXTRN	delim:NEAR
+EXTRN	get_ext_error_number:NEAR
+EXTRN	output_batch_name:NEAR
+EXTRN	promptBat:NEAR
+EXTRN	scanoff:NEAR
+EXTRN	std_eprintf:NEAR
 
 	MOV	[BATHAND],AX
 	MOV	BX,AX

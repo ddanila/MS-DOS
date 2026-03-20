@@ -231,7 +231,7 @@ data_sysgetmsg	proc far
 
 data_sysgetmsg	endp
 
-include msgdcl.inc
+include MSGDCL.INC
 
 _DATA	ends			; end code segment
 

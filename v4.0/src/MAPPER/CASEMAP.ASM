@@ -25,7 +25,7 @@ dosxxx  segment byte public 'dos'
 
         public  doscasemap
         .sall
-        include macros.inc
+        include MACROS.INC
 
 str     struc
 old_bp  dw      ?

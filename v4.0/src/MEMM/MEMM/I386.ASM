@@ -57,13 +57,12 @@ page	58,132
 ;	WARNING This code is 386 specific, it will NOT run on an 8088.
 ;
 ;******************************************************************************
-.lfcond 				; list false conditionals
 .386p
 ;
-	include VDMseg.inc
-	include VDMsel.inc
-	include desc.inc
-	include page.inc
+	include VDMSEG.INC
+	include VDMSEL.INC
+	include DESC.INC
+	include PAGE.INC
 
 ;******************************************************************************
 ;		E X T E R N A L S

@@ -21,7 +21,7 @@ dosxxx	segment byte public 'dos'                               ;AN000;
 	    public   set_int24_vector				;AN000;
 	    .sall						;AN000;
 	    .xlist						;AN000;
-	    include  macros.inc 				;AN000;
+	    include  MACROS.INC 				;AN000;
 	    .list						;AN000;
 
 str	    struc						;AN000;

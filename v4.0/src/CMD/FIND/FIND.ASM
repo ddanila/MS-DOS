@@ -115,12 +115,10 @@ ENDM
 ;-      INCLUDE FILES       ;
 ;---------------------------;
 .xlist                      ;
-.xcref                      ;
         INCLUDE SYSCALL.INC ;
-        INCLUDE sysmsg.inc  ;   ;AN000; Include message equates and MACROS
-        INCLUDE find.inc    ;   ;AN000; Include find equates and MACROS
+        INCLUDE SYSMSG.INC  ;   ;AN000; Include message equates and MACROS
+        INCLUDE FIND.INC    ;   ;AN000; Include find equates and MACROS
 .list                       ;
-.cref                       ;
 ;---------------------------;
 
 MSG_UTILNAME <FIND>             ;AN000;
@@ -238,10 +236,8 @@ code    segment public
 ;
 ;--------------------
 .xlist
-.xcref
-INCLUDE parse.asm
+INCLUDE PARSE.ASM
 .list
-.cref
 ;--------------------
 
         EXTRN   heading:byte,heading_len:byte
@@ -1676,7 +1672,7 @@ file_name_buf dw 0                      ;File name buffer offset
 
 buffer        db buffer_size+2 dup(?)   ;file data buffer
 
-include msgdcl.inc
+include MSGDCL.INC
 
 code    ends
 

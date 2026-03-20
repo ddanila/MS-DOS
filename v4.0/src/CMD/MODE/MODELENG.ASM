@@ -58,7 +58,7 @@ system_descriptor_table 	 EQU   ES:[BX]
 system_services 		 EQU   15H	   ;ROM BIOS call
 XT2				 EQU   0FBH  ;AN000;model byte for 2nd release of XT
 
-INCLUDE  modequat.inc
+INCLUDE  MODEQUAT.INC
 
 ;บ											  บ
 ;ศอออออออออออออออออออออออออออออออ  E Q U A T E S  ออออออออออออออออออออออออออออออออออออออออผ

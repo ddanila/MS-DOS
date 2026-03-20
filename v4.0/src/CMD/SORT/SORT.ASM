@@ -158,10 +158,8 @@ EASYSTEM              equ     8000h      ;AN001;  ea_flags
         PAGE   ;
 ;---------------------;
 .xlist                ;
-.xcref                ;
-INCLUDE syscall.inc   ;
-INCLUDE sysmsg.inc    ;                 ;AN000; Include message equates and MACROS
-.cref                 ;
+INCLUDE SYSCALL.INC   ;
+INCLUDE SYSMSG.INC    ;                 ;AN000; Include message equates and MACROS
 .list                 ;
 ;---------------------;
 
@@ -992,10 +990,8 @@ prt_sort endp                           ;AN003;
         PAGE   ;
 ;--------------------
 .xlist
-.xcref
-INCLUDE parse.asm
-include msgdcl.inc
-.cref
+INCLUDE PARSE.ASM
+include MSGDCL.INC
 .list
 ;--------------------
 

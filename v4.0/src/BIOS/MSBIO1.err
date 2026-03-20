@@ -1,0 +1,10 @@
+JUMPMAC.INC(25): Error! E236: Procedure is already defined
+JUMPMAC.INC(25): Note! N290: included by file MSBIO1.ASM(61)
+MSMACRO.INC(180): Error! E236: Procedure is already defined
+MSMACRO.INC(180): Note! N290: included by file MSBIO1.ASM(302)
+MSMACRO.INC(183): Error! E032: Syntax error
+MSMACRO.INC(183): Note! N290: included by file MSBIO1.ASM(302)
+MSMACRO.INC(187): Error! E236: Procedure is already defined
+MSMACRO.INC(187): Note! N290: included by file MSBIO1.ASM(302)
+MSMACRO.INC(189): Error! E032: Syntax error
+MSMACRO.INC(189): Note! N290: included by file MSBIO1.ASM(302)

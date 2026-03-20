@@ -5,15 +5,13 @@ TITLE	PART4 COMMAND Transient routines.
 
 ;	Internal commands DIR,PAUSE,ERASE,TYPE,VOL,VER
 
-	INCLUDE comsw.asm
+	INCLUDE COMSW.ASM
 .xlist
-.xcref
 	INCLUDE DOSSYM.INC
-	INCLUDE comseg.asm
-	INCLUDE comequ.asm		;AC000;
-	include ioctl.inc		;AN000;
+	INCLUDE COMSEG.ASM
+	INCLUDE COMEQU.ASM		;AC000;
+	include IOCTL.INC		;AN000;
 .list
-.cref
 
 DATARES SEGMENT PUBLIC BYTE		;AN020;
 	EXTRN	append_flag:byte	;AN020;
@@ -354,6 +352,34 @@ DoHeader:
 	int	2fh				;AN020;     set everything off
 	pop	ds				;AN020; save current data segment
 	assume	ds:trangroup			;AN020;
+EXTRN	Pause:NEAR
+EXTRN	RestUDir:NEAR
+EXTRN	build_dir_string:NEAR
+EXTRN	crlf2:NEAR
+EXTRN	get_ext_error_number:NEAR
+EXTRN	move_to_srcbuf:NEAR
+EXTRN	okvolarg:NEAR
+EXTRN	parse_with_msg:NEAR
+EXTRN	pathcrunch:NEAR
+EXTRN	print_char:NEAR
+EXTRN	printf_crlf:NEAR
+EXTRN	restudir:NEAR
+EXTRN	set_ext_error_msg:NEAR
+EXTRN	setup_parse_error_msg:NEAR
+EXTRN	Pause:NEAR
+EXTRN	RestUDir:NEAR
+EXTRN	build_dir_string:NEAR
+EXTRN	crlf2:NEAR
+EXTRN	get_ext_error_number:NEAR
+EXTRN	move_to_srcbuf:NEAR
+EXTRN	okvolarg:NEAR
+EXTRN	parse_with_msg:NEAR
+EXTRN	pathcrunch:NEAR
+EXTRN	print_char:NEAR
+EXTRN	printf_crlf:NEAR
+EXTRN	restudir:NEAR
+EXTRN	set_ext_error_msg:NEAR
+EXTRN	setup_parse_error_msg:NEAR
 
 ;
 ; Display the header

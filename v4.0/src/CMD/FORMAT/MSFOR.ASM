@@ -136,14 +136,14 @@ INCLUDE SYSCALL.INC
 
 ; Limits
 
-INCLUDE filesize.inc
+INCLUDE FILESIZE.INC
 
 ;-------------------------------------------------------------------------------
 ; These are the data structures which we will need
 
 INCLUDE DIRENT.INC
-INCLUDE ioctl.INC
-INCLUDE version.inc
+INCLUDE IOCTL.INC
+INCLUDE VERSION.INC
 
 .list
 

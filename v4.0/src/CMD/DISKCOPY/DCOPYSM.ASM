@@ -142,9 +142,7 @@ CSEG	   SEGMENT PARA PUBLIC 'CODE' ;AN000;
 				   ;DEFAULT=NO DATEmsg
 ;	   MSG_SERVICES <LOADmsg,DISPLAYmsg,CHARmsg,NUMmsg,INPUTmsg>
 .xlist				   ;AN000;
-.xcref				   ;AN000;
 	   MSG_SERVICES <LOADmsg,DISPLAYmsg,CHARmsg,NUMmsg,INPUTmsg> ;AN000;
-.cref				   ;AN000;
 .list				   ;AN000;
 ; = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 	   PATHLABL DCOPYSM	   ;AN015;

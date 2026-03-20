@@ -1,0 +1,21 @@
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Error! E230: Label 'TRUE' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Note! N290: included by file IFSUTIL.ASM(91)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Error! E230: Label 'FALSE' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Note! N290: included by file IFSUTIL.ASM(91)
+IFSUTIL.ASM(247): Warning! W095: size not specified -- BYTE PTR is assumed
+IFSUTIL.ASM(343): Warning! W095: size not specified -- BYTE PTR is assumed
+IFSUTIL.ASM(411): Warning! W095: size not specified -- BYTE PTR is assumed
+IFSUTIL.ASM(801): Warning! W095: size not specified -- BYTE PTR is assumed
+IFSUTIL.ASM(819): Error! E040: Invalid instruction operands
+IFSUTIL.ASM(823): Warning! W095: size not specified -- BYTE PTR is assumed
+IFSUTIL.ASM(824): Warning! W095: size not specified -- BYTE PTR is assumed
+IFSUTIL.ASM(825): Warning! W095: size not specified -- BYTE PTR is assumed
+IFSUTIL.ASM(826): Warning! W095: size not specified -- BYTE PTR is assumed
+IFSUTIL.ASM(987): Error! E048: Immediate data out of range
+IFSUTIL.ASM(987): Error! E040: Invalid instruction operands
+IFSUTIL.ASM(2100): Error! E048: Immediate data out of range
+IFSUTIL.ASM(2100): Error! E040: Invalid instruction operands
+IFSUTIL.ASM(2136): Error! E048: Immediate data out of range
+IFSUTIL.ASM(2136): Error! E040: Invalid instruction operands
+IFSUTIL.ASM(2398): Warning! W095: size not specified -- BYTE PTR is assumed
+IFSUTIL.ASM(2399): Warning! W095: size not specified -- BYTE PTR is assumed

@@ -20,7 +20,7 @@ dosxxx	segment byte public 'dos'
 
 	    public   dosgetversion
 	    .sall
-	    include  macros.inc
+	    include  MACROS.INC
 
 str	    struc
 old_bp	    dw	     ?

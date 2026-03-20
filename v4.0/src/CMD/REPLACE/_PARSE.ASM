@@ -54,7 +54,7 @@ _TEXT	segment byte public 'CODE'	;AN000;
 	ASSUME	DS: DGROUP		;AN000;
 
 ;-------------------------------------------------------------------
-	include parse.asm		; include the parser			;AN000;
+	include PARSE.ASM		; include the parser			;AN000;
 ;-------------------------------------------------------------------
 
 _parse	proc	near			;AN000;

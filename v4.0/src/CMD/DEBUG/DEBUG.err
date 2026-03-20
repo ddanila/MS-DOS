@@ -1,0 +1,15 @@
+DEBEQU.ASM(48): Error! E230: Label 'IBMJAPAN' is already defined
+DEBEQU.ASM(48): Note! N290: included by file DEBUG.ASM(83)
+DEBUG.ASM(154): Error! E204: Segment definition is changed
+DEBUG.ASM(177): Error! E207: Ends a segment which is not opened
+DEBUG.ASM(184): Error! E204: Segment definition is changed
+DEBUG.ASM(194): Error! E207: Ends a segment which is not opened
+DEBUG.ASM(301): Error! E066: Operand is expected
+DEBUG.ASM(307): Error! E066: Operand is expected
+DEBUG.ASM(420): Error! E066: Operand is expected
+DEBUG.ASM(451): Error! E066: Operand is expected
+DEBUG.ASM(452): Error! E066: Operand is expected
+DEBUG.ASM(453): Error! E066: Operand is expected
+DEBUG.ASM(585): Error! E066: Operand is expected
+DEBUG.ASM(586): Error! E066: Operand is expected
+DEBUG.ASM(1269): Warning! W249: End directive required at end of file

@@ -33,7 +33,7 @@ vioxxx  segment byte public 'vio'
         public vioscrollup
         .sall
         .xlist
-        include macros.inc
+        include MACROS.INC
         .list
 
 error_bvs_parameter equ 0002h

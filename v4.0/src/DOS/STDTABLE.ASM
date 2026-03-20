@@ -4,13 +4,11 @@
 ;
 
 .xlist
-.xcref
-include stdsw.asm
-.cref
+include STDSW.ASM
 .list
 
 TITLE   STDTABLE - Table segment for MS-DOS
 NAME    STDTABLE
 
-include mstable.asm
+include MSTABLE.ASM
 	END

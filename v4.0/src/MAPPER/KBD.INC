@@ -30,6 +30,6 @@ EchoOff         equ     2
 EchoOn          equ     1
 
 
-        include macros.inc
+        include MACROS.INC
 
 

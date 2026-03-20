@@ -31,7 +31,7 @@ ENDM															   ;AN000;
 															   ;AN000;
 ;------------------------------------------------------------------------						   ;AN000;
 															   ;AN000;
-INCLUDE  common.stc	   ;contains the following structure								   ;AN000;
+INCLUDE  COMMON.STC	   ;contains the following structure								   ;AN000;
 															   ;AN000;
 															   ;AN000;
 ;parm_list_entry   STRUC		   ;used by parse_parameters and invoke 					   ;AN000;
@@ -50,7 +50,7 @@ INCLUDE  common.stc	   ;contains the following structure								   ;AN000;
 ;º											º				   ;AN000;
 															   ;AN000;
 
-INCLUDE modequat.inc		 ;AN000;include definition of false, machine types
+INCLUDE MODEQUAT.INC		 ;AN000;include definition of false, machine types
 
 															   ;AN000;
 AT_family   EQU 0FCH		 ;model byte for 286 boxes								   ;AN000;

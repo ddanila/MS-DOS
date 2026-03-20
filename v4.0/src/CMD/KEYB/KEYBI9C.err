@@ -1,0 +1,14 @@
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/POSTEQU.INC(162): Error! E230: Label 'KB_ERR' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/POSTEQU.INC(162): Note! N290: included by file KEYBI9C.ASM(44)
+KEYBSHAR.INC(274): Error! E065: Operator is expected
+KEYBSHAR.INC(274): Note! N290: included by file KEYBI9C.ASM(45)
+KEYBSHAR.INC(274): Error! E050: Offset cannot be smaller than WORD size
+KEYBSHAR.INC(274): Note! N290: included by file KEYBI9C.ASM(45)
+KEYBSHAR.INC(281): Error! E065: Operator is expected
+KEYBSHAR.INC(281): Note! N290: included by file KEYBI9C.ASM(45)
+KEYBSHAR.INC(281): Error! E050: Offset cannot be smaller than WORD size
+KEYBSHAR.INC(281): Note! N290: included by file KEYBI9C.ASM(45)
+KEYBI9C.ASM(631): Error! E048: Immediate data out of range
+KEYBI9C.ASM(631): Error! E040: Invalid instruction operands
+KEYBI9C.ASM(1861): Error! E048: Immediate data out of range
+KEYBI9C.ASM(1861): Error! E040: Invalid instruction operands

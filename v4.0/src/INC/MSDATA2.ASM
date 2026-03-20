@@ -4,9 +4,8 @@
 ;
 
 .xlist
-.xcref
-include mssw.asm
-include dosseg.asm
+include MSSW.ASM
+include DOSSEG.ASM
 debug = FALSE                           ; No dossym (too big)
 INCLUDE DOSMAC.INC
 INCLUDE SF.INC
@@ -20,7 +19,6 @@ INCLUDE DEVSYM.INC
 INCLUDE PDB.INC
 INCLUDE FIND.INC
 INCLUDE MI.INC
-.cref
 .list
 
 TITLE   IBMDATA - DATA segment for DOS
@@ -28,6 +26,6 @@ NAME    IBMDATA
 
 installed = TRUE
 
-include msdata.asm
-include msinit.asm
+include MSDATA.ASM
+include MSINIT.ASM
 	END

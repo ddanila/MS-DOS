@@ -5,10 +5,8 @@
 ;
 
 .xlist
-.xcref
-include stdsw.asm
-include dosseg.asm
-.cref
+include STDSW.ASM
+include DOSSEG.ASM
 .list
 
 debug=0
@@ -16,5 +14,5 @@ debug=0
 TITLE   STDDOSMES - DOS OEM dependancies
 NAME    STDDOSMES
 
-include dosmes.asm
+include DOSMES.ASM
 

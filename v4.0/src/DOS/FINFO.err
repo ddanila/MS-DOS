@@ -1,0 +1,2 @@
+FINFO.ASM(197): Warning! W095: size not specified -- BYTE PTR is assumed
+FINFO.ASM(197): Error! E040: Invalid instruction operands

@@ -286,7 +286,7 @@ LEN_D865	EQU ($-D865)
 					;
 POST_EGA865	EQU	$		;
 					;
-include copyrigh.inc
+include COPYRIGH.INC
 
 CODE	ENDS
 	END

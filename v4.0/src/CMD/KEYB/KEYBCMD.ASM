@@ -2066,7 +2066,7 @@ TEMP_SHARED_DATA   SHARED_DATA_STR <>  ;;
 
 CODE	ENDS
 
-include msgdcl.inc
+include MSGDCL.INC
 
 	END
 

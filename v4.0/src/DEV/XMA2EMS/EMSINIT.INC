@@ -518,7 +518,7 @@ $$DO119:
 VIRT2REAL ENDP
 
 
-include romscan.inc			; code to do romscan for hole location/verification
+include ROMSCAN.INC			; code to do romscan for hole location/verification
 INCLUDE PARMPARS.INC			;Routines to parse the parameters
 					; on the CONFIG.SYS line
 

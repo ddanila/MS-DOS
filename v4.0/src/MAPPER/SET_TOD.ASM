@@ -24,7 +24,7 @@ dosxxx	segment byte public 'dos'
 
 	    public   dossetdatetime
 	    .sall
-	    include  macros.inc
+	    include  MACROS.INC
 
 error_ts_datetime equ 0002h
 

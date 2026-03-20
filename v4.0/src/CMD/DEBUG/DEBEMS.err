@@ -1,0 +1,3 @@
+DEBEQU.ASM(48): Error! E230: Label 'IBMJAPAN' is already defined
+DEBEQU.ASM(48): Note! N290: included by file DEBEMS.ASM(46)
+DEBEMS.ASM(1127): Warning! W249: End directive required at end of file

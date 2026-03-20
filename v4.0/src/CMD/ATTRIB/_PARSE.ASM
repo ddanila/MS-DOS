@@ -49,7 +49,7 @@ _TEXT	segment byte public 'CODE'	;AN000;
 	ASSUME	DS: DGROUP		;AN000;
 ;-------------------------------------------------------------------	 ;AN000;
 .xlist									 ;AN000;
-include parse.asm			; include the parser		 ;AN000;
+include PARSE.ASM			; include the parser		 ;AN000;
 .list									 ;AN000;
 ;-------------------------------------------------------------------	 ;AN000;
 ;									 ;AN000;

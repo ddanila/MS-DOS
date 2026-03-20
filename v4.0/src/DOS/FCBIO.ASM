@@ -38,16 +38,14 @@ NAME	FCBIO
 ;
 ; get the appropriate segment definitions
 ;
-include dosseg.asm
+include DOSSEG.ASM
 
 CODE	SEGMENT BYTE PUBLIC  'CODE'
 	ASSUME	SS:DOSGROUP,CS:DOSGROUP
 
-.xcref
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
 INCLUDE FASTOPEN.INC
-.cref
 .list
 
  AsmVars <Kanji>
@@ -74,7 +72,7 @@ INCLUDE FASTOPEN.INC
 if debug
 	I_need	BugLev,WORD
 	I_need	BugTyp,WORD
-	include bugtyp.asm
+	include BUGTYP.ASM
 endif
 
 
@@ -546,7 +544,7 @@ Procedure   ResetLRU,NEAR
 ovScan:
 	SUB	WORD PTR ES:[DI+BX],AX	; decrement lru count
 	JA	ovLoop
-	MOV	WORD PTR ES:[DI.BX],AX	; truncate at 0
+	MOV	WORD PTR ES:[DI+BX],AX	; truncate at 0
 ovLoop:
 	ADD	DI,SIZE SF_Entry	; advance to next
 	LOOP	ovScan
@@ -979,7 +977,7 @@ Procedure   BlastSFT,NEAR
 	RestoreReg  <DI>
 	MOV	ES:[DI].sf_ref_count,0	; set ref count
 	MOV	ES:[DI].sf_LRU,0	; set lru
-	MOV	ES:[DI].sf_OpenAge,-1	; Set open age
+	MOV	WORD PTR ES:[DI].sf_OpenAge,-1	; Set open age
 	return
 EndProc BlastSFT
 
@@ -1170,6 +1168,42 @@ Break	<FCBHardErr - generate INT 24 for hard errors on FCBS>
 
 Procedure   FCBHardErr,NEAR
 	ASSUME	DS:NOTHING,ES:NOTHING
+EXTRN	CheckShare:NEAR
+EXTRN	DOS_Close:NEAR
+EXTRN	DOS_Delete:NEAR
+EXTRN	DOS_Rename:NEAR
+EXTRN	DevName:NEAR
+EXTRN	FCB_Ret_Err:NEAR
+EXTRN	FCB_Ret_OK:NEAR
+EXTRN	Find_DPB:NEAR
+EXTRN	GetExtended:NEAR
+EXTRN	GetExtent:NEAR
+EXTRN	Get_File_Info:NEAR
+EXTRN	HARDERR:NEAR
+EXTRN	IsSFTNet:NEAR
+EXTRN	Restore_World:NEAR
+EXTRN	Save_World:NEAR
+EXTRN	TransFCB:NEAR
+EXTRN	UCase:NEAR
+EXTRN	testkanj:NEAR
+EXTRN	CheckShare:NEAR
+EXTRN	DOS_Close:NEAR
+EXTRN	DOS_Delete:NEAR
+EXTRN	DOS_Rename:NEAR
+EXTRN	DevName:NEAR
+EXTRN	FCB_Ret_Err:NEAR
+EXTRN	FCB_Ret_OK:NEAR
+EXTRN	Find_DPB:NEAR
+EXTRN	GetExtended:NEAR
+EXTRN	GetExtent:NEAR
+EXTRN	Get_File_Info:NEAR
+EXTRN	HARDERR:NEAR
+EXTRN	IsSFTNet:NEAR
+EXTRN	Restore_World:NEAR
+EXTRN	Save_World:NEAR
+EXTRN	TransFCB:NEAR
+EXTRN	UCase:NEAR
+EXTRN	testkanj:NEAR
 	MOV	AX,error_FCB_Unavailable
 	MOV	[ALLOWED],allowed_FAIL
 	LES	BP,[THISDPB]

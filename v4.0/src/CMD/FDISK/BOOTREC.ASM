@@ -27,8 +27,8 @@ PUBLIC  _master_boot_record
         public  _master_boot_record
 _master_boot_record label   byte
 
-include fdboot.inc
-include fdboot.inc
+include FDBOOT.INC
+include FDBOOT.INC
 
 _DATA      ENDS
 

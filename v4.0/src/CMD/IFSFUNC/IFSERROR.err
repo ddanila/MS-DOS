@@ -1,0 +1,37 @@
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Error! E230: Label 'TRUE' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Note! N290: included by file IFSERROR.ASM(34)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Error! E230: Label 'FALSE' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Note! N290: included by file IFSERROR.ASM(34)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSIONA.INC(2): Error! E230: Label 'major_version' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSIONA.INC(2): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(50)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSIONA.INC(2): Note! N290: included by file IFSERROR.ASM(36)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSIONA.INC(3): Error! E230: Label 'minor_version' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSIONA.INC(3): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(50)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSIONA.INC(3): Note! N290: included by file IFSERROR.ASM(36)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSIONA.INC(5): Error! E230: Label 'expected_version' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSIONA.INC(5): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(50)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSIONA.INC(5): Note! N290: included by file IFSERROR.ASM(36)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(52): Error! E230: Label 'FALSE' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(52): Note! N290: included by file IFSERROR.ASM(36)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(53): Error! E230: Label 'TRUE' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(53): Note! N290: included by file IFSERROR.ASM(36)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(218): Error! E230: Label 'stdin' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(218): Note! N290: included by file IFSERROR.ASM(36)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(219): Error! E230: Label 'stdout' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(219): Note! N290: included by file IFSERROR.ASM(36)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(220): Error! E230: Label 'stderr' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(220): Note! N290: included by file IFSERROR.ASM(36)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(221): Error! E230: Label 'stdaux' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(221): Note! N290: included by file IFSERROR.ASM(36)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(222): Error! E230: Label 'stdprn' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(222): Note! N290: included by file IFSERROR.ASM(36)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(283): Error! E220: Cannot open include file &UTILNAME.CTL
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(283): Note! N291: macro called from file IFSERROR.ASM(37)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(92): Error! E065: Operator is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(92): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(284)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(92): Note! N291: macro called from file IFSERROR.ASM(37)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(109): Error! E065: Operator is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(109): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(284)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(109): Note! N291: macro called from file IFSERROR.ASM(37)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(132): Error! E032: Syntax error
+/home/ddanila/fun/msdos/MS-DOS/

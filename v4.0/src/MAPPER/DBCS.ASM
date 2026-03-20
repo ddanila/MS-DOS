@@ -22,7 +22,7 @@ dosxxx	segment byte public 'dos'
 ;
 	public	DosGetDBCSEv
 	.sall
-	include macros.inc
+	include MACROS.INC
 
 str	struc
 old_bp	dw	?

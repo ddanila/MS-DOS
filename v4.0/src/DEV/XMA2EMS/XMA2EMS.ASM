@@ -825,7 +825,7 @@ IRPT_CMD_EXIT:				;return from command routine
 	RET				;far return back to DOS
 IRPT	ENDP
 
-include genioctl.inc			; include code for genioctl fcn gga
+include GENIOCTL.INC			; include code for genioctl fcn gga
 
 ;ษออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออป
 ;บ	Set 'OUTPUT STATUS' entry point                                 บ
@@ -2565,7 +2565,7 @@ EMS_Link_Set	endp					;			;an001; dms;
 ;ณ	LIM40.INC						     ณ
 ;ณ								     ณ
 ;ภฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤู
-include lim40.inc
+include LIM40.INC
 
 Instance_Table	db	Instance_Size*Instance_Count dup(Unallocated)  ;instance table	     ;an000; dms;
 

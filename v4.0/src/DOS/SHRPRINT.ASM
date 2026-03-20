@@ -12,24 +12,21 @@ NAME	SHRPRINT
 ;
 ; get the appropriate segment definitions
 ;
-include dosseg.asm
+include DOSSEG.ASM
 
 Share	SEGMENT PARA PUBLIC 'SHARE'
 	ASSUME	SS:DOSGROUP,CS:SHARE
 
-.xcref
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
-.cref
 .list
-.sall
 
 	I_Need	Proc_ID,WORD
 	I_Need	User_ID,WORD
 
 BREAK	<debugging output>
 
-include print.asm
+include PRINT.ASM
 
 SHARE	ENDS
 END

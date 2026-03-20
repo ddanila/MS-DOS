@@ -41,7 +41,6 @@ page	58,132
 ;
 ;
 ;******************************************************************************
-.lfcond 				; list false conditionals
 .386p
 	page
 ;******************************************************************************
@@ -56,13 +55,13 @@ page	58,132
 ;			L O C A L   C O N S T A N T S
 ;******************************************************************************
 ;
-	include loadall.inc
-	include VDMseg.inc
-	include desc.inc
-	include VDMsel.inc
-	include instr386.inc
-	include vm386.inc
-	include	oemdep.inc
+	include LOADALL.INC
+	include VDMSEG.INC
+	include DESC.INC
+	include VDMSEL.INC
+	include INSTR386.INC
+	include VM386.INC
+	include	OEMDEP.INC
 
 FALSE	equ	0
 TRUE	equ	not FALSE

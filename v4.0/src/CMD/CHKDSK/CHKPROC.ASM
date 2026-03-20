@@ -2,12 +2,12 @@ TITLE	CHKPROC - PART1 Procedures called from chkdsk
 page	,132					;
 
 	.xlist
-	include chkseg.inc
+	include CHKSEG.INC
 	INCLUDE CHKCHNG.INC
 	INCLUDE DOSSYM.INC
 	INCLUDE CHKEQU.INC
 	INCLUDE CHKMACRO.INC
-	include pathmac.inc
+	include PATHMAC.INC
 	.list
 
 

@@ -82,17 +82,14 @@ NAME	MACRO
 ;
 ; get the appropriate segment definitions
 ;
-include dosseg.asm
+include DOSSEG.ASM
 
 CODE	SEGMENT BYTE PUBLIC  'CODE'
 	ASSUME	SS:DOSGroup,CS:DOSGroup
 
-.xcref
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
-.cref
 .list
-.sall
 
 Installed = TRUE
 
@@ -424,6 +421,25 @@ Break <GetCDSFromDrv - convert a drive number to a CDS pointer>
 
 Procedure   GetCDSFromDrv,NEAR
 	ASSUME	CS:DOSGroup,DS:NOTHING,ES:NOTHING,SS:DOSGroup
+EXTRN	NET_ASSOPER:NEAR
+EXTRN	PRINTER_GETSET_STRING:NEAR
+EXTRN	SYS_RET_ERR:NEAR
+EXTRN	SYS_RET_OK:NEAR
+EXTRN	get_user_stack:NEAR
+EXTRN	sys_ret_ok:NEAR
+EXTRN	NET_ASSOPER:NEAR
+EXTRN	PRINTER_GETSET_STRING:NEAR
+EXTRN	SYS_RET_ERR:NEAR
+EXTRN	SYS_RET_OK:NEAR
+EXTRN	get_user_stack:NEAR
+EXTRN	sys_ret_ok:NEAR
+EXTRN	ASS_ERR:NEAR
+EXTRN	okdone:NEAR
+EXTRN	NET_ASSOPER:NEAR
+EXTRN	PRINTER_GETSET_STRING:NEAR
+EXTRN	SYS_RET_ERR:NEAR
+EXTRN	get_user_stack:NEAR
+EXTRN	sys_ret_ok:NEAR
 	CMP	AL,[CDSCount]		; is this a valid designator
 	JB	GetCDS			; yes, go get the macro
 	STC				; signal error

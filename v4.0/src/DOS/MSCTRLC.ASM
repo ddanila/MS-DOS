@@ -4,13 +4,11 @@
 ;
 
 .xlist
-.xcref
-include mssw.asm
-.cref
+include MSSW.ASM
 .list
 
 TITLE	Control C detection, Hard error and EXIT routines
 NAME	IBMCTRLC
 
-include ctrlc.asm
+include CTRLC.ASM
 

@@ -3,12 +3,10 @@
 ;	SCCSID = @(#)rdata.asm	4.2 85/09/22
 TITLE	COMMAND Resident DATA
 
-include comsw.asm
+include COMSW.ASM
 .xlist
-.xcref
-include comseg.asm
+include COMSEG.ASM
 .list
-.cref
 
 ;
 ; Equates for initialization (from COMEQU)
@@ -572,12 +570,10 @@ olderrno	dw	?
 RESMSGEND	DW	0			;AN000;; holds offset of msg end (end of resident)
 
 .xlist
-.xcref
 
 INCLUDE SYSMSG.INC				;AN000; include message services
 
 .list
-.cref
 
 ASSUME DS:RESGROUP,ES:RESGROUP,CS:RESGROUP
 
@@ -605,7 +601,7 @@ MSG_SERVICES <COMR,COMMAND.CLE> 		;AN000; get extended error messages
 
 EXTMSGEND		LABEL	BYTE		;AN000; end of extended error messages
 
-include msgdcl.inc
+include MSGDCL.INC
 
 DATARES ENDS
 	END

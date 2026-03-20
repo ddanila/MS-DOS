@@ -7,14 +7,12 @@ TITLE	Part3 COMMAND Transient Routines
 
 
 .xlist
-.xcref
-	include comsw.asm
+	include COMSW.ASM
 	INCLUDE DOSSYM.INC
 	INCLUDE DEVSYM.INC
-	include comseg.asm
-	include comequ.asm
+	include COMSEG.ASM
+	include COMEQU.ASM
 .list
-.cref
 
 
 DATARES 	SEGMENT PUBLIC BYTE	;AC000;
@@ -143,7 +141,7 @@ NOFORP2:
 ; it may be easier to allocate it as part of 'for_segment'.
 ;------
 
-	include fordata.asm
+	include FORDATA.ASM
 
 $for_exit:
 	jmp	forterm 			; exceeding maxarg means all done
@@ -571,6 +569,22 @@ ForOff:
 	SaveReg <AX,ES>
 	mov	es,ResSeg
 	assume	es:ResGroup
+EXTRN	ALLOC_TPA:NEAR
+EXTRN	CRLF2:NEAR
+EXTRN	FREE_TPA:NEAR
+EXTRN	PRINT_PROMPT:NEAR
+EXTRN	PipeDel:NEAR
+EXTRN	Save_Args:NEAR
+EXTRN	argv_calc:NEAR
+EXTRN	std_printf:NEAR
+EXTRN	ALLOC_TPA:NEAR
+EXTRN	CRLF2:NEAR
+EXTRN	FREE_TPA:NEAR
+EXTRN	PRINT_PROMPT:NEAR
+EXTRN	PipeDel:NEAR
+EXTRN	Save_Args:NEAR
+EXTRN	argv_calc:NEAR
+EXTRN	std_printf:NEAR
 	mov	AX,ForPtr
 	or	ax,ax
 	jz	FreeDone

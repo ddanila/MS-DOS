@@ -1,7 +1,6 @@
 .XLIST
 INCLUDE STRUC.INC
 .LIST
-.SALL
 	PAGE	,132			;
 	TITLE	TYPAMAT.SAL - TYPAMATIC RATE AND DELAY CONTROL FOR MODE COMMAND
 
@@ -111,8 +110,8 @@ set_typamatic_rate_and_delay  EQU   3
 typamatic_function   EQU   5
 ten_chars_per_second EQU   0CH	  ;value for BIOS INT 16H
 
-INCLUDE modequat.inc		 ;definitions of machine types
-include version.inc		; defines version of DOS to be built
+INCLUDE MODEQUAT.INC		 ;definitions of machine types
+include VERSION.INC		; defines version of DOS to be built
 
 ;บ											  บ
 ;ศอออออออออออออออออออออออออออออออ  E Q U A T E S  ออออออออออออออออออออออออออออออออออออออออผ

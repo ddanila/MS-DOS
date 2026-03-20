@@ -2,16 +2,14 @@
 TITLE   SHARING ROUTINES - Routines for file Sharing
 NAME    SHARE
 
-include dosseg.asm
+include DOSSEG.ASM
 
 CODE    SEGMENT BYTE PUBLIC  'CODE'
 	ASSUME  SS:DOSGROUP,CS:DOSGROUP
 
 .xlist
-.xcref
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
-.cref
 .list
 
 AsmVars <IBM, Installed>
@@ -126,6 +124,12 @@ break <ShareEnter - attempt to enter a node into the sharing set>
 Procedure   ShareEnter,NEAR
 	DOSAssume   CS,<DS>,"ShareEnter"
 	assume  es:nothing
+EXTRN	HARDERR:NEAR
+EXTRN	Idle:NEAR
+EXTRN	HARDERR:NEAR
+EXTRN	Idle:NEAR
+EXTRN	HARDERR:NEAR
+EXTRN	Idle:NEAR
 
 	SaveReg <CX>
 retry:

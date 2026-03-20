@@ -1,7 +1,7 @@
 	page	80,132
 	TITLE	4.00 PRINT  TRANSIENT
 ;			$SALUT (4,25,30,41)
-			INCLUDE pridefs.inc
+			INCLUDE PRIDEFS.INC
 
 SaveReg 		MACRO reglist	;; push those registers
 IRP			reg,<reglist>

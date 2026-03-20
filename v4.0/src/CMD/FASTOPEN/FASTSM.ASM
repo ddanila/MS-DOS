@@ -135,10 +135,8 @@ COPYRIGHT  DB	 "MS DOS FASTOPEN Utility " ;                 ;AN000;
 				   ;DEFAULT=NO DATEmsg
 
 .xlist
-.xcref
 	MSG_SERVICES <LOADmsg,GETmsg,DISPLAYmsg,INPUTmsg,CHARmsg,NUMmsg> ;AN000;
-	include msgdcl.inc
-.cref
+	include MSGDCL.INC
 .list
 ; = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 CSEG_INIT	ENDS			;

@@ -2,12 +2,12 @@ TITLE	CHKFAT	- procedures that acces the fat and/or fatmap
 page	,132					;
 
 	.xlist
-	include chkseg.inc							;an005;bgb
-	INCLUDE CHKCHNG.inc
-	INCLUDE DOSSYM.inc
-	INCLUDE CHKEQU.inc
-	INCLUDE CHKMACRO.inc
-	include pathmac.inc
+	include CHKSEG.INC							;an005;bgb
+	INCLUDE CHKCHNG.INC
+	INCLUDE DOSSYM.INC
+	INCLUDE CHKEQU.INC
+	INCLUDE CHKMACRO.INC
+	include PATHMAC.INC
 
 
 CONST	SEGMENT PUBLIC PARA  'DATA'

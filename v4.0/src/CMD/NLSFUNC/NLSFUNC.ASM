@@ -307,11 +307,11 @@ UTILITY 	db	"NLSFUNC",0           ;AC000;
 ;***************************** MSG DATA ************************************
 
 .xlist
-include copyrigh.inc			;AN000;
-include struc.inc
+include COPYRIGH.INC			;AN000;
+include STRUC.INC
 include DOESMAC.INC
 include MULT.INC
-include sf.inc				;AN001;
+include SF.INC				;AN001;
 include DOSCNTRY.INC
 include DEVSYM.INC
 include SYSMSG.INC			;AN000;

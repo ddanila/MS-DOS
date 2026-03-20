@@ -176,7 +176,7 @@ PUBLIC	MONO
 ;ษอออออออออออออออออออออออออออออ  S T R U C T U R E S  ออออออออออออออออออออออออออออออออออออป
 ;บ											  บ
 
-INCLUDE  common.stc		    ;definition of the following struc
+INCLUDE  COMMON.STC		    ;definition of the following struc
 
 ;parm_list_entry   STRUC		   ;used by parse_parameters and invoke
 ;

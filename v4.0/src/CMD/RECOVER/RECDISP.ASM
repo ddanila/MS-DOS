@@ -5,9 +5,9 @@ page	,132				; ;AN000;bgb
 ;*****************************************************************************
 ;
 .xlist
-	include pathmac.inc							;an028;bgb
-	include recseg.inc		;AN000;bgb
-	include dossym.inc
+	include PATHMAC.INC							;an028;bgb
+	include RECSEG.INC		;AN000;bgb
+	include DOSSYM.INC
 	INCLUDE SYSMSG.INC
 	INCLUDE RECEQU.INC
 	INCLUDE RECMSG.INC
@@ -129,7 +129,7 @@ Display_Interface   proc			;				;AN000;
 	 ret					 ;All done			 ;AN000;
 Display_Interface      endp			;				;AN000;
 
-include msgdcl.inc
+include MSGDCL.INC
 
 code	ends
 	end

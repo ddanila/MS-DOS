@@ -20,7 +20,6 @@ SUBTTL	selquit.asm			;AN000;
 ;	   ;AN001; Added flag to indicate error processing was in effect.
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-.LFCOND 				;AN000;
 .XLIST					;AN000;
 	INCLUDE    PANEL.MAC		;AN000;
 	INCLUDE    PCEQUATE.INC 	;AN000;

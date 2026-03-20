@@ -1,0 +1,17 @@
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(1039): Error! E066: Operand is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(1039): Note! N290: included by file _PARSE.ASM(63)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2139): Error! E066: Operand is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2139): Note! N290: included by file _PARSE.ASM(63)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2151): Error! E066: Operand is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2151): Note! N290: included by file _PARSE.ASM(63)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2255): Error! E066: Operand is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2255): Note! N290: included by file _PARSE.ASM(63)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2312): Error! E066: Operand is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2312): Note! N290: included by file _PARSE.ASM(63)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2582): Error! E066: Operand is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2582): Note! N290: included by file _PARSE.ASM(63)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2588): Error! E066: Operand is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2588): Note! N290: included by file _PARSE.ASM(63)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2953): Error! E066: Operand is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2953): Note! N290: included by file _PARSE.ASM(63)
+_PARSE.ASM(164): Error! E300: 1 unclosed conditional directive(s) detected

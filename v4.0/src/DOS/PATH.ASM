@@ -27,15 +27,13 @@ NAME	PATH
 ;
 ; get the appropriate segment definitions
 ;
-include dosseg.asm
+include DOSSEG.ASM
 
 CODE	SEGMENT BYTE PUBLIC  'CODE'
 	ASSUME	SS:DOSGroup,CS:DOSGroup
 
-.xcref
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
-.cref
 .list
 
 	EXTRN	DOS_MkDir:NEAR,DOS_RmDir:NEAR
@@ -348,6 +346,36 @@ EndProc $MKDIR
 
 	procedure Check_PathLen,NEAR
 	ASSUME	CS:DOSGroup,DS:NOTHING,ES:NOTHING,SS:DOSGroup
+EXTRN	DOS_ChDir:NEAR
+EXTRN	DStrLen:NEAR
+EXTRN	EcritDisk:NEAR
+EXTRN	FStrCpy:NEAR
+EXTRN	GetVisDrv:NEAR
+EXTRN	Get_User_Stack:NEAR
+EXTRN	LcritDisk:NEAR
+EXTRN	SYS_RET_ERR:NEAR
+EXTRN	SYS_Ret_Err:NEAR
+EXTRN	StrCmp:NEAR
+EXTRN	Sys_Ret_Err:NEAR
+EXTRN	Sys_Ret_OK:NEAR
+EXTRN	TransPath:NEAR
+EXTRN	TransPathNoSet:NEAR
+EXTRN	ValidateCDS:NEAR
+EXTRN	DOS_ChDir:NEAR
+EXTRN	DStrLen:NEAR
+EXTRN	EcritDisk:NEAR
+EXTRN	FStrCpy:NEAR
+EXTRN	GetVisDrv:NEAR
+EXTRN	Get_User_Stack:NEAR
+EXTRN	LcritDisk:NEAR
+EXTRN	SYS_RET_ERR:NEAR
+EXTRN	SYS_Ret_Err:NEAR
+EXTRN	StrCmp:NEAR
+EXTRN	Sys_Ret_Err:NEAR
+EXTRN	Sys_Ret_OK:NEAR
+EXTRN	TransPath:NEAR
+EXTRN	TransPathNoSet:NEAR
+EXTRN	ValidateCDS:NEAR
 
 	MOV	SI,Wfp_Start
   entry Check_PathLen2

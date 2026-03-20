@@ -54,11 +54,11 @@ page	,132					;
 ; Include files
 ;*****************************************************************************
 .xlist										;an000;bgb
-include chkseg.inc					   ;an005;bgb		;an000;bgb
-include pathmac.inc								;an000;bgb
+include CHKSEG.INC					   ;an005;bgb		;an000;bgb
+include PATHMAC.INC								;an000;bgb
 INCLUDE CHKEQU.INC				;				;an000;bgb;AN000;
 INCLUDE CHKCHNG.INC				;List of changes		;an000;bgb
-include dossym.inc								;an000;bgb
+include DOSSYM.INC								;an000;bgb
 INCLUDE SYSCALL.INC				;				;an000;bgb;AN000;
 INCLUDE CHKMACRO.INC				;				;an000;bgb;AN000;
 INCLUDE CHKPARSE.INC				;				;an000;bgb;AN000;
@@ -81,7 +81,7 @@ DATA	segment public para 'DATA'						;an000;bgb
 ;*****************************************************************************	;an000;bgb
 old_drive db 0									;an000;bgb
 
-include version.inc
+include VERSION.INC
 
 IF  IBMCOPYRIGHT
 
@@ -598,6 +598,8 @@ Procedure Parse_Command_Line			;				;an000;bgb;AN000;
 	mov	ds,cx				;  "  "    "  " 		;an000;bgb;AN000;
 										;an000;bgb
 	assume	ds:nothing,es:dg		;				;an000;bgb;AN000;
+EXTRN	printf_crlf:NEAR
+EXTRN	printf_crlf:NEAR
 										;an000;bgb
 	mov	si,Command_Line_Parms		;Point at command line		;an000;bgb;AN000;
 	lea	di,Command_Line_Buffer		;Where to put a copy of it	;an000;bgb;AN000;

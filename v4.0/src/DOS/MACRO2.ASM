@@ -92,17 +92,14 @@ NAME	MACRO2
 ;
 ; get the appropriate segment definitions
 ;
-include dosseg.asm
+include DOSSEG.ASM
 
 CODE	SEGMENT BYTE PUBLIC  'CODE'
 	ASSUME	SS:DOSGroup,CS:DOSGroup
 
-.xcref
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
-.cref
 .list
-.sall
 
 Installed = TRUE
 
@@ -148,7 +145,7 @@ PUBLIC MACRO001S,MACRO001E
 MACRO001S:
 	LocalVar    FCBTmp,15
 MACRO001E:
-	Enter
+	FrameEnter
 	Context ES			; get DOSGroup addressability
 	SaveReg <ES,DI> 		; save away final destination
 	LEA	DI,FCBTmp		; point to FCB temp area
@@ -1189,6 +1186,54 @@ Break	<TextFromDrive - convert a drive number to a text string>
 
 Procedure TextFromDrive,NEAR
 	ASSUME	CS:DOSGroup,DS:NOTHING,ES:NOTHING,SS:NOTHING
+EXTRN	CheckThisDevice:NEAR
+EXTRN	DStrLen:NEAR
+EXTRN	EcritDisk:NEAR
+EXTRN	FStrCpy:NEAR
+EXTRN	FatRead_CDS:NEAR
+EXTRN	GetCDSFromDrv:NEAR
+EXTRN	GetExtended:NEAR
+EXTRN	GetThisDrv:NEAR
+EXTRN	GetVisDrv:NEAR
+EXTRN	LcritDisk:NEAR
+EXTRN	NameTrans:NEAR
+EXTRN	PackName:NEAR
+EXTRN	PathChrCmp:NEAR
+EXTRN	SYS_Ret_Err:NEAR
+EXTRN	SYS_Ret_OK:NEAR
+EXTRN	StrCpy:NEAR
+EXTRN	StrLen:NEAR
+EXTRN	Strlen:NEAR
+EXTRN	TESTKANJ:NEAR
+EXTRN	TestKanj:NEAR
+EXTRN	Testkanj:NEAR
+EXTRN	UCase:NEAR
+EXTRN	ValidateCDS:NEAR
+EXTRN	testkanj:NEAR
+EXTRN	CheckThisDevice:NEAR
+EXTRN	DStrLen:NEAR
+EXTRN	EcritDisk:NEAR
+EXTRN	FStrCpy:NEAR
+EXTRN	FatRead_CDS:NEAR
+EXTRN	GetCDSFromDrv:NEAR
+EXTRN	GetExtended:NEAR
+EXTRN	GetThisDrv:NEAR
+EXTRN	GetVisDrv:NEAR
+EXTRN	LcritDisk:NEAR
+EXTRN	NameTrans:NEAR
+EXTRN	PackName:NEAR
+EXTRN	PathChrCmp:NEAR
+EXTRN	SYS_Ret_Err:NEAR
+EXTRN	SYS_Ret_OK:NEAR
+EXTRN	StrCpy:NEAR
+EXTRN	StrLen:NEAR
+EXTRN	Strlen:NEAR
+EXTRN	TESTKANJ:NEAR
+EXTRN	TestKanj:NEAR
+EXTRN	Testkanj:NEAR
+EXTRN	UCase:NEAR
+EXTRN	ValidateCDS:NEAR
+EXTRN	testkanj:NEAR
 	INC	AL
 	Entry	TextFromDrive1
 	ADD	AL,'A'-1                ;   *d++ = drive-1+'A';

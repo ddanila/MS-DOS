@@ -1,0 +1,13 @@
+KEYBSHAR.INC(271): Error! E065: Operator is expected
+KEYBSHAR.INC(271): Note! N290: included by file KDFDK.ASM(16)
+KEYBSHAR.INC(271): Error! E050: Offset cannot be smaller than WORD size
+KEYBSHAR.INC(271): Note! N290: included by file KDFDK.ASM(16)
+KEYBSHAR.INC(278): Error! E065: Operator is expected
+KEYBSHAR.INC(278): Note! N290: included by file KDFDK.ASM(16)
+KEYBSHAR.INC(278): Error! E050: Offset cannot be smaller than WORD size
+KEYBSHAR.INC(278): Note! N290: included by file KDFDK.ASM(16)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/POSTEQU.INC(162): Error! E230: Label 'KB_ERR' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/POSTEQU.INC(162): Note! N290: included by file KDFDK.ASM(17)
+KEYBMAC.INC(263): Error! E094: This instruction is not supported
+KEYBMAC.INC(263): Note! N290: included by file KDFDK.ASM(18)
+KDFDK.ASM(55): Error! E094: This instruction is not supported

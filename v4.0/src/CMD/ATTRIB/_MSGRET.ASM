@@ -227,7 +227,7 @@ _sysdispmsg endp							 ;AN000;
 ;									 ;AN000;
 _TEXT	ends				; end code segment		 ;AN000;
 
-	include msgdcl.inc
+	include MSGDCL.INC
 
 	end								 ;AN000;
 

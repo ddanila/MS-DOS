@@ -1,0 +1,4 @@
+ATTRIBA.ASM(2): Error! E032: Syntax error
+ATTRIBA.ASM(74): Error! E066: Operand is expected
+ATTRIBA.ASM(410): Error! E230: Label 'MOFFSET' is already defined
+ATTRIBA.ASM(480): Warning! W249: End directive required at end of file

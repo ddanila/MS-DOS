@@ -8,14 +8,14 @@ TITLE	RECOVER.SAL - MS-DOS File/Disk Recovery Utility
 ;
 ;-----------------------------------------------------------
 .xlist
-	include recchng.inc		;an000;bgb
-	include recseg.inc		;AN000;bgb
+	include RECCHNG.INC		;an000;bgb
+	include RECSEG.INC		;AN000;bgb
 	INCLUDE DOSSYM.INC		;AN000;bgb
 	INCLUDE RECEQU.INC		;AN000;bgb
-	INCLUDE RECdata.INC		;AN000;bgb
-	INCLUDE recmacro.inc		;AN000;bgb
-	INCLUDE sysmsg.INC		;AN000;bgb
-	include pathmac.inc
+	INCLUDE RECDATA.INC		;AN000;bgb
+	INCLUDE RECMACRO.INC		;AN000;bgb
+	INCLUDE SYSMSG.INC		;AN000;bgb
+	include PATHMAC.INC
 	msg_utilname<recover>
 ;										;AN000;bgb
 ;*****************************************************************************
@@ -1607,7 +1607,7 @@ endproc drive_spec			    ;				    ;AN000;bgb
 ;
 	pathlabl recover
 
-include msgdcl.inc
+include MSGDCL.INC
 
 code	ends
 	end				;recover ;AC000;bgb

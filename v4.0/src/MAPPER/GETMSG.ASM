@@ -112,7 +112,7 @@ MacroState = 0
 
 ; Define/declare the messages first!
 
-	include messages.inc
+	include MESSAGES.INC
 
 NotFoundNumber	=	-2
 
@@ -172,7 +172,7 @@ dosxxx	segment byte public 'dos'
 	    public   dosgetmessage
 	    .sall
 	    .xlist
-	    include  macros.inc
+	    include  MACROS.INC
 	    .list
 
 str	    struc

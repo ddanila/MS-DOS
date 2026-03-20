@@ -38,16 +38,14 @@ NAME	FCBIO2
 ;
 ; get the appropriate segment definitions
 ;
-include dosseg.asm
+include DOSSEG.ASM
 
 CODE	SEGMENT BYTE PUBLIC  'CODE'
 	ASSUME	SS:DOSGROUP,CS:DOSGROUP
 
-.xcref
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
-include version.inc
-.cref
+include VERSION.INC
 .list
 
 	EXTRN	DOS_Read:NEAR, DOS_Write:NEAR
@@ -62,7 +60,7 @@ include version.inc
 if debug
 	I_need	BugLev,WORD
 	I_need	BugTyp,WORD
-	include bugtyp.asm
+	include BUGTYP.ASM
 endif
 
 IF	BUFFERFLAG
@@ -225,7 +223,7 @@ FCBIO001S:
 	LocalVar    cRecRes,WORD
 	LocalVar    FCBOp,BYTE
 FCBIO001E:
-	Enter
+	FrameEnter
 
 FEOF	EQU	1
 FTRIM	EQU	2
@@ -432,7 +430,7 @@ FCBSave:
 	MOV	[SI.User_CX],CX
 DoReturn:
 	MOV	AL,FCBErr		;   return (FCBERR);
-	Leave
+	FrameLeave
 	return
 EndProc FCBIO
 
@@ -712,6 +710,36 @@ BREAK <$FCB_Random_Write - write a single record to a file >
 
 Procedure $FCB_Random_Write,NEAR
 	ASSUME	CS:DOSGROUP,DS:NOTHING,ES:NOTHING,SS:DOSGroup
+EXTRN	BlastSFT:NEAR
+EXTRN	CheckFCB:NEAR
+EXTRN	CheckShare:NEAR
+EXTRN	Date16:NEAR
+EXTRN	FCBHardErr:NEAR
+EXTRN	FCB_Ret_Err:NEAR
+EXTRN	GetThisDrv:NEAR
+EXTRN	Get_User_Stack:NEAR
+EXTRN	IsSFTNet:NEAR
+EXTRN	LRUFCB:NEAR
+EXTRN	SFTFromFCB:NEAR
+EXTRN	SaveFCBInfo:NEAR
+EXTRN	SetOpenAge:NEAR
+EXTRN	ShareEnd:NEAR
+EXTRN	TransFCB:NEAR
+EXTRN	BlastSFT:NEAR
+EXTRN	CheckFCB:NEAR
+EXTRN	CheckShare:NEAR
+EXTRN	Date16:NEAR
+EXTRN	FCBHardErr:NEAR
+EXTRN	FCB_Ret_Err:NEAR
+EXTRN	GetThisDrv:NEAR
+EXTRN	Get_User_Stack:NEAR
+EXTRN	IsSFTNet:NEAR
+EXTRN	LRUFCB:NEAR
+EXTRN	SFTFromFCB:NEAR
+EXTRN	SaveFCBInfo:NEAR
+EXTRN	SetOpenAge:NEAR
+EXTRN	ShareEnd:NEAR
+EXTRN	TransFCB:NEAR
 	MOV	AL,Random
 	jmp	FCBIO
 EndProc $FCB_RANDOM_WRITE

@@ -38,8 +38,8 @@
                                        ;;
 ;****
         INCLUDE KEYBEQU.INC            ;;
-        INCLUDE DSEG.inc               ;; System data segments
-        INCLUDE POSTEQU.inc            ;; System equates
+        INCLUDE DSEG.INC               ;; System data segments
+        INCLUDE POSTEQU.INC            ;; System equates
         INCLUDE KEYBSHAR.INC           ;;
         INCLUDE KEYBI2F.INC            ;;
         INCLUDE KEYBI9C.INC            ;;

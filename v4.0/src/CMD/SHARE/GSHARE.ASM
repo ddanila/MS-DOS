@@ -15,7 +15,7 @@ extrn				   fnm:near, rsc:near, rmn:near, cps:near, ofl:near, sle:near, interr:n
 				   .xlist
 				   .xcref
 				   INCLUDE DOSSYM.INC
-				   include dpl.asm
+				   include DPL.ASM
 				   .cref
 				   .list
 
@@ -66,7 +66,7 @@ LAST	ENDS
 
 DOSGROUP GROUP	START,CONSTANTS,DATA,TABLE,CODE,LAST
 	ELSE
-	include dosseg.asm
+	include DOSSEG.ASM
 	ENDIF
 
 DATA	SEGMENT WORD PUBLIC 'DATA'
@@ -80,7 +80,7 @@ DATA	SEGMENT WORD PUBLIC 'DATA'
 	IF	debug
 	    Extrn   BugLev:WORD
 	    Extrn   BugTyp:WORD
-	    include bugtyp.asm
+	    include BUGTYP.ASM
 	ENDIF
 DATA	ENDS
 
@@ -99,7 +99,7 @@ Share	    SEGMENT PARA PUBLIC 'SHARE'
 	extrn	MFT:BYTE
 	extrn	skip_check:BYTE
 
-	include mft.inc
+	include MFT.INC
 
 	PUBLIC	FreLock,Serial
 
@@ -2127,6 +2127,10 @@ csl3: ret
    EndProc CSL
 
    ASSUME DS:NOTHING
+EXTRN	EcritShare:NEAR
+EXTRN	LcritShare:NEAR
+EXTRN	EcritShare:NEAR
+EXTRN	LcritShare:NEAR
 
    BREAK <CUC - check usage conflicts>
 

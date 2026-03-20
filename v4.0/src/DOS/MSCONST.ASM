@@ -2,8 +2,8 @@
 ;   Revision history
 ;      AN000  version 4.00  Jan. 1988
 ;      AN007  fake version check for IBMCACHE.COM
-include mshead.asm
-include version.inc
+include MSHEAD.ASM
+include VERSION.INC
 
 CODE		SEGMENT BYTE PUBLIC 'CODE'
 	Extrn	LeaveDOS:NEAR
@@ -46,7 +46,7 @@ MSCT001S:
 	DB	"BUG "                  ; THIS FIELD MUST BE EVEN # OF BYTES
 	I_am	BugTyp,WORD,<0>
 	I_am	BugLev,WORD,<0>
-include bugtyp.asm
+include BUGTYP.ASM
 
 	I_am	MYNUM,WORD,<0>		; [SYSTEM] A number that goes with MYNAME
 	I_am	FCBLRU,WORD,<0> 	; [SYSTEM] LRU count for FCB cache

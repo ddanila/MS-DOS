@@ -135,16 +135,14 @@ CSEG	SEGMENT PARA PUBLIC 'CODE'	;AN000;
 					;DEFAULT=NO DATEmsg
 ;	MSG_SERVICES <LOADmsg,DISPLAYmsg,GETmsg,CHARmsg,NUMmsg> 		       ;AN027;
 .xlist					;AN000;
-.xcref					;AN000;
 	MSG_SERVICES <LOADmsg,DISPLAYmsg,GETmsg,CHARmsg,NUMmsg> ;AN027; 		     ;AC002;
-.cref					;AN000;
 .list					;AN000;
 ; = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 	PATHLABL TREESYSM		;AN013;
 LAST_BYTE EQU	$			;AN000;START OF AREA AVAIL FOR STACK
 	PUBLIC	LAST_BYTE		;AN000;
 
-include msgdcl.inc
+include MSGDCL.INC
 
 CSEG	ENDS				;AN000;
 	END				;AN000;

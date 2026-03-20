@@ -1,0 +1,3 @@
+/tmp/test_type.asm(7): Error! E065: Operator is expected
+/tmp/test_type.asm(11): Error! E250: Nesting level too deep
+/tmp/test_type.asm(11): Error! E032: Syntax error

@@ -18,21 +18,18 @@ NAME	IFSFDOS 									 ;AN000;
 ;***********************************************************************************	 ;AN000;
 											 ;AN000;
 .xlist											 ;AN000;
-.xcref											 ;AN000;
 INCLUDE IFSFSYM.INC									 ;AN000;
 INCLUDE IFSSYM.INC									 ;AN000;
 INCLUDE DOSSYM.INC									 ;AN000;
 INCLUDE DEVSYM.INC									 ;AN000;
-.cref											 ;AN000;
 .list											 ;AN000;
-.sall											 ;AN000;
 											 ;AN000;
 AsmVars <IBM, INSTALLED, DEBUG, PATHGEN>						 ;AN000;
 											 ;AN000;
 IFSSEG	SEGMENT BYTE PUBLIC 'IFSSEG'                                                     ;AN000;
 IFSSEG	ENDS										 ;AN000;
 											 ;AN000;
-include dosseg.asm									 ;AN000;
+include DOSSEG.ASM									 ;AN000;
 											 ;AN000;
 DATA		SEGMENT WORD PUBLIC 'DATA'                                               ;AN000;
 	; DOSGROUP data 								 ;AN000;
@@ -368,6 +365,12 @@ GO_ON:											 ;AN000;
 	PUSH	SS									 ;AN000;
 	POP	DS									 ;AN000;
 ASSUME	DS:DOSGROUP									 ;AN000;
+EXTRN	ifs_1000:NEAR
+EXTRN	ifs_980:NEAR
+EXTRN	ifs_990:NEAR
+EXTRN	ifs_1000:NEAR
+EXTRN	ifs_980:NEAR
+EXTRN	ifs_990:NEAR
 	PUSH	[YEAR]			; The routines in DOS (in particular		 ;AN000;
 					;	GET_DATE) do not like [YEAR]		 ;AN000;
 					;	getting changed by the call		 ;AN000;

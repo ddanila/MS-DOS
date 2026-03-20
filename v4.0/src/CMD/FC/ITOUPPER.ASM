@@ -1,6 +1,6 @@
 .xlist
-include version.inc
-include cmacros.inc
+include VERSION.INC
+include CMACROS.INC
 .list
 
 sBegin  code

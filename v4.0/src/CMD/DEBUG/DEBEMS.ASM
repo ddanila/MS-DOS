@@ -43,7 +43,7 @@
 ;======================= END OF SPECIFICATIONS ===========================
 
 INCLUDE DOSSYM.INC
-include debequ.asm
+include DEBEQU.ASM
 
 
 CODE	SEGMENT PUBLIC BYTE

@@ -141,7 +141,6 @@ MaxFileLen equ	64
 
 
 .xlist
-.xcref
 BREAK	MACRO	subtitle
 	SUBTTL	subtitle
 	PAGE
@@ -158,13 +157,12 @@ stdprn	    EQU     4
 	INCLUDE ERROR.INC
 	INCLUDE SYSVAR.INC
 	INCLUDE FIND.INC
-	include dpl.asm
+	include DPL.ASM
 	INCLUDE PDB.INC
 	INCLUDE SYSCALL.INC
 	INCLUDE MI.INC
-	include versiona.inc
+	include VERSIONA.INC
 .list
-.cref
 
 
 error_busy		EQU	9
@@ -201,7 +199,6 @@ IRP reg,<reglist>
 	PUSH	reg
 ENDM
 ENDM
-.xcref	SaveReg
 
 RestoreReg  MACRO   reglist		;; pop those registers
 IRP reg,<reglist>

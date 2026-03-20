@@ -20,16 +20,14 @@ DOS_PAGE1	   EQU	   0FEH 								   ;AN000;
 ;==============================================================================
 ;		   INCLUDE  FILES
 ;==============================================================================
-.xcref
 .xlist
 debug=0 		   ; an equate only for DOSMAC.inc				     ;AN000;
-INCLUDE  DOSMAC.inc										    ;AN000;
+INCLUDE  DOSMAC.INC										    ;AN000;
 .list
-.cref
-INCLUDE  dirent.inc										    ;AN000;
-INCLUDE  fastsegs.inc	   ; this cannot include in Fastopen.inc
-INCLUDE  fastopen.inc	   ; this include file also contains DOS equates			    ;AN000;
-include  version.inc
+INCLUDE  DIRENT.INC										    ;AN000;
+INCLUDE  FASTSEGS.INC	   ; this cannot include in Fastopen.inc
+INCLUDE  FASTOPEN.INC	   ; this include file also contains DOS equates			    ;AN000;
+include  VERSION.INC
 
 ;==============================================================================
 

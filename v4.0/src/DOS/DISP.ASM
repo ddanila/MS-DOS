@@ -5,10 +5,8 @@
 ;
 
 .xlist
-.xcref
 INCLUDE DOSSYM.INC
-include dosseg.asm
-.cref
+include DOSSEG.ASM
 .list
 
 AsmVars <Kanji, Debug>
@@ -441,6 +439,12 @@ EndProc restore_world
 ; save_world saves complete registers on the stack
 ;
         ASSUME  DS:NOTHING,ES:NOTHING,SS:NOTHING
+EXTRN	DSKSTATCHK:NEAR
+EXTRN	EcritDisk:NEAR
+EXTRN	LcritDisk:NEAR
+EXTRN	DSKSTATCHK:NEAR
+EXTRN	EcritDisk:NEAR
+EXTRN	LcritDisk:NEAR
         procedure   save_world,NEAR
         POP     restore_tmp
         PUSH    ES

@@ -1,0 +1,8 @@
+RAMDRIVE.ASM(560): Warning! W095: size not specified -- BYTE PTR is assumed
+RAMDRIVE.ASM(605): Warning! W095: size not specified -- BYTE PTR is assumed
+RAMDRIVE.ASM(1013): Warning! W095: size not specified -- BYTE PTR is assumed
+RAMDRIVE.ASM(1022): Warning! W095: size not specified -- BYTE PTR is assumed
+RAMDRIVE.ASM(2383): Warning! W041: Immediate constant too large
+RAMDRIVE.ASM(2819): Warning! W096: size not specified -- WORD PTR is assumed
+RAMDRIVE.ASM(2832): Warning! W096: size not specified -- WORD PTR is assumed
+RAMDRIVE.ASM(6218): Warning! W249: End directive required at end of file

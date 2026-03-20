@@ -34,7 +34,7 @@ dosxxx	segment byte public 'dos'
 	    public   dosQfileinfo
 	    .sall
 	    .xlist
-	    include  macros.inc
+	    include  MACROS.INC
 	    .list
 
 

@@ -23,7 +23,7 @@ CODE	SEGMENT PUBLIC 'CODE'          ;;
 				       ;;
 				       ;;
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; 
-include copyrigh.inc
+include COPYRIGH.INC
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	DB  1AH 		       ;; EOF
 				       ;;

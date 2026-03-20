@@ -3,15 +3,13 @@
 ;	SCCSID = @(#)tspc.asm	4.1 85/09/22
 TITLE	COMMAND Transient Uninitialized DATA
 
-	INCLUDE comsw.asm
+	INCLUDE COMSW.ASM
 .xlist
-.xcref
 	INCLUDE DOSSYM.INC
-	INCLUDE comequ.asm
-	INCLUDE comseg.asm
-	INCLUDE EA.inc			;AN030;
+	INCLUDE COMEQU.ASM
+	INCLUDE COMSEG.ASM
+	INCLUDE EA.INC			;AN030;
 .list
-.cref
 
 ; Uninitialized transient data
 TRANSPACE	SEGMENT PUBLIC BYTE

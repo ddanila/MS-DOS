@@ -63,12 +63,10 @@ NAME	IFSSESS 									 ;AN000;
 ;************************************************************************************
 											 ;AN000;
 .xlist											 ;AN000;
-.xcref											 ;AN000;
 INCLUDE IFSSYM.INC									 ;AN000;
 INCLUDE IFSFSYM.INC									 ;AN000;
 INCLUDE DOSSYM.INC									 ;AN000;
 INCLUDE DEVSYM.INC									 ;AN000;
-.cref											 ;AN000;
 .list											 ;AN000;
 											 ;AN000;
 AsmVars <IBM, Installed, DEBUG> 							 ;AN000;
@@ -120,7 +118,7 @@ DATA		SEGMENT WORD PUBLIC 'DATA'                                               ;
 if debug										 ;AN000;
 	Extrn	BugLev:WORD								 ;AN000;
 	Extrn	BugTyp:WORD								 ;AN000;
-	include bugtyp.asm								 ;AN000;
+	include BUGTYP.ASM								 ;AN000;
 endif											 ;AN000;
 DATA		ENDS									 ;AN000;
 											 ;AN000;
@@ -233,7 +231,7 @@ ERROR_STATUS	DB	"ERROR",0               ; from fs (GII)                         
 BREAK <IFS_ASSOPER -- Do the $Assignoper call>						 ;AN000;
 											 ;AN000;
 copyright	db	" IFSFUNC.EXE                  "                                 ;AN000;
-INCLUDE copyrigh.inc
+INCLUDE COPYRIGH.INC
 
 ;************************************************************************************	 ;AN000;
 ;											 ;AN000;
@@ -2161,6 +2159,54 @@ BREAK <CHECK_END_SPACE -- check esdi string for blanks> 				 ;AN000;
 											 ;AN000;
 	Procedure   CHECK_END_SPACE							 ;AN000;
 ASSUME	DS:NOTHING,ES:NOTHING								 ;AN000;
+EXTRN	CALL_IFS:NEAR
+EXTRN	CDS_TO_CD:NEAR
+EXTRN	CD_TO_CDS:NEAR
+EXTRN	CONSIST_SFT:NEAR
+EXTRN	CREATE_DFL_ENTRY:NEAR
+EXTRN	DELETE_DFL_ENTRY:NEAR
+EXTRN	DFL_MATCH:NEAR
+EXTRN	DFL_TO_DF:NEAR
+EXTRN	DF_TO_DFL:NEAR
+EXTRN	ECritNet:NEAR
+EXTRN	GET_UNC_FS_NAME:NEAR
+EXTRN	IFS_CLOSE:NEAR
+EXTRN	LCritNet:NEAR
+EXTRN	MOVE_DRIVER_NAME:NEAR
+EXTRN	NET_TRANS:NEAR
+EXTRN	PREP_IFSR:NEAR
+EXTRN	SET_CATEGORY:NEAR
+EXTRN	SET_DEPIOCTL_IFSR:NEAR
+EXTRN	SET_EXTERR_INFO:NEAR
+EXTRN	SET_THISIFS_UNC:NEAR
+EXTRN	XCHGP:NEAR
+EXTRN	ifs_1000:NEAR
+EXTRN	ifs_980:NEAR
+EXTRN	ifs_990:NEAR
+EXTRN	CALL_IFS:NEAR
+EXTRN	CDS_TO_CD:NEAR
+EXTRN	CD_TO_CDS:NEAR
+EXTRN	CONSIST_SFT:NEAR
+EXTRN	CREATE_DFL_ENTRY:NEAR
+EXTRN	DELETE_DFL_ENTRY:NEAR
+EXTRN	DFL_MATCH:NEAR
+EXTRN	DFL_TO_DF:NEAR
+EXTRN	DF_TO_DFL:NEAR
+EXTRN	ECritNet:NEAR
+EXTRN	GET_UNC_FS_NAME:NEAR
+EXTRN	IFS_CLOSE:NEAR
+EXTRN	LCritNet:NEAR
+EXTRN	MOVE_DRIVER_NAME:NEAR
+EXTRN	NET_TRANS:NEAR
+EXTRN	PREP_IFSR:NEAR
+EXTRN	SET_CATEGORY:NEAR
+EXTRN	SET_DEPIOCTL_IFSR:NEAR
+EXTRN	SET_EXTERR_INFO:NEAR
+EXTRN	SET_THISIFS_UNC:NEAR
+EXTRN	XCHGP:NEAR
+EXTRN	ifs_1000:NEAR
+EXTRN	ifs_980:NEAR
+EXTRN	ifs_990:NEAR
 											 ;AN000;
 	SaveReg <AX,DS,SI,ES>			; save registers			 ;AN000;
 	RestoreReg <DS> 			; set dssi -> asciiz ifs name		 ;AN000;

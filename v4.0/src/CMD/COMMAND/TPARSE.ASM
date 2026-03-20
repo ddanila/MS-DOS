@@ -4,10 +4,8 @@
 TITLE	COMMAND interface to SYSPARSE
 
 .xlist
-.xcref
-	INCLUDE comseg.asm		;AN000;
+	INCLUDE COMSEG.ASM		;AN000;
 .list
-.cref
 
 TRANSPACE	SEGMENT PUBLIC BYTE	;AN000;
 
@@ -19,12 +17,10 @@ TRANSPACE	SEGMENT PUBLIC BYTE	;AN000;
 	LFEOLSW equ	0		;AN044; do not use 0ah as line terminator
 
 .xlist
-.xcref
 
-include psdata.inc			;AN000;
+include PSDATA.INC			;AN000;
 
 .list
-.cref
 
 TRANSPACE	ENDS			;AN000;
 
@@ -48,10 +44,8 @@ ASSUME	CS:TRANGROUP,DS:NOTHING,ES:NOTHING,SS:NOTHING	 ;AN054;
 	public	Cmd_parse		;AN000;
 
 .xlist
-.xcref
-	INCLUDE parse.asm		;AN000;
+	INCLUDE PARSE.ASM		;AN000;
 .list
-.cref
 
 Cmd_parse	Proc  near		;AN000;
 

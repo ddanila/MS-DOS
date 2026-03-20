@@ -55,7 +55,7 @@
 
 .xlist
 
-include sysmsg.inc				;an000;message retriever
+include SYSMSG.INC				;an000;message retriever
 
 msg_utilname <EDLIN>				;an000;EDLIN messages
 .list
@@ -262,7 +262,7 @@ $$IF3:
 
 PRE_LOAD_MESSAGE	endp			;an000;end proc
 
-include msgdcl.inc
+include MSGDCL.INC
 
 code	ends					;an000;end code segment
 

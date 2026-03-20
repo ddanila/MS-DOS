@@ -15,7 +15,7 @@ kbdxxx	segment byte public 'kbd'
 	public kbdflushbuffer
 	.sall
 	.xlist
-	include kbd.inc
+	include KBD.INC
 	.list
 
 	public savedkbdinput

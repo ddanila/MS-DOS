@@ -32,7 +32,6 @@
 ;   It also finds a valid page frame for use.
 ;
 ;******************************************************************************
-.lfcond
 .386p
 
 	page
@@ -66,9 +65,9 @@ LAST_CONV_UMAP_SEG	=  03FFFh
 ;******************************************************************************
 ;			INCLUDE FILES
 ;******************************************************************************
-    include  vdmseg.inc     ; segment definitions
-    include  emm386.inc     ;contains the error messages
-    include  emmdef.inc     ;contains some emm defines
+    include  VDMSEG.INC     ; segment definitions
+    include  EMM386.INC     ;contains the error messages
+    include  EMMDEF.INC     ;contains some emm defines
 
 	page
 ;******************************************************************************

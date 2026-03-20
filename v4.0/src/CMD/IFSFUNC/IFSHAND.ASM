@@ -49,13 +49,11 @@ NAME	IFSHANDLE									 ;AN000;
 ;******************************************************************************
 											 ;AN000;
 .xlist											 ;AN000;
-.xcref											 ;AN000;
 INCLUDE IFSSYM.INC									 ;AN000;
 INCLUDE IFSFSYM.INC									 ;AN000;
 INCLUDE DOSSYM.INC									 ;AN000;
 INCLUDE DEVSYM.INC									 ;AN000;
 											 ;AN000;
-.cref											 ;AN000;
 .list											 ;AN000;
 											 ;AN000;
 AsmVars <IBM, Installed, DEBUG> 							 ;AN000;
@@ -67,7 +65,7 @@ IFSSEG	ENDS										 ;AN000;
 											 ;AN000;
 ; include THE REST of the segment definitions for normal MSDOS				 ;AN000;
 											 ;AN000;
-include dosseg.asm									 ;AN000;
+include DOSSEG.ASM									 ;AN000;
 											 ;AN000;
 DATA		SEGMENT WORD PUBLIC 'DATA'                                               ;AN000;
 	;DOSGROUP Data									 ;AN000;
@@ -516,6 +514,20 @@ BREAK <IFS_WRITE Write to a NET SFT>							 ;AN000;
 											 ;AN000;
 	procedure   IFS_WRITE,NEAR							 ;AN000;
 ASSUME	DS:DOSGROUP,ES:NOTHING								 ;AN000;
+EXTRN	CALL_IFS:NEAR
+EXTRN	DRIVE_FROM_SFT:NEAR
+EXTRN	PREP_IFSR:NEAR
+EXTRN	SFF_TO_SFT:NEAR
+EXTRN	SFT_TO_SFF:NEAR
+EXTRN	ifs_1000:NEAR
+EXTRN	ifs_990:NEAR
+EXTRN	CALL_IFS:NEAR
+EXTRN	DRIVE_FROM_SFT:NEAR
+EXTRN	PREP_IFSR:NEAR
+EXTRN	SFF_TO_SFT:NEAR
+EXTRN	SFT_TO_SFF:NEAR
+EXTRN	ifs_1000:NEAR
+EXTRN	ifs_990:NEAR
 											 ;AN000;
 	ifsr_fcn_def  EXECAPI			; define ifsr for write 		 ;AN000;
 	MOV	CS:IFSPROC_FLAGS,SetDeviceCB	; init processing flags 		 ;AN000;

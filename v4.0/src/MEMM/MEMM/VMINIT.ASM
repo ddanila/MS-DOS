@@ -40,7 +40,6 @@ page	58,132
 ;
 ;******************************************************************************
 .386p
-.lfcond 				; list false conditionals
 	page
 ;******************************************************************************
 ;			P U B L I C   D E C L A R A T I O N S
@@ -58,10 +57,10 @@ endif
 ;			L O C A L   C O N S T A N T S
 ;******************************************************************************
 ;
-	include VDMseg.inc
-	include VDMsel.inc
-	include desc.inc
-	include elim.inc
+	include VDMSEG.INC
+	include VDMSEL.INC
+	include DESC.INC
+	include ELIM.INC
 FALSE	equ	0
 TRUE	equ	not FALSE
 

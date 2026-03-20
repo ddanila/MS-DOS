@@ -5,9 +5,9 @@ TITLE	COMMAND Initialization messages
 
 .XCREF
 .XLIST
-include comsw.asm
-include comseg.asm
-include ifequ.asm
+include COMSW.ASM
+include COMSEG.ASM
+include IFEQU.ASM
 .LIST
 .CREF
 
@@ -75,7 +75,7 @@ INIT		SEGMENT PUBLIC PARA		;AC000;
 	PUBLIC	pars_msg_off			;AN060;
 	PUBLIC	pars_msg_seg			;AN060;
 
-include resmsg.equ				;AC000;
+include RESMSG.EQU				;AC000;
 
 
 ICONDEV LABEL BYTE
@@ -250,12 +250,10 @@ num_positionals DW	0			;AN000; counter for positionals
 old_parse_ptr	DW	0			;AN057; SI position before calling parser
 
 .xlist
-.xcref
 
 INCLUDE SYSMSG.INC				;AN000; get message services routine
 
 .list
-.cref
 
 ASSUME DS:RESGROUP,ES:RESGROUP,CS:RESGROUP
 
@@ -263,7 +261,7 @@ MSG_UTILNAME <COMMAND>				;AN000; define utility name
 
 MSG_SERVICES <COMR,COMMAND.CLB> 		;AN000; include initialization messages
 
-include msgdcl.inc
+include MSGDCL.INC
 
 INIT	ENDS
 

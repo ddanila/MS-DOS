@@ -41,7 +41,7 @@ DGROUP	GROUP	_DATA
 PGROUP	GROUP	_TEXT
 
 _DATA	segment byte public 'DATA'
-include psdata.inc
+include PSDATA.INC
 _DATA	ends
 
 _TEXT	segment byte public 'CODE'
@@ -51,7 +51,7 @@ _TEXT	segment byte public 'CODE'
 
 ;-------------------------------------------------------------------
 .xlist
-include parse.asm			; include the parser
+include PARSE.ASM			; include the parser
 .list
 ;-------------------------------------------------------------------
 

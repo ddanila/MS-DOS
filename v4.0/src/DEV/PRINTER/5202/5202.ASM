@@ -102,7 +102,7 @@ DATA865:DW     1			; CART/NON-CART
 	DB     ESC1,91,84,5,0,00,00,003H,061H,00   ; select code page ******
 	dB     ESC1,"6"                  ;
 
-include copyrigh.inc
+include COPYRIGH.INC
 
 CSEG	ENDS				;
 	END BEGIN			;

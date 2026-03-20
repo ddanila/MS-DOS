@@ -1,16 +1,14 @@
  page 80,132
 ;	SCCSID = @(#)copypr1.asm	1.1 85/05/14
 ;	SCCSID = @(#)copypr1.asm	1.1 85/05/14
-	INCLUDE comsw.asm
+	INCLUDE COMSW.ASM
 
 .xlist
-.xcref
 	INCLUDE DOSSYM.INC
 ;	INCLUDE DEVSYM.INC
-	INCLUDE comseg.asm
-	INCLUDE comequ.asm
+	INCLUDE COMSEG.ASM
+	INCLUDE COMEQU.ASM
 .list
-.cref
 
 
 TRANDATA	SEGMENT PUBLIC BYTE	;AC000;
@@ -213,6 +211,16 @@ ASSUME	DS:NOTHING
 	INT	int_command
 	POP	DS
 ASSUME	DS:TRANGROUP
+EXTRN	BUILDDEST:NEAR
+EXTRN	COMPNAME:NEAR
+EXTRN	set_ext_error_msg:NEAR
+EXTRN	set_file_code_page:NEAR
+EXTRN	std_Eprintf:NEAR
+EXTRN	BUILDDEST:NEAR
+EXTRN	COMPNAME:NEAR
+EXTRN	set_ext_error_msg:NEAR
+EXTRN	set_file_code_page:NEAR
+EXTRN	std_Eprintf:NEAR
 	MOV	DX,OFFSET TRANGROUP:NOSPACE_ptr
 	JC	xa_set_error_Jmp		;AC022; Failure
 	sub	cx,ax

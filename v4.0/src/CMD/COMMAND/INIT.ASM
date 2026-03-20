@@ -3,17 +3,15 @@
 ;	SCCSID = @(#)init.asm	4.13 85/11/03
 TITLE	COMMAND Initialization
 
-	INCLUDE comsw.asm
+	INCLUDE COMSW.ASM
 
 .xlist
-.xcref
 	INCLUDE DOSSYM.INC
-	include doscntry.inc		;AC000;
-	INCLUDE comseg.asm
-	INCLUDE comequ.asm
-	include resmsg.equ		;AN000;
+	include DOSCNTRY.INC		;AC000;
+	INCLUDE COMSEG.ASM
+	INCLUDE COMEQU.ASM
+	include RESMSG.EQU		;AN000;
 .list
-.cref
 
 
 ENVIRONSIZ		EQU	0A0H	;Must agree with values in EVIRONMENT segment
@@ -1705,18 +1703,26 @@ Set_ext_2f	endp				;AN060;
 ASSUME	DS:RESGROUP, ES:RESGROUP
 
 .xlist
-.xcref
 
 INCLUDE SYSMSG.INC				;AN000; include message services
 
 .list
-.cref
 
 MSG_UTILNAME <COMMAND>				;AN000; define utility name
 
 MSG_SERVICES <COMR,NEARmsg,LOADmsg,NOCHECKSTDIN,NOCHECKSTDOUT>	;AC026; include message services macro
 
-include msgdcl.inc
+include MSGDCL.INC
+EXTRN	LOADCOM:NEAR
+EXTRN	itestkanj:NEAR
+EXTRN	rprint:NEAR
+EXTRN	sysdispmsg:NEAR
+EXTRN	triageError:NEAR
+EXTRN	LOADCOM:NEAR
+EXTRN	itestkanj:NEAR
+EXTRN	rprint:NEAR
+EXTRN	sysdispmsg:NEAR
+EXTRN	triageError:NEAR
 
 INIT	ENDS
 

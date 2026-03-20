@@ -66,7 +66,7 @@ IF1
 	;%OUT	COMPONENT=LABEL MODULE=LABELM.SAL
 	;%OUT	INCLUDING SYSMSG.INC
 ENDIF
-	INCLUDE sysmsg.inc
+	INCLUDE SYSMSG.INC
 	MSG_UTILNAME <LABL>
 
 CSEG	segment public
@@ -86,7 +86,7 @@ CSEG	segment public
 	MSG_SERVICES <NEARmsg,DISPLAYmsg,CHARmsg,NUMmsg,INPUTmsg,LOADmsg>
 CSEG	ENDS					  ;AN000;M Access to svcs macro
 
-	include msgdcl.inc
+	include MSGDCL.INC
 
 	END
 

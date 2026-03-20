@@ -15,7 +15,6 @@
 ;              else create stop label
 ;                   - same as start except name
 ;***********************************************************************
-.LALL
 pathlabl MACRO pnam
 IF1                                     ;if pass 1
     IFNDEF LBL_&pnam                    ;switch not defined if first creation

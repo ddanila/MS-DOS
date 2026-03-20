@@ -16,16 +16,14 @@ NAME    DOS_ABORT
 ; get the appropriate segment definitions
 ;
 
-include dosseg.asm
+include DOSSEG.ASM
 
 CODE    SEGMENT BYTE PUBLIC  'CODE'
 	ASSUME  SS:DOSGROUP,CS:DOSGROUP
 
 .xlist
-.xcref
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
-.cref
 .list
 
 Installed = TRUE
@@ -85,6 +83,10 @@ else
 	call    mftCloseP
 endif
 	assume  ds:nothing
+EXTRN	$close:NEAR
+EXTRN	SFFromSFN:NEAR
+EXTRN	SFFromSFN:NEAR
+EXTRN	SFFromSFN:NEAR
 ;
 ; Scan the FCB cache for guys that belong to this process and zap their ref
 ; counts.

@@ -1,0 +1,13 @@
+INDEDAT.INC(351): Error! E094: This instruction is not supported
+INDEDAT.INC(351): Note! N290: included by file INDEINI.ASM(131)
+INDEDAT.INC(419): Error! E065: Operator is expected
+INDEDAT.INC(419): Note! N290: included by file INDEINI.ASM(131)
+INDEDAT.INC(424): Error! E065: Operator is expected
+INDEDAT.INC(424): Note! N290: included by file INDEINI.ASM(131)
+INDEDAT.INC(426): Error! E065: Operator is expected
+INDEDAT.INC(426): Note! N290: included by file INDEINI.ASM(131)
+INDEINI.ASM(230): Error! E065: Operator is expected
+INDEINI.ASM(230): Error! E021: Expecting number
+INDEINI.ASM(252): Error! E065: Operator is expected
+INDEINI.ASM(252): Error! E021: Expecting number
+INDEINI.ASM(1474): Warning! W249: End directive required at end of file

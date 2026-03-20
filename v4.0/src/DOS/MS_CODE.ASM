@@ -4,14 +4,12 @@
 ;
 
 .xlist
-.xcref
-include dossym.inc
-include devsym.inc
-include dosseg.asm
-include ifssym.inc
-include fastopen.inc
-include fastxxxx.inc
-.cref
+include DOSSYM.INC
+include DEVSYM.INC
+include DOSSEG.ASM
+include IFSSYM.INC
+include FASTOPEN.INC
+include FASTXXXX.INC
 .list
 
 AsmVars <Kanji, Debug>
@@ -587,6 +585,30 @@ EndProc RW32_CONVERT
 ;
 Procedure   Fastxxx_Purge,NEAR
 	ASSUME	CS:DOSGROUP,DS:NOTHING,ES:NOTHING,SS:NOTHING
+EXTRN	DSKREAD:NEAR
+EXTRN	DSKWRITE:NEAR
+EXTRN	EcritDisk:NEAR
+EXTRN	FETCHI_CHECK:NEAR
+EXTRN	Fast_Dispatch:NEAR
+EXTRN	GetThisDrv:NEAR
+EXTRN	LcritDisk:NEAR
+EXTRN	Restore_World:NEAR
+EXTRN	SET_RQ_SC_PARMS:NEAR
+EXTRN	Save_World:NEAR
+EXTRN	TableDispatch:NEAR
+EXTRN	get_user_stack:NEAR
+EXTRN	DSKREAD:NEAR
+EXTRN	DSKWRITE:NEAR
+EXTRN	EcritDisk:NEAR
+EXTRN	FETCHI_CHECK:NEAR
+EXTRN	Fast_Dispatch:NEAR
+EXTRN	GetThisDrv:NEAR
+EXTRN	LcritDisk:NEAR
+EXTRN	Restore_World:NEAR
+EXTRN	SET_RQ_SC_PARMS:NEAR
+EXTRN	Save_World:NEAR
+EXTRN	TableDispatch:NEAR
+EXTRN	get_user_stack:NEAR
 	PUSH	AX			      ; save regs.			;AN000;
 	PUSH	SI								;AN000;
 	PUSH	DX								;AN000;

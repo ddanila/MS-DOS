@@ -7,11 +7,9 @@ NAME    STDCODE
 ;
 
 .xlist
-.xcref
-include stdsw.asm
-.cref
+include STDSW.ASM
 .list
 
-include ms_code.asm
+include MS_CODE.ASM
 	END
 

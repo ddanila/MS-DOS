@@ -1,0 +1,20 @@
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Error! E230: Label 'TRUE' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Note! N290: included by file IFSDEV.ASM(49)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Error! E230: Label 'FALSE' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Note! N290: included by file IFSDEV.ASM(49)
+IFSDEV.ASM(208): Warning! W095: size not specified -- BYTE PTR is assumed
+IFSDEV.ASM(215): Warning! W095: size not specified -- BYTE PTR is assumed
+IFSDEV.ASM(225): Warning! W095: size not specified -- BYTE PTR is assumed
+IFSDEV.ASM(239): Warning! W095: size not specified -- BYTE PTR is assumed
+IFSDEV.ASM(243): Warning! W095: size not specified -- BYTE PTR is assumed
+IFSDEV.ASM(333): Error! E040: Invalid instruction operands
+IFSDEV.ASM(394): Error! E002: Invalid instruction with current CPU setting
+IFSDEV.ASM(442): Warning! W095: size not specified -- BYTE PTR is assumed
+IFSDEV.ASM(445): Warning! W095: size not specified -- BYTE PTR is assumed
+IFSDEV.ASM(560): Warning! W095: size not specified -- BYTE PTR is assumed
+IFSDEV.ASM(694): Warning! W095: size not specified -- BYTE PTR is assumed
+IFSDEV.ASM(698): Error! E040: Invalid instruction operands
+IFSDEV.ASM(702): Warning! W095: size not specified -- BYTE PTR is assumed
+IFSDEV.ASM(811): Warning! W095: size not specified -- BYTE PTR is assumed
+IFSDEV.ASM(814): Warning! W095: size not specified -- BYTE PTR is assumed
+IFSDEV.ASM(1121): Warning! W095: size not specified -- BYTE PTR is assumed

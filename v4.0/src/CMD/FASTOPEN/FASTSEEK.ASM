@@ -2,15 +2,13 @@
 Title	FASTOPEN
 
 ;--------------- INCLUDE FILES -----------------
-.xcref
 .xlist
 debug=0 		  ;this is an equate only for DOSMAC.inc
-INCLUDE DOSMAC.inc
+INCLUDE DOSMAC.INC
 .list
-.cref
-INCLUDE dirent.inc
-INCLUDE fastsegs.inc	  ; Cannot declare this in DOS includes
-INCLUDE fastopen.inc	  ; This include file also contains DOS equates
+INCLUDE DIRENT.INC
+INCLUDE FASTSEGS.INC	  ; Cannot declare this in DOS includes
+INCLUDE FASTOPEN.INC	  ; This include file also contains DOS equates
 
 
 CSEG_MAIN   SEGMENT   PARA   PUBLIC 'CODE'       ; Cseg_Seek segment

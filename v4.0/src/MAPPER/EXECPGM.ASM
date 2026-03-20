@@ -49,7 +49,7 @@ dosxxx	segment byte public 'dos'
 	public	dosexecpgm
 	.sall
 	.xlist
-	include macros.inc
+	include MACROS.INC
 	.list
 
 inv_parm equ 0002

@@ -1,7 +1,7 @@
 	page	60,132
 ;			$SALUT (4,25,30,41)
 
-			INCLUDE pridefs.inc
+			INCLUDE PRIDEFS.INC
 
 BREAK			<Transient Messages>
 
@@ -74,7 +74,7 @@ Val3SW			equ  false
 
 					;xlist
 					;xcref
-   include parse.asm
+   include PARSE.ASM
 					;cref
 					;list
 

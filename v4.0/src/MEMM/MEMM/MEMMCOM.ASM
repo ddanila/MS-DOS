@@ -52,7 +52,6 @@
 ;   "automatically" (depending on accesses to the EMM functions).
 ;
 ;******************************************************************************
-.lfcond 				; list false conditionals
 .386p
 	page
 ;******************************************************************************

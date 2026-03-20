@@ -108,7 +108,7 @@ DOS_Exit:
 	RET				;RESTORE REGS AND RETURN
 EXITP	ENDP
 
-include msbds.inc			; include BDS structures
+include MSBDS.INC			; include BDS structures
 ;include versiona.inc
 
 BDS	DW	-1			;Link to next structure
@@ -315,7 +315,6 @@ F_Choices	label	byte	;AN000;
 
 ;AN000;System messages handler data
 ;AN000;Put the data here
-.sall
 MSG_SERVICES <MSGDATA>
 
 ;AN000;Place the messages here
@@ -323,7 +322,6 @@ MSG_SERVICES <DRIVER.CL1, DRIVER.CL2, DRIVER.CLA>
 
 ;AN000;Put messages handler code here.
 MSG_SERVICES <LOADmsg,DISPLAYmsg,CHARmsg>
-.xall
 
 ;
 ; Sets ds:di -> BDS for this drive

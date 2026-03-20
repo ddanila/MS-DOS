@@ -19,17 +19,14 @@ NAME    UTIL
 ;
 ; get the appropriate segment definitions
 ;
-include dosseg.asm
+include DOSSEG.ASM
 
 CODE    SEGMENT BYTE PUBLIC  'CODE'
 	ASSUME  SS:DOSGROUP,CS:DOSGROUP
 
-.xcref
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
-.cref
 .list
-.sall
 
 	I_need  CurrentPDB,WORD         ; current process data block location
 	I_need  SFT_Addr,DWORD          ; pointer to beginning of table
@@ -38,7 +35,7 @@ INCLUDE DEVSYM.INC
 if debug
 	I_need  BugLev,WORD
 	I_need  BugTyp,WORD
-include bugtyp.asm
+include BUGTYP.ASM
 endif
 
 BREAK   <pJFNFromHandle - return pointer to JFN table entry>

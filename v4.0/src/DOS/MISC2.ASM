@@ -34,16 +34,14 @@ NAME  MISC2
 ;
 ; get the appropriate segment definitions
 ;
-include dosseg.asm
+include DOSSEG.ASM
 
 CODE	SEGMENT BYTE PUBLIC  'CODE'
 	ASSUME	SS:DOSGROUP,CS:DOSGROUP
 
-.xcref
-include dossym.inc
-include fastseek.inc		       ;AN000;
-include fastxxxx.inc		       ;AN000;
-.cref
+include DOSSYM.INC
+include FASTSEEK.INC		       ;AN000;
+include FASTXXXX.INC		       ;AN000;
 .list
 
 	i_need	THISCDS,DWORD
@@ -62,7 +60,7 @@ include fastxxxx.inc		       ;AN000;
 if debug
 	I_need	BugLev,WORD
 	I_need	BugTyp,WORD
-include bugtyp.asm
+include BUGTYP.ASM
 endif
 
 Break <STRCMP - compare two ASCIZ strings DS:SI to ES:DI>
@@ -582,6 +580,17 @@ Break	<Fake_version - set/reset version flag>
 
 Procedure   Fake_version,NEAR					  ;AN000;
 	ASSUME	CS:DOSGroup,DS:NOTHING,ES:NOTHING,SS:NOTHING	  ;AN000;
+EXTRN	$IOCTL:NEAR
+EXTRN	$LSEEK:NEAR
+EXTRN	$OPEN:NEAR
+EXTRN	GetLet2:NEAR
+EXTRN	PathChrCmp:NEAR
+EXTRN	testkanj:NEAR
+EXTRN	GetLet2:NEAR
+EXTRN	PathChrCmp:NEAR
+EXTRN	testkanj:NEAR
+EXTRN	GetLet2:NEAR
+EXTRN	PathChrCmp:NEAR
 
 	MOV	[Special_version],DX   ;AN006;MS.
 	return			       ;AN006;;MS. exit

@@ -1,7 +1,7 @@
 	page	80,132
 	TITLE	DOS - PRINT - RESIDENT
 ;			$SALUT (4,25,30,41)
-			INCLUDE pridefs.inc
+			INCLUDE PRIDEFS.INC
 
 ; include Extended Atribute support
 
@@ -36,7 +36,7 @@ CodeR			Segment public para
 
 			db   " - PRINT utility - "
 
-			include copyrigh.inc
+			include COPYRIGH.INC
 
 			db   01Ah	; fake end of file for 'TYPE'
 			DB   (361 - 80h) + 310 DUP (?) ; (362 - 80h) is IBM's New
