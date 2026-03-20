@@ -19,10 +19,6 @@
 ;;              - this macro has been invoked more than twice with same parm
 ;;              - issue error message
 ;;***********************************************************************
-IF1
-    %OUT COMPONENT=COMMON, MODULE=PATHMAC.INC ...
-ENDIF
-
 pathlabl MACRO pnam
 IFNDEF LBL_&pnam                        ;;IF THIS IS THE FIRST TIME,
     LBL_&pnam = 0                       ;;DEFINE IT, INITIALLY ZERO

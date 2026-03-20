@@ -240,10 +240,12 @@ NUMmsg			 =	FALSE  ;;  |
 TIMEmsg 		 =	FALSE  ;;  |
 DATEmsg 		 =	FALSE  ;; /
 
-IF1				       ;;
+IFNDEF COMR
 COMR			 =	FALSE  ;;  COMMAND.COM Cases (resident)
+ENDIF
+IFNDEF COMT
 COMT			 =	FALSE  ;;		     (transient)
-ENDIF				       ;;
+ENDIF
 
 $M_STRUC		 =	TRUE   ;; Internal message service defaults
 $M_LOAD 		 =	TRUE   ;;

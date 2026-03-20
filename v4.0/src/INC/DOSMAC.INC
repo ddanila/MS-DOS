@@ -2,6 +2,8 @@
 ;	SCCSID = @(#)dosmac.asm	1.1 85/04/10
 ;
 ; Macro file for MSDOS.
+; IF1/IF2 pass-dependent conditionals removed for WASM (single-pass).
+; .xcref/.cref listing directives removed (unsupported by WASM).
 ;
 
 TRUE    EQU 0FFFFh
@@ -13,7 +15,6 @@ BREAK   MACRO   subtitle
 	SUBTTL  subtitle
 	PAGE
 ENDM
-.xcref  break
 
 BREAK   <ASMVAR - handle assembly variables once and for all>
 
@@ -50,80 +51,55 @@ IF NOT InstalledData
 	DATA    ENDS
 ENDIF
 ENDM
-	.xcref I_need
 
 ;
 ; call a procedure that may be external.  The call will be short.
 ;
 invoke  MACRO   name
-.xcref
-	IF2
-	    IFNDEF name
+	IFNDEF name
 	EXTRN   name:NEAR
-	    ENDIF
 	ENDIF
-.cref
 	CALL    name
 ENDM
-.xcref  invoke
 
 PAGE
 ;
 ; jump to a label that may be external.  The jump will be near.
 ;
 transfer    MACRO   name
-.xcref
-	IF2
-	    IFNDEF name
+	IFNDEF name
 	EXTRN   name:NEAR
-	    ENDIF
 	ENDIF
-.cref
 	JUMP    name
 ENDM
-.xcref  transfer
 
 ;
 ; get a short address in a word
 ;
 short_addr  MACRO   name
     IFDIF   <name>,<?>
-.xcref
-	IF2
-	    IFNDEF name
+	IFNDEF name
 	EXTRN   name:NEAR
-	    ENDIF
 	ENDIF
-.cref
 	DW  OFFSET DOSGROUP:name
     ELSE
 	DW  ?
     ENDIF
 ENDM
-.xcref  short_addr
 
 ;
 ; get a long address in a dword
 ;
 long_addr   MACRO   name
-.xcref
-	IF2
-	    IFNDEF name
+	IFNDEF name
 	EXTRN   name:NEAR
-	    ENDIF
 	ENDIF
-.cref
 	DD  name
 ENDM
-.xcref  long_addr
 
 ;
 ; declare a PROC near or far but PUBLIC nonetheless
 ;
-.xcref ?frame
-.xcref ?aframe
-.xcref ?stackdepth
-.xcref ?initstack
 ?frame        =   0                     ; initial
 ?aframe       =   0                     ; initial
 ?stackdepth   =   0                     ; initial stack size
@@ -133,31 +109,22 @@ procedure   MACRO   name,distance
 	?frame =    0
 	?aframe =   2                   ;; remember the pushed BP
 	PUBLIC  name
-	IF1
-	%OUT name... pass 1
-	ENDIF
-	IF2
-	%OUT name... pass 2
-	ENDIF
 name    PROC    distance
 	?initstack    = ?stackdepth     ;; beginning of procedure
 ENDM
-.xcref  procedure
 
 ;
 ; end a procedure and check that stack depth is preserved
 ;
 EndProc MACRO   name, chk
 	IFDIF   <chk>,<NoCheck>       ;; check the stack size
-	IF2
 	IF ?initstack NE ?stackdepth    ;; is it different?
 	%OUT    ***** Possible stack size error in name *****
 	ENDIF
 	ENDIF
-	ENDIF
 name    ENDP
 ENDM
-.xcref  endproc
+
 PAGE
 ;
 ; define a data item to be public and of an appropriate size/type
@@ -209,9 +176,7 @@ ELSE
 ENDIF
     ENDIF
 ENDM
-.xcref  I_AM
-.xcref  I_AM_SIZE
-.xcref  I_AM_LEN
+
 I_AM_SIZE   = 0
 I_AM_LEN    = 0
 
@@ -224,64 +189,39 @@ entry macro name
 	PUBLIC  name
 name:
 endm
-.xcref  entry
 
 BREAK <ERROR - store an error code then jump to a label>
 
 error macro code
-.xcref
 	MOV AL,code
 	transfer    SYS_RET_ERR
-.cref
 ENDM
-.xcref  error
 
-BREAK <JUMP - real jump that links up shortwise>
+BREAK <JUMP - plain near jump>
 ;
-; given a label <lbl> either 2 byte jump to another label <lbl>_J
-; if it is near enough or 3 byte jump to <lbl>
+; jump to a label (plain near JMP — short-jump optimization removed for WASM)
 ;
 
 jump    macro lbl
-    local a
-.xcref
-
-    ifndef lbl&_J                       ;; is this the first invocation
-a:      JMP lbl
-    ELSE
-	IF (lbl&_J GE $) OR ($-lbl&_J GT 126)
-a:      JMP lbl                         ;; is the jump too far away?
-	ELSE
-a:      JMP lbl&_J                      ;; do the short one...
-	ENDIF
-    ENDIF
-    lbl&_j = a
-.cref
+	JMP     lbl
 endm
-.xcref  jump
 
 BREAK <RETURN - return from a function>
 
 return  macro x
     local a
-.xcref
 a:
 	RET
 ret_l = a
-.cref
 endm
-.xcref  return
 
 BREAK <CONDRET - conditional return>
 
 condret macro   cc,ncc
     local   a
-.xcref
-.xcref a
-.cref
     ifdef   ret_l                       ;; if ret_l is defined
 	if (($ - ret_l) le 126) and ($ gt ret_l)
-					;;     if ret_l is near enough then
+				;;     if ret_l is near enough then
 	    a:  j&cc    ret_l           ;;         a: j<CC> to ret_l
 	    ret_&cc = a                 ;;         define ret_<CC> to be a:
 	    exitm
@@ -289,7 +229,7 @@ condret macro   cc,ncc
     endif
     ifdef   ret_&cc                     ;; if ret_<CC> defined
 	if (($ - ret_&cc) le 126) and ($ gt ret_&cc)
-					;;     if ret_<CC> is near enough
+				;;     if ret_<CC> is near enough
 	    a:  j&cc    ret_&cc         ;;         a: j<CC> to ret_<CC>
 	    ret_&cc = a                 ;;         define ret_<CC> to be a:
 	    exitm
@@ -300,35 +240,30 @@ condret macro   cc,ncc
     a:                                  ;; a:
     ret_&cc = ret_l                     ;; define ret_<CC> to be ret_l
 endm
-.xcref  condret
 
 BREAK <RETZ - return if zero, links up shortwise if necessary>
 
 retz    macro
     condret z,nz
 endm
-.xcref  retz
 
 BREAK <RETNZ - return if not zero, links up shortwise if necessary>
 
 retnz   macro
     condret nz,z
 endm
-.xcref  retnz
 
 BREAK <RETC - return if carry set, links up shortwise if necessary>
 
 retc    macro
     condret c,nc
 endm
-.xcref  retc
 
 BREAK <RETNC - return if not carry, links up shortwise if necessary>
 
 retnc   macro
     condret nc,c
 endm
-.xcref  retnc
 
 BREAK <CONTEXT - set the DOS context to a particular register>
 
@@ -337,7 +272,6 @@ context macro   r
 	POP     r
 	ASSUME  r:DOSGROUP
 endm
-.xcref  context
 
 BREAK <SaveReg - save a set of registers>
 
@@ -347,7 +281,6 @@ IRP reg,<reglist>
 	PUSH    reg
 ENDM
 ENDM
-.xcref  SaveReg
 
 BREAK <RestoreReg - unsave some registers>
 
@@ -357,7 +290,6 @@ IRP reg,<reglist>
 	POP     reg
 ENDM
 ENDM
-.xcref  RestoreReg
 
 BREAK <Critical section macros>
 

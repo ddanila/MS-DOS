@@ -14,10 +14,6 @@ include dosmac.INC
 
 include VERSIONA.INC
 
-IF2
-    %OUT    DOSSYM in Pass 2
-ENDIF
-
 BREAK <Control character definitions>
 
 c_DEL	    EQU     7Fh 		;    ASCII rubout or delete previous char

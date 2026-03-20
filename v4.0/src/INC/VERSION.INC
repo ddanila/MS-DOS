@@ -42,22 +42,6 @@ endif
 IBM	   EQU	   IBMVER
 ;
 ;
-  IF1
-	IF IBMVER
-	    IF IBMCOPYRIGHT
-              %OUT ... IBM version build switch on ...
-	    ELSE
-	      %OUT ... CLONE version build switch on ...
-	    ENDIF
-	ELSE
-	    IF NOT IBMCOPYRIGHT
-	      %OUT ... MS version build switch on ...
-	    ELSE
-	      %OUT !!!!!!!!!  VERSION SWITCHES SET INCORECTLY  !!!!!!!!!
-	      %OUT !!!!!!!!! CHECK SETTINGS IN INC\VERSION.INC !!!!!!!!!
-	    ENDIF
-	ENDIF   
-  ENDIF
 ;
 ;
 ;***************************************************************************
@@ -99,8 +83,3 @@ endif
  JAPAN	   EQU	   FALSE
 	ENDIF
 ;
-	IF1
-		IF INTERNAT
-%OUT	Internat(ECS) version build switch on
-		ENDIF
-	ENDIF
