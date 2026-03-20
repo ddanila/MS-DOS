@@ -94,7 +94,7 @@
 ;		 4.00 modifications by: EMK
 ;****************** END OF SPECIFICATIONS *****************************
 	IF1
-	    %OUT    COMPONENT=DISKCOPY, MODULE=COPYINIT.SAL
+	    ;%OUT    COMPONENT=DISKCOPY, MODULE=COPYINIT.SAL
 	ENDIF
 
 ;DATE:	 9-22-83

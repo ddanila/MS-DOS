@@ -5,9 +5,9 @@
 
 IF1
     IF IBM
-        %OUT DBCS Enabled IBM  version
+        ;%OUT DBCS Enabled IBM  version
     ELSE
-        %OUT Normal version
+        ;%OUT Normal version
     ENDIF
 
 ;;  IF   KANJI                  3/3/KK

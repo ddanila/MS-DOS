@@ -133,7 +133,7 @@ print_prompt:
 	push	cs
 	pop	ds				; MAKE SURE DS IS IN TRANGROUP
 	push	es
-	invoke	find_prompt			; LOOK FOR PROMPT STRING
+	DOSInvoke	find_prompt			; LOOK FOR PROMPT STRING
 	jc	PP0				; CAN'T FIND ONE
 	cmp	byte ptr es:[di],0
 	jnz	PP1
@@ -163,7 +163,7 @@ PP2:
 
 PP3:
 	add	bx,3
-	invoke	upconv
+	DOSInvoke	upconv
 	cmp	al,[bx]
 	jz	PP4
 	cmp	byte ptr [bx],0
@@ -329,7 +329,7 @@ PATH_NORM:
 	mov	di,offset Trangroup:srcxname	;AN049;   for PATH while parsing
 	stosb					;AN049; Initialize PATH to null
 	dec	di				;AN049; point to the start of buffer
-	invoke	PGetarg 			; Pre scan for arguments
+	DOSInvoke	PGetarg 			; Pre scan for arguments
 	jz	disppath			; Print the current path
 	cmp	al,semicolon			;AC049; NUL path argument?
 	jnz	pathslp 			;AC049;
@@ -341,7 +341,7 @@ pathslp:					; Get the user specified path
 	cmp	al,end_of_line_in		;AC049; Is it end of line?
 	jz	path_eol			;AC049; yes - end of command
 
-	invoke	testkanj			;See if DBCS
+	DOSInvoke	testkanj			;See if DBCS
 	jz	notkanj2			;No - continue
 	stosb					;AC049; Yes - store the first byte
 	lodsb					;skip second byte of DBCS
@@ -351,10 +351,10 @@ path_hold:					;AN049;
 	jmp	short pathslp			;continue parsing
 
 notkanj2:
-	invoke	upconv				;upper case the character
+	DOSInvoke	upconv				;upper case the character
 	cmp	al,semicolon			;AC049; ';' not a delimiter on PATH
 	jz	path_hold			;AC049; go store it
-	invoke	delim				;delimiter?
+	DOSInvoke	delim				;delimiter?
 	jnz	path_hold			;AC049; no - go store character
 
 scan_white:					;AN049; make sure were at EOL
@@ -374,17 +374,17 @@ scan_white:					;AN049; make sure were at EOL
 path_eol:					;AN049; Parsing was clean
 	xor	al,al				;AN049; null terminate the PATH
 	stosb					;AN049;    buffer
-	invoke	find_path			;AN049; Find PATH in environment
-	invoke	delete_path			;AC049; Delete any offending name
-	invoke	scan_double_null		;AC049; Scan to end of environment
-	invoke	move_name			;AC049; move in PATH=
+	DOSInvoke	find_path			;AN049; Find PATH in environment
+	DOSInvoke	delete_path			;AC049; Delete any offending name
+	DOSInvoke	scan_double_null		;AC049; Scan to end of environment
+	DOSInvoke	move_name			;AC049; move in PATH=
 	mov	si,offset Trangroup:srcxname	;AN049; Set up source as PATH buffer
 
 store_path:					;AN049; Store the PATH in the environment
 	lodsb					;AN049; Get a character
 	cmp	al,end_of_line_out		;AN049; null character?
 	jz	got_paths			;AN049; yes - exit
-	invoke	store_char			;AN049; no - store character
+	DOSInvoke	store_char			;AN049; no - store character
 	jmp	short store_path		;AN049; continue
 
 got_paths:					;AN049; we're finished
@@ -393,7 +393,7 @@ got_paths:					;AN049; we're finished
 	return
 
 disppath:
-	invoke	find_path			;AN049;
+	DOSInvoke	find_path			;AN049;
 	call	print_path
 	call	crlf2
 	return
@@ -416,7 +416,7 @@ path1:
 	sub	di,5
 	mov	si,di
 ASSUME	DS:RESGROUP
-	invoke	scasb2				; LOOK FOR NUL
+	DOSInvoke	scasb2				; LOOK FOR NUL
 	cmp	cx,0FFH
 	jz	path0
 	push	cs

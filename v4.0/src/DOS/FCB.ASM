@@ -104,7 +104,7 @@ NOSCAN:
 	JBE	BADDRV		; Drive letter out of range
 
 	PUSH	AX
-	Invoke	GetVisDrv
+	DOSInvoke	GetVisDrv
 	POP	AX
 	JNC	HavDrv
 	CMP	[DrvErr],error_not_DOS_disk  ; if not FAt drive 		;AN000;
@@ -256,7 +256,7 @@ procedure   NameTrans,near
 	CALL	NORMSCAN
 IF DBCS 			;AN000;;KK.
 	MOV	AL,[NAME1]	;AN000;;KK. check 1st char
-	invoke	testkanj	;AN000;;KK. dbcs ?
+	DOSInvoke	testkanj	;AN000;;KK. dbcs ?
 	JZ	notdbcs 	;AN000;;KK. no
 	return			;AN000;;KK. yes
 notdbcs:			;AN000;

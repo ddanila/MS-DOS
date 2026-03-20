@@ -63,8 +63,8 @@
 ;*									     *
 ;*****************************************************************************
 IF1
-	%OUT	COMPONENT=LABEL MODULE=LABELM.SAL
-	%OUT	INCLUDING SYSMSG.INC
+	;%OUT	COMPONENT=LABEL MODULE=LABELM.SAL
+	;%OUT	INCLUDING SYSMSG.INC
 ENDIF
 	INCLUDE sysmsg.inc
 	MSG_UTILNAME <LABL>

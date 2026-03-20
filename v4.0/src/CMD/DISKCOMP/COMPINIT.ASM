@@ -97,7 +97,7 @@
 ;		 4.00 modifications by: Edwin M. K.
 ;****************** END OF SPECIFICATIONS *****************************
 	IF1
-	    %OUT    COMPONENT=DISKCOMP, MODULE=COMPINIT.SAL
+	    ;%OUT    COMPONENT=DISKCOMP, MODULE=COMPINIT.SAL
 	ENDIF
 
 ;REVISION HISTORY:

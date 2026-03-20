@@ -397,7 +397,7 @@ endif
 
 
 if iTEST
-%OUT Testing On
+;%OUT Testing On
 initmsg     db	    "Initializing device driver",13,10,"$"
 stratmsg    db	    "In strategy of driver",10,13,"$"
 dskinmsg    db	    "In DSKIN part of driver",10,13,"$"

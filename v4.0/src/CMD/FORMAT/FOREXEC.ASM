@@ -37,8 +37,8 @@ page	,132					;
 title	DOS	3.30 FORMAT EXEC Module
 
 IF1
-	%OUT	ASSEMBLING: DOS 3.3 FORMAT EXEC LOADER
-	%OUT
+	;%OUT	ASSEMBLING: DOS 3.3 FORMAT EXEC LOADER
+	;%OUT
 ENDIF
 
 code	segment public para 'code'

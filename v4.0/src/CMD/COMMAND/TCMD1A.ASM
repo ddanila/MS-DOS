@@ -170,7 +170,7 @@ DIR_NORM:
 
 dirscan:
 	xor	dx,dx				;AN000;
-	invoke	parse_with_msg			;AC018; call parser
+	DOSInvoke	parse_with_msg			;AC018; call parser
 	cmp	ax,end_of_line			;AN000; are we at end of line?
 	jne	dirscan_cont			;AN000; No - continue parsing
 	jmp	scandone			;AN000; yes - go process
@@ -191,7 +191,7 @@ dirscan_cont2:
 	push	si				;AC000; save position in line
 	lds	si,parse1_addr			;AC000; get address of filespec
 	push	si				;AN000; save address
-	invoke	move_to_srcbuf			;AC000; move to srcbuf
+	DOSInvoke	move_to_srcbuf			;AC000; move to srcbuf
 	pop	dx				;AC000; get address in DX
 
 ;
@@ -201,7 +201,7 @@ dirscan_cont2:
 	mov	ah,Find_First			;AC000; find the file
 	int	int_command			;AC000;
 	jnc	Dir_check_device		;AN022; if no error - check device
-	invoke	get_ext_error_number		;AN022; get the extended error
+	DOSInvoke	get_ext_error_number		;AN022; get the extended error
 	cmp	ax,error_no_more_files		;AN022; was error no file found
 	jz	Dir_fspec_end			;AC022; yes -> obviously not a device
 	cmp	ax,error_path_not_found 	;AN022; was error no file found
@@ -221,7 +221,7 @@ set_dir_width:
 	test	byte ptr[bits],SwitchW		;AN018; /W already set?
 	jz	ok_set_width			;AN018; no - okay to set width
 	mov	ax,moreargs_ptr 		;AN018; set up too many arguments
-	invoke	setup_parse_error_msg		;AN018; set up an error message
+	DOSInvoke	setup_parse_error_msg		;AN018; set up an error message
 	jmp	badparm 			;AN018; exit
 
 ok_set_width:
@@ -234,7 +234,7 @@ set_dir_pause:
 	test	byte ptr[bits],SwitchP		;AN018; /p already set?
 	jz	ok_set_pause			;AN018; no - okay to set width
 	mov	ax,moreargs_ptr 		;AN018; set up too many arguments
-	invoke	setup_parse_error_msg		;AN018; set up an error message
+	DOSInvoke	setup_parse_error_msg		;AN018; set up an error message
 	jmp	badparm 			;AN018; exit
 
 ok_set_pause:
@@ -269,13 +269,13 @@ ScanDone:
 ; Find and display the volume ID on the drive.
 ;
 
-	invoke	okvolarg			;AC000;
+	DOSInvoke	okvolarg			;AC000;
 	mov	[filecnt],0			;AC000; Keep track of how many files found
 	cmp	comsw,0 			;AC000; did an error occur?
 	jnz	doheader			;AC000; yes - don't bother to fix path
 
 	mov	dirflag,-1			;AN015; set pathcrunch called from DIR
-	invoke	pathcrunch			;AC000; set up FCB for dir
+	DOSInvoke	pathcrunch			;AC000; set up FCB for dir
 	mov	dirflag,0			;AN015; reset dirflag
 	jc	DirCheckPath			;AC015; no CHDIRs worked.
 	jz	doheader			;AC015; chdirs worked - path\*.*
@@ -361,10 +361,10 @@ DoHeader:
 
 DoHeaderCont:
 	mov	al,blank			;AN051; Print out a blank
-	invoke	print_char			;AN051;   before DIR header
-	invoke	build_dir_string		; get current dir string
+	DOSInvoke	print_char			;AN051;   before DIR header
+	DOSInvoke	build_dir_string		; get current dir string
 	mov	dx,offset trangroup:Dirhead_ptr
-	invoke	printf_crlf			; bang!
+	DOSInvoke	printf_crlf			; bang!
 
 ;
 ; If there were chars left after parse or device, then invalid file name
@@ -372,11 +372,11 @@ DoHeaderCont:
 	cmp	ComSw,0
 	jz	DoSearch			; nothing left; good parse
 	jl	DirNFFix			; not .. => error file not found
-	invoke	RestUDir
+	DOSInvoke	RestUDir
 	mov	dx,offset TranGroup:BadCD_ptr
 	jmp	Cerror				; was .. => error directory not found
 DirNFFix:
-	invoke	RestUDir
+	DOSInvoke	RestUDir
 	jmp	DirNF
 ;
 ; We are assured that everything is correct.  Let's go and search.  Use
@@ -399,9 +399,9 @@ DoSearch:
 	inc	al				;AN022; did an error occur?
 	pop	ax				;AN022; get return state back
 	jnz	found_first_file		;AN022; no error - start dir
-	invoke	set_ext_error_msg		;AN022; yes - set up error message
+	DOSInvoke	set_ext_error_msg		;AN022; yes - set up error message
 	push	dx				;AN022; save message
-	invoke	restudir			;AN022; restore user's dir
+	DOSInvoke	restudir			;AN022; restore user's dir
 	pop	dx				;AN022; restore message
 	cmp	word ptr Extend_Buf_Ptr,Error_No_More_Files ;AN022; convert no more files to
 	jnz	DirCerrorJ			;AN022; 	file not found
@@ -417,7 +417,7 @@ DirCerrorJ:					;AN022;
 
 found_first_file:
 	push	ax
-	invoke	restudir
+	DOSInvoke	restudir
 	pop	ax
 ;
 ; Main scanning loop.  Entry has AL = Search first/next error code.  Test for
@@ -508,7 +508,7 @@ millenium:
 prbuf:
 	mov	dx,offset trangroup:DirDatTim_ptr
 	call	std_printf
-	invoke	crlf2				;AC066;end the line
+	DOSInvoke	crlf2				;AC066;end the line
 	dec	byte ptr [fullscr]		;AC066;count the line
 	jnz	endif04 			;AN066;IF the last on the screen THEN
 	   call    check_for_P			;AN066;   pause if /P requested
@@ -527,7 +527,7 @@ nexent:
 	jnz	else01				;AX066;IF last entry on line THEN
 	   mov	   al,[linlen]
 	   mov	   [lincnt],al
-	   invoke  crlf2
+	   DOSInvoke  crlf2
 	   cmp	   [fullscr],0			;AC066;IF have filled the screen THEN
 	   jnz	   endif02			;AN066;
 	      call    check_for_P		;AN066;   reinitialize fullscr,
@@ -553,7 +553,7 @@ scroll:
 ; If no files have been found, display a not-found message
 ;
 DirDone:
-	invoke	get_ext_error_number		;AN022; get the extended error number
+	DOSInvoke	get_ext_error_number		;AN022; get the extended error number
 	cmp	ax,error_no_more_files		;AN022; was error file not found?
 	jnz	dir_err_setup_jmp		;AN022; no - setup error message
 	test	[filecnt],-1
@@ -570,7 +570,7 @@ Trailer:
 	mov	al,[linlen]
 	cmp	al,[lincnt]			; Will be equal if just had CR/LF
 	jz	mmessage
-	invoke	crlf2
+	DOSInvoke	crlf2
 	cmp	[fullscr],0			;AN066;IF on last line of screen THEN
 	jnz	endif06 			;AN066;   pause before going on
 	   call    check_for_P			;AN066;   to number and freespace
@@ -617,7 +617,7 @@ test	byte ptr[bits],SwitchP	     ;P switch present?
 jz	endif05 				;AN066;
    mov	   ax,linperpag 		   ;AN000;  transfer lines per page
    mov	   [fullscr],ax 		   ;AC000;	to fullscr
-   invoke  Pause
+   DOSInvoke  Pause
 endif05:
 ret						;AN066;
 

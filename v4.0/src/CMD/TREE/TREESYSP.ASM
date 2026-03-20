@@ -88,7 +88,7 @@
 ;
 ;****************** END OF SPECIFICATIONS *****************************
 	IF1				;AN000;
-	    %OUT    COMPONENT=TREE, MODULE=TREESYSP.SAL... ;AN000;
+	    ;%OUT    COMPONENT=TREE, MODULE=TREESYSP.SAL... ;AN000;
 	ENDIF				;AN000;
 
 	INCLUDE PATHMAC.INC		;AN013;

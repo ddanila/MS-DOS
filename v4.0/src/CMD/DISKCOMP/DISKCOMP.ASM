@@ -151,7 +151,7 @@
 ;		 4.00 modifications by: Edwin M. K.
 ;****************** END OF SPECIFICATIONS *****************************
 	IF1				;					;AN000;
-	    %OUT    COMPONENT=DISKCOMP, MODULE=DISKCOMP.SAL
+	    ;%OUT    COMPONENT=DISKCOMP, MODULE=DISKCOMP.SAL
 	ENDIF				;					;AN000;
 ;*****************************************************************************
 ;									     *

@@ -4,9 +4,6 @@ minor_version	    equ     00	    ;Minor DOS Version
 
 expected_version    equ     (MINOR_VERSION SHL 8)+MAJOR_VERSION
 
-       if1
-       %OUT  ... for DOS Version 4.00 ...
-       endif
 
        ;******************************
        ;Each assembler program should:

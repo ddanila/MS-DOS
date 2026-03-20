@@ -2,11 +2,11 @@ CODE    SEGMENT BYTE PUBLIC 'CODE'
         ASSUME CS:CODE,DS:CODE
 
 IF1
-        %OUT    EGA.CPI creation file
-        %OUT    .
-        %OUT    CP SRC files:
-        %OUT    .
-        %OUT    .       CODE PAGE:  863
+        ;%OUT    EGA.CPI creation file
+        ;%OUT    .
+        ;%OUT    CP SRC files:
+        ;%OUT    .
+        ;%OUT    .       CODE PAGE:  863
 ENDIF
 
 EGA863: DW     LEN_863                  ; SIZE OF ENTRY HEADER

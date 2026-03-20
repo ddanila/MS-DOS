@@ -33,7 +33,7 @@ OFF				   Macro reg,val
 
 ERRNZ				   Macro x
 				   IF	x NE 0
-				   %out ERRNZ failed
+				   ;%out ERRNZ failed
 				   ENDIF
 				   ENDM
 ; if we are installed, then define the base code segment of the sharer first
@@ -345,7 +345,7 @@ mcl10:
 
    sub	bx,bx				; insensitive to PID
    sub	dx,dx
-   invoke BCS				; bulk close the SFTs
+   DOSInvoke BCS				; bulk close the SFTs
    LeaveCrit critShare
    return
    EndProc MFTclU

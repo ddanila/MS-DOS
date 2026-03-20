@@ -10,7 +10,7 @@
 ;
 ;*****************************************************************************
                if1                                                              ;AN000;
-                     %OUT INCLUDING COMPEQ.INC...                               ;AN000;
+                     ;%OUT INCLUDING COMPEQ.INC...                               ;AN000;
                endif                                                            ;AN000;
 
 EAISBINARY     equ  02h           ;extended attribute is a binary integer       ;AN001;

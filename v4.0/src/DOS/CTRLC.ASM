@@ -113,7 +113,7 @@ ASSUME	DS:NOTHING,ES:NOTHING
 	MOV	BX,OFFSET DOSGROUP:DSKSTCALL
 	LDS	SI,[BCON]
 ASSUME	DS:NOTHING
-	invoke	DEVIOCALL2
+	DOSInvoke	DEVIOCALL2
 	TEST	[DSKSTST],STBUI
 	JZ	GotCh			; No characters available
 	XOR	AL,AL			; Set zero
@@ -135,7 +135,7 @@ DSK1:
 	MOV	BYTE PTR [DSKCHRET],CL
 	MOV	[DSKSTST],0
 	MOV	[DSKSTCNT],1
-	invoke	DEVIOCALL2		; Eat the ^C
+	DOSInvoke	DEVIOCALL2		; Eat the ^C
 	POP	SI
 	POP	DS
 	POP	BX			; Clean stack
@@ -190,15 +190,15 @@ EndProc SPOOLINT
 
 	procedure   STATCHK,NEAR
 
-	invoke	DSKSTATCHK		; Allows ^C to be detected under
+	DOSInvoke	DSKSTATCHK		; Allows ^C to be detected under
 					; input redirection
 	PUSH	BX
 	XOR	BX,BX
-	invoke	GET_IO_SFT
+	DOSInvoke	GET_IO_SFT
 	POP	BX
 	retc
 	MOV	AH,1
-	invoke	IOFUNC
+	DOSInvoke	IOFUNC
 	JZ	SPOOLINT
 	CMP	AL,"S"-"@"
 	JNZ	NOSTOP
@@ -206,14 +206,14 @@ EndProc SPOOLINT
 	CMP	BYTE PTR [SCAN_FLAG],0	      ;AN000; ALT_R ?
 	JNZ	check_end		      ;AN000; yes
 	XOR	AH,AH
-	invoke	IOFUNC			; Eat Cntrl-S
+	DOSInvoke	IOFUNC			; Eat Cntrl-S
 	JMP	SHORT PAUSOSTRT
 PRINTOFF:
 PRINTON:
 	NOT	BYTE PTR [PFLAG]
 	PUSH	BX
 	MOV	BX,4
-	invoke	GET_IO_SFT
+	DOSInvoke	GET_IO_SFT
 	POP	BX
 	retc
 	PUSH	ES
@@ -232,11 +232,11 @@ PRINTON:
 NORM_PR:
 	CMP	BYTE PTR [PFLAG],0
 	JNZ	PRNOPN
-	invoke	DEV_CLOSE_SFT
+	DOSInvoke	DEV_CLOSE_SFT
 	JMP	SHORT RETP6
 
 PRNOPN:
-	invoke	DEV_OPEN_SFT
+	DOSInvoke	DEV_OPEN_SFT
 RETP6:
 	POP	DI
 	POP	ES
@@ -246,16 +246,16 @@ PAUSOLP:
 	CALL	SPOOLINT
 PAUSOSTRT:
 	MOV	AH,1
-	invoke	IOFUNC
+	DOSInvoke	IOFUNC
 	JZ	PAUSOLP
 INCHK:
 	PUSH	BX
 	XOR	BX,BX
-	invoke	GET_IO_SFT
+	DOSInvoke	GET_IO_SFT
 	POP	BX
 	retc
 	XOR	AH,AH
-	invoke	IOFUNC
+	DOSInvoke	IOFUNC
 	CMP	AL,"P"-"@"
 ;;;;;  7/14/86	ALT_Q key fix
 
@@ -284,19 +284,19 @@ EndProc STATCHK
 	TEST	[DOS34_FLAG],CTRL_BREAK_FLAG  ;AN002; from RAWOUT
 	JNZ	around_deadlock 	      ;AN002;
 	MOV	AL,3			; Display "^C"
-	invoke	BUFOUT
-	invoke	CRLF
+	DOSInvoke	BUFOUT
+	DOSInvoke	CRLF
 around_deadlock:			      ;AN002;
 	Context DS
 	CMP	BYTE PTR [CONSWAP],0
 	JZ	NOSWAP
-	invoke	SWAPBACK
+	DOSInvoke	SWAPBACK
 NOSWAP:
 	CLI				; Prepare to play with stack
 	MOV	SS,[user_SS]		; User stack now restored
 ASSUME	SS:NOTHING
 	MOV	SP,[user_SP]
-	invoke	restore_world		; User registers now restored
+	DOSInvoke	restore_world		; User registers now restored
 ASSUME	DS:NOTHING
 	MOV	BYTE PTR [INDOS],0	; Go to known state
 	MOV	BYTE PTR [ERRORMODE],0
@@ -380,7 +380,7 @@ procedure   OutMes,NEAR
 	MOV	WORD PTR [DskChRet+1],SI    ; transfer address (need an EQU)
 	LDS	SI,[BCON]
 ASSUME	DS:NOTHING
-	invoke	DEVIOCALL2
+	DOSInvoke	DEVIOCALL2
 	MOV	WORD PTR [DskChRet+1],OFFSET DOSGROUP:DevIOBuf
 	MOV	[DskStCnt],1
 	return
@@ -497,7 +497,7 @@ GOT_RIGHT_CODE:
 	JMP	FailRet
 NoSetFail:
 IF	BUFFERFLAG
-	invoke	RESTORE_USER_MAP		;AN000;LB. restore user's EMS map
+	DOSInvoke	RESTORE_USER_MAP		;AN000;LB. restore user's EMS map
 ENDIF
 	MOV	[CONTSTK],SP
 	Context ES
@@ -597,7 +597,7 @@ DoAbort:
 	Context DS
 	CMP	BYTE PTR [CONSWAP],0
 	JZ	NOSWAP2
-	invoke	SWAPBACK
+	DOSInvoke	SWAPBACK
 NOSWAP2:
 ;
 ; See if we are to truly abort.  If we are in the process of aborting, turn
@@ -633,7 +633,7 @@ NOSWAP2:
 	entry	reset_environment
 	ASSUME	DS:NOTHING,ES:NOTHING
 
-	invoke	Reset_Version		;AN007;MS. reset version number
+	DOSInvoke	Reset_Version		;AN007;MS. reset version number
 	PUSH	DS			; save PDB of process
 
 ;
@@ -650,7 +650,7 @@ NOSWAP2:
 					; Allow REDIR to clear some stuff
 					;   On process exit.
 	MOV	AL,int_Terminate
-	invoke	$Get_interrupt_vector	; and who to go to
+	DOSInvoke	$Get_interrupt_vector	; and who to go to
 
 	POP	CX			; get ThisPDB
 	SaveReg <ES,BX> 		; save return address
@@ -675,13 +675,13 @@ NOSWAP2:
 ; We are truly removing a process.  Free all allocation blocks belonging to
 ; this PDB
 ;
-	invoke	arena_free_process
+	DOSInvoke	arena_free_process
 ;
 ; Kill off remainder of this process.  Close file handles and signal to
 ; relevant network folks that this process is dead.  Remember that CurrentPDB
 ; is STILL the current process!
 ;
-	invoke	DOS_ABORT
+	DOSInvoke	DOS_ABORT
 
 reset_to_parent:
 	POP	[CurrentPDB]		; set up process as parent
@@ -696,14 +696,14 @@ reset_return:				; come here for normal return
 ; "FAIL" the abort, the program being aborted is dead.
 ;
 	EnterCrit   critDisk
-	invoke	FLUSHBUF
+	DOSInvoke	FLUSHBUF
 	LeaveCrit   critDisk
 ;
 ; Decrement open ref. count if we had done a virtual open earlier.
 ;
-	invoke	CHECK_VIRT_OPEN
+	DOSInvoke	CHECK_VIRT_OPEN
 IF	BUFFERFLAG
-	invoke	RESTORE_USER_MAP		;AN000;LB. restore user's EMS map
+	DOSInvoke	RESTORE_USER_MAP		;AN000;LB. restore user's EMS map
 ENDIF
 	CLI
 	MOV	BYTE PTR [INDOS],0	; Go to known state
@@ -720,7 +720,7 @@ ENDIF
 	MOV	SP,WORD PTR DS:[PDB_user_stack]
 
 	ASSUME	SS:NOTHING
-	invoke	restore_world
+	DOSInvoke	restore_world
 	ASSUME	ES:NOTHING
 	MOV	User_SP,AX
 	POP	AX			; suck off CS:IP of interrupt...
@@ -761,7 +761,7 @@ NoTrans:
 ;
 	PUSH	SI
 	MOV	SI,OFFSET DOSGROUP:ERR_TABLE_24
-	invoke	CAL_LK			; Set other extended error fields
+	DOSInvoke	CAL_LK			; Set other extended error fields
 	POP	SI
 	ret
 EndProc SET_I24_EXTENDED_ERROR

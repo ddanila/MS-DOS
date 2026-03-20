@@ -37,7 +37,7 @@
 ;======================= END OF SPECIFICATIONS ===========================
 
 	IF1
-	    %OUT    Including DEBEQU.ASM...
+	    ;%OUT    Including DEBEQU.ASM...
 	ENDIF
 
 ;IBMVER EQU	TRUE		    ; These switches get set in version.inc

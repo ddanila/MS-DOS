@@ -163,7 +163,7 @@ FLAG MACRO  FLAG_MASK
        FIND_FLAG FLAG_MASK
        IF (FLAG_ID EQ UNKNOWN)
           IF2
-              %OUT Unknown parameter FLAG_MASK on FLAG MACRO
+              ;%OUT Unknown parameter FLAG_MASK on FLAG MACRO
           ENDIF
        ELSE
           DB FLAG_ID
@@ -182,7 +182,7 @@ IFF MACRO  FLAG_MASK,MASK_TYPE
          ELSE
              MAC_OK = 0
              IF2
-                 %OUT Unknown parameter MASK_TYPE on IFF MACRO
+                 ;%OUT Unknown parameter MASK_TYPE on IFF MACRO
              ENDIF
          ENDIF
     ENDIF
@@ -190,7 +190,7 @@ IFF MACRO  FLAG_MASK,MASK_TYPE
        FIND_FLAG FLAG_MASK
        IF (FLAG_ID EQ UNKNOWN)
           IF2
-              %OUT Unknown parameter FLAG_MASK on IFF MACRO
+              ;%OUT Unknown parameter FLAG_MASK on IFF MACRO
           ENDIF
        ELSE
           DB IFF_COMMAND+NOT_BIT+FLAG_ID
@@ -216,7 +216,7 @@ ANDF MACRO  FLAG_MASK,MASK_TYPE
          ELSE
              MAC_OK = 0
              IF2
-                 %OUT Unknown parameter MASK_TYPE on ANDF MACRO
+                 ;%OUT Unknown parameter MASK_TYPE on ANDF MACRO
              ENDIF
          ENDIF
     ENDIF
@@ -224,7 +224,7 @@ ANDF MACRO  FLAG_MASK,MASK_TYPE
        FIND_FLAG FLAG_MASK
        IF (FLAG_ID EQ UNKNOWN)
           IF2
-              %OUT Unknown parameter FLAG_MASK on ANDF MACRO
+              ;%OUT Unknown parameter FLAG_MASK on ANDF MACRO
           ENDIF
        ELSE
           DB ANDF_COMMAND+NOT_BIT+FLAG_ID
@@ -266,7 +266,7 @@ OPTION MACRO MASK,MASK_TYPE
          ELSE
              MAC_OK = 0
              IF2
-                 %OUT Unknown parameter MASK_TYPE on OPTION MACRO
+                 ;%OUT Unknown parameter MASK_TYPE on OPTION MACRO
              ENDIF
          ENDIF
     ENDIF

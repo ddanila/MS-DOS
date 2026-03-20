@@ -2,8 +2,8 @@
 	title	Reboot Support for FDISK
 
 IF1
-	%OUT ASSEMBLING: Reboot
-	%OUT
+	;%OUT ASSEMBLING: Reboot
+	;%OUT
 ENDIF
 
 ROMDATA segment at 040h

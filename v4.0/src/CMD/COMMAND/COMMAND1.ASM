@@ -544,8 +544,8 @@ NoReset:
 	JZ	CONTCTERM
 	OR	AX,AX
 	JNZ	Contcterm
-	invoke	SavHand
-	invoke	ASKEND				; See if user wants to terminate batch
+	DOSInvoke	SavHand
+	DOSInvoke	ASKEND				; See if user wants to terminate batch
 ;
 ; If the carry flag is clear, we do NOT free up the batch file
 ;
@@ -589,8 +589,8 @@ shell_bat_cont: 				;AN000; continue batch for SHELL
 	MOV	ECHOFLAG,CL			;G reset echo status
 	MOV	PIPEFLAG,0			;G turn off pipeflag
 ContBatch:
-	invoke	CRLF				;G print out crlf before returning
-	invoke	RestHand
+	DOSInvoke	CRLF				;G print out crlf before returning
+	DOSInvoke	RestHand
 ;
 ; Yes, we are terminating.  Turn off flags and allow the DOS to abort.
 ;

@@ -126,7 +126,7 @@ FATALC:
 	PUSH	CS
 	POP	DS
 	ASSUME	DS:ResGroup
-	invoke	RPRINT
+	DOSInvoke	RPRINT
 ;
 ; If this is NOT a permanent (top-level) COMMAND, then we exit; we can't do
 ; anything else!
@@ -143,18 +143,18 @@ FATALC:
 ; Permanent command.  We can't do ANYthing except halt.
 ;
 	MOV	DX,HALTMES		;AC000; get message number
-	invoke	RPRINT
+	DOSInvoke	RPRINT
 	STI
 STALL:
 	JMP	STALL			; Crash the system nicely
 
 FATALRET:
 	MOV	DX,FRETMES		;AC000; get message number
-	invoke	RPRINT
+	DOSInvoke	RPRINT
 FATALRET2:
 	CMP	[PERMCOM],0		; If we get here and PERMCOM,
 	JNZ	RET_2E			; must be INT_2E
-	invoke	reset_msg_pointers	;AN000; reset critical & parse error messages
+	DOSInvoke	reset_msg_pointers	;AN000; reset critical & parse error messages
 	MOV	AX,[PARENT]
 	MOV	WORD PTR CS:[PDB_Parent_PID],AX
 	MOV	AX,WORD PTR OldTerm
@@ -442,7 +442,7 @@ getcomdsk3:
 	cmp	dx,combad		;AC000;
 	jnz	getcomdsk4
 	mov	dx,combad		;AN000; get message number
-	invoke	RPRINT			; Say command is invalid
+	DOSInvoke	RPRINT			; Say command is invalid
 getcomdsk4:
 	cmp	[cpdrv],0		;g is there a drive in the comspec?
 	jnz	users_drive		;g yes - use it
@@ -459,12 +459,12 @@ endif
 	MOV	AL,COMPRMT1_SUBST	;AN000; get number of substitutions
 	MOV	SI,OFFSET RESGROUP:COMPRMT1_BLOCK ;AN000; get address of subst block
 	MOV	NUMBER_SUBST,AL 	;AN000;
-	invoke	rprint
+	DOSInvoke	rprint
 if tokenized
 	and	byte ptr [si],NOT 80h
 endif
 	mov	dx,prompt		;AN047; Tell the user to strike a key
-	invoke	rprint			;AN047;
+	DOSInvoke	rprint			;AN047;
 	CALL	GetRawFlushedByte
 	return
 

@@ -104,7 +104,7 @@
 ;****************** END OF SPECIFICATIONS *****************************
 ;									 ;AN000;
 	IF1								 ;AN000;
-	    %OUT    COMPONENT=COMP, MODULE=COMPSM.SAL...		 ;AN000;
+	    ;%OUT    COMPONENT=COMP, MODULE=COMPSM.SAL...		 ;AN000;
 	ENDIF								 ;AN000;
 ; =  =	=  =  =  =  =  =  =  =	=  =					 ;AN000;
 ;									 ;AN000;

@@ -1,7 +1,7 @@
 	PAGE ,132 ;
 	TITLE MSBIO2 - BIOS
 
-	%OUT	...MSBIO2.ASM
+	;%OUT	...MSBIO2.ASM
 
 ;==============================================================================
 ;REVISION HISTORY:

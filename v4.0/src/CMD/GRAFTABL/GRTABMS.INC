@@ -43,7 +43,7 @@
 ;:end
 ; = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 	IF1				;AN000;
-	    %OUT    COMPONENT=GRAFTABL, MODULE=GRTABMS.INC...;AN000;
+	    ;%OUT    COMPONENT=GRAFTABL, MODULE=GRTABMS.INC...;AN000;
 	ENDIF				;AN000;
 ;THIS MODULE IS INCLUDED IN GRTABSM.SAL.
 ; = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =

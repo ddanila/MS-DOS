@@ -3,7 +3,7 @@
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 IF1                                     ;
-        %OUT .               ®MACROS  .INC¯
+        ;%OUT .               ®MACROS  .INC¯
 ENDIF                                   ;
                                         ;
 JUMP    MACRO   LBL                     ;

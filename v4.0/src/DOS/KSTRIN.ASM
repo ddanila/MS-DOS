@@ -143,7 +143,7 @@ SAVCH:
 	JAE	BUFFUL			; buffer is full.
 ;----------------------------- Start of DBCS 2/13/KK
 
-	invoke	TESTKANJ		;AN000;
+	DOSInvoke	TESTKANJ		;AN000;
 	JZ	ISNORM			;AN000;
 	INC	DH			;AN000;
 	CMP	DH,DL			;AN000;
@@ -172,7 +172,7 @@ ISNORM:
 	STOSB				;AN000;
 	INC	DH			;AN000;; increment count in buffer.
 	popf				;AN000;; 2/17/KK
-	invoke	BUFOUTx 		;AN000;; Print control chars nicely 2/17/KK
+	DOSInvoke	BUFOUTx 		;AN000;; Print control chars nicely 2/17/KK
 	jnz	ContIn1 		;AN000;; 2/17/KK
 	call	InterCheck		;AN000;; 2/17/KK
 	jmp	short InterLoop 	;AN000;; 2/17/KK
@@ -187,7 +187,7 @@ CONTIN1:				;AN000;; 2/13/KK
 
 	PUSH	AX			;
 	MOV	AL,BYTE PTR [SI-1]	;AN000;;		    2/13/KK
-	invoke	TESTKANJ		;AN000;;		    2/13/KK
+	DOSInvoke	TESTKANJ		;AN000;;		    2/13/KK
 	POP	AX			;AN000;;		    2/13/KK
 	JZ	GETCH0			;AN000;; Wasn't a dual byte 2/13/KK
 	INC	SI			;AN000;; Was a dual byte,   2/13/KK
@@ -200,7 +200,7 @@ BACKSPJ: JMP	SHORT BACKSP
 BUFFUL:
 	popf				;AN000;; 2/17/KK
 	MOV	AL,7			;AN000;; Bell to signal full buffer
-	invoke	OUTT
+	DOSInvoke	OUTT
 	JMP	GETCH
 ;						2/17/KK
 ;	Reduce character count, reduce pointer	2/17/KK
@@ -215,7 +215,7 @@ ESCC:
 
 ENDLIN:
 	STOSB				; Put the CR in the buffer
-	invoke	OUTT			; Echo it
+	DOSInvoke	OUTT			; Echo it
 	POP	DI			; Get start of user buffer
 	MOV	[DI-1],DH		; Tell user how many bytes
 	INC	DH			; DH is length including CR
@@ -230,7 +230,7 @@ COPYNEW:
 ; Output a CRLF to the user screen and do NOT store it into the buffer
 ;
 PHYCRLF:
-	invoke	CRLF
+	DOSInvoke	CRLF
 	JMP	GETCH
 
 ;
@@ -271,12 +271,12 @@ GetChJ:
 ;
 	entry	KILNEW
 	MOV	AL,"\"
-	invoke	OUTT		;Print the CANCEL indicator
+	DOSInvoke	OUTT		;Print the CANCEL indicator
 	POP	SI		;Remember start of edit buffer
 PUTNEW:
-	invoke	CRLF		;Go to next line on screen
+	DOSInvoke	CRLF		;Go to next line on screen
 	MOV	AL,[STARTPOS]
-	invoke	TAB		;Tab over
+	DOSInvoke	TAB		;Tab over
 	JMP	NEWLIN		;Start over again
 
 
@@ -292,7 +292,7 @@ BackSpace:
 	JZ	OLDBAK		;No chars in line, do nothing to line
 	CALL	BACKUP		;Do the backup
 	MOV	AL,ES:[DI]	;Get the deleted char
-	invoke	TESTKANJ	;AN000;2/13/KK
+	DOSInvoke	TESTKANJ	;AN000;2/13/KK
 	JNZ	OLDBAK		;AN000; Was a dual byte, done  2/13/KK
 	CMP	AL," "
 	JAE	OLDBAK		;Was a normal char
@@ -325,7 +325,7 @@ LOOKDUAL:			;AN000;
 	JAE	ATLOC		;AN000;
 	PUSH	AX		;AN000;
 	MOV	AL,BYTE PTR [SI];AN000;
-	invoke	TESTKANJ	;AN000;
+	DOSInvoke	TESTKANJ	;AN000;
 	POP	AX		;AN000;
 	JZ	ONEINC		;AN000;
 	INC	SI		;AN000;
@@ -369,7 +369,7 @@ HAVTAB:
 	POP	DI
 	JZ	OLDBAK		;Nothing to erase
 TABBAK:
-	invoke	BACKMES
+	DOSInvoke	BACKMES
 	LOOP	TABBAK		;Erase correct number of chars
 	JMP	SHORT OLDBAK
 
@@ -386,7 +386,7 @@ LOOKDUAL2:				;AN000;
 	JAE	ATLOC2			;AN000;
 	PUSH	AX			;AN000;
 	MOV	AL,BYTE PTR ES:[DI]	;AN000;
-	invoke	TESTKANJ		;AN000;
+	DOSInvoke	TESTKANJ		;AN000;
 	POP	AX			;AN000;
 	JZ	ONEINC2 		;AN000;
 	INC	DI			;AN000;
@@ -403,9 +403,9 @@ ATLOC2: 				;AN000;
 ;---------------------------End of DBCS 2/13/KK
 BACKMES:
 	MOV	AL,c_BS 	;Backspace
-	invoke	OUTT
+	DOSInvoke	OUTT
 	MOV	AL," "          ;Erase
-	invoke	OUTT
+	DOSInvoke	OUTT
 	MOV	AL,c_BS 	;Backspace
 	JMP	OUTT		;Done
 
@@ -421,14 +421,14 @@ BACKMES:
 	JMP	SHORT COPYEACH
 
 	entry	CopyStr
-	invoke	FINDOLD 	;Find the char
+	DOSInvoke	FINDOLD 	;Find the char
 	JMP	SHORT COPYEACH	;Copy up to it
 
 ;Copy one char from template to line
 	entry	COPYONE
 	MOV	CX,1			;AN000;;	       2/13/KK
 	MOV	AL,[SI] 		;AN000;; get char      2/13/KK
-	invoke	TestKanj		;AN000;; is it kanji?  2/13/KK
+	DOSInvoke	TestKanj		;AN000;; is it kanji?  2/13/KK
 	JZ	CopyEach		;AN000;; no, go do copy2/13/KK
 	INC	CX			;AN000;; do 2 byte copy2/13/KK
 
@@ -455,14 +455,14 @@ COPYEACH:
 	JMP	GetCh			;AN000;; go get next char
 					;AN000;
 CopyBoth:				;AN000;
-	invoke	BUFOUT			;AN000;; output the first byte
+	DOSInvoke	BUFOUT			;AN000;; output the first byte
 	LODSB				;AN000;; get the second
 	STOSB				;AN000;; move the second
 	INC	BH			;AN000;; bump template
 	INC	DH			;AN000;; bump line
 	DEC	CX			;AN000;; dump byte count
 CopyLoop:				;AN000;
-	invoke	BUFOUT			;AN000;
+	DOSInvoke	BUFOUT			;AN000;
 	LOOP	COPYEACH		;AN000;
 ;;;;;	invoke	BUFOUT
 ;;;;;	INC	BH			;Ahead in template
@@ -480,7 +480,7 @@ GETCH2:
 	INC	SI
 	PUSH	AX			;AN000;; 2/13/KK
 	MOV	AL,BYTE PTR [SI-1]	;AN000;; 2/13/KK
-	invoke	TESTKANJ		;AN000;; 2/13/KK
+	DOSInvoke	TESTKANJ		;AN000;; 2/13/KK
 	POP	AX			;AN000;; 2/13/KK
 	JZ	GETCH2			;AN000;; 2/13/KK
 	INC	BH			;AN000;; 2/13/KK
@@ -488,7 +488,7 @@ GETCH2:
 	JMP	GETCH
 
 	entry	SKIPSTR
-	invoke	FINDOLD 		;Find out how far to go
+	DOSInvoke	FINDOLD 		;Find out how far to go
 	ADD	SI,CX			;Go there
 	ADD	BH,CL
 	JMP	GETCH
@@ -517,7 +517,7 @@ FINDOLD:
 	JMP	NotFnd			       ; go try again
 ;;;;;;;FindSetup:			;AN000;; 2/13/KK
 TryKanj:				;AN000;; 2/13/KK
-	invoke	TESTKANJ		;AN000;; 2/13/KK
+	DOSInvoke	TESTKANJ		;AN000;; 2/13/KK
 	JZ	GOTLSIZ 		;AN000;; 2/13/KK
 	INC	[LOOKSIZ]		;AN000;; Gonna look for a word	2/13/KK
 	PUSH	AX			;AN000;; Save first byte	2/13/KK
@@ -534,7 +534,7 @@ GOTLSIZ:
 	JZ	NOTFND		;If only one char in template, forget it
 	PUSH	AX			;AN000;; 2/13/KK
 	MOV	AL,BYTE PTR [SI]	;AN000;; 2/13/KK
-	invoke	TESTKANJ		;AN000;; 2/13/KK
+	DOSInvoke	TESTKANJ		;AN000;; 2/13/KK
 	POP	AX			;AN000;; 2/13/KK
 	JZ	NOTDUAL5		;AN000;; 2/13/KK
 	DEC	CX			;AN000;; And one more besides	2/13/KK
@@ -550,7 +550,7 @@ NOTDUAL5:				;AN000;; 2/13/KK
 ;--------------------- Start of DBCS 2/13/KK
 	PUSH	AX			;AN000;
 	MOV	AL,BYTE PTR ES:[DI]	;AN000;
-	invoke	TESTKANJ		;AN000;
+	DOSInvoke	TESTKANJ		;AN000;
 	POP	AX			;AN000;
 	JZ	ONEINC5 		;AN000;
 	INC	DI			;AN000;; We will skip at least something
@@ -561,7 +561,7 @@ ONEINC5:				;AN000;
 LOOKBYTE:				;AN000;
 	PUSH	AX			;AN000;
 	MOV	AL,BYTE PTR ES:[DI]	;AN000;
-	invoke	TESTKANJ		;AN000;
+	DOSInvoke	TESTKANJ		;AN000;
 	POP	AX			;AN000;
 	JZ	TESTITB 		;AN000;
 	INC	DI			;AN000;
@@ -597,7 +597,7 @@ NOTFND:
 LOOKWORD:			       ;AN000;
 	PUSH	AX		       ;AN000;
 	MOV	AL,BYTE PTR ES:[DI]    ;AN000;
-	invoke	TESTKANJ	       ;AN000;
+	DOSInvoke	TESTKANJ	       ;AN000;
 	POP	AX		       ;AN000;
 	JNZ	TESTITW 	       ;AN000;
 	INC	DI		       ;AN000;
@@ -616,12 +616,12 @@ TESTITW:			       ;AN000;
 
 entry	REEDIT
 	MOV	AL,"@"          ;Output re-edit character
-	invoke	OUTT
+	DOSInvoke	OUTT
 	POP	DI
 	PUSH	DI
 	PUSH	ES
 	PUSH	DS
-	invoke	COPYNEW 	;Copy current line into template
+	DOSInvoke	COPYNEW 	;Copy current line into template
 	POP	DS
 	POP	ES
 	POP	SI
@@ -641,7 +641,7 @@ entry	REEDIT
 ;Output a CRLF
 	entry	CRLF
 	MOV	AL,c_CR
-	invoke	OUTT
+	DOSInvoke	OUTT
 	MOV	AL,c_LF
 	JMP	OUTT
 
@@ -653,7 +653,7 @@ procedure	IntCNE0,near		;AN000;
 	push	word ptr [InterCon]	;AN000;
 	mov	[InterCon],01		;AN000;
 get_com:				;AN000;
-	invoke	INTER_CON_INPUT_NO_ECHO ;AN000;; get a byte character
+	DOSInvoke	INTER_CON_INPUT_NO_ECHO ;AN000;; get a byte character
 	pop	word ptr [InterCon]	;AN000;
 	ret				;AN000;
 IntCNE0 endp				;AN000;
@@ -682,7 +682,7 @@ outchax endp				;AN000;
 	jnz	sj2			;AN000;
 	mov	[SaveCurFlg],1		;AN000;
 sj2:					;AN000;
-	invoke	BUFOUT			;AN000;
+	DOSInvoke	BUFOUT			;AN000;
 	mov	[SaveCurFlg],0		;AN000;
 	popf				;AN000;
 	ret				;AN000;

@@ -132,7 +132,7 @@ CD_NORM:
 	mov	di,offset trangroup:parse_chdir ;AN000; Get adderss of PARSE_CHDIR
 	xor	cx,cx				;AN000; clear cx,dx
 	xor	dx,dx				;AN000;
-	invoke	parse_with_msg			;AC018; call parser
+	DOSInvoke	parse_with_msg			;AC018; call parser
 
 	cmp	ax,end_of_line			;AC000; are we at end of line?
 	jz	bwdJ				; No args
@@ -146,11 +146,11 @@ CD_NORM:
 ;
 	mov	di,offset trangroup:parse_chdir ;AC000; get address of parse_chdir
 	xor	dx,dx				;AC000;
-	invoke	parse_check_eol 		;AC000; call parser
+	DOSInvoke	parse_check_eol 		;AC000; call parser
 	jnz	ChDirErr			;AC000;
 
 bwdJ:
-	invoke	build_dir_for_chdir		; Drive only specified
+	DOSInvoke	build_dir_for_chdir		; Drive only specified
 	call	crlf2
 	return
 
@@ -158,21 +158,21 @@ REALCD:
 
 	push	si				;AN000; save position in line
 	lds	si,parse1_addr			;AN000; get address of filespec
-	invoke	move_to_srcbuf			;AN000; move to srcbuf
+	DOSInvoke	move_to_srcbuf			;AN000; move to srcbuf
 	pop	si				;AN000; restore position in line
 	mov	di,offset trangroup:parse_chdir ;AC000; get address of parse_chdir
 	xor	dx,dx				;AC000;
-	invoke	parse_check_eol 		;AC000; call parser
+	DOSInvoke	parse_check_eol 		;AC000; call parser
 	jnz	ChDirErr			;AC000;
 
-	invoke	SETPATH
+	DOSInvoke	SETPATH
 	TEST	[DESTINFO],2
 	JNZ	BadChdir
 	MOV	AH,CHDIR
 	INT	int_command
 	retnc
 
-	invoke	get_ext_error_number		;AN022; get the extended error
+	DOSInvoke	get_ext_error_number		;AN022; get the extended error
 	cmp	ax,error_path_not_found 	;AN022; see if path not found
 	jz	BadChDir			;AN022; yes - issue old message
 	call	Set_Ext_Error_Subst		;AN022;
@@ -182,7 +182,7 @@ BadChDir:
 	MOV	DX,OFFSET TRANGROUP:BADCD_ptr
 
 ChDirErr:
-	invoke	Std_Eprintf
+	DOSInvoke	Std_Eprintf
 	return
 
 break	$Mkdir
@@ -221,7 +221,7 @@ MD_NORM:
 	INT	int_command
 	retnc
 
-	invoke	get_ext_error_number		;AN022; get the extended error
+	DOSInvoke	get_ext_error_number		;AN022; get the extended error
 	cmp	ax,error_path_not_found 	;AN022; see if path not found
 	jz	MD_other_err			;AN022; yes - issue old message
 	cmp	ax,error_access_denied		;AN022; access denied?
@@ -246,7 +246,7 @@ BADMDERR:
 MD_other_err:					;AN006;
 	MOV	DX,OFFSET TRANGROUP:BADMKD_ptr
 MkDirErr:
-	invoke	Std_Eprintf
+	DOSInvoke	Std_Eprintf
 	return
 
 Break	<Common MkDir/RmDir set up code>
@@ -273,7 +273,7 @@ SETRMMK:
 	mov	di,offset trangroup:parse_mrdir ;AN000; Get adderss of PARSE_MRDIR
 	xor	cx,cx				;AN000; clear cx,dx
 	xor	dx,dx				;AN000;
-	invoke	parse_with_msg			;AC000; call parser
+	DOSInvoke	parse_with_msg			;AC000; call parser
 	cmp	ax,result_no_error		;AC000; did we have an error?
 	jnz	 NOARGERR			;AC000; yes - exit
 
@@ -294,7 +294,7 @@ mrdir_move_filename:				;AN000; put filespec in srcxname
 ;
 
 	mov	di,offset trangroup:parse_mrdir ;AC000; get address of parse_mrdir
-	invoke	parse_check_eol 		;AC000; are we at end of line?
+	DOSInvoke	parse_check_eol 		;AC000; are we at end of line?
 	pop	dx				;AC000; get address of SRCXNAME
 	retz					;yes - return no error
 NOARGERR:
@@ -340,7 +340,7 @@ RD_NORM:
 	INT	int_command
 	retnc
 
-	invoke	get_ext_error_number		;AN022; get the extended error
+	DOSInvoke	get_ext_error_number		;AN022; get the extended error
 	cmp	ax,error_path_not_found 	;AN022; see if path not found
 	jz	badrderr			;AN022; yes - issue old message
 	cmp	ax,error_access_denied		;AN022; access denied?
@@ -353,7 +353,7 @@ BADRDERR:
 	MOV	DX,OFFSET TRANGROUP:BADRMD_ptr
 
 RmDirErr:
-	invoke	STD_Eprintf
+	DOSInvoke	STD_Eprintf
 	return
 
 ;****************************************************************
@@ -440,7 +440,7 @@ PR:
 	PUSH	DS
 	PUSH	CS
 	POP	DS
-	invoke	std_printf
+	DOSInvoke	std_printf
 	POP	DS
 	POP	DX
 
@@ -545,7 +545,7 @@ CRPRINT:
 	POP	ES
 	mov	string_ptr_2,dx
 	mov	dx,offset trangroup:string_buf_ptr
-	invoke	std_printf
+	DOSInvoke	std_printf
 	mov	ds:byte ptr [di-1],13		; now put the CR back
 	JC	ERROR_OUTPUT
 
@@ -566,7 +566,7 @@ ASSUME	ES:RESGROUP
 	CMP	[PIPEFLAG],0
 	JZ	GO_TO_ERROR
 
-	invoke	PipeOff
+	DOSInvoke	PipeOff
 	MOV	DX,OFFSET TRANGROUP:PIPEEMES_ptr
 GO_TO_ERROR:
 	JMP	CERROR
@@ -607,7 +607,7 @@ PATHCRUNCH:
 	CALL	SAVUDIR
 	jc	pcrunch_cderrJ			;AN022; if error on current dir - report
 
-	invoke	SETPATH
+	DOSInvoke	SETPATH
 	TEST	[DESTINFO],2
 	JNZ	TRYPEEL 			; If ? or * cannot be pure dir
 
@@ -615,7 +615,7 @@ PATHCRUNCH:
 	INT	int_command
 	jnc	chdir_worked			;AN022; no error - continue
 
-	invoke	get_ext_error_number		;AN022; get the extended error
+	DOSInvoke	get_ext_error_number		;AN022; get the extended error
 	cmp	ax,error_path_not_found 	;AN022; if path not found
 	jz	trypeel 			;AC022;     keep trying
 	cmp	ax,error_access_denied		;AN022; if access denied
@@ -624,7 +624,7 @@ PATHCRUNCH:
 	jmp	peelfail			;AN022; exit with other error
 
 chdir_worked:
-	invoke	SETREST1
+	DOSInvoke	SETREST1
 	MOV	AL,'?'                          ; *.* is default file spec if pure dir
 	MOV	DI,5DH
 	MOV	CX,11
@@ -654,7 +654,7 @@ DELLOOP:
 	CMP	SI,CX
 	JZ	GOTDELE
 	LODSB
-	invoke	TESTKANJ
+	DOSInvoke	TESTKANJ
 	JZ	NOTKANJ8
 	INC	SI
 	JMP	DELLOOP
@@ -708,7 +708,7 @@ NOTDOUBLESL:
 	INT	int_command
 	JNC	CDSUCC
 pcrunch_cderr:
-	invoke	get_ext_error_number		;AN022; get the extended error
+	DOSInvoke	get_ext_error_number		;AN022; get the extended error
 	mov	[msg_numb],ax			;AN022; set up message flag
 	or	si,si				;AN022; set up zero flag to not zero
 	stc					;AN022; set up carry flag
@@ -726,7 +726,7 @@ BADRET:
 	jc	pcrunch_cderr			;AN022; go to error exit
 	MOV	[SI+1],BL
 CDSUCC:
-	invoke	SETREST1
+	DOSInvoke	SETREST1
 	INC	SI				; Reset zero
 	MOV	[DESTTAIL],SI
 	pushf					;AN015; save flags

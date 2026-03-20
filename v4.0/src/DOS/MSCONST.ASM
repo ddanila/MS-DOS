@@ -42,7 +42,7 @@ Public MSCT001S,MSCT001E
 MSCT001S:
 	I_am	DataVersion,WORD,<1>	;AC000; [SYSTEM] version number for DOS DATA
 
-%out WARNING!!! Debug fields are being included!!!
+;%out WARNING!!! Debug fields are being included!!!
 	DB	"BUG "                  ; THIS FIELD MUST BE EVEN # OF BYTES
 	I_am	BugTyp,WORD,<0>
 	I_am	BugLev,WORD,<0>

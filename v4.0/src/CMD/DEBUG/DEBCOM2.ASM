@@ -48,7 +48,7 @@
 ; Routines to perform debugger commands except ASSEMble and UASSEMble
 
 	IF1
-	    %OUT COMPONENT=DEBUG, MODULE=DEBCOM2
+	    ;%OUT COMPONENT=DEBUG, MODULE=DEBCOM2
 	ENDIF
 .XLIST
 .XCREF

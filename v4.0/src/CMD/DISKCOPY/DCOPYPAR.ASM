@@ -79,7 +79,7 @@
 ;PROGRAM AUTHOR: DOS 4.00 EMK
 ;****************** END OF SPECIFICATIONS *****************************
 	IF1				;AN000;
-	    %OUT    COMPONENT=DISKCOPY, MODULE=DCOPYPAR.SAL... ;AN000;
+	    ;%OUT    COMPONENT=DISKCOPY, MODULE=DCOPYPAR.SAL... ;AN000;
 	ENDIF				;AN000;
 ; =  =	=  =  =  =  =  =  =  =	=  =
 	INCLUDE PATHMAC.INC		;AN015;PATHGEN MACRO

@@ -1,6 +1,6 @@
 	PAGE ,132 ;
 	TITLE MSCON - BIOS
-	%OUT	...MSCON.ASM
+	;%OUT	...MSCON.ASM
 ;==============================================================================
 ;REVISION HISTORY:
 ;AN000 - New for DOS Version 4.00 - J.K.

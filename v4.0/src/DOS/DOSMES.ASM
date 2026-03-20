@@ -362,7 +362,7 @@ Procedure   OEMFunctionKey,NEAR
 extrn	intCNE0:near			;AN000; 2/17/KK
 	CALL	intCNE0 		;AN000; 2/17/KK
  ELSE					;AN000;
-	invoke	$std_con_input_no_echo	; Get the second byte of the sequence
+	DOSInvoke	$std_con_input_no_echo	; Get the second byte of the sequence
  ENDIF					;AN000;
 	IF NOT Rainbow
 	MOV	CL,ESCTABLEN		; length of table for scan
@@ -389,13 +389,13 @@ ENDM
 GoGetCh:
 	transfer    GetCh		; no, ignore sequence
 EatParm:
-	invoke	$std_con_input_no_echo	; get argument
+	DOSInvoke	$std_con_input_no_echo	; get argument
 	CMP	AL,'A'                  ; is it alphabetic arg?
 	JAE	EatAlpha		; yes, go snarf one up
 	XOR	BP,BP			; init digit counter
 	JMP	InDigit 		; jump into internal eat digit routine
 EatNum:
-	invoke	$std_con_input_no_echo	; get next digit
+	DOSInvoke	$std_con_input_no_echo	; get next digit
 InDigit:
 	CMP	AL,'9'                  ; still a digit?
 	JA	CheckNumEnd		; no, go check for end char
@@ -431,7 +431,7 @@ EatAlpha:
 	transferIf  'D',BackSp          ; LEFT
 	JMP	GoGetCh
 EatPQRS:
-	invoke	$std_con_input_no_echo	; eat char after O
+	DOSInvoke	$std_con_input_no_echo	; eat char after O
 	JMP	GoGetCh
 	ENDIF
 

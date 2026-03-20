@@ -38,7 +38,7 @@ OFF				   Macro reg,val
 
 ERRNZ				   Macro x
 				   IF	x    NE 0
-				   %out ERRNZ failed
+				   ;%out ERRNZ failed
 				   ENDIF
 				   ENDM
 					   ;---------------------------------------
@@ -1529,7 +1529,7 @@ $$IF13:
 ;	       $if  nz			; if non-FAT			       ;AC003;
 	       JZ $$IF17
 
-		   invoke Call_IFS	; tell IFS of SFT change	       ;AN000;
+		   DOSInvoke Call_IFS	; tell IFS of SFT change	       ;AN000;
 
 ;	       $else			; else - its FAT		       ;AN000;
 	       JMP SHORT $$EN17
@@ -2012,7 +2012,7 @@ lck8   DW   OFFSET DOSGROUP:lck7	; link
 
        CODE ENDS
 
-       %out Ignore this END error (blasted assembler)
+       ;%out Ignore this END error (blasted assembler)
 
    ENDIF
 

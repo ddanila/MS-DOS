@@ -53,9 +53,9 @@ BREAK <$Parse_File_Descriptor -- Parse an arbitrary string into an FCB>
 	procedure   $PARSE_FILE_DESCRIPTOR,NEAR
 ASSUME  DS:NOTHING,ES:NOTHING
 
-	invoke  MAKEFCB
+	DOSInvoke  MAKEFCB
 	PUSH    SI
-	invoke  get_user_stack
+	DOSInvoke  get_user_stack
 	POP     [SI.user_SI]
 	return
 EndProc $PARSE_FILE_DESCRIPTOR
@@ -186,7 +186,7 @@ drive:  cmp     byte ptr [si],':'       ; if there is a drive designator, parse
 	jle     dcont1
 	sub     al,' '
 dcont1: sub     al,'@'
-	invoke  GetthisDrv
+	DOSInvoke  GetthisDrv
 	lodsb
 	stosb
 	jc      dcont2
@@ -263,7 +263,7 @@ bksi:   dec     si                      ; is found, stick a terminating null
 done:   xor     al,al                   ; byte at the end of buf, and exit
 	stosb
 	push    si
-	invoke  Get_user_stack
+	DOSInvoke  Get_user_stack
 	mov     [si].user_AX,bx
 	pop     [si].user_SI
 	Transfer sys_ret_ok

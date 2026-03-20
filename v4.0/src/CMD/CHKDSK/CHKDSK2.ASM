@@ -189,7 +189,7 @@ DOINT26:
 ;      $IF	C								;ac048;bgb;an045;bgb
        JNC $$IF7
 	   mov	   dx,offset dg:write_fault					;ac048;bgb;an045;bgb
-	   invoke  printf_crlf							;ac048;bgb;an045;bgb
+	   DOSInvoke  printf_crlf							;ac048;bgb;an045;bgb
 ;      $ENDIF									;ac048;bgb;an045;bgb
 $$IF7:
 ;										;ac048;bgb;ac048;bgb;an045;bgb

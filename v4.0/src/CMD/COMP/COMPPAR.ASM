@@ -119,7 +119,7 @@
 ;	 modified: Bill L.
 ;****************** END OF SPECIFICATIONS *****************************
 	IF1				;AN000;
-	    %OUT    COMPONENT=COMP, MODULE=COMPPAR.SAL... ;AN000;
+	    ;%OUT    COMPONENT=COMP, MODULE=COMPPAR.SAL... ;AN000;
 	ENDIF				;AN000;
 ; =  =	=  =  =  =  =  =  =  =	=  =						;AN000;
 HEADER	MACRO	TEXT			;;AN000;

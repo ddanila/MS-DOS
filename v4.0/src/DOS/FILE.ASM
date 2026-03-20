@@ -123,7 +123,7 @@ IF  DBCS				;AN000;
 novol:					;AN000;
 ENDIF					;AN000;
 	EnterCrit   critSFT
-	invoke	SFNFree 		; get a free sfn
+	DOSInvoke	SFNFree 		; get a free sfn
 	LeaveCrit   critSFT
 	JC	OpenFailJ		; oops, no free sft's
 	MOV	SFN,BX			; save the SFN for later
@@ -133,7 +133,7 @@ ENDIF					;AN000;
 ;
 ; Find a free area in the user's JFN table.
 ;
-	invoke	JFNFree 		; get a free jfn
+	DOSInvoke	JFNFree 		; get a free jfn
 	JNC	SaveJFN
 OpenFailJ:
 	JMP	OpenFail		; there were free JFNs... try SFN
@@ -150,7 +150,7 @@ SaveJFN:
 	MOV	SI,DX			; get name in appropriate place
 	MOV	DI,OFFSET DOSGroup:OpenBuf  ; appropriate buffer
 	SaveReg <CX>			; save routine to call
-	invoke	TransPath		; convert the path
+	DOSInvoke	TransPath		; convert the path
 	RestoreReg  <BX>		; restore routine to call
 	LDS	SI,ThisSFT
 	ASSUME	DS:NOTHING
@@ -309,7 +309,7 @@ BREAK <$CHMOD - change file attributes>
 	MOV	DI,OFFSET DOSGroup:OpenBuf  ; appropriate buffer
 	SaveReg <AX,CX> 		; save function and attributes
 	MOV	SI,DX			; get things in appropriate places
-	invoke	TransPathSet		; get correct path
+	DOSInvoke	TransPathSet		; get correct path
 	RestoreReg  <CX,AX>		; and get function and attrs back
 	JC	ChModErr		; errors get mapped to path not found
 	Context DS			; set up for later possible calls
@@ -322,14 +322,14 @@ BREAK <$CHMOD - change file attributes>
 	MOV	EXTERR_LOCUS,errLoc_Unk ; Extended Error Locus
 	error	error_invalid_function	; bad value
 ChModGet:
-	invoke	Get_File_Info		; suck out the ol' info
+	DOSInvoke	Get_File_Info		; suck out the ol' info
 	JC	ChModE			; error codes are already set for ret
-	invoke	Get_User_stack		; point to user saved vaiables
+	DOSInvoke	Get_User_stack		; point to user saved vaiables
 	MOV	[SI.User_CX],AX 	; return the attributes
 	transfer    Sys_Ret_OK		; say sayonara
 ChModSet:
 	MOV	AX,CX			; get attrs in position
-	invoke	Set_File_Attribute	; go set
+	DOSInvoke	Set_File_Attribute	; go set
 	JC	ChModE			; errors are set
 	transfer    Sys_Ret_OK
 ChModErr:
@@ -357,7 +357,7 @@ BREAK <$UNLINK - delete a file entry>
 	SaveReg <CX>			; Save possible CX input parm
 	MOV	SI,DX			; Point at input string
 	MOV	DI,OFFSET DOSGroup:OpenBuf  ; temp spot for path
-	invoke	TransPathSet		; go get normalized path
+	DOSInvoke	TransPathSet		; go get normalized path
 	RestoreReg <CX>
 	JC	ChModErr		; badly formed path
 	CMP	cMeta,-1		; meta chars?
@@ -365,7 +365,7 @@ BREAK <$UNLINK - delete a file entry>
 	Context DS
 	mov	ch,attr_hidden+attr_system   ; unlink appropriate files
 	call	SetAttrib
-	invoke	DOS_Delete		; remove that file
+	DOSInvoke	DOS_Delete		; remove that file
 	JC	UnlinkE 		; error is there
 
 
@@ -402,7 +402,7 @@ BREAK <$RENAME - move directory entries around>
 	MOV	WORD PTR [NO_FILTER_DPATH],SI	;AN000;;IFS. save them for IFS
 	MOV	WORD PTR [NO_FILTER_DPATH+2],DS ;AN000;;IFS.
 
-	invoke	TransPathSet		; munge the paths
+	DOSInvoke	TransPathSet		; munge the paths
 	PUSH	WFP_Start		; get pointer
 	POP	Ren_WFP 		; stash it
 	RestoreReg <SI,DS,CX>		; get back source and possible CX arg
@@ -411,7 +411,7 @@ epjc2:	JC	ChModErr		; get old error
 	JNZ	NotFound
 	SaveReg <CX>			; Save possible CX arg
 	MOV	DI,OFFSET DOSGroup:OpenBuf  ; appropriate buffer
-	invoke	TransPathSet		; wham
+	DOSInvoke	TransPathSet		; wham
 	RestoreReg <CX>
 	JC	EPJC2
 	Context DS
@@ -425,9 +425,9 @@ epjc2:	JC	ChModErr		; get old error
 	POP	ES			   ;AN000;;MS.es:di-> source
 	XOR	AL,AL			   ;AN000;;MS.scan all CDS
 rnloop: 				   ;AN000;
-	invoke	GetCDSFromDrv		   ;AN000;;MS.
+	DOSInvoke	GetCDSFromDrv		   ;AN000;;MS.
 	JC	dorn			   ;AN000;;MS.	end of CDS
-	invoke	StrCmp			   ;AN000;;MS.	current dir ?
+	DOSInvoke	StrCmp			   ;AN000;;MS.	current dir ?
 	JZ	rnerr			   ;AN000;;MS.	yes
 	INC	AL			   ;AN000;;MS.	next
 	JMP	rnloop			   ;AN000;;MS.
@@ -440,7 +440,7 @@ dorn:					   ;AN000;
 	Context DS
 	mov	ch,attr_directory+attr_hidden+attr_system; rename appropriate files
 	call	SetAttrib
-	invoke	DOS_Rename		; do the deed
+	DOSInvoke	DOS_Rename		; do the deed
 	JC	UnlinkE 		; errors
 
 
@@ -556,7 +556,7 @@ Kloop:					;AN000;; 2/13/KK
 	INC	DI			;AN000;; 2/13/KK
 	OR	AL,AL			;AN000;; 2/13/KK
 	JZ	GOTEND			;AN000;; 2/13/KK
-	invoke	testkanj		;AN000;; 2/13/KK
+	DOSInvoke	testkanj		;AN000;; 2/13/KK
 	jz	Kloop			;AN000;; 2/13/KK
 	inc	di			;AN000;; Skip over second kanji byte 2/13/KK
 	CMP	BYTE PTR ES:[DI],0	;AN000;; 2/13/KK
@@ -574,7 +574,7 @@ okok:					;AN000;
  ENDIF					;AN000;
 	DEC	DI			; point back to the null
 	MOV	AL,ES:[DI-1]		; Get char before the NUL
-	invoke	PathChrCmp		; Is it a path separator?
+	DOSInvoke	PathChrCmp		; Is it a path separator?
 	JZ	SETENDPTR		; Yes
 STOREPTH:
 	MOV	AL,'\'
@@ -584,7 +584,7 @@ SETENDPTR:
 CreateLoop:
 	Context DS			; let ReadTime see variables
 	SaveReg <BP>
-	invoke	ReadTime		; go get time
+	DOSInvoke	ReadTime		; go get time
 	RestoreReg  <BP>
 ;
 ; Time is in CX:DX.  Go drop it into the string.
@@ -748,7 +748,7 @@ goopen: 					 ;AN000;
 	AND	[EXTOPEN_FLAG],0FFH		 ;AN000;EO.create new ?
 	CMP	[EXTOPEN_FLAG],ext_exists_fail + ext_nexists_create ;AN000;FT.
 	JNZ	chknext 			 ;AN000;;EO.  no
-	invoke	$CreateNewFile			 ;AN000;;EO.  yes
+	DOSInvoke	$CreateNewFile			 ;AN000;;EO.  yes
 	JC	error_return			 ;AN000;;EO.  error
 	CMP	[EXTOPEN_ON],0			 ;AN000;;EO.  IFS does it
 	JZ	ok_return2			 ;AN000;;EO.  yes
@@ -760,7 +760,7 @@ ok_return2:
 chknext:
 	TEST	[EXTOPEN_FLAG],ext_exists_open	 ;AN000;;EO.  exists open
 	JNZ	exist_open			 ;AN000;;EO.  yes
-	invoke	$Creat				 ;AN000;;EO.  must be replace open
+	DOSInvoke	$Creat				 ;AN000;;EO.  must be replace open
 	JC	error_return			 ;AN000;;EO.  return with error
 	CMP	[EXTOPEN_ON],0			 ;AN000;;EO.  IFS does it
 	JZ	ok_return2			 ;AN000;;EO.  yes
@@ -780,7 +780,7 @@ exist_open:					 ;AN000;
 	MOV	CL,CH				 ;AN000;;EO. cl=search attribute
 
 noserver:
-	invoke	$Open2				 ;AN000;;EO.  do open
+	DOSInvoke	$Open2				 ;AN000;;EO.  do open
 	JNC	ext_ok				 ;AN000;;EO.
 	CMP	[EXTOPEN_ON],0			 ;AN000;;EO.  error and IFS call
 	JZ	error_return2			 ;AN000;;EO.  return with error
@@ -796,7 +796,7 @@ do_creat:
 	MOV	CX,[SAVE_CX]			 ;AN000;;EO.  get ds:dx for file name
 	LDS	SI,DWORD PTR [SAVE_SI]		 ;AN000;;EO.  cx = attribute
 	MOV	DX,SI				 ;AN000;;EO.
-	invoke	$Creat				 ;AN000;;EO.  do create
+	DOSInvoke	$Creat				 ;AN000;;EO.  do create
 	JC	extexit 			 ;AN000;;EO.  error
 	MOV	[EXTOPEN_FLAG],action_created_opened  ;AN000;;EO. is created/opened
 	JMP	SHORT setXAttr			      ;AN000;;EO.   set XAs
@@ -822,7 +822,7 @@ setXAttr:
 ;	POP	DX			;AN000;;EO. restore file name addr
 ;	POP	DS			;AN000;;EO.
 ;	JC	extexit2		;AN000;;EO.
-	invoke	get_user_stack		;AN000;;EO.
+	DOSInvoke	get_user_stack		;AN000;;EO.
 	MOV	AX,[EXTOPEN_FLAG]	;AN000;;EO.
 	MOV	[SI.USER_CX],AX 	;AN000;;EO. set action code for cx
 	POP	AX			;AN000;;EO.
@@ -839,11 +839,11 @@ extexit2:				;AN000; ERROR RECOVERY
 	JNZ	justopen		;AN000;EO.
 	LDS	SI,DWORD PTR [SAVE_SI]		 ;AN000;EO.  cx = attribute
 	LDS	DX,DWORD PTR [SI]		 ;AN000;EO.
-	invoke	$UNLINK 		;AN000;EO. delete the file
+	DOSInvoke	$UNLINK 		;AN000;EO. delete the file
 	JMP	SHORT reserror		;AN000;EO.
 
 justopen:				;AN000;
-	invoke	$close			;AN000;EO. pretend never happend
+	DOSInvoke	$close			;AN000;EO. pretend never happend
 reserror:				;AN000;
 	POP	AX			;AN000;EO. retore error code from set XA
 	JMP	SHORT extexit		;AN000;EO.

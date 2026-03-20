@@ -389,7 +389,7 @@ DoPrompt:
 	MOV	AX,(STD_CON_INPUT_FLUSH SHL 8)+STD_CON_INPUT
 	INT	21H				; Get response
 
-	invoke	TestKanjR			;AN000;  3/3/KK
+	DOSInvoke	TestKanjR			;AN000;  3/3/KK
 	jz	notkanj 			;AN000;  3/3/KK
 	MOV	AX,(STD_CON_INPUT SHL 8)	;AN000;  eat the 2nd byte of ECS code  3/3/KK
 	INT	21H				;AN000;  3/3/KK
@@ -454,7 +454,7 @@ AbortCont:
 
 Not_Batch_Abort:
 	mov	dl,PipeFlag
-	invoke	ResPipeOff
+	DOSInvoke	ResPipeOff
 	OR	DL,DL
 	JZ	CHECKFORA
 	CMP	[SINGLECOM],0

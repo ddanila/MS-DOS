@@ -95,7 +95,7 @@
 ;
 ;****************** END OF SPECIFICATIONS *****************************
 	IF1				;AN000;
-	    %OUT    COMPONENT=DISKCOPY, MODULE=DCOPYSM.SAL... ;AN000;
+	    ;%OUT    COMPONENT=DISKCOPY, MODULE=DCOPYSM.SAL... ;AN000;
 	ENDIF				;AN000;
 ; =  =	=  =  =  =  =  =  =  =	=  =
 	INCLUDE PATHMAC.INC		;AN015;PATHGEN MACRO

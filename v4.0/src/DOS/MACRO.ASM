@@ -238,7 +238,7 @@ Procedure InitCDS,NEAR
 	PUSH	DS
 	PUSH	SI
 	SUB	AL,"A"                  ; A = 0
-	invoke	FIND_DPB
+	DOSInvoke	FIND_DPB
 	JC	PRET			; OOOOPPPPPSSSS!!!!
 	MOV	WORD PTR ES:[DI.curdir_devptr],SI
 	MOV	WORD PTR ES:[DI.curdir_devptr+2],DS
@@ -286,7 +286,7 @@ UserGet:
 	POP	ES
 	MOV	DI,DX			; destination
 	MOV	CX,[MYNUM]		; Get number
-	invoke	get_user_stack
+	DOSInvoke	get_user_stack
 	MOV	[SI.User_CX],CX 	; Set number return
 	Context DS			; point to DOSGroup
 ASSUME	DS:DOSGROUP
@@ -390,7 +390,7 @@ GetMap:
 	JMP	SHORT GetBye		; carry clear
 
 Not_SRVC:
-	invoke	GetCDSFromDrv
+	DOSInvoke	GetCDSFromDrv
 	JC	GetBerr2		; Unassigned CDS -> return error already set
 	TEST	[SI.curdir_flags],curdir_inuse	; Clears Carry
 	JNZ	GetBye			; carry clear

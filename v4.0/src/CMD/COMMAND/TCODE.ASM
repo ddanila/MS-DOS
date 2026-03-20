@@ -189,9 +189,9 @@ ASSUME	SS:TRANGROUP
 	MOV	ES,AX
 	MOV	DS,AX				;AN000; set DS to transient
 ASSUME	ES:TRANGROUP,DS:TRANGROUP		;AC000;
-	invoke	TSYSLOADMSG			;AN000; preload messages
-	invoke	SETSTDINOFF			;AN026; turn off critical error on STDIN
-	invoke	SETSTDOUTOFF			;AN026; turn off critical error on STDOUT
+	DOSInvoke	TSYSLOADMSG			;AN000; preload messages
+	DOSInvoke	SETSTDINOFF			;AN026; turn off critical error on STDIN
+	DOSInvoke	SETSTDOUTOFF			;AN026; turn off critical error on STDOUT
 	mov	append_exec,0			;AN041; set internal append state off
 
 	MOV	DS,[RESSEG]
@@ -418,7 +418,7 @@ nullcomj:
 	jmp	nullcom
 
 NOPIPEPROC:
-	invoke	parseline
+	DOSInvoke	parseline
 	jnc	OkParse 			; user error?  or maybe we goofed?
 
 BadParse:
@@ -473,11 +473,11 @@ DRVGD:
 	PUSH	SI
 
 	mov	si, OFFSET TRANGROUP:COMBUF+2	; Skip over all leading delims
-	invoke	scanoff
+	DOSInvoke	scanoff
 
 do_skipcom:
 	lodsb					; move command line pointer over
-	invoke	delim				; pathname -- have to do it ourselves
+	DOSInvoke	delim				; pathname -- have to do it ourselves
 	jz	do_skipped			; 'cause parse_file_descriptor is dumb
 	cmp	AL, 0DH 			; can't always depend on argv[0].arglen
 	jz	do_skipped			; to be the same length as the user-

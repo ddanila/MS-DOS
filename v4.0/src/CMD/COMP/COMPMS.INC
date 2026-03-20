@@ -30,7 +30,7 @@
 ;:end                                                                           ;AN000;
 ; = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =       ;AN000;
             IF1                                                                 ;AN000;
-                %OUT    COMPONENT=COMP, MODULE=COMPMS.INC...                    ;AN000;
+                ;%OUT    COMPONENT=COMP, MODULE=COMPMS.INC...                    ;AN000;
             ENDIF                                                               ;AN000;
 ;               $SALUT (0,13,18,22)                                             ;AN000;
 ;                                                                               ;AN000;

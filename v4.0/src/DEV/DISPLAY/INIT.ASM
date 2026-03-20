@@ -30,10 +30,10 @@ TITLE	DOS - CON Code Page Switching Device Driver (INIT)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 IF1					;
-	%OUT .COMPILING:     INIT.ASM
-	%OUT .		     ô INSTALL CPS-CON DRIVER
-	%OUT .		     õ VERSION 3.30
-	%OUT .INCLUDE FILES:
+	;%OUT .COMPILING:     INIT.ASM
+	;%OUT .		     ô INSTALL CPS-CON DRIVER
+	;%OUT .		     õ VERSION 3.30
+	;%OUT .INCLUDE FILES:
 ENDIF					;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;

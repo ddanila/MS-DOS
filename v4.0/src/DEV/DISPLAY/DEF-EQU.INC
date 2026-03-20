@@ -10,7 +10,7 @@
 ;AN003; D4934 Change ANSI 2F function number to 1Ah               05/20/88 F.G.
 ;******************************************************************************
 IF1                                     ;
-        %OUT .               ®DEF-EQU .INC¯
+        ;%OUT .               ®DEF-EQU .INC¯
 ENDIF                                   ;
 ZERO    EQU     0H                      ;
 ONE     EQU     1H                      ;

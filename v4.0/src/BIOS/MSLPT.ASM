@@ -1,6 +1,6 @@
 	PAGE ,132 ;
 	TITLE MSLPT - BIOS
-	%OUT	...MSLPT.ASM
+	;%OUT	...MSLPT.ASM
 
 ;==============================================================================
 ;REVISION HISTORY:

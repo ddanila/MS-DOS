@@ -4,7 +4,7 @@
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 IF1                                     ;
-        %OUT .               ®CPS-FUNC.INC¯
+        ;%OUT .               ®CPS-FUNC.INC¯
 ENDIF                                   ;
                                         ;
 CP_FUNCTION     LABEL   BYTE            ;

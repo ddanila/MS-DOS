@@ -84,7 +84,7 @@
 ;
 ;****************** END OF SPECIFICATIONS *****************************
 	IF1				;					;AN000;
-	    %OUT    COMPONENT=fastopen, MODULE=fastp.asm...
+	    ;%OUT    COMPONENT=fastopen, MODULE=fastp.asm...
 	ENDIF				;					;AN000;
 ; =  =	=  =  =  =  =  =  =  =	=  =
 	HEADER	<MACRO DEFINITION>	;					;AN000;
@@ -123,8 +123,8 @@ VAL3SW	EQU	0			;DO SUPPORT VALUE DEFINITION 3
 
 
 	IF1				;					;AN000;
-	    %OUT    COMPONENT=fastopen, SUBCOMPONENT=PARSE, MODULE=PARSE.ASM...
-	    %OUT    COMPONENT=fastopen, SUBCOMPONENT=PARSE, MODULE=PSDATA.INC...
+	    ;%OUT    COMPONENT=fastopen, SUBCOMPONENT=PARSE, MODULE=PARSE.ASM...
+	    ;%OUT    COMPONENT=fastopen, SUBCOMPONENT=PARSE, MODULE=PSDATA.INC...
 	ENDIF				;					;AN000;
 	INCLUDE PARSE.ASM		;					;AN000;
 CSEG_INIT  ENDS 			   ;

@@ -1,6 +1,6 @@
 	PAGE ,132 ;
 	TITLE MSDISK - BIOS
-	%OUT	...MSDISK.ASM
+	;%OUT	...MSDISK.ASM
 
 ;==============================================================================
 ;REVISION HISTORY:

@@ -1,5 +1,5 @@
 ;	SCCSID = @(#)sysvar.asm 1.1 85/04/10
-include		version.inc
+include		VERSION.INC
 
 SysInitVars STRUC
 SYSI_DPB	    DD	    ?		; DPB chain
@@ -38,7 +38,7 @@ SysInitVars_Ext ends
 ;The SYSI_BUF of SysInitVars points to the follwong structure
 EMS_MAP_BUFF_SIZE      EQU	12	; EMS map buffer size
 
-Buffinfo    STRUC
+BuffInfoSys    STRUC
 Hash_ptr	 DD	 ?		     ; pointer to Hash table
 Hash_count	 DW	 ?		     ; number of Hash entries
 Cache_ptr	 DD	 ?		     ; pointer to secondary cache
@@ -66,7 +66,7 @@ ELSE
 EMS_Map_Buff	DB	12 dup(0)
 ENDIF
 
-Buffinfo    ENDS
+BuffInfoSys    ENDS
 
 
 

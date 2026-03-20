@@ -3,7 +3,7 @@
 ; Code for the UASSEMble command in the debugger
 
 	    IF1
-		%OUT COMPONENT=DEBUG, MODULE=DEBUASM
+		;%OUT COMPONENT=DEBUG, MODULE=DEBUASM
 	    ENDIF
 .XLIST
 .XCREF

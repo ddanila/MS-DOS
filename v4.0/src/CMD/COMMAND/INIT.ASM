@@ -245,7 +245,7 @@ CMD_HLP_PAST:
 	JNC	OKDOS				;AN000; if no problem - continue
 
 	mov	ax,badver			;AN000; set DOS version
-	invoke	sysdispmsg			;AN000; must be incorrect version
+	DOSInvoke	sysdispmsg			;AN000; must be incorrect version
 	mov	ax,es
 	cmp	es:[PDB_Parent_PID],AX		; If command is its own parent,
 here:						;  loop forever.
@@ -525,9 +525,9 @@ init_chk_delim:
 	cmp	al,[rswitchar]			;AN057; Switch?
 	jnz	parse_line_error_disp		;AN057; No - just issue message
 	lodsb					;AN057; Get the char after the switch
-	invoke	itestkanj			;AN057; Is it DBCS?
+	DOSInvoke	itestkanj			;AN057; Is it DBCS?
 	jnz	parse_line_error_disp		;AN057; Yes - can't be /C
-	invoke	iupconv 			;AN057; upper case it
+	DOSInvoke	iupconv 			;AN057; upper case it
 	cmp	al,scswitch			;AN057; it is /C?
 	jnz	parse_line_error_disp		;AN057;
 	pop	dx				;AN057; even up stack
@@ -827,7 +827,7 @@ ARGSDONEJ2:
 
 SETCOMSRBAD:
 	MOV	DX,BADCOMLKMES_ptr		;AC000; get message number
-	invoke	triageError
+	DOSInvoke	triageError
 	cmp	ax, 65
 	jnz	doprt
 	mov	dx,BADCOMACCMES_ptr		;AC000; get error message number
@@ -1013,7 +1013,7 @@ GOTENVIR:
 	pop	cx
 ; If we are too close to be safe, call LOADCOM instead of moving the code.
 	jb	Ok_To_Move
-	invoke	LOADCOM
+	DOSInvoke	LOADCOM
 	jmp	short Trans_Loaded
 Ok_To_Move:
 ;
@@ -1346,7 +1346,7 @@ print_message:
 ;AD054; POP	DX				;AC000; restore registers
 ;AD054; POP	CX				;AC000;
 ;AD054; POP	BX				;AC000;
-	invoke	rprint				;AC054;
+	DOSInvoke	rprint				;AC054;
 
 	POP	ES				;AN000;
 	POP	DS				;AN000;

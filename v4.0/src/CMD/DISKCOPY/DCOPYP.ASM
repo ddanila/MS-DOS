@@ -87,7 +87,7 @@
 ;
 ;****************** END OF SPECIFICATIONS *****************************
 	IF1				;AN000;
-	    %OUT    COMPONENT=DISKCOPY, MODULE=DCOPYP.SAL... ;AN000;
+	    ;%OUT    COMPONENT=DISKCOPY, MODULE=DCOPYP.SAL... ;AN000;
 	ENDIF				;AN000;
 ; =  =	=  =  =  =  =  =  =  =	=  =
 	HEADER	<MACRO DEFINITION>	;AN000;

@@ -30,7 +30,7 @@ if incsw				;AN000; If incsw = 1 then (tm03)
 endif					;AN000; endif		  (tm03)
    PAGE 				;AN000;
 IF1					;AN000;
-   %OUT INCLUDING COMP=COMMON DSN=PARSE.ASM...;AN000;
+   ;%OUT INCLUDING COMP=COMMON DSN=PARSE.ASM...;AN000;
 ENDIF					;AN000;
 ;***********************************************************************
 ; SysParse;

@@ -155,7 +155,7 @@
 ;		 4.00 modifications by: EMK
 ;****************** END OF SPECIFICATIONS *****************************
 	IF1				;
-	    %OUT    COMPONENT=DISKCOPY, MODULE=DISKCOPY.SAL ;
+	    ;%OUT    COMPONENT=DISKCOPY, MODULE=DISKCOPY.SAL ;
 	ENDIF				;
 
 ;*****************************************************************************

@@ -1,5 +1,5 @@
 	PAGE	,132			;
-	%OUT	...MSINIT.ASM
+	;%OUT	...MSINIT.ASM
 ;=======================================================
 ;REVISION HISTORY:
 ;AN000; - NEW Version 4.00. J.K.

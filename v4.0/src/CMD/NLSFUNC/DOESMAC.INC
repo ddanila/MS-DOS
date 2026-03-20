@@ -14,7 +14,7 @@ IF Installed
 	RestoreReg  <restore>
     ENDIF
 ELSE
-	Invoke	name
+	DOSInvoke	name
 ENDIF
 ENDM
 

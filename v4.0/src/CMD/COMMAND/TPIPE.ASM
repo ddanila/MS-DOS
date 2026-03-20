@@ -153,13 +153,13 @@ PIPEERRSYN:
 	JMP	CERROR
 PIPEERR:
 	pushf
-	invoke	triageError
+	DOSInvoke	triageError
 	SaveReg    <AX,DX>			; Save results from TriageError
 	MOV	DX,OFFSET TRANGROUP:PIPEEMES_ptr
 	CALL	PIPEDEL
 	PUSH	CS
 	POP	DS
-	invoke	std_eprintf
+	DOSInvoke	std_eprintf
 	RestoreReg <DX,AX>			; Restore results from TriageError
 	popf
 	cmp	ax, 65
@@ -320,9 +320,9 @@ DATINIT PROC	FAR
 	MOV	AX,CS				; Set up the appropriate segment registers
 	MOV	ES,AX
 	MOV	DS,AX
-	invoke	TSYSLOADMSG			;AN000; preload messages
-	invoke	SETSTDINON			;AN026; turn on critical error on STDIN
-	invoke	SETSTDOUTOFF			;AN026; turn off critical error on STDOUT
+	DOSInvoke	TSYSLOADMSG			;AN000; preload messages
+	DOSInvoke	SETSTDINON			;AN026; turn on critical error on STDIN
+	DOSInvoke	SETSTDOUTOFF			;AN026; turn off critical error on STDOUT
 	MOV	DX,OFFSET TRANGROUP:INTERNATVARS;Set up internat vars
 	MOV	AX,INTERNATIONAL SHL 8
 	INT	21H
@@ -390,7 +390,7 @@ DATE_NORM:
 	mov	di,offset trangroup:parse_date	;AN000; Get adderss of PARSE_DATE
 	xor	cx,cx				;AN000; clear counter for positionals
 	xor	dx,dx				;AN000;
-	invoke	cmd_parse			;AC000; call parser
+	DOSInvoke	cmd_parse			;AC000; call parser
 	cmp	ax,end_of_line			;AC000; are we at end of line?
 	JZ	PRMTDAT 			;AC000; yes - go ask for date
 	cmp	ax,result_no_error		;AN000; did we have an error?
@@ -400,12 +400,12 @@ DATE_NORM:
 PRMTDAT:
 	; Print "Current date is
 
-	invoke	GetDate 			;AN000; get date  for output
+	DOSInvoke	GetDate 			;AN000; get date  for output
 	xchg	dh,dl				;AN000; switch month & day
 	mov	CurDat_yr,cx			;AC000; put year into message control block
 	mov	CurDat_mo_day,dx		;AC000; put month and day into message control block
 	mov	dx,offset trangroup:CurDat_ptr	;AC000; set up message for output
-	invoke	std_printf
+	DOSInvoke	std_printf
 ;AD061; mov	CurDat_yr,0			;AC000; reset year, month and day
 ;AD061; mov	CurDat_mo_day,0 		;AC000;     pointers in control block
 
@@ -423,7 +423,7 @@ COMDAT:
 	push	dx				;AC000;
 	mov	cx,1				;AC000; set 1 positional entered
 	xor	dx,dx				;AN029;
-	invoke	cmd_parse			;AN029; call parser
+	DOSInvoke	cmd_parse			;AN029; call parser
 	cmp	al,end_of_line			;AN029; Are we at end of line?
 	pop	dx				;AC000; retrieve date
 	pop	cx				;AC000;
@@ -436,9 +436,9 @@ date_end:
 	ret
 
 DATERR:
-	invoke	crlf2				;AN028; print out a blank line
+	DOSInvoke	crlf2				;AN028; print out a blank line
 	MOV	DX,OFFSET TRANGROUP:BADDAT_ptr
-	invoke	std_printf
+	DOSInvoke	std_printf
 	JMP	GET_NEW_DATE			;AC000; get date again
 
 
@@ -494,7 +494,7 @@ TIME_NORM:
 	mov	di,offset trangroup:parse_time	;AN000; Get adderss of PARSE_time
 	xor	cx,cx				;AN000; clear counter for positionals
 	xor	dx,dx				;AN000;
-	invoke	cmd_parse			;AC000; call parser
+	DOSInvoke	cmd_parse			;AC000; call parser
 	cmp	ax,end_of_line			;AC000; are we at end of line?
 	JZ	PRMTTIM 			;AC000; yes - prompt for time
 	cmp	ax,result_no_error		;AN000; did we have an error?
@@ -511,7 +511,7 @@ PRMTTIM:
 	mov	CurTim_hr_min,cx		;AC000; put hours and minutes into message subst block
 	mov	CurTim_sec_hn,dx		;AC000; put seconds and hundredths into message subst block
 	mov	dx,offset trangroup:CurTim_ptr	;AC000; set up message for output
-	invoke	std_printf
+	DOSInvoke	std_printf
 ;AD061; mov	CurTim_hr_min,0 		;AC000; reset hour, minutes, seconds, and hundredths
 ;AD061; mov	CurTim_sec_hn,0 		;AC000;     pointers in control block
 
@@ -531,7 +531,7 @@ COMTIM:
 	push	dx				;AC000;
 	mov	cx,1				;AC000; set 1 positional parm entered
 	xor	dx,dx				;AN029;
-	invoke	cmd_parse			;AN029; call parser
+	DOSInvoke	cmd_parse			;AN029; call parser
 	cmp	al,end_of_line			;AN029; Are we at end of line?
 	pop	dx				;AC000; retieve time
 	pop	cx				;AC000;
@@ -548,9 +548,9 @@ TIME_END:
 	ret
 
 TIMERR:
-	invoke	crlf2				;AN028; print out a blank line
+	DOSInvoke	crlf2				;AN028; print out a blank line
 	MOV	DX,OFFSET TRANGROUP:BADTIM_ptr
-	invoke	std_printf			; Print error message
+	DOSInvoke	std_printf			; Print error message
 	JMP	GET_NEW_TIME			;AC000; Try again
 
 
@@ -595,7 +595,7 @@ PRINT_TIME:
 	mov	promTim_hr_min,cx		;AC000; put hours and minutes into message subst block
 	mov	promTim_sec_hn,dx		;AC000; put seconds and hundredths into message subst block
 	mov	dx,offset trangroup:promTim_ptr ;AC000; set up message for output
-	invoke	std_printf
+	DOSInvoke	std_printf
 ;AD061; mov	promTim_hr_min,0		;AC000; reset hour, minutes, seconds, and hundredths
 ;AD061; mov	promTim_sec_hn,0		;AC000;     pointers in control block
 
@@ -641,7 +641,7 @@ printformat:
 	call	Tsysgetmsg			;AN000; get the address of the message
 	mov	newdat_format,si		;AN000; put the address in subst block
 	MOV	DX,OFFSET TRANGROUP:NEWDAT_ptr	;AC000; get address of message to print
-	invoke	std_printf
+	DOSInvoke	std_printf
 	mov	newdat_format,no_subst		;AN000; reset subst block
 
 	MOV	AH,STD_CON_STRING_INPUT
@@ -651,12 +651,12 @@ printformat:
 	INT	int_command			; Get input line
 	xor	cx,cx				; Reset bit in InitFlag that indicates
 	call	SetInitFlag			;  prompting for date.
-	invoke	CRLF2
+	DOSInvoke	CRLF2
 	MOV	SI,OFFSET TRANGROUP:COMBUF+2
 	mov	di,offset trangroup:parse_date	;AN000; Get adderss of PARSE_DATE
 	xor	cx,cx				;AN000; clear counter for positionals
 	xor	dx,dx				;AN000;
-	invoke	cmd_parse			;AC000; call parser
+	DOSInvoke	cmd_parse			;AC000; call parser
 
 	ret
 
@@ -685,7 +685,7 @@ GETTIM	proc	near				;AC000;
 
 	XOR	CX,CX				; Initialize hours and minutes to zero
 	MOV	DX,OFFSET TRANGROUP:NEWTIM_ptr
-	invoke	std_printf
+	DOSInvoke	std_printf
 	MOV	AH,STD_CON_STRING_INPUT
 	MOV	DX,OFFSET TRANGROUP:COMBUF
 	mov	cx,initSpecial			; Set bit in InitFlag that indicates
@@ -693,12 +693,12 @@ GETTIM	proc	near				;AC000;
 	INT	int_command			; Get input line
 	xor	cx,cx				; Reset bit in InitFlag that indicates
 	call	SetInitFlag			;  prompting for time.
-	invoke	CRLF2
+	DOSInvoke	CRLF2
 	MOV	SI,OFFSET TRANGROUP:COMBUF+2
 	mov	di,offset trangroup:parse_time	;AN000; Get adderss of PARSE_TIME
 	xor	cx,cx				;AN000; clear counter for positionals
 	xor	dx,dx				;AN000;
-	invoke	cmd_parse			;AC000; call parser
+	DOSInvoke	cmd_parse			;AC000; call parser
 
 	ret
 

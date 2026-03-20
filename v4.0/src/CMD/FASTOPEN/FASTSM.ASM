@@ -94,7 +94,7 @@
 ;
 ;****************** END OF SPECIFICATIONS *****************************
 	IF1				;					;AN000;
-	    %OUT    COMPONENT=fastopen, MODULE=fastsm.asm...
+	    ;%OUT    COMPONENT=fastopen, MODULE=fastsm.asm...
 	ENDIF				;					;AN000;
 ; =  =	=  =  =  =  =  =  =  =	=  =
 

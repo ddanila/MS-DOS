@@ -514,7 +514,7 @@ IF1
                         IF   IBM
 ;                            %out IBM VERSION
                         ELSE
-                            %out MS-DOS VERSION
+                            ;%out MS-DOS VERSION
                         ENDIF
 ENDIF
 

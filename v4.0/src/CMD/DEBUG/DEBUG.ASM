@@ -73,7 +73,7 @@
 ;======================= END OF SPECIFICATIONS ===========================
 
 	IF1
-	    %OUT    COMPONENT=DEBUG, MODULE=DEBUG
+	    ;%OUT    COMPONENT=DEBUG, MODULE=DEBUG
 	ENDIF
 .XLIST
 .XCREF

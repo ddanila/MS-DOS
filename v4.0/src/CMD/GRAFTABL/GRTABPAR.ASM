@@ -93,7 +93,7 @@
 
 ;****************** END OF SPECIFICATIONS *****************************
 	IF1				;AN000;
-	    %OUT    COMPONENT=GRAFTABL, MODULE=GRTABPAR.SAL... ;AN000;
+	    ;%OUT    COMPONENT=GRAFTABL, MODULE=GRTABPAR.SAL... ;AN000;
 	ENDIF				;AN000;
 ; =  =	=  =  =  =  =  =  =  =	=  =
 	INCLUDE PATHMAC.INC		;AN006;

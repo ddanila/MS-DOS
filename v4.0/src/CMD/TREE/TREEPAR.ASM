@@ -75,7 +75,7 @@
 ;****************** END OF SPECIFICATIONS *****************************
 	HEADER	<LOCAL MACROS, EQUATES> ;AN000;
 	IF1				;AN000;
-	    %OUT    COMPONENT=TREE, MODULE=TREEPAR.SAL... ;AN000;
+	    ;%OUT    COMPONENT=TREE, MODULE=TREEPAR.SAL... ;AN000;
 	ENDIF				;AN000;
 	INCLUDE PATHMAC.INC		;AN012;
 ; =  =	=  =  =  =  =  =  =  =	=  =

@@ -1,6 +1,6 @@
 ;
         if1
-                %out    macros.inc
+                ;%out    macros.inc
         endif
 
 

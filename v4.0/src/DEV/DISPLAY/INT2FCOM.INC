@@ -7,7 +7,7 @@
 ;   1) not yet defined
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 IF1					       ;
-	%OUT .		     ®INT2FCOM.INC¯
+	;%OUT .		     ®INT2FCOM.INC¯
 ENDIF					       ;
 	PUBLIC	ROM_INT_2F		       ;
 	PUBLIC	INT_2F_COM		       ;

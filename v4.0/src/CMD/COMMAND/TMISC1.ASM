@@ -155,7 +155,7 @@ append_internal:
 	mov	pathpos,cx
 	inc	append_exec			;AN041; set APPEND to ON
 
-	invoke	ioset				; re-direct the o'l io
+	DOSInvoke	ioset				; re-direct the o'l io
 
 	mov	SI, offset TRANGROUP:IDLEN	; address command name, DS already set
 	mov	DX,-1				; set invoke function
@@ -200,11 +200,11 @@ abcd:
 ;
     cmp     append_exec,0			;AN041; APPEND just executed?
     jnz     dont_set_io 			;AN041; Yes - this junk is already set
-    invoke  ioset				; re-direct the ol' i/o
+    DOSInvoke  ioset				; re-direct the ol' i/o
 
 dont_set_io:					;AN041;
-    invoke  SETSTDINON				;AN026; turn on critical error on STDIN
-    invoke  SETSTDOUTOFF			;AN026; turn off critical error on STDOUT
+    DOSInvoke  SETSTDINON				;AN026; turn on critical error on STDIN
+    DOSInvoke  SETSTDOUTOFF			;AN026; turn off critical error on STDOUT
     test    [CHKDRV], fCheckDrive		; did we wanna check those drives?
     jz	    nocheck
     mov     AL, [PARM1] 			; parse_file_descriptor results tell
@@ -302,7 +302,7 @@ IF IBM
 	JMP	NeoExecute
 ENDIF
 RESEARCH:
-	invoke	path_search			; find the mother (result in execpath)
+	DOSInvoke	path_search			; find the mother (result in execpath)
 	or	AX, AX				; did we find anything?
 	je	badcomj45			; null means no (sob)
 	cmp	AX, 04H 			; 04H and 08H are .exe and .com
@@ -317,9 +317,9 @@ ASSUME	DS:TRANGROUP,ES:TRANGROUP
 
 EXECUTE:
 NeoExecute:
-	invoke	IOSET
-	invoke	SETSTDINOFF			;AN026; turn off critical error on STDIN
-	invoke	SETSTDOUTOFF			;AN026; turn off critical error on STDOUT
+	DOSInvoke	IOSET
+	DOSInvoke	SETSTDINOFF			;AN026; turn off critical error on STDIN
+	DOSInvoke	SETSTDOUTOFF			;AN026; turn off critical error on STDOUT
 	MOV	ES,[TRAN_TPA]
 	MOV	AH,DEALLOC
 	INT	int_command			; Now running in "free" space

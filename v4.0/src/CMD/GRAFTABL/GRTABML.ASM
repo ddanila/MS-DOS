@@ -7,7 +7,7 @@
 ;in graphics mode to define the multi-lingual character set when loaded to
 ;interrupt 1FH by the GRAFTABL command in DOS 3.3.
 	IF1				;AN000;
-	    %OUT    GRTABML.ASM...	;AN000;
+	    ;%OUT    GRTABML.ASM...	;AN000;
 	ELSE				;AN000;
 ;    %OUT GRTABML.ASM...
 	ENDIF				;AN000;

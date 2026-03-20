@@ -976,7 +976,7 @@ $$IF61:
 	      JNE $$IF63
 baddrv: 	  mov  fatal_error,yes						;an000;bgb;an033;bgb
 		  mov	  dx,offset dg:inval_media				;an000;bgb;an033;bgb
-		  invoke  printf_crlf						;an000;bgb;an033;bgb
+		  DOSInvoke  printf_crlf						;an000;bgb;an033;bgb
 ;	      $ENDIF								;an000;bgb;an033;bgb
 $$IF63:
 Exit_Baddrv:					;AN099;

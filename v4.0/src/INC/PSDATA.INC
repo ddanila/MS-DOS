@@ -2,7 +2,7 @@
 ; Parser include file
 ;*******************************************************************
 IF1					;AN000;
-	%OUT	INCLUDING COMP=COMMON DSN=PSDATA.INC...;AN000;
+	;%OUT	INCLUDING COMP=COMMON DSN=PSDATA.INC...;AN000;
 ENDIF					;AN000;
 ;
 ;**** Default assemble switches definition *************************

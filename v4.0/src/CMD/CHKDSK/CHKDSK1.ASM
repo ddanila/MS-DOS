@@ -232,7 +232,7 @@ Root_CD_Ok:					 ;				;AN000;
 ;   $IF     B			     ; if not, display error msg
     JNB $$IF9
 	MOV	DX,OFFSET DG:no_mem_arg
-	invoke	printf_crlf
+	DOSInvoke	printf_crlf
 	jmp	alldone 	     ;finished with pgm
 ;   $ENDIF
 $$IF9:
@@ -459,7 +459,7 @@ NOT_ROOT_DIR:
 	JNC	VALID_PATH
 	INVOKE	DOCRLF
 	MOV	DX,OFFSET DG:INVPATH_arg
-	invoke	printf_crlf
+	DOSInvoke	printf_crlf
 	JMP	CDONE1
 
 ;*****************************************************************************
@@ -535,7 +535,7 @@ NXTCHK: 	      ;reached the end of a file
 	CALL	get_THISEL2
 ; print it out
 	mov	dx,offset dg:extent_arg
-	invoke	printf_crlf
+	DOSInvoke	printf_crlf
 GETNXT:
 	MOV	AH,DIR_SEARCH_NEXT	    ;Look for the next file
 	JMP	FRAGCHK
@@ -547,14 +547,14 @@ MSGCHK:
 	MOV	SI,pFileName
 	CALL	get_currdir
 	mov	dx,offset dg:OPNERR_arg
-	invoke	printf_crlf		    ;bad file spec
+	DOSInvoke	printf_crlf		    ;bad file spec
 	jmp	short cdone
 FILSPOK:
 	CMP	BYTE PTR [FRAGMENT],2
 	JZ	CDONE
 ; all files were ok
 	mov	dx,offset dg:NOEXT_arg
-	invoke	printf_crlf
+	DOSInvoke	printf_crlf
 CDONE:
 	CMP	BYTE PTR [DIR_FIX],0
 	JZ	CDONE1

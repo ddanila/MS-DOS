@@ -85,7 +85,7 @@
 ;
 ;****************** END OF SPECIFICATIONS *****************************
 	IF1				;AN000;
-	    %OUT    COMPONENT=GRAFTABL, MODULE=GRTABP.SAL... ;AN000;
+	    ;%OUT    COMPONENT=GRAFTABL, MODULE=GRTABP.SAL... ;AN000;
 	ENDIF				;AN000;
 ; =  =	=  =  =  =  =  =  =  =	=  =
 	HEADER	<MACRO DEFINITION>	;AN000;

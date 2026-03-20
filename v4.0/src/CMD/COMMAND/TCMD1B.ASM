@@ -126,8 +126,8 @@ PAUSE_CSW:
 PAUSE_NORM:
 	mov	dx,offset trangroup:pausemes_ptr
 	call	std_printf
-	invoke	GetKeystroke
-	invoke	crlf2
+	DOSInvoke	GetKeystroke
+	DOSInvoke	crlf2
 	return
 
 	break	Erase
@@ -188,7 +188,7 @@ ERASE_NORM:
 
 erase_scan:
 	xor	dx,dx				;AN000;
-	invoke	parse_with_msg			;AC018; call parser
+	DOSInvoke	parse_with_msg			;AC018; call parser
 	cmp	ax,end_of_line			;AN000; are we at end of line?
 	jz	good_line			;AN000; yes - done parsing
 	cmp	ax,result_no_error		;AC000; did we have an error?
@@ -210,7 +210,7 @@ erase_scan:
 	jmp	short extend_setup		;AC000; exit
 
 erase_drive_ok:
-	invoke	move_to_srcbuf			;AC000; move to srcbuf
+	DOSInvoke	move_to_srcbuf			;AC000; move to srcbuf
 	pop	si				;AC000; get position back
 	jmp	short erase_scan		;AN000; continue parsing
 
@@ -218,7 +218,7 @@ set_erase_prompt:
 	cmp	comsw,0 			;AN018; was /P already entered?
 	jz	ok_to_set_erase_prompt		;AN018; no go set switch
 	mov	ax,moreargs_ptr 		;AN018; set up too many arguments
-	invoke	setup_parse_error_msg		;AN018; set up an error message
+	DOSInvoke	setup_parse_error_msg		;AN018; set up an error message
 	jmp	short errj2			;AN018; exit
 
 ok_to_set_erase_prompt: 			;AN018;
@@ -226,7 +226,7 @@ ok_to_set_erase_prompt: 			;AN018;
 	jmp	short erase_scan		;AN000; continue parsing
 
 good_line:					;G  We know line is good
-	invoke	pathcrunch
+	DOSInvoke	pathcrunch
 	jnc	checkdr
 	mov	ax,[msg_numb]			;AN022; get message number
 	cmp	ax,0				;AN022; was message flag set?
@@ -304,7 +304,7 @@ CRENAME_NORM:
 	mov	di,offset trangroup:parse_rename;AN000; Get adderss of PARSE_RENAME
 	xor	cx,cx				;AN000; clear cx,dx
 	xor	dx,dx				;AN000;
-	invoke	parse_with_msg			;AC018; call parser
+	DOSInvoke	parse_with_msg			;AC018; call parser
 	cmp	ax,result_no_error		;AC000; did we have an error?
 	jz	crename_no_parse_error		;AC000; no - continue
 	JMP	crename_parse_error		;AC000; Yes, fail. (need long jump)
@@ -315,11 +315,11 @@ CRENAME_NORM:
 crename_no_parse_error:
 	push	si				;AN000; save position in line
 	lds	si,parse1_addr			;AN000; get address of filespec
-	invoke	move_to_srcbuf			;AN000; move to srcbuf
+	DOSInvoke	move_to_srcbuf			;AN000; move to srcbuf
 	pop	si				;AN000; restore position in line
 
 	xor	dx,dx				;AN000; clear dx
-	invoke	parse_with_msg			;AC018; call parser
+	DOSInvoke	parse_with_msg			;AC018; call parser
 	cmp	ax,result_no_error		;AN000; did we have an error?
 	JNZ	crename_parse_error		;AN000; Yes, fail.
 
@@ -359,10 +359,10 @@ ren_no_drive:
 ;
 
 	mov	di,offset trangroup:parse_rename;AC000; get address of parse_rename
-	invoke	parse_check_eol 		;AC000; are we at end of line?
+	DOSInvoke	parse_check_eol 		;AC000; are we at end of line?
 	jnz	crename_parse_error		;AN000; no, fail.
 
-	invoke	pathcrunch
+	DOSInvoke	pathcrunch
 	mov	dx,offset trangroup:badcpmes_ptr
 	jnz	crj_notdir			; If non-zero: first parm is not a dir
 	jmp	errj2				; If 1st parm a dir, print error msg
@@ -380,7 +380,7 @@ crj_no_extset:
 notest3:
 	mov	al,one_char_val 		;AN000; move char into AX
 	mov	dx,offset trangroup:inornot_ptr ; Load invalid fname error ptr
-	invoke	pathchrcmp			; Is the char in al a path sep?
+	DOSInvoke	pathchrcmp			; Is the char in al a path sep?
 	jz	errj				; Yes, error - 2nd arg must be
 						;  filename only.
 
@@ -390,13 +390,13 @@ notest3:
 	cmp	al, 0FFH			; Did an error occur??
 	jnz	renameok
 
-	invoke	get_ext_error_number		;AN022; get extended error
+	DOSInvoke	get_ext_error_number		;AN022; get extended error
 	SaveReg <AX>				;AC022; Save results
 	mov	al, 0FFH			; Restore original error state
 
 renameok:
 	push	ax
-	invoke	restudir
+	DOSInvoke	restudir
 	pop	ax
 	inc	al
 	retnz
@@ -465,23 +465,23 @@ TYPEFIL_NORM:
 	mov	di,offset trangroup:parse_mrdir ;AN000; Get adderss of PARSE_MRDIR
 	xor	cx,cx				;AN000; clear cx,dx
 	xor	dx,dx				;AN000;
-	invoke	parse_with_msg			;AC018; call parser
+	DOSInvoke	parse_with_msg			;AC018; call parser
 	cmp	ax,result_no_error		;AC000; did we have an error?
 	jnz	typefil_parse_error		;AN000; yes - issue error message
 
 	push	si				;AC000; save position in line
 	lds	si,parse1_addr			;AC000; get address of filespec
-	invoke	move_to_srcbuf			;AC000; move to srcbuf
+	DOSInvoke	move_to_srcbuf			;AC000; move to srcbuf
 	pop	si				;AC000; get position back
 	mov	di,offset trangroup:parse_mrdir ;AC000; get address of parse_mrdir
-	invoke	parse_check_eol 		;AC000; are we at end of line?
+	DOSInvoke	parse_check_eol 		;AC000; are we at end of line?
 	jz	gottarg 			;AC000; yes - continue
 
 typefil_parse_error:				;AN000; no - set up error message and exit
 	jmp	Cerror
 
 gottarg:
-	invoke	setpath
+	DOSInvoke	setpath
 	test	[destinfo],00000010b		; Does the filespec contain wildcards
 	jz	nowilds 			; No, continue processing
 	mov	dx,offset trangroup:inornot_ptr ; Yes, report error
@@ -499,7 +499,7 @@ nowilds:
 Typerr: 					;AN022;
 	push	cs				;AN022; make sure we have local segment
 	pop	ds				;AN022;
-	invoke	set_ext_error_msg		;AN022;
+	DOSInvoke	set_ext_error_msg		;AN022;
 
 Typerr2:					;AN022;
 	mov	string_ptr_2,offset trangroup:srcbuf ;AC022; get address of failed string
@@ -607,7 +607,7 @@ VOLUME_NORM:
 	mov	di,offset trangroup:parse_vol	;AN000; Get adderss of PARSE_VOL
 	xor	cx,cx				;AN000; clear cx,dx
 	xor	dx,dx				;AN000;
-	invoke	parse_with_msg			;AC018; call parser
+	DOSInvoke	parse_with_msg			;AC018; call parser
 	cmp	ax,end_of_line			;AC000; are we at end of line?
 	jz	OkVolArg			;AC000; Yes, display default volume ID
 	cmp	ax,result_no_error		;AC000; did we have an error?
@@ -618,7 +618,7 @@ VOLUME_NORM:
 
 	mov	di,offset trangroup:parse_vol	;AC000; get address of parse_vol
 	xor	dx,dx				;AC000;
-	invoke	parse_check_eol 		;AC000; call parser
+	DOSInvoke	parse_check_eol 		;AC000; call parser
 	jz	OkVolArg			;AC000; yes, end of road
 ;
 ; The line was not interpretable.  Report an error.
@@ -630,9 +630,9 @@ badvolarg:
 ;
 PUBLIC	OkVolArg
 OKVOLARG:
-	invoke	crlf2
+	DOSInvoke	crlf2
 	mov	al,blank			;AN051; Print out a blank
-	invoke	print_char			;AN051;   before volume message
+	DOSInvoke	print_char			;AN051;   before volume message
 	push	ds
 	pop	es
 ;
@@ -711,7 +711,7 @@ PRINT_SERIAL:
 	jc	printvol_end			;AN000; if error, just go print label
 	call	std_printf			;AC000; go print volume message
 	mov	al,blank			;AN051; Print out a blank
-	invoke	print_char			;AN051;   before volume message
+	DOSInvoke	print_char			;AN051;   before volume message
 	mov	dx,offset trangroup:VolSerMes_ptr ;AN000; get serial number message
 
 printvol_end:

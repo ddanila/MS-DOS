@@ -1,7 +1,7 @@
 ; find.inc
 
         if1
-                %out    find.inc
+                ;%out    find.inc
         endif
 
 FileFindBuf     struc

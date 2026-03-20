@@ -1,0 +1,2 @@
+/tmp/test_irp4.asm(7): Error! E020: Expecting comma
+/tmp/test_irp4.asm(7): Note! N291: macro called from file /tmp/test_irp4.asm(11)

@@ -14,20 +14,20 @@ outif MACRO name,defval,onmsg,offmsg
     if name
 	name=1
 	ifnb <onmsg>
-	    %out ! onmsg
+	    ;%out ! onmsg
 	endif
     else
 	ifnb <offmsg>
-	    %out ! offmsg
+	    ;%out ! offmsg
 	endif
     endif
 endm
 
 error MACRO msg
 bug
-%out E r r o r ----- msg
+;%out E r r o r ----- msg
 ENDM
-%out cMacros Version 1.04
+;%out cMacros Version 1.04
 outif memS,0,<Small Model>
 outif memM,0,<Medium Model>
 outif memL,0,<Large Model>
@@ -198,7 +198,7 @@ endm
 endif
  .cref
 else
-%out Parm(s) "&nl" declared outside proc def.
+;%out Parm(s) "&nl" declared outside proc def.
 endif
 endm
 ?pp1 macro n,t,o,a,b
@@ -262,7 +262,7 @@ irp x,<nL>
 endm
  .cref
 else
-%out Locals "&nl" declared outside procedure def.
+;%out Locals "&nl" declared outside procedure def.
 endif
 endm
 ?aL1 macro n,t,o
@@ -735,7 +735,7 @@ endm
 	endif
 	ifidn <g>,<nogen>
 	    if ???+?PO+a
-		%out <cBegin - possible invalid use of nogen>
+		;%out <cBegin - possible invalid use of nogen>
 	    endif
 	else
 	    if ?IA
@@ -759,7 +759,7 @@ endm
 	purge cBegin
     &endm
     ?UTPE &macro
-	%out Unterminated Procedure Definition: "&n"
+	;%out Unterminated Procedure Definition: "&n"
     &endm
 endm
 
@@ -770,7 +770,7 @@ endm
 	?BA = 0
 	ifidn <g>,<nogen>
 	    if o+a
-		%out <cEnd - possible invalid use of nogen>
+		;%out <cEnd - possible invalid use of nogen>
 	    endif
 	else
 	    mPop a,1

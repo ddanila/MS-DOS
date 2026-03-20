@@ -69,7 +69,7 @@
 ;:end
 ; = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 	IF1				;AN000;
-	    %OUT    COMPONENT=DISKCOMP, MODULE=DCOMPMS.INC...;AN000;
+	    ;%OUT    COMPONENT=DISKCOMP, MODULE=DCOMPMS.INC...;AN000;
 	ENDIF				;AN000;
 ;	    $SALUT (0,13,18,22) ;						;AN000;
 ;THIS MODULE IS INCLUDED IN DCOMPSM.SAL.

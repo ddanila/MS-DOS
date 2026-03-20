@@ -30,8 +30,8 @@ MsgError	macro text		; message string error
 
 	if1
 	else
-	%out 
-	%out $ERROR - &text
+	;%out 
+	;%out $ERROR - &text
 	endif
 
  $ERROR - &text

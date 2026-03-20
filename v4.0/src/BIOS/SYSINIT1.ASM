@@ -1,7 +1,7 @@
 	PAGE	,132			;
 ;	SCCSID = @(#)sysinit1.asm	1.7 85/10/24
 TITLE	BIOS SYSTEM INITIALIZATION
-%OUT ...SYSINIT1
+;%OUT ...SYSINIT1
 ;==============================================================================
 ;REVISION HISTORY:
 ;AN000 - New for DOS Version 4.00 - J.K.
@@ -83,7 +83,7 @@ DOSSIZE EQU	0A000H
 
 ;AN000 J.K. If MYCDS_SIZE <> CURDIRLEN, then force a compilatiaon error.
 	if	MYCDS_SIZE NE CURDIRLEN
-	   %OUT  !!! SYSINIT1 COMPILATION FAILED. DIFFERENT CDS SIZE !!!
+	   ;%OUT  !!! SYSINIT1 COMPILATION FAILED. DIFFERENT CDS SIZE !!!
 	   .ERRE   MYCDS_SIZE EQ CURDIRLEN
 	endif
 
@@ -632,7 +632,7 @@ ASSUME	DS:SYSINITSEG
 					; start of free memory
 	IF	ALTVECT
 	MOV	DX,OFFSET BOOTMES
-	invoke	PRINT			;Print message DOSINIT couldn't
+	DOSInvoke	PRINT			;Print message DOSINIT couldn't
 	ENDIF
 
 	POP	DS
@@ -1307,7 +1307,7 @@ $$IF1:
 	    mov   ds:[bx.HASH_COUNT], ax	;AN000;
 ;	$ENDIF					;AN000;
 $$EN1:
-	invoke Round				;AN000; get [MEMHI]:[MEMLO]
+	DOSInvoke Round				;AN000; get [MEMHI]:[MEMLO]
 	mov	al, DEVMARK_BUF 		;AN005; ='B'
 	call	SetDevMark			;AN005;
 ;Now, allocate Hash table at [memhi]:[memlo]. AX = Hash_Count.
@@ -2658,7 +2658,7 @@ LShare_Set_Filename:				;AN021;
 	push	cs				;AN021;
 	pop	ds				;AN021;
 	mov	dx, offset ShareWarnMsg 	;AN021;WARNING! SHARE should be loaded...
-	invoke	Print				;AN021;
+	DOSInvoke	Print				;AN021;
 LShare_Ret:					;AN021;
 	ret					;AN021;
 LoadShare	endp				;AN021;

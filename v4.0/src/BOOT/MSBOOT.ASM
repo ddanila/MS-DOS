@@ -174,7 +174,7 @@ START:
 	MOV	CX,11
 	CLD
 if	$ le BIOS$_L
-	%OUT Don't destroy unexcuted code yet!!!
+	;%OUT Don't destroy unexcuted code yet!!!
 endif
 	repz	movsb			;AN000;
 	push	es			;AN000;
@@ -508,7 +508,7 @@ DOS	DB	"MSDOS   SYS"
 Free	EQU (cbSec - 4) - ($-$start)		;AC000;
 ;Free	 EQU (cbSec - 5) - ($-$start)
 if Free LT 0
-    %out FATAL PROBLEM:boot sector is too large
+    ;%out FATAL PROBLEM:boot sector is too large
 endif
 
 	org	origin + (cbSec - 2)		;AN004;

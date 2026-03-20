@@ -24,8 +24,8 @@ title	Non-Contiguous IBMBIO Loader (MSLOAD)
 ;
 
 IF1
-	%OUT ASSEMBLING: Non-Contiguous IBMBIO Loader (MSLOAD)
-	%OUT
+	;%OUT ASSEMBLING: Non-Contiguous IBMBIO Loader (MSLOAD)
+	;%OUT
 
 ENDIF
 

@@ -244,7 +244,7 @@ add_name_ret:
 ; We have changed the COMSPEC variable.  We need to update the resident
 ; pieces necessary to reread in the info.  First, skip all delimiters
 ;
-	invoke	ScanOff
+	DOSInvoke	ScanOff
 	mov	es,[resseg]			;  comspec var in the resident
 	assume	es:resgroup
 ;
@@ -288,7 +288,7 @@ GotDrive:					;g
 
 copy_comspec:
 	lodsb
-	invoke	Delim
+	DOSInvoke	Delim
 	jz	CopyDone
 	cmp	al,13
 	jz	CopyDone
@@ -327,7 +327,7 @@ PENVLP2:
 	push	ds
 	push	es
 	pop	ds
-	invoke	printf_crlf
+	DOSInvoke	printf_crlf
 	pop	ds
 	JMP	PENVLP
 
@@ -479,7 +479,7 @@ GETARG:
 	LODSB
 	OR	AL,AL
 	retz
-	invoke	SCANOFF
+	DOSInvoke	SCANOFF
 	CMP	AL,13
 	return
 
@@ -616,7 +616,7 @@ STORE_CHAR:
 	PUSH	AX
 	PUSH	CX
 	PUSH	BX				; Save Size of environment
-	invoke	FREE_TPA
+	DOSInvoke	FREE_TPA
 	POP	BX
 	ADD	BX,2				; Recover true environment size
 
@@ -642,7 +642,7 @@ ENVNOSET:
 	PUSHF
 	PUSH	ES
 	MOV	ES,[RESSEG]
-	invoke	ALLOC_TPA
+	DOSInvoke	ALLOC_TPA
 	POP	ES
 	POPF
 	POP	CX
@@ -697,7 +697,7 @@ RESTUDIR:
 	MOV	AH,CHDIR
 	INT	int_command			; Restore users DIR
 	XOR	AL,AL
-	invoke	SETREST
+	DOSInvoke	SETREST
 RET56:
 	return
 

@@ -333,13 +333,13 @@ I2F5_90:										 ;AN005;
 	RestoreReg <DS> 			; set ds-ifsseg 			 ;AN002;
 	MOV	AX,BX				; whole ax now ext error		 ;AN003;;AC005;
 	SaveReg <AX>				; save ext err #			 ;AN000;
-	invoke	PREP_IFSR			; zero out ifsr, sets es:bx -> ifsr	 ;AN000;
+	DOSInvoke	PREP_IFSR			; zero out ifsr, sets es:bx -> ifsr	 ;AN000;
 	MOV	ES:[BX.IFSR_LENGTH],LENGTH_CRITMSG					 ;AN000;
 	MOV	ES:[BX.IFSR_FUNCTION],IFSCRITMSG					 ;AN000;
 	MOV	ES:[BX.IFSR_RETCODE],AX 						 ;AN003;
 
 ;***********************************************************************************************
-	invoke	CALL_IFS			; call ifs with chance to set errmsg	 ;AN000;
+	DOSInvoke	CALL_IFS			; call ifs with chance to set errmsg	 ;AN000;
 ;***********************************************************************************************
 
 	JNC	I2F5_200								 ;AN000;

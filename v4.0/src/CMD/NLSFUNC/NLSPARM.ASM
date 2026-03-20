@@ -90,7 +90,7 @@
 ;
 ;****************** END OF SPECIFICATIONS *****************************
 	IF1
-	    %OUT    COMPONENT=NLSFUNC, MODULE=NLSPARM.SAL...
+	    ;%OUT    COMPONENT=NLSFUNC, MODULE=NLSPARM.SAL...
 	ENDIF
 ; =  =	=  =  =  =  =  =  =  =	=  =
 	HEADER	<MACRO DEFINITION>

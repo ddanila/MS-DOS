@@ -68,7 +68,7 @@ ENDIF
 	PUSH    AX
 cargs = cargs + 2
 ENDM
-	invoke  PFMT
+	DOSInvoke  PFMT
 	ADD     SP,Cargs
 	POP     BP
 	POP     AX
@@ -180,7 +180,7 @@ Procedure   DPBCheck,NEAR
 	LDS     SI,[BP].Astarg
 DPBLoop:CMP     DI,-1
 	JZ      DPBNotFound
-	invoke  PointComp
+	DOSInvoke  PointComp
 	JZ      DPBRet
 	LES     DI,ES:[DI.dpb_next_dpb]
 	JMP     DPBLoop
@@ -210,10 +210,10 @@ Procedure   SFTCheck,NEAR
 	XOR     BX,BX                   ;   i = 0;
 SFTLoop:
 	SaveReg <BX>
-	invoke  SFFromSFN               ;   while ((d=SF(i)) != NULL)
+	DOSInvoke  SFFromSFN               ;   while ((d=SF(i)) != NULL)
 	RestoreReg  <BX>
 	JC      Sft1
-	invoke  PointComp
+	DOSInvoke  PointComp
 	JZ      DPBRet                  ;               goto Done;
 SFTNext:INC     BX                      ;           else
 	JMP     SFTLoop                 ;               i++;
@@ -221,7 +221,7 @@ SFT1:   LES     DI,sftFCB
 	MOV     BX,ES:[DI.sfCount]
 	LEA     DI,[DI.sfTable]
 SFT2:
-	invoke  PointComp
+	DOSInvoke  PointComp
 DPBRETJ:JZ      DPBRet
 	ADD     DI,SIZE sf_entry
 	DEC     BX
@@ -232,10 +232,10 @@ DPBRETJ:JZ      DPBRet
 ;
 	Context ES
 	MOV     DI,OFFSET DOSGROUP:AUXSTACK - SIZE SF_ENTRY
-	Invoke  PointComp
+	DOSInvoke  PointComp
 	JZ      DPBRet
 	MOV     DI,OFFSET DOSGROUP:RenBuf
-	Invoke  PointComp
+	DOSInvoke  PointComp
 	JZ      DPBRetj
 DPBNotFoundJ:
 	JMP     DPBNotFound
@@ -273,7 +273,7 @@ CheckDone:
 	LES     DI,BUFFHead
 BUFLoop:CMP     DI,-1
 	JZ      DPBNotFoundJ
-	invoke  PointComp
+	DOSInvoke  PointComp
 	JNZ     BufNext
 	JMP     DPBRet
 BufNext:

@@ -100,7 +100,7 @@ Break	<DISKWRITE -- PERFORM USER DISK WRITE>
 	PUSH	ES:[DI.sf_firclus]	  ; set up 1st cluster # for FastSeek
 	POP	[FSeek_firclus]
 
-	invoke	CHECK_WRITE_LOCK	  ;IFS. check write lock		 ;AN000;
+	DOSInvoke	CHECK_WRITE_LOCK	  ;IFS. check write lock		 ;AN000;
 	JNC	WRITE_OK		  ;IFS. lock check ok			 ;AN000;
 	return
 
@@ -115,7 +115,7 @@ WRITE_OK:
 	MOV	AL,ES:[BP.dpb_drive]   ; set up drive # for FastSeek
 	MOV	[FSeek_drive],AL       ; 11/5/86 DOS 4.00
 
-	invoke	BREAKDOWN
+	DOSInvoke	BREAKDOWN
 	MOV	AX,WORD PTR [BYTPOS]
 	MOV	DX,WORD PTR [BYTPOS+2]
 	JCXZ	WRTEOFJ 		;Make the file length = sf_position
@@ -205,14 +205,14 @@ yesgrow:
 HAVSTART:
 ;int 3
 	MOV	CX,AX
-	invoke	SKPCLP
+	DOSInvoke	SKPCLP
 	JCXZ	DOWRTJ
 ;;; 11/5/86 FastSeek
 	MOV	[FSeek_logclus],DX   ; delete EOF (FFFFH)
 	INC	[FSeek_logclus]
-	invoke	FastSeek_Truncate    ;
+	DOSInvoke	FastSeek_Truncate    ;
 ;;; 11/5/86 FastSeek
-	invoke	ALLOCATE
+	DOSInvoke	ALLOCATE
 	JNC	DOWRTJ
 
 	entry	WRTERR
@@ -245,7 +245,7 @@ SETGRW:
 NOGROW:
 	POP	AX
 	MOV	CX,[CLUSNUM]	; First cluster accessed
-	invoke	FNDCLUS
+	DOSInvoke	FNDCLUS
 	JC	ACC_ERRWJ
 	MOV	[CLUSNUM],BX
 	MOV	[LASTPOS],DX
@@ -262,10 +262,10 @@ NOGROW:
 	JZ	NULL_FILE	      ;FS. yes					;AN000;
 	MOV	[FSeek_logclus],DX    ;FS. delete EOF (FFFFH)			;AN000;
 	INC	[FSeek_logclus]       ;FS.					;AN000;
-	invoke	FastSeek_Truncate     ;FS.					;AN000;
+	DOSInvoke	FastSeek_Truncate     ;FS.					;AN000;
 NULL_FILE:
 ;;; 11/5/86 FastSeek
-	invoke	ALLOCATE
+	DOSInvoke	ALLOCATE
 	POP	AX
 	JC	WRTERR
 	MOV	CX,AX
@@ -276,7 +276,7 @@ NULL_FILE:
 ;;; 11/5/86 FastSeek
 	MOV	[FSeek_logclus],DX    ;
 	ADD	[FSeek_logclus],CX    ; set up last position
-	invoke	SKPCLP
+	DOSInvoke	SKPCLP
 	JC	ACC_ERRWJ
 NOSKIP:
 	MOV	[CLUSNUM],BX
@@ -285,7 +285,7 @@ DOWRT:
 	CMP	[BYTCNT1],0
 	JZ	WRTMID
 	MOV	BX,[CLUSNUM]
-	invoke	BUFWRT
+	DOSInvoke	BUFWRT
 	JC	ACC_ERRWJ
 WRTMID:
 	MOV	AX,[SECCNT]
@@ -295,7 +295,7 @@ WRTMID:
 havemid:
 	ADD	WORD PTR [SECPOS],AX
 	ADC	WORD PTR [SECPOS+2],0	 ;F.C. >32mb				;AN000;
-	invoke	NEXTSEC
+	DOSInvoke	NEXTSEC
 	JNC	gotok
 	JMP	ACC_ERRWJ
 gotok:
@@ -304,7 +304,7 @@ gotok:
 	MOV	BX,[CLUSNUM]
 	MOV	CX,[SECCNT]
 WRTLP:
-	invoke	OPTIMIZE
+	DOSInvoke	OPTIMIZE
 	JNC	wokok
 	JMP	ACC_ERRWJ
 wokok:
@@ -318,7 +318,7 @@ wokok:
 	PUSH	CX			  ;LB.					;AN000;
 	PUSH	[HIGH_SECTOR]		  ;LB.					;AN000;
 SCANNEXT:				  ;LB.					;AN000;
-	invoke	GETCURHEAD		  ;LB.					;AN000;
+	DOSInvoke	GETCURHEAD		  ;LB.					;AN000;
 ASSUME	DS:NOTHING
 NEXTBUFF:			; Search for buffers
 	CMP	[SC_CACHE_COUNT],0	    ;LB. SC support ?			;AN000;
@@ -326,7 +326,7 @@ NEXTBUFF:			; Search for buffers
 	PUSH	AX			    ;LB. save reg			;AN000;
 	PUSH	CX			    ;LB. save reg			;AN000;
 	PUSH	DX			    ;LB. save reg			;AN000;
-	invoke	INVALIDATE_SC		    ;LB. invalidate SC			;AN000;
+	DOSInvoke	INVALIDATE_SC		    ;LB. invalidate SC			;AN000;
 	POP	DX			    ;LB. save reg			;AN000;
 	POP	CX			    ;LB. save reg			;AN000;
 	POP	AX			    ;LB. save reg			;AN000;
@@ -338,10 +338,10 @@ nosc:
 inrange2:
 	TEST	[DI.buf_flags],buf_dirty    ;LB. if dirty			;AN000;
 	JZ	not_dirty		    ;LB.				;AN000;
-	invoke	DEC_DIRTY_COUNT 	    ;LB. then decrement dirty count	;AN000;
+	DOSInvoke	DEC_DIRTY_COUNT 	    ;LB. then decrement dirty count	;AN000;
 not_dirty:
 	MOV	WORD PTR [DI.buf_ID],(buf_visit SHL 8) OR 0FFH	  ; Free the buffer, it is being over written
-	invoke	SCANPLACE
+	DOSInvoke	SCANPLACE
 DONEXTBUFF:
 	CMP	DI,[FIRST_BUFF_ADDR]	  ;LB. end of chain			;AN000;
 	JNZ	NEXTBUFF		  ;LB. no				;AN000;
@@ -366,7 +366,7 @@ safe_write:
 	popf
 ENDIF	
 
-	invoke	DWRITE
+	DOSInvoke	DWRITE
 
 IF	BUFFERFLAG
 	pushf
@@ -392,10 +392,10 @@ WRTLAST:
 	OR	AX,AX
 	JZ	FINWRT
 	MOV	[BYTCNT1],AX
-	invoke	NEXTSEC
+	DOSInvoke	NEXTSEC
 	JC	SET_ACC_ERRW
 	MOV	[BYTSECPOS],0
-	invoke	BUFWRT
+	DOSInvoke	BUFWRT
 	JC	SET_ACC_ERRW
 FINWRT:
 	LES	DI,[THISSFT]
@@ -439,15 +439,15 @@ WRTEOF:
 
 ;	SHR	AX,CL
 	MOV	CX,AX
-	invoke	FNDCLUS
+	DOSInvoke	FNDCLUS
 SET_ACC_ERRWJ2:
 	JC	SET_ACC_ERRW
 ;;; 11/5/86 FastSeek
 	MOV	[FSeek_logclus],DX    ; truncate clusters starting from DX
-	invoke	FastSeek_Truncate
+	DOSInvoke	FastSeek_Truncate
 ;;; 11/5/86 FastSeek
 	JCXZ	RELFILE
-	invoke	ALLOCATE
+	DOSInvoke	ALLOCATE
 	JC	WRTERRJ 	     ;;;;;;;;; disk full
 UPDATE:
 	LES	DI,[THISSFT]
@@ -473,7 +473,7 @@ WRTERRJ: JMP	 WRTERR
 ;;;;;;;;;;;;;;;;;
 RELFILE:
 	MOV	DX,0FFFFH
-	invoke	RELBLKS
+	DOSInvoke	RELBLKS
 Set_Acc_ERRWJJ:
 	JC	SET_ACC_ERRWJ2
 	JMP	SHORT UPDATE
@@ -488,7 +488,7 @@ KILLFIL:
 	XCHG	BX,ES:[DI.sf_firclus]
 	POP	ES
 ;; 11/5/86 FastSeek
-	invoke	Delete_FSeek   ; delete fastseek entry
+	DOSInvoke	Delete_FSeek   ; delete fastseek entry
 
 	OR	BX,BX
 	JZ	UPDATEJ
@@ -502,7 +502,7 @@ KILLFIL:
 	MOV	DL,ES:[BP.dpb_drive]	 ; get current drive
 	MOV	CX,BX			 ; first cluster #
 	MOV	AH,2			 ; delete cache entry by drive:firclus
-	invoke	FastOpen_Update 	 ; call fastopen
+	DOSInvoke	FastOpen_Update 	 ; call fastopen
 	POP	DX
 	POP	CX
 	POP	AX
@@ -510,7 +510,7 @@ KILLFIL:
 	POP	ES
 ;; 10/23/86 FastOpen update
 
-	invoke	RELEASE
+	DOSInvoke	RELEASE
 	JC	SET_ACC_ERRWJJ
 UpDateJ:
 	JMP	UPDATE
@@ -616,7 +616,7 @@ chardev2:
 doi24:
 	MOV	BP,DS				  ;MS. bp:si -> device header	;AN000;
 	MOV	DI,error_I24_gen_failure	;MS. general error		;AN000;
-	invoke	NET_I24_ENTRY			;MS. issue I24			;AN000;
+	DOSInvoke	NET_I24_ENTRY			;MS. issue I24			;AN000;
 	STC					;MS. must be fail		;AN000;
 	POP	DS				;MS. restore DS 		;AN000;
 	MOV	AX,[EXTERR]			;MS. set error			;AN000;

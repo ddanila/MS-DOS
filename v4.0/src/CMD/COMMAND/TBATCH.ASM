@@ -83,13 +83,13 @@ Break	<PromptBat - Open or wait for batch file>
 
 Procedure   PromptBat,NEAR
 	ASSUME	DS:ResGroup,ES:NOTHING
-	invoke	BATOPEN 			; attempt to open batch file
+	DOSInvoke	BATOPEN 			; attempt to open batch file
 	retnc
 	cmp	dx,error_file_not_found 	;AN022; Ask for diskette if file not found
 	jz	Bat_Remcheck			;AN022;
 	cmp	dx,error_path_not_found 	;AN022; Ask for diskette if path not found
 	jz	Bat_Remcheck			;AN022;    Otherwise, issue message and exit
-	invoke	output_batch_name		;AN022; set up batch name in bwdbuf
+	DOSInvoke	output_batch_name		;AN022; set up batch name in bwdbuf
 	jmp	short BatDie			;AN022;
 
 Bat_Remcheck:					;AN022; Go see if media is removable
@@ -98,8 +98,8 @@ Bat_Remcheck:					;AN022; Go see if media is removable
 ;
 ; The media is not changeable.	Turn everything off.
 ;
-	invoke	ForOff
-	invoke	PipeOff
+	DOSInvoke	ForOff
+	DOSInvoke	PipeOff
 	MOV	IfFlag,AL			; No If in progress.
 	MOV	DX,OFFSET TRANGROUP:BADBAT_ptr
 
@@ -108,7 +108,7 @@ BatDie:
 	PUSH	CS
 	POP	DS
 	ASSUME	DS:TranGroup
-	invoke	std_eprintf			;AC022; display message
+	DOSInvoke	std_eprintf			;AC022; display message
 
 ;
 ; TCOMMAND resets the stack.  This is the equivalent of a non-local goto.
@@ -125,9 +125,9 @@ ASKFORBAT:
 	POP	DS
 	ASSUME	DS:TranGroup
 	MOV	DX,OFFSET TRANGROUP:NEEDBAT_ptr  ;AN022;
-	invoke	std_eprintf			 ;Prompt for batch file on stderr
+	DOSInvoke	std_eprintf			 ;Prompt for batch file on stderr
 	mov	dx,offset trangroup:pausemes_ptr ;AN000; get second part of message
-	invoke	std_eprintf			 ;AN000; print it to stderr
+	DOSInvoke	std_eprintf			 ;AN000; print it to stderr
 	CALL	GetKeystroke
 	POP	DS
 	ASSUME	DS:ResGroup
@@ -154,7 +154,7 @@ Output_batch_name    proc near			;AN022;
 	mov	ds,[batch]			;AN022; get batch file segment
 assume	DS:nothing				;AN022;
 	mov	SI,BatFile			;AN022; get offset of batch file
-	invoke	dstrlen 			;AN022; get length of string
+	DOSInvoke	dstrlen 			;AN022; get length of string
 	mov	di,offset Trangroup:bwdbuf	;AN022; target for batch name
 	rep	movsb				;AN022; move the name
 
@@ -235,7 +235,7 @@ TESTNOP:
 	PUSH	WORD PTR DS:[BatSeek+2] 	; save current location.
 	MOV	DS,AX
 	ASSUME	DS:ResGroup
-	invoke	SkipDelim			; skip to first non-delim
+	DOSInvoke	SkipDelim			; skip to first non-delim
 ;
 ; If the first non-delimiter is not a :  (label), we reseek back to the
 ; beginning and read the line.
@@ -272,7 +272,7 @@ SET_BAT_POS:					;g
 
 NOPLINE:
 	CALL	SkipToEOL
-	invoke	GetBatByt			; eat trailing LF
+	DOSInvoke	GetBatByt			; eat trailing LF
 	TEST	[BATCH],-1			; are we done with the batch file?
 	JNZ	TESTNOP 			; no, go get another line
 	return					; Hit EOF
@@ -286,7 +286,7 @@ NOPLINE:
 ;
 
 RDBAT:
-	invoke	GetBatByt
+	DOSInvoke	GetBatByt
 	inc	cx				; Inc the line length
 	cmp	cx,COMBUFLEN			; Is it too long?
 	jae	TooLong 			; Yes - handle it, handle it
@@ -312,8 +312,8 @@ Found_EOL:
 	SUB	DI,OFFSET TRANGROUP:COMBUF+3
 	MOV	AX,DI				; remember that we've not counted the CR
 	MOV	ES:[COMBUF+1],AL		; Set length of line
-	invoke	GetBatByt			; Eat linefeed
-	invoke	BATCLOSE
+	DOSInvoke	GetBatByt			; Eat linefeed
+	DOSInvoke	BATCLOSE
 	CMP	SUPPRESS, NO_ECHO		;G
 	JZ	Reset				;G
 	test	[echoflag],1			; To echo or not to echo, that is the
@@ -331,17 +331,17 @@ Reset:
 try_nextflag:
 	cmp	nullflag,nullcommand		;G was there a command last time?
 	jz	No_crlf_print			;G no - don't print crlf
-	invoke	CRLF2				;G  Print out prompt
+	DOSInvoke	CRLF2				;G  Print out prompt
 
 no_crlf_print:
-	invoke	PRINT_PROMPT			;G
+	DOSInvoke	PRINT_PROMPT			;G
 	PUSH	CS				;G change data segment
 	POP	DS				;G
 
 ASSUME DS:TRANGROUP
 	mov	dx,OFFSET TRANGROUP:COMBUF+2	; get command line for echoing
-	invoke	CRPRINT
-	invoke	CRLF2
+	DOSInvoke	CRPRINT
+	DOSInvoke	CRLF2
 	return
 ;
 ; The line was too long.  Eat remainder of input text up until the CR
@@ -360,7 +360,7 @@ Ltlcont:
 ;
 
 NEEDPARM:
-	invoke	GetBatByt			; get next character
+	DOSInvoke	GetBatByt			; get next character
 	CMP	AL,'%'                          ; Check for two consecutive %
 	JZ	SAVBATBYT			; if so, replace with a single %
 	CMP	AL,0Dh				; Check for end-of-line
@@ -458,7 +458,7 @@ NEEDENV:
 ;
 
 GETENV1:
-	invoke	GetBatByt			; get the byte
+	DOSInvoke	GetBatByt			; get the byte
 	STOSB					; store it
 	CMP	AL,0Dh				; EOL?
 	JNZ	GETENV15			; no, see if it the term char
@@ -550,7 +550,7 @@ Procedure   SkipToEOL,NEAR
 
 	TEST	Batch,-1
 	retz					; no batch file in effect
-	invoke	GetBatByt
+	DOSInvoke	GetBatByt
 	CMP	AL,0Dh				; eol character?
 	JNZ	SkipToEOL			; no, go eat another
 	return
@@ -689,7 +689,7 @@ ASSUME	DS:TRANGROUP, ES:NOTHING
 ASSUME	ES:RESGROUP
 	cmp	es:[call_batch_flag],call_in_progress ;AN043; If in CALL,
 	jz	skip_ioset			;AN043;   redirection was already set up
-	invoke	IOSET				; Set up any redirection
+	DOSInvoke	IOSET				; Set up any redirection
 
 skip_ioset:					;AN043;
 	CALL	FREE_TPA			; G
@@ -700,10 +700,10 @@ skip_ioset:					;AN043;
 ; being started it MUST be true that no FOR or PIPE is currently in progress.
 ; Don't execute if in call
 ;
-	invoke	ForOff
+	DOSInvoke	ForOff
 
 getecho:
-	invoke	PipeOff
+	DOSInvoke	PipeOff
 	mov	al,EchoFlag			; preserve echo state for chaining
 
 	and	al, 1				; Save current echo state
@@ -746,7 +746,7 @@ startbat:					;G
 	mov	cx,search_attr			;AN042; filetypes to search for
 	int	int_command			;AN042;
 
-	invoke	DStrLen
+	DOSInvoke	DStrLen
 ;
 ; Allocate batch area:
 ;   BYTE    type of segment
@@ -860,7 +860,7 @@ for_not_on:
 ; Look for beginning of next argument
 ;
 EACHPARM:
-	invoke	SCANOFF 			; skip to argument
+	DOSInvoke	SCANOFF 			; skip to argument
 ;
 ; AL is first non-delimiter.  DS:SI points to char = AL
 ;

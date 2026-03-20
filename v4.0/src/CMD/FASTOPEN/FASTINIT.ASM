@@ -108,7 +108,7 @@ TITLE	FASTINIT - initialization code for FASTOPEN  (May 13, 1988)
 ;藩様様様様様様様様様様様様様様様様様様様様様様様様様様様様様様様様様様様様様夕
 ;
 IF1
-    %OUT ASSEMBLING: FASTINIT - FASTOPEN initialization
+    ;%OUT ASSEMBLING: FASTINIT - FASTOPEN initialization
 ENDIF
 NAME	FASTINIT
 

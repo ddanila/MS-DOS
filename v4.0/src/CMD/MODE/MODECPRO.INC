@@ -66,7 +66,7 @@
 
 ;****************** END OF SPECIFICATIONS *****************************
 	IF1
-	    %OUT INCLUDE MODECPRO.INC ;MODULE PROLOGUE
+	    ;%OUT INCLUDE MODECPRO.INC ;MODULE PROLOGUE
 	ENDIF
 
 ;ษออออออออออออออออออออออออออออออออ  P R O L O G  อออออออออออออออออออออออออออออออออออออออออป

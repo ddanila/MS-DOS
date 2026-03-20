@@ -52,7 +52,7 @@ NEWLIN:
         MOV     [INSMODE],CH    ;Insert mode off
         MOV     BH,CH           ;No chars from template yet
         MOV     DH,CH           ;No chars to new line yet
-        invoke  $STD_CON_INPUT_NO_ECHO          ;Get first char
+        DOSInvoke  $STD_CON_INPUT_NO_ECHO          ;Get first char
         CMP     AL,c_LF         ;Linefeed
         JNZ     GOTCH           ;Filter out LF so < works
 ;
@@ -64,7 +64,7 @@ NEWLIN:
 ;   DL is the length of the buffer
 ;
 entry   GETCH
-        invoke  $STD_CON_INPUT_NO_ECHO
+        DOSInvoke  $STD_CON_INPUT_NO_ECHO
 GOTCH:
 ;
 ; Brain-damaged TP ignored ^F in case his BIOS did not flush the
@@ -124,7 +124,7 @@ SAVCH:
         JAE     BUFFUL                  ; buffer is full.
         STOSB
         INC     DH                      ; increment count in buffer.
-        invoke  BUFOUT                  ;Print control chars nicely
+        DOSInvoke  BUFOUT                  ;Print control chars nicely
         CMP     BYTE PTR [INSMODE],0
         JNZ     GETCH                   ; insertmode => don't advance template
         CMP     BH,BL
@@ -137,7 +137,7 @@ BACKSPJ: JMP    SHORT BACKSP
 
 BUFFUL:
         MOV     AL,7                    ; Bell to signal full buffer
-        invoke  OUTT
+        DOSInvoke  OUTT
         JMP     SHORT GETCH
 
 ESCape:                         ;change reserved keyword DBM 5-7-87
@@ -145,7 +145,7 @@ ESCape:                         ;change reserved keyword DBM 5-7-87
 
 ENDLIN:
         STOSB                           ; Put the CR in the buffer
-        invoke  OUTT                    ; Echo it
+        DOSInvoke  OUTT                    ; Echo it
         POP     DI                      ; Get start of user buffer
         MOV     [DI-1],DH               ; Tell user how many bytes
         INC     DH                      ; DH is length including CR
@@ -160,7 +160,7 @@ COPYNEW:
 ; Output a CRLF to the user screen and do NOT store it into the buffer
 ;
 PHYCRLF:
-        invoke  CRLF
+        DOSInvoke  CRLF
         JMP     GETCH
 
 ;
@@ -199,12 +199,12 @@ GetChJ:
 ;
         entry   KILNEW
         MOV     AL,"\"
-        invoke  OUTT            ;Print the CANCEL indicator
+        DOSInvoke  OUTT            ;Print the CANCEL indicator
         POP     SI              ;Remember start of edit buffer
 PUTNEW:
-        invoke  CRLF            ;Go to next line on screen
+        DOSInvoke  CRLF            ;Go to next line on screen
         MOV     AL,[STARTPOS]
-        invoke  TAB             ;Tab over
+        DOSInvoke  TAB             ;Tab over
         JMP     NEWLIN          ;Start over again
 
 
@@ -268,7 +268,7 @@ HAVTAB:
         POP     DI
         JZ      OLDBAK          ;Nothing to erase
 TABBAK:
-        invoke  BACKMES
+        DOSInvoke  BACKMES
         LOOP    TABBAK          ;Erase correct number of chars
         JMP     SHORT OLDBAK
 
@@ -277,9 +277,9 @@ BACKUP:
         DEC     DI
 BACKMES:
         MOV     AL,c_BS         ;Backspace
-        invoke  OUTT
+        DOSInvoke  OUTT
         MOV     AL," "          ;Erase
-        invoke  OUTT
+        DOSInvoke  OUTT
         MOV     AL,c_BS         ;Backspace
         JMP     OUTT            ;Done
 
@@ -295,7 +295,7 @@ BACKMES:
         JMP     SHORT COPYEACH
 
         entry   CopyStr
-        invoke  FINDOLD         ;Find the char
+        DOSInvoke  FINDOLD         ;Find the char
         JMP     SHORT COPYEACH  ;Copy up to it
 
 ;Copy one char from template to line
@@ -310,7 +310,7 @@ COPYEACH:
         JZ      GETCH2                  ;At end of template, can't do anything
         LODSB
         STOSB
-        invoke  BUFOUT
+        DOSInvoke  BUFOUT
         INC     BH                      ;Ahead in template
         INC     DH                      ;Ahead in line
         LOOP    COPYEACH
@@ -326,7 +326,7 @@ GETCH2:
         JMP     GETCH
 
         entry   SKIPSTR
-        invoke  FINDOLD                 ;Find out how far to go
+        DOSInvoke  FINDOLD                 ;Find out how far to go
         ADD     SI,CX                   ;Go there
         ADD     BH,CL
         JMP     GETCH
@@ -338,10 +338,10 @@ GETCH2:
 ;       Make sure nothing extra on stack when this routine
 ;       is called!!! (no PUSHes before calling it).
 FINDOLD:
-        invoke  $STD_CON_INPUT_NO_ECHO
+        DOSInvoke  $STD_CON_INPUT_NO_ECHO
         CMP     AL,[ESCCHAR]            ; did he type a function key?
         JNZ     FindSetup               ; no, set up for scan
-        invoke  $STD_CON_INPUT_NO_ECHO  ; eat next char
+        DOSInvoke  $STD_CON_INPUT_NO_ECHO  ; eat next char
         JMP     NotFnd                  ; go try again
 FindSetup:
         MOV     CL,BL
@@ -370,12 +370,12 @@ NOTFND:
 
 entry   REEDIT
         MOV     AL,"@"          ;Output re-edit character
-        invoke  OUTT
+        DOSInvoke  OUTT
         POP     DI
         PUSH    DI
         PUSH    ES
         PUSH    DS
-        invoke  COPYNEW         ;Copy current line into template
+        DOSInvoke  COPYNEW         ;Copy current line into template
         POP     DS
         POP     ES
         POP     SI
@@ -395,7 +395,7 @@ entry   REEDIT
 ;Output a CRLF
         entry   CRLF
         MOV     AL,c_CR
-        invoke  OUTT
+        DOSInvoke  OUTT
         MOV     AL,c_LF
         JMP     OUTT
 

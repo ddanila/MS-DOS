@@ -57,7 +57,7 @@
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 IF1
-	%OUT .		     ®TABLES  .INC¯
+	;%OUT .		     ®TABLES  .INC¯
 ENDIF
 						;
 DISPLAY_CONFIG	LABEL	BYTE			;

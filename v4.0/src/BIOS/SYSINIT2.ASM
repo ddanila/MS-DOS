@@ -1,7 +1,7 @@
 	PAGE	,132			;
 ;	SCCSID = @(#)sysinit2.asm	1.13 85/10/15
 TITLE	BIOS SYSTEM INITIALIZATION
-%OUT ...SYSINIT2
+;%OUT ...SYSINIT2
 
 ;==============================================================================
 ;REVISION HISTORY:
@@ -191,7 +191,7 @@ getparm:
 	mov	word ptr Switches,BX	     ; save switches read so far
 	jc	swterr
 get_next:
-	invoke	getchr
+	DOSInvoke	getchr
 	jc	done_line
 	jmp	NextSwtch
 swterr:
@@ -225,7 +225,7 @@ put_back:
 ; error.
 ;
 Check_Switch:
-	invoke	getchr
+	DOSInvoke	getchr
 	jc	err_check
 	and	al,0DFH 	    ; convert it to upper case
 	cmp	al,'A'
@@ -248,11 +248,11 @@ Check_Switch:
 	mov	cx,ax
 	test	ax, switchnum	; test against switches that require number to follow
 	jz	done_swtch
-	invoke	getchr
+	DOSInvoke	getchr
 	jc	err_Swtch
 	cmp	al,':'
 	jnz	err_swtch
-	invoke	getchr
+	DOSInvoke	getchr
 	push	bx			; preserve switches
 	mov	byte ptr cs:sepchr,' '          ; allow space separators
 	call	GetNum
@@ -728,7 +728,7 @@ NEWLINE:invoke	GETCHR			;SKIP NON-CONTROL CHARACTERS
 	retc
 	CMP	AL,LF			;LOOK FOR LINE FEED
 	JNZ	NEWLINE
-	invoke	GETCHR
+	DOSInvoke	GETCHR
 	return
 
 MAPCASE:
@@ -833,7 +833,7 @@ ROUND:
 	PUSH	AX
 	MOV	AX,[MEMLO]
 
-	invoke	ParaRound		; para round up
+	DOSInvoke	ParaRound		; para round up
 
 	ADD	[MEMHI],AX
 	MOV	[MEMLO],0
@@ -908,7 +908,7 @@ B2:	CALL	ToDigit 		; do we have a digit
 	JC	BADNUM			; too big a number
 	XCHG	AX,BX			; stash total
 
-	invoke	GETCHR			;GET NEXT DIGIT
+	DOSInvoke	GETCHR			;GET NEXT DIGIT
 	JC	B1			; no more characters
 	cmp	al, ' '                 ;J.K. 5/23/86 space?
 	jz	B15			;J.K. 5/23/86 then end of digits

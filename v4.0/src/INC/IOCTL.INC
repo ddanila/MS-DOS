@@ -1,5 +1,5 @@
 
-%OUT IOCTL.INC...
+;%OUT IOCTL.INC...
 ; THESE ARE ALL THE IMPORTANT STRUCTURES AND EQUATES FOR IOCTL
 ;==============================================================================
 ;REVISION HISTORY:

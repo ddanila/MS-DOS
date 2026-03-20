@@ -1,5 +1,5 @@
 	IF1				;AN000;
-	    %OUT    COMPONENT=DISKCOPY, INCLUDING DCPYMACR.INC...;AN000;
+	    ;%OUT    COMPONENT=DISKCOPY, INCLUDING DCPYMACR.INC...;AN000;
 	ENDIF				;AN000;
 ;***************************************************************************;
 ;			     MACRO DEFINITION				    ;

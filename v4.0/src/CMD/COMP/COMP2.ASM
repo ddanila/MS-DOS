@@ -174,7 +174,7 @@
 	page
 
 	if1
-	    %OUT    COMPONENT=COMP, MODULE=COMP2.SAL
+	    ;%OUT    COMPONENT=COMP, MODULE=COMP2.SAL
 	endif
 
 ;***********************************

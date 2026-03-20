@@ -6,14 +6,14 @@
 ; .xcref/.cref listing directives removed (unsupported by WASM).
 ;
 
+IFNDEF TRUE
 TRUE    EQU 0FFFFh
+ENDIF
+IFNDEF FALSE
 FALSE   EQU 0
+ENDIF
 
-SUBTTL BREAK a listing into pages and give new subtitles
-PAGE
 BREAK   MACRO   subtitle
-	SUBTTL  subtitle
-	PAGE
 ENDM
 
 BREAK   <ASMVAR - handle assembly variables once and for all>
@@ -55,7 +55,7 @@ ENDM
 ;
 ; call a procedure that may be external.  The call will be short.
 ;
-invoke  MACRO   name
+DOSInvoke  MACRO   name
 	IFNDEF name
 	EXTRN   name:NEAR
 	ENDIF
@@ -119,7 +119,7 @@ ENDM
 EndProc MACRO   name, chk
 	IFDIF   <chk>,<NoCheck>       ;; check the stack size
 	IF ?initstack NE ?stackdepth    ;; is it different?
-	%OUT    ***** Possible stack size error in name *****
+	;%OUT    ***** Possible stack size error in name *****
 	ENDIF
 	ENDIF
 name    ENDP
@@ -160,16 +160,10 @@ name    LABEL BYTE
 	DB  I_AM_SIZE*I_AM_LEN DUP (?)
     ELSE
 IF NOT InstalledData
-	IRP itm,<init>
-	    IF I_AM_LEN EQ 1
-		DB  itm
-	    ELSE
-		DW  itm
-	    ENDIF
-	    I_AM_SIZE = I_AM_SIZE - 1
-	ENDM
-	IF I_AM_SIZE NE 0
-	    %out    ***** initialization of name not complete *****
+	IF I_AM_LEN EQ 1
+	    DB  init
+	ELSE
+	    DW  init
 	ENDIF
 ELSE
 	DB  I_AM_SIZE*I_AM_LEN DUP (?)
@@ -294,11 +288,11 @@ ENDM
 BREAK <Critical section macros>
 
 EnterCrit MACRO section
-	Invoke  E&section
+	DOSInvoke  E&section
 ENDM
 
 LeaveCrit MACRO section
-	Invoke  L&section
+	DOSInvoke  L&section
 ENDM
 
 Break   <message - display a message>
@@ -343,7 +337,7 @@ ENDIF
 	PUSH    AX
 cargs = cargs + 2
 ENDM
-	invoke  PFMT
+	DOSInvoke  PFMT
 	ADD     SP,Cargs
 	POP     BP
 	POP     AX
@@ -368,7 +362,7 @@ local a,b
 	IFIDN <reg>,<SS>
 	    $temp   =   0
 	ELSE
-	    %out ***** Invalid DOS register reg in DOSAssume *****
+	    ;%out ***** Invalid DOS register reg in DOSAssume *****
 	ENDIF
     ENDIF
     IRP r,<reglist>
@@ -378,7 +372,7 @@ local a,b
 	    IFIDN <r>,<ES>
 		$temp = $temp OR 4
 	    ELSE
-		%out ***** Invalid register reg in DOSAssume *****
+		;%out ***** Invalid register reg in DOSAssume *****
 	    ENDIF
 	ENDIF
     ENDM
@@ -391,7 +385,7 @@ ELSE
 	MOV     AX,OFFSET DOSGroup:a
 ENDIF
 	PUSH    AX
-	Invoke  SegCheck
+	DOSInvoke  SegCheck
 	POP     AX
 IF NOT SHAREF
 Table   SEGMENT
@@ -442,13 +436,13 @@ a:
 	    ENDIF
     PUSH    AX
 	    IFIDN   <kind>,<ISBUF>
-	Invoke  BUFCheck
+	DOSInvoke  BUFCheck
 	    ENDIF
 	    IFIDN   <kind>,<ISSFT>
-	Invoke  SFTCheck
+	DOSInvoke  SFTCheck
 	    ENDIF
 	    IFIDN   <kind>,<ISDPB>
-	Invoke  DPBCheck
+	DOSInvoke  DPBCheck
 	    ENDIF
     POP     AX
 	    IF SHAREF
@@ -481,7 +475,7 @@ IF Installed
 	RestoreReg  <restore>
     ENDIF
 ELSE
-	Invoke  name
+	DOSInvoke  name
 ENDIF
 ENDM
 
@@ -556,7 +550,7 @@ BREAK   <errnz - generate compilation errors>
 
 errnz   macro   x
 if x NE 0
-    %out ***** FATAL error: x <> 0
+    ;%out ***** FATAL error: x <> 0
 foobar
 endif
 endm
