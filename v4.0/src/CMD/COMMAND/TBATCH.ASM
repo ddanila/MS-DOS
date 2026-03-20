@@ -494,7 +494,7 @@ GETENV2:
 	POP	DS				; DS:SI POINTS TO NAME
 	ASSUME DS:TRANGROUP
 	PUSH	CX
-	INVOKE	FIND_NAME_IN_environment
+	DOSInvoke	FIND_NAME_IN_environment
 	ASSUME ES:RESGROUP
 	POP	CX
 	PUSH	ES
@@ -878,7 +878,7 @@ EACHPARM:
 ;
 MOVPARM:
 	LODSB					; get byte
-	INVOKE	DELIM				; if delimiter
+	DOSInvoke	DELIM				; if delimiter
 	JZ	ENDPARM 			; then done with parm
 	STOSB					; store byte
 	CMP	AL,0DH				; if CR then not delimiter

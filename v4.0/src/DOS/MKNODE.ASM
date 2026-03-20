@@ -918,7 +918,7 @@ EndProc FREEENT
         mov     [VIRTUAL_OPEN],0        ; reset flag
         SaveReg <ES,DI>
         LES     DI,[THISSFT]
-        INVOKE  DEV_CLOSE_SFT
+        DOSInvoke  DEV_CLOSE_SFT
         RestoreReg <DI,ES>
 
 ALL_CLOSED:

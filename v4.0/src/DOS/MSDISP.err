@@ -1,11 +1,11 @@
 MSSW.ASM(5): Error! E230: Label 'IBM' is already defined
 MSSW.ASM(5): Note! N290: included by file MSDISP.ASM(10)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Error! E230: Label 'TRUE' is already defined
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Note! N290: included by file DISP.ASM(8)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Note! N290: included by file MSDISP.ASM(13)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Error! E230: Label 'FALSE' is already defined
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Note! N290: included by file DISP.ASM(8)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Note! N290: included by file MSDISP.ASM(13)
-DISP.ASM(549): Error! E032: Syntax error
-DISP.ASM(549): Note! N290: included by file MSDISP.ASM(13)
+../INC/DOSSYM.INC(4): Error! E230: Label 'TRUE' is already defined
+../INC/DOSSYM.INC(4): Note! N290: included by file DISP.ASM(8)
+../INC/DOSSYM.INC(4): Note! N290: included by file MSDISP.ASM(13)
+../INC/DOSSYM.INC(5): Error! E230: Label 'FALSE' is already defined
+../INC/DOSSYM.INC(5): Note! N290: included by file DISP.ASM(8)
+../INC/DOSSYM.INC(5): Note! N290: included by file MSDISP.ASM(13)
+DISP.ASM(555): Error! E032: Syntax error
+DISP.ASM(555): Note! N290: included by file MSDISP.ASM(13)
 MSDISP.ASM(15): Warning! W249: End directive required at end of file

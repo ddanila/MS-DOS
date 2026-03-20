@@ -239,7 +239,7 @@ DEVWRTERR:
 
 PUBLIC COPERR
 COPERR:
-	INVOKE	std_Eprintf			;AC022;
+	DOSInvoke	std_Eprintf			;AC022;
 
 COPERRP:
 	inc	[DESTCLOSED]

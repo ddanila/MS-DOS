@@ -843,7 +843,7 @@ OKLD:
 
 COMERR:
 	MOV	DX,OFFSET BADCOM	;WANT TO PRINT COMMAND ERROR
-	INVOKE	BADFIL
+	DOSInvoke	BADFIL
 STALL:	JMP	STALL
 
 	PUBLIC	TEMPCDS
@@ -976,7 +976,7 @@ MulTrk_Flag_Done:			    ;AN002;
 
 	PUSH	CS
 	POP	DS
-	INVOKE	ROUND
+	DOSInvoke	ROUND
 	MOV	AL,[FILES]
 	SUB	AL,5
 	JBE	DOFCBS
@@ -1004,7 +1004,7 @@ MulTrk_Flag_Done:			    ;AN002;
 	MOV	AX,6
 	ADD	[MEMLO],AX		;REMEMBER THE HEADER TOO
 	or	[SetDevMarkFlag], FOR_DEVMARK ;AN005;
-	INVOKE	ROUND			; Check for mem error before the STOSB
+	DOSInvoke	ROUND			; Check for mem error before the STOSB
 	ADD	DI,AX
 	XOR	AX,AX
 	REP	STOSB			;CLEAN OUT THE STUFF
@@ -1015,7 +1015,7 @@ MulTrk_Flag_Done:			    ;AN002;
 DOFCBS:
 	PUSH	CS
 	POP	DS
-	INVOKE	ROUND
+	DOSInvoke	ROUND
 	mov	al, DEVMARK_FCBS	;AN005;='X'
 	call	SetDevMark		;AN005;
 	MOV	AL,[FCBS]
@@ -1043,7 +1043,7 @@ DOFCBS:
 	MOV	AX,size sf-2
 	ADD	[MEMLO],AX		;REMEMBER THE HEADER TOO
 	or	[SetDevMarkFlag], FOR_DEVMARK ;AN005;
-	INVOKE	ROUND			; Check for mem error before the STOSB
+	DOSInvoke	ROUND			; Check for mem error before the STOSB
 	ADD	DI,AX			;Skip over header
 	MOV	AL,"A"
 FillLoop:
@@ -1383,7 +1383,7 @@ $$IF16:
 ; Allocate CDSs
 ;------------------------------------------------------------------------------
 BUF1:
-	INVOKE	ROUND
+	DOSInvoke	ROUND
 	push	ax				;AN005;
 	mov	ax, DEVMARK_CDS 		;AN005;='L'
 	call	SetDevMark			;AN005;
@@ -1406,7 +1406,7 @@ GOTNCDS:
 	call	ParaRound
 	ADD	[MEMHI],AX
 	or	[SetDevMarkFlag], FOR_DEVMARK	;AN005;
-	INVOKE	ROUND				; Check for mem error before initializing
+	DOSInvoke	ROUND				; Check for mem error before initializing
 	LDS	SI,ES:[DI.SYSI_DPB]
 ASSUME	DS:NOTHING
 	LES	DI,ES:[DI.SYSI_CDS]
@@ -1481,7 +1481,7 @@ DoInstallStack:
 	call	ParaRound			; Convert size to pargraphs
 	ADD	[MEMHI], AX
 	or	[SetDevMarkFlag], FOR_DEVMARK	;AN005;To set the DEVMARK_SIZE for Stack by ROUND routine.
-	INVOKE	ROUND				; Check for memory error before
+	DOSInvoke	ROUND				; Check for memory error before
 						; continuing
 	CALL	StackInit			; Initialize hardware stack. CS=DS=sysinitseg, ES=Relocated stack code & data
 
@@ -1512,7 +1512,7 @@ RCCLLOOP:					;Close everybody but standard output
 	STC					; Set for possible INT 24
 	INT	21H
 	JNC	GOAUX
-	INVOKE	BADFIL
+	DOSInvoke	BADFIL
 	JMP	SHORT GOAUX2
 
 GOAUX:	PUSH	AX
@@ -1529,11 +1529,11 @@ GOAUX:	PUSH	AX
 
 GOAUX2: MOV	DX,OFFSET AUXDEV
 	MOV	AL,2				;READ/WRITE ACCESS
-	INVOKE	OPEN_DEV
+	DOSInvoke	OPEN_DEV
 
 	MOV	DX,OFFSET PRNDEV
 	MOV	AL,1				;WRITE ONLY
-	INVOKE	OPEN_DEV
+	DOSInvoke	OPEN_DEV
 
 ;J.K.9/29/86 *******************
 ;Global Rearm command for Shared Interrupt devices attached in the system;
@@ -1675,7 +1675,7 @@ Set_Sysinit_Base:
 ;------------------------------------------------------------------------------
 ;Skip_SYSINIT_BASE:				;AN021;
 
-	INVOKE	ROUND
+	DOSInvoke	ROUND
 	MOV	BX,[MEMHI]
 	MOV	AX,[AREA]
 	mov	[Old_Area], ax			;AN013; Save [AREA]

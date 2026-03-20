@@ -1,16 +1,16 @@
 MSSW.ASM(5): Error! E230: Label 'IBM' is already defined
 MSSW.ASM(5): Note! N290: included by file MSCODE.ASM(10)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Error! E230: Label 'TRUE' is already defined
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Note! N290: included by file MS_CODE.ASM(7)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Note! N290: included by file MSCODE.ASM(13)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Error! E230: Label 'FALSE' is already defined
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Note! N290: included by file MS_CODE.ASM(7)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Note! N290: included by file MSCODE.ASM(13)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(196): Error! E306: Label is defined outside segment
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(196): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/IFSSYM.INC(497)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(196): Note! N290: included by file MS_CODE.ASM(10)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(196): Note! N290: included by file MSCODE.ASM(13)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(197): Error! E225: Data emitted with no segment
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(197): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/IFSSYM.INC(497)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(197): Note! N290: included by file MS_CODE.ASM(10)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(197): Note! N290: included by file MSCODE.ASM(13)
+../INC/DOSSYM.INC(4): Error! E230: Label 'TRUE' is already defined
+../INC/DOSSYM.INC(4): Note! N290: included by file MS_CODE.ASM(7)
+../INC/DOSSYM.INC(4): Note! N290: included by file MSCODE.ASM(13)
+../INC/DOSSYM.INC(5): Error! E230: Label 'FALSE' is already defined
+../INC/DOSSYM.INC(5): Note! N290: included by file MS_CODE.ASM(7)
+../INC/DOSSYM.INC(5): Note! N290: included by file MSCODE.ASM(13)
+../INC/DOSMAC.INC(197): Error! E306: Label is defined outside segment
+../INC/DOSMAC.INC(197): Note! N291: macro called from file ../INC/IFSSYM.INC(497)
+../INC/DOSMAC.INC(197): Note! N290: included by file MS_CODE.ASM(10)
+../INC/DOSMAC.INC(197): Note! N290: included by file MSCODE.ASM(13)
+../INC/DOSMAC.INC(198): Error! E225: Data emitted with no segment
+../INC/DOSMAC.INC(198): Note! N291: macro called from file ../INC/IFSSYM.INC(497)
+../INC/DOSMAC.INC(198): Note! N290: included by file MS_CODE.ASM(10)
+../INC/DOSMAC.INC(198): Note! N290: included by file MSCODE.ASM(13)

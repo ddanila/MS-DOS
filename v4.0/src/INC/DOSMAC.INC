@@ -321,7 +321,7 @@ c:
 	POPF
 ENDM
 else
-fmt macro
+fmt macro typ,lev,fmts,args
 endm
 endif
 

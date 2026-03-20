@@ -1,2 +1,2 @@
-MKNODE.ASM(875): Error! E094: This instruction is not supported
-MKNODE.ASM(888): Warning! W249: End directive required at end of file
+MKNODE.ASM(921): Error! E094: This instruction is not supported
+MKNODE.ASM(934): Warning! W249: End directive required at end of file

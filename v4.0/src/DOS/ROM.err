@@ -1,5 +1,5 @@
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Error! E230: Label 'TRUE' is already defined
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Note! N290: included by file ROM.ASM(38)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Error! E230: Label 'FALSE' is already defined
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Note! N290: included by file ROM.ASM(38)
-ROM.ASM(936): Warning! W249: End directive required at end of file
+../INC/DOSSYM.INC(4): Error! E230: Label 'TRUE' is already defined
+../INC/DOSSYM.INC(4): Note! N290: included by file ROM.ASM(38)
+../INC/DOSSYM.INC(5): Error! E230: Label 'FALSE' is already defined
+../INC/DOSSYM.INC(5): Note! N290: included by file ROM.ASM(38)
+ROM.ASM(958): Warning! W249: End directive required at end of file

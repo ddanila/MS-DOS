@@ -1,13 +1,13 @@
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BUGTYP.ASM(39): Error! E230: Label 'LevLog' is already defined
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BUGTYP.ASM(39): Note! N290: included by file MSCONST.ASM(49)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BUGTYP.ASM(42): Error! E230: Label 'LevLog' is already defined
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BUGTYP.ASM(42): Note! N290: included by file MSCONST.ASM(49)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BUGTYP.ASM(45): Error! E230: Label 'LevLog' is already defined
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BUGTYP.ASM(45): Note! N290: included by file MSCONST.ASM(49)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BUGTYP.ASM(48): Error! E230: Label 'LevLog' is already defined
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BUGTYP.ASM(48): Note! N290: included by file MSCONST.ASM(49)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(155): Error! E045: Initializer value too large
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(155): Note! N291: macro called from file MSCONST.ASM(58)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(155): Error! E045: Initializer value too large
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(155): Note! N291: macro called from file MSCONST.ASM(69)
+../INC/BUGTYP.ASM(39): Error! E230: Label 'LevLog' is already defined
+../INC/BUGTYP.ASM(39): Note! N290: included by file MSCONST.ASM(49)
+../INC/BUGTYP.ASM(42): Error! E230: Label 'LevLog' is already defined
+../INC/BUGTYP.ASM(42): Note! N290: included by file MSCONST.ASM(49)
+../INC/BUGTYP.ASM(45): Error! E230: Label 'LevLog' is already defined
+../INC/BUGTYP.ASM(45): Note! N290: included by file MSCONST.ASM(49)
+../INC/BUGTYP.ASM(48): Error! E230: Label 'LevLog' is already defined
+../INC/BUGTYP.ASM(48): Note! N290: included by file MSCONST.ASM(49)
+../INC/DOSMAC.INC(156): Error! E045: Initializer value too large
+../INC/DOSMAC.INC(156): Note! N291: macro called from file MSCONST.ASM(58)
+../INC/DOSMAC.INC(156): Error! E045: Initializer value too large
+../INC/DOSMAC.INC(156): Note! N291: macro called from file MSCONST.ASM(69)
 MSCONST.ASM(153): Error! E249: End directive required at end of file

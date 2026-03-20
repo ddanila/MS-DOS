@@ -1,23 +1,11 @@
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Error! E230: Label 'TRUE' is already defined
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Note! N290: included by file PROC.ASM(31)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Note! N290: included by file STDPROC.ASM(13)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Error! E230: Label 'FALSE' is already defined
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Note! N290: included by file PROC.ASM(31)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Note! N290: included by file STDPROC.ASM(13)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(44): Error! E230: Label 'IBM' is already defined
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(44): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSVAR.INC(2)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(44): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(69)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(44): Note! N290: included by file PROC.ASM(31)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(44): Note! N290: included by file STDPROC.ASM(13)
-EXEC.ASM(148): Error! E040: Invalid instruction operands
-EXEC.ASM(148): Note! N290: included by file PROC.ASM(67)
-EXEC.ASM(148): Note! N290: included by file STDPROC.ASM(13)
-EXEC.ASM(161): Error! E002: Invalid instruction with current CPU setting
-EXEC.ASM(161): Note! N290: included by file PROC.ASM(67)
-EXEC.ASM(161): Note! N290: included by file STDPROC.ASM(13)
-EXEC.ASM(624): Error! E002: Invalid instruction with current CPU setting
-EXEC.ASM(624): Note! N290: included by file PROC.ASM(67)
-EXEC.ASM(624): Note! N290: included by file STDPROC.ASM(13)
-EXEC.ASM(774): Error! E002: Invalid instruction with current CPU setting
-EXEC.ASM(774): Note! N290: included by file PROC.ASM(67)
-EXEC.ASM(774): Note! N290: included by file STDPROC.ASM(13)
+../INC/DOSSYM.INC(4): Error! E230: Label 'TRUE' is already defined
+../INC/DOSSYM.INC(4): Note! N290: included by file PROC.ASM(31)
+../INC/DOSSYM.INC(4): Note! N290: included by file STDPROC.ASM(13)
+../INC/DOSSYM.INC(5): Error! E230: Label 'FALSE' is already defined
+../INC/DOSSYM.INC(5): Note! N290: included by file PROC.ASM(31)
+../INC/DOSSYM.INC(5): Note! N290: included by file STDPROC.ASM(13)
+../INC/VERSION.INC(44): Error! E230: Label 'IBM' is already defined
+../INC/VERSION.INC(44): Note! N290: included by file ../INC/SYSVAR.INC(2)
+../INC/VERSION.INC(44): Note! N290: included by file ../INC/DOSSYM.INC(69)
+../INC/VERSION.INC(44): Note! N290: included by file PROC.ASM(31)
+../INC/VERSION.INC(44): Note! N290: included by file STDPROC.ASM(13)

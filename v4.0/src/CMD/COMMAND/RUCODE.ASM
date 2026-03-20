@@ -140,7 +140,7 @@ ASSUME	DS:NOTHING,ES:NOTHING,SS:NOTHING
 	POP	CX
 	POP	DI				; Stack just contains DS and ES
 						;     at this point
-	INVOKE	SAVHAND
+	DOSInvoke	SAVHAND
 	PUSH	CS
 	POP	DS				; Set up local data segment
 ASSUME	DS:RESGROUP
@@ -322,7 +322,7 @@ BLKERR:
 	CALL	RPRINT
 	CMP	[LOADING],0
 	JZ	ASK
-	INVOKE	RESTHAND
+	DOSInvoke	RESTHAND
 	JMP	GETCOMDSK2			; If error loading COMMAND, re-prompt
 
 ASK:
@@ -476,7 +476,7 @@ EEXIT:
 	MOV	DX,DI
 
 RESTHD:
-	INVOKE	RESTHAND
+	DOSInvoke	RESTHAND
 	POP	CX
 	POP	SI				;AN000; restore registers
 	POP	ES

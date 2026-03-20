@@ -1,10 +1,1 @@
-../INC/DOSMAC.INC(495): Error! E236: Procedure is already defined
-../INC/DOSMAC.INC(495): Note! N290: included by file ../INC/DOSSYM.INC(13)
-../INC/DOSMAC.INC(495): Note! N290: included by file HANDLE.ASM(39)
-../INC/DOSMAC.INC(496): Error! E239: Local variable must immediately follow PROC or MACRO statement
-../INC/DOSMAC.INC(496): Note! N290: included by file ../INC/DOSSYM.INC(13)
-../INC/DOSMAC.INC(496): Note! N290: included by file HANDLE.ASM(39)
-../INC/DOSMAC.INC(514): Error! E066: Operand is expected
-../INC/DOSMAC.INC(514): Note! N290: included by file ../INC/DOSSYM.INC(13)
-../INC/DOSMAC.INC(514): Note! N290: included by file HANDLE.ASM(39)
 HANDLE.ASM(936): Warning! W249: End directive required at end of file

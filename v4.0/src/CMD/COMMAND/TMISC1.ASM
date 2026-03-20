@@ -105,17 +105,17 @@ RETSW:
 SWITCH:
 	XOR	BX,BX				; Initialize - no switches set
 SWLOOP:
-	INVOKE	SCANOFF 			; Skip any delimiters
+	DOSInvoke	SCANOFF 			; Skip any delimiters
 	CMP	AL,[SWITCHAR]			; Is it a switch specifier?
 	JNZ	RETSW				; No -- we're finished
 	OR	BX,fSwitch			; Indicate there is a switch specified
 	INC	SI				; Skip over the switch character
-	INVOKE	SCANOFF
+	DOSInvoke	SCANOFF
 	CMP	AL,0DH
 	JZ	RETSW				; Oops
 	INC	SI
 ; Convert lower case input to upper case
-	INVOKE	UPCONV
+	DOSInvoke	UPCONV
 	MOV	DI,OFFSET TRANGROUP:switch_list
 	MOV	CX,SWCOUNT
 	REPNE	SCASB				; Look for matching switch
@@ -355,7 +355,7 @@ BADCOM:
 	MOV	DX,OFFSET TRANGROUP:BADNAM_ptr
 
 CERROR:
-	INVOKE	std_eprintf
+	DOSInvoke	std_eprintf
 	JMP	TCOMMAND
 
 ;
@@ -401,7 +401,7 @@ CountEnd:
 
 KanjiScan:
 	LODSB					; get a byte
-	INVOKE	TestKanj			; is it a leadin byte
+	DOSInvoke	TestKanj			; is it a leadin byte
 	JZ	KanjiQuote			; no, check for quotes
 	MOV	AH,AL				; save leadin
 	LODSB					; get trailing byte
@@ -435,7 +435,7 @@ PRESCANLP:
 	LODSB
 
 ;;;;	IF	KANJI		3/3/KK
-	INVOKE	TESTKANJ
+	DOSInvoke	TESTKANJ
 	JZ	NOTKANJ6
 	MOV	[DI],AL
 	INC	DI				; fake STOSB into DS
@@ -479,7 +479,7 @@ NOAPPND:
 ;
 ; Now we attempt to find the file name.  First, scan off all whitespace
 ;
-	INVOKE	SCANOFF
+	DOSInvoke	SCANOFF
 	CMP	AL,labracket			;AN040; was there no filename?
 	JZ	REOUT_ERRSET			;AN040; yes - set up error
 	CMP	AL,0DH
@@ -502,7 +502,7 @@ SETREOUTSTR:					; Get the output redirection name
 	LODSB
 	CMP	AL,0DH
 	JZ	GOTRESTR
-	INVOKE	DELIM
+	DOSInvoke	DELIM
 	JZ	GOTRESTR
 	CMP	AL,[SWITCHAR]
 	JZ	GOTRESTR
@@ -526,7 +526,7 @@ NOOUT:
 	CMP	AL,labracket
 	JNZ	CHKPIPE
 	mov	bx,si				; Save loc of "<"
-	INVOKE	SCANOFF
+	DOSInvoke	SCANOFF
 	CMP	AL,rabracket			;AN040; was there no filename?
 	JZ	REIN_ERRSET			;AN040; yes - set up error
 	CMP	AL,0DH
@@ -562,7 +562,7 @@ IsPipe3:
 	SHL	EchoFlag,1			; push echo state and turn it off
 NoEchoPush:
 	INC	[PIPEFLAG]
-	INVOKE	SCANOFF
+	DOSInvoke	SCANOFF
 	CMP	AL,0DH
 	JZ	PIPEERRSYNJ5
 	CMP	AL,AltPipeChr
@@ -609,7 +609,7 @@ PRESCANEND:
 	MOV	DI,OFFSET RESGROUP:PIPESTR
 	MOV	[PIPEPTR],DI
 	MOV	SI,OFFSET TRANGROUP:COMBUF+2
-	INVOKE	SCANOFF
+	DOSInvoke	SCANOFF
 
 PIPESETLP:					; Transfer the pipe into the resident
 	LODSB					; pipe buffer
@@ -627,7 +627,7 @@ ISNOPIPE:
 cmd_copy  proc near
 
 	MOV	SI,OFFSET TRANGROUP:COMBUF+2
-	INVOKE	Scanoff 			; advance past separators...
+	DOSInvoke	Scanoff 			; advance past separators...
 	add	si,PathPos
 	mov	di,81h
 	xor	cx,cx

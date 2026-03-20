@@ -234,7 +234,7 @@ NOSETBUF:
 	JZ	NOPCLOSE			; Don't bother if they don't exist
 	CMP	[PIPEFLAG],0
 	JNZ	NOPCLOSE			; Don't del if still piping
-	INVOKE	PIPEDEL
+	DOSInvoke	PIPEDEL
 
 NOPCLOSE:
 	MOV	[EXTCOM],0			; Flag internal command
@@ -272,7 +272,7 @@ ASSUME	DS:RESGROUP
 
 	TEST	[ECHOFLAG],1
 	JZ	GETCOM				; Don't do the CRLF
-	INVOKE	SINGLETEST
+	DOSInvoke	SINGLETEST
 	JB	GETCOM
 	TEST	[PIPEFLAG],-1
 	JNZ	GETCOM
@@ -280,7 +280,7 @@ ASSUME	DS:RESGROUP
 	JNZ	GETCOM				; G
 	TEST	[BATCH], -1			; G  Don't print prompt if in batch
 	JNZ	GETCOM				; G
-	INVOKE	CRLF2
+	DOSInvoke	CRLF2
 
 GETCOM:
 	MOV	CALL_FLAG,0			; G Reset call flags
@@ -295,13 +295,13 @@ GETCOM:
 NOPIPE:
 	TEST	[ECHOFLAG],1
 	JZ	NOPDRV				; No prompt if echo off
-	INVOKE	SINGLETEST
+	DOSInvoke	SINGLETEST
 	JB	NOPDRV
 	TEST	[FORFLAG],-1			; G  Don't print prompt in FOR
 	JNZ	NOPDRV				; G
 	TEST	[BATCH], -1			; G  Don't print prompt if in batch
 	JNZ	TESTFORBAT			; G
-	INVOKE	PRINT_PROMPT			; Prompt the user
+	DOSInvoke	PRINT_PROMPT			; Prompt the user
 
 NOPDRV:
 	TEST	[FORFLAG],-1			; FOR has next highest precedence
@@ -331,7 +331,7 @@ TESTFORBAT:
 	jz	jdocom1 			;AN000; yes - go process command
 
 	PUSH	DS				;G
-	INVOKE	READBAT 			; Continue BATCH
+	DOSInvoke	READBAT 			; Continue BATCH
 	POP	DS				;G
 	mov	nullflag,0			;G reset no command flag
 	TEST	[BATCH],-1			;G
@@ -405,10 +405,10 @@ transpace   ends
 
 
 DOCOM:
-	INVOKE	CRLF2
+	DOSInvoke	CRLF2
 
 DOCOM1:
-	INVOKE	PRESCAN 			; Cook the input buffer
+	DOSInvoke	PRESCAN 			; Cook the input buffer
 	JZ	NOPIPEPROC
 	JMP	PIPEPROCSTRT			; Fire up the pipe
 
@@ -423,7 +423,7 @@ BadParse:
 	PUSH	CS
 	POP	DS
 	MOV	DX,OFFSET TRANGROUP:BADNAM_ptr
-	INVOKE	std_eprintf
+	DOSInvoke	std_eprintf
 	JMP	TCOMMAND
 
 OkParse:

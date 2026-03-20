@@ -445,7 +445,7 @@ GOTEXECEMES:
 	POP	ES				;AC000; get resident segment into ES
 ASSUME	ES:RESGROUP				;AN000;
 	MOV	DX,BX				;AN000; get message number in DX
-	INVOKE	RPRINT
+	DOSInvoke	RPRINT
 	JMP	SHORT NOEXEC
 ;
 ; The transient has set up everything for an EXEC system call.	For

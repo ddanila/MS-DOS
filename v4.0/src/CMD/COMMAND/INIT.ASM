@@ -459,7 +459,7 @@ NOTWIDENV:
 	MOV	WORD PTR [KAUTOBAT],AX		;AN000;  used to reference kautoexe.bat 3/3/KK
 
 NOCOMDRV:
-	INVOKE	SETVECT 			; Set interrupt vectors 22h, 23h, & 24h
+	DOSInvoke	SETVECT 			; Set interrupt vectors 22h, 23h, & 24h
 
 ;*********************************
 ; PARSING STARTS HERE
@@ -763,7 +763,7 @@ COMTRLOOP:
 	PUSH	DS				;AN054; Make sure we have
 	PUSH	CS				;AN054;    local DS for
 	POP	DS				;AN054;      ITESTKANJ
-	INVOKE	ITESTKANJ
+	DOSInvoke	ITESTKANJ
 	POP	DS				;AN054; restore PARSER DS
 	JZ	COMTRLOOP
 	DEC	CX
@@ -1028,7 +1028,7 @@ Ok_To_Move:
 Trans_Loaded:
 	POP	ES
 
-	INVOKE	CHKSUM				; Compute the checksum
+	DOSInvoke	CHKSUM				; Compute the checksum
 	MOV	[SUM],DX			; Save it
 
 	CMP	BYTE PTR [PRDATTM],0		;eg
@@ -1387,7 +1387,7 @@ IFIND11:
 	LODSB
 
 ;;;;	IF	KANJI		3/3/KK
-	INVOKE	ITESTKANJ
+	DOSInvoke	ITESTKANJ
 	JZ	NOTKANJ4
 	DEC	SI
 	LODSW
@@ -1532,7 +1532,7 @@ GET_MSG_PTR	PROC NEAR			;AN000;
 	MOV	BX,OFFSET RESGROUP:ABORT_CHAR	;AN000; get first char offset
 MOVEMES:					;AN000;
 	MOV	DH,-1				;AN000; utility message
-	INVOKE	SYSGETMSG			;AN000; get the offset of the char
+	DOSInvoke	SYSGETMSG			;AN000; get the offset of the char
 	MOV	CL,BYTE PTR [SI]		;AN000; get the character in CL
 	MOV	BYTE PTR [BX],CL		;AN000; put the character in the table
 	INC	BX				;AN000; point to next position in table

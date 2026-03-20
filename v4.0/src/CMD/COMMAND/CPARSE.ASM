@@ -111,7 +111,7 @@ ASSUME	DS:TRANGROUP,ES:TRANGROUP
 	mov	comma,cl			;g reset comma flag
 moredelim:
 	LODSB
-	INVOKE	DELIM
+	DOSInvoke	DELIM
 	JNZ	SCANCDONE
 	CMP	AL,' '
 	JZ	moredelim
@@ -283,7 +283,7 @@ cpcont3:
 ;---------------
 ;;;;	ENDIF				3/3/KK
 
-	INVOKE	DELIM
+	DOSInvoke	DELIM
 	je	x_done
 
 	cmp	al,0DH
@@ -348,7 +348,7 @@ x_done2:
 a_switch:
 	OR	BH,1				; Indicate switch
 	OR	BP,fSwitch
-	INVOKE	SCANOFF
+	DOSInvoke	SCANOFF
 	INC	SI
 	DOSInvoke	testkanj			;AN057; See if DBCS lead byte
 	jz	a_switch_notkanj		;AN057; no - continue processing

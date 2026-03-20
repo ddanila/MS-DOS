@@ -104,7 +104,7 @@ ASKAGN:
 	LODSW
 	OR	AH,AH
 	JZ	ASKAGN
-	INVOKE	SCANOFF
+	DOSInvoke	SCANOFF
 	call	char_in_xlat			;G Convert to upper case
 	retc					;AN000; return if function not supported
 	CMP	AL,CAPITAL_N			;G

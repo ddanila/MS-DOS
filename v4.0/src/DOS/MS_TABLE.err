@@ -1,5 +1,5 @@
 MS_TABLE.ASM(234): Error! E050: Offset cannot be smaller than WORD size
 MS_TABLE.ASM(235): Error! E050: Offset cannot be smaller than WORD size
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(149): Error! E021: Expecting number
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(149): Note! N291: macro called from file MS_TABLE.ASM(482)
+../INC/DOSMAC.INC(150): Error! E021: Expecting number
+../INC/DOSMAC.INC(150): Note! N291: macro called from file MS_TABLE.ASM(482)
 MS_TABLE.ASM(708): Error! E249: End directive required at end of file

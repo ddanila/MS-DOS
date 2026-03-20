@@ -1,6 +1,0 @@
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(59): Error! E251: Symbol $IOCTL is not defined
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(59): Note! N291: macro called from file MISC.ASM(575)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(190): Error! E251: Symbol SYS_RET_ERR is not defined
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(190): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(69)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(190): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(181)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(190): Note! N291: macro called from file MISC.ASM(578)

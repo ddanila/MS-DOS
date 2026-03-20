@@ -374,7 +374,7 @@ checkit:
     CALL    DIRPROC
     CALL    CHKMAP		    ;Look for badsectors, orphans
     CALL    CHKCROSS		    ;Check for second pass
-    INVOKE  DOCRLF		     ;display new line
+    DOSInvoke  DOCRLF		     ;display new line
     CALL    REPORT		     ;finished, display data to screen
 
 ;*****************************************************************************
@@ -457,7 +457,7 @@ NOT_ROOT_DIR:
 	POP	DI			; Recall loc
 	POP	WORD PTR [DI]		; recall chars
 	JNC	VALID_PATH
-	INVOKE	DOCRLF
+	DOSInvoke	DOCRLF
 	MOV	DX,OFFSET DG:INVPATH_arg
 	DOSInvoke	printf_crlf
 	JMP	CDONE1
@@ -483,7 +483,7 @@ ParseName:
 ;
 	MOV	BYTE PTR es:[DI],-1
 ScanFile:
-	INVOKE	DOCRLF
+	DOSInvoke	DOCRLF
 ;set dma pointer to here
 	MOV	DX,OFFSET DG:DIRBUF	;FOR ALL SEARCHING
 	MOV	BP,DX

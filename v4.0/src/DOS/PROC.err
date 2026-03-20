@@ -1,8 +1,0 @@
-EXEC.ASM(148): Error! E040: Invalid instruction operands
-EXEC.ASM(148): Note! N290: included by file PROC.ASM(67)
-EXEC.ASM(161): Error! E002: Invalid instruction with current CPU setting
-EXEC.ASM(161): Note! N290: included by file PROC.ASM(67)
-EXEC.ASM(624): Error! E002: Invalid instruction with current CPU setting
-EXEC.ASM(624): Note! N290: included by file PROC.ASM(67)
-EXEC.ASM(774): Error! E002: Invalid instruction with current CPU setting
-EXEC.ASM(774): Note! N290: included by file PROC.ASM(67)
