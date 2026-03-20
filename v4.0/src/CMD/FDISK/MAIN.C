@@ -135,11 +135,11 @@
 /*                                                                        */
 /*         d       Drive (1 or 2) that FDISK should operate on            */
 /*                                                                        */
-/*         /PRI:m  Size of Primary DOS partition to create in K           */
+/*         /PRI:m  Size of Primary DOS partition to create in MB          */
 /*                                                                        */
-/*         /EXT:n  Size of Extended DOS partition to create in K          */
+/*         /EXT:n  Size of Extended DOS partition to create in MB         */
 /*                                                                        */
-/*         /LOG:o  Size of Logical drive to create in K in the            */
+/*         /LOG:o  Size of Logical drive to create in MB in the           */
 /*                 extended partition                                     */
 /*                                                                        */
 /*         /Q      This suppresses the reboot screen and returns          */
