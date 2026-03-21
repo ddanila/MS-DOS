@@ -1,5 +1,5 @@
 	PAGE	,132
-	SUBTTL	DOS - Message Retriever - SYSTEM CONTROL file
+	;; SUBTTL	DOS - Message Retriever - SYSTEM CONTROL file
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; DOS -- Message Retriever
 ;; (c) Copyright 1988 Microsoft

@@ -860,6 +860,7 @@ EXTRN	SET_BUF_AS_DIR:NEAR
 EXTRN	SET_MAP_PAGE:NEAR
 EXTRN	ShareEnd:NEAR
 EXTRN	ShareEnter:NEAR
+EXTRN	DEV_CLOSE_SFT:NEAR
         MOV     CX,[SI]         ; Get pointer to clusters
         MOV     DX,WORD PTR [DI.buf_sector+2]  ;F.C. >32mb                      ;AN000;
         MOV     [HIGH_SECTOR],DX               ;F.C. >32mb                      ;AN000;

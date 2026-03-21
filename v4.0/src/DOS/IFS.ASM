@@ -49,7 +49,7 @@ buffers   dw	0							  ;AN000;
 	  dw	0							  ;AN000;
 lastdrv   dw	0							  ;AN000;
 secsize   dw	0							  ;AN000;
-DosInfo       ENDS							  ;AN000;
+DOSINFO       ENDS							  ;AN000;
 
 
 

@@ -105,7 +105,7 @@ EXTRN	UNPACK:NEAR
 ;
 	CMP	DX,CX			; is it in a reasonable range?
 	JB	GotVal			; yes, trust it.
-	fmt	TypInt,LevLog,<"Internal error: MaxClus <= FreeClus\n">
+	fmt	TypInt,LevLog,<"Internal error: MaxClus LE FreeClus">
 DoScan:
 	XOR	DX,DX
 	DEC	CX

@@ -162,7 +162,7 @@ rmlset:
 	Jnz	rmerr			;	return (-1);
 	Context ES
 	xor	al,al			; al = 0 , ie drive a:
-rmloop: Invoke	GetCDSFromDrv		; Get curdir for drive in al
+rmloop: DOSInvoke	GetCDSFromDrv		; Get curdir for drive in al
 	jc	rmcont			; If error, exit loop & cont normally
 	DOSInvoke	StrCmp			; Are the 2 paths the same?
 	jz	rmerr			; Yes, report error.
@@ -370,12 +370,12 @@ EXTRN	Get_User_Stack:NEAR
 EXTRN	LcritDisk:NEAR
 EXTRN	SYS_RET_ERR:NEAR
 EXTRN	SYS_Ret_Err:NEAR
-EXTRN	StrCmp:NEAR
 EXTRN	Sys_Ret_Err:NEAR
 EXTRN	Sys_Ret_OK:NEAR
 EXTRN	TransPath:NEAR
 EXTRN	TransPathNoSet:NEAR
 EXTRN	ValidateCDS:NEAR
+EXTRN	GetCDSFromDrv:NEAR
 
 	MOV	SI,Wfp_Start
   entry Check_PathLen2

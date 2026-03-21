@@ -552,7 +552,7 @@ ENDIF
 EndProc get_user_stack
 
         IF      NOT IBM
-BREAK <Set_OEM_Handler -- Set OEM sys call address and handle OEM Calls
+BREAK <Set_OEM_Handler -- Set OEM sys call address and handle OEM Calls>
 
 $SET_OEM_HANDLER:
 ASSUME  DS:NOTHING,ES:NOTHING,SS:NOTHING

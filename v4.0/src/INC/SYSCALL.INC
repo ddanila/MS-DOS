@@ -1,6 +1,6 @@
 ;	SCCSID = @(#)syscall.asm	1.1 85/04/10
 ;BREAK <system call definitions>
-SUBTTL	system call definitions
+;; SUBTTL	system call definitions
 PAGE
 
 Abort				EQU 0	;  0	  0

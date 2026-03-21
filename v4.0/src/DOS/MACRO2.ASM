@@ -231,7 +231,7 @@ NextCh: LOOP	FCBScan
 BadPack:
 	STC
 	MOV	AL,error_path_not_found
-FCBRet: Leave
+FCBRet: FrameLeave
 	return
 EndProc TransFCB,NoCheck
 

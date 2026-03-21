@@ -39,7 +39,7 @@ Installed = TRUE
 	i_need	DMAADD,DWORD
 	i_need	FastOpenFlg,BYTE
 
-SUBTTL GET_FILE_INFO -- Get File Information
+;; SUBTTL GET_FILE_INFO -- Get File Information
 PAGE
 
 ; Inputs:
@@ -291,7 +291,7 @@ EXTRN	NET_SEQ_SET_FILE_ATTRIBUTE:NEAR
 EXTRN	REN_DEL_Check:NEAR
 EXTRN	TestNet:NEAR
 EXTRN	EcritDisk:NEAR
-EXTRN	ExtErr_Action:NEAR
+EXTRN	ExtErr_Action:BYTE
 EXTRN	FastOpen_Update:NEAR
 EXTRN	FlushBuf:NEAR
 EXTRN	GetPath:NEAR

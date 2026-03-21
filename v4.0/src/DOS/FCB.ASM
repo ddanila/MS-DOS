@@ -281,53 +281,53 @@ Table	SEGMENT
 Public FCB001S,FCB001E
 FCB001S  label byte
 CharType    DB	256 dup (-1)
-	ChType	".", <LOW (NOT (     fChk))>
-	ChType	'"', <LOW (NOT (fFCB+fChk))>
-	ChType	"/", <LOW (NOT (fFCB+fChk))>
-	ChType	"\", <LOW (NOT (fFCB+fChk))>
-	ChType	"[", <LOW (NOT (fFCB+fChk))>
-	ChType	"]", <LOW (NOT (fFCB+fChk))>
-	ChType	":", <LOW (NOT (fFCB+fChk+fDelim))>
-	ChType	"<", <LOW (NOT (fFCB+fChk+fDelim))>
-	ChType	"|", <LOW (NOT (fFCB+fChk+fDelim))>
-	ChType	">", <LOW (NOT (fFCB+fChk+fDelim))>
-	ChType	"+", <LOW (NOT (fFCB+fChk+fDelim))>
-	ChType	"=", <LOW (NOT (fFCB+fChk+fDelim))>
-	ChType	";", <LOW (NOT (fFCB+fChk+fDelim))>
-	ChType	",", <LOW (NOT (fFCB+fChk+fDelim))>
-	ChType	0,   <LOW (NOT (fFCB+fChk))>	       ; NUL
-	ChType	1,   <LOW (NOT (fFCB+fChk))>	       ; ^A
-	ChType	2,   <LOW (NOT (fFCB+fChk))>	       ; ^b
-	ChType	3,   <LOW (NOT (fFCB+fChk))>	       ; ^c
-	ChType	4,   <LOW (NOT (fFCB+fChk))>	       ; ^d
-	ChType	5,   <LOW (NOT (fFCB+fChk))>	       ; ^e
-	ChType	6,   <LOW (NOT (fFCB+fChk))>	       ; ^f
-	ChType	7,   <LOW (NOT (fFCB+fChk))>	       ; ^g
-	ChType	8,   <LOW (NOT (fFCB+fChk))>	       ; ^h
-	ChType	9,   <LOW (NOT (fFCB+fChk+fDelim+fSpChk))> ; Tab
-	ChType	10,  <LOW (NOT (fFCB+fChk))>	       ; ^j
-	ChType	11,  <LOW (NOT (fFCB+fChk))>	       ; ^k
-	ChType	12,  <LOW (NOT (fFCB+fChk))>	       ; ^l
-	ChType	13,  <LOW (NOT (fFCB+fChk))>	       ; ^m
-	ChType	14,  <LOW (NOT (fFCB+fChk))>	       ; ^n
-	ChType	15,  <LOW (NOT (fFCB+fChk))>	       ; ^o
-	ChType	16,  <LOW (NOT (fFCB+fChk))>	       ; ^p
-	ChType	17,  <LOW (NOT (fFCB+fChk))>	       ; ^q
-	ChType	18,  <LOW (NOT (fFCB+fChk))>	       ; ^r
-	ChType	19,  <LOW (NOT (fFCB+fChk))>	       ; ^s
-	ChType	20,  <LOW (NOT (fFCB+fChk))>	       ; ^t
-	ChType	21,  <LOW (NOT (fFCB+fChk))>	       ; ^u
-	ChType	22,  <LOW (NOT (fFCB+fChk))>	       ; ^v
-	ChType	23,  <LOW (NOT (fFCB+fChk))>	       ; ^w
-	ChType	24,  <LOW (NOT (fFCB+fChk))>	       ; ^x
-	ChType	25,  <LOW (NOT (fFCB+fChk))>	       ; ^y
-	ChType	26,  <LOW (NOT (fFCB+fChk))>	       ; ^z
-	ChType	27,  <LOW (NOT (fFCB+fChk))>	       ; ^[
-	ChType	28,  <LOW (NOT (fFCB+fChk))>	       ; ^\
-	ChType	29,  <LOW (NOT (fFCB+fChk))>	       ; ^]
-	ChType	30,  <LOW (NOT (fFCB+fChk))>	       ; ^^
-	ChType	31,  <LOW (NOT (fFCB+fChk))>	       ; ^_
-	ChType	" ", <LOW (NOT (     fChk+fDelim+fSpChk))>
+	ChType	46,  0FEH		       ; "."
+	ChType	34,  0F6H		       ; '"'
+	ChType	47,  0F6H		       ; "/"
+	ChType	92,  0F6H		       ; "\"
+	ChType	91,  0F6H		       ; "["
+	ChType	93,  0F6H		       ; "]"
+	ChType	58,  0F4H	       ; ":"
+	ChType	60,  0F4H	       ; "<"
+	ChType	124, 0F4H	       ; "|"
+	ChType	62,  0F4H	       ; ">"
+	ChType	43,  0F4H	       ; "+"
+	ChType	61,  0F4H	       ; "="
+	ChType	59,  0F4H	       ; ";"
+	ChType	44,  0F4H	       ; ","
+	ChType	0,   0F6H	       ; NUL
+	ChType	1,   0F6H	       ; ^A
+	ChType	2,   0F6H	       ; ^b
+	ChType	3,   0F6H	       ; ^c
+	ChType	4,   0F6H	       ; ^d
+	ChType	5,   0F6H	       ; ^e
+	ChType	6,   0F6H	       ; ^f
+	ChType	7,   0F6H	       ; ^g
+	ChType	8,   0F6H	       ; ^h
+	ChType	9,   0F0H ; Tab
+	ChType	10,  0F6H	       ; ^j
+	ChType	11,  0F6H	       ; ^k
+	ChType	12,  0F6H	       ; ^l
+	ChType	13,  0F6H	       ; ^m
+	ChType	14,  0F6H	       ; ^n
+	ChType	15,  0F6H	       ; ^o
+	ChType	16,  0F6H	       ; ^p
+	ChType	17,  0F6H	       ; ^q
+	ChType	18,  0F6H	       ; ^r
+	ChType	19,  0F6H	       ; ^s
+	ChType	20,  0F6H	       ; ^t
+	ChType	21,  0F6H	       ; ^u
+	ChType	22,  0F6H	       ; ^v
+	ChType	23,  0F6H	       ; ^w
+	ChType	24,  0F6H	       ; ^x
+	ChType	25,  0F6H	       ; ^y
+	ChType	26,  0F6H	       ; ^z
+	ChType	27,  0F6H	       ; ^[
+	ChType	28,  0F6H	       ; ^\
+	ChType	29,  0F6H	       ; ^]
+	ChType	30,  0F6H	       ; ^^
+	ChType	31,  0F6H	       ; ^_
+	ChType	32,  0F8H	       ; " "
 	ChType	255, -1
 FCB001E label byte
 Table	ENDS

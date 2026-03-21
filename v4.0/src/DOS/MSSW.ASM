@@ -2,8 +2,12 @@
 
 include VERSION.INC
 
+ifndef IBM
 IBM		EQU	ibmver
+endif
+ifndef WANG
 WANG		EQU	FALSE
+endif
 
 ; Set this switch to cause DOS to move itself to the end of memory
 HIGHMEM EQU	FALSE

@@ -41,7 +41,9 @@ BUFFERFLAG	EQU	NOT IBMCOPYRIGHT
 ifndef	MSVER	
 MSVER      EQU     NOT IBMVER
 endif
+ifndef IBM
 IBM	   EQU	   IBMVER
+endif
 ;
 ;
 ;

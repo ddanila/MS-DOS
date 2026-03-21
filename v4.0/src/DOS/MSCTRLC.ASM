@@ -7,7 +7,7 @@
 include MSSW.ASM
 .list
 
-TITLE	Control C detection, Hard error and EXIT routines
+;; TITLE	Control C detection, Hard error and EXIT routines
 NAME	IBMCTRLC
 
 include CTRLC.ASM
