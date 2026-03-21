@@ -1,5 +1,5 @@
 ifndef VERSION_INC_INCLUDED
-VERSION_INC_INCLUDED = 1
+VERSION_INC_INCLUDED EQU 1
 ; Some modules really want TRUE to be 0FFH.  Best to let them have their way.
 ifndef TRUE
 	TRUE	   EQU	   0FFFFh
@@ -33,10 +33,16 @@ memS       EQU     1			; Small model
 ; --------------------------------------------------------
 ;  Clone Version |     TRUE              FALSE
 ;
+ifndef IBMVER
 IBMVER     EQU     TRUE
+endif
+ifndef IBMCOPYRIGHT
 IBMCOPYRIGHT EQU   FALSE
+endif
 
+ifndef BUFFERFLAG
 BUFFERFLAG	EQU	NOT IBMCOPYRIGHT
+endif
 
 ifndef	MSVER	
 MSVER      EQU     NOT IBMVER
@@ -56,19 +62,31 @@ endif
 ;*                                                                         *
 ;***************************************************************************
 ;
+ifndef IBMJAPVER
 IBMJAPVER  EQU	   FALSE		;If TRUE set KANJI true also
+endif
 
 ;
 ; Switch INTERNAT for DBCS support
 ;
+ifndef INTERNAT
 INTERNAT   EQU	   FALSE
+endif
 ;
 	IF INTERNAT
+ifndef KANJI
 KANJI	   EQU	   TRUE
+endif
+ifndef IBMJAPAN
 IBMJAPAN   EQU	   TRUE
+endif
 	ELSE
+ifndef KANJI
 KANJI	   EQU	   FALSE
+endif
+ifndef IBMJAPAN
 IBMJAPAN   EQU	   FALSE
+endif
 	ENDIF
 
 ifndef altvect				; avoid jerking off vector.inc

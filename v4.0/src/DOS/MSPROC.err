@@ -1,8 +1,0 @@
-MSSW.ASM(5): Error! E230: Label 'IBM' is already defined
-MSSW.ASM(5): Note! N290: included by file MSPROC.ASM(7)
-../INC/DOSSYM.INC(4): Error! E230: Label 'TRUE' is already defined
-../INC/DOSSYM.INC(4): Note! N290: included by file PROC.ASM(31)
-../INC/DOSSYM.INC(4): Note! N290: included by file MSPROC.ASM(13)
-../INC/DOSSYM.INC(5): Error! E230: Label 'FALSE' is already defined
-../INC/DOSSYM.INC(5): Note! N290: included by file PROC.ASM(31)
-../INC/DOSSYM.INC(5): Note! N290: included by file MSPROC.ASM(13)

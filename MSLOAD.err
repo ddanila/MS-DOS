@@ -1,0 +1,6 @@
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BOOTFORM.INC(29): Error! E065: Operator is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BOOTFORM.INC(29): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSLOAD.ASM(54)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BOOTFORM.INC(29): Error! E050: Offset cannot be smaller than WORD size
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BOOTFORM.INC(29): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSLOAD.ASM(54)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSLOAD.ASM(977): Error! E048: Immediate data out of range
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSLOAD.ASM(977): Error! E040: Invalid instruction operands

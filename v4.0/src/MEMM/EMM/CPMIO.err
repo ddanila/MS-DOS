@@ -1,0 +1,30 @@
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STRIN.ASM(4): Error! E032: Syntax error
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STRIN.ASM(4): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/CPMIO.ASM(230)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STRIN.ASM(154): Error! E032: Syntax error
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STRIN.ASM(154): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/CPMIO.ASM(230)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STRIN.ASM(160): Error! E066: Operand is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STRIN.ASM(160): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/CPMIO.ASM(230)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STRIN.ASM(162): Error! E299: 'COPYNEW' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STRIN.ASM(162): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/CPMIO.ASM(230)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STRIN.ASM(163): Error! E032: Syntax error
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STRIN.ASM(163): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/CPMIO.ASM(230)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STRIN.ASM(182): Error! E032: Syntax error
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STRIN.ASM(182): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/CPMIO.ASM(230)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STRIN.ASM(190): Error! E032: Syntax error
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STRIN.ASM(190): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/CPMIO.ASM(230)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STRIN.ASM(193): Error! E066: Operand is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STRIN.ASM(193): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/CPMIO.ASM(230)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STRIN.ASM(194): Warning! W095: size not specified -- BYTE PTR is assumed
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STRIN.ASM(194): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/CPMIO.ASM(230)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STRIN.ASM(196): Warning! W095: size not specified -- BYTE PTR is assumed
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STRIN.ASM(196): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/CPMIO.ASM(230)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STRIN.ASM(225): Error! E032: Syntax error
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STRIN.ASM(225): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/CPMIO.ASM(230)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STRIN.ASM(265): Error! E066: Operand is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STRIN.ASM(265): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/CPMIO.ASM(230)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STRIN.ASM(288): Error! E299: 'BACKMES' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STRIN.ASM(288): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/CPMIO.ASM(230)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STRIN.ASM(314): Error! E032: Syntax error
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STRIN.ASM(314): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/CPMIO.ASM(230)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STRIN.ASM(350): Error! E299: 'FINDOLD' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STRIN.ASM(350): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/CPMIO.ASM(230)

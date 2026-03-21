@@ -1,0 +1,3 @@
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/PATH.ASM(391): Warning! W249: End directive required at end of file
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(59): Error! E251: Symbol GetCDSFromDrv is not defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(59): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/PATH.ASM(165)

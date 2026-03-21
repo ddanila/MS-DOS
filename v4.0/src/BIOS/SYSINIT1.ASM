@@ -154,6 +154,7 @@ ASSUME	CS:SYSINITSEG,DS:NOTHING,ES:NOTHING,SS:NOTHING
 
 	EXTRN	INT24:NEAR,MEM_ERR:NEAR
 	EXTRN	DOCONF:NEAR
+	EXTRN	BADFIL:NEAR,OPEN_DEV:NEAR	;; defined in SYSINIT2.ASM
 	extrn	Multi_Pass:NEAR 			;AN024;
 	extrn	BadLoad:near
 	extrn	Error_Line:near
@@ -347,7 +348,14 @@ IFS_Flag	dw	0			;AN000; Set to 1 if it is an IFS.
    IS_IFS	  equ	00000001b		;IFS command?
    NOT_IFS	  equ	11111110b
 
-IFS_RH	IFSRH <LENGTH_INIT, IFSINIT,,,,>	;AN000; IFS initialization request packet
+IFS_RH	label	byte			;AN000; IFS initialization request packet
+	dw	28			; IFSR_LENGTH = LENGTH_INIT (WASM: IFSRH struct expr not portable)
+	db	IFSINIT 		; IFSR_FUNCTION
+	dw	0			; IFSR_RETCODE
+	db	0			; IFSR_RETCLASS
+	db	16 dup (0)		; IFSR_RESV1
+	db	50 dup (0)		; IFSR_FCN_PARMS
+; WASM E020: IFSRH <> with DUP fields not supported; use explicit layout above
 
 ;------------------------------------------------------------------
 ;Variables for Comment=

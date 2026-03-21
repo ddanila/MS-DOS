@@ -284,7 +284,10 @@ DOC1:
 	MOV  DX, HF_PORT
 	CLD			;String op goes up
 	CLI			;Disable interrupts (BUG WAS FORGETTING THIS)
-  REPZ  INSW			;Read in sector
+DOC_INSW_LOOP:			;Read in sector (REPZ INSW: WASM E101)
+	IN   AX, DX
+	STOSW
+	LOOP DOC_INSW_LOOP
   	STI
 	TEST CMD_BLOCK[CMD_REG], 02
 	JZ   DOC2		;No ECC bytes to read.
@@ -294,7 +297,10 @@ DOC1:
 	MOV  CX, 4		;4 bytes of ECC
 	MOV  DX, HF_PORT
 	CLI
-  REPZ  INSB			;Read in ECC
+DOC_INSB_LOOP:			;Read in ECC (REPZ INSB: WASM E101)
+	IN   AL, DX
+	STOSB
+	LOOP DOC_INSB_LOOP
   	STI
 DOC2:
 	PUSH CS

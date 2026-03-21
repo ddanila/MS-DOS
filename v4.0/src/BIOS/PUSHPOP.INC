@@ -1,3 +1,8 @@
+IFNDEF ?stackdepth_init_
+?stackdepth_init_ EQU 1
+?stackdepth   =   0			;; WASM: must be initialized before use
+ENDIF
+
 SaveReg MACRO	reglist 		;; push those registers
 IRP reg,<reglist>
 	?stackdepth = ?stackdepth + 1

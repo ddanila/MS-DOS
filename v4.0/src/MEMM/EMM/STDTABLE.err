@@ -1,0 +1,44 @@
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(44): Error! E230: Label 'IBM' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(44): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MSSW.ASM(3)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(44): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSTABLE.ASM(7)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(44): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STDTABLE.ASM(13)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MSSW.ASM(5): Error! E230: Label 'IBM' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MSSW.ASM(5): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSTABLE.ASM(7)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MSSW.ASM(5): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STDTABLE.ASM(13)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MSSW.ASM(6): Error! E230: Label 'WANG' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MSSW.ASM(6): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSTABLE.ASM(7)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MSSW.ASM(6): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STDTABLE.ASM(13)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MSSW.ASM(9): Error! E230: Label 'HIGHMEM' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MSSW.ASM(9): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSTABLE.ASM(7)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MSSW.ASM(9): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STDTABLE.ASM(13)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MSSW.ASM(21): Error! E230: Label 'ESCCH' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MSSW.ASM(21): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSTABLE.ASM(7)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MSSW.ASM(21): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STDTABLE.ASM(13)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MSSW.ASM(22): Error! E230: Label 'CANCEL' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MSSW.ASM(22): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSTABLE.ASM(7)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MSSW.ASM(22): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STDTABLE.ASM(13)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MSSW.ASM(23): Error! E230: Label 'TOGLPRN' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MSSW.ASM(23): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSTABLE.ASM(7)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MSSW.ASM(23): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STDTABLE.ASM(13)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MSSW.ASM(25): Error! E230: Label 'ZEROEXT' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MSSW.ASM(25): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSTABLE.ASM(7)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MSSW.ASM(25): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STDTABLE.ASM(13)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Error! E230: Label 'TRUE' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MS_TABLE.ASM(11)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSTABLE.ASM(13)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STDTABLE.ASM(13)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Error! E230: Label 'FALSE' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MS_TABLE.ASM(11)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSTABLE.ASM(13)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STDTABLE.ASM(13)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MS_TABLE.ASM(234): Error! E050: Offset cannot be smaller than WORD size
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MS_TABLE.ASM(234): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSTABLE.ASM(13)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MS_TABLE.ASM(234): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STDTABLE.ASM(13)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MS_TABLE.ASM(235): Error! E050: Offset cannot be smaller than WORD size
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MS_TABLE.ASM(235): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSTABLE.ASM(13)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MS_TABLE.ASM(235): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STDTABLE.ASM(13)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(150): Error! E021: Expecting number
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(150): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MS_TABLE.ASM(482)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(150): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSTABLE.ASM(13)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(150): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STDTABLE.ASM(13)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STDTABLE.ASM(14): Warning! W249: End directive required at end of file

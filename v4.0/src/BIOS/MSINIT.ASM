@@ -601,8 +601,8 @@ Skip_Patch_DoubleWordMov:		;AN003;
 ;*********************************************** ARR 2.15
 
 ; BAS DEBUG
-	MOV	DS:WORD PTR CHROUT*4,OFFSET WORD PTR OUTCHR
-	MOV	DS:WORD PTR CHROUT*4+2,AX
+	MOV	DS:WORD PTR (29H*4),OFFSET WORD PTR OUTCHR	;; CHROUT*4 (WASM E077: needs literal)
+	MOV	DS:WORD PTR (29H*4+2),AX
 
 	MESSAGE FTESTINIT,<"INTERRUPT VECTORS",CR,LF>
 	MOV	DI,4
@@ -2138,7 +2138,7 @@ GETCLUS PROC	NEAR
 ;	 MOV	 DX,AX			 ;DX = FIRST SECTOR TO READ
 GETCL1:
 	MNUM	FTESTINIT
-	MESSAGE FTESTINIT,<" => ">
+	MESSAGE FTESTINIT," => "	;; WASM: > inside <> closes bracket prematurely
 ;				     ;SI = BX, BX = NEXT ALLOCATION UNIT
 
 ;	GET THE FAT ENTRY AT BX
@@ -2525,7 +2525,7 @@ FmpGot_Cont:				;AN000;
 	inc	Mini_BPB_ptr
 	pop	bx
 
-	add	DI, type BDSM_type	;adjust to the next BDSM table entry.
+	add	DI, SIZE BDSM_type	;adjust to the next BDSM table entry. (WASM: type→SIZE)
 	mov	End_OF_BDSM, DI 	;set the ending address of BDSM table to this.
 ;	 Message fTestHard,<"Mini disk installed.",cr,lf>
 FmpnextChain: jmp FmpNext		;let's find out if we have any chained partition

@@ -22,7 +22,9 @@
 ; length of the volume id
 ;
 
+IFNDEF vid_size
 vid_size    equ 12
+ENDIF
 
 	    PATHSTART 001,VOLID 					  ;3.30
 

@@ -1,0 +1,8 @@
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MSSW.ASM(5): Error! E230: Label 'IBM' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MSSW.ASM(5): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MSPROC.ASM(7)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Error! E230: Label 'TRUE' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/PROC.ASM(31)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MSPROC.ASM(13)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Error! E230: Label 'FALSE' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/PROC.ASM(31)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MSPROC.ASM(13)

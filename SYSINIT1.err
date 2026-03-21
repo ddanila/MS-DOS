@@ -1,0 +1,63 @@
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SMDOSSYM.INC(4): Error! E230: Label 'TRUE' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SMDOSSYM.INC(4): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/SYSINIT1.ASM(71)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SMDOSSYM.INC(5): Error! E230: Label 'FALSE' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SMDOSSYM.INC(5): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/SYSINIT1.ASM(71)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(36): Error! E230: Label 'IBMVER' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(36): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSVAR.INC(2)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(36): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SMDOSSYM.INC(67)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(36): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/SYSINIT1.ASM(71)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(44): Error! E230: Label 'IBM' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(44): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSVAR.INC(2)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(44): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SMDOSSYM.INC(67)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(44): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/SYSINIT1.ASM(71)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(57): Error! E230: Label 'IBMJAPVER' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(57): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSVAR.INC(2)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(57): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SMDOSSYM.INC(67)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(57): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/SYSINIT1.ASM(71)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(68): Error! E230: Label 'KANJI' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(68): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSVAR.INC(2)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(68): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SMDOSSYM.INC(67)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(68): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/SYSINIT1.ASM(71)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(162): Error! E065: Operator is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(162): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(234)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(162): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/SYSINIT1.ASM(213)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(166): Error! E032: Syntax error
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(166): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(234)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(166): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/SYSINIT1.ASM(213)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(175): Error! E065: Operator is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(175): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(234)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(175): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/SYSINIT1.ASM(213)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(182): Error! E065: Operator is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(182): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(234)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(182): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/SYSINIT1.ASM(213)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(195): Error! E032: Syntax error
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(195): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(234)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(195): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/SYSINIT1.ASM(213)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(203): Error! E032: Syntax error
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(203): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(234)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(203): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/SYSINIT1.ASM(213)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(205): Error! E065: Operator is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(205): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(234)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(205): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/SYSINIT1.ASM(213)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(208): Error! E032: Syntax error
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(208): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(234)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(208): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/SYSINIT1.ASM(213)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(210): Error! E065: Operator is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(210): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(234)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(210): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/SYSINIT1.ASM(213)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(212): Error! E032: Syntax error
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(212): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(234)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(212): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/SYSINIT1.ASM(213)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(214): Error! E065: Operator is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(214): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(234)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(214): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/SYSINIT1.ASM(213)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(220): Error! E065: Operator is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(220): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(234)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(220): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/SYSINIT1.ASM(213)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(222): Error! E243: Procedure name does not match
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(222): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(234)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(222): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/SYSINIT1.ASM(213)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(162): Error! E065: Operator is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(162): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(234)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(162): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/SYSINIT1.ASM(213)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSSTACK.INC(166):   273: Too many errors

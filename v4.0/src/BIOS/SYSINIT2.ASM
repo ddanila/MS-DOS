@@ -50,6 +50,16 @@ NOEXEC	EQU	FALSE
 
 DOSSIZE EQU	0A000H
 
+;; WASM single-pass: forward-reference EQU constants moved here from bottom of file
+;; (originally after switchlist, now hoisted so they resolve before first use)
+switchnum	equ 11111000B		; which switches require number
+flagec35	equ 00000100B		; electrically compatible 3.5 inch disk drive
+flagdrive	equ 00001000B
+flagcyln	equ 00010000B
+flagseclim	equ 00100000B
+flagheads	equ 01000000B
+flagff		equ 10000000B
+
 .xlist
 ;	INCLUDE dossym.INC
 	include SMDOSSYM.INC	;J.K. Reduced version of DOSSYM.INC
@@ -77,14 +87,14 @@ ASSUME	CS:SYSINITSEG,DS:NOTHING,ES:NOTHING,SS:NOTHING
 ;	 EXTRN	 BADSIZ_POST:BYTE,BADLD_POST:BYTE
 	EXTRN	SYSSIZE:BYTE,BADCOUNTRY:BYTE
 
-	EXTRN  dosinfo:dword,entry_point:dword,
+	EXTRN  dosinfo:dword,entry_point:dword
 	EXTRN  MEMORY_SIZE:WORD,fcbs:byte,keep:byte
 	EXTRN  DEFAULT_DRIVE:BYTE,confbot:word,alloclim:word
 	EXTRN  BUFFERS:WORD,zero:byte,sepchr:byte
 	EXTRN  FILES:BYTE
 	EXTRN  count:word,chrptr:word
 	EXTRN  bufptr:byte,memlo:word,prmblk:byte,memhi:word
-	EXTRN  ldoff:word,area:word,PACKET:BYTE,UNITCOUNT:BYTE,
+	EXTRN  ldoff:word,area:word,PACKET:BYTE,UNITCOUNT:BYTE
 	EXTRN  BREAK_ADDR:DWORD,BPB_ADDR:DWORD,drivenumber:byte
 	extrn  COM_Level:byte, CMMT:byte, CMMT1:byte, CMMT2:byte
 	extrn  Cmd_Indicator:byte
@@ -345,7 +355,7 @@ Set_RecBPB:
 	mov	di,offset DeviceParameters.DP_BPB	 ; es:di -> BPB
 	mov	cx,size a_BPB
 	cld
-	repe	movsb
+	rep	movsb			;; WASM E101: REPE not allowed on MOVSB, use REP
 	pop	es
 ASSUME ES:NOTHING
 	test	word ptr switches,flagseclim
@@ -724,7 +734,7 @@ NOGET:	POP	CX
 ;
 ;  NEWLINE RETURNS WITH FIRST CHARACTER OF NEXT LINE
 ;
-NEWLINE:invoke	GETCHR			;SKIP NON-CONTROL CHARACTERS
+NEWLINE:DOSInvoke GETCHR		;SKIP NON-CONTROL CHARACTERS (WASM E094: invoke→DOSInvoke)
 	retc
 	CMP	AL,LF			;LOOK FOR LINE FEED
 	JNZ	NEWLINE
@@ -1615,14 +1625,7 @@ switchlist  db	8,"FHSTDICN"         ; Preserve the positions of N and C.
 
 ; The following depend on the positions of the various letters in SwitchList
 
-switchnum	equ 11111000B		; which switches require number
-
-flagec35	equ 00000100B		; electrically compatible 3.5 inch disk drive
-flagdrive	equ 00001000B
-flagcyln	equ 00010000B
-flagseclim	equ 00100000B
-flagheads	equ 01000000B
-flagff		equ 10000000B
+;; switchnum/flagec35/flagdrive/flagcyln/flagseclim/flagheads/flagff moved to top of file (WASM forward-ref fix)
 
 SWTCHR	    EQU     "/"             ; switch follows this character
 

@@ -1,3 +1,6 @@
+; Include guard: WASM rejects macro redefinitions on second inclusion.
+IFNDEF MSMACRO_INC_
+MSMACRO_INC_ EQU 1
 ;
 ; This file contains three macros used in debugging the system.  If the
 ; variable "itest" (in msbio.asm) is nonzero code is included in the
@@ -177,6 +180,8 @@ DUMP_BYTE_REG MACRO							  ;3.30
 	    ENDM							  ;3.30
 	ENDIF								  ;3.30
 									  ;3.30
+IFNDEF PATHMACROS_DEFINED_						  ;3.30
+PATHMACROS_DEFINED_ EQU 1	;; sentinel for files that don't define inline  ;3.30
 PATHSTART MACRO INDEX,ABBR						  ;3.30
 	IFDEF	PATHGEN 						  ;3.30
 	    PUBLIC  ABBR&INDEX&S,ABBR&INDEX&E				  ;3.30
@@ -189,4 +194,6 @@ PATHEND MACRO	INDEX,ABBR						  ;3.30
 	    ABBR&INDEX&E LABEL	 BYTE					  ;3.30
 	ENDIF								  ;3.30
 	ENDM								  ;3.30
+ENDIF									  ;3.30
 
+ENDIF ;; MSMACRO_INC_

@@ -1,8 +1,12 @@
 ;	SCCSID = @(#)dossym.asm 1.1 85/04/10
 ;	SCCSID = @(#)dossym.asm 1.1 85/04/10
 	PAGE 80,132
+IFNDEF TRUE
 TRUE	    EQU 0FFFFh
+ENDIF
+IFNDEF FALSE
 FALSE	    EQU 0
+ENDIF
 
 Installed   = TRUE
 IFNDEF	DEBUG

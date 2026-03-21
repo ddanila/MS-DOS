@@ -1,0 +1,10 @@
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/JUMPMAC.INC(25): Error! E236: Procedure is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/JUMPMAC.INC(25): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSAUX.ASM(49)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/JUMPMAC.INC(12): Error! E074: Constant operand is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/JUMPMAC.INC(12): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSAUX.ASM(193)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/JUMPMAC.INC(12): Error! E074: Constant operand is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/JUMPMAC.INC(12): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSAUX.ASM(230)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/JUMPMAC.INC(12): Error! E074: Constant operand is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/JUMPMAC.INC(12): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSAUX.ASM(256)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/JUMPMAC.INC(12): Error! E074: Constant operand is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/JUMPMAC.INC(12): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSAUX.ASM(261)

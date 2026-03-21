@@ -1,0 +1,68 @@
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Error! E230: Label 'TRUE' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/DOSMES.ASM(20)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STDDOSME.ASM(17)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Error! E230: Label 'FALSE' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/DOSMES.ASM(20)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STDDOSME.ASM(17)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(44): Error! E230: Label 'IBM' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(44): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSVAR.INC(2)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(44): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(69)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(44): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/DOSMES.ASM(20)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(44): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STDDOSME.ASM(17)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(68): Error! E230: Label 'KANJI' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(68): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSVAR.INC(2)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(68): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(69)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(68): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/DOSMES.ASM(20)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/VERSION.INC(68): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STDDOSME.ASM(17)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(16): Error! E236: Procedure is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(16): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/DOSMES.ASM(21)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(16): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STDDOSME.ASM(17)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(21): Error! E236: Procedure is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(21): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/DOSMES.ASM(21)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(21): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STDDOSME.ASM(17)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(27): Error! E236: Procedure is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(27): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/DOSMES.ASM(21)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(27): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STDDOSME.ASM(17)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(39): Error! E236: Procedure is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(39): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/DOSMES.ASM(21)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(39): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STDDOSME.ASM(17)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(48): Warning! W020: Expecting comma
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(48): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/DOSMES.ASM(21)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(48): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STDDOSME.ASM(17)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(58): Error! E236: Procedure is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(58): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/DOSMES.ASM(21)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(58): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STDDOSME.ASM(17)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(68): Error! E236: Procedure is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(68): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/DOSMES.ASM(21)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(68): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STDDOSME.ASM(17)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(75): Error! E236: Procedure is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(75): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/DOSMES.ASM(21)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(75): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STDDOSME.ASM(17)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(77): Error! E066: Operand is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(77): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/DOSMES.ASM(21)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(77): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STDDOSME.ASM(17)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(77): Error! E032: Syntax error
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(77): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/DOSMES.ASM(21)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(77): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STDDOSME.ASM(17)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(86): Error! E236: Procedure is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(86): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/DOSMES.ASM(21)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(86): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STDDOSME.ASM(17)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(87): Error! E021: Expecting number
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(87): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/DOSMES.ASM(21)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(87): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STDDOSME.ASM(17)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(99): Error! E236: Procedure is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(99): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/DOSMES.ASM(21)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(99): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STDDOSME.ASM(17)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(110): Error! E236: Procedure is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(110): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/DOSMES.ASM(21)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(110): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STDDOSME.ASM(17)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(124): Error! E236: Procedure is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(124): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/DOSMES.ASM(21)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(124): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STDDOSME.ASM(17)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(155): Error! E050: Offset cannot be smaller than WORD size
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(155): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/DOSMES.ASM(21)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(155): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STDDOSME.ASM(17)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(173): Error! E236: Procedure is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(173): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/DOSMES.ASM(21)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(173): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/STDDOSME.ASM(17)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(180):   273: Too many errors

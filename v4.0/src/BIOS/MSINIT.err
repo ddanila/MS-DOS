@@ -1,15 +1,1 @@
-MSEQU.INC(6): Error! E230: Label 'ROMStatus' is already defined
-MSEQU.INC(6): Note! N290: included by file MSINIT.ASM(29)
-MSEQU.INC(7): Error! E230: Label 'ROMRead' is already defined
-MSEQU.INC(7): Note! N290: included by file MSINIT.ASM(29)
-MSEQU.INC(8): Error! E230: Label 'ROMWrite' is already defined
-MSEQU.INC(8): Note! N290: included by file MSINIT.ASM(29)
-MSEQU.INC(9): Error! E230: Label 'ROMVerify' is already defined
-MSEQU.INC(9): Note! N290: included by file MSINIT.ASM(29)
-MSEQU.INC(10): Error! E230: Label 'ROMFormat' is already defined
-MSEQU.INC(10): Note! N290: included by file MSINIT.ASM(29)
-MSINIT.ASM(604): Error! E077: A constant operand is expected in multiplication
-MSINIT.ASM(605): Error! E077: A constant operand is expected in multiplication
-MSINIT.ASM(2141): Error! E032: Syntax error
-MSINIT.ASM(2528): Error! E065: Operator is expected
 MSINIT.ASM(2819): Warning! W249: End directive required at end of file

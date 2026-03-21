@@ -1,0 +1,10 @@
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/JUMPMAC.INC(25): Error! E236: Procedure is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/JUMPMAC.INC(25): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSBIO1.ASM(61)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSMACRO.INC(180): Error! E236: Procedure is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSMACRO.INC(180): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSBIO1.ASM(302)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSMACRO.INC(183): Error! E032: Syntax error
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSMACRO.INC(183): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSBIO1.ASM(302)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSMACRO.INC(187): Error! E236: Procedure is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSMACRO.INC(187): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSBIO1.ASM(302)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSMACRO.INC(189): Error! E032: Syntax error
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSMACRO.INC(189): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/BIOS/MSBIO1.ASM(302)

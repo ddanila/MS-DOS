@@ -15,8 +15,18 @@ DISK_HEAD_STTL	DB	?	; Head Settle Time (MSec)
 DISK_MOTOR_STRT DB	?	; Motor start delay
 DISK_PARMS	ENDS
 
+IFNDEF ROMStatus
 ROMStatus	equ	1
+ENDIF
+IFNDEF ROMRead
 ROMRead 	equ	2
+ENDIF
+IFNDEF ROMWrite
 ROMWrite	equ	3
+ENDIF
+IFNDEF ROMVerify
 ROMVerify	equ	4
+ENDIF
+IFNDEF ROMFormat
 ROMFormat	equ	5
+ENDIF

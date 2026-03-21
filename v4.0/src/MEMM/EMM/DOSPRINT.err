@@ -1,0 +1,10 @@
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/PRINT.ASM(45): Error! E040: Invalid instruction operands
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/PRINT.ASM(45): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/DOSPRINT.ASM(30)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/PRINT.ASM(70): Error! E040: Invalid instruction operands
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/PRINT.ASM(70): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/DOSPRINT.ASM(30)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/PRINT.ASM(95): Error! E040: Invalid instruction operands
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/PRINT.ASM(95): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/DOSPRINT.ASM(30)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/PRINT.ASM(122): Error! E040: Invalid instruction operands
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/PRINT.ASM(122): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/DOSPRINT.ASM(30)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/PRINT.ASM(140): Error! E040: Invalid instruction operands
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/PRINT.ASM(140): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/DOSPRINT.ASM(30)

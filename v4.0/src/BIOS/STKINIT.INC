@@ -77,8 +77,8 @@ StackInit	proc near						       ;3.30
 	MOV	es:[STACKSIZE], AX		   ;			       ;3.30
 	MOV	AX, WORD PTR cs:[STACK_ADDR]	   ; OFFSET		       ;3.30
 	MOV	WORD PTR es:[STACKS], AX				       ;3.30
-	MOV	AX, WORD PTR cs:[STACK_ADDR+WORD]  ; SEGMENT		       ;3.30
-	MOV	WORD PTR es:[STACKS+WORD], AX				       ;3.30
+	MOV	AX, WORD PTR cs:[STACK_ADDR+2]    ; SEGMENT (WASM: +WORD→+2)  ;3.30
+	MOV	WORD PTR es:[STACKS+2], AX	   ;   (WASM: +WORD→+2)        ;3.30
 									       ;3.30
 ; INITIALIZE THE DATA FIELDS WITH THE PARAMETERS			       ;3.30
 									       ;3.30

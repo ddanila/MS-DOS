@@ -26,11 +26,12 @@ ifndef incsw				;AN000; (tm03) Someone doesn't want to include psdata
    incsw equ	 1			;AN000; include psdata.inc (tm03)
 endif					;AN000; (tm03)
 if incsw				;AN000; If incsw = 1 then (tm03)
-   include PSDATA.INC			;AN000;    include psdata.inc (tm03)endif					;AN000; endif		  (tm03)
+   include PSDATA.INC			;AN000;    include psdata.inc (tm03)
+endif					;AN000; endif		  (tm03)
    PAGE 				;AN000;
-IF1					;AN000;
+;IF1 (WASM: single-pass, removed)	;AN000;
    ;%OUT INCLUDING COMP=COMMON DSN=PARSE.ASM...;AN000;
-ENDIF					;AN000;
+;ENDIF (matching IF1 removed)		;AN000;
 ;***********************************************************************
 ; SysParse;
 ;
@@ -821,7 +822,7 @@ $P_RLT03:				;AN000;
 $P_RLT05:				;AN000;
 ;------------------------  AL = 3, 5, or 9
 	mov	word ptr es:[di].$P_Picked_Val,si ;AN000; store offset of STRING_BUF
-;(replaced ;AN031;)  mov word ptr es:[di+word].$P_Picked_Val,cs ;AN000; store segment of STRING_BUF
+;(replaced ;AN031;)  mov word ptr es:[di+2].$P_Picked_Val,cs ;AN000; store segment of STRING_BUF
 	mov	word ptr es:[di+2].$P_Picked_Val,Psdata_Seg ;AN031; store segment of STRING_BUF
 ;
 	push	ax			;AN000;
@@ -1036,7 +1037,7 @@ $P_RCOL_Loop:				;AN000;
 	cmp	al,$P_Colon		;AN000; is it colon ?
 	jne	$P_RCOL00		;AN000;
 
-	cmp	byte ptr psdata_seg:[si+byte],$P_NULL ;AN000; if so, next is NULL ?
+	cmp	byte ptr psdata_seg:[si+1],$P_NULL ;AN000; if so, next is NULL ?
 	jne	$P_RCOL00		;AN000; no, then next char
 
 	mov	byte ptr psdata_seg:[si],$P_NULL ;AN000; yes, remove colon
@@ -2252,7 +2253,7 @@ $P_Cmpx05:				;AN000;
 ;----					;AN000;
 $P_Cmpx03:				;AN000;
 	mov	byte ptr psdata_seg:[si],al ;AN000;
-	mov	byte ptr psdata_seg:[si+byte],$P_NULL ;AN000;
+	mov	byte ptr psdata_seg:[si+1],$P_NULL ;AN000;
 	mov	byte ptr [bx],$P_NULL	;AN000; replace right parentheses with NULL
 	mov	si,bx			;AN000; skip whitespaces
 	inc	si			;AN000;     after
@@ -2309,7 +2310,7 @@ $P_Quoted_Format proc			;AN000;
 	call	$P_Quoted_Str		;AN000; skip pointers to the closing of quoted string
 	jc	$P_Qus_Err0		;AN000; if invali quoted string syntax, exit
 
-	mov	byte ptr psdata_seg:[si+byte],$P_NULL ;AN000; end up with NULL
+	mov	byte ptr psdata_seg:[si+1],$P_NULL ;AN000; end up with NULL
 	mov	si,bx			;AN000;
 	inc	si			;AN000;
 	call	$P_Skip_Delim		;AN000; skip whitespaces after closing quote
@@ -2579,13 +2580,13 @@ $P_Drive_Format proc			;AN000;
 	call	$P_Chk_DBCS		;AN000; is it leading byte ?
 	jc	$P_Drv_Err		;AN000;
 
-	cmp	word ptr psdata_seg:[si+byte],$P_Colon ;AN000; "d", ":", 0  ?
+	cmp	word ptr psdata_seg:[si+1],$P_Colon ;AN000; "d", ":", 0  ?
 	je	$P_DrvF00		;AN000;
 
 	test	es:[bx].$P_Match_Flag,$P_Ig_Colon ;AN000; colon can be ignored?
 	je	$P_Drv_Err		;AN000;
 
-	cmp	byte ptr psdata_seg:[si+byte],$P_NULL ;AN000; "d", 0  ?
+	cmp	byte ptr psdata_seg:[si+1],$P_NULL ;AN000; "d", 0  ?
 	jne	$P_Drv_Err		;AN000;
 
 $P_DrvF00:				;AN000;
@@ -2950,7 +2951,7 @@ $P_DBCS_LOOP:				;AN000;
 	CMP	AL,[SI] 		;AN000;
 	JB	$P_DBCS01		;AN000; Check if AL is in
 
-	CMP	AL,[SI+BYTE]		;AN000;   range of
+	CMP	AL,[si+1]		;AN000;   range of
 	JA	$P_DBCS01		;AN000;      the vector
 
 	STC				;AN000; if yes, indicate DBCS and exit

@@ -1,6 +1,0 @@
-STRIN.ASM(167): Error! E299: 'COPYNEW' is already defined
-STRIN.ASM(167): Note! N290: included by file CPMIO.ASM(230)
-STRIN.ASM(293): Error! E299: 'BACKMES' is already defined
-STRIN.ASM(293): Note! N290: included by file CPMIO.ASM(230)
-STRIN.ASM(355): Error! E299: 'FINDOLD' is already defined
-STRIN.ASM(355): Note! N290: included by file CPMIO.ASM(230)

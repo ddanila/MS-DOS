@@ -1,0 +1,8 @@
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/CTRLC.ASM(810): Warning! W249: End directive required at end of file
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/CTRLC.ASM(810): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MSCTRLC.ASM(13)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(181): Error! E251: Symbol andEXITroutines is not defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(181): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MSCTRLC.ASM(23)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(191): Error! E251: Symbol SYS_RET_ERR is not defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(191): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(69)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(191): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(182)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(191): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MSCTRLC.ASM(23)

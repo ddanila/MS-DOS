@@ -1,0 +1,7 @@
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(197): Error! E306: Label is defined outside segment
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(197): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/IFSSYM.INC(497)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(197): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MS_CODE.ASM(10)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(198): Error! E225: Data emitted with no segment
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(198): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/IFSSYM.INC(497)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSMAC.INC(198): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MS_CODE.ASM(10)
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/DOS/MS_CODE.ASM(636): Error! E249: End directive required at end of file

@@ -1,0 +1,4 @@
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/CMD/ATTRIB/ATTRIBA.ASM(2): Error! E032: Syntax error
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/CMD/ATTRIB/ATTRIBA.ASM(74): Error! E066: Operand is expected
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/CMD/ATTRIB/ATTRIBA.ASM(410): Error! E230: Label 'MOFFSET' is already defined
+/home/ddanila/fun/msdos/MS-DOS/v4.0/src/CMD/ATTRIB/ATTRIBA.ASM(480): Warning! W249: End directive required at end of file

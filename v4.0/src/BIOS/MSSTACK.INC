@@ -91,7 +91,7 @@ Entry_Int&AA&_Stk:
 ;
 ; Keyboard interrupt must have a three byte jump, a NOP and a zero byte
 ; as its first instruction for compatibility reasons
-	ifidn	<&aa>,<09>
+	ifidn	<&AA>,<09>
 	jmp	Keyboard_lbl
 	nop
 	db	0
@@ -103,7 +103,7 @@ Keyboard_lbl	label	near
 ; post production patch.
 	push	ax
 
-	ifidn	<&aa>,<02>
+	ifidn	<&AA>,<02>
 
 ; *********************************************************************
 ;
@@ -135,17 +135,17 @@ Keyboard_lbl	label	near
 	mov	es,ax
 	cmp	byte ptr es:[0fffeh],mdl_convert	;check if convertible
 	pop	es
-	jne	Normal&aa
+	jne	Normal&AA
 
 	in	al,62h
 	test	al,80h
-	jz	Normal&aa
+	jz	Normal&AA
 
-Special&aa:
+Special&AA:
 	pop	ax
-	jmp	dword ptr Old&aa
+	jmp	dword ptr Old&AA
 
-Normal&aa:
+Normal&AA:
 
 ; *********************************************************************
 
@@ -159,11 +159,11 @@ Normal&aa:
 	mov	al,Allocated
 	xchg	AllocByte,al		; grab the entry
 	cmp	al,Free 		; still avail?
-	jne	NotFree&aa
+	jne	NotFree&AA
 
 	sub	NextEntry,EntrySize	; set for next interrupt
 
-Found&aa:
+Found&AA:
 	mov	SavedSP,sp		; save sp value
 	mov	SavedSS,ss		; save ss also
 ;	mov	IntLevel,aa&h		; save the int level
@@ -172,14 +172,14 @@ Found&aa:
 
 	mov	bp,NewSP		; get new SP value
 	cmp	es:[bp],ax		; check for offset into table
-	jne	FoundBad&aa
+	jne	FoundBad&AA
 
 	mov	ax,es			; point ss,sp to the new stack
 	mov	ss,ax
 	mov	sp,bp
 
 	pushf				; go execute the real interrupt handler
-	call	dword ptr old&aa	;  which will iret back to here
+	call	dword ptr old&AA	;  which will iret back to here
 
 	mov	bp,sp			; retrieve the table offset for us
 	mov	bp,es:[bp]		   ;  but leave it on the stack
@@ -187,12 +187,12 @@ Found&aa:
 	mov	sp,SavedSP
 
 ;	cmp	AllocByte,Allocated	; If an error occured,
-;	jne	NewError&aa		;  do not free us
+;	jne	NewError&AA		;  do not free us
 
 	mov	AllocByte,Free		; free the entry
 	mov	NextEntry,bp		; setup to use next time
 
-NewError&aa:
+NewError&AA:
 	pop	es
 	pop	bp			; saved on entry
 	pop	ax			; saved on entry
@@ -200,26 +200,26 @@ NewError&aa:
 INTRET_&AA:								  ;3.30
 	iret				; done with this interrupt
 
-NotFree&aa:
+NotFree&AA:
 	cmp	al,Allocated		; error flag
-	je	findnext&aa		;  no, continue
+	je	findnext&AA		;  no, continue
 	xchg	AllocByte,al		;  yes, restore error value
 
-FindNext&aa:
+FindNext&AA:
 	call	LongPath
-	jmp	Found&aa
+	jmp	Found&AA
 
-FoundBad&aa:
+FoundBad&AA:
 	cmp	bp,FirstEntry
-	jc	findnext&aa
+	jc	findnext&AA
 	mov	bp,ax			; flag this entry
 	mov	AllocByte,Clobbered
 ;	add	bp,EntrySize		;  and previous entry
 ;	mov	AllocByte,Overflowed
 ;	sub	bp,EntrySize
-	jmp	findnext&aa		; keep looking
+	jmp	findnext&AA		; keep looking
 
-int&aa	endp
+int&AA	endp
 
 
 	endm
