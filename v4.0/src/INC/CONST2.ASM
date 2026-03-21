@@ -77,6 +77,10 @@ sftabl	LABEL	DWORD			; [SYSTEM] file table
 ; The following table is a list of addresses that the sharer patches to be
 ; PUSH AX to enable the critical sections
 ;
+	EXTRN	EcritDisk:NEAR		; defined in CRIT.ASM
+	EXTRN	LcritDisk:NEAR		; defined in CRIT.ASM
+	EXTRN	EcritDevice:NEAR	; defined in CRIT.ASM
+	EXTRN	LcritDevice:NEAR	; defined in CRIT.ASM
 PUBLIC	CritPatch
 CritPatch LABEL WORD
 IRP sect,<critDisk,critDevice>
@@ -193,6 +197,7 @@ IORCHR	LABEL	BYTE			;
 	I_am	DSKSTST,WORD		;
 	DB	8 DUP (0)		;
 	I_am	DSKCHRET,BYTE		;
+	EXTRN	DEVIOBUF:NEAR		; defined in MS_DATA.ASM
 	short_addr  DEVIOBUF		;
 	DW	?			; DOS segment set at Init
 	I_AM	DSKSTCNT,WORD,<1>	;

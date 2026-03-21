@@ -42,9 +42,9 @@ FmtLoop:
 	CMP     AL,'\'
 	JZ      FmtChr
 FmtOut:
-	CALL    Out
+	CALL    OUTRTN
 	JMP     FmtLoop
-Out:
+OUTRTN:
 	SaveReg <SI,DI,BP>
 	INT     29h
 	RestoreReg  <BP,DI,SI>
@@ -67,7 +67,7 @@ FmtChr: LODSB
 	MOV     AL,9
 	JMP     FmtOut
 FmtCRLF:MOV     AL,13
-	CALL    Out
+	CALL    OUTRTN
 	MOV     AL,10
 	JMP     FmtOut
 ;
@@ -92,7 +92,7 @@ FmtX:
 	JMP     FmtLoop
 FmtC:
 	Call    FmtGetArg
-	CALL    Out
+	CALL    OUTRTN
 	JMP     FmtLoop
 FmtSoff:
 	SaveReg <SI>
@@ -119,7 +119,7 @@ FmtUPID:
 	MOV     BX,User_ID
 	CALL    MNUM
 	MOV     AL,':'
-	CALL    OUT
+	CALL    OUTRTN
 	MOV     BX,Proc_ID
 	CALL    MNUM
 	RestoreReg  <DS>
@@ -137,7 +137,7 @@ Procedure   FmtSOut,NEAR
 	LODSB
 	OR      AL,AL
 	retz
-	CALL    OUT
+	CALL    OUTRTN
 	JMP     FmtSOut
 EndProc FMTSout
 

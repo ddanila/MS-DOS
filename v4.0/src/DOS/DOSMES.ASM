@@ -252,6 +252,21 @@ PAGE
 ; in indexing.	That is; The first entry in ESCTAB corresponds to the last
 ; entry in ESCFUNC, and the last entry in ESCTAB to the first entry in ESCFUNC.
 
+; WASM: short_addr expands to DW OFFSET DOSGROUP:name; need explicit EXTRNs
+; for all symbols from STRIN.ASM/KSTRIN.ASM referenced in ESCFUNC table.
+	EXTRN	GETCH:NEAR		; defined in STRIN.ASM / KSTRIN.ASM
+	EXTRN	TWOESC:NEAR		; defined in STRIN.ASM / KSTRIN.ASM
+	EXTRN	EXITINS:NEAR		; defined in STRIN.ASM / KSTRIN.ASM
+	EXTRN	ENTERINS:NEAR		; defined in STRIN.ASM / KSTRIN.ASM
+	EXTRN	BACKSP:NEAR		; defined in STRIN.ASM / KSTRIN.ASM
+	EXTRN	REEDIT:NEAR		; defined in STRIN.ASM / KSTRIN.ASM
+	EXTRN	KILNEW:NEAR		; defined in STRIN.ASM / KSTRIN.ASM
+	EXTRN	COPYLIN:NEAR		; defined in STRIN.ASM / KSTRIN.ASM
+	EXTRN	SKIPSTR:NEAR		; defined in STRIN.ASM / KSTRIN.ASM
+	EXTRN	COPYSTR:NEAR		; defined in STRIN.ASM / KSTRIN.ASM
+	EXTRN	SKIPONE:NEAR		; defined in STRIN.ASM / KSTRIN.ASM
+	EXTRN	COPYONE:NEAR		; defined in STRIN.ASM / KSTRIN.ASM
+	EXTRN	CTRLZ:NEAR		; defined in STRIN.ASM / KSTRIN.ASM
 
 TABLE	SEGMENT
 	PUBLIC	CANCHAR

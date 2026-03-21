@@ -2,6 +2,9 @@
 ;	SCCSID = @(#)dosmac.asm	1.1 85/04/10
 ;
 ; Macro file for MSDOS.
+; Include guard: WASM (single-pass) rejects macro redefinitions on second inclusion.
+IFNDEF DOSMAC_INC_
+DOSMAC_INC_ EQU 1
 ; IF1/IF2 pass-dependent conditionals removed for WASM (single-pass).
 ; .xcref/.cref listing directives removed (unsupported by WASM).
 ;
@@ -536,3 +539,5 @@ if x NE 0
 foobar
 endif
 endm
+
+ENDIF ;; DOSMAC_INC_

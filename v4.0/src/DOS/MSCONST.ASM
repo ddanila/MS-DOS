@@ -79,6 +79,8 @@ SYSINITVAR  LABEL   WORD		; [SYSTEM]
 ; A fake header for the NUL device
 	I_am	NULDEV,DWORD		; [SYSTEM] Link to rest of device list
 	DW	DEVTYP OR ISNULL	; [SYSTEM] Null device attributes
+	EXTRN	SNULDEV:NEAR		; defined in MS_CODE.ASM
+	EXTRN	INULDEV:NEAR		; defined in MS_CODE.ASM
 	short_addr  SNULDEV		; [SYSTEM] Strategy entry point
 	short_addr  INULDEV		; [SYSTEM] Interrupt entry point
 	DB	"NUL     "              ; [SYSTEM] Name of null device
