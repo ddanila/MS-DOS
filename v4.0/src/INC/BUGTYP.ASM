@@ -32,18 +32,18 @@ TypSeg	    EQU     0020h
     LevAll	EQU	0000h
 
 TypSyscall  EQU     0040h
-    LevLog	EQU	0000h
+    LevLog	=	0000h		;; redefinable — same value for all Typ groups
     LevArgs	EQU	0001h
 
 TypInt24    EQU     0080h
-    LevLog	EQU	0000h
+    LevLog	=	0000h
 
 TypProlog   EQU     0100h
-    LevLog	EQU	0000h
+    LevLog	=	0000h
 
 TypInt	    EQU     0200h
-    LevLog	equ	0000h
+    LevLog	=	0000h
 
 typFCB	    equ     0400h
-    LevLog	equ	0000h
+    LevLog	=	0000h
     LevCheck	equ	0001h

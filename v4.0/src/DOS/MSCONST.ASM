@@ -55,7 +55,7 @@ include BUGTYP.ASM
 ;	This allows the REDIRector to work on either IBM or MS-DOS.
 	PUBLIC	OEM_HANDLER
 OEM_HANDLER	DD	-1		; [SYSTEM] Pointer to OEM handler code
-	I_am	LeaveAddr,WORD,<<OFFSET DOSGroup:LeaveDOS>> ; [SYSTEM]
+	I_am	LeaveAddr,WORD,<OFFSET DOSGroup:LeaveDOS> ; [SYSTEM]
 	I_am	RetryCount,WORD,<3>	; [SYSTEM] Share retries
 	I_am	RetryLoop,WORD,<1>	; [SYSTEM] Share retries
 	I_am	LastBuffer,DWORD,<-1,-1>; [SYSTEM] Buffer queue recency pointer
@@ -66,7 +66,7 @@ OEM_HANDLER	DD	-1		; [SYSTEM] Pointer to OEM handler code
 	PUBLIC	SYSINITVAR		; [SYSTEM]
 SYSINITVAR  LABEL   WORD		; [SYSTEM]
 	I_am	DPBHEAD,DWORD		; [SYSTEM] Pointer to head of DPB-FAT list
-	I_am	sft_addr,DWORD,<<OFFSET DosGroup:sfTabl>,?> ; [SYSTEM] Pointer to first SFT table
+	I_am	sft_addr,DWORD,<OFFSET DosGroup:sfTabl,?> ; [SYSTEM] Pointer to first SFT table
 	I_am	BCLOCK,DWORD		; [SYSTEM] The CLOCK device
 	I_am	BCON,DWORD		; [SYSTEM] Console device entry points
 	I_am	MAXSEC,WORD,<128>	; [SYSTEM] Maximum allowed sector size

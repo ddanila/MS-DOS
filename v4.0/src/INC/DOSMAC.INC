@@ -151,10 +151,14 @@ name    LABEL BYTE
 	DB  I_AM_SIZE*I_AM_LEN DUP (?)
     ELSE
 IF NOT InstalledData
-	IF I_AM_LEN EQ 1
-	    DB  init
-	ELSE
+	IFIDN <size>,<WORD>
 	    DW  init
+	ELSE
+	IFIDN <size>,<DWORD>
+	    DW  init
+	ELSE
+	    DB  init
+	ENDIF
 	ENDIF
 ELSE
 	DB  I_AM_SIZE*I_AM_LEN DUP (?)
