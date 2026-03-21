@@ -36,7 +36,7 @@ vioxxx  segment byte public 'vio'
 full_scr_err equ 0001h
 error_bvs_parameter     equ 0002h
 
-str     struc
+argframe     struc
 old_bp  dw      ?
 return  dd      ?
 handle  dw      ?       ; vio handle
@@ -44,11 +44,12 @@ attr    dd      ?       ; attribute pointer
 column  dw      ?       ; column number
 row     dw      ?       ; starting position for output
 lngth   dw      ?       ; length of the string
-addr    dd      ?       ; string to be written (pointer)
-str     ends
+str_addr    dd      ?       ; string to be written (pointer)
+argframe     ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 viowrtcharstratt proc   far
-        Enter   viowrtcharstratt         ; push registers
+        MapEnter viowrtcharstratt         ; push registers
 
         sub     bh,bh
         sub     ax,ax                    ; Start with clean error condition
@@ -68,7 +69,7 @@ viowrtcharstratt proc   far
         popal
         lds     si,[bp].attr             ; Set up attribute in BL
         mov     bl,byte ptr ds:[si]
-        lds     si,[bp].addr             ; DS:SI is pointer to string
+        lds     si,[bp].str_addr             ; DS:SI is pointer to string
         mov     di,[bp].lngth
                                          ;  ****************************
 ;       cmp     bl,15                    ;  ** assume good attribute! **
@@ -108,7 +109,7 @@ around: mov     ah,02h
 error:  mov     ax,error_bvs_parameter
 
 exit:   Mexit                            ; return
-        ret     size str - 6
+        retfar str_retsz
 ;
 viowrtcharstratt endp
 vioxxx  ends

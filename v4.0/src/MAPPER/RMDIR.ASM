@@ -25,16 +25,17 @@ dosxxx  segment byte public 'dos'
             .sall
             include  MACROS.INC
 
-str         struc
+argframe         struc
 old_bp      dw       ?
 return      dd       ?
 rsrvd       dd       ?       ; reserved
 asciiz      dd       ?       ; directory name pointer
-str         ends
+argframe         ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 dosrmdir    proc     far
 
-            Enter    dosrmdir            ; push registers
+            MapEnter dosrmdir            ; push registers
 
             lds      dx,[bp].asciiz      ; set pointer to directory name
 
@@ -44,7 +45,7 @@ dosrmdir    proc     far
 
             sub      ax,ax               ; set good return code
 exit:       Mexit                        ; pop registers
-            ret      size str - 6        ; return
+            retfar str_retsz	; return
 
 dosrmdir    endp
 

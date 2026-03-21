@@ -28,14 +28,15 @@ dosxxx	segment byte public 'dos'
 
 error_ts_datetime equ 0002h
 
-str	    struc
+argframe	    struc
 old_bp	    dw	     ?
 return	    dd	     ?
 Data	    dd	     ?	       ; TOD data pointer
-str	    ends
+argframe	    ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 dossetdatetime	proc far
-	    Enter    dossetdatetime	   ; push registers
+	    MapEnter dossetdatetime	   ; push registers
 
 	    lds      si,[bp].data	   ; set TOD data pointer and load
 					   ;   info into registers
@@ -67,7 +68,7 @@ error:	    mov      ax,error_ts_datetime  ; set error code
 
 exit:	    sub      ax,ax		   ; set good return code
 exit1:	    Mexit			   ; pop registers
-	    ret      size str - 6	   ; return
+	    retfar str_retsz	; return
 
 dossetdatetime endp
 

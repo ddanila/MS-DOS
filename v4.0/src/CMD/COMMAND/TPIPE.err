@@ -1,7 +1,3 @@
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Error! E230: Label 'TRUE' is already defined
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Note! N290: included by file TPIPE.ASM(9)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Error! E230: Label 'FALSE' is already defined
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Note! N290: included by file TPIPE.ASM(9)
 COMEQU.ASM(195): Error! E066: Operand is expected
 COMEQU.ASM(195): Note! N290: included by file TPIPE.ASM(11)
 COMEQU.ASM(195): Error! E021: Expecting number

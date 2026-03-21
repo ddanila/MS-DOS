@@ -25,14 +25,15 @@ dosxxx  segment
             .sall
             include  MACROS.INC
 
-str         struc
+argframe         struc
 Old_bp      dw       ?
 Return      dd       ?
 Ccode       dd       ?        ; country code
-str         ends
+argframe         ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 dossetctrycode  proc far
-            Enter    dossetctrycode        ; push registers
+            MapEnter dossetctrycode        ; push registers
 
             lds      si,[bp].ccode
             mov      ax,word ptr [si]      ; get country code
@@ -50,7 +51,7 @@ okay:       mov      dx,0ffffh             ; Set DX
 
             sub      ax,ax                 ; set good return
 exit:       mexit                          ; pop registers
-            ret      size  str - 6         ; return
+            retfar str_retsz	; return
 
 dossetctrycode endp
 dosxxx      ends

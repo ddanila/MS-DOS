@@ -1,5 +1,0 @@
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(1039): Error! E066: Operand is expected
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(1039): Note! N290: included by file _PARSE.ASM(63)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2953): Error! E066: Operand is expected
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2953): Note! N290: included by file _PARSE.ASM(63)
-_PARSE.ASM(164): Error! E300: 1 unclosed conditional directive(s) detected

@@ -26,16 +26,17 @@ dosxxx  segment byte public 'dos'
             .sall
             include  MACROS.INC
 
-str         struc
+argframe         struc
 old_bp      dw       ?
 return      dd       ?
 Result      dw       ?       ; result code
 Action      dw       ?       ; action code
-str         ends
+argframe         ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 dosexit     proc     far
 
-            Enter    DosExit             ; push registers
+            MapEnter DosExit             ; push registers
 
             mov      ax,[bp].action      ; set resule code area
             cmp      ax,1                ; check for valid action code
@@ -49,7 +50,7 @@ dosexit     proc     far
             xor      ax,ax               ; set good return code
 
 exit:       mexit                        ; pop registers
-            ret      size str - 6        ; return
+            retfar str_retsz	; return
 
 dosexit     endp
 

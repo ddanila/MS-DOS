@@ -28,14 +28,15 @@ dosxxx  segment byte public 'dos'
 
 error_code  equ      0002h
 
-str         struc
+argframe         struc
 old_bp      dw       ?
 return      dd       ?
 verify      dw       ?      ; new verify settings value
-str         ends
+argframe         ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 dossetverify proc    far
-            Enter    dossetverify          ; push registers
+            MapEnter dossetverify          ; push registers
 
             mov      ax,[bp].verify        ; check request
             cmp      al,1                  ; for validity
@@ -50,7 +51,7 @@ dossetverify proc    far
 error:      mov      ax,error_code         ; set error return code
 
 exit:       Mexit                          ; pop registers
-            ret      size str - 6          ; return
+            retfar str_retsz	; return
 
 dossetverify endp
 

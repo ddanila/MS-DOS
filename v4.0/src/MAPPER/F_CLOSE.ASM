@@ -51,18 +51,19 @@ FindSegment     ends
         include MACROS.INC
         .list
 
-str     struc
+argframe     struc
 old_bp    dw      ?
 return    dd      ?
 DirHandle dw      ?           ; dirctory search handle
-str     ends
+argframe     ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 
 dosxxx  segment byte public 'dos'
         assume  cs:dosxxx,ds:nothing,es:nothing,ss:nothing
 
 DosFindClose  proc   far
-        Enter   DosFindClose               ; push registers
+        MapEnter DosFindClose               ; push registers
 
         mov     ax,seg FindSegment         ; get address to our data
         mov     ds,ax
@@ -90,12 +91,12 @@ CheckForClose:
         jmp     ErrorExit                  ; return
 
 OkToClose:
-        and     ds:[si],not OpenedHandle   ; set close flag
+        and     word ptr ds:[si],07FFFh    ; set close flag (NOT OpenedHandle=08000h; WASM E102: not→literal)
         xor     ax,ax                      ; set good return code
 
 ErrorExit:
         mexit                              ; pop registers
-        ret     size str - 6               ; return
+        retfar str_retsz	; return
 
 DosFindClose endp
 

@@ -35,16 +35,17 @@ kbdxxx	segment byte public 'kbd'
 
 	public kbdgetstatus
 
-str	struc
+argframe	struc
 old_bp	dw	?
 return	dd	?
 handle	dw	?      ; kbd handle
 data	dd	?      ; data area pointer
-str	ends
+argframe	ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 kbdgetstatus	proc	far
 
-	Enter	KbdGetStatus		; push registers
+	MapEnter KbdGetStatus		; push registers
 
 	les	di,[bp].data		; setup area where status is
 					; returned
@@ -69,7 +70,7 @@ kbdgetstatus	proc	far
 						 ; area
 	Mexit					 ; restore registers
 
-	ret	size str - 6			 ; return
+	retfar str_retsz	; return
 
 kbdgetstatus	endp
 kbdxxx	ends

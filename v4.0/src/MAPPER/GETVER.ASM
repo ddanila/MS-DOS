@@ -22,14 +22,15 @@ dosxxx	segment byte public 'dos'
 	    .sall
 	    include  MACROS.INC
 
-str	    struc
+argframe	    struc
 old_bp	    dw	     ?
 Return	    dd	     ?
 Data	    dd	     ?	     ; return data area pointer
-str	    ends
+argframe	    ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 dosgetversion	proc	far
-	Enter	dosgetversion
+	MapEnter dosgetversion
 	lds	si,[bp].data	      ; set pointer
 
 	mov	ah,30h		      ; get DOS version
@@ -40,7 +41,7 @@ dosgetversion	proc	far
 
 exit:	mexit			      ; pop registers
 	sub	ax,ax
-	ret	size str - 6
+	retfar str_retsz
 ;
 dosgetversion endp
 

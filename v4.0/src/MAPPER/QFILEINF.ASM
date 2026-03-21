@@ -51,17 +51,18 @@ Attributes	dw	?	; attributes
 FileInfo	ends
 
 
-str	    struc
+argframe	    struc
 old_bp	    dw	     ?
 return	    dd	     ?
 BufferSize  dw	     ?		; file data buffer size
 BufferPtr   dd	     ?		; file data buffer
 Level	    dw	     ?		; file data info level
 Handle	    dw	     ?		; file handle
-str	    ends
+argframe	    ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 dosQfileinfo  proc     far
-	Enter	dosQfileinfo		   ; save registers
+	MapEnter dosQfileinfo		   ; save registers
 
 	mov	bx,[bp].handle		   ;fill registers for function call
 
@@ -137,7 +138,7 @@ HaveSpace:
 
 ErrorExit:
 	mexit				       ; restore registers
-	ret	 size  str - 6		       ; return
+	retfar str_retsz	; return
 
 dosqfileinfo endp
 

@@ -32,4 +32,4 @@ COMEQU.ASM(206): Error! E021: Expecting number
 COMEQU.ASM(206): Note! N290: included by file TCMD1B.ASM(12)
 COMEQU.ASM(211): Error! E094: This instruction is not supported
 COMEQU.ASM(211): Note! N290: included by file TCMD1B.ASM(12)
-TCMD1B.ASM(858): Warning! W249: End directive required at end of file
+TCMD1B.ASM(880): Warning! W249: End directive required at end of file

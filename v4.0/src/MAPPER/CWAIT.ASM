@@ -44,7 +44,7 @@ dosxxx  segment byte public 'dos'
         include MACROS.INC
         .list
 ;
-str     struc
+argframe     struc
 old_bp      dw    ?
 return      dd    ?
 Qprocessid  dw    ?           ; Child process ID
@@ -52,10 +52,11 @@ Aprocessid  dd    ?           ; process id pointer
 resultcode  dd    ?           ; result code pointer
 waitoption  dw    ?           ; wait option
 actioncode  dw    ?           ; action code
-str     ends
+argframe     ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 doscwait proc   far
-        Enter   doscwait                 ; push registers
+        MapEnter doscwait                 ; push registers
 
         mov     ax,seg buffer
         mov     ds,ax                    ; set temporary buffer
@@ -81,7 +82,7 @@ WeHaveExeced:
 
 ErrorExit:
         Mexit                            ; pop registers
-        ret     size str - 6             ; return
+        retfar str_retsz	; return
 
 doscwait endp
 

@@ -27,14 +27,15 @@ dosxxx  segment byte public 'dos'
             include  MACROS.INC
             .list
 
-str         struc
+argframe         struc
 old_bp      dw       ?
 return      dd       ?
 verify      dd       ?     ; return data area pointer
-str         ends
+argframe         ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 dosqverify  proc    far
-            Enter   dosqverify             ; save registers
+            MapEnter dosqverify             ; save registers
 
             mov      ah,54h
             int      21h                   ; get verify flag setting
@@ -45,7 +46,7 @@ dosqverify  proc    far
             sub      ax,ax                 ; set good return code
 
 exit:       Mexit                          ; pop registers
-            ret      size str - 6          ; return
+            retfar str_retsz	; return
 
 dosqverify  endp
 

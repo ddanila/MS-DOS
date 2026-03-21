@@ -30,17 +30,18 @@ dosxxx	segment byte public 'dos'
 	    include  MACROS.INC
 	    .list
 
-str	    struc
+argframe	    struc
 old_bp	    dw	     ?
 return	    dd	     ?
 newptr	    dd	     ?	     ; new file pointer
 movtyp	    dw	     ?	     ; move type
 dstnce	    dd	     ?	     ; distance to be moved
 handle	    dw	     ?	     ; file handle
-str	    ends
+argframe	    ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 doschgfileptr  proc  far
-	    Enter    doschgfileptr	 ; push registers
+	    MapEnter doschgfileptr	 ; push registers
 
 	    push     es
 	    les      dx,[bp].dstnce
@@ -59,7 +60,7 @@ doschgfileptr  proc  far
 	    sub      ax,ax		   ; set godd return code
 
 exit:	    mexit		       ;pop registers
-	    ret      size str - 6      ;return
+	    retfar str_retsz	;return
 
 doschgfileptr endp
 

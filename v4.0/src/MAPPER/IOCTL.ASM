@@ -31,7 +31,7 @@ dosxxx  segment byte public 'dos'
             include  MACROS.INC
             .list
 
-str         struc
+argframe         struc
 Old_bp      dw       ?
 Return      dd       ?
 Handle      dw       ?       ; handle
@@ -39,10 +39,11 @@ Category    dw       ?       ; device category
 Function    dw       ?       ; device function
 Parmlist    dd       ?       ; command arguments
 Data        dd       ?       ; data area
-str         ends
+argframe         ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 dosdevioctl     proc  far
-        Enter   dosdevioctl           ; push registers
+        MapEnter dosdevioctl           ; push registers
 
         mov     bx,[bp].handle        ; get handle
 
@@ -84,7 +85,7 @@ continue:
         xor     ax,ax                 ; set no error coe
 
 exit:   mexit                         ; pop registers
-        ret     size str - 6          ; return
+        retfar str_retsz	; return
 
 dosdevioctl  endp
 

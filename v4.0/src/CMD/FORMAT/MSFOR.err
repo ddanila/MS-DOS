@@ -1,9 +1,5 @@
 FORMACRO.INC(59): Error! E236: Procedure is already defined
 FORMACRO.INC(59): Note! N290: included by file MSFOR.ASM(130)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BOOTFORM.INC(29): Error! E065: Operator is expected
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BOOTFORM.INC(29): Note! N290: included by file MSFOR.ASM(196)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BOOTFORM.INC(29): Error! E050: Offset cannot be smaller than WORD size
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BOOTFORM.INC(29): Note! N290: included by file MSFOR.ASM(196)
 MSFOR.ASM(516): Error! E048: Immediate data out of range
 MSFOR.ASM(516): Error! E040: Invalid instruction operands
 MSFOR.ASM(529): Error! E101: REPZ, REPNZ, REPE or REPNE prefix is not allowed on this instruction

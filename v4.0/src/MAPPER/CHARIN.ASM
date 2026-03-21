@@ -38,18 +38,19 @@ kbdxxx	segment byte public 'kbd'
 
 error_kbd_parameter equ 0002h
 
-str	struc
+argframe	struc
 old_bp	dw	?
 return	dd	?
 handle	dw	?	 ; keyboard handle
 iowait	dw	?	 ; indicate if wait for io
 data	dd	?	 ; data buffer pointer
-str	ends
+argframe	ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 
 kbdcharin proc	 far
 
-	Enter	KbdCharIn		; save registers
+	MapEnter KbdCharIn		; save registers
 	lds	si,[bp].data		; set up return data area
 loopx:
 	mov	ax,savedkbdinput
@@ -103,7 +104,7 @@ shift:	mov	ah,02h			; Start of shift check block
 	sub	ax,ax			; set good return code
 	Mexit				; pop registers
 
-	ret	size str - 6		; return
+	retfar str_retsz	; return
 
 kbdcharin endp
 

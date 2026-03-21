@@ -24,14 +24,15 @@ savedkbdinput	label	word
 		db	0	; Not zero means char is here
 
 
-str	struc
+argframe	struc
 old_bp	dw	?
 return	dd	?
 handle	dw	?	   ; kbd handle
-str	ends
+argframe	ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 kbdflushbuffer	proc   far
-	Enter	KbdFlushBuffer	  ; push registers
+	MapEnter KbdFlushBuffer	  ; push registers
 	mov	ah,0bh		  ; Check for ^C
 	int	021h
 
@@ -48,7 +49,7 @@ nochar:
 
 done:	sub	ax,ax		  ; set good return code
 	Mexit			  ; pop registers
-	ret	size str - 6	  ; return
+	retfar str_retsz	; return
 
 kbdflushbuffer endp
 

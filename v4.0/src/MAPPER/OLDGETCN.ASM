@@ -32,14 +32,15 @@ dosxxx  segment byte public 'dos'
             include  MACROS.INC
 
 ;
-str         struc
+argframe         struc
 old_bp          dw      ?
 return          dd      ?
 ReturnLength    dd      ?
 BufferPtr       dd      ?
 CountryCodePtr  dd      ?
 BufferLength    dw      ?
-str         ends
+argframe         ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 ;
 
 cntry       struc                       ;country info. sturctrue
@@ -78,7 +79,7 @@ Doscntry       ends
 
 dosgetctryinfo  proc far
 
-        Enter   Dosgetcntryinfo
+        MapEnter Dosgetcntryinfo
 
         lds     si,[bp].CountryCodePtr
         mov     ax,ds:[si]
@@ -123,7 +124,7 @@ NoFillNecessary:
 ErrorExit:
         Mexit
 
-        ret     size str - 6
+        retfar str_retsz
 ;
 dosgetctryinfo endp
 

@@ -37,15 +37,16 @@ dosxxx  segment byte public 'dos'
         include MACROS.INC
         .list
 
-str     struc
+argframe     struc
 old_bp  dw      ?
 return  dd      ?
 Selector        dw      ?       ; segment selector
 SegmentSize     dw      ?       ; new segment size in bytes
-str     ends
+argframe     ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 dosreallocseg proc   far
-        Enter   dosreallocseg           ; save registers
+        MapEnter dosreallocseg           ; save registers
 
         mov     bx,[bp].SegmentSize     ; Get new segment size
         cmp     bx,0                    ; check for 0
@@ -72,7 +73,7 @@ HaveSize:
 ErrorExit:
         Mexit                           ; restore registers
 
-        ret     size str - 6            ; return
+        retfar str_retsz	; return
 
 dosreallocseg  endp
 

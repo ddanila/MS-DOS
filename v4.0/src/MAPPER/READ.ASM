@@ -29,17 +29,18 @@ dosxxx  segment byte public 'dos'
             include  MACROS.INC
             .list
 
-str         struc
+argframe         struc
 old_bp      dw       ?
 return      dd       ?
 Written     dd       ?       ; number of bytes actually read
 Bufflng     dw       ?       ; number of bytes to be read
 Buffer      dd       ?       ; read buffer
 Handle      dw       ?       ; handle
-str         ends
+argframe         ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 dosread     proc     far
-            Enter    Dosread           ; save registers
+            MapEnter Dosread           ; save registers
 
             mov      bx,[bp].handle    ; fill registers for
             lds      dx,[bp].buffer    ; function call
@@ -54,7 +55,7 @@ dosread     proc     far
             sub      ax,ax             ; set good return code
 
 exit:       mexit                      ; pop registers
-            ret      size str - 6      ; rturn
+            retfar str_retsz	; rturn
 
 dosread     endp
 

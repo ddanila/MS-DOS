@@ -28,11 +28,11 @@ MacroState = 0
 
 MsgError	macro text		; message string error
 
-	if1
-	else
+	;;if1  ;; WASM: IF1 not supported, removed
+	;;else
 	;%out 
 	;%out $ERROR - &text
-	endif
+	;;endif  ;; closes ;;if1 above
 
  $ERROR - &text
 
@@ -47,11 +47,11 @@ msg	macro	number,text
 	mexit
 	endif
 
-Message&Number	db	text
+Message&number	db	text
 		db	0
 
 	if	MaxMessageNumber lt &number
-	  MaxMessageNumber	  =	  &Number
+	  MaxMessageNumber	  =	  &number
 	endif
 
 MacroState = 0
@@ -67,10 +67,10 @@ msgStart	macro	number,text	 ; start of  a message string
 	mexit
 	endif
 
-Message&Number	db	text
+Message&number	db	text
 
 	if	MaxMessageNumber lt &number
-	  MaxMessageNumber	  =	  &Number
+	  MaxMessageNumber	  =	  &number
 	endif
 
 MacroState = 1
@@ -117,14 +117,17 @@ MacroState = 0
 NotFoundNumber	=	-2
 
 NotFoundMessage label	byte
-		msg	NotFoundNumber,<'We could not find your message #'>
+		;;msg  NotFoundNumber,<'We could not find your message #'>
+		;; WASM: # in single-quoted macro arg triggers text-conversion op (E065).
+		;; Bypass msg macro: emit the label+data directly (# = 23h).
+		db 'We could not find your message ',23h,0
 
 ; Now, for each defined message, generate an index
 
 msgidx	macro	number
-	ifdef	Message&Number
-	dw	&Number
-	dw	offset messages:Message&Number
+	ifdef	Message&number
+	dw	&number
+	dw	offset messages:Message&number
 	endif
 	endm
 
@@ -175,7 +178,7 @@ dosxxx	segment byte public 'dos'
 	    include  MACROS.INC
 	    .list
 
-str	    struc
+argframe	    struc
 old_bp	    dw	     ?
 return	    dd	     ?
 ReturnLengthPtr  dd	 ?	; length of returned message
@@ -185,12 +188,13 @@ MessageBufferLen dw	 ?	; length of the message buffer
 MessageBufferPtr dd	 ?	; buffer address to return message
 VariablesCount	 dw	 ?	; number of variables
 VariableTablePtr dd	 ?	; table of variables to insert
-str	    ends
+argframe	    ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 
 dosgetmessage  proc	far
 
-	Enter	Dosgetmessage		; push registers
+	MapEnter Dosgetmessage		; push registers
 	mov	ax,messages		; setup message buffer
 	mov	ds,ax
 	assume	ds:messages
@@ -464,7 +468,7 @@ SkipToHere:
 	xor	ax,ax			   ; set good return code
 
 	mexit				   ; pop registers
-	ret	 size str - 6		   ; return
+	retfar str_retsz	; return
 
 dosgetmessage  endp
 

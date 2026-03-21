@@ -87,8 +87,8 @@ CODE	SEGMENT
 
 DSKADR	=	1EH*4			;POINTER TO DRIVE PARAMETERS
 
-Public $START
-$START:
+Public BOOT_START
+BOOT_START:
 	JMP	START
 ;----------------------------------------------------------
 ;
@@ -136,12 +136,12 @@ Boot_System_id	db    'FAT12   '        ;AN000;
 Public UDATA
 UDATA	LABEL	byte
 Sec9	  equ	byte ptr UDATA+0	;11 byte diskette parm. table
-BIOS$_L   EQU	WORD PTR UDATA+11
-BIOS$_H   equ	word ptr UDATA+13	;AN000;
+BIOS_L   EQU	WORD PTR UDATA+11
+BIOS_H   equ	word ptr UDATA+13	;AN000;
 CURTRK	  EQU	WORD PTR UDATA+15
 CURSEC	  EQU	BYTE PTR UDATA+17
-DIR$_L	  EQU	WORD PTR UDATA+18
-Dir$_H	  equ	word ptr UDATA+20	;AN000;
+DIR_L	  EQU	WORD PTR UDATA+18
+Dir_H	  equ	word ptr UDATA+20	;AN000;
 START:
 
 ;
@@ -173,10 +173,10 @@ START:
 	MOV	DI,offset Sec9
 	MOV	CX,11
 	CLD
-if	$ le BIOS$_L
+;;if $ le BIOS_L	;; WASM: WORD PTR in IF expr invalid; block is comment-only, removed
 	;%OUT Don't destroy unexcuted code yet!!!
-endif
-	repz	movsb			;AN000;
+;;endif  ;; WASM: closes ;;if above
+	rep	movsb		;; WASM E101: REPZ→REP			;AN000;
 	push	es			;AN000;
 	pop	ds			;AN000; DS = ES = code = 0.
 	assume	ds:code 		;AN000;
@@ -218,10 +218,10 @@ Dir_Cont:				;AN000;
 	adc	DX,cSecHid_H		;AN000;
 	ADD	AX,cSecRes
 	ADC	DX,0
-	MOV	[DIR$_L],AX		; DX;AX = cFat*cSecFat + cSecRes + cSecHid
-	mov	[DIR$_H],DX		;AN000;
-	MOV	[BIOS$_L],AX
-	mov	[BIOS$_H],DX		;AN000;
+	MOV	[DIR_L],AX		; DX;AX = cFat*cSecFat + cSecRes + cSecHid
+	mov	[DIR_H],DX		;AN000;
+	MOV	[BIOS_L],AX
+	mov	[BIOS_H],DX		;AN000;
 ;
 ; Take into account size of directory (only know number of directory entries)
 ;
@@ -231,8 +231,8 @@ Dir_Cont:				;AN000;
 	ADD	AX,BX
 	DEC	AX			; decrement so that we round up
 	DIV	BX			; convert to sector number
-	ADD	[BIOS$_L],AX		; Start sector # of Data area
-	adc	[BIOS$_H],0		;AN000;
+	ADD	[BIOS_L],AX		; Start sector # of Data area
+	adc	[BIOS_H],0		;AN000;
 
 ;
 ; We load in the first directory sector and examine it to make sure the the
@@ -241,8 +241,8 @@ Dir_Cont:				;AN000;
 ; into 00500h
 ;
 	MOV	BX,DirOff		; sector to go in at 00500h
-	mov	dx,[DIR$_H]		;AN000;
-	MOV	AX,[DIR$_L]		; logical sector of directory
+	mov	dx,[DIR_H]		;AN000;
+	MOV	AX,[DIR_L]		; logical sector of directory
 	CALL	DODIV			; convert to sector, track, head
 	jc	CKErr			;AN000; Overflow? BPB must be wrong!!
 ;	 MOV	 AX,0201H		 ; disk read 1 sector
@@ -301,8 +301,8 @@ Load_Failure:
 DoLoad:
 	mov	BX,BioOff		;offset of ibmbio(IBMLOAD) to be loaded.
 	mov	CX,IBMLOADSIZE		;# of sectors to read.
-	mov	AX, [BIOS$_L]		;Sector number to read.
-	mov	DX, [BIOS$_H]		;AN000;
+	mov	AX, [BIOS_L]		;Sector number to read.
+	mov	DX, [BIOS_H]		;AN000;
 Do_While:				;AN000;
 	push	AX			;AN000;
 	push	DX			;AN000;
@@ -406,8 +406,8 @@ Do_While:				;AN000;
 DISKOK:
 	MOV	CH,Media
 	MOV	DL,PhyDrv
-	MOV	bx,[BIOS$_L]		;AN000; J.K.I1.Get bios sector in bx
-	mov	ax,[BIOS$_H]		;AN000; J.K.I1.
+	MOV	bx,[BIOS_L]		;AN000; J.K.I1.Get bios sector in bx
+	mov	ax,[BIOS_H]		;AN000; J.K.I1.
 	JMP	FAR PTR BIOS		;CRANK UP THE DOS
 
 WRITE:	LODSB				;GET NEXT CHARACTER
@@ -505,8 +505,8 @@ BIO	DB	"IO      SYS"
 DOS	DB	"MSDOS   SYS"
 	ENDIF
 
-Free	EQU (cbSec - 4) - ($-$start)		;AC000;
-;Free	 EQU (cbSec - 5) - ($-$start)
+Free	EQU (cbSec - 4) - ($-BOOT_START)		;AC000;
+;Free	 EQU (cbSec - 5) - ($-BOOT_START)
 if Free LT 0
     ;%out FATAL PROBLEM:boot sector is too large
 endif

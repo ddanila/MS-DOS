@@ -24,15 +24,16 @@ dosxxx	segment byte public 'dos'                               ;AN000;
 	    include  MACROS.INC 				;AN000;
 	    .list						;AN000;
 
-str	    struc						;AN000;
+argframe	    struc						;AN000;
 old_bp	    dw	     ?						;AN000;
 Return	    dd	     ?						;AN000;
 Flag	    dw	     ?						;AN000;
-str	    ends						;AN000;
+argframe	    ends						;AN000;
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 
 set_int24_vector   proc  far					;AN000;
-	Enter	set_int24_vector				;AN000;
+	MapEnter set_int24_vector				;AN000;
 
 	mov	ax,seg databuff 				;AN000;
 	mov	ds,ax						;AN000;
@@ -55,7 +56,7 @@ set_int24_vector   proc  far					;AN000;
 	xor	ax,ax		       ;Set good error return	;AN000;
 
 exit:	mexit			       ; pop all registers	;AN000;
-	ret	size str - 6	       ; return 		;AN000;
+	retfar str_retsz	; return 		;AN000;
 
 set_int24_vector    endp					;AN000;
 

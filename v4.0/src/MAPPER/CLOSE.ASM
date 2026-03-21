@@ -37,15 +37,16 @@ dosxxx	segment byte public 'dos'
 	include MACROS.INC
 	.list
 
-str	struc
+argframe	struc
 old_bp	   dw	  ?
 return	   dd	  ?
 FileHandle dw	  ?	     ; file or device handle
-str	ends
+argframe	ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 
 DosClose  proc	 far
-	Enter	DosClose	       ; push registers
+	MapEnter DosClose	       ; push registers
 
 ; Only files are closed.  Devices are not closed, since OPEN creates
 ; a dummy device handle without actually openning the device.
@@ -65,7 +66,7 @@ GoodExit:
 
 ErrorExit:
 	mexit			       ; pop registers
-	ret	size str - 6	       ; return
+	retfar str_retsz	; return
 
 DosClose  endp
 

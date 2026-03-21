@@ -41,15 +41,16 @@ dosxxx	segment byte public 'dos'
 	include MACROS.INC
 	.list
 
-str	struc
+argframe	struc
 old_bp	dw	?
 return	dd	?
 dtrm12	dd	?	; reserved, always 0
 asc012	dd	?	; file name path pointer
-str	ends
+argframe	ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 DosDelete  proc   far
-	Enter	DosDelete		    ; push registers
+	MapEnter DosDelete		    ; push registers
 
 	lds	dx,dword ptr [bp].asc012    ; file path name
 
@@ -61,7 +62,7 @@ DosDelete  proc   far
 
 err012:
 	mexit				    ; pop registers
-	ret	size str - 6		    ; return
+	retfar str_retsz	; return
 
 DosDelete  endp
 

@@ -34,17 +34,18 @@ dosxxx	segment byte public 'dos'
 	include MACROS.INC
 	.list
 
-str	struc
+argframe	struc
 old_bp	dw	?
 return	dd	?
 MessagePtr	dd	?	; message pointer
 MessageLength	dw	?	; message length
 Handle		dw	?	; file handle
-str	ends
+argframe	ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 dosputmessage proc   far
 
-	Enter	dosputmessage		      ; save registers
+	MapEnter dosputmessage		      ; save registers
 
 	mov	bx,[bp].Handle		      ; get handle
 	mov	cx,[bp].MessageLength	      ; get message length
@@ -58,7 +59,7 @@ dosputmessage proc   far
 
 ErrorExit:
 	Mexit				      ; pop registers
-	ret	size str - 6		      ; return
+	retfar str_retsz	; return
 
 dosputmessage  endp
 

@@ -29,18 +29,19 @@ dosxxx  segment byte public 'dos'
             include  MACROS.INC
             .list
 
-str         struc
+argframe         struc
 old_bp      dw       ?
 return      dd       ?
 Written     dd       ?       ; number of bytes actually written
 Bufflng     dw       ?       ; number of bytes to be written
 Buffer      dd       ?       ; write buffer address
 Handle      dw       ?       ; file handle
-str         ends
+argframe         ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 doswrite    proc     far
 
-            Enter    doswrite            ; push registers
+            MapEnter doswrite            ; push registers
 
             mov      bx,[bp].handle      ; get handle
             lds      dx,[bp].buffer      ; set write buffer
@@ -55,7 +56,7 @@ doswrite    proc     far
             sub      ax,ax               ; set good return code
 
 exit:       mexit                        ; pop registers
-            ret      size str - 6        ; return
+            retfar str_retsz	; return
 
 doswrite    endp
 

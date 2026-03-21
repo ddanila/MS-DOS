@@ -1,22 +1,9 @@
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(1039): Error! E066: Operand is expected
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(1039): Note! N290: included by file EDLPARSE.ASM(154)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2139): Error! E066: Operand is expected
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2139): Note! N290: included by file EDLPARSE.ASM(154)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2151): Error! E066: Operand is expected
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2151): Note! N290: included by file EDLPARSE.ASM(154)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2255): Error! E066: Operand is expected
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2255): Note! N290: included by file EDLPARSE.ASM(154)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2312): Error! E066: Operand is expected
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2312): Note! N290: included by file EDLPARSE.ASM(154)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2582): Error! E066: Operand is expected
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2582): Note! N290: included by file EDLPARSE.ASM(154)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2588): Error! E066: Operand is expected
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2588): Note! N290: included by file EDLPARSE.ASM(154)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2953): Error! E066: Operand is expected
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/PARSE.ASM(2953): Note! N290: included by file EDLPARSE.ASM(154)
+../../INC/PARSE.ASM(2140): Error! E066: Operand is expected
+../../INC/PARSE.ASM(2140): Note! N290: included by file EDLPARSE.ASM(154)
+../../INC/PARSE.ASM(2152): Error! E066: Operand is expected
+../../INC/PARSE.ASM(2152): Note! N290: included by file EDLPARSE.ASM(154)
 EDLPARSE.ASM(187): Error! E048: Immediate data out of range
 EDLPARSE.ASM(187): Error! E040: Invalid instruction operands
 EDLPARSE.ASM(263): Error! E048: Immediate data out of range
 EDLPARSE.ASM(263): Error! E040: Invalid instruction operands
-EDLPARSE.ASM(271): Error! E300: 1 unclosed conditional directive(s) detected
 EDLPARSE.ASM(272): Warning! W249: End directive required at end of file

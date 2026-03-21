@@ -1,7 +1,7 @@
 ;
-        if1
-                ;%out    macros.inc
-        endif
+;       if1                         ;; WASM single-pass: IF1 not supported, removed
+;               ;%out    macros.inc
+;       endif
 
 
 pushal  macro
@@ -28,7 +28,7 @@ popal   macro
         pop     bx
         endm
 ;
-Enter   macro   Routine
+MapEnter   macro   Routine         ;; WASM: renamed from Enter (conflicts with x86 ENTER instruction)
 
         push    bp
         mov     bp,sp
@@ -42,5 +42,11 @@ Mexit   macro
         mov     sp,bp
         pop     bp
 
+        endm
+;
+;; WASM: ret SIZEOF str - 6 fails in instruction operand context.
+;; Use local var assignment to force constant evaluation, then ret the constant.
+retfar  macro   nbytes      ;; WASM: call as retfar (SIZEOF str - 6) — pass precomputed size
+        ret     nbytes
         endm
 

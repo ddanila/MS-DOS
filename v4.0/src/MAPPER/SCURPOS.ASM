@@ -32,16 +32,17 @@ vioxxx  segment byte public 'vio'
 
 error_bvs_parameter equ    0002h
 
-str     struc
+argframe     struc
 old_bp  dw      ?
 return  dd      ?
 handle  dw      ?           ; vio handle
 column  dw      ?           ; column value
 row     dw      ?           ; row value
-str     ends
+argframe     ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 viosetcurpos proc   far
-        Enter   viosetcurpos            ; push registers
+        MapEnter viosetcurpos            ; push registers
 
         mov     bh,0
         mov     ax,[bp].row             ; get column number
@@ -65,7 +66,7 @@ viosetcurpos proc   far
 
 error:  mov     ax,error_bvs_parameter  ; set error return code
 exit:   Mexit                           ; pop registers
-        ret     size str - 6            ; return
+        retfar str_retsz	; return
 
 viosetcurpos endp
 vioxxx  ends

@@ -32,5 +32,4 @@ COMEQU.ASM(206): Error! E021: Expecting number
 COMEQU.ASM(206): Note! N290: included by file TUCODE.ASM(11)
 COMEQU.ASM(211): Error! E094: This instruction is not supported
 COMEQU.ASM(211): Note! N290: included by file TUCODE.ASM(11)
-TUCODE.ASM(107): Error! E094: This instruction is not supported
 TUCODE.ASM(255): Error! E094: This instruction is not supported

@@ -41,16 +41,17 @@ kbdxxx  segment byte public 'kbd'
 ;
         public kbdsetstatus
 
-str     struc
+argframe     struc
 old_bp  dw      ?
 return  dd      ?
 handle  dw      ?       ; kbd handle
 data    dd      ?       ; kbd data strructure pointer
-str     ends
+argframe     ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 kbdsetstatus    proc    far
 
-        Enter   KbdSetStatus            ; save registers
+        MapEnter KbdSetStatus            ; save registers
 
         les     di,[bp].data            ; set up kbd data structure
         mov     ax,seg kbddata
@@ -119,7 +120,7 @@ CheckEchoOn:
 EverythingSet:
         Mexit                               ; pop registers
 
-        ret     size str - 6                ; return
+        retfar str_retsz	; return
 
 KbdSetStatus    endp
 

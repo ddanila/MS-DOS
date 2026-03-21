@@ -55,7 +55,7 @@ dosxxx	segment byte public 'dos'
 inv_parm equ 0002
 not_suf_mem equ 0004
 
-str	struc
+argframe	struc
 old_bp	dw	?
 return	dd	?
 Pgmpointer dd	?	; address of program file name
@@ -64,10 +64,11 @@ EnvPointer dd	?	; address of environment string
 ArgPointer dd	?	; address of argument string
 Traceindic dw	?	; ignored,  what is a trace process?
 Asyncindic dw	?	; ignored,  PC-DOS always waits!
-str	ends
+argframe	ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 dosexecpgm proc   far				; push registers
-	Enter	dosexecpgm
+	MapEnter dosexecpgm
 
 	mov	ax,seg buffer			; setup buffer segment
 	mov	ds,ax				;   and copy info into
@@ -108,7 +109,7 @@ dosexecpgm proc   far				; push registers
 
 ErrorExit:
 	Mexit				   ; pop registers
-	ret	size str - 6		   ; return
+	retfar str_retsz	; return
 
 dosexecpgm  endp
 

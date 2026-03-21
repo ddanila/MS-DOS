@@ -26,15 +26,16 @@ dosxxx	segment byte public 'dos'
 	    .sall
 	    include  MACROS.INC
 
-str	    struc
+argframe	    struc
 old_bp	    dw	     ?
 return	    dd	     ?
 data	    dd	     ?	     ; date and time info return pointer
-str	    ends
+argframe	    ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 dosgetdatetime	proc far
 
-	    Enter    dosgetdatetime	   ; push registers
+	    MapEnter dosgetdatetime	   ; push registers
 
 	    lds      si,[bp].data	   ; set return data area
 
@@ -58,7 +59,7 @@ dosgetdatetime	proc far
 exit:	    sub      ax,ax		   ; set good return code
 
 	    Mexit			   ; pop registers
-	    ret      size str - 6	   ; return
+	    retfar str_retsz	; return
 
 dosgetdatetime endp
 

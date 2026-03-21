@@ -34,15 +34,16 @@ dosxxx	segment byte public 'dos'
 	    include  MACROS.INC
 	    .list
 
-str	    struc
+argframe	    struc
 old_bp	    dw	     ?
 Return	    dd	     ?
 Flag	    dw	     ?		; error flag;  0 = APP handle error
-str	    ends		;	       1 = System handle error
+argframe	    ends		;	       1 = System handle error
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 
 DosError   proc  far
-	Enter	 doserror		; Push registers
+	MapEnter doserror		; Push registers
 
 	mov	 ax,seg databuff	;-->RW
 	mov	 ds,ax			;-->RW
@@ -98,7 +99,7 @@ setapp: mov	 errorstate,AppIsHandling ; indicate app handles error
 	xor	 ax,ax		       ; set good error return
 
 exit:	mexit			       ; pop all registers
-	ret	 size str - 6	       ; return
+	retfar str_retsz	; return
 
 DosError    endp
 

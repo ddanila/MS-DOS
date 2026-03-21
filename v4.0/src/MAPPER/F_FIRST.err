@@ -1,0 +1,4 @@
+F_FIRST.ASM(158): Warning! W096: size not specified -- WORD PTR is assumed
+F_FIRST.ASM(171): Warning! W096: size not specified -- WORD PTR is assumed
+F_FIRST.ASM(187): Warning! W096: size not specified -- WORD PTR is assumed
+F_FIRST.ASM(188): Warning! W041: Immediate constant too large

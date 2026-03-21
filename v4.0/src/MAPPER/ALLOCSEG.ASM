@@ -34,16 +34,17 @@ dosxxx	segment byte public 'dos'
 	include MACROS.INC
 	.list
 ;
-str	struc
+argframe	struc
 old_bp	 dw	 ?
 return	 dd	 ?
 ShareIndicator	dw	?	; whether segment will be shared
 SelectorPtr	dd	?	; selector allocated
 SegmentSize	dw	?	; number of bytes requested
-str	ends
+argframe	ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 dosallocseg proc   far
-	Enter	dosallocseg		 ; push registers
+	MapEnter dosallocseg		 ; push registers
 
 	mov	bx,[bp].SegmentSize	 ; Get segment size
 
@@ -78,7 +79,7 @@ AllocDone:
 	sub	ax,ax			 ; set good return code
 ErrorExit:
 	mexit				 ; pop registers
-	ret	size str - 6		 ; return
+	retfar str_retsz	; return
 
 dosallocseg endp
 

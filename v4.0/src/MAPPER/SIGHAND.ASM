@@ -31,7 +31,7 @@ dosxxx  segment byte public 'dos'
             include  MACROS.INC
             .list
 
-str         struc
+argframe         struc
 old_bp      dw       ?
 return      dd       ?
 Signumber   dw       ?          ; signal number
@@ -39,7 +39,8 @@ Action      dw       ?          ; action code
 Prevaction  dd       ?          ; previous action code
 Prevadrs    dd       ?          ; previous vector address
 Routineadrs dd       ?          ; interrupt handler address
-str         ends
+argframe         ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 ; While we hate to do this, we have to.  The following data areas are
 ; expected to be in the CODE segment.
@@ -54,7 +55,7 @@ NextCriticalErrorHandlerSegment dw      dosxxx
 
 dossetsighandler  proc  far
 
-        Enter    dossetsighandler       ; push registers
+        MapEnter dossetsighandler       ; push registers
 
         mov      ax,[bp].action         ; get action code
         cmp      ax,2                   ; action code 2 ??
@@ -93,7 +94,7 @@ cntrlc: mov      ax,03523h
         sub      ax,ax                 ; set good return code
 
 exit:   mexit                          ; pop registers
-        ret      size str - 6          ; return
+        retfar str_retsz	; return
 
 dossetsighandler  endp
 

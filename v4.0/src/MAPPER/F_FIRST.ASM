@@ -101,7 +101,7 @@ dosxxx  segment byte public 'dos'
         .list
 
 
-str     struc
+argframe     struc
 old_bp          dw      ?
 return          dd      ?
 ReservedZero    dd      0       ; reserved
@@ -111,12 +111,13 @@ FindBufferPtr   dd      ?       ; result buffer pointer
 FileAttribute   dw      ?       ; search attribute
 DirHandlePtr    dd      ?       ; directory search handle
 PathNamePtr     dd      ?       ; file path name pointer
-str     ends
+argframe     ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 
 DosFindFirst  proc   far
 
-        Enter   DosFindFirst
+        MapEnter DosFindFirst
 
         mov     ax,seg FindSegment      ; get address to our data
         mov     ds,ax
@@ -345,7 +346,7 @@ DoNotRestore:
         pop     ax
 
         mexit                              ; pop registers
-        ret     size str - 6               ; return
+        retfar str_retsz	; return
 
 DosFindFirst endp
 

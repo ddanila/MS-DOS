@@ -32,4 +32,4 @@ COMEQU.ASM(206): Error! E021: Expecting number
 COMEQU.ASM(206): Note! N290: included by file PARSE2.ASM(9)
 COMEQU.ASM(211): Error! E094: This instruction is not supported
 COMEQU.ASM(211): Note! N290: included by file PARSE2.ASM(9)
-PARSE2.ASM(355): Error! E032: Syntax error
+PARSE2.ASM(359): Error! E032: Syntax error

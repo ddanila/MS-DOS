@@ -43,15 +43,16 @@ dosxxx  segment byte public 'dos'
         include MACROS.INC
         .list
 
-str     struc
+argframe     struc
 old_bp  dw      ?
 return  dd      ?
 dtrm006 dd      0h           ;reserved  (must be zero)
 dnam006 dd      ?            ;address of directory path name
-str     ends
+argframe     ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 DosChDir  proc   far
-        Enter   DosChDir                 ; push registers
+        MapEnter DosChDir                 ; push registers
 
         mov     dx, word ptr [bp].dnam006    ;load directory name offset
         mov     ax, word ptr [bp].dnam006+2  ;load directory name segment
@@ -65,7 +66,7 @@ DosChDir  proc   far
 
         xor     ax,ax                    ; else, good return code
 exit:   mexit                            ; pop registers
-        ret     size str - 6             ; return
+        retfar str_retsz	; return
 
 DosChDir  endp
 

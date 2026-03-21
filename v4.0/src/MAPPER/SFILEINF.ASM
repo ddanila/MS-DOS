@@ -40,17 +40,18 @@ dosxxx	segment byte public 'dos'
 
 
 
-str	    struc
+argframe	    struc
 old_bp	    dw	     ?
 return	    dd	     ?
 BufferSize  dw	     ?		; file info buufer size
 BufferPtr   dd	     ?		; file info buffer
 Level	    dw	     ?		; file info level
 Handle	    dw	     ?		; file handle
-str	    ends
+argframe	    ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 dossetfileinfo	proc	 far
-	Enter	dossetfileinfo	      ; push registers
+	MapEnter dossetfileinfo	      ; push registers
 
 	mov	bx,[bp].Handle	      ; fill registers for function call
 	lds	si,[bp].BufferPtr     ; date/time pointer
@@ -80,7 +81,7 @@ dossetfileinfo	proc	 far
 
 ErrorExit:
 	mexit			       ; pop registers
-	ret	size  str - 6	       ; return
+	retfar str_retsz	; return
 
 dossetfileinfo endp
 

@@ -30,16 +30,17 @@ dosxxx	segment byte public 'dos'
 	    .list
 
 
-str	struc
+argframe	struc
 old_bp	dw	?
 return	dd	?
 Rsrvd	dd	?	; reserved
 Attrib	dw	?	; file attribute
 Path	dd	?	; path name pointer  pointer
-str	ends
+argframe	ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 dossetfilemode proc  far
-	    Enter    dossetfilemode	   ; push registers
+	    MapEnter dossetfilemode	   ; push registers
 
 	    lds      dx,[bp].path	   ; set pointer to path
 	    mov      cx,[bp].attrib
@@ -52,7 +53,7 @@ dossetfilemode proc  far
 	    jmp      short exit 	   ; return
 
 exit:	    mexit			   ; pop registers
-	    ret      size  str - 6	   ; return
+	    retfar str_retsz	; return
 
 dossetfilemode endp
 

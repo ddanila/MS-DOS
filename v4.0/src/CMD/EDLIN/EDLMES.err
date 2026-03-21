@@ -1,51 +1,51 @@
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(283): Error! E220: Cannot open include file &UTILNAME.CTL
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(283): Note! N291: macro called from file EDLMES.ASM(60)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(92): Error! E065: Operator is expected
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(92): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(284)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(92): Note! N291: macro called from file EDLMES.ASM(60)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(109): Error! E065: Operator is expected
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(109): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(284)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(109): Note! N291: macro called from file EDLMES.ASM(60)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(132): Error! E032: Syntax error
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(132): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(284)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(132): Note! N291: macro called from file EDLMES.ASM(60)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(147): Error! E065: Operator is expected
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(147): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(284)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(147): Note! N291: macro called from file EDLMES.ASM(60)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(159): Error! E250: Nesting level too deep
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(159): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(284)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(159): Note! N291: macro called from file EDLMES.ASM(60)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(159): Error! E250: Nesting level too deep
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(159): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(284)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(159): Note! N291: macro called from file EDLMES.ASM(60)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(197): Error! E032: Syntax error
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(197): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(329)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(197): Note! N291: macro called from file EDLMES.ASM(161)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(2303): Error! E250: Nesting level too deep
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(2303): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(329)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(2303): Note! N291: macro called from file EDLMES.ASM(184)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(2338): Error! E250: Nesting level too deep
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(2338): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(329)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(2338): Note! N291: macro called from file EDLMES.ASM(184)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(360): Error! E220: Cannot open include file &EXT
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(360): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(324)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(360): Note! N291: macro called from file EDLMES.ASM(185)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(360): Error! E220: Cannot open include file &EXT
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(360): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(324)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(360): Note! N291: macro called from file EDLMES.ASM(185)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(360): Error! E220: Cannot open include file &EXT
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(360): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(324)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(360): Note! N291: macro called from file EDLMES.ASM(185)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(360): Error! E220: Cannot open include file &EXT
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(360): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(324)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(360): Note! N291: macro called from file EDLMES.ASM(186)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(360): Error! E220: Cannot open include file &EXT
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(360): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(324)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(360): Note! N291: macro called from file EDLMES.ASM(186)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(360): Error! E220: Cannot open include file &EXT
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(360): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(324)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(360): Note! N291: macro called from file EDLMES.ASM(187)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGDCL.INC(14): Error! E066: Operand is expected
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGDCL.INC(14): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGDCL.INC(103)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGDCL.INC(14): Note! N290: included by file EDLMES.ASM(265)
+../../INC/SYSMSG.INC(283): Error! E220: Cannot open include file &UTILNAME.CTL
+../../INC/SYSMSG.INC(283): Note! N291: macro called from file EDLMES.ASM(60)
+../../INC/MSGSERV.ASM(92): Error! E065: Operator is expected
+../../INC/MSGSERV.ASM(92): Note! N290: included by file ../../INC/SYSMSG.INC(284)
+../../INC/MSGSERV.ASM(92): Note! N291: macro called from file EDLMES.ASM(60)
+../../INC/MSGSERV.ASM(109): Error! E065: Operator is expected
+../../INC/MSGSERV.ASM(109): Note! N290: included by file ../../INC/SYSMSG.INC(284)
+../../INC/MSGSERV.ASM(109): Note! N291: macro called from file EDLMES.ASM(60)
+../../INC/MSGSERV.ASM(132): Error! E032: Syntax error
+../../INC/MSGSERV.ASM(132): Note! N290: included by file ../../INC/SYSMSG.INC(284)
+../../INC/MSGSERV.ASM(132): Note! N291: macro called from file EDLMES.ASM(60)
+../../INC/MSGSERV.ASM(147): Error! E065: Operator is expected
+../../INC/MSGSERV.ASM(147): Note! N290: included by file ../../INC/SYSMSG.INC(284)
+../../INC/MSGSERV.ASM(147): Note! N291: macro called from file EDLMES.ASM(60)
+../../INC/MSGSERV.ASM(159): Error! E250: Nesting level too deep
+../../INC/MSGSERV.ASM(159): Note! N290: included by file ../../INC/SYSMSG.INC(284)
+../../INC/MSGSERV.ASM(159): Note! N291: macro called from file EDLMES.ASM(60)
+../../INC/MSGSERV.ASM(159): Error! E250: Nesting level too deep
+../../INC/MSGSERV.ASM(159): Note! N290: included by file ../../INC/SYSMSG.INC(284)
+../../INC/MSGSERV.ASM(159): Note! N291: macro called from file EDLMES.ASM(60)
+../../INC/MSGSERV.ASM(197): Error! E032: Syntax error
+../../INC/MSGSERV.ASM(197): Note! N290: included by file ../../INC/SYSMSG.INC(329)
+../../INC/MSGSERV.ASM(197): Note! N291: macro called from file EDLMES.ASM(161)
+../../INC/MSGSERV.ASM(2303): Error! E250: Nesting level too deep
+../../INC/MSGSERV.ASM(2303): Note! N290: included by file ../../INC/SYSMSG.INC(329)
+../../INC/MSGSERV.ASM(2303): Note! N291: macro called from file EDLMES.ASM(184)
+../../INC/MSGSERV.ASM(2338): Error! E250: Nesting level too deep
+../../INC/MSGSERV.ASM(2338): Note! N290: included by file ../../INC/SYSMSG.INC(329)
+../../INC/MSGSERV.ASM(2338): Note! N291: macro called from file EDLMES.ASM(184)
+../../INC/SYSMSG.INC(360): Error! E220: Cannot open include file &EXT
+../../INC/SYSMSG.INC(360): Note! N291: macro called from file ../../INC/SYSMSG.INC(324)
+../../INC/SYSMSG.INC(360): Note! N291: macro called from file EDLMES.ASM(185)
+../../INC/SYSMSG.INC(360): Error! E220: Cannot open include file &EXT
+../../INC/SYSMSG.INC(360): Note! N291: macro called from file ../../INC/SYSMSG.INC(324)
+../../INC/SYSMSG.INC(360): Note! N291: macro called from file EDLMES.ASM(185)
+../../INC/SYSMSG.INC(360): Error! E220: Cannot open include file &EXT
+../../INC/SYSMSG.INC(360): Note! N291: macro called from file ../../INC/SYSMSG.INC(324)
+../../INC/SYSMSG.INC(360): Note! N291: macro called from file EDLMES.ASM(185)
+../../INC/SYSMSG.INC(360): Error! E220: Cannot open include file &EXT
+../../INC/SYSMSG.INC(360): Note! N291: macro called from file ../../INC/SYSMSG.INC(324)
+../../INC/SYSMSG.INC(360): Note! N291: macro called from file EDLMES.ASM(186)
+../../INC/SYSMSG.INC(360): Error! E220: Cannot open include file &EXT
+../../INC/SYSMSG.INC(360): Note! N291: macro called from file ../../INC/SYSMSG.INC(324)
+../../INC/SYSMSG.INC(360): Note! N291: macro called from file EDLMES.ASM(186)
+../../INC/SYSMSG.INC(360): Error! E220: Cannot open include file &EXT
+../../INC/SYSMSG.INC(360): Note! N291: macro called from file ../../INC/SYSMSG.INC(324)
+../../INC/SYSMSG.INC(360): Note! N291: macro called from file EDLMES.ASM(187)
+../../INC/MSGDCL.INC(14): Error! E066: Operand is expected
+../../INC/MSGDCL.INC(14): Note! N291: macro called from file ../../INC/MSGDCL.INC(103)
+../../INC/MSGDCL.INC(14): Note! N290: included by file EDLMES.ASM(265)
 EDLMES.ASM(665): Warning! W249: End directive required at end of file

@@ -24,17 +24,18 @@ dosxxx	segment byte public 'dos'
 	.sall
 	include MACROS.INC
 
-str	struc
+argframe	struc
 old_bp	dw	?
 return	dd	?
 DataAreaPtr	dd	?      ; Data buffer pointer
 CountryCodePtr	dd	?      ; Country code pointer
 DataAreaLength	dw	?      ; Length of data area
-str	ends
+argframe	ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 DosGetDBCSEv	proc	far
 
-	Enter  DosGetDBCSEv		    ;AN000; push registers
+	MapEnter DosGetDBCSEv		    ;AN000; push registers
 
 ; Get the country, so we can then get the country case map stuff
 
@@ -62,7 +63,7 @@ loopx:
 Exit:
 	Mexit				    ;AN000;pop registers
 
-	ret	size str - 6		    ;AN000; return
+	retfar str_retsz	;AN000; return
 
 DosGetDBCSEv	endp
 

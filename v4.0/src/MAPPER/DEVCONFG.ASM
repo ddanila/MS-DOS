@@ -30,16 +30,17 @@ dosxxx	segment byte public 'dos'
 inv_parm    equ      0002h
 model_byte  equ      0fffeh
 
-str	    struc
+argframe	    struc
 old_bp	    dw	     ?
 return	    dd	     ?
 rsrvd	    dw	     ?	      ; reserved
 item	    dw	     ?	      ; item number
 data	    dd	     ?	      ; returned information
-str	    ends
+argframe	    ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 dosdevconfig  proc far
-	    Enter    dosdevconfig	   ; push registers
+	    MapEnter dosdevconfig	   ; push registers
 
 	    mov      ax,[bp].rsrvd	   ; reserved parm must
 	    cmp      ax,0		   ; be zero
@@ -108,7 +109,7 @@ exit:	    sub      ax,ax		  ; set good return code
 	    mov      byte ptr [si],bl	  ; save bit pattern in return
 					  ; data area
 exit1:	    Mexit			  ; pop registers
-	    ret      size str - 6	  ; return
+	    retfar str_retsz	; return
 
 dosdevconfig endp
 

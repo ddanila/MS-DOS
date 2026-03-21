@@ -27,14 +27,15 @@ dosxxx  segment byte public 'dos'
             include  MACROS.INC
             .list
 
-str         struc
+argframe         struc
 old_bp      dw       ?
 Return      dd       ?
 Drive       dw       ?       ; drive number
-str         ends
+argframe         ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 dosselectdisk  proc  far
-        Enter   Dosselectdisk         ; push registers
+        MapEnter Dosselectdisk         ; push registers
 
         mov     dx,[bp].drive         ; load drive number
         dec     dx                    ; adjust for cp/dos incompatibility
@@ -45,7 +46,7 @@ dosselectdisk  proc  far
         sub     ax,ax                 ; set good return code
 
         mexit                         ; pop registers
-        ret     size str - 6          ; return
+        retfar str_retsz	; return
 
 dosselectdisk endp
 

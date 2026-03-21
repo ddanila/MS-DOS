@@ -32,18 +32,19 @@ dosxxx  segment byte public 'dos'
             .sall
             include  MACROS.INC
 
-str         struc
+argframe         struc
 old_bp      dw       ?
 return      dd       ?
 BufferLengthPtr dd      ?    ; directory path buffer length pointer
 BufferPtr       dd      ?    ; directory path buffer pointer
 Drive           dw      ?    ; driver number
-str         ends
+argframe         ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 
 dosqcurdir  proc     far
 
-        Enter   Dosqcurdir               ; push registers
+        MapEnter Dosqcurdir               ; push registers
 
         mov     ax,seg buffer            ; set temporary buffer  to receive
         mov     ds,ax                    ; dircetory path information
@@ -94,7 +95,7 @@ HaveThePathLength:
 
 ErrorExit:
         mexit                            ; pop registers
-        ret      size str - 6            ; return
+        retfar str_retsz	; return
 
 dosqcurdir  endp
 

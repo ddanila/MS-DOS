@@ -21,17 +21,18 @@ dosxxx	segment byte public 'dos'
 	    include  MACROS.INC
 	    .list
 
-str	    struc
+argframe	    struc
 modeaddr    dw	     ?
-str	    ends
+argframe	    ends
+	str_retsz EQU SIZEOF argframe - 6	;; WASM: precomputed for retfar str_retsz
 
 dosgetmachinemode proc	far
-	Enter	DosGetMachMode	      ; push registers
+	MapEnter DosGetMachMode	      ; push registers
 
 	sub	ax,ax		      ; set good return code
 
 	mexit			      ; pop registers
-	ret	size str - 6	      ; return garbage (Not supported in PCDOS)
+	retfar str_retsz	; return garbage (Not supported in PCDOS)
 
 dosgetmachinemode endp
 
