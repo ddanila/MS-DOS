@@ -352,7 +352,7 @@ DoHeader:
 	int	2fh				;AN020;     set everything off
 	pop	ds				;AN020; save current data segment
 	assume	ds:trangroup			;AN020;
-EXTRN	Pause:NEAR
+EXTRN	cmd_pause:NEAR	;; WASM: renamed from 'pause' (CPU instruction conflict)
 EXTRN	RestUDir:NEAR
 EXTRN	build_dir_string:NEAR
 EXTRN	crlf2:NEAR
@@ -366,7 +366,7 @@ EXTRN	printf_crlf:NEAR
 EXTRN	restudir:NEAR
 EXTRN	set_ext_error_msg:NEAR
 EXTRN	setup_parse_error_msg:NEAR
-EXTRN	Pause:NEAR
+EXTRN	cmd_pause:NEAR	;; WASM: renamed from 'pause' (CPU instruction conflict)
 EXTRN	RestUDir:NEAR
 EXTRN	build_dir_string:NEAR
 EXTRN	crlf2:NEAR
@@ -643,7 +643,7 @@ test	byte ptr[bits],SwitchP	     ;P switch present?
 jz	endif05 				;AN066;
    mov	   ax,linperpag 		   ;AN000;  transfer lines per page
    mov	   [fullscr],ax 		   ;AC000;	to fullscr
-   DOSInvoke  Pause
+   DOSInvoke  cmd_pause
 endif05:
 ret						;AN066;
 

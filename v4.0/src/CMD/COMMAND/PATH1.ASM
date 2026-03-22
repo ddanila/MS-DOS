@@ -129,7 +129,7 @@ Procedure   Path_Search,NEAR
 	push	DI
 	push	BP
 	pushf
-	test	DS:arg.argv[0].argflags, (MASK wildcard) + (MASK sw_flag)
+	test	DS:arg.argv[0].argflags, (wildcard) + (sw_flag)
 	jz	path_search_ok
 
 path_failure_jmp:
@@ -159,8 +159,8 @@ path_search_ok:
 
 	mov	BP, AX				; success... save filetype code
 	mov	DI, OFFSET TRANGROUP:EXECPATH
-	mov	SI, DS:arg.argv[0].argpointer
-	mov	CX, DS:arg.argv[0].argstartel
+	mov	SI, WORD PTR DS:arg.argv[0].argpointer
+	mov	CX, WORD PTR DS:arg.argv[0].argstartel
 	sub	CX, SI				; compute prefix bytes to copy
 ;
 ; We have the number of bytes in the prefix (up to the final component).
@@ -251,12 +251,12 @@ CopyDone:
 	jmp	path_success			; run off and form complete pathname
 
 path_noinit:
-	test	DS:arg.argv[0].argflags, MASK path_sep
+	test	DS:arg.argv[0].argflags, path_sep
 	jnz	path_failure			; complete pathname specified ==> fail
 
 	mov	BH, path_sep_char		; semicolon terminates pathstring
-	mov	DX, DS:arg.argv[0].argstartel	; this is where the last element starts
-	sub	DX, DS:arg.argv[0].argpointer	; form pointer into EXECPATH,
+	mov	DX, WORD PTR DS:arg.argv[0].argstartel	; this is where the last element starts
+	sub	DX, WORD PTR DS:arg.argv[0].argpointer	; form pointer into EXECPATH,
 	add	DX, OFFSET TRANGROUP:EXECPATH	; skipping over drive spec, if any
 
 path_loop:

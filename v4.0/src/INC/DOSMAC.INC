@@ -16,8 +16,12 @@ IFNDEF FALSE
 FALSE   EQU 0
 ENDIF
 
+;; WASM: guard against re-definition (COMSEG.ASM may define Break before DOSMAC.INC)
+IFNDEF _BREAK_DEFINED_
+_BREAK_DEFINED_ EQU 1
 BREAK   MACRO   subtitle
 ENDM
+ENDIF
 
 BREAK   <ASMVAR - handle assembly variables once and for all>
 

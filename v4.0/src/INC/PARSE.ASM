@@ -2137,7 +2137,7 @@ $P_T12_Loop:				;AN000;
 	or	al,al			;AN000;       to
 	jne	$P_T12_Loop		;AN000; 	end of string
 
-	mov	al,psdata_seg:[si-word] ;AN000; get char just before NULL
+	mov	al,psdata_seg:[si-2]    ;AN000; get char just before NULL ;; WASM: 'word' not a numeric constant, use 2
 	or	al,$P_Make_Lower	;AN000; lower case map
 	cmp	al,"p"                  ;AN000; only "p" of "pm" ?
 	je	$P_T1200		;AN000;
@@ -2149,7 +2149,7 @@ $P_T12_Loop:				;AN000;
 	jne	$P_T12_Exit		;AN000;
 
 	dec	si			;AN000;
-	mov	al,psdata_seg:[si-word] ;AN000;
+	mov	al,psdata_seg:[si-2]    ;AN000; ;; WASM: 'word' not a numeric constant
 	or	al,$P_Make_lower	;AN000; lower case map
 	cmp	al,"p"                  ;AN000; "p" of "pm" ?
 	je	$P_T1200		;AN000;

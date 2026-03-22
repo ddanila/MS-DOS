@@ -1,0 +1,4 @@
+/tmp/test_macro3.asm(2): Error! E050: Offset cannot be smaller than WORD size
+/tmp/test_macro3.asm(2): Note! N291: macro called from file /tmp/test_macro3.asm(15)
+/tmp/test_macro3.asm(2): Error! E050: Offset cannot be smaller than WORD size
+/tmp/test_macro3.asm(2): Note! N291: macro called from file /tmp/test_macro3.asm(16)

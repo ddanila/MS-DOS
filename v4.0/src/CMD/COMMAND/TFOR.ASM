@@ -34,7 +34,7 @@ TRANDATA	SEGMENT PUBLIC BYTE	;AC000;
 TRANDATA	ENDS
 
 TRANSPACE	SEGMENT PUBLIC BYTE	;AC000;
-	extrn	arg:byte		; the arg structure!
+	extrn arg:arg_unit  ;; WASM: use struct type for correct field-access sizes		; the arg structure!
 	EXTRN	COMBUF:BYTE
 	EXTRN	RESSEG:WORD
 	EXTRN	string_ptr_2:word
@@ -188,7 +188,7 @@ forsub:
 	cmp	f.for_expand, 0 		; are we still expanding a name?
 	je	for_find_next			; if so, get next matching filename
 
-	test	[BX].argflags, MASK wildcard
+	test	[BX].argflags, wildcard
 	jnz	for_find_first			; should we expand THIS (new) arg?
 	mov	CX, [BX].arglen 		; else, just copy all of it directly
 	jmp	for_smoosh

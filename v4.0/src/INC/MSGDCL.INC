@@ -17,9 +17,9 @@ $M_DECLARE    macro	numcls	       ;
    ENDM 			       ;
 
   IF COMR
-    IFNDEF $M_RT2			;  If Resident table is not in this assembly,
-	EXTRN	$M_RT2:BYTE		;     Must be external
-    ELSE
+    IFNDEF $M_HAS_RT2			;  If Resident table is not in this assembly,
+	EXTRN	$M_RT2:BYTE		;  WASM: check $M_HAS_RT2 flag, not $M_RT2 itself
+    ELSE				;  ($M_RT2=0 equate would fool IFNDEF $M_RT2 in WASM)
 	PUBLIC	$M_RT2
     ENDIF				;
   ELSE

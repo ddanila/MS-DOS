@@ -628,10 +628,11 @@ EXTRN	ASKEND:NEAR
 EXTRN	CRLF:NEAR
 EXTRN	RestHand:NEAR
 EXTRN	SavHand:NEAR
-EXTRN	ASKEND:NEAR
-EXTRN	CRLF:NEAR
-EXTRN	RestHand:NEAR
-EXTRN	SavHand:NEAR
+EXTRN	RPRINT:NEAR     ;; WASM: DOSInvoke no longer auto-generates EXTRN
+;;EXTRN  ASKEND:NEAR   ;; WASM E299: duplicate removed
+;;EXTRN  CRLF:NEAR     ;; WASM E299: duplicate removed
+;;EXTRN  RestHand:NEAR ;; WASM E299: duplicate removed
+;;EXTRN  SavHand:NEAR  ;; WASM E299: duplicate removed
 ResPipeOff:
 	SaveReg <AX>
 	xor	ax,ax

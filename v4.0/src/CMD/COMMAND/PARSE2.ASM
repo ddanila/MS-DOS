@@ -356,7 +356,7 @@ Arg_Switch:
 	push	CX
 	push	DI
 	pushf
-	test	BH, MASK sw_flag		; is it a switch? (preserve flag word)
+	test	BH, sw_flag		; is it a switch? (preserve flag word)
 	jz	arg_no_switch0
 	cmp	[LAST_ARG], -1			; have we encountered any REAL args yet?
 	je	arg_no_switch1			; no, so leading switches don't matter

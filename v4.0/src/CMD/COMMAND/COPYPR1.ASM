@@ -163,7 +163,7 @@ TESTBOTH:
 	jmp	short EXISTS
 
 COPERRJ:
-	jmp	SHORT COPERR
+	jmp	NEAR PTR COPERR	;; WASM: was SHORT, out of range
 
 EXSETA:
 ;

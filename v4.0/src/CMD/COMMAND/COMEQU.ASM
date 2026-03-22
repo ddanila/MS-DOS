@@ -192,23 +192,30 @@ arg_cnt_error	equ	1		; number of args > MAXARG
 arg_buf_ovflow	equ	2		; overflowed argbuffer
 
 argv_ele   STRUC			; elements in the argv array
-    argpointer	DW	(?)		; pointer to the argstring
-    argflags	DB	(?)		; cparse flags for this argstring
-    argstartel	DW	(?)		; the result of cparse's [STARTEL]
-    arglen	DW	(?)		; cparse's char count + one (for null)
-    argsw_word	DW	(?)		; any switches after this?  what kinds?
-    arg_ocomptr DW	(?)		; pointer into original command string
+    argpointer	DW	?		; pointer to the argstring
+    argflags	DB	?		; cparse flags for this argstring
+    argstartel	DW	?		; the result of cparse's [STARTEL]
+    arglen	DW	?		; cparse's char count + one (for null)
+    argsw_word	DW	?		; any switches after this?  what kinds?
+    arg_ocomptr DW	?		; pointer into original command string
 argv_ele   ENDS
 
 arg_unit    STRUC
     argv	DB	(ARGMAX * SIZE argv_ele) DUP (?)
-    argvcnt	DW	(?)		; number of arguments
-    argswinfo	DW	(?)		; Switch information for entire line
+    argvcnt	DW	?		; number of arguments
+    argswinfo	DW	?		; Switch information for entire line
     argbuf	DW	ARGBLEN DUP (?) ; storage for argv strings
     argforcombuf db	COMBUFLEN DUP (?) ; Original for loop command string
 arg_unit    ENDS
 
-parseflags RECORD special_delim:1, unused:4, path_sep:1, wildcard:1, sw_flag:1
+;; WASM: RECORD not supported (E094). Replaced with bit-mask EQU constants.
+;; parseflags RECORD special_delim:1, unused:4, path_sep:1, wildcard:1, sw_flag:1
+;; Bit layout (8 bits, MSB→LSB): [special_delim][unused:4][path_sep][wildcard][sw_flag]
+special_delim  EQU  80h   ;; bit 7: was MASK special_delim
+;;unused       EQU  78h   ;; bits 6-3 (not referenced via MASK)
+path_sep       EQU  04h   ;; bit 2: was MASK path_sep
+wildcard       EQU  02h   ;; bit 1: was MASK wildcard
+sw_flag        EQU  01h   ;; bit 0: was MASK sw_flag
 
 SwitchV 	EQU	10h
 SwitchB 	EQU	08h

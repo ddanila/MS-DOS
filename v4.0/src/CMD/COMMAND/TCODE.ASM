@@ -85,6 +85,15 @@ ASSUME	CS:TRANGROUP,DS:NOTHING,ES:NOTHING,SS:NOTHING
 	EXTRN	FORPROC:NEAR
 	EXTRN	PIPEPROC:NEAR
 	EXTRN	PIPEPROCSTRT:NEAR
+	;; WASM: DOSInvoke no longer auto-EXTRNs; add explicit declarations
+	EXTRN	PIPEDEL:NEAR
+	EXTRN	SINGLETEST:NEAR
+	EXTRN	CRLF2:NEAR
+	EXTRN	PRINT_PROMPT:NEAR
+	EXTRN	READBAT:NEAR
+	EXTRN	PRESCAN:NEAR
+	EXTRN	std_eprintf:NEAR
+	EXTRN	parseline:NEAR
 
 	PUBLIC	COMMAND
 	PUBLIC	DOCOM
@@ -399,7 +408,7 @@ REGCOM:
 ;---------------
 
 transpace   segment
-    extrn   arg:byte				; the arg structure!
+    extrn arg:arg_unit  ;; WASM: use struct type for correct field-access sizes				; the arg structure!
 transpace   ends
 ;---------------
 
@@ -427,7 +436,7 @@ BadParse:
 	JMP	TCOMMAND
 
 OkParse:
-	test	arg.argv[0].argflags, MASK wildcard
+	test	arg.argv[0].argflags, wildcard
 	jnz	BadParse			; ambiguous commands not allowed
 	cmp	arg.argvcnt, 0			; there WAS a command, wasn't there?
 	jz	nullcomj
@@ -438,7 +447,7 @@ OkParse:
 	MOV	DI,OFFSET TRANGROUP:IDLEN
 	MOV	AX,(PARSE_FILE_DESCRIPTOR SHL 8) OR 01H ; Make FCB with blank scan-off
 	INT	int_command
-	mov	BX, arg.argv[0].argpointer
+	mov	BX, WORD PTR arg.argv[0].argpointer
 	cmp	BYTE PTR [BX+1],':'             ; was a drive specified?
 	jne	short drvgd			; no, use default of zero...
 
@@ -449,7 +458,7 @@ OkParse:
 	CMP	AL,-1				; See what PARSE said about our drive letter.
 	JZ	drvbadj2			; It was invalid.
 
-	mov	DI, arg.argv[0].argstartel
+	mov	DI, WORD PTR arg.argv[0].argstartel
 	cmp	BYTE PTR [DI], 0		; is there actually a command there?
 	jnz	drvgd				; if not, we have:  "d:", "d:\", "d:/"
 	jmp	setdrv				; and set drive to new drive spec
@@ -504,9 +513,9 @@ COMTAIL:
 ; any switches that might be present.
 ; SI -> first character after the command.
 
-	mov	DI, arg.argv[0].argsw_word
+	mov	DI, WORD PTR arg.argv[0].argsw_word
 	mov	[COMSW], DI			; ah yes, the old addressing mode problem...
-	mov	SI, arg.argv[1 * SIZE argv_ele].argpointer  ; s = argv[1];
+	mov	SI, WORD PTR arg.argv[1 * SIZE argv_ele].argpointer  ; s = argv[1];
 	OR	SI,SI				;   if (s == NULL)
 	JNZ	DoParse
 	MOV	SI,BP				;	s = bp; (buffer end)
@@ -517,9 +526,9 @@ DoParse:
 	INT	int_command
 	MOV	[PARM1],AL			; Save result of parse
 
-	mov	DI, arg.argv[1*SIZE argv_ele].argsw_word
+	mov	DI, WORD PTR arg.argv[1*SIZE argv_ele].argsw_word
 	mov	[ARG1S], DI
-	mov	SI, arg.argv[2*SIZE argv_ele].argpointer    ; s = argv[2];
+	mov	SI, WORD PTR arg.argv[2*SIZE argv_ele].argpointer    ; s = argv[2];
 	OR	SI,SI				;   if (s == NULL)
 	JNZ	DoParse2
 	MOV	SI,BP				;	s = bp; (bufend)1
@@ -530,9 +539,9 @@ DoParse2:
 	INT	int_command			; Parse file name
 	MOV	[PARM2],AL			; Save result
 
-	mov	DI, arg.argv[2*SIZE argv_ele].argsw_word
+	mov	DI, WORD PTR arg.argv[2*SIZE argv_ele].argsw_word
 	mov	[ARG2S], DI
-	mov	DI, arg.argv[0].argsw_word
+	mov	DI, WORD PTR arg.argv[0].argsw_word
 	not	DI				; ARGTS doesn't include the flags
 	and	DI, arg.argswinfo		; from COMSW...
 	mov	[ARGTS], DI

@@ -63,11 +63,14 @@ ASSUME	CS:TRANGROUP,DS:NOTHING,ES:NOTHING,SS:NOTHING
 
 	EXTRN	cerror:near
 	EXTRN	tcommand:near
+	;; WASM: DOSInvoke no longer auto-EXTRNs; add explicit declarations
+	EXTRN	FIND_NAME_IN_environment:NEAR
+	EXTRN	DELIM:NEAR
 
 ;---------------
 
 TRANSPACE	SEGMENT PUBLIC BYTE	;AC000;
-    extrn   arg:byte			; the arg structure!
+    extrn arg:arg_unit  ;; WASM: use struct type for correct field-access sizes			; the arg structure!
 transpace   ends
 ;---------------
 

@@ -302,12 +302,12 @@ Procedure   Strip,NEAR
 	pushf
 
 	mov	ext_entered,1			;AN005; assume no extension on file name
-	mov	DX, DS:arg.argv[0].argpointer	; save pointer to beginning of argstring
-	mov	DI, DS:arg.argv[0].argstartel	; beginning of last pathname element
+	mov	DX, WORD PTR DS:arg.argv[0].argpointer	; save pointer to beginning of argstring
+	mov	DI, WORD PTR DS:arg.argv[0].argstartel	; beginning of last pathname element
 	cmp	BYTE PTR [DI], 0		; *STARTEL == NULL means no command
 	jz	strip_error
 	mov	CX, DX				; compute where end of argstring lies
-	add	CX, DS:arg.argv[0].arglen
+	add	CX, WORD PTR DS:arg.argv[0].arglen
 	sub	CX, DI				; and then find length of last element
 	inc	CX				; include null as well
 	mov	AL, dot 			; let's find the filetype extension
@@ -414,15 +414,15 @@ save_ptr_loop:
 	jl	save_done
 	mov	BX, CX				; get arg index and
 	DOSInvoke	argv_calc			; convert to a pointer
-	mov	DX, DS:arg.argv[BX].argpointer
+	mov	DX, WORD PTR DS:arg.argv[BX].argpointer
 	sub	DX, SI				; adjust argpointer
-	mov	ES:argv[BX].argpointer, DX
-	mov	DX, DS:arg.argv[BX].argstartel
+	mov	WORD PTR ES:argv[BX].argpointer, DX
+	mov	DX, WORD PTR DS:arg.argv[BX].argstartel
 	sub	DX, SI				; and adjust argstartel
-	mov	ES:argv[BX].argstartel, DX
-	mov	DX, DS:arg.argv[BX].arg_ocomptr
+	mov	WORD PTR ES:argv[BX].argstartel, DX
+	mov	DX, WORD PTR DS:arg.argv[BX].arg_ocomptr
 	sub	DX, SI				; and adjust arg_ocomptr
-	mov	ES:argv[BX].arg_ocomptr, DX
+	mov	WORD PTR ES:argv[BX].arg_ocomptr, DX
 	jmp	save_ptr_loop
 
 save_done:

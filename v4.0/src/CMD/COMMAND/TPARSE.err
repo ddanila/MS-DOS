@@ -1,5 +1,1 @@
-../../INC/PARSE.ASM(2140): Error! E066: Operand is expected
-../../INC/PARSE.ASM(2140): Note! N290: included by file TPARSE.ASM(47)
-../../INC/PARSE.ASM(2152): Error! E066: Operand is expected
-../../INC/PARSE.ASM(2152): Note! N290: included by file TPARSE.ASM(47)
 TPARSE.ASM(70): Warning! W249: End directive required at end of file

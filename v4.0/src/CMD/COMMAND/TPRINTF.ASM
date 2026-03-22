@@ -74,6 +74,9 @@ TRANCODE	SEGMENT PUBLIC BYTE	;AC000;
 	EXTRN	cerror:near
 	EXTRN	crlf2:near
 	EXTRN	tcommand:near		;AN026;
+	;; WASM: removed explicit EXTRNs for $M_MSGSERV_1/2 and $M_CLS_8 — EXTRN before
+	;; MSGDCL.INC causes MSGDCL's IFNDEF to emit PUBLIC instead of EXTRN → L2025.
+	;; MSGDCL.INC at line 363 handles these correctly when no prior EXTRN exists.
 
 ASSUME	CS:TRANGROUP,DS:TRANGROUP,ES:NOTHING,SS:NOTHING ;AC000;
 

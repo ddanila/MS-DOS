@@ -11,7 +11,7 @@ include IFEQU.ASM
 .LIST
 .CREF
 
-addr macro sym,name
+cmdaddr macro sym,name	;; WASM: renamed from 'addr' (reserved keyword in WASM)
      public name
      ifidn <name>,<>
 

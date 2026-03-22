@@ -28,7 +28,14 @@ CODERES 	SEGMENT PUBLIC BYTE	;AC000;
 	EXTRN	INT_2E:NEAR
 	EXTRN	LODCOM:NEAR
 	EXTRN	RSTACK:WORD
+	EXTRN	SETVECT:NEAR		;; WASM: DOSInvoke no longer auto-EXTRNs
+	EXTRN	CHKSUM:NEAR		;; WASM: DOSInvoke no longer auto-EXTRNs
+	EXTRN	SYSGETMSG:NEAR		;; WASM: DOSInvoke no longer auto-EXTRNs
 CODERES ENDS
+
+;; WASM: removed explicit EXTRN $M_CLS_3-7 — EXTRN before MSGDCL.INC causes MSGDCL's
+;; IFNDEF to see them as "defined" and emit PUBLIC instead of EXTRN → L2025 duplicates.
+;; MSGDCL.INC handles these EXTRN declarations correctly when no prior EXTRN exists.
 
 DATARES 	SEGMENT PUBLIC BYTE	;AC000;
 	EXTRN	abort_char:byte 	;AN000;
@@ -1605,11 +1612,11 @@ setup_for_messages	proc	near		;AN060;
 	mov	di,offset resgroup:parse_msg_start-0100h ;AN060; start address
 	call	set_parse_2f			;AN060; set parse error address
 	pop	es				;AN060;
-	IF2					;AN060;;
+;;	IF2					;AN060;; WASM: IF2 never taken (single-pass)
 	IFNDEF	READ_DISK_INFO			;AN060;;
 		Extrn	READ_DISK_PROC:Far	;AN060;;
 	ENDIF					;AN060;;
-	ENDIF					;AN060;;
+;;	ENDIF					;AN060;;
 	MOV	AX,DOS_GET_EXT_PARSE_ADD	;AN060;; 2FH Interface
 	MOV	DL,DOS_SET_ADDR 		;AN060;; Set the READ_DISK_PROC address
 	LEA	DI,READ_DISK_PROC		;AN060;;

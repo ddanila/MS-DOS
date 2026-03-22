@@ -53,7 +53,7 @@ TRANCODE	SEGMENT PUBLIC BYTE
 	EXTRN	extend_setup:near	;AN022;
 
 	PUBLIC	CNTRLC
-	PUBLIC	ECHO
+	PUBLIC	cmd_echo	;; WASM: renamed from 'ECHO' (directive conflict)
 	PUBLIC	GetDate
 	PUBLIC	NOTEST2
 	PUBLIC	PRINT_DATE
@@ -252,7 +252,7 @@ ECHO_HELP_STR	DB	"Displays messages, or turns command echoing on or off.", 0DH, 
 		DB	0DH, 0AH
 		DB	"Type ECHO without parameters to display the current echo setting.", 0DH, 0AH, "$"
 
-ECHO:
+cmd_echo:
 	mov	si, 81H
 ECHO_SPC:
 	mov	al, [si]

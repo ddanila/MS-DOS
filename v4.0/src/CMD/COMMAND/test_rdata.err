@@ -1,0 +1,2 @@
+/tmp/test_rdata.asm(1): Error! E220: Cannot open include file comsw.asm
+/tmp/test_rdata.asm(2): Error! E220: Cannot open include file comseg.asm

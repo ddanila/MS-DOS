@@ -84,7 +84,7 @@ transpace   ends
 	PUBLIC	extend_setup		;AN022;
 	PUBLIC	Get_ext_error_number	;AN022;
 	PUBLIC	Get_file_code_page_tag	;AN000;
-	PUBLIC	pause
+	PUBLIC	cmd_pause	;; WASM: renamed from 'pause' (conflicts with PAUSE CPU instruction)
 	PUBLIC	Set_ext_error_msg	;AN000;
 	PUBLIC	set_file_code_page	;AN000;
 	PUBLIC	typefil
@@ -101,7 +101,7 @@ PAUSE_HELP_STR	DB	"Suspends processing of a batch program and displays the messa
 		DB	0DH, 0AH
 		DB	"PAUSE", 0DH, 0AH, "$"
 
-PAUSE:
+cmd_pause:
 	mov	si, 81H
 PAUSE_SPC:
 	mov	al, [si]

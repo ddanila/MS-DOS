@@ -22,20 +22,20 @@ endm
 
 btab	macro	b,sym
     db	b
-    dw	    offset trangroup:sym
+    dw	    WORD PTR offset sym		;; WASM: avoid E050 - force WORD type for EXTRN offset
     endm
 
 .xlist
 	INCLUDE COMSW.ASM				;AC000;
 	INCLUDE COMSEG.ASM
 	INCLUDE EA.INC					;AN030;
+
+BREAK	MACRO	subtitle			;; WASM: moved before DIRENT.INC (uses Break)
+	;; WASM: no SUBTTL/PAGE — "SUBTTL Trap: ..." would invoke 'trap' macro (case-insensitive)
+ENDM
+
 	INCLUDE DIRENT.INC				;AN042;
 .list
-
-BREAK	MACRO	subtitle
-	SUBTTL	subtitle
-	PAGE
-ENDM
 
 ;
 ; WARNING: DO NOT INCLUDE DOSSYM.INC BECAUSE IT DESTROYS THE MACRO 'FMT' THAT
@@ -44,6 +44,11 @@ ENDM
 	INCLUDE CURDIR.INC
 	INCLUDE ERROR.INC
 	INCLUDE IFEQU.ASM
+;; WASM: COMEQU.ASM trap macro references int_command (from VECTOR.INC) at definition
+;; time; define here to avoid E251 (VECTOR.INC not included in TDATA chain)
+IFNDEF int_command
+int_command	EQU	21H	;; INT 21H = DOS service call (from INC/VECTOR.INC)
+ENDIF
 	INCLUDE COMEQU.ASM
 
 TRANSPACE	SEGMENT PUBLIC BYTE	;AC000;
@@ -91,14 +96,14 @@ TRANCODE	SEGMENT PUBLIC BYTE	;AC000;
 	EXTRN	CTIME:NEAR
 	EXTRN	CTTY:NEAR
 	EXTRN	DATE:NEAR
-	EXTRN	ECHO:NEAR
+	EXTRN	cmd_echo:NEAR	;; WASM: renamed from 'ECHO' (directive conflict)
 	EXTRN	ERASE:NEAR
 	EXTRN	GOTO:NEAR
 	EXTRN	IFERLEV:NEAR
 	EXTRN	IFEXISTS:NEAR
 	EXTRN	IFNOT:NEAR
 	EXTRN	PATH:NEAR
-	EXTRN	PAUSE:NEAR
+	EXTRN	cmd_pause:NEAR	;; WASM: renamed from 'PAUSE' (CPU instruction conflict)
 	EXTRN	PRINT_B:NEAR
 	EXTRN	PRINT_BACK:NEAR
 	EXTRN	PRINT_DATE:NEAR
@@ -247,24 +252,89 @@ TRANDATA	SEGMENT PUBLIC BYTE
 	PUBLIC	WEEKTAB
 	PUBLIC	xa_cp			;AN030;
 
+;; WASM single-pass: SYSMSG.INC and COMEQU.ASM constants needed before TRANMSG.ASM
+;; Also: TRANMSG.ASM uses different case than definitions (MASM was case-insensitive)
+;; Pre-define/alias all needed constants here
+IFNDEF Char_Field_ASCIIZ
+Char_Field_ASCIIZ EQU  10h		;; from SYSMSG.INC
+ENDIF
+IFNDEF Char_field_ASCIIZ		;; lowercase 'f' variant in TRANMSG.ASM
+Char_field_ASCIIZ EQU  Char_Field_ASCIIZ
+ENDIF
+IFNDEF Char_Field_Char
+Char_Field_Char   EQU  0		;; from SYSMSG.INC
+ENDIF
+IFNDEF Char_field_Char			;; lowercase 'f' variant
+Char_field_Char   EQU  Char_Field_Char
+ENDIF
+IFNDEF Right_Align
+Right_Align       EQU  80h		;; from SYSMSG.INC
+ENDIF
+IFNDEF Right_align			;; lowercase 'a' variant used in TRANMSG.ASM
+Right_align       EQU  Right_Align
+ENDIF
+IFNDEF Unsgn_Bin_Word
+Unsgn_Bin_Word    EQU  21h		;; from SYSMSG.INC
+ENDIF
+IFNDEF Unsgn_Bin_DWord
+Unsgn_Bin_DWord   EQU  31h		;; from SYSMSG.INC
+ENDIF
+IFNDEF Bin_Hex_Word
+Bin_Hex_Word      EQU  23h		;; from SYSMSG.INC
+ENDIF
+IFNDEF DATE_MDY_4			;; TRANMSG.ASM uses all-caps; SYSMSG.INC has Date_MDY_4
+DATE_MDY_4        EQU  34h
+ENDIF
+IFNDEF DATE_MDY_2
+DATE_MDY_2        EQU  24h
+ENDIF
+IFNDEF TIME_HHMMSSHH_Cty
+TIME_HHMMSSHH_Cty EQU  25h
+ENDIF
+IFNDEF TIME_HHMMSSHH_24
+TIME_HHMMSSHH_24  EQU  26h
+ENDIF
+IFNDEF TIME_HHMM_Cty
+TIME_HHMM_Cty     EQU  05h
+ENDIF
+IFNDEF Util_msg_class			;; COMEQU.ASM defines util_msg_class (lowercase)
+Util_msg_class    EQU  0FFFFh		;; = -1 = util_msg_class
+ENDIF
+IFNDEF No_cont_flag			;; COMEQU.ASM defines no_cont_flag (lowercase)
+No_cont_flag      EQU  0
+ENDIF
 INCLUDE TRANMSG.ASM
 
 CLSSTRING DB	4,01BH,"[2J"            ; ANSI Clear screen
 
 PROMPT_TABLE LABEL BYTE
-	btab	"B",Print_B
-	btab	"D",PRINT_DATE
-	btab	"E",PRINT_ESC
-	btab	"G",PRINT_G
-	btab	"H",PRINT_BACK
-	btab	"L",PRINT_L
-	btab	"N",PRINT_DRIVE
-	btab	"P",build_dir_for_prompt
-	btab	"Q",PRINT_EQ
-	btab	"T",PRINT_TIME
-	btab	"V",PRINT_VERSION
-	btab	"_",CRLF2
-	btab	"$",PRINT_CHAR
+;; WASM: btab macro (db+dw combo) triggers E050 in macro context; expanded inline
+	DB "B"
+	DW OFFSET TRANGROUP:Print_B
+	DB "D"
+	DW OFFSET TRANGROUP:PRINT_DATE
+	DB "E"
+	DW OFFSET TRANGROUP:PRINT_ESC
+	DB "G"
+	DW OFFSET TRANGROUP:PRINT_G
+	DB "H"
+	DW OFFSET TRANGROUP:PRINT_BACK
+	DB "L"
+	DW OFFSET TRANGROUP:PRINT_L
+	DB "N"
+	DW OFFSET TRANGROUP:PRINT_DRIVE
+	DB "P"
+	DW OFFSET TRANGROUP:build_dir_for_prompt
+	DB "Q"
+	DW OFFSET TRANGROUP:PRINT_EQ
+	DB "T"
+	DW OFFSET TRANGROUP:PRINT_TIME
+	DB "V"
+	DW OFFSET TRANGROUP:PRINT_VERSION
+	DB "_"
+	DW OFFSET TRANGROUP:CRLF2
+	DB "$"
+	DW OFFSET TRANGROUP:PRINT_CHAR
 	DB	0				; NUL TERMINATED
 
 IFTAB	LABEL	BYTE				; Table of IF conditionals
@@ -298,7 +368,7 @@ COMTAB	DB	3,"DIR",fSwitchAllowed+fCheckDrive
 	DB	4,"COPY",fSwitchAllowed+fCheckDrive
 	DW	OFFSET TRANGROUP:COPY		; In COPY.ASM
 	DB	5,"PAUSE",fSwitchAllowed
-	DW	OFFSET TRANGROUP:PAUSE		; In TCMD1.ASM
+	DW	OFFSET TRANGROUP:cmd_pause	;; WASM: renamed from PAUSE (CPU instruction conflict)
 	DB	4,"DATE",fSwitchAllowed
 	DW	OFFSET TRANGROUP:DATE		; In TPIPE.ASM
 	DB	4,"TIME",fSwitchAllowed         ;AC018; P3903
@@ -334,7 +404,7 @@ COMTAB	DB	3,"DIR",fSwitchAllowed+fCheckDrive
 	DB	4,"CTTY",fCheckDrive+fSwitchAllowed
 	DW	OFFSET TRANGROUP:CTTY		; In TCMD2.ASM
 	DB	4,"ECHO",fSwitchAllowed
-	DW	OFFSET TRANGROUP:ECHO		; In TUCODE.ASM
+	DW	OFFSET TRANGROUP:cmd_echo	;; WASM: renamed from ECHO (directive conflict)
 	DB	4,"GOTO",fSwitchAllowed
 	DW	OFFSET TRANGROUP:GOTO		; In TBATCH.ASM
 	DB	5,"SHIFT",fSwitchAllowed

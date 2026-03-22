@@ -47,10 +47,18 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 				       ;;
+;; WASM: include guard — prevent double-definition errors when included twice
+IFNDEF SYSMSG_INC_
+SYSMSG_INC_    EQU    1
+
 INCLUDE        VERSIONA.INC	       ;;AN003;;
 
-FALSE	       = 0		       ;;
-TRUE	       = NOT FALSE	       ;;    List message services and flags
+IFNDEF FALSE
+FALSE	       EQU 0		       ;; WASM: = → EQU for IFNDEF guards
+ENDIF
+IFNDEF TRUE
+TRUE	       EQU 0FFFFh	       ;; WASM: NOT FALSE → literal (= not supported by IFNDEF)
+ENDIF
 				       ;;
 
 ; Control Characters For Message Skeleton file
@@ -81,16 +89,26 @@ NO_REPLACE		EQU	0000H  ;; No replacable parameters
   Reserved		EQU	0      ;; Reserved byte field
 
   Left_Align		EQU	0      ;;00xxxxxx
+IFNDEF Right_Align			;; WASM: guard against pre-definition in RDATA.ASM
   Right_Align		EQU	80h    ;;10xxxxxx
+ENDIF
 
   Char_type		EQU	0      ;;axxx0000 - Character type
+IFNDEF Char_Field_Char			;; WASM: guard against pre-definition in RDATA.ASM
   Char_Field_Char	EQU	0      ;;a0000000
+ENDIF
+IFNDEF Char_Field_ASCIIZ		;; WASM: guard against pre-definition in RDATA.ASM
   Char_Field_ASCIIZ	EQU	10h    ;;a0010000
+ENDIF
 
   Unsgn_Bin_Type	EQU	01h    ;;axxx0001 - Unsigned Binary to Decimal character
   Unsgn_Bin_Byte	EQU	11h    ;;a0010001
+IFNDEF Unsgn_Bin_Word				;; WASM: guard against pre-definition
   Unsgn_Bin_Word	EQU	21h    ;;a0100001
+ENDIF
+IFNDEF Unsgn_Bin_DWord				;; WASM: guard against pre-definition
   Unsgn_Bin_DWord	EQU	31h    ;;a0110001
+ENDIF
 
   Sgn_Bin_Type		EQU	02h    ;;axxx0010 - Signed Binary to Decimal character
   Sgn_Bin_Byte		EQU	12h    ;;a0010010
@@ -99,23 +117,35 @@ NO_REPLACE		EQU	0000H  ;; No replacable parameters
 
   Bin_Hex_Type		EQU	03h    ;;axxx0011 - Unsigned Binary to Hexidecimal character
   Bin_Hex_Byte		EQU	13h    ;;a0010011
+IFNDEF Bin_Hex_Word			;; WASM: guard against pre-definition in RDATA.ASM
   Bin_Hex_Word		EQU	23h    ;;a0100011
+ENDIF
   Bin_Hex_DWord 	EQU	33h    ;;a0110011
 
   Date_Type		EQU	04h    ;;axxx0100 - Date to character using current country format
   Date_MD		EQU	14h    ;;a0010100
+IFNDEF Date_MDY_2				;; WASM: guard against pre-definition
   Date_MDY_2		EQU	24h    ;;a0100100
+ENDIF
+IFNDEF Date_MDY_4				;; WASM: guard against pre-definition
   Date_MDY_4		EQU	34h    ;;a0110100
+ENDIF
 
   Time_Cty_Type 	EQU	05h    ;;axxx0101 - Time to character using current country format
+IFNDEF Time_HHMM_Cty				;; WASM: guard against pre-definition
   Time_HHMM_Cty 	EQU	05h    ;;a0000101
+ENDIF
   Time_HHMMSS_Cty	EQU	15h    ;;a0010101
+IFNDEF Time_HHMMSSHH_Cty			;; WASM: guard against pre-definition
   Time_HHMMSSHH_Cty	EQU	25h    ;;a0100101
+ENDIF
 
   Time_24_Type		EQU	06h    ;;axxx0110 - Time to character using 24 hour format
   Time_HHMM_24		EQU	06h    ;;a0000110
   Time_HHMMSS_24	EQU	16h    ;;a0010110
+IFNDEF Time_HHMMSSHH_24				;; WASM: guard against pre-definition
   Time_HHMMSSHH_24	EQU	26h    ;;a0100110
+ENDIF
 
   $M_EXTPAR_Type	EQU	08h    ;;axxx1000 - Special case for extended parse replace format
 
@@ -215,11 +245,21 @@ $M_DWORD		EQU  00110000b ;; DWORD indicator
 
 ; Standard reserved DOS handles
 
+IFNDEF STDIN
 STDIN			EQU	0000H  ;; Standard Input device handle
+ENDIF
+IFNDEF STDOUT
 STDOUT			EQU	0001H  ;; Standard Output device handle
+ENDIF
+IFNDEF STDERR
 STDERR			EQU	0002H  ;; Standard Error Output device handle
+ENDIF
+IFNDEF STDAUX
 STDAUX			EQU	0003H  ;; Standard Auxiliary device handle
+ENDIF
+IFNDEF STDPRN
 STDPRN			EQU	0004H  ;; Standard Printer device handle
+ENDIF
 
 ; Reserved Message Service equates
 
@@ -281,7 +321,7 @@ ENDM
 				       ;
 MSG_UTILNAME  Macro   utilname	       ;
 				       ;
-   INCLUDE &UTILNAME.CTL	       ;  Include the control file for the utility   $M_STRUC = TRUE		       ;
+   INCLUDE &utilname.CTL	       ;  Include the control file for the utility   $M_STRUC = TRUE		       ;  ;; WASM -Mx: parameter is lowercase 'utilname'
    INCLUDE MSGSERV.ASM		       ;  Get structure definitions
 				       ;
 ENDM				       ;
@@ -358,7 +398,7 @@ ENDM					  ;
 						 ;
 $M_INC	Macro	ext				 ;
 						 ;
-INCLUDE &EXT					 ;						 ;
+INCLUDE &ext					 ;						 ;
 ENDM						 ;
 						 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -393,11 +433,11 @@ ENDM						 ;
 $M_MAKE Macro $m_append 			 ;
 IF  FARmsg					 ;
     CALL    FAR PTR $M_CLS_&$m_append		 ;  Get addressibilty to class &$M_APPEND (ES:DI)
-    MOV     WORD PTR $M_RT.$M_CLASS_ADDRS+$M_INDEX+2,ES ;  Move into first avaliable table location
-    MOV     WORD PTR $M_RT.$M_CLASS_ADDRS+$M_INDEX,DI ;
+    MOV     WORD PTR DS:$M_RT.$M_CLASS_ADDRS+$M_INDEX+2,ES ;  Move into first avaliable table location
+    MOV     WORD PTR DS:$M_RT.$M_CLASS_ADDRS+$M_INDEX,DI ;
 ELSE						 ;
     CALL    $M_CLS_&$m_append			 ;  Get addressibilty to class &$M_APPEND (ES:DI)
-    MOV     WORD PTR $M_RT.$M_CLASS_ADDRS+$M_INDEX,DI ;
+    MOV     WORD PTR DS:$M_RT.$M_CLASS_ADDRS+$M_INDEX,DI ;
 ENDIF						 ;
 $M_INDEX =  $M_INDEX + 4			 ;  Set next available table location
 						 ;
@@ -409,23 +449,23 @@ ENDM						 ;
 $M_MAKE_COMR   macro			     ;
 						 ;
     CALL    $M_CLS_3				 ;  Get addressibilty to class A
-    MOV     WORD PTR $M_RT.$M_CLASS_ADDRS+$M_INDEX,DI ;
+    MOV     WORD PTR DS:$M_RT.$M_CLASS_ADDRS+$M_INDEX,DI ;
 $M_INDEX =  $M_INDEX + 4			 ;  Set next available table location
 						 ;
     CALL    $M_CLS_4				 ;  Get addressibilty to class B
-    MOV     WORD PTR $M_RT.$M_CLASS_ADDRS+$M_INDEX,DI ;
+    MOV     WORD PTR DS:$M_RT.$M_CLASS_ADDRS+$M_INDEX,DI ;
 $M_INDEX =  $M_INDEX + 4			 ;  Set next available table location
 						 ;
     CALL    $M_CLS_5				 ;  Get addressibilty to class C
-    MOV     WORD PTR $M_RT.$M_CLASS_ADDRS+$M_INDEX,DI ;
+    MOV     WORD PTR DS:$M_RT.$M_CLASS_ADDRS+$M_INDEX,DI ;
 $M_INDEX =  $M_INDEX + 4			 ;  Set next available table location
 						 ;
     CALL    $M_CLS_6				 ;  Get addressibilty to class D
-    MOV     WORD PTR $M_RT.$M_CLASS_ADDRS+$M_INDEX,DI ;
+    MOV     WORD PTR DS:$M_RT.$M_CLASS_ADDRS+$M_INDEX,DI ;
 $M_INDEX =  $M_INDEX + 4			 ;  Set next available table location
 						 ;
     CALL    $M_CLS_7				 ;  Get addressibilty to class E
-    MOV     WORD PTR $M_RT.$M_CLASS_ADDRS+$M_INDEX,DI ;
+    MOV     WORD PTR DS:$M_RT.$M_CLASS_ADDRS+$M_INDEX,DI ;
 $M_INDEX =  $M_INDEX + 4			 ;  Set next available table location
 						 ;
 ENDM						 ;
@@ -436,8 +476,10 @@ ENDM						 ;
 $M_MAKE_COMT  macro			     ;
 						 ;
     CALL    $M_CLS_8				 ;  Get addressibilty to class A
-    MOV     WORD PTR $M_RT.$M_CLASS_ADDRS+$M_INDEX,DI ;
+    MOV     WORD PTR DS:$M_RT.$M_CLASS_ADDRS+$M_INDEX,DI ;
 $M_INDEX =  $M_INDEX + 4			 ;  Set next available table location
 						 ;
 ENDM						 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+ENDIF ;; SYSMSG_INC_

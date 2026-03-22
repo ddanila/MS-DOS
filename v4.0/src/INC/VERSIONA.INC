@@ -1,8 +1,17 @@
 
+IFNDEF major_version
 major_version	    equ     4	    ;Major DOS version
+ENDIF
+IFNDEF minor_version
 minor_version	    equ     00	    ;Minor DOS Version
-
-expected_version    equ     (MINOR_VERSION SHL 8)+MAJOR_VERSION
+ENDIF
+IFNDEF expected_version
+expected_version    equ     (minor_version SHL 8)+major_version  ;; WASM: fix case to match definitions above
+ENDIF
+;; WASM -Mx: add uppercase alias used by MSGSERV.ASM and COMMAND.CL? message files
+IFNDEF EXPECTED_VERSION
+EXPECTED_VERSION    EQU     expected_version
+ENDIF
 
 
        ;******************************

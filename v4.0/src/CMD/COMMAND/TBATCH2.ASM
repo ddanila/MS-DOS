@@ -53,6 +53,8 @@ ASSUME	CS:TRANGROUP,DS:NOTHING,ES:NOTHING,SS:NOTHING
 	EXTRN	cerror:near
 	EXTRN	docom1:near
 	EXTRN	tcommand:near
+	;; WASM: DOSInvoke no longer auto-EXTRNs; add explicit declarations
+	EXTRN	TESTKANJ:NEAR
 
 	public	$if,iferlev,goto,shift,ifexists,ifnot,forerror,$call
 

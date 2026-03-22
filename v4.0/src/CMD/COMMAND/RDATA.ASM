@@ -276,6 +276,20 @@ ELSE
 parm_block_size EQU	11			;AN000; size of message subst block
 blank		EQU	" "                     ;AN000; blank character
 
+;; WASM single-pass: SYSMSG.INC included later (line 574); pre-define constants used here
+IFNDEF Char_Field_ASCIIZ
+Char_Field_ASCIIZ EQU  10h
+ENDIF
+IFNDEF Char_Field_Char
+Char_Field_Char   EQU  0
+ENDIF
+IFNDEF Right_Align
+Right_Align       EQU  80h
+ENDIF
+IFNDEF Bin_Hex_Word
+Bin_Hex_Word      EQU  23h
+ENDIF
+
 DISP_CLASS	DB	-1			;AN000; utility message class
 NUMBER_SUBST	DB	0			;AN000; number of message substitutions - def 0
 
@@ -286,7 +300,7 @@ DRVNUM_BLOCK	db	parm_block_size 	;AN000;size of sublist
 DRVNUM_OP_OFF	dw	0			;AN000;offset of arg
 DRVNUM_OP_SEG	dw	0			;AN000;segment of arg
 		db	1			;AN000;first subst
-		db	Char_field_ASCIIZ	;AN000;character string
+		db	Char_Field_ASCIIZ	;AN000;character string
 		db	128			;AN000;maximum width
 		db	0			;AN000;minimum width
 		db	blank			;AN000;pad character
@@ -295,7 +309,7 @@ DRVNUM_OP_SEG	dw	0			;AN000;segment of arg
 		dw	OFFSET RESGROUP:DRVLET	;AN000;offset of arg
 DRVNUM_OP_SEG2	dw	0			;AN000;segment of arg
 		db	2			;AN000;second subst
-		db	Char_field_Char 	;AN000;one character
+		db	Char_Field_Char 	;AN000;one character
 		db	1			;AN000;maximum width
 		db	1			;AN000;minimum width
 		db	blank			;AN000;pad character
@@ -308,7 +322,7 @@ DEVEMES_BLOCK	db	parm_block_size 	;AN000;size of sublist
 DEVE_OP_OFF	dw	0			;AN000;offset of arg
 DEVE_OP_SEG	dw	0			;AN000;segment of arg
 		db	1			;AN000;first subst
-		db	Char_field_ASCIIZ	;AN000;character string
+		db	Char_Field_ASCIIZ	;AN000;character string
 		db	128			;AN000;maximum width
 		db	0			;AN000;minimum width
 		db	blank			;AN000;pad character
@@ -317,7 +331,7 @@ DEVE_OP_SEG	dw	0			;AN000;segment of arg
 		dw	OFFSET RESGROUP:DEVENAM ;AN000;offset of arg
 DEVE_OP_SEG2	dw	0			;AN000;segment of arg
 		db	2			;AN000;second subst
-		db	Char_field_ASCIIZ	;AN000;character string
+		db	Char_Field_ASCIIZ	;AN000;character string
 		db	8			;AN019;maximum width
 		db	8			;AN019;minimum width
 		db	blank			;AN000;pad character
@@ -331,7 +345,7 @@ ERR15MES_BLOCK	db	parm_block_size 	;AN000;size of sublist
 		dw	OFFSET RESGROUP:VOLNAME ;AN000;offset of arg
 ERR15_OP_SEG	dw	0			;AN000;segment of arg
 		db	1			;AN000;first subst
-		db	Char_field_ASCIIZ	;AN000;character string
+		db	Char_Field_ASCIIZ	;AN000;character string
 		db	12			;AN000;maximum width
 		db	12			;AN000;minimum width
 		db	blank			;AN000;pad character
@@ -340,7 +354,7 @@ ERR15_OP_SEG	dw	0			;AN000;segment of arg
 		dw	OFFSET RESGROUP:VOLSER+2;AN000;offset of arg
 ERR15_OP_SEG2	dw	0			;AN000;segment of arg
 		db	2			;AN000;second subst
-		db	right_align+Bin_Hex_Word ;AN000;long binary to decimal
+		db	Right_Align+Bin_Hex_Word ;AN000;long binary to decimal
 		db	4			;AN000;maximum width
 		db	4			;AN000;minimum width
 		db	"0"                     ;AN000;pad character
@@ -349,7 +363,7 @@ ERR15_OP_SEG2	dw	0			;AN000;segment of arg
 		dw	OFFSET RESGROUP:VOLSER	;AN000;offset of arg
 ERR15_OP_SEG3	dw	0			;AN000;segment of arg
 		db	3			;AN000;third subst
-		db	right_align+Bin_Hex_Word ;AN000;long binary to decimal
+		db	Right_Align+Bin_Hex_Word ;AN000;long binary to decimal
 		db	4			;AN000;maximum width
 		db	4			;AN000;minimum width
 		db	"0"                     ;AN000;pad character
@@ -373,7 +387,7 @@ BADFAT_BLOCK	db	parm_block_size 	;AN000;size of sublist
 		dw	OFFSET RESGROUP:DRVLET	;AN000;offset of arg
 BADFAT_OP_SEG	dw	0			;AN000;segment of arg
 		db	1			;AN000;first subst
-		db	Char_field_Char 	;AN000;one character
+		db	Char_Field_Char 	;AN000;one character
 		db	1			;AN000;maximum width
 		db	1			;AN000;minimum width
 		db	blank			;AN000;pad character
@@ -385,7 +399,7 @@ COMPRMT1_BLOCK	db	parm_block_size 	;AN000;size of sublist
 COMSPEC_PRINT	dw	?			;AN000;offset of arg
 COMPRMT1_SEG	dw	0			;AN000;segment of arg
 		db	1			;AN000;first subst
-		db	Char_field_ASCIIZ	;AN000;character string
+		db	Char_Field_ASCIIZ	;AN000;character string
 		db	64			;AN000;maximum width
 		db	0			;AN000;minimum width
 		db	blank			;AN000;pad character
@@ -394,7 +408,7 @@ COMPRMT1_SEG	dw	0			;AN000;segment of arg
 		dw	OFFSET RESGROUP:CPDRV	;AN000;offset of arg
 COMPRMT1_SEG2	dw	0			;AN000;segment of arg
 		db	2			;AN000;second subst
-		db	Char_field_Char 	;AN000;one character
+		db	Char_Field_Char 	;AN000;one character
 		db	1			;AN000;maximum width
 		db	1			;AN000;minimum width
 		db	blank			;AN000;pad character
@@ -409,7 +423,7 @@ EXECEMES_BLOCK	db	parm_block_size 	;AN000;size of sublist
 EXECEMES_OFF	dw	0			;AN000;offset of arg
 EXECEMES_SEG	dw	0			;AN000;segment of arg
 		db	1			;AN000;first subst
-		db	Char_field_ASCIIZ	;AN000;character string
+		db	Char_Field_ASCIIZ	;AN000;character string
 		db	64			;AN000;maximum width
 		db	0			;AN000;minimum width
 		db	blank			;AN000;pad character
