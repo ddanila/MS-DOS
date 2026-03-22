@@ -1724,7 +1724,7 @@ EXTRN	LOADCOM:NEAR
 EXTRN	itestkanj:NEAR
 EXTRN	rprint:NEAR
 EXTRN	sysdispmsg:NEAR
-EXTRN	triageError:FAR		;; WASM: triageError is in TRANGROUP — need FAR call from RESGROUP
+EXTRN	triageError:NEAR	;; cross-group NEAR: L2002 possible but linker still emits EXE w/o seg reloc
 
 INIT	ENDS
 
