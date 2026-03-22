@@ -3,7 +3,9 @@
 	include VERSION.INC
 	page	80,132
 
+IFNDEF FALSE                            ;; WASM: -Mx uppercases 'false'; DOSMAC.INC already defines FALSE=0
 false	= 0
+ENDIF
 
 DATA	SEGMENT PARA PUBLIC
 
@@ -102,6 +104,11 @@ PAR_MIN DB	1			; MINIMUM POSITIONAL PARAMETERS = 1    ;AC021;
 					;  STRUCTURE TO DEFINE THE POSITIONAL PARAMETER (Drive ID)
 					;---------------------------------------
 
+;;  WASM: move equates before first use (single-pass: no forward equate refs)
+reqd	equ	0
+f_spec	equ	2
+drv_id	equ	1
+
 POS1	LABEL	WORD
 POSREP	DB	reqd			; MATCH FLAG LOW		       ;AC021;
 POSTYP	DB	f_spec + drv_id 	; MATCH FLAG HIGH		       ;AC021;
@@ -109,10 +116,6 @@ POSTYP	DB	f_spec + drv_id 	; MATCH FLAG HIGH		       ;AC021;
 	DW	OFFSET POS_BUFF 	; PLACE RESULT IN POSITIONAL BUFFER
 	DW	OFFSET NOVALS		; NO VALUES LIST REQUIRED
 	DB	0			; NO KEYWORDS
-
-reqd	equ	0
-f_spec	equ	2
-drv_id	equ	1
 					;---------------------------------------
 					;  VALUE LIST FOR POSITIONAL
 					;---------------------------------------
@@ -183,6 +186,9 @@ fat_16			DB   "FAT16   " ; 16 or 32 bit FAT
 			MSG_SERVICES <MSGDATA> ;			       ;AN000;
 .list
 
+;;  WASM: sub_size = $ - SUBLIST can't be forward-referenced; pre-define as 11 (structure size)
+sub_size		equ  11         ;; WASM: was ($ - SUBLIST); 1+1+2+2+1+1+1+1+1 = 11 bytes
+
 SUBLIST 		LABEL DWORD
 
 			DB   sub_size	; size of sublist
@@ -196,8 +202,6 @@ insert_max		DB   3		; maximum field size (limited to 3)
 					;   - and - D:\
 			DB   1		; minimum field size
 			DB   " "	; pad character
-
-sub_size		equ  $ - SUBLIST ; size of sublist
 
 sys_ptr 		db   "SYS",0
 
@@ -273,7 +277,7 @@ DATA			ENDS
 CODE			SEGMENT PARA PUBLIC
 
 			EXTRN SYSLOADMSG:near, SYSDISPMSG:near, SYSPARSE:near
-			EXTRN Data_Space:WORD, Find_DPB:near,
+			EXTRN Data_Space:WORD, Find_DPB:near
 			EXTRN Move_DIR_Entry:near, Free_Cluster:near, Direct_Access:near
 
 			BREAK <SYS - Main>
@@ -652,7 +656,7 @@ public Parse_Command_Line
 ;			  $SALUT (4,27,34,41)
 
 eol			  equ	 -1	; Indicator for End-Of-Line	       ;AN000;
-noerror 		  equ	 0	; Return Indicator for No Errors       ;AN000;
+;; noerror equ 0  ;; WASM: already defined in SYSHDR.INC (noerror equ 0)
 command_line		  equ	 081H	; offset of command line in PSP        ;AN000;
 Syntax_Error		  equ	 9	; PARSE syntax error		       ;AN000;
 
@@ -2261,7 +2265,7 @@ $$IF118:
        mov  di,OFFSET FCBBIO		; pointer to name
        mov  cx,file_spec_length 	; length of name
        cld				; go forward
-       rep  cmpsb			; check it
+       repe cmpsb			;; WASM: REP not allowed on CMPSB; use REPE			; check it
 
 ;      $if  e				; first file IBMBIO.COM 	       ;AC000;
        JNE $$IF120
@@ -2333,7 +2337,7 @@ $$EN118:
 ;      $if  nc				;				       ;AC000;
        JC $$IF130
 
-	   add	bp,TYPE dir_entry	;				       ;AC000;
+	   add	bp,SIZEOF dir_entry	;				       ;AC000;
 	   mov	si,bp			;				       ;AC000;
 	   mov	ax,(util_B shl 8) + no_room ; load return code in case we fail ;AC000;
 					;    - No room for system on dest..
@@ -2357,7 +2361,7 @@ $$IF131:
 					; This entry is not free.
 	       mov  di,OFFSET FCBDOS	;   see if it is IBMDOS
 	       mov  cx,file_spec_length ; length of name
-	       rep  cmpsb		; compare it
+	       repe cmpsb			;; WASM: REP not allowed on CMPSB; use REPE		; compare it
 	       mov  si,bp		; restore pointer to start	       ;AC000;
 
 ;	       $if  e			; if second file is IBMDOS.COM.        ;AC000;
@@ -3301,7 +3305,7 @@ $$IF185:
 
        lea  si,DeviceParameters.DP_BPB
        lea  di,boot.EXT_BOOT_BPB
-       mov  cx,type EXT_BPB_INFO
+       mov  cx,SIZEOF EXT_BPB_INFO
        cld
        rep  movsb
 
@@ -3436,7 +3440,7 @@ $$IF190:
 					; Calculate the number of directory sectors
 
    mov	ax, deviceParameters.DP_BPB.BPB_RootEntries ;			       ;AN000;
-   mov	bx, TYPE dir_entry		;				       ;AN000;
+   mov	bx, SIZEOF dir_entry		;				       ;AN000;
    mul	bx				;				       ;AN000;
    add	ax, deviceParameters.DP_BPB.BPB_BytesPerSector ;		       ;AN000;
    dec	ax				;				       ;AN000;

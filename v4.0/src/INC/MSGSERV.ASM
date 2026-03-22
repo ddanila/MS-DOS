@@ -194,6 +194,7 @@ IF    COMR						     ;;AN000;; Since COMMAND.COM includes this twice
       $M_HAS_RT2 = 1					     ;; WASM: flag that $M_RT2 is a real LABEL (vs equate=0)
 ELSE							     ;;AN000;;
       $M_RT   LABEL   BYTE				     ;;AN000;;
+      $M_HAS_RT2 = 1					     ;; WASM: same flag for non-COMR; prevents LOADmsg/DISPLAYmsg EXTRN guard from re-defining $M_RT
 ENDIF							     ;;AN000;;
       $M_RES_ADDRS <>					     ;;AN000;; Resident addresses
 							     ;;
@@ -485,13 +486,11 @@ ENDIF							     ;AN001;
       ENDIF						     ;;AN000;; END of include for SETSTDIO
 ; 
       IF      LOADmsg					     ;;AN000;;	 Is the request to include the code for SYSLOADMSG ?
-	IF	COMR					     ;;AN000;;
-	  IFNDEF $M_HAS_RT2				     ;; WASM: if MSGDATA not in this assembly
-	    IFNDEF $M_HAS_RT2_EXTERN			     ;; only declare EXTRN and EQU once per assembly
-	      EXTRN $M_RT2:BYTE
+	IFNDEF $M_HAS_RT2				     ;; WASM: if MSGDATA not in this assembly (non-COMR also needs $M_RT)
+	  IFNDEF $M_HAS_RT2_EXTERN			     ;; only declare EXTRN and EQU once per assembly
+	    EXTRN $M_RT2:BYTE
 $M_HAS_RT2_EXTERN = 1
-	      $M_RT EQU $M_RT2			     ;; alias $M_RT to external $M_RT2 (generates proper fixups)
-	    ENDIF
+	    $M_RT EQU $M_RT2			     ;; alias $M_RT to external $M_RT2 (generates proper fixups)
 	  ENDIF
 	ENDIF
 	LOADmsg = FALSE 				     ;;AN000;;	 Yes, THEN include it and reset flag
@@ -811,15 +810,13 @@ $M_VERSION_CHECK ENDP					     ;;
       ENDIF						     ;;AN000;; END of include for SYSLOADMSG
 ; 
       IF      GETmsg					     ;;AN000;; Is the request to include the code for SYSGETMSG ?
-	IF	COMR					     ;;AN000;;
-	  IFNDEF $M_HAS_RT2				     ;; WASM: if MSGDATA not in this assembly
-	    IFNDEF $M_HAS_RT2_EXTERN			     ;; only declare EXTRN and EQU once per assembly
-	      EXTRN $M_RT2:BYTE
+	IFNDEF $M_HAS_RT2				     ;; WASM: if MSGDATA not in this assembly (non-COMR also needs $M_RT)
+	  IFNDEF $M_HAS_RT2_EXTERN			     ;; only declare EXTRN and EQU once per assembly
+	    EXTRN $M_RT2:BYTE
 $M_HAS_RT2_EXTERN = 1
-	      $M_RT EQU $M_RT2			     ;; alias $M_RT to external $M_RT2 (generates proper fixups)
-	    ENDIF
+	    $M_RT EQU $M_RT2			     ;; alias $M_RT to external $M_RT2 (generates proper fixups)
 	  ENDIF
-	ENDIF						     ;;AN000;;
+	ENDIF
 	GETmsg	=      FALSE				     ;;AN000;; Yes, THEN include it and reset flag
 	PAGE
 	;; SUBTTL	DOS - Message Retriever - GETMSG.ASM Module
@@ -1212,15 +1209,13 @@ $M_FIND_SPECIFIED_MSG ENDP				     ;;AN000;;
       ENDIF						     ;;AN000;; END of include of SYSGETMSG
 ; 
       IF      DISPLAYmsg				     ;;AN000;; Is the request to include the code for SYSGETMSG ?
-	IF	COMR					     ;;AN000;;
-	  IFNDEF $M_HAS_RT2				     ;; WASM: if MSGDATA not in this assembly
-	    IFNDEF $M_HAS_RT2_EXTERN			     ;; only declare EXTRN and EQU once per assembly
-	      EXTRN $M_RT2:BYTE
+	IFNDEF $M_HAS_RT2				     ;; WASM: if MSGDATA not in this assembly (non-COMR also needs $M_RT)
+	  IFNDEF $M_HAS_RT2_EXTERN			     ;; only declare EXTRN and EQU once per assembly
+	    EXTRN $M_RT2:BYTE
 $M_HAS_RT2_EXTERN = 1
-	      $M_RT EQU $M_RT2			     ;; alias $M_RT to external $M_RT2 (generates proper fixups)
-	    ENDIF
+	    $M_RT EQU $M_RT2			     ;; alias $M_RT to external $M_RT2 (generates proper fixups)
 	  ENDIF
-	ENDIF						     ;;AN000;;
+	ENDIF
 	DISPLAYmsg =  FALSE				     ;;AN000;; Yes, THEN include it and reset flag
 	PAGE
 	;; SUBTTL	DOS - Message Retriever - DISPMSG.ASM Module

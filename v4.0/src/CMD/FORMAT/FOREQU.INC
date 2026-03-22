@@ -45,6 +45,48 @@ DBCS_VECTOR equ NO
 ;Limits
 BIG_FAT_THRESHOLD equ 4086
 
+;; WASM: FORMSG.INC uses these SYSMSG.INC constants before SYSMSG.INC is included.
+;; Pre-define them here so FORMSG.INC data structures assemble correctly.
+IFNDEF Left_Align
+Left_Align  EQU 0       ;; 00xxxxxx - from SYSMSG.INC
+ENDIF
+IFNDEF Right_Align
+Right_Align EQU 80h     ;; 10xxxxxx - from SYSMSG.INC
+ENDIF
+IFNDEF Char_Field_Char
+Char_Field_Char EQU 0   ;; a0000000 - from SYSMSG.INC
+ENDIF
+IFNDEF Char_Field_ASCIIZ
+Char_Field_ASCIIZ EQU 10h ;; a0010000 - from SYSMSG.INC
+ENDIF
+IFNDEF Unsgn_Bin_Word
+Unsgn_Bin_Word EQU 21h  ;; a0100001 - from SYSMSG.INC
+ENDIF
+IFNDEF Unsgn_Bin_DWord
+Unsgn_Bin_DWord EQU 31h ;; a0110001 - from SYSMSG.INC
+ENDIF
+IFNDEF Unsgn_Bin_Dword                  ;; WASM: typo variant in FORMSG.INC (lowercase d)
+Unsgn_Bin_Dword EQU 31h ;; alias for Unsgn_Bin_DWord
+ENDIF
+IFNDEF Bin_Hex_Word
+Bin_Hex_Word EQU 23h    ;; a0100011 - from SYSMSG.INC
+ENDIF
+IFNDEF Bin_hex_Word                     ;; WASM: typo variant in FORMSG.INC (lowercase h)
+Bin_hex_Word EQU 23h    ;; alias for Bin_Hex_Word
+ENDIF
+IFNDEF STDOUT
+STDOUT EQU 0001H        ;; Standard Output device handle - from SYSMSG.INC
+ENDIF
+IFNDEF STDERR
+STDERR EQU 0002H        ;; Standard Error Output device handle - from SYSMSG.INC
+ENDIF
+IFNDEF NO_HANDLE
+NO_HANDLE EQU 0FFFFh    ;; No handle specified - from SYSMSG.INC
+ENDIF
+IFNDEF NO_INPUT
+NO_INPUT EQU 00H        ;; No input characters - from SYSMSG.INC
+ENDIF
+
 ;-------------------------------------------------------------------------------
 
 

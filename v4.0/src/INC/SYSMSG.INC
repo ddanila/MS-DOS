@@ -63,32 +63,65 @@ ENDIF
 
 ; Control Characters For Message Skeleton file
 
+IFNDEF NULL
 NULL			EQU	00H    ;; Null
+ENDIF
+IFNDEF BELL
 BELL			EQU	07H    ;; Bell
+ENDIF
+IFNDEF TAB
 TAB			EQU	09H    ;; Tab
+ENDIF
+IFNDEF LF
 LF			EQU	0AH    ;; Line Feed
+ENDIF
+IFNDEF HOME
 HOME			EQU	0BH    ;; Home
+ENDIF
+IFNDEF FORMFD
 FORMFD			EQU	0CH    ;; Form Feed
+ENDIF
+IFNDEF CR					;; WASM: FOREQU.INC may already define CR
 CR			EQU	0DH    ;; Carriage Return
+ENDIF
+IFNDEF COLON
 COLON			EQU	3AH    ;; Colon
+ENDIF
 
 ; SYSDISPMSG and SYSGETMSG Equates
 
+IFNDEF MSG_SER_CLASS				;; WASM: FORMSG.INC (case-insensitive) may define Msg_Ser_Class
 MSG_SER_CLASS		EQU	00H    ;; Message Service Class (reserved)
+ENDIF
+IFNDEF EXT_ERR_CLASS
 EXT_ERR_CLASS		EQU	01H    ;; DOS Extended error class
+ENDIF
+IFNDEF PARSE_ERR_CLASS
 PARSE_ERR_CLASS 	EQU	02H    ;; Parse error class
+ENDIF
+IFNDEF UTILITY_MSG_CLASS
 UTILITY_MSG_CLASS	EQU	0FFH   ;; Utility message class
+ENDIF
 
+IFNDEF NO_HANDLE
 NO_HANDLE		EQU	0FFFFH ;; No handle specified (Use DOS functions 01H-09H only)
+ENDIF
 
+IFNDEF NO_REPLACE				;; WASM: FORMSG.INC may define No_Replace (same symbol in case-insensitive)
 NO_REPLACE		EQU	0000H  ;; No replacable parameters
+ENDIF
 
 ; SUBLIST Equates
 
+IFNDEF Sublist_Length				;; WASM: FORMSG.INC defines Sublist_Length
   Sublist_Length	EQU	11     ;; Length of sublist structure
+ENDIF
+IFNDEF Reserved					;; WASM: FORMSG.INC may define Reserved
   Reserved		EQU	0      ;; Reserved byte field
-
+ENDIF
+IFNDEF Left_Align				;; WASM: FOREQU.INC may define Left_Align
   Left_Align		EQU	0      ;;00xxxxxx
+ENDIF
 IFNDEF Right_Align			;; WASM: guard against pre-definition in RDATA.ASM
   Right_Align		EQU	80h    ;;10xxxxxx
 ENDIF
@@ -149,7 +182,9 @@ ENDIF
 
   $M_EXTPAR_Type	EQU	08h    ;;axxx1000 - Special case for extended parse replace format
 
+IFNDEF NO_INPUT
 NO_INPUT		EQU	00H    ;; No input characters
+ENDIF
 DOS_KEYB_INP		EQU	01H    ;; DOS INT 21H - AH=01H := Keyboard Input
 DOS_DIR_CON_INP 	EQU	07H    ;; DOS INT 21H - AH=07H := Direct Console Input Without Echo
 DOS_CON_INP		EQU	08H    ;; DOS INT 21H - AH=08H := Console Input Without Echo (Check CTL-BK)

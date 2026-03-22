@@ -36,7 +36,9 @@ ASSUME	CS:CODE,DS:nothing,ES:nothing
 .list
 
 
+IFNDEF FALSE				;; WASM: -Mx uppercases 'false'; DOSMAC.INC already defines FALSE=0
 false	=	0			;				       ;AN000;
+ENDIF
 
 DateSW	equ	false			;				       ;AN000;
 TimeSW	equ	false			;				       ;AN000;

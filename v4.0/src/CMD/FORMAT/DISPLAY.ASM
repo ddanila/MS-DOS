@@ -74,10 +74,12 @@ Msg_Services    <MSGDATA>
 data    ends
 
 code    segment public  para    'CODE'
+;; WASM: CL files must come BEFORE service calls so $M_HAS_MSGSERV_x flags are set
+;; when MSGSERV.ASM is included for LOADmsg/DISPLAYmsg (prevents spurious EXTRN).
+Msg_Services    <FORMAT.CLA,FORMAT.CLB,FORMAT.CLC,FORMAT.CL1,FORMAT.CL2,FORMAT.CTL>
 Msg_Services    <NEARmsg>
 Msg_Services    <LOADmsg>
 Msg_Services    <DISPLAYmsg,CHARmsg,NUMmsg>
-Msg_Services    <FORMAT.CLA,FORMAT.CLB,FORMAT.CLC,FORMAT.CL1,FORMAT.CL2,FORMAT.CTL>
 code    ends
 
 ;
