@@ -594,7 +594,7 @@ ASSUME DS:RESGROUP,ES:RESGROUP,CS:RESGROUP
 MSG_UTILNAME <COMMAND>				;AN000; define utility name
 
 ;AD054; MSG_SERVICES <COMR,MSGDATA,COMMAND.CLA,COMMAND.CL3,COMMAND.CL4>  ;AN000; get message services data and resident messages
-MSG_SERVICES <COMR,MSGDATA,COMMAND.CLA>  ;AN054; get message services data and resident messages
+MSG_SERVICES <COMR,MSGDATA,COMMAND.CLA,COMMAND.CL3,COMMAND.CL4>  ;AN054;WASM: restore CL3/CL4 (AD054 removed them but they define $M_CLS_1/$M_CLS_2 needed by linker)
 
 
 CRITICAL_MSG_START	LABEL	BYTE		;AN000; start of critical error messages

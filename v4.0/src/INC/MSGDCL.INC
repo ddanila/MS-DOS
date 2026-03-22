@@ -8,7 +8,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;	$M_DECLARE	     Macro
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-				       ;
+			       ;
 $M_DECLARE    macro	numcls	       ;
    $M_DCOUNT = 0		       ;
    REPT  numcls 		       ;
@@ -17,10 +17,8 @@ $M_DECLARE    macro	numcls	       ;
    ENDM 			       ;
 
   IF COMR
-    IFNDEF $M_HAS_RT2			;  If Resident table is not in this assembly,
-	EXTRN	$M_RT2:BYTE		;  WASM: check $M_HAS_RT2 flag, not $M_RT2 itself
-    ELSE				;  ($M_RT2=0 equate would fool IFNDEF $M_RT2 in WASM)
-	PUBLIC	$M_RT2
+    IFDEF $M_HAS_RT2			;  WASM: if $M_RT2 is a real LABEL in this assembly → PUBLIC
+	PUBLIC	$M_RT2			;  (EXTRN $M_RT2 is handled by MSGSERV.ASM with $M_HAS_RT2_EXTERN guard)
     ENDIF				;
   ELSE
     IFNDEF $M_RT			;  If Resident table is not in this assembly,
@@ -35,11 +33,11 @@ $M_DECLARE    macro	numcls	       ;
   $M_CHECK $M_MSGSERV_2 	      ;  If this subroutine is not in this assembly,
 
 ENDM				       ;
-				       ;
+			       ;
 $M_DECLARE2   macro   innum	       ;
   IF NOT COMR			       ; IF Not resident COMMAND.COM
     IF NOT COMT 			 ; IF Not transient COMMAND.COM
-      IFNDEF  $M_CLS_&innum		 ; IF class is not in this assembly,
+      IFNDEF  $M_HAS_CLS_&innum	 ; WASM: check HAS flag (EXTRN fools IFNDEF $M_CLS_N)
 	IF	FARmsg			 ;
 	  EXTRN   $M_CLS_&innum:FAR	 ;    Must be external
 	ELSE				 ;
@@ -51,7 +49,7 @@ $M_DECLARE2   macro   innum	       ;
     ELSE				 ; ELSE
       IFDIF  <$M_CLS_&innum>,<$M_CLS_1>  ; IF NOT $M_CLS_1 or
 	IFDIF <$M_CLS_&innum>,<$M_CLS_2> ;   IF NOT $M_CLS_2 then
-	  IFNDEF  $M_CLS_&innum 	 ;     IF class is not in this assembly,
+	  IFNDEF  $M_HAS_CLS_&innum	 ; WASM: check HAS flag
 	    IF	    FARmsg		 ;
 	      EXTRN   $M_CLS_&innum:FAR  ;	 Must be external
 	    ELSE			 ;
@@ -66,7 +64,7 @@ $M_DECLARE2   macro   innum	       ;
   ELSE					 ; ELSE
     IFDIF  <$M_CLS_&innum>,<$M_CLS_1>	 ; IF NOT $M_CLS_1 or
       IFDIF <$M_CLS_&innum>,<$M_CLS_2>	 ;   IF NOT $M_CLS_2 then
-	IFNDEF	$M_CLS_&innum		 ;     IF class is not in this assembly,
+	IFNDEF	$M_HAS_CLS_&innum	 ; WASM: check HAS flag (EXTRN fools IFNDEF)
 	  IF	  FARmsg		 ;
 	    EXTRN   $M_CLS_&innum:FAR	 ;	 Must be external
 	  ELSE				 ;
@@ -79,10 +77,10 @@ $M_DECLARE2   macro   innum	       ;
     ENDIF				 ;
   ENDIF 			       ;
 ENDM				       ;
-				       ;
+			       ;
 $M_CHECK      macro   parm	       ;
-  IFNDEF  parm			       ; IF class is not in this assembly,
-    IF	    FARmsg		       ;
+  IFNDEF  $M_HAS_&parm		       ; WASM: check HAS flag — EXTRN-declared parm
+    IF	    FARmsg		       ; fools WASM's IFNDEF into FALSE; use flag instead
       EXTRN   parm:FAR		       ;    Must be external
     ELSE			       ;
       EXTRN   parm:NEAR 	       ;    Must be external
@@ -94,15 +92,15 @@ $M_CHECK      macro   parm	       ;
     ENDIF
   ENDIF 			       ;
 ENDM				       ;
-				       ;
+			       ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-				       ;
+			       ;
 IF1				       ;
   $M_DECLARE %$M_NUM_CLS	       ;  Declare any class not in this assembly
 ENDIF				       ;
-				       ;
+			       ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
+

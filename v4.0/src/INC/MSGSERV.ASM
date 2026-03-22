@@ -208,10 +208,13 @@ ENDIF							     ;;AN000;;
 							     ;;AN000;; Figure out what other code to include
       IF      DISK_PROC 				     ;;AN003;;	 Is the request to include the READ_DISK code
 	IF	COMR					     ;;AN003;;	 (Only Resident COMMAND.COM should ask for it)
-	  IFNDEF $M_RT2					     ;; If $M_RT2 not yet defined (MSGDATA not in this asm)
-	    $M_RT2 = 0					     ;; WASM: set to 0 (MSGDCL uses $M_HAS_RT2, not $M_RT2)
+	  IFNDEF $M_HAS_RT2				     ;; WASM: if MSGDATA not in this assembly
+	    IFNDEF $M_HAS_RT2_EXTERN			     ;; only declare EXTRN and EQU once per assembly
+	      EXTRN $M_RT2:BYTE
+$M_HAS_RT2_EXTERN = 1
+	      $M_RT EQU $M_RT2			     ;; alias $M_RT to external $M_RT2 (generates proper fixups)
+	    ENDIF
 	  ENDIF
-	  $M_RT = $M_RT2				     ;; WASM: use = (reassignable) instead of EQU
 	ENDIF
 	DISK_PROC = FALSE				     ;;AN003;;	 Yes, THEN include it and reset flag
 	PAGE
@@ -483,10 +486,13 @@ ENDIF							     ;AN001;
 ; 
       IF      LOADmsg					     ;;AN000;;	 Is the request to include the code for SYSLOADMSG ?
 	IF	COMR					     ;;AN000;;
-	  IFNDEF $M_RT2					     ;; If $M_RT2 not yet defined (MSGDATA not in this asm)
-	    $M_RT2 = 0					     ;; WASM: set to 0 (MSGDCL uses $M_HAS_RT2, not $M_RT2)
+	  IFNDEF $M_HAS_RT2				     ;; WASM: if MSGDATA not in this assembly
+	    IFNDEF $M_HAS_RT2_EXTERN			     ;; only declare EXTRN and EQU once per assembly
+	      EXTRN $M_RT2:BYTE
+$M_HAS_RT2_EXTERN = 1
+	      $M_RT EQU $M_RT2			     ;; alias $M_RT to external $M_RT2 (generates proper fixups)
+	    ENDIF
 	  ENDIF
-	  $M_RT = $M_RT2				     ;; WASM: use = (reassignable) instead of EQU
 	ENDIF
 	LOADmsg = FALSE 				     ;;AN000;;	 Yes, THEN include it and reset flag
 	PAGE
@@ -547,6 +553,13 @@ IF	COMR						     ;;  ** Special case for RESIDENT COMMAND.COM
 	  ENDIF 					     ;;AN003;;
 	ENDIF						     ;;AN003;;
 ELSE							     ;;
+	IFNDEF $M_HAS_MSGSERV_1 		     ;; WASM: EXTRN if not defined locally (timing guard)
+	  IF FARmsg
+	    EXTRN $M_MSGSERV_1:FAR
+	  ELSE
+	    EXTRN $M_MSGSERV_1:NEAR
+	  ENDIF
+	ENDIF
 	IF	FARmsg					     ;;AN000;;
 	  CALL	  FAR PTR $M_MSGSERV_1			     ;;AN000;; Get addressibilty to MSGSERV CLASS 1 (EXTENDED Errors)
 	ELSE						     ;;AN000;;
@@ -557,6 +570,13 @@ ELSE							     ;;
 	MOV	WORD PTR DS:$M_RT.$M_CRIT_ADDRS+2,ES	     ;;AN000;; Move into first avaliable table location
 	MOV	WORD PTR DS:$M_RT.$M_CRIT_ADDRS,DI 	     ;;AN000;;
 							     ;;
+	IFNDEF $M_HAS_MSGSERV_2 		     ;; WASM: EXTRN if not defined locally (timing guard)
+	  IF FARmsg
+	    EXTRN $M_MSGSERV_2:FAR
+	  ELSE
+	    EXTRN $M_MSGSERV_2:NEAR
+	  ENDIF
+	ENDIF
 	IF	FARmsg					     ;;AN000;;
 	  CALL	  FAR PTR $M_MSGSERV_2			     ;;AN000;; Get addressibilty to MSGSERV CLASS 2 (PARSE Errors)
 	ELSE						     ;;AN000;;
@@ -792,10 +812,13 @@ $M_VERSION_CHECK ENDP					     ;;
 ; 
       IF      GETmsg					     ;;AN000;; Is the request to include the code for SYSGETMSG ?
 	IF	COMR					     ;;AN000;;
-	  IFNDEF $M_RT2					     ;; If $M_RT2 not yet defined (MSGDATA not in this asm)
-	    $M_RT2 = 0					     ;; WASM: set to 0 (MSGDCL uses $M_HAS_RT2, not $M_RT2)
+	  IFNDEF $M_HAS_RT2				     ;; WASM: if MSGDATA not in this assembly
+	    IFNDEF $M_HAS_RT2_EXTERN			     ;; only declare EXTRN and EQU once per assembly
+	      EXTRN $M_RT2:BYTE
+$M_HAS_RT2_EXTERN = 1
+	      $M_RT EQU $M_RT2			     ;; alias $M_RT to external $M_RT2 (generates proper fixups)
+	    ENDIF
 	  ENDIF
-	  $M_RT = $M_RT2				     ;; WASM: use = (reassignable) instead of EQU
 	ENDIF						     ;;AN000;;
 	GETmsg	=      FALSE				     ;;AN000;; Yes, THEN include it and reset flag
 	PAGE
@@ -877,6 +900,7 @@ $MIF31:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	IF	$M_SUBS 				     ;;AN000;; Include the common subroutines if they haven't yet
 	  $M_SUBS = FALSE				     ;;AN000;; No, then include and reset the flag
+$M_HAS_$M_GET_MSG_ADDRESS = 1			     ;; WASM: flag for $M_CHECK — symbol defined in this assembly
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;	PROC NAME: $M_GET_MSG_ADDRESS
@@ -1189,10 +1213,13 @@ $M_FIND_SPECIFIED_MSG ENDP				     ;;AN000;;
 ; 
       IF      DISPLAYmsg				     ;;AN000;; Is the request to include the code for SYSGETMSG ?
 	IF	COMR					     ;;AN000;;
-	  IFNDEF $M_RT2					     ;; WASM: no MSGDATA unit; match MASM's implicit 0
-	    $M_RT2 = 0					     ;; WASM: undefined forward ref -> 0
+	  IFNDEF $M_HAS_RT2				     ;; WASM: if MSGDATA not in this assembly
+	    IFNDEF $M_HAS_RT2_EXTERN			     ;; only declare EXTRN and EQU once per assembly
+	      EXTRN $M_RT2:BYTE
+$M_HAS_RT2_EXTERN = 1
+	      $M_RT EQU $M_RT2			     ;; alias $M_RT to external $M_RT2 (generates proper fixups)
+	    ENDIF
 	  ENDIF
-	  $M_RT = $M_RT2				     ;; WASM: use = (reassignable) instead of EQU
 	ENDIF						     ;;AN000;;
 	DISPLAYmsg =  FALSE				     ;;AN000;; Yes, THEN include it and reset flag
 	PAGE
@@ -2084,6 +2111,7 @@ $M_EXT_PAR_REPLACE ENDP 				     ;;AN000;;
 ENDIF
 	IF	$M_SUBS 				     ;;AN000;; Include the common subroutines if they haven't yet
 	  $M_SUBS = FALSE				     ;;AN000;; No, then include and reset the flag
+$M_HAS_$M_GET_MSG_ADDRESS = 1			     ;; WASM: flag for $M_CHECK — symbol defined in this assembly
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;	PROC NAME: $M_GET_MSG_ADDRESS

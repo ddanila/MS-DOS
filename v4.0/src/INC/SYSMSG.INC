@@ -448,22 +448,57 @@ ENDM						 ;
 						 ;
 $M_MAKE_COMR   macro			     ;
 						 ;
+    IFNDEF $M_HAS_CLS_3 		     ;; WASM: EXTRN if not defined locally (timing guard)
+      IF FARmsg
+        EXTRN $M_CLS_3:FAR
+      ELSE
+        EXTRN $M_CLS_3:NEAR
+      ENDIF
+    ENDIF
     CALL    $M_CLS_3				 ;  Get addressibilty to class A
     MOV     WORD PTR DS:$M_RT.$M_CLASS_ADDRS+$M_INDEX,DI ;
 $M_INDEX =  $M_INDEX + 4			 ;  Set next available table location
 						 ;
+    IFNDEF $M_HAS_CLS_4
+      IF FARmsg
+        EXTRN $M_CLS_4:FAR
+      ELSE
+        EXTRN $M_CLS_4:NEAR
+      ENDIF
+    ENDIF
     CALL    $M_CLS_4				 ;  Get addressibilty to class B
     MOV     WORD PTR DS:$M_RT.$M_CLASS_ADDRS+$M_INDEX,DI ;
 $M_INDEX =  $M_INDEX + 4			 ;  Set next available table location
 						 ;
+    IFNDEF $M_HAS_CLS_5
+      IF FARmsg
+        EXTRN $M_CLS_5:FAR
+      ELSE
+        EXTRN $M_CLS_5:NEAR
+      ENDIF
+    ENDIF
     CALL    $M_CLS_5				 ;  Get addressibilty to class C
     MOV     WORD PTR DS:$M_RT.$M_CLASS_ADDRS+$M_INDEX,DI ;
 $M_INDEX =  $M_INDEX + 4			 ;  Set next available table location
 						 ;
+    IFNDEF $M_HAS_CLS_6
+      IF FARmsg
+        EXTRN $M_CLS_6:FAR
+      ELSE
+        EXTRN $M_CLS_6:NEAR
+      ENDIF
+    ENDIF
     CALL    $M_CLS_6				 ;  Get addressibilty to class D
     MOV     WORD PTR DS:$M_RT.$M_CLASS_ADDRS+$M_INDEX,DI ;
 $M_INDEX =  $M_INDEX + 4			 ;  Set next available table location
 						 ;
+    IFNDEF $M_HAS_CLS_7
+      IF FARmsg
+        EXTRN $M_CLS_7:FAR
+      ELSE
+        EXTRN $M_CLS_7:NEAR
+      ENDIF
+    ENDIF
     CALL    $M_CLS_7				 ;  Get addressibilty to class E
     MOV     WORD PTR DS:$M_RT.$M_CLASS_ADDRS+$M_INDEX,DI ;
 $M_INDEX =  $M_INDEX + 4			 ;  Set next available table location
@@ -475,6 +510,13 @@ ENDM						 ;
 						 ;
 $M_MAKE_COMT  macro			     ;
 						 ;
+    IFNDEF $M_HAS_CLS_8 		     ;; WASM: EXTRN if not defined locally (timing guard)
+      IF FARmsg
+        EXTRN $M_CLS_8:FAR
+      ELSE
+        EXTRN $M_CLS_8:NEAR
+      ENDIF
+    ENDIF
     CALL    $M_CLS_8				 ;  Get addressibilty to class A
     MOV     WORD PTR DS:$M_RT.$M_CLASS_ADDRS+$M_INDEX,DI ;
 $M_INDEX =  $M_INDEX + 4			 ;  Set next available table location

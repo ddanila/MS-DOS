@@ -1724,12 +1724,7 @@ EXTRN	LOADCOM:NEAR
 EXTRN	itestkanj:NEAR
 EXTRN	rprint:NEAR
 EXTRN	sysdispmsg:NEAR
-EXTRN	triageError:NEAR
-EXTRN	LOADCOM:NEAR
-EXTRN	itestkanj:NEAR
-EXTRN	rprint:NEAR
-EXTRN	sysdispmsg:NEAR
-EXTRN	triageError:NEAR
+EXTRN	triageError:FAR		;; WASM: triageError is in TRANGROUP — need FAR call from RESGROUP
 
 INIT	ENDS
 
