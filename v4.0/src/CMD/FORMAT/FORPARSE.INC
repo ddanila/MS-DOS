@@ -81,8 +81,12 @@ Type_Quoted_String	equ	9		;				;AN000;
 
 ;Other
 
+IFNDEF None
 None			equ	0		;				;AN000;
+ENDIF
+IFNDEF No_Error
 No_Error		equ	0		;				;AN000;
+ENDIF
 Switch_Found		equ	0FFFFh		;				;AN000;
 Range_Ok		equ	1		;				;AN000;
 Command_Line_Parms	equ	81h		;				;AN000;

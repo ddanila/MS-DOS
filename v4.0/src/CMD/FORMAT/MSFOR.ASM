@@ -513,7 +513,7 @@ NotSingleSided:
 	jz	Not8SectorsPerTrack
 	add	ax, 2
 ; /8 implies Old_Dir = TRUE
-	mov	Old_Dir,TRUE
+	mov	Old_Dir,0FFh
 Not8SectorsPerTrack:
 
 ; Ok now we know which BPB to use so lets move it to the device parameters
@@ -526,7 +526,7 @@ Not8SectorsPerTrack:
 	mov	cx, size a_BPB
 	push	ds
 	pop	es
-	repnz	movsb
+	rep	movsb
 
 ;*****************************************************************
 ;*  /N/T DCR stuff.  Possible flaw exists if we are dealing with a
@@ -683,7 +683,7 @@ CheckSwitches endp
 ;*****************************************************************************
 
 
-Procedure Size_To_Switch
+Fmt_Proc Size_To_Switch
 
 	cmp	SizeMap,0			;Are there sizes entered?	 ;AN001;
 ;	$IF	NE				;Yes				;AN001;
@@ -774,7 +774,7 @@ Size_To_Switch endp
 ;	 SwitchMap = Switch_4 if 360k or lowere
 ;*****************************************************************************
 
-Procedure High_Capacity_Drive			;
+Fmt_Proc High_Capacity_Drive			;
 
 	test	SizeMap,Size_1200		;1.2mb diskette?		 ;AN001;
 ;	$IF	Z				;Nope				;AN001;
@@ -820,7 +820,7 @@ High_Capacity_Drive endp
 ;*****************************************************************************
 
 
-Procedure Low_Density_Drive			;				;AN000;
+Fmt_Proc Low_Density_Drive			;				;AN000;
 						;
 	test	SizeMap,Size_160		;				 ;AN001;
 ;	$IF	NZ				;				;AN001;
@@ -880,7 +880,7 @@ Low_Density_Drive endp
 ;	720k = /T:80 /N:9
 ;*****************************************************************************
 
-Procedure Small_Drives				;				;AN000;
+Fmt_Proc Small_Drives				;				;AN000;
 
 	test	SizeMap,Size_720		;Ask for 720k?			 ;AN001;
 ;	$IF	Z				;Nope, thats all drive can do	;AN001;
@@ -913,7 +913,7 @@ Small_Drives endp
 ;	720k = /T:80 /N:9
 ;*****************************************************************************
 
-Procedure Other_Drives				;				;AN001;
+Fmt_Proc Other_Drives				;				;AN001;
 
 	test	SizeMap,Size_1440		;Ask for 1.44mb diskette?	 ;AN001;
 ;	$IF	Z				;Nope				;AN001;
@@ -956,7 +956,7 @@ Other_Drives endp
 ;Output: Fatal_Error = YES/NO
 ;*****************************************************************************
 
-Procedure Check_T_N
+Fmt_Proc Check_T_N
 
 	test	SwitchMap,Switch_N		;Make sure /T entered if /N	;AN009;
 ;	$IF	NZ,AND				;				;AN009;
@@ -1013,7 +1013,7 @@ LastChanceToSaveIt proc near
 	cmp	deviceParameters.DP_DeviceType, DEV_5INCH
 	ja	WeCanNotIgnoreThisError
 
-	mov	fLastChance, TRUE
+	mov	fLastChance,0FFh
 
 	or	switchmap, SWITCH_1
 	call	CheckSwitches
@@ -1074,14 +1074,14 @@ LastChanceToSaveIt endp
 ;	ret
 ;*****************************************************************************
 
-Procedure WriteBootSector			;				;AN000;
+Fmt_Proc WriteBootSector			;				;AN000;
 
 	lea	si, deviceParameters.DP_BPB	;Copy EBPB to the boot record	;
 	lea	di, Boot.EXT_BOOT_BPB		;  "  " 	"  "		;AC000:
 	mov	cx, size EXT_BPB_INFO		;  "  " 	"  "		;AC000:
 	push	ds				;Set ES=DS (data segment)	;     ;
 	pop	es				;  "  " 	"  "		;     ;
-	repnz	movsb				;Do the copy			;     ;
+	rep	movsb				;Do the copy			;     ;
 						;Write out the boot record	;     ;
 	mov	al, drive			;Get drive letter		;     ;
 	mov	cx, 1				;Specify 1 sector		;     ;
@@ -1103,7 +1103,7 @@ $$IF62:
 	   rep	   movsb			;  "  "       "  "		;AN000;
 	   call    Create_Serial_ID		;Go create unique ID number	;AN000;
 	   lea	   si,FAT12_String		;Assume 12 bit FAT		;AN000;
-	   cmp	   fBigFAT,TRUE 		;Is it? 			;AN000;
+	   cmp	   fBigFAT,0FFh 		;Is it? 			;AN000;
 ;	   $IF	   E				;Not if fBigFat is set....	;AN000;
 	   JNE $$IF64
 	      lea     si,FAT16_String		;Got 16 bit FAT 		;AN000;
@@ -1112,7 +1112,7 @@ $$IF64:
 						;Copy file system string	;     ;
 	   mov	   cx,8 			; to buffer			;AN000;
 	   lea	   di,Media_ID_Buffer.Media_ID_File_System ;	 "  "		;AN000;
-	   repnz   movsb			;    "   "	  "  "		;AN000;
+	   rep	   movsb			;    "   "	  "  "		;AN000;
 	   mov	   al,Generic_IOCtl		;Generic IOCtl call		;AN000;
 	   mov	   bl,Drive			;Get drive			;AN000;
 	   inc	   bl				;Make it 1 based		;AN000;
@@ -1167,7 +1167,7 @@ WriteBootSector endp				;				;AN000;
 ;	ret
 ;*****************************************************************************
 
-Procedure Create_Serial_ID			;				;AN000;
+Fmt_Proc Create_Serial_ID			;				;AN000;
 
 	DOS_Call Get_Date			;Get date from DOS		;AN000;
 	push	cx				;Save results			;AN000;
@@ -1459,7 +1459,7 @@ IBMBoot ENDS
 ;	ret
 ;*****************************************************************************
 
-Procedure SetPartitionTable			;				;AN000;
+Fmt_Proc SetPartitionTable			;				;AN000;
 
 	xor	ax, ax				;Head				;AC000;
 	xor	bx, bx				;Cylinder			;AC000;
@@ -1468,7 +1468,7 @@ Procedure SetPartitionTable			;				;AN000;
 	call	ReadSector			;this will use space as buffer	;     ;
 ;	$IF	NC				;If read okay			;AN000;
 	JC $$IF70
-	   cmp	   Boot2.Boot_Signature,Boot_ID ;				;AC000;
+	   cmp	   word ptr Boot2.Boot_Signature,Boot_ID ;			;AC000;
 ;	   $IF	   E				;Does signature match?		;AN000;
 	   JNE $$IF71
 	      lea     bx, boot2.PartitionTable	;Yes, point at partition table	;AN000;
@@ -1573,7 +1573,7 @@ SetPartitionTable endp				;				;AN000;
 ;	ret
 ;*****************************************************************************
 
-Procedure Determine_Partition_Type						;AN000;
+Fmt_Proc Determine_Partition_Type						;AN000;
 
 	mov	dx,word ptr [bx].Csec+2 					;an000; dms;Get high word of sector count
 	cmp	dx,0								;AN000;    ;> 32Mb?
@@ -1598,7 +1598,7 @@ $$IF89:
 ;			$else							;an000; dms; < 32 Mb partition
 			JMP SHORT $$EN91
 $$IF91:
-				cmp	fBigFat,True				;an000;    ;16 bit FAT
+				cmp	fBigFat,0FFh				;an000;    ;16 bit FAT
 ;				$IF	E					;AC000;    ;yes
 				JNE $$IF93
 					mov	[BX].SysInd,FAT16_File_System	;an000;    ;type 4
@@ -1629,7 +1629,7 @@ Determine_Partition_Type endp			;				;AN000;
 ;	Outputs : DX:AX - Double word partition size
 ;=========================================================================
 
-Procedure Calc_Total_Sectors_For_Partition					;an000; dms;
+Fmt_Proc Calc_Total_Sectors_For_Partition					;an000; dms;
 
 	mov	ax,word ptr DeviceParameters.DP_BPB.BPB_HiddenSectors[+0]	;an000; dms; low word
 	mov	dx,word ptr DeviceParameters.DP_BPB.BPB_HiddenSectors[+2]	;an000; dms; high word

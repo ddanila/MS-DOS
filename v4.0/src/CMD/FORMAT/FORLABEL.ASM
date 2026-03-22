@@ -10,18 +10,18 @@
 ;		Interpret_Parse
 ;			|
 ;*			|
-;³ÚÄÄÄÄÄ¿ÚÄÄÄÄÄÄÄÄÄÄÄÄÄ¿|ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿ ÚÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
-;À´VolIDÃ´Get_New_LabelÃÄ´Get_11_CharactersÃÂ´Change_Blanks³
-; ÀÄÄÄÄÄÙÀÄÄÄÄÄÄÄÄÄÄÄÄÄÙ ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ³ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
-;					    ³ÚÄÄÄÄÄÄÄÄÄÄÄ¿
-;					    Ã´Skip_Blanks³
-;					    ³ÀÄÄÄÄÄÄÄÄÄÄÄÙ
-;					    ³ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
-;					    Ã´Check_DBCS_OverrunÃ´Check_DBCS_Character³
-;					    ³ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
-;					    ³ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
-;					    À´Copy_FCB_String³
-;					     ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿|ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿
+;ï¿½ï¿½VolIDÃ´Get_New_Labelï¿½Ä´Get_11_Charactersï¿½Â´Change_Blanksï¿½
+; ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+;					    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿
+;					    Ã´Skip_Blanksï¿½
+;					    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+;					    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿
+;					    Ã´Check_DBCS_OverrunÃ´Check_DBCS_Characterï¿½
+;					    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+;					    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿
+;					    ï¿½ï¿½Copy_FCB_Stringï¿½
+;					     ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 ;*****************************************************************************
 ;*****************************************************************************
 
@@ -48,8 +48,12 @@ INCLUDE FORSWTCH.INC
 
 None	equ	0
 StdIn	equ	0
+IFNDEF STDOUT
 StdOut	equ	1
+ENDIF
+IFNDEF STDERR
 StdErr	equ	2
+ENDIF
 Tab	equ	09h
 Label_Buffer_length equ 80h
 Create_Worked equ 0								;an024;
@@ -123,7 +127,7 @@ code	segment public para 'CODE'
 ;	ret
 ;*****************************************************************************
 
-Procedure Volid 				;				;AN000;
+Fmt_Proc Volid 				;				;AN000;
 
 	push	ds				;Save registers 		;AN000;
 	push	si				; "  "	  "  "			;AN000;
@@ -197,7 +201,7 @@ Volid	endp					;				;AN000;
 ;	ret
 ;*****************************************************************************
 
-Procedure Get_New_Label 			;				;AN000;
+Fmt_Proc Get_New_Label 			;				;AN000;
 
 ;	$DO					;Loop until we get good one	;AN000;
 $$DO8:
@@ -268,7 +272,7 @@ Get_New_Label endp				;				;AN000;
 ;	ret
 ;*****************************************************************************
 
-Procedure Get_11_Characters			;				;AN000;
+Fmt_Proc Get_11_Characters			;				;AN000;
 
 	call	Change_Blanks			;Change DBCS blanks to SBCS	;AN000;
 	call	Skip_Blanks			;Skip over leading blanks	;AN000;
@@ -334,7 +338,7 @@ Get_11_Characters endp				;				;AN000;
 ;
 ;*****************************************************************************
 
-Procedure Change_Blanks 			;				;AN000;
+Fmt_Proc Change_Blanks 			;				;AN000;
 
 	push	si				;Save pointer to string 	;AN000;
 	push	cx				;				;AN000;
@@ -424,7 +428,7 @@ Change_Blanks endp				;				;AN000;
 ;	ret
 ;*****************************************************************************
 
-Procedure Skip_Blanks				;				;AN000;
+Fmt_Proc Skip_Blanks				;				;AN000;
 
 	push	di				;Preserve DI, just in case	;AN000;
 	push	si				;Save pointer to string 	;AN000;
@@ -499,7 +503,7 @@ Skip_Blanks endp				;				;AN000;
 ;	Restore regs
 ;*****************************************************************************
 
-Procedure Copy_FCB_String			;				;AN000;
+Fmt_Proc Copy_FCB_String			;				;AN000;
 
 	push	di				;				;AN000;
 	push	cx				;				;AN000;
@@ -551,7 +555,7 @@ Copy_FCB_String endp				;				;AN000;
 ;
 ;*****************************************************************************
 
-Procedure Check_DBCS_Overrun			;				;AN000;
+Fmt_Proc Check_DBCS_Overrun			;				;AN000;
 
 	push	si				;Save pointer			;AN000;
 	push	ax				;Save registers 		;AN000;
@@ -645,7 +649,7 @@ Check_DBCS_Overrun endp 			;				;AN000;
 ;	ret
 ;*****************************************************************************
 
-Procedure Check_DBCS_Character			;				;AN000;
+Fmt_Proc Check_DBCS_Character			;				;AN000;
 
 	push	ds				;Save registers 		;AN000;
 	push	si				; "  "	  "  "			;AN000;
@@ -710,7 +714,7 @@ Check_DBCS_Character endp			;				;AN000;
 ;		  NC			- Character good
 ;=========================================================================
 
-Procedure Scan_For_Invalid_Char 						;an000; dms;
+Fmt_Proc Scan_For_Invalid_Char 						;an000; dms;
 
 	push	ax								;an000; dms;save ax
 	push	cx								;an000; dms;save cx

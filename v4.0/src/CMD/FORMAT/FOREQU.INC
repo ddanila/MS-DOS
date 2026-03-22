@@ -1,7 +1,11 @@
 ;                                              ;                               ;     ;
 
+IFNDEF NO
 NO      equ     0
+ENDIF
+IFNDEF YES
 YES     equ     not NO
+ENDIF
 FSExec  equ     NO                              ;an018; dms;conditional assembly
 ShipDisk equ    NO                              ;an000; dms;ship disk flag
 

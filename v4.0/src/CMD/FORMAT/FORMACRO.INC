@@ -56,7 +56,9 @@ Extended_Message macro                          ;                               
 ;*****************************************************************************
 ;
 
-Procedure       macro   Proc_Name
+;; WASM: DOSMAC.INC also defines a 'procedure' macro (case-insensitive duplicate).
+;; Redefining a macro silently replaces any prior definition in WASM/MASM.
+Fmt_Proc       macro   Proc_Name
 
 Public  Proc_Name
 Proc_Name    proc

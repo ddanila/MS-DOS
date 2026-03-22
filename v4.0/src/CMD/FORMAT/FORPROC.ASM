@@ -120,7 +120,7 @@ FormatAnother? endp
 ;	ret
 ;*****************************************************************************
 
-Procedure YES?					;				;AN000;
+Fmt_Proc YES?					;				;AN000;
 
 	call	User_String			;Get character			;     ;
 ;	$IF	NZ				;Got one if returned NZ 	;AC000;
@@ -271,7 +271,7 @@ NOSERIALNUMBER: 								;AN027;
 ;	ret
 ;*****************************************************************************
 
-Procedure Read_Disk				;				;AN000;
+Fmt_Proc Read_Disk				;				;AN000;
 
 						;This is setup for INT 25h right;AN000;
 						;Change it to Read relative sect;AN000;
@@ -344,7 +344,7 @@ Read_Disk endp					;				;AN000;
 ;	ret
 ;*****************************************************************************
 
-Procedure Write_Disk				;				;AN000;
+Fmt_Proc Write_Disk				;				;AN000;
 
 
 						;This is setup for INT 26h right
@@ -398,7 +398,7 @@ Write_Disk endp 				;				;AN000;
 ;	Outputs : Fdsksiz - Size in bytes of the disk
 ;=========================================================================
 
-Procedure Calc_Total_Addressible_Space		;an013; dms;
+Fmt_Proc Calc_Total_Addressible_Space		;an013; dms;
 
 	push	ax				;an013; dms;save affected regs
 	push	dx				;an013; dms;
@@ -462,7 +462,7 @@ Calc_Total_Addressible_Space	endp		;an013; dms;
 ;		  DX - Total space in clusters
 ;=========================================================================
 
-Procedure Get_Free_Space			;an013; dms;
+Fmt_Proc Get_Free_Space			;an013; dms;
 
 	xor	ax,ax				;an013; dms;clear ax
 	mov	ah,36h				;an013; dms;Get disk free space
@@ -485,7 +485,7 @@ Get_Free_Space	endp				;an013; dms;
 ;	Outputs : SysSiz			- Size of the system
 ;=========================================================================
 
-Procedure Calc_System_Space							;an013; dms;
+Fmt_Proc Calc_System_Space							;an013; dms;
 
 	push	ax								;an013; dms;save regs
 	push	dx								;an013; dms;

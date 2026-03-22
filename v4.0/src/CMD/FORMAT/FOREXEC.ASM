@@ -9,25 +9,25 @@ page	,132					;
 ;
 ;
 ;
-; ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
-; ³EXEC_FS_FORMAT³
-; ÀÄÂÄÄÄÄÄÄÄÄÄÄÄÄÙ
-;   ³
-;   ³ÚÄÄÄÄÄÄ¿
-;   Ã´Shrink³
-;   ³ÀÄÄÄÄÄÄÙ
-;   ³ÚÄÄÄÄÄÄÄÄÄÄ¿
-;   Ã´Setup_EXEC³
-;   ³ÀÄÄÄÄÄÄÄÄÄÄÙ
-;   ³ÚÄÄÄÄÄÄÄÄÄ¿	  ÚÄÄÄÄÄÄÄÄÄÄÄÄ¿
-;   Ã´EXEC_ArgVÃÄÄÄÄÄÄÄÄÄÄ´EXEC_Program³
-;   ³ÀÄÄÄÄÄÄÄÄÄÙ	  ÀÄÄÄÄÄÄÄÄÄÄÄÄÙ
-;   ³ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿ ÚÄÄÄÄÄÄÄÄÄÄÄÄ¿
-;   Ã´EXEC_Cur_DirectoryÃÄ´EXEC_Program³
-;   ³ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ ÀÄÄÄÄÄÄÄÄÄÄÄÄÙ
-;   ³ÚÄÄÄÄÄÄÄÄÄÄÄÄ¿	  ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿ ÚÄÄÄÄÄÄÄÄÄÄÄÄ¿
-;   À´EXEC_RoutineÃÄÄÄÄÄÄÄ´Build_Path_And_EXECÃÄ´EXEC_Program³
-;    ÀÄÄÄÄÄÄÄÄÄÄÄÄÙ	  ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ ÀÄÄÄÄÄÄÄÄÄÄÄÄÙ
+; ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿
+; ï¿½EXEC_FS_FORMATï¿½
+; ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+;   ï¿½
+;   ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿
+;   Ã´Shrinkï¿½
+;   ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+;   ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿
+;   Ã´Setup_EXECï¿½
+;   ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+;   ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿	  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿
+;   Ã´EXEC_ArgVï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä´EXEC_Programï¿½
+;   ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+;   ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿
+;   Ã´EXEC_Cur_Directoryï¿½Ä´EXEC_Programï¿½
+;   ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+;   ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿	  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿
+;   ï¿½ï¿½EXEC_Routineï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä´Build_Path_And_EXECï¿½Ä´EXEC_Programï¿½
+;    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 ;
 ; Change List: AN000 - New code DOS 3.3 spec additions
 ;	       AC000 - Changed code DOS 3.3 spec additions
@@ -124,7 +124,9 @@ Exec_Block_Parms ends
 String_Done	equ	0
 No_Error	equ	0
 Error		equ	1
+IFNDEF STDERR
 Stderr		equ	2
+ENDIF
 Stack_Space	equ	02eh							;an000; dms; IBM addition ROM paras
 
 ;
@@ -198,8 +200,9 @@ data	ends
 
 code	segment public para 'code'
 	assume	cs:code,ds:data
+IF FSExec
 EXTRN	SYS_RET_ERR:NEAR
-EXTRN	SYS_RET_ERR:NEAR
+ENDIF
 
 ;
 ;****************************************************************************
@@ -214,7 +217,7 @@ EXTRN	SYS_RET_ERR:NEAR
 IF FSExec					;an018; dms;if /FS: desired
 
 
-Procedure Exec_FS_Format			;				;AC000;
+Fmt_Proc Exec_FS_Format			;				;AC000;
 
 	Set_Data_Segment			;
 	call	Set_FCB1_Drive			;an000;dms;
@@ -295,7 +298,7 @@ Exec_FS_Format endp
 ;
 
 
-Procedure Shrink				;				;AC000;
+Fmt_Proc Shrink				;				;AC000;
 
 	mov	ax,cs				;an000; dms;get code segment
 	mov	bx,ds				;an000; dms;get data segment
@@ -332,7 +335,7 @@ Shrink	endp					;				;AN000;
 ;
 ;
 
-Procedure Setup_Exec				;				;AC000;
+Fmt_Proc Setup_Exec				;				;AC000;
 
 	Set_Data_Segment
 	mov	ax,PSP_Segment			;Get segment of PSP		;AN000;
@@ -375,7 +378,7 @@ Setup_EXEC endp 				;				;AN000;
 ; FORMAT.COM
 ;
 
-Procedure EXEC_Argv				;				;AC000;
+Fmt_Proc EXEC_Argv				;				;AC000;
 
 	Set_Data_Segment			;DS,ES = DATA
 	cld					;				;     ;
@@ -439,7 +442,7 @@ EXEC_ArgV endp					;				;AN000;
 ;
 ;
 
-Procedure EXEC_Program				;				;AC000;
+Fmt_Proc EXEC_Program				;				;AC000;
 
 	Set_Data_Segment			;				;AN000;
 	mov	ExitStatus,No_Error		;Setup to Exec the file 	;     ;
@@ -476,7 +479,7 @@ EXEC_Program endp				;				;AN000;
 ;
 ;
 
-Procedure EXEC_Routine				;				;AN000;
+Fmt_Proc EXEC_Routine				;				;AN000;
 
 	Set_Data_Segment			;				;AN000;
 	mov	ExitStatus,Error		;Assume the worst		;     ;
@@ -521,7 +524,7 @@ EXEC_Routine endp
 ;
 ;
 
-Procedure Build_Path_And_Exec			;				;AN000;
+Fmt_Proc Build_Path_And_Exec			;				;AN000;
 
 ;	$DO					;				;AC000;
 $$DO27:
@@ -593,7 +596,7 @@ Build_Path_And_EXEC Endp			;				;AN000;
 ;
 ;
 
-Procedure Exec_Cur_Directory			;				;AC000;
+Fmt_Proc Exec_Cur_Directory			;				;AC000;
 
 	Set_Data_Segment			;				;AN000;
 	mov	si,offset FS_String_Buffer	;Setup path for current dir	;     ;
@@ -610,7 +613,7 @@ EXEC_Cur_Directory endp 			;				;AN000;
 ;			  the drive identifier, to the default drive.
 ;=========================================================================
 
-Procedure Set_FCB1_Drive			;an000;dms;set drive ID
+Fmt_Proc Set_FCB1_Drive			;an000;dms;set drive ID
 
 	push	ds				;an000;dms;save ds
 	push	si				;an000;dms;save si

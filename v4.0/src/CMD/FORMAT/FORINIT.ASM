@@ -45,6 +45,15 @@
 ;*****************************************************************************
 ;*****************************************************************************
 
+;; WASM: NO/YES are used before the INCLUDE files that define them (FOREQU.INC).
+;; Pre-define here so the data segment assembles correctly.
+IFNDEF NO
+NO	EQU	0
+ENDIF
+IFNDEF YES
+YES	EQU	NOT NO
+ENDIF
+
 data	segment public para 'DATA'
 
 
@@ -108,8 +117,8 @@ INCLUDE FORMACRO.INC
 INCLUDE SYSCALL.INC
 INCLUDE IOCTL.INC
 INCLUDE FOREQU.INC
+INCLUDE FORSWTCH.INC  ;; WASM: must precede FORPARSE.INC (Size_xxx EQUs used as db values)
 INCLUDE FORPARSE.INC
-INCLUDE FORSWTCH.INC
 .list
 
 ;
@@ -225,7 +234,7 @@ code	segment public	para	'CODE'
 ;	Exit program
 ;*****************************************************************************
 
-Procedure Main_Init				;				;AN000;
+Fmt_Proc Main_Init				;				;AN000;
 
 
 	Set_Data_Segment			;Set DS,ES to Data segment	;AN000;
@@ -314,7 +323,7 @@ Main_Init endp					;				;AN000;
 ;	ret
 ;*****************************************************************************
 
-Procedure Init_Input_Output			;				;AN000;
+Fmt_Proc Init_Input_Output			;				;AN000;
 
 	Set_Data_Segment			;Set DS,ES to Data segment	;AN000;
 	call	Preload_Messages		;Load up message retriever	;AN000;
@@ -379,7 +388,7 @@ Init_Input_Output endp				;				;AN000;
 ;	ret
 ;*****************************************************************************
 
-Procedure Preload_Messages			;				;AN000;
+Fmt_Proc Preload_Messages			;				;AN000;
 						;
 	Set_Data_Segment			;Set DS,ES to Data segment	;AN000;
 	call	SysLoadMsg			;Preload the messages		;AN000;
@@ -436,7 +445,7 @@ IF FSExec					;/FS: conditional assembly	;an018; dms;
 ;	ret
 ;*****************************************************************************
 
-Procedure Check_For_FS_Switch			;				;AN000;
+Fmt_Proc Check_For_FS_Switch			;				;AN000;
 						;AN000;
 	Set_Data_Segment			;Set DS,ES to Data segment	;AN000;
 	call	Parse_For_FS_Switch		;See if /FS entered		;AN000;
@@ -532,7 +541,7 @@ Check_For_FS_Switch endp			;				;AN000;
 ;	ret
 ;*****************************************************************************
 
-Procedure Parse_For_FS_Switch			;				;AN000;
+Fmt_Proc Parse_For_FS_Switch			;				;AN000;
 						;
 	Set_Data_Segment			;Set DS,ES to Data segment	;AN000;
 	mov	Drive_Letter_Buffer.Drive_Number,Init ; 			;AN000;
@@ -618,7 +627,7 @@ ENDIF						;/FS: conditional assembly end	;an018;dms;
 ;	ret
 ;*****************************************************************************
 
-Procedure Parse_Command_Line			;				;AN000;
+Fmt_Proc Parse_Command_Line			;				;AN000;
 
 	Set_Data_Segment			;Set DS,ES to Data segment	;AN000;
 	push	ds
@@ -756,7 +765,7 @@ Parse_Command_Line endp 			;				;AN000;
 ;	ret
 ;*****************************************************************************
 
-Procedure Interpret_Parse			;				;AN000;
+Fmt_Proc Interpret_Parse			;				;AN000;
 
 	push	ds				;Save segment			;AN000;
 	push	si				;Restore SI for parser		;AN000;
@@ -990,7 +999,7 @@ Interpret_Parse endp				;				;AN000;
 ;	ret
 ;*****************************************************************************
 
-Procedure Validate_Target_Drive 		;				;AN000;
+Fmt_Proc Validate_Target_Drive 		;				;AN000;
 						;
 	call	Check_Target_Drive		;See if valid drive letter	;AN000;
 	cmp	Fatal_Error,YES 		;Can we continue?		;AN000;
@@ -1042,7 +1051,7 @@ Validate_Target_Drive endp			;				;AN000;
 ;	ret
 ;*****************************************************************************
 
-Procedure Check_Target_Drive			;				;AN000;
+Fmt_Proc Check_Target_Drive			;				;AN000;
 						;
 	DOS_Call Get_Default_Drive		;Find the current drive 	;AC000;
 	add	al,'A'				;Convert to drive letter	;     ;
@@ -1097,7 +1106,7 @@ Check_Target_Drive endp 			;				;AN000;
 ;	ret
 ;*****************************************************************************
 
-Procedure Check_For_Network			;				;AN000;
+Fmt_Proc Check_For_Network			;				;AN000;
 						;
 	mov	bl,Drive			;Drive is 0=A, 1=B		;     ;
 	inc	bl				;Get 1=A, 2=B for IOCtl call	;     ;
@@ -1151,7 +1160,7 @@ Check_For_Network endp				;				;AN000;
 ;	ret
 ;*****************************************************************************
 
-Procedure Check_Translate_Drive 		;				;AN000;
+Fmt_Proc Check_Translate_Drive 		;				;AN000;
 						;
 	mov	bl,Drive			;Get drive			;     ;
 	add	byte ptr [TranSrc],bl		;Make string "d:\"		;     ;
@@ -1195,7 +1204,7 @@ Check_Translate_Drive endp			;				;AN000;
 ;	ret
 ;*****************************************************************************
 
-Procedure Hook_CNTRL_C				;				;AN000;
+Fmt_Proc Hook_CNTRL_C				;				;AN000;
 						;
 	mov	al,23H				;Specify CNTRL handler		;     ;
 	mov	dx, offset ControlC_Handler	;Point at it			;     ;
@@ -1219,7 +1228,7 @@ Hook_CNTRL_C endp				;				;AN000;
 ;	Outputs : Fatal_Error	- Yes if AL contained FFh
 ;=========================================================================
 
-Procedure Check_For_Invalid_Drive		;an000; dms;
+Fmt_Proc Check_For_Invalid_Drive		;an000; dms;
 
 	push	ax				;an000; dms;save ax
 	cmp	FAT_Flag,Yes			;an000; dms;FAT system?
@@ -1255,7 +1264,7 @@ Check_For_Invalid_Drive endp			;an000; dms;
 ;	Date	: 11/6/87
 ;=========================================================================
 
-Procedure Determine_FAT_Non_FAT 						;an012; dms;
+Fmt_Proc Determine_FAT_Non_FAT 						;an012; dms;
 
 	push	ax								;an012; dms;save regs
 	push	dx								;an012; dms;

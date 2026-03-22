@@ -352,10 +352,18 @@ printStringPointer dw 0
 
 ; Exit status defines
 ExitStatus		db	0
+IFNDEF ExitOK
 ExitOK			equ	0
+ENDIF
+IFNDEF ExitCtrlC
 ExitCtrlC		equ	3
+ENDIF
+IFNDEF ExitFatal
 ExitFatal		equ	4
+ENDIF
+IFNDEF ExitNo
 ExitNo			equ	5
+ENDIF
 ExitDriveNotReady	equ	6						;an017; dms;drive not ready error
 ExitWriteProtect	equ	7						;an017; dms;write protect error
 
@@ -694,7 +702,7 @@ BadClus 	proc		near		;an000; mark bad clusters
 	push	es
 
 	mov	es, word ptr fatSpace + 2	;an005; obtain seg of FAT
-	CMP	fBigFat,TRUE			;an005; 16 bit fat?
+	CMP	fBigFat,0FFh			;an005; 16 bit fat?
 ;	$if	ne				;an005; no - 12-bit fat
 	JE $$IF8
 		push	ax			;an000; save ax - contains low cluster number
@@ -1058,7 +1066,7 @@ NotRemove:
 ;				Flags
 ;
 DSKPRM:
-	CMP	fLastChance,TRUE
+	CMP	fLastChance,0FFh
 	JE	PrmptRet
 
 	CMP	deviceParameters.DP_DeviceType, DEV_HARDDISK
@@ -2081,7 +2089,7 @@ SetfBigFat proc near
 	cmp	deviceParameters.DP_BPB.BPB_BigTotalSectors+2,0 ; > 32mb part?	;AN000;
 ;	$IF	NE				;Yes, big FAT	;AC000;
 	JE $$IF21
-	   mov	   fBigFat, TRUE		;Set flag	;AN000;
+	   mov	   fBigFat,0FFh		;Set flag	;AN000;
 ;	$ELSE					;Nope, < 32,b	 ;AC000;
 	JMP SHORT $$EN21
 $$IF21:
@@ -2101,7 +2109,7 @@ $$IF23:
 	   cmp	   ax,BIG_FAT_THRESHOLD 	;Is clusters >= 4086?
 ;	   $IF	   AE
 	   JNAE $$IF25
-	      mov     fBigFAT,TRUE		;16 bit FAT if >=4096
+	      mov     fBigFAT,0FFh		;16 bit FAT if >=4096
 						;** END fix for PTM PCDOS P51
 ;	   $ENDIF
 $$IF25:
@@ -2167,7 +2175,7 @@ NotBigTotalSectors:
 	les	bx, directorySector
 ; If Old_Dir = TRUE then put the first letter of each directory entry must be 0E5H
 	xor	al, al
-	cmp	old_Dir, TRUE
+	cmp	old_Dir,0FFh
 	jne	StickE5
 	mov	al, 0e5H
 StickE5:
@@ -2258,7 +2266,7 @@ DiskFormat proc near
 	mov	ah, 0ffH
 	stosw
 	mov	ax, 00ffH
-	test	fBigFat, TRUE
+	test	fBigFat,0FFh
 	jz	NotBig
 	mov	ax, 0ffffH
 NotBig: stosw
@@ -2352,7 +2360,7 @@ StdBPB:
 FormatLoop:
 	call	Format_Loop							;an015; dms;Format until CY occurs
 
-	cmp	Format_End,True 						;an015; dms;End of Format?
+	cmp	Format_End,0FFh 						;an015; dms;End of Format?
 ;	$if	e								;an015; dms;yes
 	JNE $$IF36
 		mov	FormatError,0						;an015; dms;signal good format
@@ -2432,11 +2440,11 @@ BadSector proc	near
 ContinueFormat:
 	call	Adj_Track_Count 						;an015; dms;decrease track counter
 	call	NextTrack							;an015; dms;adjust head and cylinder
-	cmp	Format_End,True 						;an015; dms;end of format?
+	cmp	Format_End,0FFh 						;an015; dms;end of format?
 ;	$if	ne								;an015; dms;no
 	JE $$IF44
 		call	Format_Loop						;an015; dms;format until CY
-		cmp	Format_End,True 					;an015; dms;end of format?
+		cmp	Format_End,0FFh 					;an015; dms;end of format?
 ;		$if	ne							;an015; dms;no
 		JE $$IF45
 			call	CheckError					;an015; dms;must be error - which error?
@@ -2500,7 +2508,7 @@ data	ends
 ;		FP_Head 	- Head of track being formatted
 ;=========================================================================
 
-Procedure Calc_Current_Head_Cyl 						;an000; dms;
+Fmt_Proc Calc_Current_Head_Cyl 						;an000; dms;
 
 	push	cx								;an000; dms;save cx
 	mov	cx,FormatPacket.FP_Cylinder					;an000; dms;get current cylinder
@@ -2992,7 +3000,7 @@ Multiply_32_Bits endp
 ;		  CX	- remainder
 ;=========================================================================
 
-Procedure Divide_32_Bits							;an000; dms;
+Fmt_Proc Divide_32_Bits							;an000; dms;
 
 	push	ax								;an000; dms;save regs
 	push	bx								;an000; dms;
@@ -3198,7 +3206,7 @@ Reset_Ctrl_Break	endp			;ac010; dms;
 ;	Outputs : CommandFile		 - Holds path to COMMAND.COM
 ;=========================================================================
 
-Procedure	Get_Command_Path		;an011; dms;
+Fmt_Proc	Get_Command_Path		;an011; dms;
 
 	push	ds				;an011; dms;save ds
 	push	es				;an011; dms;save es
@@ -3283,7 +3291,7 @@ Get_Command_Path	endp			;an011; dms;
 ;
 ;
 
-Procedure Get_PSP_Parms 			;				;AC000;
+Fmt_Proc Get_PSP_Parms 			;				;AC000;
 
 	Set_Data_Segment
 	mov	ax,PSP_Segment			;Get segment of PSP		;AN000;
@@ -3314,7 +3322,7 @@ Get_PSP_Parms endp				;				;AN000;
 ;				      on target drive.
 ;=========================================================================
 
-Procedure	Command_Root			;an011; dms;
+Fmt_Proc	Command_Root			;an011; dms;
 
 	push	ds				;an011; dms; save ds
 	push	es				;an011; dms; save es
@@ -3351,7 +3359,7 @@ Command_Root	endp				;an011; dms;
 ;	Outputs : BPB information
 ;=========================================================================
 
-Procedure Set_BPB_Info								;an012; dms;calc new BPB
+Fmt_Proc Set_BPB_Info								;an012; dms;calc new BPB
 
 	Set_Data_Segment							;an012; dms;set up addressibility
 	cmp	DeviceParameters.DP_BPB.BPB_NumberOfFats,00h			;an012; dms;see if we have 0 FATS specified
@@ -3398,7 +3406,7 @@ Set_BPB_Info	endp								;an012; dms;
 ;	Outputs : DS:SI     - Points to applicable disk data
 ;=========================================================================
 
-Procedure Scan_Disk_Table							;an012; dms;
+Fmt_Proc Scan_Disk_Table							;an012; dms;
 
 	cmp	DeviceParameters.DP_BPB.BPB_TotalSectors,00h			;an012; dms;small disk?
 ;	$if	ne								;an012; dms;yes
@@ -3444,7 +3452,7 @@ Scan_Disk_Table endp								;an012; dms;
 ;	Outputs : DeviceParameters.DP_BPB.BPB_SectorsPerFat
 ;=========================================================================
 
-Procedure Calc_Big_FAT								;an012; dms;
+Fmt_Proc Calc_Big_FAT								;an012; dms;
 
 	cmp	DeviceParameters.DP_BPB.BPB_TotalSectors,00h			;an012; dms;small disk?
 ;	$if	ne								;an012; dms;yes
@@ -3491,7 +3499,7 @@ Calc_Big_FAT	endp								;an012; dms;
 ;	Outputs : DeviceParameters.DP_BPB.BPB_SectorsPerFat
 ;=========================================================================
 
-Procedure Calc_Small_FAT							;an012; dms;
+Fmt_Proc Calc_Small_FAT							;an012; dms;
 
 	cmp	DeviceParameters.DP_BPB.BPB_TotalSectors,00h			;an012; dms;small disk?
 ;	$if	ne								;an012; dms;yes
@@ -3546,7 +3554,7 @@ Calc_Small_FAT	endp								;an012; dms;
 ;	Outputs : Marked cluster as bad
 ;=========================================================================
 
-Procedure Get_Bad_Sector_Hard							;an000; dms;
+Fmt_Proc Get_Bad_Sector_Hard							;an000; dms;
 
 	push	cx								;an000; dms;save cx
 	mov	cx,0001h							;an000; dms;set counter to start at 1
@@ -3559,7 +3567,7 @@ $$DO115:
 		JA $$EN115
 		push	cx							;an000; dms;save cx
 
-		cmp	Cluster_Boundary_Flag,True				;an000; dms;full buffer there?
+		cmp	Cluster_Boundary_Flag,0FFh				;an000; dms;full buffer there?
 ;		$if	e							;an000; dms;yes
 		JNE $$IF117
 			call	Calc_Cluster_Boundary				;an000; dms;see if on boundary
@@ -3625,7 +3633,7 @@ Get_Bad_Sector_Hard	endp							;an000; dms;
 ;				  sectors it is verifying.
 ;=========================================================================
 
-Procedure	Verify_Structure_Set_Up 					;an019; dms;set up verify structure
+Fmt_Proc	Verify_Structure_Set_Up 					;an019; dms;set up verify structure
 
 	mov	RWPacket.TRWP_SpecialFunctions,00h				;an000; dms;reset special functions
 
@@ -3660,7 +3668,7 @@ Verify_Structure_Set_Up endp							;an019; dms;
 ;	Outputs : FAT marked with bad sectors
 ;=========================================================================
 
-Procedure Get_Bad_Sector_Floppy 						;an000; dms;
+Fmt_Proc Get_Bad_Sector_Floppy 						;an000; dms;
 
 	push	bx								;an000; dms;save regs
 	push	cx								;an000; dms;
@@ -3700,7 +3708,7 @@ Get_Bad_Sector_Floppy	endp							;an000; dms;
 ;
 ;	Outputs : DX:AX - Cluster position
 ;=========================================================================
-Procedure Calc_Cluster_Position 						;an000; dms;
+Fmt_Proc Calc_Cluster_Position 						;an000; dms;
 
 	push	cx								;an000; dms;save regs
 	push	di								;an000; dms;
@@ -3741,7 +3749,7 @@ Calc_Cluster_Position	endp							;an000; dms;
 ;	Outputs : DL - Capitalized character
 ;=========================================================================
 
-Procedure Cap_Char								;an011; dms;
+Fmt_Proc Cap_Char								;an011; dms;
 
 	push	ax								;an011; dms;save ax
 	mov	ax,6520h							;an011; dms;capitalize character
@@ -3760,7 +3768,7 @@ Cap_Char	endp								;an011; dms;
 ;
 ;=========================================================================
 
-Procedure Set_Disk_Access_On_Off						;an014; dms;
+Fmt_Proc Set_Disk_Access_On_Off						;an014; dms;
 
 	push	ax								;an014; dms;save regs
 	push	bx								;an014; dms;
@@ -3802,7 +3810,7 @@ Set_Disk_Access_On_Off	endp							;an014; dms;
 ;
 ;=========================================================================
 
-Procedure Get_Disk_Access							;an014; dms;
+Fmt_Proc Get_Disk_Access							;an014; dms;
 
 	push	ax								;an014; dms;save regs
 	push	bx								;an014; dms;
@@ -3854,7 +3862,7 @@ Get_Disk_Access 	endp							;an014; dms;
 ;						  a track.
 ;=========================================================================
 
-Procedure Calc_Cluster_Boundary 						;an000; dms;
+Fmt_Proc Calc_Cluster_Boundary 						;an000; dms;
 
 	push	ax								;an000; dms;save regs
 	push	bx								;an000; dms;
@@ -3934,7 +3942,7 @@ Calc_Cluster_Boundary	endp							;an000; dms;
 ;		  Cluster_Boundary_Buffer_Seg	- Pointer to buffer
 ;=========================================================================
 
-Procedure Cluster_Buffer_Allocate						;an000; dms;
+Fmt_Proc Cluster_Buffer_Allocate						;an000; dms;
 
 	push	ax								;an000; dms;save regs
 	push	bx								;an000; dms;
@@ -3961,7 +3969,7 @@ Procedure Cluster_Buffer_Allocate						;an000; dms;
 		mov	ax,(Alloc shl 8)					;an000; dms;
 		int	21h							;an000; dms;
 		mov	Cluster_Boundary_Buffer_Seg,ax				;an000; dms;save pointer to buffer
-		mov	Cluster_Boundary_Flag,True				;an000; dms;signal space available
+		mov	Cluster_Boundary_Flag,0FFh				;an000; dms;signal space available
 ;	$else									;an000; dms;not enough room
 	JMP SHORT $$EN137
 $$IF137:
@@ -3986,7 +3994,7 @@ Cluster_Buffer_Allocate endp							;an000; dms;
 ;
 ;=========================================================================
 
-Procedure Set_CDS_Off								;an000; dms;
+Fmt_Proc Set_CDS_Off								;an000; dms;
 
 	push	ax								;an000; dms;save regs
 	push	dx								;an000; dms;
@@ -4011,7 +4019,7 @@ Set_CDS_Off	endp								;an000; dms;
 ;
 ;=========================================================================
 
-Procedure Format_Access_Wrap_Up 						;an000; dms;
+Fmt_Proc Format_Access_Wrap_Up 						;an000; dms;
 
 	cmp	Disk_Access.DAC_Access_Flag,0ffh				;an015; dms;access prev. allowed?
 ;	$if	ne								;an015; dms;no
@@ -4062,7 +4070,7 @@ Format_Access_Wrap_Up	endp							;an000; dms;
 ;		  ax	- new offset value
 ;=========================================================================
 
-Procedure BadClus_Address_Adjust						;an000; dms;
+Fmt_Proc BadClus_Address_Adjust						;an000; dms;
 
 	push	bx								;an000; save regs
 	push	dx								;an000;
@@ -4107,14 +4115,14 @@ BadClus_Address_Adjust	endp							;an000; dms;
 ;		  NC			- tracks left to format
 ;=========================================================================
 
-Procedure NextTrack								;an015; dms;
+Fmt_Proc NextTrack								;an015; dms;
 
 
 	cmp	TracksLeft,00							;an015; dms;end of format?
 ;	$if	e								;an015; dms;yes
 	JNE $$IF149
 		stc								;an015; dms;signal end of format
-		mov	Format_End,True
+		mov	Format_End,0FFh
 ;	$else
 	JMP SHORT $$EN149
 $$IF149:
@@ -4162,7 +4170,7 @@ NextTrack	endp								;an015; dms;
 ;					  or multi track format
 ;=========================================================================
 
-Procedure Determine_Format_Type 						;an015; dms;
+Fmt_Proc Determine_Format_Type 						;an015; dms;
 
 	cmp	DeviceParameters.DP_DeviceType,Dev_HardDisk			;an015; dms;harddisk?
 ;	$if	e								;an015; dms;yes
@@ -4192,7 +4200,7 @@ Determine_Format_Type	endp							;an015; dms;
 ;		  AX			- extended error on CY
 ;=========================================================================
 
-Procedure FormatTrack								;an015; dms;
+Fmt_Proc FormatTrack								;an015; dms;
 
 	mov	ax,(IOCTL shl 8) or Generic_IOCTL				;an015; dms;Generic IOCTL
 	mov	bl,drive							;an015; dms;get drive number
@@ -4232,7 +4240,7 @@ FormatTrack	endp								;an015; dms;
 ;						  call
 ;=========================================================================
 
-Procedure Determine_Track_Count 						;an015; dms;
+Fmt_Proc Determine_Track_Count 						;an015; dms;
 
 	cmp	DeviceParameters.DP_DeviceType,Dev_HardDisk			;an015; dms;harddisk?
 ;	$if	e								;an015; dms;yes
@@ -4270,7 +4278,7 @@ Determine_Track_Count	endp							;an015;dms;
 ;
 ;=========================================================================
 
-Procedure Calc_Track_Count							;an015; dms;
+Fmt_Proc Calc_Track_Count							;an015; dms;
 
 	push	ax								;an015; dms;save regs
 	mov	ax,Track_Count							;an015; dms;max bytes to format
@@ -4299,7 +4307,7 @@ Calc_Track_Count	endp							;an015; dms;
 ;				     to FormatTrack
 ;=========================================================================
 
-Procedure Calc_Max_Tracks_To_Format
+Fmt_Proc Calc_Max_Tracks_To_Format
 
 	push	ax								;an015; dms;save regs
 	push	bx								;an015; dms;
@@ -4339,7 +4347,7 @@ Calc_Max_Tracks_To_Format	endp
 ;
 ;=========================================================================
 
-Procedure Format_Track_Retry
+Fmt_Proc Format_Track_Retry
 
 	clc									;an022; dms; clear existing CY
 	mov	Tracks_To_Format,1						;an015; dms; only format 1 track
@@ -4377,7 +4385,7 @@ Format_Track_Retry	endp							;an015; dms;
 ;		  AX - Possible error condition code
 ;=========================================================================
 
-Procedure Format_Loop								;an015; dms;
+Fmt_Proc Format_Loop								;an015; dms;
 
 	clc									;an015; dms;initialize to NC
 ;	$do									;an015; dms;while NC
@@ -4444,7 +4452,7 @@ Format_Loop	endp								;an015; dms;
 ;	Outputs : TracksLeft	- # of tracks remaining to be formatted
 ;=========================================================================
 
-Procedure Adj_Track_Count							;an015; dms;
+Fmt_Proc Adj_Track_Count							;an015; dms;
 
 	push	ax								;an015; dms; save regs
 	mov	ax,TracksLeft							;an015; dms; get tracks remaining
@@ -4469,7 +4477,7 @@ Adj_Track_Count endp								;an015; dms;
 ;	Outputs : Message printed as appropriate.
 ;=========================================================================
 
-Procedure Prompt_User_For_Disk							;an016;dms;
+Fmt_Proc Prompt_User_For_Disk							;an016;dms;
 
 	push	ax								;an016;dms;save ax
 	test	switchmap, (SWITCH_Backup or SWITCH_Select or SWITCH_AUTOTEST) ;Suppress prompt?	       ;AC000;
