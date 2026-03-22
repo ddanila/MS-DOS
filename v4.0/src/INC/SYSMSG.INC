@@ -453,10 +453,34 @@ ELSE						 ; ELSE
     $M_INDEX =	    0				 ;
     $M_COUNT =	    0				 ;     Build normal utilities
 						 ;
-    REPT    nummsg				 ;
-    $M_COUNT =	    $M_COUNT + 1		 ;
-    $M_MAKE %$M_COUNT				 ;
-    ENDM					 ;
+    ;; WASM: REPT nummsg fails in nested macro+INCLUDE context
+    ;; (MSG_SERVICES -> INCLUDE MSGSERV.ASM -> $M_BUILD_PTRS %%$M_NUM_CLS).
+    ;; %%$M_NUM_CLS expansion yields wrong value in WASM nested context.
+    ;; Fix: iterate up to max class count (8) using $M_HAS_CLS_N flags.
+    IFDEF $M_HAS_CLS_1				 ;
+      $M_MAKE 1					 ;
+    ENDIF					 ;
+    IFDEF $M_HAS_CLS_2				 ;
+      $M_MAKE 2					 ;
+    ENDIF					 ;
+    IFDEF $M_HAS_CLS_3				 ;
+      $M_MAKE 3					 ;
+    ENDIF					 ;
+    IFDEF $M_HAS_CLS_4				 ;
+      $M_MAKE 4					 ;
+    ENDIF					 ;
+    IFDEF $M_HAS_CLS_5				 ;
+      $M_MAKE 5					 ;
+    ENDIF					 ;
+    IFDEF $M_HAS_CLS_6				 ;
+      $M_MAKE 6					 ;
+    ENDIF					 ;
+    IFDEF $M_HAS_CLS_7				 ;
+      $M_MAKE 7					 ;
+    ENDIF					 ;
+    IFDEF $M_HAS_CLS_8				 ;
+      $M_MAKE 8					 ;
+    ENDIF					 ;
   ENDIF 					 ;
 ENDIF						 ;
 ENDM						 ;
