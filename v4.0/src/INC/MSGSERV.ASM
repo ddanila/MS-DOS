@@ -203,7 +203,7 @@ ENDIF							     ;;AN000;;
     ENDIF						     ;;AN000;; END of include of Data table
 
 ; 
-    IF	    NOT  $M_MSGDATA_ONLY			     ;;AN000;; IF this was a request for only the data table THEN
+    IF	    $M_MSGDATA_ONLY EQ 0			     ;;AN000;; IF this was a request for only the data table THEN ;; WASM: avoid IF NOT (mishandles TRUE=0FFFFh)
 							     ;; 	don't include any more code
 							     ;;AN000;; Figure out what other code to include
       IF      DISK_PROC 				     ;;AN003;;	 Is the request to include the READ_DISK code
@@ -613,7 +613,7 @@ ENDIF							     ;;AN000;;
 							     ;;        Error ?
 ;	$IF	NC					     ;;AN000;; No.
 	JC $MIF20
-IF	  NOT	  NOVERCHECKmsg 			     ;;AN000;;	IF version check was not supressed
+IF	  NOVERCHECKmsg EQ 0				     ;;AN000;;	IF version check was not supressed ;; WASM: avoid IF NOT (mishandles TRUE=0FFFFh)
 	  POP	  CX					     ;;AN000;;	Reset stack
 ENDIF							     ;;AN000;;
 	  POP	  DI					     ;;AN000;;	Restore REGS
