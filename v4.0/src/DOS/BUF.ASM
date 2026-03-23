@@ -125,7 +125,7 @@ Map_Entry2:
 	MOV	WORD PTR [LASTBUFFER],-1   ;LB. invalidate last buffer		;AN000;
 	MOV	BX,[DI.EMS_PAGE_NUM]	  ;LB. logical page			;AN000;
 
-IF	NOT	BUFFERFLAG
+IF BUFFERFLAG EQ 0
 	LDS	DI,[DI.BUFFER_BUCKET]	  ;LB. ds:di is 1st buffer addr 	;AN000;
 	MOV	[FIRST_BUFF_ADDR],DI	  ;LB. 1/19/88 save first buffer addr	;AN000;
 	CALL	SET_MAP_PAGE		  ;LB. activate handle if EMS there	;AN000;
@@ -164,7 +164,7 @@ Procedure   SET_MAP_PAGE,NEAR							;AN000;
 	CMP	[BUF_EMS_MODE],-1	  ;LB. EMS support			;AN000;
 	JZ	No_map			  ;LB. no				;AN000;
 
-IF	NOT BUFFERFLAG
+IF BUFFERFLAG EQ 0
 	CMP	[ACT_PAGE],BX		  ;LB. already mapped ? 		;AN000;
 	JZ	No_map			  ;LB. yes				;AN000;
 ENDIF

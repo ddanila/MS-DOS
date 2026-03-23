@@ -298,7 +298,7 @@ CheckErrType:
 	jmp	short ASK
 
 ContOld:
-	IF	NOT Tokenized
+	IF Tokenized EQ 0
 	MOV	AX,SI				;AN000; get reading/writing for message
 	MOV	DH,UTIL_MSG_CLASS		;AN000; this is a utility message
 	CALL	SYSGETMSG			;AN000; get the message

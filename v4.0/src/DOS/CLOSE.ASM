@@ -406,7 +406,7 @@ EXTRN	XCHGP:NEAR
 	retnz
 	TEST	BX,sf_isnet
 	JZ	LOCAL_COMMIT
-IF NOT Installed
+IF Installed EQ 0
 	transfer NET_COMMIT
 ELSE
 	MOV	AX,(multNET SHL 8) OR 7

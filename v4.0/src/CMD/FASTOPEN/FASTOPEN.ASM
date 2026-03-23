@@ -176,7 +176,7 @@ MAIN	PROC	FAR			  ; FAR procedure for FAR call from DOS
 	cmp	cs:Main_EMS_flag,1	  ; EMS enabled ??					     ;AN000;
 	jne	dispatch_funcs		  ; no - dispatch functions			   ;AN000;
 					  ; yes - save EMS page state
-IF	NOT BUFFERFLAG
+IF BUFFERFLAG EQ 0
 
 ;-----------------------------------------------------------------------------
 ; SAVE EMS PAGE STATE
@@ -267,7 +267,7 @@ EMS_FAILED:
 
 ENDIF
 
-IF	NOT BUFFERFLAG
+IF BUFFERFLAG EQ 0
 SAVE_FAILED:
 ENDIF
 

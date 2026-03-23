@@ -41,11 +41,11 @@ IBMCOPYRIGHT EQU   FALSE
 endif
 
 ifndef BUFFERFLAG
-BUFFERFLAG	EQU	NOT IBMCOPYRIGHT
+BUFFERFLAG	EQU	(IBMCOPYRIGHT EQ 0)	;; WASM: avoid NOT (mishandles TRUE=0FFFFh)
 endif
 
 ifndef	MSVER	
-MSVER      EQU     NOT IBMVER
+MSVER      EQU     (IBMVER EQ 0)		;; WASM: avoid NOT (mishandles TRUE=0FFFFh)
 endif
 ifndef IBM
 IBM	   EQU	   IBMVER

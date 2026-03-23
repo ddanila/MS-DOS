@@ -148,7 +148,7 @@ NOSTOP:
 	JZ	INCHKJ			      ; no
 	return
 check_next:
-	IF	NOT TOGLPRN
+	IF TOGLPRN EQ 0
 	CMP	AL,"N"-"@"
 	JZ	INCHKJ
 	ENDIF
@@ -261,7 +261,7 @@ INCHK:
 
 NOPRINT:
 ;;;;;  7/14/86	ALT_Q key fix
-	IF	NOT TOGLPRN
+	IF TOGLPRN EQ 0
 	CMP	AL,"N"-"@"
 	JZ	PRINTOFF
 	ENDIF

@@ -123,7 +123,7 @@ IFS_extopen:				    ;AN000;EO.
 NOEXTOP:				    ;AN000;
 ;Extended open hooks
 
-IF NOT Installed
+IF Installed EQ 0
 	transfer NET_SEQ_CREATE
 ELSE
 	PUSH	AX
@@ -150,7 +150,7 @@ dochk:
 	JNZ	IFS_extopen		    ;AN000;EO. yes, issue extended open
 ;Extended open hooks
 
-IF NOT Installed
+IF Installed EQ 0
 	transfer NET_CREATE
 ELSE
 	PUSH	AX
@@ -354,7 +354,7 @@ EndProc Set_Media_ID		;AN000;
 ;	carry set,mode is set if from Extended Open
 ;	carry clear, mode not set yet
 
-IF	NOT IBMCOPYRIGHT
+IF IBMCOPYRIGHT EQ 0
 	public Set_EXT_mode
 ENDIF
 

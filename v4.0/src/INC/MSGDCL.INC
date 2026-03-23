@@ -35,8 +35,8 @@ $M_DECLARE    macro	numcls	       ;
 ENDM				       ;
 			       ;
 $M_DECLARE2   macro   innum	       ;
-  IF NOT COMR			       ; IF Not resident COMMAND.COM
-    IF NOT COMT 			 ; IF Not transient COMMAND.COM
+  IF COMR EQ 0			       ; IF Not resident COMMAND.COM
+    IF COMT EQ 0 			 ; IF Not transient COMMAND.COM
       IFNDEF  $M_HAS_CLS_&innum	 ; WASM: check HAS flag (EXTRN fools IFNDEF $M_CLS_N)
 	IF	FARmsg			 ;
 	  EXTRN   $M_CLS_&innum:FAR	 ;    Must be external

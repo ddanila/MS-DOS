@@ -273,9 +273,9 @@ TABLE	SEGMENT
 CANCHAR DB	CANCEL			;Cancel line character
 	PUBLIC	ESCCHAR
 ESCCHAR DB	ESCCH			;Lead-in character for escape sequences
-	IF	NOT Rainbow
+	IF Rainbow EQ 0
 ESCTAB	LABEL BYTE
-	IF	NOT IBM
+	IF IBM EQ 0
 	IF	WANG
 	DB	0C0h			; ^Z inserter
 	DB	0C1H			; Copy one char
@@ -384,7 +384,7 @@ extrn	intCNE0:near			;AN000; 2/17/KK
  ELSE					;AN000;
 	DOSInvoke	$std_con_input_no_echo	; Get the second byte of the sequence
  ENDIF					;AN000;
-	IF NOT Rainbow
+	IF Rainbow EQ 0
 	MOV	CL,ESCTABLEN		; length of table for scan
 	PUSH	DI			; save DI (cannot change it!)
 	MOV	DI,OFFSET DOSGROUP:ESCTAB   ; offset of second byte table

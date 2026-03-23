@@ -255,7 +255,7 @@ DOVAL:
 	AND	CX,NOT F_TRACE		; no trace
 	MOV	FLSAVE,CX		 ; rest of CLI
 ; Set up correct process and go to normal reentry code.
-	IF	NOT SYSVER
+	IF SYSVER EQ 0
 	    MOV     BX,[USER_PROC_PDB]
 	    MOV     AH,SET_CURRENT_PDB
 	    INT     21H
@@ -280,7 +280,7 @@ FOO:
 	    STI
 	ENDIF
 DEXIT:
-	IF	NOT SYSVER
+	IF SYSVER EQ 0
 	    MOV     BX,[USER_PROC_PDB]
 	    MOV     AH,SET_CURRENT_PDB
 	    INT     21H
@@ -492,7 +492,7 @@ SETENVIRON:
 	MOV	ES,AX
 	ASSUME	DS:DG,ES:DG
 
-	IF	NOT SYSVER
+	IF SYSVER EQ 0
 	    MOV     AH,GET_CURRENT_PDB
 	    INT     21H
 	    MOV     [USER_PROC_PDB],BX

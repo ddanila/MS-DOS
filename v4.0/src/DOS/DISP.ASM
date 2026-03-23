@@ -52,7 +52,7 @@ CODE    SEGMENT BYTE PUBLIC 'CODE'
         I_need  DOS34_FLAG,WORD            ;AN000;
         I_need  ACT_PAGE,WORD              ;AN000;
 
-        IF      NOT IBM
+        IF IBM EQ 0
         I_need  OEM_HANDLER,DWORD
         ENDIF
 
@@ -225,7 +225,7 @@ BADCALL:
 
 entry   COMMAND                         ; Interrupt call entry point (INT 21H)
 
-        IF      NOT IBM
+        IF IBM EQ 0
         CMP     AH,SET_OEM_HANDLER
         JB      NOTOEM
         JMP     $SET_OEM_HANDLER
@@ -551,7 +551,7 @@ ENDIF
         return
 EndProc get_user_stack
 
-        IF      NOT IBM
+        IF IBM EQ 0
 BREAK <Set_OEM_Handler -- Set OEM sys call address and handle OEM Calls>
 
 $SET_OEM_HANDLER:

@@ -140,7 +140,7 @@ NOEXTOP:
 ;Extended open hooks
 
 
-IF NOT Installed
+IF Installed EQ 0
 	transfer NET_SEQ_OPEN
 ELSE
 	PUSH	AX
@@ -162,7 +162,7 @@ TEST_RE_NET:
 	JNZ	IFS_extopen		    ;FT. isuue extended open		;AN000;
 ;Extended open hooks
 
-IF NOT Installed
+IF Installed EQ 0
 	transfer NET_OPEN
 ELSE
 	PUSH	AX

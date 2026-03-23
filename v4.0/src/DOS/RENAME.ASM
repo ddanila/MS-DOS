@@ -131,7 +131,7 @@ nofiles:
 ;	ret				       ;IFS. return			;AN000;
 ifsshare:
 
-IF NOT Installed
+IF Installed EQ 0
 	transfer NET_RENAME
 ELSE
 	MOV	AX,(multNET SHL 8) OR 17

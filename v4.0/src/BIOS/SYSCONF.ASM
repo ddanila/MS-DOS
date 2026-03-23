@@ -94,7 +94,7 @@ DOSSIZE EQU	0A000H
 	include VERSION.INC
 .list
 
-	IF	NOT IBMJAPVER
+	IF IBMJAPVER EQ 0
 	EXTRN	RE_INIT:FAR
 	ENDIF
 
@@ -765,7 +765,7 @@ CONFLP: JC	ENDCONV
 	call	Reset_DOS_Version	;AN024;AN026; Still need to reset version even IBMDOS handles this through
 					; function 4Bh call, since IBMDOS does not know when Load/Overlay call finishes.
 
-IF	NOT BUFFERFLAG
+IF BUFFERFLAG EQ 0
 	call	EMS_Stub_handler	;AN030;
 ENDIF
 
@@ -1316,7 +1316,7 @@ GOTDJ:
 	MOV	AX,[MEMHI]
 	MOV	WORD PTR [ENTRY_POINT+2],AX	;SET ENTRY POINT
 
-	IF	NOT NOEXEC
+	IF NOEXEC EQ 0
 	MOV	[LDOFF],AX		;SET LOAD OFFSET
 	ENDIF
 
@@ -2981,7 +2981,7 @@ Int_2F_5800_Err_Exit:			;AN030;
 Int_2F_Exit:				;AN030;
 
 
-IF	NOT BUFFERFLAG
+IF BUFFERFLAG EQ 0
 	pop	si			;AN030;;restore regs			       ;an000; dms;
 ENDIF
 	iret				;AN030;;return to caller		       ;an000; dms;
@@ -3003,7 +3003,7 @@ ENDIF
 ;	5/10/88 for DOS 4.0.
 ;-------------------------------------------------------------------
 
-IF	NOT BUFFERFLAG
+IF BUFFERFLAG EQ 0
 
 GetMappableArray equ	58h		; INT 67 function code for Get Mappable Array
 GetPageFrame	equ	41h		; function code for getting the page frame address
@@ -3096,7 +3096,7 @@ PassThru:
 EMS_STUB_END	label	byte		;AN030;
 ;-------------------------------------------------------------------
 
-IF	NOT BUFFERFLAG
+IF BUFFERFLAG EQ 0
 ;-------------------------------------------------------------------
 ;
 ;	Int67FilterInit - This routine is called to initialize the INT 67
@@ -3344,7 +3344,7 @@ EMS_Stub_Do:
 	mov	word ptr cs:[OldInt67+2], ax	;AN030;
 	pop	es				;AN030;
 
-IF	NOT BUFFERFLAG
+IF BUFFERFLAG EQ 0
 ;initalize tables in INT 67h handler
 	call	Int67FilterInit 		;AN030;
 	cmp	ax, 0ffffh			; if the page found was part of a lim 4.0 page frame

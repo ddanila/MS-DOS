@@ -44,7 +44,7 @@ BREAK <I_NEED: declare a variable external, if necessary, and allocate a size>
 ;
 AsmVar  InstalledData
 I_NEED  MACRO   sym,len
-IF NOT InstalledData
+IF InstalledData EQ 0
 	DATA    SEGMENT WORD PUBLIC 'DATA'
     IFIDN   <len>,<WORD>
 	EXTRN   &sym:WORD
@@ -157,7 +157,7 @@ name    LABEL BYTE
     IFB <init>
 	DB  I_AM_SIZE*I_AM_LEN DUP (?)
     ELSE
-IF NOT InstalledData
+IF InstalledData EQ 0
 	IFIDN <size>,<WORD>
 	    DW  init
 	ELSE
@@ -374,7 +374,7 @@ ENDIF
 	PUSH    AX
 	DOSInvoke  SegCheck
 	POP     AX
-IF NOT SHAREF
+IF SHAREF EQ 0
 Table   SEGMENT
 a       DB      message,0
 Table   ends

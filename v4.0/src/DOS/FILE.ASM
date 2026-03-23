@@ -42,7 +42,7 @@ include VERSION.INC
 
 	EXTRN	DOS_OPEN:NEAR,DOS_CREATE:NEAR,DOS_Create_New:NEAR
 
-IF 	NOT IBMCOPYRIGHT
+IF IBMCOPYRIGHT EQ 0
 	extrn	Set_EXT_mode:near
 ENDIF
 
@@ -178,7 +178,7 @@ DoOper:
 ;	modes in sf_mode. Call Set_EXT_mode to do all this. See
 ;	Set_EXT_mode in creat.asm
 ;
-IF	NOT IBMCOPYRIGHT
+IF IBMCOPYRIGHT EQ 0
 
 	push	es	; set up es:di to point to SFT
 	push	di

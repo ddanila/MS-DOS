@@ -58,7 +58,7 @@ Break	<DISK_INFO -- Get Disk Drive Information>
 
 	DOSInvoke	TestNet
 	JNC	LOCAL_INFO
-IF NOT Installed
+IF Installed EQ 0
 	transfer NET_DISK_INFO
 ELSE
 	MOV	AX,(multNET SHL 8) OR 12

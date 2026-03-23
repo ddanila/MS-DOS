@@ -104,7 +104,7 @@ ERRNZ				   Macro x
 				   ;---------------------------------------
 
 	.sall
-	IF	NOT	INSTALLED
+	IF INSTALLED EQ 0
 
 	    CODE    SEGMENT BYTE PUBLIC 'CODE'
 
@@ -262,7 +262,7 @@ fnm10$5:
 
 fnm11: cmp [si].mft_flag,MFLG_FRE
 
-   IF	NOT  DEBUG
+   IF DEBUG EQ 0
        jl   fnm20			; at END, am out of space
    ELSE
        jl   fnm20j
@@ -2636,7 +2636,7 @@ msg_offset		  dw	 offset SHARE_Name ; insert 'SHARE'
 
 msg_segment		  LABEL  WORD
 
-IF			  NOT	 INSTALLED
+IF INSTALLED EQ 0
 
 			  dw	 CODE
 

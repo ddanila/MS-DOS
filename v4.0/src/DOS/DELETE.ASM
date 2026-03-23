@@ -133,7 +133,7 @@ nofiles:
 ifsshare:
 
 
-IF NOT Installed
+IF Installed EQ 0
 	transfer NET_DELETE
 ELSE
 	MOV	AX,(multNET SHL 8) OR 19
