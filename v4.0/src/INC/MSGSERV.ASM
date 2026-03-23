@@ -173,7 +173,6 @@ $M_COUNTRY_INFO ENDS					     ;;AN000;;
 ELSE							     ;;AN000;;	ELSE if we have already included the STRUCTURES
 ; 
 ;   $SALUT  $M	(2,5,13,62)				     ;;AN000;;	Set SALUT formatting for code section
-
     IF	    MSGDATA					     ;;AN000;;	IF this is a request to include the data area
       MSGDATA =  FALSE					     ;;AN000;;	  Let the assembler know not to include it again
 							     ;;AN000;;	  and include it
@@ -779,7 +778,7 @@ $M_VERSION_CHECK PROC NEAR				     ;;AN000;;
 ;	  $ELSE 					     ;;AN000;; ELSE
 	  JMP SHORT $MEN25
 $MIF25:
-IF	    NOT     COMR				     ;;  ** Special case for RESIDENT COMMAND.COM
+IF COMR EQ 0					     ;; WASM: avoid IF NOT (mishandles TRUE=0FFFFh) ;;  ** Special case for RESIDENT COMMAND.COM
 	    CMP     AX,LOWEST_4CH_VERSION		     ;;AN000;; Does this version support AH = 4CH
 ;	    $IF     B					     ;;AN000;; No,
 	    JNB $MIF27
@@ -895,9 +894,9 @@ $MIF31:
 							     ;;
 	SYSGETMSG ENDP					     ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	IF	$M_SUBS 				     ;;AN000;; Include the common subroutines if they haven't yet
+	IF	$M_SUBS				     ;;AN000;; Include the common subroutines if they haven't yet
 	  $M_SUBS = FALSE				     ;;AN000;; No, then include and reset the flag
-$M_HAS_$M_GET_MSG_ADDRESS = 1			     ;; WASM: flag for $M_CHECK — symbol defined in this assembly
+;; $M_HAS_$M_GET_MSG_ADDRESS = 1			     ;; WASM: DISABLED — WASM misparsed this as $M_GET_MSG_ADDRESS=1
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;	PROC NAME: $M_GET_MSG_ADDRESS
@@ -1454,7 +1453,7 @@ $M_DISPLAY_$_STRING PROC NEAR				     ;;AN000;;
 	PUSH	DS					     ;;AN000;;
 	PUSH	ES					     ;;AN000;;
 	POP	DS					     ;;AN000;; Set DS to segment of message text
-IF	NOT	COMR
+IF COMR EQ 0					     ;; WASM: avoid IF NOT (mishandles TRUE=0FFFFh)
 	CMP	CX,$M_SINGLE_CHAR			     ;;AN000;; Is this a single character?
 ;	$IF	E					     ;;AN000;; Yes,
 	JNE $MIF119
@@ -1491,7 +1490,7 @@ $MDO123:
 ;	  $ENDDO  Z					     ;;AN002;; No,
 	  JNZ $MDO123
 $MEN123:
-IF	  NOT	  COMR
+IF COMR EQ 0					     ;; WASM: avoid IF NOT (mishandles TRUE=0FFFFh)
 ;	$ENDIF						     ;;AN000;;
 $MEN119:
 ENDIF
@@ -1501,7 +1500,7 @@ ENDIF
 							     ;;
 $M_DISPLAY_$_STRING ENDP				     ;;AN000;;
 							     ;;
-IF	NOT	COMR
+IF COMR EQ 0					     ;; WASM: avoid IF NOT (mishandles TRUE=0FFFFh)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;	PROC NAME: $M_DISPLAY_H_STRING
@@ -1712,7 +1711,7 @@ $MEN146:
 ;	$LEAVE	Z					     ;;AN000;; No,
 	JZ $MEN145
 $MLL149:
-IF	  NOT	  COMR
+IF COMR EQ 0					     ;; WASM: avoid IF NOT (mishandles TRUE=0FFFFh)
 	  CMP	  CX,$M_FIRST_THOU			     ;;AN000;; Are we at the first thousands mark
 ;	  $IF	  E					     ;;AN000;; Yes,
 	  JNE $MIF150
@@ -2021,7 +2020,7 @@ ENDIF							     ;;AN000;;
 ;	  $ELSE 					     ;;AN000;;
 	  JMP SHORT $MEN199
 $MIF199:
-IF	    NOT     COMR
+IF COMR EQ 0					     ;; WASM: avoid IF NOT (mishandles TRUE=0FFFFh)
 	    CALL    $M_EXT_PAR_REPLACE			     ;;AN000;;
 ENDIF
 ;	  $ENDIF					     ;;AN000;;
@@ -2057,7 +2056,7 @@ $MEN165:
 	RET						     ;;AN000;; Return
 							     ;;
 $M_DISPLAY_MESSAGE ENDP 				     ;;AN000;;
-IF	NOT	COMR
+IF COMR EQ 0					     ;; WASM: avoid IF NOT (mishandles TRUE=0FFFFh)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;	PROC NAME: $M_EXT_PAR_REPLACE
@@ -2106,7 +2105,7 @@ $M_EXT_PAR_REPLACE ENDP 				     ;;AN000;;
 ENDIF
 	IF	$M_SUBS 				     ;;AN000;; Include the common subroutines if they haven't yet
 	  $M_SUBS = FALSE				     ;;AN000;; No, then include and reset the flag
-$M_HAS_$M_GET_MSG_ADDRESS = 1			     ;; WASM: flag for $M_CHECK — symbol defined in this assembly
+;; $M_HAS_$M_GET_MSG_ADDRESS = 1			     ;; WASM: DISABLED — WASM misparsed this as $M_GET_MSG_ADDRESS=1
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;	PROC NAME: $M_GET_MSG_ADDRESS
@@ -2423,7 +2422,7 @@ $M_FIND_SPECIFIED_MSG ENDP				     ;;AN000;;
 $M_DISPLAY_REPLACE PROC NEAR				     ;;AN000;;
 							     ;;
 	  XOR	  BX,BX 				     ;;AN000;; Use BX for buffer count
-IF	  NOT	  COMR
+IF COMR EQ 0					     ;; WASM: avoid IF NOT (mishandles TRUE=0FFFFh)
 	  CMP	  $M_SL.$M_S_ID,$M_SPECIAL_CASE-30H	     ;;AN000;; Is this the special case (convert to ASCII)
 ;	  $IF	  E					     ;;AN000;; Yes,
 	  JNE $MIF276
@@ -2703,7 +2702,7 @@ $M_BIN2ASC_REPLACE PROC NEAR				     ;;AN000;;
 	    XOR     AX,AX				     ;;AN000;; Prepare for get binary value (LOW)
 	    MOV     DS:$M_RT.$M_DIVISOR,$M_BASE16		     ;;AN000;; Set default divisor
 	    XOR     BX,BX				     ;;AN000;; Use BP as the NEG flag (if applicable)
-IF	    NOT     COMR
+IF COMR EQ 0					     ;; WASM: avoid IF NOT (mishandles TRUE=0FFFFh)
 	    TEST    $M_SL.$M_S_FLAG,NOT $M_BYTE AND $M_SIZE_MASK ;;AN000;; Was BYTE specified?
 ;	    $IF     Z					     ;;AN000;;
 	    JNZ $MIF325
@@ -2757,7 +2756,7 @@ $MIF338:
 ;	      $ELSE					     ;;AN000;;
 	      JMP SHORT $MEN333
 $MIF333:
-IF		NOT	COMR
+IF COMR EQ 0					     ;; WASM: avoid IF NOT (mishandles TRUE=0FFFFh)
 		MOV	AX, WORD PTR ES:[DI]		     ;;AN000;; Setup Double word in DX:AX
 		MOV	DX, WORD PTR ES:[DI]+2		     ;;AN000;;
 		TEST	$M_SL.$M_S_FLAG,NOT Sgn_Bin_Type AND $M_TYPE_MASK ;;AN000;; Was Signed binary specified?
@@ -2786,7 +2785,7 @@ $MEN333:
 $MEN325:
 							     ;;
 	    CALL    $M_CONVERT2ASC			     ;;AN000;; Convert to ASCII string
-IF	    NOT     COMR
+IF COMR EQ 0					     ;; WASM: avoid IF NOT (mishandles TRUE=0FFFFh)
 	    OR	    BX,BX				     ;;AN000;;
 ;	    $IF     NZ					     ;;AN000;; Was number negative?
 	    JZ $MIF349

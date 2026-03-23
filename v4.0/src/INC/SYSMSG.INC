@@ -48,6 +48,46 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 				       ;;
 ;; WASM: include guard — prevent double-definition errors when included twice
+
+;; WASM fix: = assignments inside IFNDEF/ENDIF blocks do not persist in WASM (single-pass scoping bug).
+;; Service flag defaults and $M_* flags are placed OUTSIDE the include guard so they always execute.
+;; In MASM this is harmless since SYSMSG.INC is included once; in WASM this is required for correctness.
+
+; Reserved Message Service equates
+
+NEARmsg 		 =	TRUE   ;; \
+NOVERCHECKmsg		 =	FALSE  ;;  |
+MSGDATA 		 =	FALSE  ;;  |
+FARmsg			 =	FALSE  ;;  |
+GETmsg			 =	FALSE  ;;  |
+LOADmsg 		 =	FALSE  ;;  |
+DISPLAYmsg		 =	FALSE  ;;   } Set default cases
+SETSTDIO		 =	FALSE  ;;  |
+NOCHECKSTDIN		 =	FALSE  ;;  |
+NOCHECKSTDOUT		 =	FALSE  ;;  |
+DISK_PROC		 =	FALSE  ;;  |			       ;AN003;
+INPUTmsg		 =	FALSE  ;;  |
+CHARmsg 		 =	FALSE  ;;  |
+NUMmsg			 =	FALSE  ;;  |
+TIMEmsg 		 =	FALSE  ;;  |
+DATEmsg 		 =	FALSE  ;; /
+
+COMR			 =	FALSE  ;;  COMMAND.COM Cases (resident) ;; WASM: removed nested IFNDEF (= inside IFNDEF doesn't persist)
+COMT			 =	FALSE  ;;		     (transient)
+
+$M_STRUC		 =	TRUE   ;; Internal message service defaults
+$M_LOAD 		 =	TRUE   ;;
+$M_SUBS 		 =	TRUE   ;;
+$M_REPLACE		 =	TRUE   ;;
+$M_REPL_DONE		 =	FALSE  ;;
+$M_CHAR_ONLY		 =	TRUE   ;;
+$M_PARSE_FLAG		 =	TRUE   ;;
+$M_EXT_ERR_FLAG 	 =	TRUE   ;;
+$M_MSGDATA_ONLY 	 =	TRUE   ;;
+$M_END			 =	FALSE  ;;
+$M_EXT_CLS		 =	TRUE   ;;
+$M_PAR_CLS		 =	TRUE   ;;
+				       ;;
 IFNDEF SYSMSG_INC_
 SYSMSG_INC_    EQU    1
 
@@ -57,7 +97,7 @@ IFNDEF FALSE
 FALSE	       EQU 0		       ;; WASM: = → EQU for IFNDEF guards
 ENDIF
 IFNDEF TRUE
-TRUE	       EQU 0FFFFh	       ;; WASM: NOT FALSE → literal (= not supported by IFNDEF)
+TRUE	       EQU -1		       ;; WASM: use -1 so NOT TRUE = 0 in 32-bit (0FFFFh gives NOT 0FFFFh = 0xFFFF0000 ≠ 0)
 ENDIF
 				       ;;
 
@@ -296,45 +336,6 @@ IFNDEF STDPRN
 STDPRN			EQU	0004H  ;; Standard Printer device handle
 ENDIF
 
-; Reserved Message Service equates
-
-NEARmsg 		 =	TRUE   ;; \
-NOVERCHECKmsg		 =	FALSE  ;;  |
-MSGDATA 		 =	FALSE  ;;  |
-FARmsg			 =	FALSE  ;;  |
-GETmsg			 =	FALSE  ;;  |
-LOADmsg 		 =	FALSE  ;;  |
-DISPLAYmsg		 =	FALSE  ;;   } Set default cases
-SETSTDIO		 =	FALSE  ;;  |
-NOCHECKSTDIN		 =	FALSE  ;;  |
-NOCHECKSTDOUT		 =	FALSE  ;;  |
-DISK_PROC		 =	FALSE  ;;  |			       ;AN003;
-INPUTmsg		 =	FALSE  ;;  |
-CHARmsg 		 =	FALSE  ;;  |
-NUMmsg			 =	FALSE  ;;  |
-TIMEmsg 		 =	FALSE  ;;  |
-DATEmsg 		 =	FALSE  ;; /
-
-IFNDEF COMR
-COMR			 =	FALSE  ;;  COMMAND.COM Cases (resident)
-ENDIF
-IFNDEF COMT
-COMT			 =	FALSE  ;;		     (transient)
-ENDIF
-
-$M_STRUC		 =	TRUE   ;; Internal message service defaults
-$M_LOAD 		 =	TRUE   ;;
-$M_SUBS 		 =	TRUE   ;;
-$M_REPLACE		 =	TRUE   ;;
-$M_REPL_DONE		 =	FALSE  ;;
-$M_CHAR_ONLY		 =	TRUE   ;;
-$M_PARSE_FLAG		 =	TRUE   ;;
-$M_EXT_ERR_FLAG 	 =	TRUE   ;;
-$M_MSGDATA_ONLY 	 =	TRUE   ;;
-$M_END			 =	FALSE  ;;
-$M_EXT_CLS		 =	TRUE   ;;
-$M_PAR_CLS		 =	TRUE   ;;
-				       ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;	$M_POPF 	     Macro
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -356,7 +357,8 @@ ENDM
 				       ;
 MSG_UTILNAME  Macro   utilname	       ;
 				       ;
-   INCLUDE &utilname.CTL	       ;  Include the control file for the utility   $M_STRUC = TRUE		       ;  ;; WASM -Mx: parameter is lowercase 'utilname'
+   INCLUDE &utilname.CTL	       ;  Include the control file for the utility
+   $M_STRUC = TRUE		       ;  Reset so MSG_SERVICES include of MSGSERV.ASM generates procs
    INCLUDE MSGSERV.ASM		       ;  Get structure definitions
 				       ;
 ENDM				       ;
