@@ -1,2 +1,2 @@
-SYSINIT1.ASM(2429): Warning! W096: size not specified -- WORD PTR is assumed
-SYSINIT1.ASM(2678): Warning! W249: End directive required at end of file
+SYSINIT1.ASM(2438): Warning! W096: size not specified -- WORD PTR is assumed
+SYSINIT1.ASM(2687): Warning! W249: End directive required at end of file

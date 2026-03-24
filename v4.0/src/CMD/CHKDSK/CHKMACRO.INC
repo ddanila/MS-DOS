@@ -1,9 +1,7 @@
 
-BREAK	MACRO	subtitle
-	SUBTTL	subtitle
-	PAGE
-ENDM
-
+;; WASM: BREAK macro already defined in DOSMAC.INC (via DOSSYM.INC); removed duplicate (#57)
+;; WASM: Procedure macro already defined in DOSMAC.INC (via DOSSYM.INC); removed duplicate (#57)
+;; Both are case-insensitively identical in MASM mode; duplicate defs cause E236 in WASM.
 
 ;
 ;******************************************************************************
@@ -17,17 +15,17 @@ ENDM
 ;-----------------------------------------------------------------------------
 
 Message macro	Message_Name			;				;AN000;
-						;
+					;
 	mov	dx,offset dg:Message_Name	;				;AN000;
 	call	Display_Interface		;				;AN000;
-						;
+					;
 	endm					;				;AN000;
 
 ;-----------------------------------------------------------------------------
 
 Parse_Message macro				;				;AN000;
 
-						;
+					;
 	push	ds
 	mov	dx,dg
 	mov	ds,dx
@@ -40,7 +38,7 @@ Parse_Message macro				;				;AN000;
 ;-----------------------------------------------------------------------------
 
 Extended_Message macro				;				;AN000;
-						;
+					;
 
 	push	ds
 	mov	dx,dg
@@ -56,19 +54,13 @@ Extended_Message macro				;				;AN000;
 ;*****************************************************************************
 ;
 
-Procedure	macro	Proc_Name,Seg_Name	;				;AN000;
-						;
-Public	Proc_Name				;				;AN000;
-Proc_Name    proc				;				;AN000;
-
-	endm					;				;AN000;
 ;-----------------------------------------------------------------------------
 
 DOS_Call	macro	Function		;				;AN000;
-						;
+					;
 	mov	ah,Function			;				;AN000;
 	int	21h				;				;AN000;
-						;
+					;
 	endm					;				;AN000;
 
 ;-----------------------------------------------------------------------------
@@ -102,4 +94,3 @@ Set_Data_Segment     macro
 	.XALL
 	endm
 
-

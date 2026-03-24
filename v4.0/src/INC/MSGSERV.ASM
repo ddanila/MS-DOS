@@ -203,6 +203,9 @@ ENDIF							     ;;AN000;;
     ENDIF						     ;;AN000;; END of include of Data table
 
 ; 
+    IFNDEF  $M_MSGDATA_ONLY			             ;; WASM: default 0 when included via MSG_UTILNAME before SYSMSG.INC init (#57)
+    $M_MSGDATA_ONLY = 0 			             ;;      MASM treats undefined as 0; WASM requires explicit init
+    ENDIF				             ;;
     IF	    $M_MSGDATA_ONLY EQ 0			     ;;AN000;; IF this was a request for only the data table THEN ;; WASM: avoid IF NOT (mishandles TRUE=0FFFFh)
 							     ;; 	don't include any more code
 							     ;;AN000;; Figure out what other code to include

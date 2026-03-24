@@ -55,6 +55,15 @@
 
 ; Reserved Message Service equates
 
+;; WASM fix (#57): TRUE/FALSE must be defined before the = assignments below.
+;; In MASM these are resolved in pass 2; WASM is single-pass so they must precede first use.
+IFNDEF FALSE
+FALSE		EQU	0
+ENDIF
+IFNDEF TRUE
+TRUE		EQU	-1
+ENDIF
+
 NEARmsg 		 =	TRUE   ;; \
 NOVERCHECKmsg		 =	FALSE  ;;  |
 MSGDATA 		 =	FALSE  ;;  |
