@@ -28,7 +28,19 @@ $M_DECLARE    macro	numcls	       ;
     ENDIF				;
   ENDIF
 
-  $M_CHECK $M_GET_MSG_ADDRESS	      ;  If this subroutine is not in this assembly,
+  ;; WASM: can't use $M_CHECK here — $M_HAS_$M_GET_MSG_ADDRESS misparsed (#52)
+  IFNDEF  $M_HAS_GETMSGADDR		      ;  If $M_GET_MSG_ADDRESS is not in this assembly,
+    IF	    FARmsg			      ;
+      EXTRN   $M_GET_MSG_ADDRESS:FAR	      ;    Must be external
+    ELSE				      ;
+      EXTRN   $M_GET_MSG_ADDRESS:NEAR	      ;    Must be external
+    ENDIF				      ;
+  ELSE					      ;
+    IF COMR				      ;
+    ELSE				      ;
+      PUBLIC $M_GET_MSG_ADDRESS		      ;
+    ENDIF				      ;
+  ENDIF					      ;
   $M_CHECK $M_MSGSERV_1 	      ;  If this subroutine is not in this assembly,
   $M_CHECK $M_MSGSERV_2 	      ;  If this subroutine is not in this assembly,
 

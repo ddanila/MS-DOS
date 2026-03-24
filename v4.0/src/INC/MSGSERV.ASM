@@ -896,7 +896,7 @@ $MIF31:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	IF	$M_SUBS				     ;;AN000;; Include the common subroutines if they haven't yet
 	  $M_SUBS = FALSE				     ;;AN000;; No, then include and reset the flag
-;; $M_HAS_$M_GET_MSG_ADDRESS = 1			     ;; WASM: DISABLED — WASM misparsed this as $M_GET_MSG_ADDRESS=1
+  $M_HAS_GETMSGADDR = 1				     ;; WASM: renamed from $M_HAS_$M_GET_MSG_ADDRESS (WASM misparsed $M_ prefix)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;	PROC NAME: $M_GET_MSG_ADDRESS
@@ -2105,7 +2105,7 @@ $M_EXT_PAR_REPLACE ENDP 				     ;;AN000;;
 ENDIF
 	IF	$M_SUBS 				     ;;AN000;; Include the common subroutines if they haven't yet
 	  $M_SUBS = FALSE				     ;;AN000;; No, then include and reset the flag
-;; $M_HAS_$M_GET_MSG_ADDRESS = 1			     ;; WASM: DISABLED — WASM misparsed this as $M_GET_MSG_ADDRESS=1
+  $M_HAS_GETMSGADDR = 1				     ;; WASM: renamed from $M_HAS_$M_GET_MSG_ADDRESS (WASM misparsed $M_ prefix)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;	PROC NAME: $M_GET_MSG_ADDRESS
