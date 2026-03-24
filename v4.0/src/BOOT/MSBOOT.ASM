@@ -89,7 +89,8 @@ DSKADR	=	1EH*4			;POINTER TO DRIVE PARAMETERS
 
 Public BOOT_START
 BOOT_START:
-	JMP	START
+	JMP	SHORT START
+	NOP				; standard 3-byte boot JMP — BPB at offset 11
 ;----------------------------------------------------------
 ;
 ;	THE FOLLOWING DATA CONFIGURES THE BOOT PROGRAM
