@@ -171,7 +171,7 @@ TableZero   LABEL   BYTE
 PUBLIC MSTAB001s,MSTAB001e
 MSTAB001S       label byte
 
-MSVERS  EQU     THIS WORD               ; MS-DOS version in hex for $GET_VERSION
+MSVERS  LABEL   WORD                    ; MS-DOS version in hex for $GET_VERSION
 MSMAJOR DB      MAJOR_VERSION
 MSMINOR DB      MINOR_VERSION
 
