@@ -1,10 +1,6 @@
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Error! E230: Label 'TRUE' is already defined
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Note! N290: included by file IFSHAND.ASM(54)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Error! E230: Label 'FALSE' is already defined
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Note! N290: included by file IFSHAND.ASM(54)
 IFSHAND.ASM(215): Warning! W095: size not specified -- BYTE PTR is assumed
 IFSHAND.ASM(339): Warning! W095: size not specified -- BYTE PTR is assumed
 IFSHAND.ASM(340): Warning! W095: size not specified -- BYTE PTR is assumed
 IFSHAND.ASM(438): Warning! W095: size not specified -- BYTE PTR is assumed
-IFSHAND.ASM(527): Warning! W095: size not specified -- BYTE PTR is assumed
-IFSHAND.ASM(690): Warning! W095: size not specified -- BYTE PTR is assumed
+IFSHAND.ASM(541): Warning! W095: size not specified -- BYTE PTR is assumed
+IFSHAND.ASM(704): Warning! W095: size not specified -- BYTE PTR is assumed

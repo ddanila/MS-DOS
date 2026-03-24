@@ -1,2 +1,1 @@
-_PARSE.ASM(115): Error! E300: 1 unclosed conditional directive(s) detected
-_PARSE.ASM(115): Error! E249: End directive required at end of file
+_PARSE.ASM(115): Warning! W249: End directive required at end of file

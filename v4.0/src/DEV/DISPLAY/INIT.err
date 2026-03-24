@@ -1,23 +1,6 @@
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(283): Error! E220: Cannot open include file &UTILNAME.CTL
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(283): Note! N291: macro called from file INIT.ASM(49)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(92): Error! E065: Operator is expected
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(92): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(284)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(92): Note! N291: macro called from file INIT.ASM(49)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(109): Error! E065: Operator is expected
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(109): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(284)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(109): Note! N291: macro called from file INIT.ASM(49)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(132): Error! E032: Syntax error
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(132): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(284)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(132): Note! N291: macro called from file INIT.ASM(49)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(147): Error! E065: Operator is expected
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(147): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(284)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(147): Note! N291: macro called from file INIT.ASM(49)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(159): Error! E250: Nesting level too deep
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(159): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(284)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(159): Note! N291: macro called from file INIT.ASM(49)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(159): Error! E250: Nesting level too deep
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(159): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(284)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(159): Note! N291: macro called from file INIT.ASM(49)
+../../INC/MSGSERV.ASM(206): Error! E074: Constant operand is expected
+../../INC/MSGSERV.ASM(206): Note! N290: included by file ../../INC/SYSMSG.INC(361)
+../../INC/MSGSERV.ASM(206): Note! N291: macro called from file INIT.ASM(49)
 MACROS.INC(12): Error! E040: Invalid instruction operands
 MACROS.INC(12): Note! N291: macro called from file MACROS.INC(24)
 MACROS.INC(12): Note! N290: included by file INIT.ASM(107)
@@ -31,24 +14,7 @@ DEF-EQU.INC(90): Error! E021: Expecting number
 DEF-EQU.INC(90): Note! N290: included by file INIT.ASM(108)
 INIT.ASM(183): Warning! W095: size not specified -- BYTE PTR is assumed
 INIT.ASM(382): Warning! W095: size not specified -- BYTE PTR is assumed
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(197): Error! E032: Syntax error
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(197): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(329)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(197): Note! N291: macro called from file INIT.ASM(953)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(2303): Error! E250: Nesting level too deep
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(2303): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(329)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(2303): Note! N291: macro called from file INIT.ASM(954)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(2338): Error! E250: Nesting level too deep
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(2338): Note! N290: included by file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(329)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGSERV.ASM(2338): Note! N291: macro called from file INIT.ASM(954)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(360): Error! E220: Cannot open include file &EXT
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(360): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(324)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(360): Note! N291: macro called from file INIT.ASM(955)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(360): Error! E220: Cannot open include file &EXT
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(360): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(324)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(360): Note! N291: macro called from file INIT.ASM(956)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(360): Error! E220: Cannot open include file &EXT
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(360): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(324)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/SYSMSG.INC(360): Note! N291: macro called from file INIT.ASM(957)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGDCL.INC(14): Error! E066: Operand is expected
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGDCL.INC(14): Note! N291: macro called from file /home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGDCL.INC(103)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/MSGDCL.INC(14): Note! N290: included by file INIT.ASM(960)
+../../INC/MSGDCL.INC(38): Error! E074: Constant operand is expected
+../../INC/MSGDCL.INC(38): Note! N291: macro called from file ../../INC/MSGDCL.INC(16)
+../../INC/MSGDCL.INC(38): Note! N291: macro called from file ../../INC/MSGDCL.INC(101)
+../../INC/MSGDCL.INC(38): Note! N290: included by file INIT.ASM(960)

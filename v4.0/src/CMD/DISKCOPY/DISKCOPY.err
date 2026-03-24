@@ -1,9 +1,5 @@
 DISKCOPY.EQU(2): Error! E032: Syntax error
 DISKCOPY.EQU(2): Note! N290: included by file DISKCOPY.ASM(182)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BOOTFORM.INC(29): Error! E065: Operator is expected
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BOOTFORM.INC(29): Note! N290: included by file DISKCOPY.ASM(202)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BOOTFORM.INC(29): Error! E050: Offset cannot be smaller than WORD size
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BOOTFORM.INC(29): Note! N290: included by file DISKCOPY.ASM(202)
 DISKCOPY.ASM(382): Error! E050: Offset cannot be smaller than WORD size
 DISKCOPY.ASM(1097): Error! E066: Operand is expected
 DISKCOPY.ASM(1098): Error! E066: Operand is expected

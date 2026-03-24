@@ -1,11 +1,3 @@
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Error! E230: Label 'TRUE' is already defined
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Note! N290: included by file IFSFILE.ASM(63)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Error! E230: Label 'FALSE' is already defined
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Note! N290: included by file IFSFILE.ASM(63)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSCNTRY.INC(96): Error! E065: Operator is expected
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSCNTRY.INC(96): Note! N290: included by file IFSFILE.ASM(65)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSCNTRY.INC(97): Error! E065: Operator is expected
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSCNTRY.INC(97): Note! N290: included by file IFSFILE.ASM(65)
 IFSFILE.ASM(211): Warning! W095: size not specified -- BYTE PTR is assumed
 IFSFILE.ASM(482): Warning! W095: size not specified -- BYTE PTR is assumed
 IFSFILE.ASM(485): Warning! W095: size not specified -- BYTE PTR is assumed

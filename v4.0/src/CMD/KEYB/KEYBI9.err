@@ -1,5 +1,5 @@
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/POSTEQU.INC(162): Error! E230: Label 'KB_ERR' is already defined
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/POSTEQU.INC(162): Note! N290: included by file KEYBI9.ASM(42)
+../../INC/POSTEQU.INC(162): Error! E230: Label 'KB_ERR' is already defined
+../../INC/POSTEQU.INC(162): Note! N290: included by file KEYBI9.ASM(42)
 KEYBSHAR.INC(274): Error! E065: Operator is expected
 KEYBSHAR.INC(274): Note! N290: included by file KEYBI9.ASM(43)
 KEYBSHAR.INC(274): Error! E050: Offset cannot be smaller than WORD size

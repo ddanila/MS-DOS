@@ -1,7 +1,3 @@
-../../INC/PARSE.ASM(2140): Error! E066: Operand is expected
-../../INC/PARSE.ASM(2140): Note! N290: included by file EDLPARSE.ASM(154)
-../../INC/PARSE.ASM(2152): Error! E066: Operand is expected
-../../INC/PARSE.ASM(2152): Note! N290: included by file EDLPARSE.ASM(154)
 EDLPARSE.ASM(187): Error! E048: Immediate data out of range
 EDLPARSE.ASM(187): Error! E040: Invalid instruction operands
 EDLPARSE.ASM(263): Error! E048: Immediate data out of range

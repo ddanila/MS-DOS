@@ -1,0 +1,8 @@
+../../INC/MSGSERV.ASM(206): Error! E074: Constant operand is expected
+../../INC/MSGSERV.ASM(206): Note! N290: included by file ../../INC/SYSMSG.INC(361)
+../../INC/MSGSERV.ASM(206): Note! N291: macro called from file _MSGRET.ASM(23)
+../../INC/MSGDCL.INC(38): Error! E074: Constant operand is expected
+../../INC/MSGDCL.INC(38): Note! N291: macro called from file ../../INC/MSGDCL.INC(16)
+../../INC/MSGDCL.INC(38): Note! N291: macro called from file ../../INC/MSGDCL.INC(101)
+../../INC/MSGDCL.INC(38): Note! N290: included by file _MSGRET.ASM(246)
+_MSGRET.ASM(251): Warning! W249: End directive required at end of file

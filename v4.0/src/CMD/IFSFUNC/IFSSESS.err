@@ -1,7 +1,3 @@
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Error! E230: Label 'TRUE' is already defined
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(4): Note! N290: included by file IFSSESS.ASM(68)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Error! E230: Label 'FALSE' is already defined
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/DOSSYM.INC(5): Note! N290: included by file IFSSESS.ASM(68)
 IFSSESS.ASM(1600): Warning! W095: size not specified -- BYTE PTR is assumed
 IFSSESS.ASM(1607): Warning! W095: size not specified -- BYTE PTR is assumed
 IFSSESS.ASM(1955): Warning! W095: size not specified -- BYTE PTR is assumed

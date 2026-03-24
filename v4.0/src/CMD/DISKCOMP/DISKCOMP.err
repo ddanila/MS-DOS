@@ -1,11 +1,5 @@
 DISKCOMP.EQU(3): Error! E065: Operator is expected
 DISKCOMP.EQU(3): Note! N290: included by file DISKCOMP.ASM(167)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BOOTFORM.INC(29): Error! E065: Operator is expected
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BOOTFORM.INC(29): Note! N290: included by file DISKCOMP.EQU(168)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BOOTFORM.INC(29): Note! N290: included by file DISKCOMP.ASM(167)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BOOTFORM.INC(29): Error! E050: Offset cannot be smaller than WORD size
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BOOTFORM.INC(29): Note! N290: included by file DISKCOMP.EQU(168)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/BOOTFORM.INC(29): Note! N290: included by file DISKCOMP.ASM(167)
 DISKCOMP.ASM(401): Error! E050: Offset cannot be smaller than WORD size
 DISKCOMP.ASM(2068): Error! E065: Operator is expected
 DISKCOMP.ASM(2086): Warning! W249: End directive required at end of file

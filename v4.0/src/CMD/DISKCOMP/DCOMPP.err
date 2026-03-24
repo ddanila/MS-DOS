@@ -1,2 +1,7 @@
-DCOMPP.ASM(123): Error! E300: 1 unclosed conditional directive(s) detected
-DCOMPP.ASM(123): Error! E249: End directive required at end of file
+DCOMPP.ASM(123): Warning! W249: End directive required at end of file
+../../INC/PATHMAC.INC(22): Error! E281: forced error:
+../../INC/PATHMAC.INC(22): Note! N291: macro called from file ../../INC/PATHMAC.INC(27)
+../../INC/PATHMAC.INC(22): Note! N291: macro called from file DCOMPP.ASM(114)
+../../INC/PATHMAC.INC(22): Error! E281: forced error:
+../../INC/PATHMAC.INC(22): Note! N291: macro called from file ../../INC/PATHMAC.INC(27)
+../../INC/PATHMAC.INC(22): Note! N291: macro called from file DCOMPP.ASM(120)
