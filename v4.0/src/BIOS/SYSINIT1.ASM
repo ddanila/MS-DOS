@@ -854,6 +854,15 @@ COMERR:
 	DOSInvoke	BADFIL
 STALL:	JMP	STALL
 
+	ASSUME	ES:NOTHING		; WASM fix: reset stale ES:SYSINITSEG
+					; from line 840 (PUSH CS/POP ES block).
+					; TEMPCDS is reached via CALL, not
+					; fall-through.  MASM preferred SS: for
+					; SYSINITSEG vars when both SS and ES
+					; were assumed; WASM prefers ES:, which
+					; is wrong once LES/MOV ES change ES
+					; at runtime.
+
 	PUBLIC	TEMPCDS
 TEMPCDS:
 ASSUME	DS:SYSINITSEG

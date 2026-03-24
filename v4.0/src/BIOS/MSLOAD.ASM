@@ -974,9 +974,7 @@ Got_16_Bit:
 	jae	Got_Cluster_Done
 
 Not_Last_Cluster:
-	mov	al,END_OF_FILE			  ;Assume last cluster
-	not	al				  ;(WASM E048: NOT immediate out of range)
-	mov	cs:EOF,al
+	mov	cs:EOF, 0			  ;Not last cluster (WASM: NOT imm not supported)
 
 Got_Cluster_Done:
 	pop	es
