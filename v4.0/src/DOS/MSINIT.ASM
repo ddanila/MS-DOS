@@ -524,7 +524,7 @@ ASSUME	ES:DOSGROUP
 ; After this points the char device functions for CON will work for
 ; printing messages
 
-	IF	(NOT IBM) OR (DEBUG)
+	IF	(IBM EQ 0) OR (DEBUG)		;; WASM: NOT IBM mishandles TRUE=0FFFFh (#53)
 	IF ALTVECT EQ 0
 	MOV	SI,OFFSET DOSGROUP:HEADER
 OUTMES:

@@ -171,9 +171,7 @@ TableZero   LABEL   BYTE
 PUBLIC MSTAB001s,MSTAB001e
 MSTAB001S       label byte
 
-MSVERS  LABEL   WORD                    ; MS-DOS version in hex for $GET_VERSION
-MSMAJOR DB      MAJOR_VERSION
-MSMINOR DB      MINOR_VERSION
+MSVERS  DW      MAJOR_VERSION + MINOR_VERSION * 256  ; MS-DOS version in hex for $GET_VERSION (WASM: LABEL WORD emits absolute symbol)
 
         I_am    YRTAB,8,<200,166,200,165,200,165,200,165>   ; [SYSTEM]
         I_am    MONTAB,12,<31,28,31,30,31,30,31,31,30,31,30,31> ; [SYSTEM]
