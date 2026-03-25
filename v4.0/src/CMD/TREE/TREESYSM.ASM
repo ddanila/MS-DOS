@@ -139,8 +139,8 @@ CSEG	SEGMENT PARA PUBLIC 'CODE'	;AN000;
 .list					;AN000;
 ; = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 	PATHLABL TREESYSM		;AN013;
-LAST_BYTE EQU	$			;AN000;START OF AREA AVAIL FOR STACK
 	PUBLIC	LAST_BYTE		;AN000;
+LAST_BYTE LABEL	BYTE			;AN000;START OF AREA AVAIL FOR STACK (WASM: EQU $ not relocatable)
 
 include MSGDCL.INC
 
