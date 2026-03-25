@@ -383,6 +383,7 @@ ENDM				       ;
 					  ;
 MSG_SERVICES Macro   varlist		  ;  MACRO used in source routine
 					  ;
+   $M_CLS_CTR = 0			  ;  WASM: init class counter for $M_BUILD_PTRS
    $M_SERVICE = FALSE			  ;  Reset service flag
    IRP	   var,<varlist>		  ;  FOR each variable in the list
      $M_INCLUDE = TRUE			  ;  Reset include flag

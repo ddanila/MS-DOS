@@ -583,6 +583,10 @@ ENDIF							     ;;
 	MOV	WORD PTR DS:$M_RT.$M_DISK_PROC_ADDR+2,ES	     ;;AN001;;	Move into first avaliable table location
 	MOV	WORD PTR DS:$M_RT.$M_DISK_PROC_ADDR,DI	     ;;AN001;;
 
+	;; WASM: $M_NUM_CLS is always 1 for non-COMMAND utilities (one class A file).
+	;; REPT %$M_NUM_CLS doesn't work in WASM nested macro context, so we use
+	;; IFDEF $M_HAS_CLS_N flags instead.  Define CLS_1 unconditionally here.
+	$M_HAS_CLS_1 = TRUE
 	$M_BUILD_PTRS %$M_NUM_CLS			     ;;AN000;; Build all utility classes
 							     ;;AN000;;
 	CALL	$M_GET_DBCS_VEC 			     ;;AN000;; Save the DBCS vector
