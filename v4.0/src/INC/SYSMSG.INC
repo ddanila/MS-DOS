@@ -383,7 +383,6 @@ ENDM				       ;
 					  ;
 MSG_SERVICES Macro   varlist		  ;  MACRO used in source routine
 					  ;
-   $M_CLS_CTR = 0			  ;  WASM: init class counter for $M_BUILD_PTRS
    $M_SERVICE = FALSE			  ;  Reset service flag
    IRP	   var,<varlist>		  ;  FOR each variable in the list
      $M_INCLUDE = TRUE			  ;  Reset include flag
@@ -474,9 +473,10 @@ ELSE						 ; ELSE
     ;; (MSG_SERVICES -> INCLUDE MSGSERV.ASM -> $M_BUILD_PTRS %%$M_NUM_CLS).
     ;; %%$M_NUM_CLS expansion yields wrong value in WASM nested context.
     ;; Fix: iterate up to max class count (8) using $M_HAS_CLS_N flags.
-    IFDEF $M_HAS_CLS_1				 ;
-      $M_MAKE 1					 ;
-    ENDIF					 ;
+    ;; WASM: unconditionally call $M_MAKE 1 (every utility has class A).
+    ;; Cannot use IFDEF $M_HAS_CLS_1 because setting it with `= TRUE`
+    ;; inside code context emits a byte, shifting the $M_RT struct.
+    $M_MAKE 1					 ;
     IFDEF $M_HAS_CLS_2				 ;
       $M_MAKE 2					 ;
     ENDIF					 ;
@@ -509,11 +509,11 @@ ENDM						 ;
 $M_MAKE Macro $m_append 			 ;
 IF  FARmsg					 ;
     CALL    FAR PTR $M_CLS_&$m_append		 ;  Get addressibilty to class &$M_APPEND (ES:DI)
-    MOV     WORD PTR DS:$M_RT.$M_CLASS_ADDRS+$M_INDEX+2,ES ;  Move into first avaliable table location
-    MOV     WORD PTR DS:$M_RT.$M_CLASS_ADDRS+$M_INDEX,DI ;
+    MOV     WORD PTR DS:$M_RT.$M_CLASS_ADDRS+$M_INDEX+2-1,ES ;  WASM: -1 compensates EQU alias offset bug
+    MOV     WORD PTR DS:$M_RT.$M_CLASS_ADDRS+$M_INDEX-1,DI ;
 ELSE						 ;
     CALL    $M_CLS_&$m_append			 ;  Get addressibilty to class &$M_APPEND (ES:DI)
-    MOV     WORD PTR DS:$M_RT.$M_CLASS_ADDRS+$M_INDEX,DI ;
+    MOV     WORD PTR DS:$M_RT.$M_CLASS_ADDRS+$M_INDEX-1,DI ;  WASM: -1 compensates EQU alias offset bug
 ENDIF						 ;
 $M_INDEX =  $M_INDEX + 4			 ;  Set next available table location
 						 ;

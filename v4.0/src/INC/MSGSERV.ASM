@@ -585,8 +585,7 @@ ENDIF							     ;;
 
 	;; WASM: $M_NUM_CLS is always 1 for non-COMMAND utilities (one class A file).
 	;; REPT %$M_NUM_CLS doesn't work in WASM nested macro context, so we use
-	;; IFDEF $M_HAS_CLS_N flags instead.  Define CLS_1 unconditionally here.
-	$M_HAS_CLS_1 = TRUE
+	;; IFDEF $M_HAS_CLS_N flags instead.  Define CLS_1 in the macro preamble (not here).
 	$M_BUILD_PTRS %$M_NUM_CLS			     ;;AN000;; Build all utility classes
 							     ;;AN000;;
 	CALL	$M_GET_DBCS_VEC 			     ;;AN000;; Save the DBCS vector
