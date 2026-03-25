@@ -864,4 +864,3 @@ sexit:					    ;AN000;
 EndProc SC2BUF
 CODE	ENDS
     END
-

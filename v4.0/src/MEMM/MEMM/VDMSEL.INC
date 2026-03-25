@@ -98,4 +98,3 @@ OEM3_GSEL	equ	128h OR TAB_GDT 	; OEM specific selector
 USER1_GSEL	equ	130h OR TAB_GDT		; USER data structure 
 
 .list	; end of VDMSEL.INC
-

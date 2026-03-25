@@ -73,4 +73,3 @@ extern	char		*format_string; 				/* ;AN000; */
 extern	char far	*fat12_String;					/* ;AN000; */
 extern	char far	*fat16_String;					/* ;AN000; */
 extern	char far	*hilda_string;					/* ;AN000; */
-

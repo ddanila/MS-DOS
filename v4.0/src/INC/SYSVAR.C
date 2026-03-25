@@ -46,4 +46,3 @@ struct sysVarsType *pSVars ;
                 *((char far *)vptr+i) = *((char *)pSVars+i) ;
 
 }
-

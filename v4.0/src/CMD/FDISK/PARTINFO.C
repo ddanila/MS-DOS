@@ -259,4 +259,3 @@ char   i;
         return(c(INVALID));                                             /* AC000 */
 END
 
-

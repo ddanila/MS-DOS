@@ -307,4 +307,3 @@ unsigned char c;
   strcpy(fix_es_reg,NULL);                      /* ;AN000; Repair ES reg */
   return(got_dbcs);                             /* ;AN000; */
 }
-

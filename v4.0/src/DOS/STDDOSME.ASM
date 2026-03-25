@@ -15,4 +15,3 @@ TITLE   STDDOSMES - DOS OEM dependancies
 NAME    STDDOSMES
 
 include DOSMES.ASM
-

@@ -485,4 +485,3 @@ int valid_input_date(in_string,inyear,inmonth,inday)
 } /*end of subroutine valid_input_date*/
 
 /**************************/
-

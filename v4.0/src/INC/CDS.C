@@ -129,4 +129,3 @@ int i ;
 
         return TESTFLAG(CDS.flags,CDSNET) || TESTFLAG(iregs->x.dx,0x0200) ;
 }
-

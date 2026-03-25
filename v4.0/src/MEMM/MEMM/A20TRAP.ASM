@@ -524,4 +524,3 @@ get_init_a20_state   endp
 LAST   ends
 
 	end				; end of module
-

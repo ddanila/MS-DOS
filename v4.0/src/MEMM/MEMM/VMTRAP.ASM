@@ -787,4 +787,3 @@ emul_reflect	label	near
 _TEXT	 ends				 ; end of segment
 ;
 	end				; end of module
-

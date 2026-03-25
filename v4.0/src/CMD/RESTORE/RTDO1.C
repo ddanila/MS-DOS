@@ -417,4 +417,3 @@ void check_bkdisk_old(dheadold, dinfo, srcd, dnumwant) /* wrw! */
    return;							      /*;AN000;*/
 } /*end of subroutine */
 
-

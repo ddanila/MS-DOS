@@ -167,4 +167,3 @@ OEM_C6				EQU 254 ; 254	 FE
 OEM_C7				EQU 255 ; 255	 FF
 
 endif	; __SYSCALL_INC
-

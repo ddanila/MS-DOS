@@ -91,4 +91,3 @@ PromptYN endp					;				;an000;bgb;AN000;
 										;an000;bgb
 CODE	ENDS									;an000;bgb
 	END									;an000;bgb
-

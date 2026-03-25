@@ -476,4 +476,3 @@ Check_DBCS_CharACter endp			;				;an055;bgb
 	pathlabl chkproc2
 CODE	ENDS
 	END
-

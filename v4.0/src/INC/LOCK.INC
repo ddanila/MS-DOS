@@ -21,4 +21,3 @@ LockBuf    STRUC
 
 LockBuf    ENDS
 ;
-

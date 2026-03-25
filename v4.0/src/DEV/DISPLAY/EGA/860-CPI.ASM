@@ -46,4 +46,3 @@ POST_EGA860     EQU     $               ;
                                         ;
 CODE    ENDS                            ;
         END                             ;
-

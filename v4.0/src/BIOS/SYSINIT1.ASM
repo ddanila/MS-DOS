@@ -2684,4 +2684,3 @@ LoadShare	endp				;AN021;
 
 SYSINITSEG	ENDS
 	   END
-

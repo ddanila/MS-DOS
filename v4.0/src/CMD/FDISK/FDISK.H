@@ -221,4 +221,3 @@ struct sublistx                                                                 
     unsigned char pad_char;                                                     /* pad character for replaceable field  */       /* ;an000; */
   END;
                                                                                                                                  /* ;an000; */
-

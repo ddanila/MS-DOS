@@ -49,4 +49,3 @@ Mexit   macro
 retfar  macro   nbytes      ;; WASM: call as retfar (SIZEOF str - 6) — pass precomputed size
         ret     nbytes
         endm
-

@@ -648,4 +648,3 @@ SegOffTo24Resident endp
 
 _TEXT	ENDS
 END
-

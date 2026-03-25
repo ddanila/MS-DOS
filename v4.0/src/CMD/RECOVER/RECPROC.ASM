@@ -526,4 +526,3 @@ Check_DBCS_CharACter endp			;				;AN000;
 	pathlabl recproc
 code	ends
 	end
-

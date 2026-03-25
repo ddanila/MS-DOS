@@ -573,4 +573,3 @@ GET_ENTER_KEY ENDP						;AN000;DT
 								;
 SELECT	ENDS							;AN000;
 	END							;AN000;
-

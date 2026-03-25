@@ -719,4 +719,3 @@ endproc Get_Serial_Num			   ;AN000;S					;an024;bgb
 	pathlabl chkdsk1							;an024;bgb
 CODE	ENDS
 	END	CHKDSK
-

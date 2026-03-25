@@ -1790,4 +1790,3 @@ include MSGDCL.INC
 
 code	ends
 	end	ENTRY_POINT
-

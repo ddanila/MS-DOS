@@ -89,4 +89,3 @@ CSEG	ENDS					  ;AN000;M Access to svcs macro
 	include MSGDCL.INC
 
 	END
-

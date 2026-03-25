@@ -41,4 +41,3 @@ void             clear_screen(unsigned,unsigned,unsigned,unsigned);
 void             display(char far *);
 char             wait_for_ESC(void);
 
-

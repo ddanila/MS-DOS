@@ -3154,4 +3154,3 @@ $M_WAIT_FOR_INPUT ENDP					     ;;AN000;;
       ENDIF						     ;;AN000;; END of include of SYSDISPMSG
     ENDIF						     ;;AN000;; END of include of MSG_DATA_ONLY
 ENDIF							     ;;AN000;; END of include of Structure only
-

@@ -48,4 +48,3 @@ Process_data_block  ENDS
 
 PDB_InterCon	EQU	BYTE PTR PDB_PAD1	; 2/12/KK
 PDB_Append	EQU	BYTE PTR PDB_PAD1+1	; 2/12/KK
-

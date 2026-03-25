@@ -38,4 +38,3 @@ INCLUDE PTRMSG.INC
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 CSEG	ENDS
 	END
-

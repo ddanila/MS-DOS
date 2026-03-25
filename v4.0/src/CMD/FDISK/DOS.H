@@ -78,4 +78,3 @@ int int86x(int, union REGS *, union REGS *, struct SREGS *);
 void segread(struct SREGS *);
 
 #endif	/* LINT_ARGS */
-

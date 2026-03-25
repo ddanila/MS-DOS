@@ -167,4 +167,3 @@ ljo		macro	Farlabel	     ;;AN000;
 		jmp	Farlabel	     ;;AN000;
 Nearlabel:				     ;;AN000;
 		endm			     ;;AN000;
-

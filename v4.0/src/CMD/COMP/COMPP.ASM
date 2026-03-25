@@ -127,4 +127,3 @@ BASESW	EQU	1			;use DS to index off of for PSDATA
 	INCLUDE PARSE.ASM		;AN000;
 CSEG	ENDS				;AN000;
 	END				;AN000;
-

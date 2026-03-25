@@ -230,4 +230,3 @@ int67_entry	endp
 
 _TEXT	ENDS
 END
-

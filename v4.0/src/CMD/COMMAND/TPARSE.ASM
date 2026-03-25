@@ -67,4 +67,3 @@ Append_parse	endp			;AN010;
 
 trancode    ends			;AN000;
 	    end 			;AN000;
-

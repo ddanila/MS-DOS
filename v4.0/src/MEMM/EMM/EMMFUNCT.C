@@ -657,4 +657,3 @@ GetLogicalToPhysicalPageTrans()
 {
 	setAH(INVALID_FUNCTION);
 }
-

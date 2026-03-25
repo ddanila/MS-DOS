@@ -4396,4 +4396,3 @@ WORD	mode;							      /*;AN000;3*/
 
 	return(outreg.x.ax);					      /*;AN000;3*/
 }	/* end extended_open */ 				      /*;AN000;3*/
-

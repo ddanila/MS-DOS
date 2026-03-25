@@ -17,4 +17,3 @@ cseg_seek   ends                                                             ;AN
 cseg_init   segment  Public 'CODE' ; represents INIT
 cseg_init   ends
 
-

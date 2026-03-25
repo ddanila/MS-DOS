@@ -595,4 +595,3 @@ void restore_a_file(finfo,dinfo,bufsize,control_bufsize,	 /* wrw! */
 	 } /* end of if open destination file get file sharing error */
 
 } /*end of restore_a_file subroutine*/
-

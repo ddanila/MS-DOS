@@ -168,4 +168,3 @@ CSECT_F        DW    0		   ;;AN000;# OF SECTORS IN A TRACK. Currently 18 is max.
 	       DW    63 	   ;;AN000;
 	       DW    512	   ;;AN000;
 	       ENDM								;AN000;
-

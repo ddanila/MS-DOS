@@ -15,4 +15,3 @@ PACKET		ENDS
 
 STD_CPLENGTH  equ	2
 PK	      PACKET <>  ;CNS
-

@@ -325,4 +325,3 @@ EndProc ReadFt									;an005;bgb
 	pathlabl chkdisk
 CODE	ENDS
 	END
-

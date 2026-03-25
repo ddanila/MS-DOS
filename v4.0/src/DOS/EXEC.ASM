@@ -951,4 +951,3 @@ Procedure    Reset_Version,near 	;AN008;MS.
 dont_reset:
 	return
 EndProc Reset_Version,near		;AN008;;MS.
-

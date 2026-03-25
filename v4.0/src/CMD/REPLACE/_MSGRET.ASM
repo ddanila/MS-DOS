@@ -248,4 +248,3 @@ include MSGDCL.INC
 _TEXT	ends				; end code segment			;AN000;
 	end									;AN000;
 
-

@@ -229,4 +229,3 @@ MSGNUM_NEWLINE MSG_DESC <22> ;AC007;
 	    PUBLIC MSGNUM_NEWLINE ;AN000;
 ; = = = = = = = = = = = = = = = =
 ;end of DCOMPMS.INC
-

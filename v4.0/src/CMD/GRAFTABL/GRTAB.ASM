@@ -1242,4 +1242,3 @@ SENDMSG ENDP		       ;						;AN000;
    PATHLABL GRTAB	       ;AN006;
 CSEG ENDS
    END
-

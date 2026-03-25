@@ -742,4 +742,3 @@ PUBLIC	stay_resident
 
 PRINTF_CODE ENDS
 	END	ENTPT
-

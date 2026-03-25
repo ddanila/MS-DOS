@@ -97,4 +97,3 @@ ljo		macro	Farlabel
 		jmp	Farlabel
 Nearlabel:
 		endm
-

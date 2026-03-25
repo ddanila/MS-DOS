@@ -71,4 +71,3 @@ SEG_2 DW  ?	     ;; ptr to data
       DB  min_1      ;;min width
       DB  PAD_CHAR   ;;char defined to be space
 
-

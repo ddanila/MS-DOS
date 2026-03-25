@@ -1276,4 +1276,3 @@ setup_packet_for_DBCS	ENDP
 
 PRINTF_CODE ENDS	       ;END OF MODECP.SAL MODULE
 END
-

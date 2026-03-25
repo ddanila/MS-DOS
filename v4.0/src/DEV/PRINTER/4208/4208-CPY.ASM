@@ -7,4 +7,3 @@ ASSUME	CS:CODE,DS:NOTHING,ES:NOTHING,SS:NOTHING
 
 code	ends
 	end
-
