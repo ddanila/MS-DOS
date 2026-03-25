@@ -239,7 +239,7 @@ CHKCROSS:
 	JZ $$IF13
 $$LL13:
 	    CALL    DOCRLF		;display another line
-	    MOV     SecondPass,True	;	     ;				     ;AC000;
+	    MOV     SecondPass,0FFH	;	     ;				     ;AC000; WASM: TRUE byte literal
 	    XOR     AX,AX		;
 	    PUSH    AX
 	    PUSH    AX

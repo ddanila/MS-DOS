@@ -184,7 +184,9 @@ IFNDEF Char_Field_ASCIIZ		;; WASM: guard against pre-definition in RDATA.ASM
 ENDIF
 
   Unsgn_Bin_Type	EQU	01h    ;;axxx0001 - Unsigned Binary to Decimal character
+IFNDEF Unsgn_Bin_Byte				;; WASM: guard against pre-definition
   Unsgn_Bin_Byte	EQU	11h    ;;a0010001
+ENDIF
 IFNDEF Unsgn_Bin_Word				;; WASM: guard against pre-definition
   Unsgn_Bin_Word	EQU	21h    ;;a0100001
 ENDIF
@@ -195,10 +197,14 @@ ENDIF
   Sgn_Bin_Type		EQU	02h    ;;axxx0010 - Signed Binary to Decimal character
   Sgn_Bin_Byte		EQU	12h    ;;a0010010
   Sgn_Bin_Word		EQU	22h    ;;a0100010
+IFNDEF Sgn_Bin_DWord				;; WASM: guard against pre-definition
   Sgn_Bin_DWord 	EQU	32h    ;;a0110010
+ENDIF
 
   Bin_Hex_Type		EQU	03h    ;;axxx0011 - Unsigned Binary to Hexidecimal character
+IFNDEF Bin_Hex_Byte				;; WASM: guard against pre-definition
   Bin_Hex_Byte		EQU	13h    ;;a0010011
+ENDIF
 IFNDEF Bin_Hex_Word			;; WASM: guard against pre-definition in RDATA.ASM
   Bin_Hex_Word		EQU	23h    ;;a0100011
 ENDIF

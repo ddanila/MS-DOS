@@ -140,13 +140,13 @@ A_CREATE_BLOCK ENDS
 CODE	SEGMENT PUBLIC
 CODE	ENDS
 
-CONST	SEGMENT PUBLIC
+CONST	SEGMENT PUBLIC BYTE	; WASM: align must match subsequent reopening
 CONST	ENDS
 
 CSTACK	SEGMENT STACK
 CSTACK	ENDS
 
-DATA	SEGMENT PUBLIC
+DATA	SEGMENT PUBLIC BYTE	; WASM: align must match subsequent reopening
 DATA	ENDS
 
 DG	GROUP	CODE,CONST,CSTACK,DATA
@@ -298,13 +298,13 @@ $$IF1:
 	INT	21H			;  of the BREAKPOINT vector
 
 	MOV	WORD PTR [BPINTSAV],BX	;  and save that vector for later
-	MOV	WORD PTR [BPINTSAV+WORD],ES ; restoration
+	MOV	WORD PTR [BPINTSAV+2],ES ; restoration
 
 	MOV	AX,(GET_INTERRUPT_VECTOR SHL 8) OR VEC_SING_STEP ;get original contents
 	INT	21H			;  of the SINGLE STEP vector
 
 	MOV	WORD PTR [SSINTSAV],BX	;  and save that vector for later
-	MOV	WORD PTR [SSINTSAV+WORD],ES ; restoration
+	MOV	WORD PTR [SSINTSAV+2],ES ; restoration
 
 	MOV	BEGSEG,DS		; save beginning DS
 	PUSH	CS			; repair damaged ES to be
@@ -337,9 +337,9 @@ $$IF1:
 	    LDS     SI,ES:[BX.BCON]	; get system console device
 	    ASSUME  DS:NOTHING
 
-	    MOV     WORD PTR CS:[CIN+WORD],DS ;save vector to console input device
+	    MOV     WORD PTR CS:[CIN+2],DS ;save vector to console input device
 	    MOV     WORD PTR CS:[CIN],SI
-	    MOV     WORD PTR CS:[COUT+WORD],DS ;save vector to console output device
+	    MOV     WORD PTR CS:[COUT+2],DS ;save vector to console output device
 	    MOV     WORD PTR CS:[COUT],SI
 	    PUSH    CS			; restore DS to be
 	    POP     DS			;  just like CS, as before
@@ -377,7 +377,7 @@ $$IF1:
 	    MOV     DX,OFFSET DG:BADDEV_Ptr ; complain again
 	    CALL    STD_PRINTF
 NOLIST1:				; kwc 12/10/86
-	    MOV     WORD PTR [POUT+WORD],CS ; use null device for printer
+	    MOV     WORD PTR [POUT+2],CS ; use null device for printer
 	    MOV     WORD PTR [POUT],OFFSET DG:LONGRET
 	    JMP     NOLIST
 
@@ -395,7 +395,7 @@ GOTLIST:
 	    LDS     SI,DWORD PTR DS:[SI.FCB_NSLD_DRVPTR] ; KWC 12/10/86
 	    ASSUME  DS:NOTHING
 
-	    MOV     WORD PTR CS:[POUT+WORD],DS
+	    MOV     WORD PTR CS:[POUT+2],DS
 	    MOV     WORD PTR CS:[POUT],SI
 	ENDIF
 NOLIST:
@@ -417,7 +417,7 @@ NOLIST:
 	INT	21H			; of the int 24h vector
 
 	MOV	WORD PTR PREV24,BX	; remember what int 24h used to
-	MOV	WORD PTR PREV24+WORD,ES ;  point to
+	MOV	WORD PTR PREV24+2,ES ;  point to
 	POP	ES			; restore ES to be like CS and DS
 
 	MOV	AX,(SET_INTERRUPT_VECTOR SHL 8) + VEC_CRIT_ERR ; change int 24h to
@@ -448,9 +448,9 @@ NOLIST:
 	STOSW
 	STOSW
 	STOSW
-	MOV	WORD PTR [DISADD+WORD],AX
-	MOV	WORD PTR [ASMADD+WORD],AX
-	MOV	WORD PTR [DEFDUMP+WORD],AX
+	MOV	WORD PTR [DISADD+2],AX
+	MOV	WORD PTR [ASMADD+2],AX
+	MOV	WORD PTR [DEFDUMP+2],AX
 
 	MOV	AX,100H
 	MOV	WORD PTR[DISADD],AX
@@ -582,8 +582,8 @@ FILOOP:
 
 					;perform self-relocation on some internal vectors:
 	MOV	AX,CSSAVE		; pick up the seg id to go to vectors
-	MOV	WORD PTR DISADD+WORD,AX ;  shove it into the segid portion
-	MOV	WORD PTR ASMADD+WORD,AX ;  of these two vectors
+	MOV	WORD PTR DISADD+2,AX ;  shove it into the segid portion
+	MOV	WORD PTR ASMADD+2,AX ;  of these two vectors
 	MOV	AX,IPSAVE		; pick up the offset to go to vectors
 	MOV	WORD PTR DISADD,AX	;  shove it into the offset portion
 	MOV	WORD PTR ASMADD,AX	;  of these two vectors
@@ -802,10 +802,10 @@ USERDEV:
 ;	    LDS     SI,DWORD PTR [CONFCB.FCB_FIRCLUS]		; KWC 12/10/86
 	    LDS     SI,DWORD PTR [CONFCB.FCB_NSLD_DRVPTR] ; KWC 12/10/86
 	    MOV     WORD PTR CS:[CIN],SI
-	    MOV     WORD PTR CS:[CIN+WORD],DS
+	    MOV     WORD PTR CS:[CIN+2],DS
 
 	    MOV     WORD PTR CS:[COUT],SI
-	    MOV     WORD PTR CS:[COUT+WORD],DS
+	    MOV     WORD PTR CS:[COUT+2],DS
 	    PUSH    CS
 	    POP     DS
 	    RET

@@ -310,7 +310,7 @@ PRIN:
 
 	POP	CX			; Restore overall dump len
 	MOV	WORD PTR [DEFDUMP],SI
-	MOV	WORD PTR [DEFDUMP+WORD],DS ; Save last address as def
+	MOV	WORD PTR [DEFDUMP+2],DS ; Save last address as def
 	RET
 
 	ASSUME	DS:DG

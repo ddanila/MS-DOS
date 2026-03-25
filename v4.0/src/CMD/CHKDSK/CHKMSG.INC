@@ -1,3 +1,4 @@
+INCLUDE MSGEQUS.INC	; WASM: forward-declare sublist EQUs used before SYSMSG.INC
                                                                                 ;an000;bgb
 ;                                                                               ;an000;bgb
 ;*****************************************************************************  ;an000;bgb
@@ -346,7 +347,7 @@ endif                                                                           
 Sublist_msgSerialNumber label dword             ;                               ;an000;bgb;an024;bgb
         db              Sublist_Length          ;0b                             ;an000;bgb;an024;bgb
         db              Reserved                ;00                             ;an000;bgb;an024;bgb
-        dw              offset word ptr sernum+2 ;data field                    ;an000;bgb;an024;bgb
+        dw              offset sernum+2 ;data field                            ;an000;bgb;an024;bgb
         dw              data                    ;                               ;an000;bgb;an024;bgb
         db              1                       ;#1 of 2                        ;an000;bgb;an024;bgb
         db              Right_Align+Bin_Hex_Word ;format                        ;an000;bgb;an024;bgb

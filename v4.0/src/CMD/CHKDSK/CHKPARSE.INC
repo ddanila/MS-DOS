@@ -57,7 +57,9 @@ Colon			equ	":"             ;                               ;an000;bgb;AN000;
 										;an000;bgb
 ;Parse Errors									;an000;bgb
 										;an000;bgb
+IFNDEF No_Error
 No_Error		equ	0		;				;an000;bgb;AN000;
+ENDIF
 Too_Many_Operands	equ	1		;				;an000;bgb;AN000;
 Operand_Missing 	equ	2		;				;an000;bgb;AN000;
 Not_In_Switch_List	equ	3		;				;an000;bgb;AN000;
@@ -84,7 +86,9 @@ Type_Quoted_String	equ	9		;				;an000;bgb;AN000;
 ;Other										;an000;bgb
 										;an000;bgb
 None			equ	0		;				;an000;bgb;AN000;
+IFNDEF No_Error
 No_Error		equ	0		;				;an000;bgb;AN000;
+ENDIF
 Switch_Found		equ	0FFFFh		;				;an000;bgb;AN000;
 Range_Ok		equ	1		;				;an000;bgb;AN000;
 Command_Line_Parms	equ	81h		;				;an000;bgb;AN000;
@@ -128,7 +132,7 @@ Item		  db	  0		  ;AN000;SM				;an000;bgb
 Pointer 	  dw	  0		  ;AN000;SM				;an000;bgb
 drnum_stroff	  dw	  0		  ;AN000;SM				;an000;bgb
 return_strseg		 dw	 0						;an000;bgb
-single_return	ends								;an000;bgb
+single_Return	ends								;an000;bgb
 										;an000;bgb
 										;an000;bgb
 Switch_Return	 struc				;				;an000;bgb;AN000;

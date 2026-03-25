@@ -124,16 +124,16 @@
 ;*	       "Licensed Material - Program Property of Microsoft"		     *
 ;*									     *
 ;*****************************************************************************
-	HEADER	<DEFINITIONS - LOCAL MACROS AND LOCAL EQUATES>
-IF1
-	;%OUT	COMPONENT=LABEL, MODULE=LABEL.SAL
-ENDIF
 HEADER	MACRO	TEXT
 .XLIST
 	SUBTTL	&TEXT
 .LIST
 	PAGE
 	ENDM
+	HEADER	<DEFINITIONS - LOCAL MACROS AND LOCAL EQUATES>
+IF1
+	;%OUT	COMPONENT=LABEL, MODULE=LABEL.SAL
+ENDIF
 ;*****************************************************************************
 ; Equate Area
 ;*****************************************************************************
@@ -1272,14 +1272,14 @@ Setup_SerialNum PROC NEAR	   ;AN000;M
    mov	s1_offset,offset SerNum+2  ;AN000;M
    mov	s1_segment,ds		   ;AN000;M Setup segment
    mov	s1_flags,BIN_HEX_WORD+RIGHT_ALIGN ;AN000;M Set up the parm formatting
-   mov	s1_maxwidth,DWORD	   ;AN000;M 0 ensures no padding
-   mov	s1_minwidth,DWORD	   ;AN000;M At least 1 char to insert
+   mov	s1_maxwidth,4		   ;AN000;M 4 hex digits for a WORD
+   mov	s1_minwidth,4		   ;AN000;M At least 4 chars to insert
    mov	s1_padchar,CHAR_ZERO	   ;AN000;M In case, pad with ZERO CHAR
    mov	s2_offset,offset SerNum    ;AN000;M
    mov	s2_segment,ds		   ;AN000;M Setup segment
    mov	s2_flags,BIN_HEX_WORD+RIGHT_ALIGN ;AN000;M Set up the parm formatting
-   mov	s2_maxwidth,DWORD	   ;AN000;M 0 ensures no padding
-   mov	s2_minwidth,DWORD	   ;AN000;M At least 1 char to insert
+   mov	s2_maxwidth,4		   ;AN000;M 4 hex digits for a WORD
+   mov	s2_minwidth,4		   ;AN000;M At least 4 chars to insert
    mov	s2_padchar,CHAR_ZERO	   ;AN000;M In case, pad with ZERO CHAR
    mov	ax,7			   ;AN000;M Utility's message number
    mov	bx,STDOUT		   ;AN000;M Info msg, so stdout

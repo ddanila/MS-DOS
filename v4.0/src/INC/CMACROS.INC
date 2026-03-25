@@ -12,7 +12,9 @@ outif MACRO name,defval,onmsg,offmsg
 	endif
     endif
     if name
+ifndef __WASM__
 	name=1
+endif
 	ifnb <onmsg>
 	    ;%out ! onmsg
 	endif
@@ -103,14 +105,14 @@ n1&n2 o1&o2 p1&p2
 endm
 mpush macro rV
 irp x,<ax,bx,cx,dx,si,di,es,ds,bp,sp,ss,cs>
-if rV AND ?&&x
+if rV AND ?&x
 push x
 endif
 endm
 endm
 mpop macro rV
 irp x,<cs,ss,sp,bp,ds,es,di,si,dx,cx,bx,ax>
-if rV AND ?&&x
+if rV AND ?&x
 pop x
 endif
 endm
@@ -128,36 +130,36 @@ smashes macro n,rL
 endm
 ?RI macro n,rL
 irp x,<rL>
-ifdef ?&&x
-n = n or ?&&x
+ifdef ?&x
+n = n or ?&x
 endif
 endm
 endm
-parmB macro nl
+parmB macro nL
 ?pp <&nL>,<byte>,2,1
 endm
-parmW macro nl
+parmW macro nL
 ?pp <&nL>,<word>,2,2
 endm
-parmD macro nl
+parmD macro nL
 ife ?PLM
 irp x,<nL>
-?pp <&&x>,<DWORD>,0,4
-?pp <Off_&&x>,<WORD>,2,2
-?pp <Seg_&&x>,<WORD>,2,2
+?pp <&x>,<DWORD>,0,4
+?pp <Off_&x>,<WORD>,2,2
+?pp <Seg_&x>,<WORD>,2,2
 endm
 else
 irp x,<nL>
-?pp <Seg_&&x>,<WORD>,2,2
-?pp <Off_&&x>,<WORD>,2,2
-?pp <&&x>,<DWORD>,0,4
+?pp <Seg_&x>,<WORD>,2,2
+?pp <Off_&x>,<WORD>,2,2
+?pp <&x>,<DWORD>,0,4
 endm
 endif
 endm
-parmQ macro nl
+parmQ macro nL
 ?pp <&nL>,<QWORD>,8,8
 endm
-parmT macro nl
+parmT macro nL
 ?pp <&nL>,<TBYTE>,10,10
 endm
 if sizeC
@@ -185,15 +187,15 @@ ife ?PLM
 irp x,<nL>
 ?pp1 x,<t>,%?PO,%?adj,%(?PO+?adj)
 ?PO = ?PO + l
- .xcref ?T&&x
-?T&&x = s
+ .xcref ?T&x
+?T&x = s
 endm
 else
 irp x,<nL>
 ?PO = ?PO + l
 ?pp1 x,<t>,%?PO,%?adj,%(?PO+?adj)
- .xcref ?T&&x
-?T&&x = s
+ .xcref ?T&x
+?T&x = s
 endm
 endif
  .cref
@@ -216,9 +218,9 @@ localW macro nL
 endm
 localD macro nL
 irp x,<nL>
-?aLoc <Seg_&&x>,<WORD PTR>,2,2,1
-?aLoc <Off_&&x>,<WORD PTR>,2,2,1
-?aLoc <&&x>,<DWORD PTR>,0,4,1
+?aLoc <Seg_&x>,<WORD PTR>,2,2,1
+?aLoc <Off_&x>,<WORD PTR>,2,2,1
+?aLoc <&x>,<DWORD PTR>,0,4,1
 endm
 endm
 localQ macro nL
@@ -257,8 +259,8 @@ if a
 endif
 irp x,<nL>
 ?aL1 x,<t>,%???
- .xcref ?T&&x
-?T&&x = s
+ .xcref ?T&x
+?T&x = s
 endm
  .cref
 else
@@ -421,12 +423,12 @@ endif
 ?ex1 macro nL,s,d
 irp x,<nL>
  .xcref
- .xcref ?T&&x
+ .xcref ?T&x
  .cref
-?T&&x = s
+?T&x = s
 ife ?PLM
-extrn _&&x:&d
-x equ _&&x
+extrn _&x:&d
+x equ _&x
 else
 extrn x:&d
 endif
@@ -487,15 +489,15 @@ ifidn <x>,<PUBLIC>
 ?lblpu = 1
 else
  .xcref
- .xcref ?T&&x
+ .xcref ?T&x
  .cref
-?T&&x = s
+?T&x = s
 ife ?PLM
 if ?lblpu
-public _&&x
+public _&x
 endif
-_&&x label &d
-x equ _&&x
+_&x label &d
+x equ _&x
 else
 if ?lblpu
 public x
@@ -541,9 +543,9 @@ endif
 ?aD macro nL,s
 irp x,<nL>
  .xcref
- .xcref ?T&&x
+ .xcref ?T&x
  .cref
-?T&&x = s
+?T&x = s
 endm
 endm
 regPtr macro n,S,O
@@ -556,6 +558,11 @@ regPtr macro n,S,O
 ?OR&n = 0
 ?RI ?OR&n,<&O>
 endm
+ifdef __WASM__
+; WASM: ?Atal is not used (ccall inlines args via IRP); Arg is defined with ccall
+?Atal macro n,i
+endm
+else
 arg macro aL
 irp x,<aL>
 ?argc = ?argc + 1
@@ -570,6 +577,7 @@ endm
 ?AP n
 &endm
 endm
+endif
 ?AP macro n
 ?argl = ?argl + 2
 ifdef ?T&n
@@ -608,6 +616,42 @@ endif
 endif
 push n
 endm
+ifdef __WASM__
+; WASM: simplified ccall — pushes args left-to-right via IRP.
+; For C cdecl calling convention with multiple args, list them right-to-left.
+; For single-arg calls this is always correct.
+Arg macro aL
+; WASM: Arg is a no-op; args are passed directly to ccall
+endm
+ccall macro n,a,sleaze
+?argl = 0
+ifnb <a>
+irp x,<a>
+?AP x
+endm
+endif
+ifdef ?SM&n
+?RSL = ?RSL AND ?SM&n
+endif
+mpush %?RSL
+ife ?PLM
+ifb <sleaze>
+call _&n
+else
+call n
+endif
+else
+call n
+endif
+if ?argl
+add sp,?argl
+endif
+mpop %?RSL
+?RSL = 0
+?argc = 0
+?argl = 0
+endm
+else
 ife ?PLM
 ccall macro n,a,sleaze
 ifnb <a>
@@ -668,6 +712,7 @@ mpop %?RSL
 ?argl = 0
 endm
 endif
+endif
 cProc macro n,cl,s
 ?pd n,<cl>,<s>,4
 endm
@@ -716,6 +761,81 @@ else
 ?pg <n>,%?PU,%?PC,%?PAS
 endif
 endm
+ifdef __WASM__
+; WASM: ?pg stores proc attributes; cBegin/cEnd are static macros
+; that take the proc name as the first argument (injected by preprocess-wasm).
+__wasm_proc_c = 0  ; is FAR?
+__wasm_proc_p = 0  ; is PUBLIC?
+__wasm_proc_a = 0  ; save regs mask
+?pg macro n,p,cc,aa
+    __wasm_proc_c = cc
+    __wasm_proc_p = p
+    __wasm_proc_a = aa
+endm
+?UTPE macro
+endm
+; WASM: ?pg1 is a no-op; cEnd is a static macro defined below
+?pg1 macro n,cc,aa,oo
+endm
+; WASM static cBegin: first arg is the proc name (injected by preprocess-wasm)
+cBegin macro procname,g
+    ?CPD = 0
+    ?argc = 0
+    ?BA = 1
+    ??? = (???+1) AND 0FFFEH
+    IF __wasm_proc_p
+	PUBLIC &procname
+    ENDIF
+    IFIDN <g>,<nogen>
+    ELSE
+	IF __wasm_proc_c
+	    &procname proc FAR
+	ELSE
+	    &procname proc NEAR
+	ENDIF
+	IF ?IA
+	    mov ax,ds
+	    nop
+	    inc bp
+	    push bp
+	    mov bp,sp
+	    push ds
+	    mov ds,ax
+	ELSE
+	    push bp
+	    mov bp,sp
+	ENDIF
+	IF ???
+	    sub sp,???
+	ENDIF
+	mPush %__wasm_proc_a,1
+    ENDIF
+endm
+; WASM static cEnd: first arg is the proc name (injected by preprocess-wasm)
+cEnd macro procname,g
+    ?BA = 0
+    IFIDN <g>,<nogen>
+    ELSE
+	mPop %__wasm_proc_a,1
+	IF ?IA
+	    sub bp,2
+	    mov sp,bp
+	    pop ds
+	    pop bp
+	    dec bp
+	ELSE
+	    mov sp,bp
+	    pop bp
+	ENDIF
+	ife ?PLM
+	    ret
+	else
+	    ret ?PO
+	endif
+    ENDIF
+    &procname endp
+endm
+else
 ?pg macro n,p,c,a
     .xcref
     cBegin &macro g
@@ -762,7 +882,8 @@ endm
 	;%out Unterminated Procedure Definition: "&n"
     &endm
 endm
-
+?UTPE macro
+endm
 ?pg1 macro n,c,a,o
     .xcref
     cEnd &macro g
@@ -796,6 +917,7 @@ endm
     &endm
     .cref
 endm
+endif
 
 assumes macro s,g
 local assumed
@@ -852,6 +974,15 @@ ASMpass=1
 else
 ASMpass=2
 endif
+ifdef __WASM__
+; WASM: addSeg — emit GROUP directive immediately when a segment is provided.
+; When called with only grp (no seg), it is a no-op (GROUP already emitted).
+addSeg macro grp,seg
+ifnb <seg>
+grp GROUP seg
+endif
+endm
+else
 addSeg macro grp,seg
 ifndef def_&grp
 def_&grp= 0
@@ -874,9 +1005,42 @@ else
 add_&grp seg
 endif
 endm
+endif
 defGrp macro nam
 addSeg nam
 endm
+ifdef __WASM__
+; WASM: ?cs1 defines beginXX macro using nested MACRO (without & prefix).
+; Each call gets a unique segment-tracking index via IRP+%operator.
+; ?cs2 is a no-op; sEnd is defined once as a static macro below.
+__wasm_cms_seg = 0   ; currently open segment index (0=none)
+__wasm_cms_cnt = 0   ; counter for segment index assignment
+?cs1 macro n,ln
+    __wasm_cms_cnt = __wasm_cms_cnt + 1
+    irp __idx, <%__wasm_cms_cnt>
+	begin&ln macro
+	    __wasm_cms_seg = __idx
+	    &n segment
+	endm
+    endm
+endm
+?cs2 macro n
+endm
+; WASM static sEnd: closes the currently open segment based on __wasm_cms_seg.
+; Supports up to 4 segments (code, data, initcode, initdata).
+sEnd macro
+    if __wasm_cms_seg eq 1
+	_TEXT ends
+    elseif __wasm_cms_seg eq 2
+	_DATA ends
+    elseif __wasm_cms_seg eq 3
+	_INITTEXT ends
+    elseif __wasm_cms_seg eq 4
+	_INITDATA ends
+    endif
+    __wasm_cms_seg = 0
+endm
+else
 ?cs1 macro n,ln
 begin&ln &macro
 ?cs2 <n>
@@ -889,6 +1053,7 @@ endm
 	n ends
     &endm
 endm
+endif
 
 sBegin macro ln
     begin&ln
@@ -910,9 +1075,13 @@ ife ?DF
     if sizeC
 	codeOFFSET equ OFFSET _TEXT:
     else
+ifndef __WASM__
 	codeOFFSET equ OFFSET IGROUP:
+endif
     endif
+ifndef __WASM__
     dataOFFSET equ OFFSET DGROUP:
+endif
 endif
 
 errnz macro x

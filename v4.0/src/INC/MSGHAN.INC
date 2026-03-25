@@ -64,11 +64,17 @@ SUBLIST 	  ENDS		;AN000;
 
 ;		  BITS DEFINED FOR SUB_FLAGS ABOVE
 ;			FORMAT = A0SSTTTT
-;				 ³³ ³ ÀÄÄÄ FIELD TYPE
-;				 ³³ ÀÄÄÄ DATA VARIABLE SIZE
-;				 ³ÀÄÄÄ RESERVED, MUST BE ZERO
-;				 ÀÄÄÄ ALIGNMENT INDICATOR
-SF_BITS     RECORD F_ALIGN:1,F_RES:1=0,F_SIZE:2,F_TYPE:4;AN000;
+;				 ï¿½ï¿½ ï¿½ ï¿½ï¿½ï¿½ï¿½ FIELD TYPE
+;				 ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ DATA VARIABLE SIZE
+;				 ï¿½ï¿½ï¿½ï¿½ï¿½ RESERVED, MUST BE ZERO
+;				 ï¿½ï¿½ï¿½ï¿½ ALIGNMENT INDICATOR
+;; SF_BITS RECORD replaced with EQUs for WASM compatibility
+;; Layout: A0SSTTTT (F_ALIGN:1, F_RES:1=0, F_SIZE:2, F_TYPE:4)
+;; SF_BITS<align,,size,type> instantiations are expanded by preprocess-wasm
+F_ALIGN		EQU	7	;AN000; bit position of alignment flag
+F_RES		EQU	6	;AN000; bit position of reserved flag
+F_SIZE		EQU	4	;AN000; bit position of size field
+F_TYPE		EQU	0	;AN000; bit position of type field
 
 ;		F_ALIGN FIELD, ALIGNMENT INDICATOR
 SF_LEFT 	  EQU	0	   ;AN000;LEFT ALIGN

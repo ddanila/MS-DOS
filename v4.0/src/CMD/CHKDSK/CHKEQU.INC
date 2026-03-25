@@ -2,7 +2,9 @@
 FCB	EQU	5CH
 
 String_Done equ 0
+IFNDEF No_Error
 No_Error equ	0
+ENDIF
 chk_Error   equ     1
 IFNDEF Stderr
 Stderr	equ	2
@@ -144,6 +146,11 @@ Sublist_Min	db	?			;				;AN000;
 Sublist_Char	db	?			;				;AN000;
 Sublist_Struc ends
 
+; WASM: A_DeviceParameters already defined in IOCTL.INC (as A_DEVICEPARAMETERS).
+; Guard to prevent E046 "Symbol already defined" — MASM allowed same-name STRUC
+; redefinition, WASM does not.
+IFNDEF A_DEVICEPARAMETERS_DEFINED
+A_DEVICEPARAMETERS_DEFINED	equ	1
 A_DeviceParameters	struc
 
 SpecialFunctions	db	?    ;1  0
@@ -166,6 +173,7 @@ Ext_Total_Sectors	dd	?
 ReservedArea		db	6 dup(?)
 
 A_DeviceParameters	ends
+ENDIF
 
 
 

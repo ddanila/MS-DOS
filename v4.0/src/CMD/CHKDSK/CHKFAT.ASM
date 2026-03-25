@@ -743,7 +743,7 @@ FAT12_4:
 CHKCHHEAD:
 	TEST	AH,80H				;Previosly marked head?
 	jz	ADDCHAIN			;Nope
-	AND	BYTE PTR es:[DI],NOT 80H	   ;Turn off head bit
+	AND	BYTE PTR es:[DI],07FH		   ;Turn off head bit (NOT 80H)
 	sub	word ptr orphcnt,1		;Wasn't really a head
 	sbb	word ptr orphcnt+2,0		;Wasn't really a head
 	POP	DI				;Clean stack

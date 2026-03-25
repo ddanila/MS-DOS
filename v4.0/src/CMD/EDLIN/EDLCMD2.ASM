@@ -260,7 +260,7 @@ Terminate:
 
 	call	EDLIN_PG_COUNT			;an000;adjust screen line count
 						;      DMS:6/10/87
-	cmp	lc_flag,false			;an000;continue DISPLAY?
+	cmp	lc_flag,0			;an000;continue DISPLAY?
 						;      DMS:6/10/87
 	JNZ	DISPLN
 	DEC	BX
@@ -1060,7 +1060,7 @@ EDLIN_PG_COUNT		proc	near		;an000;track remaining lines
 
 	push	ax				;an000;save affected regs
 
-	mov	lc_flag,true			;an000;init. flag to signal
+	mov	lc_flag,0FFh			;an000;init. flag to signal
 						;      continue printing
 
 	mov	al,pg_count			;an000;set up for page adj.
@@ -1085,7 +1085,7 @@ $$EN15:
 	    JNBE $$IF19
 		   call    EDLIN_PG_PROMPT	;an000;prompt the user to
 						;      "Continue(Y/N)?"
-		   cmp	  continue,true 	;an000;did user say continue
+		   cmp	  continue,0FFh 	;an000;did user say continue
 ;		   $if	  z			;an000;continue
 		   JNZ $$IF20
 			  mov	al,dg:disp_len	;an000;begin init of screen
@@ -1094,7 +1094,7 @@ $$EN15:
 ;		   $else			;an000;do not continue
 		   JMP SHORT $$EN20
 $$IF20:
-			  mov	lc_flag,false	;an000;signal no more to print
+			  mov	lc_flag,0		;an000;signal no more to print
 ;		   $endif			;an000;
 $$EN20:
 ;	    $endif				;an000;
@@ -1102,7 +1102,7 @@ $$IF19:
 ;	$else					;an000;total lines printed
 	JMP SHORT $$EN18
 $$IF18:
-	    mov    lc_flag,false		;an000;signal no more to print
+	    mov    lc_flag,0			;an000;signal no more to print
 ;	$endif					;an000;
 $$EN18:
 
@@ -1149,12 +1149,12 @@ EPP_Reprompt:
 
 EPP_True_Exit:
 
-	mov	Continue,True			;an000;flag Y found
+	mov	Continue,0FFh			;an000;flag Y found
 	jmp	EPP_Exit			;an000;exit routine
 
 EPP_False_Exit:
 
-	mov	Continue,False			;an000;flag N found
+	mov	Continue,0			;an000;flag N found
 
 EPP_Exit:
 

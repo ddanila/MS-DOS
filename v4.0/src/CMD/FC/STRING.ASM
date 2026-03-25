@@ -24,7 +24,7 @@ externP strlen
 ; strbscan (string, set) returns pointer to 1st char in set or end
 ;
 cProc	strbscan,<PUBLIC>,<SI,DI>
-parmW	str
+parmW	strn
 parmW	set
 cBegin
 	push	ds
@@ -32,7 +32,7 @@ cBegin
 	cCall	strlen,<set>
 	inc	ax
 	mov	bx, ax
-	mov	si,str
+	mov	si,strn
 	cld
 bscan:
 	lodsb
@@ -50,7 +50,7 @@ cEnd
 ; strbskip ( string, set ) returns pointer to 1st char not in set
 ;
 cProc	strbskip,<PUBLIC>,<SI,DI>
-parmW	str
+parmW	strn
 parmW	set
 cBegin
 	push	ds
@@ -58,7 +58,7 @@ cBegin
 	cCall	strlen,<set>
 	inc	ax
 	mov	bx, ax
-	mov	si,str
+	mov	si,strn
 	cld
 bskip:
 	lodsb
@@ -81,12 +81,12 @@ cEnd
 ;
 cProc	strpre,<PUBLIC>,<si,di>
 parmW	pref
-parmW	str
+parmW	strn
 cBegin
 	cld
 	mov	si,pref
-	mov	di,str
-	mov	bx,dataOFFSET xltab
+	mov	di,strn
+	mov	bx,OFFSET DGROUP:xltab
 preCompare:
 	lodsb
 	mov	ah,[di]

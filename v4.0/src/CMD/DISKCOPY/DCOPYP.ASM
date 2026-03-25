@@ -90,16 +90,19 @@
 	    ;%OUT    COMPONENT=DISKCOPY, MODULE=DCOPYP.SAL... ;AN000;
 	ENDIF				;AN000;
 ; =  =	=  =  =  =  =  =  =  =	=  =
-	HEADER	<MACRO DEFINITION>	;AN000;
-; =  =	=  =  =  =  =  =  =  =	=  =
-	INCLUDE PATHMAC.INC		;AN015;PATHGEN MACRO
-; =  =	=  =  =  =  =  =  =  =	=  =
+
 HEADER	MACRO	TEXT			;;AN000;
 .XLIST					;AN000;
 	SUBTTL	TEXT			;AN000;
 .LIST					;AN000;
 	PAGE				;;AN000;
 	ENDM				;;AN000;
+
+; =  =	=  =  =  =  =  =  =  =	=  =
+	HEADER	<MACRO DEFINITION>	;AN000;
+; =  =	=  =  =  =  =  =  =  =	=  =
+	INCLUDE PATHMAC.INC		;AN015;PATHGEN MACRO
+; =  =	=  =  =  =  =  =  =  =	=  =
 
 ; =  =	=  =  =  =  =  =  =  =	=  =
 	HEADER	<SYSPARSE - SYSTEM COMMAND LINE PARSER> ;AN000;

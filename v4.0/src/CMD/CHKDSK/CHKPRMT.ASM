@@ -54,7 +54,8 @@ ASSUME	CS:DG,DS:DG,ES:DG,SS:DG 						;an000;bgb
 ;	ENDDO NC								;an000;bgb
 ;	ret									;an000;bgb
 ;*****************************************************************************	;an000;bgb
-Procedure PromptYN				;				;an000;bgb;AN000;
+PUBLIC	PromptYN							;an000;bgb;AN000;
+PromptYN proc	near				;				;an000;bgb;AN000;
 	push	si				;Save reg			;an000;bgb
 ;	$DO					;				;an000;bgb;AC000;
 $$DO1:

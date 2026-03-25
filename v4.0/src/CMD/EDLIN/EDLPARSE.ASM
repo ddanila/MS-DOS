@@ -54,7 +54,7 @@ parse_command	equ	081h			;an000;offset of command line
 nul		equ	0			;an000;nul
 fs_flag 	equ	05h			;an000;filespec found
 sw_flag 	equ	03h			;an000;switch found
-true		equ	0ffffh			;an000;true
+true		equ	0FFh			;an000;true (byte-sized for WASM compat; was 0FFFFh)
 false		equ	00h			;an000;false
 too_many	equ	01h			;an000;too many parms
 

@@ -554,12 +554,14 @@ IF	COMR						     ;;  ** Special case for RESIDENT COMMAND.COM
 	  ENDIF 					     ;;AN003;;
 	ENDIF						     ;;AN003;;
 ELSE							     ;;
-	IFNDEF $M_HAS_MSGSERV_1 		     ;; WASM: EXTRN if not defined locally (timing guard)
-	  IF FARmsg
-	    EXTRN $M_MSGSERV_1:FAR
-	  ELSE
-	    EXTRN $M_MSGSERV_1:NEAR
-	  ENDIF
+	;; WASM: EXTERNDEF lets single-pass assembler know about forward refs
+	;; to $M_MSGSERV_N procs defined by CL files included later.
+	IF FARmsg
+	  EXTERNDEF $M_MSGSERV_1:FAR
+	  EXTERNDEF $M_MSGSERV_2:FAR
+	ELSE
+	  EXTERNDEF $M_MSGSERV_1:NEAR
+	  EXTERNDEF $M_MSGSERV_2:NEAR
 	ENDIF
 	IF	FARmsg					     ;;AN000;;
 	  CALL	  FAR PTR $M_MSGSERV_1			     ;;AN000;; Get addressibilty to MSGSERV CLASS 1 (EXTENDED Errors)
@@ -571,13 +573,6 @@ ELSE							     ;;
 	MOV	WORD PTR DS:$M_RT.$M_CRIT_ADDRS+2,ES	     ;;AN000;; Move into first avaliable table location
 	MOV	WORD PTR DS:$M_RT.$M_CRIT_ADDRS,DI 	     ;;AN000;;
 							     ;;
-	IFNDEF $M_HAS_MSGSERV_2 		     ;; WASM: EXTRN if not defined locally (timing guard)
-	  IF FARmsg
-	    EXTRN $M_MSGSERV_2:FAR
-	  ELSE
-	    EXTRN $M_MSGSERV_2:NEAR
-	  ENDIF
-	ENDIF
 	IF	FARmsg					     ;;AN000;;
 	  CALL	  FAR PTR $M_MSGSERV_2			     ;;AN000;; Get addressibilty to MSGSERV CLASS 2 (PARSE Errors)
 	ELSE						     ;;AN000;;

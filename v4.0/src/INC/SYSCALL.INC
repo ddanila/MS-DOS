@@ -3,6 +3,9 @@
 ;; SUBTTL	system call definitions
 PAGE
 
+ifndef __SYSCALL_INC
+__SYSCALL_INC equ 1
+
 Abort				EQU 0	;  0	  0
 Std_Con_Input			EQU 1	;  1	  1
 Std_Con_Output			EQU 2	;  2	  2
@@ -163,4 +166,6 @@ OEM_C4				EQU 252 ; 252	 FC
 OEM_C5				EQU 253 ; 253	 FD
 OEM_C6				EQU 254 ; 254	 FE
 OEM_C7				EQU 255 ; 255	 FF
+
+endif	; __SYSCALL_INC
 

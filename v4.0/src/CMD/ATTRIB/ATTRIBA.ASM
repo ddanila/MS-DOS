@@ -1,5 +1,5 @@
 	page	,132			;
-	title	New_C.C - DOS entry to the KWC's 'C' programs
+	title	New_C.C - DOS entry to the KWC C programs
 
 ;
 ;	This module has been modified extensively for my personal
@@ -71,9 +71,9 @@ base	   ends
 
 _data	   segment PARA public 'DATA'
 
-	   irp	 name,<_top,_base,_cs,_ss,_psp,_env,_rax,_rbx,_rcx,_rdx,_rds,_rsi,_rbp,_res,_rdi>
-	   public name
-name	   dw	 0
+	   irp	 vnam,<_top,_base,_cs,_ss,_psp,_env,_rax,_rbx,_rcx,_rdx,_rds,_rsi,_rbp,_res,_rdi>
+	   public vnam
+vnam	   dw	 0
 	   endm
 
 _data	   ends
@@ -407,7 +407,9 @@ _GETPSPBYTE ENDP
 
 
 MVALUE	   EQU	 PARM_2 		;AN000;
+IFNDEF MOFFSET
 MOFFSET    EQU	 PARM_1 		;AN000;
+ENDIF
 
 	   ASSUME CS:PGROUP		;AN000;
 	   ASSUME DS:DGROUP		;AN000;

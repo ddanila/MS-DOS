@@ -38,21 +38,96 @@ endm
 JN	macro
 endm
 
-$BuildJump   macro   j1,j2
-	j1  macro   t
-	    .xcref  j1
-					j2 t
-	endm
+;;-- Jump aliases (expanded manually — WASM cannot define macros inside macros)
+jeq	macro t
+	je t
 endm
-
-irp	x,<<jeq,je>,<jlt,jl>,<jgt,jg>,<jneq,jne>,<jnlt,jnl>,<jngt,jng>,<jnpe,jpo>,<jnpo,jpe>>
-	$BuildJump x
+jlt	macro t
+	jl t
 endm
-irp	x,<<jzero,jz>,<jnzero,jnz>,<jnonzero,jnz>,<jnnonzero,jz>,<jand,jnz>,<jnand,jz>,<jnnand,jnz>>
-	$BuildJump x
+jgt	macro t
+	jg t
 endm
-irp	x,<a,ae,b,be,c,e,g,ge,l,le,o,p,s,z,cxz>
-	$BuildJump jnn&x,j&x
+jneq	macro t
+	jne t
+endm
+jnlt	macro t
+	jnl t
+endm
+jngt	macro t
+	jng t
+endm
+jnpe	macro t
+	jpo t
+endm
+jnpo	macro t
+	jpe t
+endm
+jzero	macro t
+	jz t
+endm
+jnzero	macro t
+	jnz t
+endm
+jnonzero	macro t
+	jnz t
+endm
+jnnonzero	macro t
+	jz t
+endm
+jand	macro t
+	jnz t
+endm
+jnand	macro t
+	jz t
+endm
+jnnand	macro t
+	jnz t
+endm
+jnna	macro t
+	ja t
+endm
+jnnae	macro t
+	jae t
+endm
+jnnb	macro t
+	jb t
+endm
+jnnbe	macro t
+	jbe t
+endm
+jnnc	macro t
+	jc t
+endm
+jnne	macro t
+	je t
+endm
+jnng	macro t
+	jg t
+endm
+jnnge	macro t
+	jge t
+endm
+jnnl	macro t
+	jl t
+endm
+jnnle	macro t
+	jle t
+endm
+jnno	macro t
+	jo t
+endm
+jnnp	macro t
+	jp t
+endm
+jnns	macro t
+	js t
+endm
+jnnz	macro t
+	jz t
+endm
+jnncxz	macro t
+	jcxz t
 endm
 
 jncxz	macro	t
@@ -65,15 +140,15 @@ jncxz	macro	t
 	endif
 endm
 
-purge	$BuildJump
+;;purge	$BuildJump  ;; no longer needed — jump aliases expanded inline
 
-$GetConj macro	p1,p2
+$GetConj macro	p1,p2,_d	;; _d: WASM trailing-comma guard
 	$AndOr	= $NoConj
 	irp	parm,<p1,p2>
 	    ifnb    <&parm>
 		irp	x,<and,AND,or,OR>
 		    ifidn   <parm>,<x>
-			 $AndOr = $&&&x
+			 $AndOr = $&x
 			 exitm
 		    endif
 		endm
@@ -81,12 +156,12 @@ $GetConj macro	p1,p2
 	endm
 endm
 
-$GetDist macro	p1,p2
+$GetDist macro	p1,p2,_d	;; _d: WASM trailing-comma guard
 	irp	parm,<p1,p2>
 	    ifnb    <parm>
 		irp	x,<short,SHORT,near,NEAR>
 		    ifidn   <parm>,<x>
-			$Dist	= $&&&x
+			$Dist	= $&x
 			 exitm
 		     endif
 		endm
@@ -118,10 +193,12 @@ $Pop	macro	x
 endm
 
 $EquateLabel macro last,this
+IFNDEF __WASM__		;; WASM: can't compare variable with $ (relocatable)
 	if	$LastLabelOrg eq $
 	    $ll&last = this
 	    .xcref  $ll&last
 	endif
+ENDIF
 endm
 
 $TraceLabel macro n,a,b
@@ -163,10 +240,10 @@ $CondJump macro l,tf,c
 	else
 	    $TraceLabel l,l,%$ll&l
 	endif
-	$CondJump2 %$ll&l,tf,c
+	$CondJump2 %$ll&l,tf,c,_
 endm
 
-$CondJump2 macro l,tf,c
+$CondJump2 macro l,tf,c,_d	;; _d: WASM trailing-comma guard
 	if	$Dist eq $Short
 	    ifb     <c>
 					jmp short $l&l
@@ -294,10 +371,10 @@ $Test	macro	tgt,a1,a2,a3,a4,x
 	endif
 endm
 
-$TopTest macro	args,n,c,p4,p5
-	$GetConj p4,p5
+$TopTest macro	args,n,c,p4,p5,_d	;; _d: WASM trailing-comma guard
+	$GetConj p4,p5,_
 	$Dist	= $DefDist
-	$GetDist p4,p5
+	$GetDist p4,p5,_
 	if	$AndOr eq $NoConj
 	    $Test   <$sn-1,f>,args
 	    $Pop    $Temp
@@ -329,7 +406,7 @@ endm
 	    $sn     = $sn+1
 	    $Push   $sn
 	endif
-	$TopTest <t>,$IfType,$ConjIfType,p2,p3
+	$TopTest <t>,$IfType,$ConjIfType,p2,p3,_
 endm
 ;;*****************************************************************************
 .then	macro
@@ -357,7 +434,7 @@ endm
 	$Push	$sn
 	$sn	= $sn+1
 	$Push	$sn
-	$TopTest <t>,$IfType,$ConjIfType,p2,p3
+	$TopTest <t>,$IfType,$ConjIfType,p2,p3,_
 endm
 ;;*****************************************************************************
 .else	macro	dist
@@ -429,7 +506,7 @@ endm
 	    $sn     = $sn+1
 	    $Push   $sn
 	endif
-	$TopTest <tst>,$WhenType,$ConjWhenType,p2,p3
+	$TopTest <tst>,$WhenType,$ConjWhenType,p2,p3,_
 endm
 ;;*****************************************************************************
 .otherwise	macro	dist
@@ -488,7 +565,7 @@ endm
 	    $Push   $sn
 	    $LoopEnd = $sn - 1
 	endif
-	$TopTest <t>,$WhileType,$ConjWhileType,p2,p3
+	$TopTest <t>,$WhileType,$ConjWhileType,p2,p3,_
 endm
 ;;*****************************************************************************
 .endwhile macro p1
@@ -530,8 +607,8 @@ $until2 macro	p2,p3,a1,a2,a3,a4,x
 	    $OrFound = 0
 	endif
 	$Dist	= $DefDist
-	$GetDist p2,p3
-	$GetConj p2,p3
+	$GetDist p2,p3,_
+	$GetConj p2,p3,_
 
 	if	$AndOr eq $NoConj
 	    $Pop    $Temp
@@ -647,8 +724,8 @@ $leave2 macro  p2,p3,a1,a2,a3,a4,x
 	    endif
 	else
 	    $Dist   = $DefDist
-	    $GetDist p2,p3
-	    $GetConj p2,p3
+	    $GetDist p2,p3,_
+	    $GetConj p2,p3,_
 	    if	    $AndOr eq $NoConj
 		ifb	<a1>
 		    $CondJump %$LoopEnd,t
@@ -685,6 +762,10 @@ $OrFound = 0
 $LoopEnd = 0
 $LeaveFound = 0
 $LastLabel = -1
+IFDEF __WASM__
+$LastLabelOrg = 0	;; WASM: $ not valid outside segment
+ELSE
 $LastLabelOrg = $
+ENDIF
 $DefDist= $Short
 $Push	%$NoType

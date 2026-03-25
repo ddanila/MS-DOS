@@ -92,16 +92,16 @@
 	IF1
 	    ;%OUT    COMPONENT=NLSFUNC, MODULE=NLSPARM.SAL...
 	ENDIF
-; =  =	=  =  =  =  =  =  =  =	=  =
-	HEADER	<MACRO DEFINITION>
-; =  =	=  =  =  =  =  =  =  =	=  =
-
 HEADER	MACRO	TEXT
 .XLIST
 	SUBTTL	TEXT
 .LIST
 	PAGE
 	ENDM
+
+; =  =	=  =  =  =  =  =  =  =	=  =
+	HEADER	<MACRO DEFINITION>
+; =  =	=  =  =  =  =  =  =  =	=  =
 
 ; =  =	=  =  =  =  =  =  =  =	=  =
 	HEADER	<SYSPARSE - SYSTEM COMMAND LINE PARSER>

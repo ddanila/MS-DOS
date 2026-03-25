@@ -114,11 +114,11 @@ fill:
         jnz     fin1
         jmp     short getldone
 
-setnz:  or      al,1
-        mov     fGetlCR,-1              ; indicate we've seen a CR
+do_setnz: or    al,1
+        mov     fGetlCR,0FFh            ; indicate we've seen a CR (-1 as byte)
         jmp     endl
 
-spec:   jz      setnz
+spec:   jz      do_setnz
         cmp     al,10
         jz      fin
         cmp     al,9

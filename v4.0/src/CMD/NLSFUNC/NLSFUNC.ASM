@@ -316,6 +316,7 @@ include DOSCNTRY.INC
 include DEVSYM.INC
 include SYSMSG.INC			;AN000;
 include FUNCDBCS.INC			;AN000;
+PAD_CHAR	 equ	' '                  ;AN000; WASM: moved before MSG2NLS.INC (forward ref)
 include MSG2NLS.INC
 include FUNCPARM.INC			;AN000;
 
@@ -335,7 +336,9 @@ INVALID_DATA	 equ	13		     ;=L
 ;FILE_NOT_FOUND  equ	2		     ;=J(=L no longer explicitly used)
 ;TAB		  equ	 9
 ;CR		  equ	 13
+IFNDEF PAD_CHAR
 PAD_CHAR	 equ	' '                  ;AN000;
+ENDIF
 BAD_INVOKE	 equ	65		     ;=E
 UPCASE_A	 equ	'A'
 BUFFSIZE	 equ	512 ;	      ;AC000;REDUCTION OF ORIGINAL (128 BYTES) TO STORE

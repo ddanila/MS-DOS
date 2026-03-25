@@ -256,7 +256,7 @@ PUT_ERROR_CHAR  MACRO STATE
        ENDM
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-OPTION MACRO MASK,MASK_TYPE
+KB_OPTION MACRO MASK,MASK_TYPE	;; renamed from OPTION — reserved word in WASM
     MAC_OK = 1
     IFB  <MASK_TYPE>
          NOT_BIT = 00000000B

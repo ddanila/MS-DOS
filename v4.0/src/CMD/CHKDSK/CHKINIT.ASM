@@ -604,7 +604,7 @@ EXTRN	printf_crlf:NEAR
 	mov	si,Command_Line_Parms		;Point at command line		;an000;bgb;AN000;
 	lea	di,Command_Line_Buffer		;Where to put a copy of it	;an000;bgb;AN000;
 	mov	cx,Command_Line_Length		;How long was input?		;an000;bgb;AN000;
-	repnz	movsb				;Copy it			;an000;bgb;AN000;
+	rep	movsb				;Copy it			;an000;bgb;AN000;
 	lea	Di,Command_Line_Buffer		;				;an046;bgb
 public nextdi									;an046;bgb
 nextdi: 									;an046;bgb

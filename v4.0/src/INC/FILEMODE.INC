@@ -4,7 +4,9 @@ BREAK <Standard I/O assignments>
 
 stdin	    EQU     0
 stdout	    EQU     1
+IFNDEF stderr
 stderr	    EQU     2
+ENDIF
 stdaux	    EQU     3
 stdprn	    EQU     4
 

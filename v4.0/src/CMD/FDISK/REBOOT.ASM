@@ -11,11 +11,6 @@ ROMDATA segment at 040h
 BootType	dw	?
 ROMDATA ends
 
-ROMBIOS segment at 0ffffh
-	org	0
-POR	label	far
-ROMBIOS ends
-
 _text	segment byte public 'code'
 	assume	cs:_TEXT
 	assume	ds:nothing
@@ -33,7 +28,11 @@ _reboot proc	near
 
 	cli
 	cld
-	jmp	POR
+	; far jmp to 0FFFFh:0000h (ROM BIOS power-on reset vector)
+	; WASM does not support 'jmp label_far' where label is in AT segment
+	db	0EAh		; far JMP opcode
+	dw	0000h		; offset 0
+	dw	0FFFFh		; segment 0FFFFh
 
 _reboot endp
 

@@ -2,7 +2,7 @@
 
 TITLE	FASTINIT - initialization code for FASTOPEN  (May 13, 1988)
 
-;ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í»
 ; The entire Fastopen component is divided into 5 modules.  They are:
 ; Fastopen initialization routine-1, Fastopen initialization routine-2,
 ; Fastopen which manages the directory/file cache buffers, the Fastseek
@@ -19,27 +19,27 @@ TITLE	FASTINIT - initialization code for FASTOPEN  (May 13, 1988)
 ;
 ;		   Modules	      Segment
 ;
-;	      Ú-------------------¿
-;	      ³      MAIN	  ³   CSEG_MAIN
-;	      Ã-------------------´
-;	      ³   FASTINIT1	  ³   CSEG_MAIN
-;	      Ã-------------------´
-;	      ³ 		  ³
-;	      ³    FASTOPEN	  ³   CSEG_OPEN
-;	      ³ 		  ³
-;	      Ã-------------------´
-;	      ³ 		  ³
-;	      ³    FASTSEEK	  ³   CSEG_SEEK
-;	      ³ 		  ³
-;	      Ã-------------------´
-;	      ³   FASTINIT2	  ³   CSEG_INIT
-;	      Ã-------------------´
-;	      ³ 		  ³
-;	      ³   NAME AND	  ³
-;	      ³   EXTENT	  ³
-;	      ³   CACHE BUFFERS   ³   CSEG_INIT
-;	      ³ 		  ³
-;	      À-------------------Ù
+;	      ï¿½-------------------ï¿½
+;	      ï¿½      MAIN	  ï¿½   CSEG_MAIN
+;	      ï¿½-------------------ï¿½
+;	      ï¿½   FASTINIT1	  ï¿½   CSEG_MAIN
+;	      ï¿½-------------------ï¿½
+;	      ï¿½ 		  ï¿½
+;	      ï¿½    FASTOPEN	  ï¿½   CSEG_OPEN
+;	      ï¿½ 		  ï¿½
+;	      ï¿½-------------------ï¿½
+;	      ï¿½ 		  ï¿½
+;	      ï¿½    FASTSEEK	  ï¿½   CSEG_SEEK
+;	      ï¿½ 		  ï¿½
+;	      ï¿½-------------------ï¿½
+;	      ï¿½   FASTINIT2	  ï¿½   CSEG_INIT
+;	      ï¿½-------------------ï¿½
+;	      ï¿½ 		  ï¿½
+;	      ï¿½   NAME AND	  ï¿½
+;	      ï¿½   EXTENT	  ï¿½
+;	      ï¿½   CACHE BUFFERS   ï¿½   CSEG_INIT
+;	      ï¿½ 		  ï¿½
+;	      ï¿½-------------------ï¿½
 ;
 ; MAIN:       This module provides DOS entry point into FASTOPEN. It also
 ;	      dispatch various Fastopen and Fastseek functions.  This module is
@@ -105,7 +105,7 @@ TITLE	FASTINIT - initialization code for FASTOPEN  (May 13, 1988)
 ;	buffer available in EMS usually about 8K.  This can be avoided by
 ;	keeping code and cache buffers in two seperated pages, so that maximum
 ;	of 16K is available for cache buffers.
-;ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼
 ;
 IF1
     ;%OUT ASSEMBLING: FASTINIT - FASTOPEN initialization
@@ -211,7 +211,7 @@ PAGE_FRAME_STRUC    STRUC	    ; EMS page frame structure				       ;AN000;
 
 PAGE_FRAME_STRUC    ENDS
 
-BUFFER_ENTRY_SIZE      EQU    TYPE  PAGE_FRAME_STRUC
+BUFFER_ENTRY_SIZE      EQU    SIZE  PAGE_FRAME_STRUC  ; SIZE replaces TYPE for WASM
 
 
 SUB_LIST      STRUC			; Message handler sublist structure			   ;AN000;
@@ -261,12 +261,12 @@ CSEG_SEEK      ENDS
 
 
 
-;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 CSEG_MAIN   SEGMENT   PARA   PUBLIC 'CODE'       ;  MAIN segment
 
 ; This segment is a continuation of the Cseg_Main segment in Fastopen.asm
 ; and contains code to initializes name and extent drive buffers
-;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 ASSUME	 CS:cseg_main,DS:nothing,SS:stack,ES:nothing
 
 EXTRN	MAIN:FAR										   ;AN000;
@@ -566,11 +566,11 @@ CSEG_MAIN	ENDS		     ; End of Cseg_Main segment
 page
 
 
-;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 CSEG_INIT	SEGMENT PUBLIC PARA 'CODE'
 
-;ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 ASSUME    cs:cseg_init,ds:cseg_init,ss:stack,es:cseg_init
 
 	 EXTRN	  SYSPARSE:NEAR 								   ;AN000;
@@ -1785,8 +1785,8 @@ ADJUST_SEGIDS	ENDP
 ; *
 ; *	 FUNCTION: Parse  command line
 ; *
-; *	 INPUT: FASTOPEN  d: {=n | (n,m) } ... /x  à
-; *		   where à activates queue analyser for debugging
+; *	 INPUT: FASTOPEN  d: {=n | (n,m) } ... /x  ï¿½
+; *		   where ï¿½ activates queue analyser for debugging
 ; *
 ; *	 OUTPUT:   Command line is parsed
 ; *
@@ -1965,13 +1965,13 @@ Disp_Error:
 	 jmp   Bad_Switch
 
 ;----------------------------------------------------------------------------
-; If user entered à to activate the analyser, than verify the previous
+; If user entered ï¿½ to activate the analyser, than verify the previous
 ; drive case. If true, assign default name extent entries, set activation
 ; flag and take normal exit.
 ;----------------------------------------------------------------------------
 Bad_Param:
 	mov   si,Current_Parm	   ; SI-->current parameter (analyser hook)
-	mov   al,0e0h		   ; à (hidden character to activate analyser)
+	mov   al,0e0h		   ; ï¿½ (hidden character to activate analyser)
 	cmp   [si],al		   ; activate analyser ??
 	jne   set_disp_param	   ; no - normal error
 	mov   Check_Queue,1	   ; yes - set flag to activate analyser
