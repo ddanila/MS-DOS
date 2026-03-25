@@ -51,7 +51,6 @@ IF  $M_STRUC						     ;;AN000;; IF we haven't included the structures yet THEN
 							     ;;AN000;;	   and include them
 
     PAGE
-    ;; SUBTTL	     DOS - Message Retriever - MSGSTR.INC Module
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;; STRUCTURE: $M_SUBLIST_STRUC
@@ -177,7 +176,6 @@ ELSE							     ;;AN000;;	ELSE if we have already included the STRUCTURES
       MSGDATA =  FALSE					     ;;AN000;;	  Let the assembler know not to include it again
 							     ;;AN000;;	  and include it
       PAGE
-      ;; SUBTTL  DOS - Message Retriever - MSGRES.TAB Module
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;	DATA NAME: $M_RES_TABLE
@@ -221,7 +219,6 @@ $M_HAS_RT2_EXTERN = 1
 	ENDIF
 	DISK_PROC = FALSE				     ;;AN003;;	 Yes, THEN include it and reset flag
 	PAGE
-	;; SUBTTL	DOS - Message Retriever - DISK_PROC Module
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;	PROC NAME: DISK_PROC
@@ -373,7 +370,6 @@ READ_DISK_PROC ENDP					     ;;AN003;;
       IF      SETSTDIO					     ;;AN000;;	 Is the request to include the code for SETSTDIO
 	SETSTDIO = FALSE				     ;;AN000;;	 Yes, THEN include it and reset flag
 	PAGE
-	;; SUBTTL	DOS - Message Retriever - SETSTDIO Module
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;	PROC NAME: SETSTDIO
@@ -497,7 +493,6 @@ $M_HAS_RT2_EXTERN = 1
 	ENDIF
 	LOADmsg = FALSE 				     ;;AN000;;	 Yes, THEN include it and reset flag
 	PAGE
-	;; SUBTTL	DOS - Message Retriever - LOADMSG.ASM Module
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;	PROC NAME: SYSLOADMSG
@@ -636,7 +631,6 @@ $MEN20:
 	SYSLOADMSG ENDP 				     ;;AN000;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 	PAGE
-	;; SUBTTL	DOS - Message Retriever - $M_VERSION_CHECK Proc
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;  Proc Name:	$M_GET_DBCS_VEC
@@ -677,7 +671,6 @@ $M_GET_DBCS_VEC ENDP					     ;;
 	IF	NOCHECKSTDIN				     ;AN001; Are we suppose to include the code for Checking EOF ?
 	ELSE						     ;AN001; Yes, THEN include it
 	  PAGE
-	  ;; SUBTTL  DOS - Message Retriever - $M_CHECKSTDIN Proc
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;  Proc Name:	$M_CHECKSTDIN
@@ -712,7 +705,6 @@ $M_CHECKSTDIN ENDP					     ;AN001;
 	IF	NOCHECKSTDOUT				     ;AN001; Are we suppose to include the code for Checking Disk Full?
 	ELSE						     ;AN001; Yes, THEN include it
 	  PAGE
-	  ;; SUBTTL  DOS - Message Retriever - $M_CHECKSTDOUT Proc
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;  Proc Name:	$M_CHECKSTDOUT
@@ -747,7 +739,6 @@ $M_CHECKSTDOUT ENDP					     ;AN001;
 	IF	NOVERCHECKmsg				     ;;AN000;; Are we suppose to include the code for DOS version check?
 	ELSE						     ;;AN000;; Yes, THEN include it
 	  PAGE
-	  ;; SUBTTL  DOS - Message Retriever - $M_VERSION_CHECK Proc
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;  Proc Name:	$M_VERSION_CHECK
@@ -816,7 +807,6 @@ $M_HAS_RT2_EXTERN = 1
 	ENDIF
 	GETmsg	=      FALSE				     ;;AN000;; Yes, THEN include it and reset flag
 	PAGE
-	;; SUBTTL	DOS - Message Retriever - GETMSG.ASM Module
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;  Proc Name:	SYSGETMSG
@@ -1215,7 +1205,6 @@ $M_HAS_RT2_EXTERN = 1
 	ENDIF
 	DISPLAYmsg =  FALSE				     ;;AN000;; Yes, THEN include it and reset flag
 	PAGE
-	;; SUBTTL	DOS - Message Retriever - DISPMSG.ASM Module
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;  Proc Name:	SYSDISPMSG

@@ -45,7 +45,6 @@ SAVEXIT 	EQU	10
     i_need  OpenBuf,128
     I_need  EXTERR_LOCUS,BYTE		; Extended Error Locus
 
-;; SUBTTL $WAIT - return previous process error code
 PAGE
 ;
 ; process control data
@@ -66,7 +65,6 @@ EndProc $WAIT
 
 include EXEC.ASM
 
-;; SUBTTL Terminate and stay resident handler
 PAGE
 ;
 ; Input:    DX is  an  offset  from  CurrentPDB  at which to
@@ -114,7 +112,6 @@ EndProc $Keep_process
 	transfer    COMMAND
 EndProc Stay_resident
 
-;; SUBTTL $EXIT - return to parent process
 PAGE
 ;
 ;   Assembler usage:

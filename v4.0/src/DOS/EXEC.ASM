@@ -4,7 +4,6 @@
 ;    A007  PTM 3957 - fake vesrion for IBMCACHE.COM
 ;    A008  PTM 4070 - fake version for MS WINDOWS
 
-;; SUBTTL $exec - load/go a program
 PAGE
 ;
 ; Assembler usage:

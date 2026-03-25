@@ -33,7 +33,6 @@ INCLUDE DEVSYM.INC
 .list
 
 
-;; SUBTTL memory allocation utility routines
 PAGE
 ;
 ; arena data
@@ -136,7 +135,6 @@ coalesce_check:
 	JMP     coalesce                ; try again
 EndProc Coalesce
 
-;; SUBTTL $Alloc - allocate space in memory
 PAGE
 ;
 ;   Assembler usage:
@@ -289,7 +287,6 @@ alloc_set_owner:
 
 EndProc $alloc
 
-;; SUBTTL $SETBLOCK - change size of an allocated block (if possible)
 PAGE
 ;
 ;   Assembler usage:
@@ -328,7 +325,6 @@ setblock_grab:
 	JMP     alloc_fail
 EndProc $setblock
 
-;; SUBTTL $DEALLOC - free previously allocated piece of memory
 PAGE
 ;
 ;   Assembler usage:
@@ -357,7 +353,6 @@ dealloc_err:
 	error   error_invalid_block
 EndProc $DEALLOC
 
-;; SUBTTL $AllocOper - get/set allocation mechanism
 PAGE
 ;
 ;   Assembler usage:

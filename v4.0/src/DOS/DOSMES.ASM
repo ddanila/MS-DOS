@@ -245,7 +245,6 @@ FINISH:
 L_RET:	RET
 EndProc MAP_CASE
 
-;; SUBTTL EDIT FUNCTION ASSIGNMENTS AND HEADERS
 PAGE
 ; The following two tables implement the current buffered input editing
 ; routines.  The tables are pairwise associated in reverse order for ease

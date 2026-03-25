@@ -39,7 +39,6 @@ Installed = TRUE
 	i_need	DMAADD,DWORD
 	i_need	FastOpenFlg,BYTE
 
-;; SUBTTL GET_FILE_INFO -- Get File Information
 PAGE
 
 ; Inputs:
