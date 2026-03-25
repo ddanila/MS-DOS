@@ -1,4 +1,4 @@
-COMPPAR.ASM(138): Error! E230: Label 'ZERO_PARM_CT' is already defined
-COMPPAR.ASM(139): Error! E230: Label 'FIRST_PARM_CT' is already defined
-COMPPAR.ASM(140): Error! E230: Label 'NUL' is already defined
-COMPPAR.ASM(410): Warning! W249: End directive required at end of file
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.Cw1mTbior9/COMPPAR.ASM(138): Error! E230: Label 'ZERO_PARM_CT' is already defined
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.Cw1mTbior9/COMPPAR.ASM(139): Error! E230: Label 'FIRST_PARM_CT' is already defined
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.Cw1mTbior9/COMPPAR.ASM(140): Error! E230: Label 'NUL' is already defined
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.Cw1mTbior9/COMPPAR.ASM(410): Warning! W249: End directive required at end of file

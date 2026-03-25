@@ -1,5 +1,5 @@
-EDLPARSE.ASM(187): Error! E048: Immediate data out of range
-EDLPARSE.ASM(187): Error! E040: Invalid instruction operands
-EDLPARSE.ASM(263): Error! E048: Immediate data out of range
-EDLPARSE.ASM(263): Error! E040: Invalid instruction operands
-EDLPARSE.ASM(272): Warning! W249: End directive required at end of file
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.7zyyL3aSEk/EDLPARSE.ASM(187): Error! E048: Immediate data out of range
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.7zyyL3aSEk/EDLPARSE.ASM(187): Error! E040: Invalid instruction operands
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.7zyyL3aSEk/EDLPARSE.ASM(263): Error! E048: Immediate data out of range
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.7zyyL3aSEk/EDLPARSE.ASM(263): Error! E040: Invalid instruction operands
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.7zyyL3aSEk/EDLPARSE.ASM(272): Warning! W249: End directive required at end of file

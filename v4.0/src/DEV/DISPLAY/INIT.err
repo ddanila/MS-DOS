@@ -1,20 +1,41 @@
-../../INC/MSGSERV.ASM(206): Error! E074: Constant operand is expected
-../../INC/MSGSERV.ASM(206): Note! N290: included by file ../../INC/SYSMSG.INC(361)
-../../INC/MSGSERV.ASM(206): Note! N291: macro called from file INIT.ASM(49)
 MACROS.INC(12): Error! E040: Invalid instruction operands
 MACROS.INC(12): Note! N291: macro called from file MACROS.INC(24)
-MACROS.INC(12): Note! N290: included by file INIT.ASM(107)
+MACROS.INC(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.BgRzdEaZVK/INIT.ASM(107)
 DEF-EQU.INC(76): Error! E065: Operator is expected
-DEF-EQU.INC(76): Note! N290: included by file INIT.ASM(108)
+DEF-EQU.INC(76): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.BgRzdEaZVK/INIT.ASM(108)
 DEF-EQU.INC(76): Error! E021: Expecting number
-DEF-EQU.INC(76): Note! N290: included by file INIT.ASM(108)
+DEF-EQU.INC(76): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.BgRzdEaZVK/INIT.ASM(108)
 DEF-EQU.INC(90): Error! E065: Operator is expected
-DEF-EQU.INC(90): Note! N290: included by file INIT.ASM(108)
+DEF-EQU.INC(90): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.BgRzdEaZVK/INIT.ASM(108)
 DEF-EQU.INC(90): Error! E021: Expecting number
-DEF-EQU.INC(90): Note! N290: included by file INIT.ASM(108)
-INIT.ASM(183): Warning! W095: size not specified -- BYTE PTR is assumed
-INIT.ASM(382): Warning! W095: size not specified -- BYTE PTR is assumed
-../../INC/MSGDCL.INC(38): Error! E074: Constant operand is expected
-../../INC/MSGDCL.INC(38): Note! N291: macro called from file ../../INC/MSGDCL.INC(16)
-../../INC/MSGDCL.INC(38): Note! N291: macro called from file ../../INC/MSGDCL.INC(101)
-../../INC/MSGDCL.INC(38): Note! N290: included by file INIT.ASM(960)
+DEF-EQU.INC(90): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.BgRzdEaZVK/INIT.ASM(108)
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.BgRzdEaZVK/INIT.ASM(183): Warning! W095: size not specified -- BYTE PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.BgRzdEaZVK/INIT.ASM(382): Warning! W095: size not specified -- BYTE PTR is assumed
+DISPLAY.CL1(12): Error! E050: Offset cannot be smaller than WORD size
+DISPLAY.CL1(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.BgRzdEaZVK/inc_______INC/SYSMSG.INC(446)
+DISPLAY.CL1(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.BgRzdEaZVK/inc_______INC/SYSMSG.INC(410)
+DISPLAY.CL1(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.BgRzdEaZVK/INIT.ASM(955)
+DISPLAY.CL1(41): Error! E299: '$M_MSGSERV_1' is already defined
+DISPLAY.CL1(41): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.BgRzdEaZVK/inc_______INC/SYSMSG.INC(446)
+DISPLAY.CL1(41): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.BgRzdEaZVK/inc_______INC/SYSMSG.INC(410)
+DISPLAY.CL1(41): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.BgRzdEaZVK/INIT.ASM(955)
+DISPLAY.CL1(50): Error! E206: Block nesting error
+DISPLAY.CL1(50): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.BgRzdEaZVK/inc_______INC/SYSMSG.INC(446)
+DISPLAY.CL1(50): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.BgRzdEaZVK/inc_______INC/SYSMSG.INC(410)
+DISPLAY.CL1(50): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.BgRzdEaZVK/INIT.ASM(955)
+DISPLAY.CL2(12): Error! E050: Offset cannot be smaller than WORD size
+DISPLAY.CL2(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.BgRzdEaZVK/inc_______INC/SYSMSG.INC(446)
+DISPLAY.CL2(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.BgRzdEaZVK/inc_______INC/SYSMSG.INC(410)
+DISPLAY.CL2(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.BgRzdEaZVK/INIT.ASM(956)
+DISPLAY.CL2(41): Error! E299: '$M_MSGSERV_2' is already defined
+DISPLAY.CL2(41): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.BgRzdEaZVK/inc_______INC/SYSMSG.INC(446)
+DISPLAY.CL2(41): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.BgRzdEaZVK/inc_______INC/SYSMSG.INC(410)
+DISPLAY.CL2(41): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.BgRzdEaZVK/INIT.ASM(956)
+DISPLAY.CL2(50): Error! E206: Block nesting error
+DISPLAY.CL2(50): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.BgRzdEaZVK/inc_______INC/SYSMSG.INC(446)
+DISPLAY.CL2(50): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.BgRzdEaZVK/inc_______INC/SYSMSG.INC(410)
+DISPLAY.CL2(50): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.BgRzdEaZVK/INIT.ASM(956)
+DISPLAY.CLA(12): Error! E050: Offset cannot be smaller than WORD size
+DISPLAY.CLA(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.BgRzdEaZVK/inc_______INC/SYSMSG.INC(446)
+DISPLAY.CLA(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.BgRzdEaZVK/inc_______INC/SYSMSG.INC(410)
+DISPLAY.CLA(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.BgRzdEaZVK/INIT.ASM(957)

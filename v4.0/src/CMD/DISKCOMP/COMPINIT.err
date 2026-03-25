@@ -1,3 +1,3 @@
 DISKCOMP.EQU(3): Error! E065: Operator is expected
-DISKCOMP.EQU(3): Note! N290: included by file COMPINIT.ASM(117)
-COMPINIT.ASM(1123): Warning! W249: End directive required at end of file
+DISKCOMP.EQU(3): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.oesY1FBJfg/COMPINIT.ASM(117)
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.oesY1FBJfg/COMPINIT.ASM(1123): Warning! W249: End directive required at end of file

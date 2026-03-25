@@ -1,41 +1,41 @@
-SMARTDRV.ASM(778): Warning! W095: size not specified -- BYTE PTR is assumed
-SMARTDRV.ASM(895): Warning! W095: size not specified -- BYTE PTR is assumed
-SMARTDRV.ASM(925): Warning! W095: size not specified -- BYTE PTR is assumed
-SMARTDRV.ASM(1936): Warning! W041: Immediate constant too large
-SMARTDRV.ASM(2064): Warning! W097: size not specified -- DWORD PTR is assumed
-SMARTDRV.ASM(2064): Error! E102: Cannot use 386 operand size with current CPU setting
-SMARTDRV.ASM(2065): Warning! W097: size not specified -- DWORD PTR is assumed
-SMARTDRV.ASM(2065): Error! E102: Cannot use 386 operand size with current CPU setting
-SMARTDRV.ASM(2279): Warning! W041: Immediate constant too large
-SMARTDRV.ASM(2310): Warning! W097: size not specified -- DWORD PTR is assumed
-SMARTDRV.ASM(2310): Error! E102: Cannot use 386 operand size with current CPU setting
-SMARTDRV.ASM(2311): Warning! W097: size not specified -- DWORD PTR is assumed
-SMARTDRV.ASM(2311): Error! E102: Cannot use 386 operand size with current CPU setting
-SMARTDRV.ASM(2465): Warning! W097: size not specified -- DWORD PTR is assumed
-SMARTDRV.ASM(2465): Error! E102: Cannot use 386 operand size with current CPU setting
-SMARTDRV.ASM(2466): Warning! W097: size not specified -- DWORD PTR is assumed
-SMARTDRV.ASM(2466): Error! E102: Cannot use 386 operand size with current CPU setting
-SMARTDRV.ASM(2519): Warning! W097: size not specified -- DWORD PTR is assumed
-SMARTDRV.ASM(2519): Error! E102: Cannot use 386 operand size with current CPU setting
-SMARTDRV.ASM(2520): Warning! W097: size not specified -- DWORD PTR is assumed
-SMARTDRV.ASM(2520): Error! E102: Cannot use 386 operand size with current CPU setting
-SMARTDRV.ASM(2635): Warning! W097: size not specified -- DWORD PTR is assumed
-SMARTDRV.ASM(2635): Error! E102: Cannot use 386 operand size with current CPU setting
-SMARTDRV.ASM(2636): Warning! W097: size not specified -- DWORD PTR is assumed
-SMARTDRV.ASM(2636): Error! E102: Cannot use 386 operand size with current CPU setting
-SMARTDRV.ASM(2708): Warning! W041: Immediate constant too large
-SMARTDRV.ASM(2970): Warning! W097: size not specified -- DWORD PTR is assumed
-SMARTDRV.ASM(2970): Error! E102: Cannot use 386 operand size with current CPU setting
-SMARTDRV.ASM(2971): Warning! W097: size not specified -- DWORD PTR is assumed
-SMARTDRV.ASM(2971): Error! E102: Cannot use 386 operand size with current CPU setting
-SMARTDRV.ASM(3156): Warning! W097: size not specified -- DWORD PTR is assumed
-SMARTDRV.ASM(3156): Error! E102: Cannot use 386 operand size with current CPU setting
-SMARTDRV.ASM(3157): Warning! W097: size not specified -- DWORD PTR is assumed
-SMARTDRV.ASM(3157): Error! E102: Cannot use 386 operand size with current CPU setting
-SMARTDRV.ASM(3418): Warning! W095: size not specified -- BYTE PTR is assumed
-SMARTDRV.ASM(3427): Warning! W095: size not specified -- BYTE PTR is assumed
-SMARTDRV.ASM(4876): Warning! W041: Immediate constant too large
-SMARTDRV.ASM(4963): Warning! W096: size not specified -- WORD PTR is assumed
-SMARTDRV.ASM(5275): Warning! W096: size not specified -- WORD PTR is assumed
-SMARTDRV.ASM(5288): Warning! W096: size not specified -- WORD PTR is assumed
-SMARTDRV.ASM(7587): Warning! W249: End directive required at end of file
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(778): Warning! W095: size not specified -- BYTE PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(895): Warning! W095: size not specified -- BYTE PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(925): Warning! W095: size not specified -- BYTE PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(1936): Warning! W041: Immediate constant too large
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(2064): Warning! W097: size not specified -- DWORD PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(2064): Error! E102: Cannot use 386 operand size with current CPU setting
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(2065): Warning! W097: size not specified -- DWORD PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(2065): Error! E102: Cannot use 386 operand size with current CPU setting
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(2279): Warning! W041: Immediate constant too large
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(2310): Warning! W097: size not specified -- DWORD PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(2310): Error! E102: Cannot use 386 operand size with current CPU setting
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(2311): Warning! W097: size not specified -- DWORD PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(2311): Error! E102: Cannot use 386 operand size with current CPU setting
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(2465): Warning! W097: size not specified -- DWORD PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(2465): Error! E102: Cannot use 386 operand size with current CPU setting
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(2466): Warning! W097: size not specified -- DWORD PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(2466): Error! E102: Cannot use 386 operand size with current CPU setting
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(2519): Warning! W097: size not specified -- DWORD PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(2519): Error! E102: Cannot use 386 operand size with current CPU setting
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(2520): Warning! W097: size not specified -- DWORD PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(2520): Error! E102: Cannot use 386 operand size with current CPU setting
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(2635): Warning! W097: size not specified -- DWORD PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(2635): Error! E102: Cannot use 386 operand size with current CPU setting
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(2636): Warning! W097: size not specified -- DWORD PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(2636): Error! E102: Cannot use 386 operand size with current CPU setting
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(2708): Warning! W041: Immediate constant too large
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(2970): Warning! W097: size not specified -- DWORD PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(2970): Error! E102: Cannot use 386 operand size with current CPU setting
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(2971): Warning! W097: size not specified -- DWORD PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(2971): Error! E102: Cannot use 386 operand size with current CPU setting
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(3156): Warning! W097: size not specified -- DWORD PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(3156): Error! E102: Cannot use 386 operand size with current CPU setting
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(3157): Warning! W097: size not specified -- DWORD PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(3157): Error! E102: Cannot use 386 operand size with current CPU setting
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(3418): Warning! W095: size not specified -- BYTE PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(3427): Warning! W095: size not specified -- BYTE PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(4876): Warning! W041: Immediate constant too large
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(4963): Warning! W096: size not specified -- WORD PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(5275): Warning! W096: size not specified -- WORD PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(5288): Warning! W096: size not specified -- WORD PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rFGs4NImIo/SMARTDRV.ASM(7587): Warning! W249: End directive required at end of file

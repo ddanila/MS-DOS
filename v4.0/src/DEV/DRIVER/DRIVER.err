@@ -1,13 +1,22 @@
-../../INC/MSGSERV.ASM(206): Error! E074: Constant operand is expected
-../../INC/MSGSERV.ASM(206): Note! N290: included by file ../../INC/SYSMSG.INC(361)
-../../INC/MSGSERV.ASM(206): Note! N291: macro called from file DRIVER.ASM(36)
-DRIVER.ASM(671): Error! E040: Invalid instruction operands
-DRIVER.ASM(740): Error! E040: Invalid instruction operands
-DRIVER.ASM(747): Error! E040: Invalid instruction operands
-DRIVER.ASM(754): Error! E040: Invalid instruction operands
-DRIVER.ASM(761): Error! E040: Invalid instruction operands
-DRIVER.ASM(779): Error! E040: Invalid instruction operands
-DRIVER.ASM(1053): Error! E101: REPZ, REPNZ, REPE or REPNE prefix is not allowed on this instruction
-DRIVER.ASM(1182): Error! E040: Invalid instruction operands
-DRIVER.ASM(1191): Error! E040: Invalid instruction operands
-DRIVER.ASM(1196): Error! E040: Invalid instruction operands
+DRIVER.CL1(12): Error! E050: Offset cannot be smaller than WORD size
+DRIVER.CL1(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.A1pvMjyG32/inc_______INC/SYSMSG.INC(446)
+DRIVER.CL1(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.A1pvMjyG32/inc_______INC/SYSMSG.INC(410)
+DRIVER.CL1(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.A1pvMjyG32/DRIVER.ASM(321)
+DRIVER.CL2(12): Error! E050: Offset cannot be smaller than WORD size
+DRIVER.CL2(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.A1pvMjyG32/inc_______INC/SYSMSG.INC(446)
+DRIVER.CL2(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.A1pvMjyG32/inc_______INC/SYSMSG.INC(410)
+DRIVER.CL2(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.A1pvMjyG32/DRIVER.ASM(321)
+DRIVER.CLA(12): Error! E050: Offset cannot be smaller than WORD size
+DRIVER.CLA(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.A1pvMjyG32/inc_______INC/SYSMSG.INC(446)
+DRIVER.CLA(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.A1pvMjyG32/inc_______INC/SYSMSG.INC(410)
+DRIVER.CLA(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.A1pvMjyG32/DRIVER.ASM(321)
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.A1pvMjyG32/DRIVER.ASM(671): Error! E040: Invalid instruction operands
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.A1pvMjyG32/DRIVER.ASM(740): Error! E040: Invalid instruction operands
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.A1pvMjyG32/DRIVER.ASM(747): Error! E040: Invalid instruction operands
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.A1pvMjyG32/DRIVER.ASM(754): Error! E040: Invalid instruction operands
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.A1pvMjyG32/DRIVER.ASM(761): Error! E040: Invalid instruction operands
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.A1pvMjyG32/DRIVER.ASM(779): Error! E040: Invalid instruction operands
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.A1pvMjyG32/DRIVER.ASM(1053): Error! E101: REPZ, REPNZ, REPE or REPNE prefix is not allowed on this instruction
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.A1pvMjyG32/DRIVER.ASM(1182): Error! E040: Invalid instruction operands
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.A1pvMjyG32/DRIVER.ASM(1191): Error! E040: Invalid instruction operands
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.A1pvMjyG32/DRIVER.ASM(1196): Error! E040: Invalid instruction operands

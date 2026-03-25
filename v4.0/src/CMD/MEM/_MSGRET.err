@@ -1,11 +1,36 @@
-../../INC/MSGSERV.ASM(206): Error! E074: Constant operand is expected
-../../INC/MSGSERV.ASM(206): Note! N290: included by file ../../INC/SYSMSG.INC(361)
-../../INC/MSGSERV.ASM(206): Note! N291: macro called from file _MSGRET.ASM(20)
-../../INC/MSGDCL.INC(38): Error! E074: Constant operand is expected
-../../INC/MSGDCL.INC(38): Note! N291: macro called from file ../../INC/MSGDCL.INC(16)
-../../INC/MSGDCL.INC(38): Note! N291: macro called from file ../../INC/MSGDCL.INC(101)
-../../INC/MSGDCL.INC(38): Note! N290: included by file _MSGRET.ASM(234)
-../../INC/MSGDCL.INC(38): Error! E074: Constant operand is expected
-../../INC/MSGDCL.INC(38): Note! N291: macro called from file ../../INC/MSGDCL.INC(16)
-../../INC/MSGDCL.INC(38): Note! N291: macro called from file ../../INC/MSGDCL.INC(101)
-../../INC/MSGDCL.INC(38): Note! N290: included by file _MSGRET.ASM(234)
+MEM.CLA(12): Error! E050: Offset cannot be smaller than WORD size
+MEM.CLA(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.c01q8wKjSJ/inc_______INC/SYSMSG.INC(446)
+MEM.CLA(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.c01q8wKjSJ/inc_______INC/SYSMSG.INC(410)
+MEM.CLA(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.c01q8wKjSJ/_MSGRET.ASM(47)
+MEM.CLB(12): Error! E050: Offset cannot be smaller than WORD size
+MEM.CLB(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.c01q8wKjSJ/inc_______INC/SYSMSG.INC(446)
+MEM.CLB(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.c01q8wKjSJ/inc_______INC/SYSMSG.INC(410)
+MEM.CLB(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.c01q8wKjSJ/_MSGRET.ASM(47)
+MEM.CL1(12): Error! E050: Offset cannot be smaller than WORD size
+MEM.CL1(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.c01q8wKjSJ/inc_______INC/SYSMSG.INC(446)
+MEM.CL1(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.c01q8wKjSJ/inc_______INC/SYSMSG.INC(410)
+MEM.CL1(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.c01q8wKjSJ/_MSGRET.ASM(47)
+MEM.CL1(39): Error! E299: '$M_MSGSERV_1' is already defined
+MEM.CL1(39): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.c01q8wKjSJ/inc_______INC/SYSMSG.INC(446)
+MEM.CL1(39): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.c01q8wKjSJ/inc_______INC/SYSMSG.INC(410)
+MEM.CL1(39): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.c01q8wKjSJ/_MSGRET.ASM(47)
+MEM.CL1(50): Error! E206: Block nesting error
+MEM.CL1(50): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.c01q8wKjSJ/inc_______INC/SYSMSG.INC(446)
+MEM.CL1(50): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.c01q8wKjSJ/inc_______INC/SYSMSG.INC(410)
+MEM.CL1(50): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.c01q8wKjSJ/_MSGRET.ASM(47)
+MEM.CL2(12): Error! E050: Offset cannot be smaller than WORD size
+MEM.CL2(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.c01q8wKjSJ/inc_______INC/SYSMSG.INC(446)
+MEM.CL2(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.c01q8wKjSJ/inc_______INC/SYSMSG.INC(410)
+MEM.CL2(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.c01q8wKjSJ/_MSGRET.ASM(47)
+MEM.CL2(39): Error! E299: '$M_MSGSERV_2' is already defined
+MEM.CL2(39): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.c01q8wKjSJ/inc_______INC/SYSMSG.INC(446)
+MEM.CL2(39): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.c01q8wKjSJ/inc_______INC/SYSMSG.INC(410)
+MEM.CL2(39): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.c01q8wKjSJ/_MSGRET.ASM(47)
+MEM.CL2(50): Error! E206: Block nesting error
+MEM.CL2(50): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.c01q8wKjSJ/inc_______INC/SYSMSG.INC(446)
+MEM.CL2(50): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.c01q8wKjSJ/inc_______INC/SYSMSG.INC(410)
+MEM.CL2(50): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.c01q8wKjSJ/_MSGRET.ASM(47)
+MEM.CTL(1): Error! E230: Label '$M_NUM_CLS' is already defined
+MEM.CTL(1): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.c01q8wKjSJ/inc_______INC/SYSMSG.INC(446)
+MEM.CTL(1): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.c01q8wKjSJ/inc_______INC/SYSMSG.INC(410)
+MEM.CTL(1): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.c01q8wKjSJ/_MSGRET.ASM(47)

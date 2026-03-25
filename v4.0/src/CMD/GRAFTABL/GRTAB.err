@@ -1,8 +1,8 @@
-GRTAB.ASM(171): Error! E032: Syntax error
-GRTAB.ASM(287): Error! E065: Operator is expected
-GRTAB.ASM(287): Error! E050: Offset cannot be smaller than WORD size
-GRTAB.ASM(677): Error! E066: Operand is expected
-GRTAB.ASM(714): Error! E004: REP prefix is not allowed on this instruction
-GRTAB.ASM(801): Error! E066: Operand is expected
-GRTAB.ASM(815): Error! E066: Operand is expected
-GRTAB.ASM(1245): Warning! W249: End directive required at end of file
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.soBF1TZ4XV/GRTAB.ASM(171): Error! E032: Syntax error
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.soBF1TZ4XV/GRTAB.ASM(287): Error! E065: Operator is expected
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.soBF1TZ4XV/GRTAB.ASM(287): Error! E050: Offset cannot be smaller than WORD size
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.soBF1TZ4XV/GRTAB.ASM(677): Error! E066: Operand is expected
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.soBF1TZ4XV/GRTAB.ASM(714): Error! E004: REP prefix is not allowed on this instruction
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.soBF1TZ4XV/GRTAB.ASM(801): Error! E066: Operand is expected
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.soBF1TZ4XV/GRTAB.ASM(815): Error! E066: Operand is expected
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.soBF1TZ4XV/GRTAB.ASM(1245): Warning! W249: End directive required at end of file

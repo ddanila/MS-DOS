@@ -1,2 +1,2 @@
-FDBOOT.ASM(30): Error! E101: REPZ, REPNZ, REPE or REPNE prefix is not allowed on this instruction
-FDBOOT.ASM(119): Warning! W249: End directive required at end of file
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.qopDR9KNyJ/FDBOOT.ASM(30): Error! E101: REPZ, REPNZ, REPE or REPNE prefix is not allowed on this instruction
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.qopDR9KNyJ/FDBOOT.ASM(119): Warning! W249: End directive required at end of file

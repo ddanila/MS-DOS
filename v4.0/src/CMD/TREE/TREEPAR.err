@@ -1,5 +1,5 @@
-TREEPAR.ASM(76): Error! E032: Syntax error
-TREEPAR.ASM(463): Error! E050: Offset cannot be smaller than WORD size
-TREEPAR.ASM(471): Error! E066: Operand is expected
-TREEPAR.ASM(472): Error! E066: Operand is expected
-TREEPAR.ASM(510): Warning! W249: End directive required at end of file
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.h8WHfdyKp8/TREEPAR.ASM(76): Error! E032: Syntax error
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.h8WHfdyKp8/TREEPAR.ASM(463): Error! E050: Offset cannot be smaller than WORD size
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.h8WHfdyKp8/TREEPAR.ASM(471): Error! E066: Operand is expected
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.h8WHfdyKp8/TREEPAR.ASM(472): Error! E066: Operand is expected
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.h8WHfdyKp8/TREEPAR.ASM(510): Warning! W249: End directive required at end of file

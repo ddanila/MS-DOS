@@ -1,6 +1,6 @@
-GSHARE.ASM(34): Error! E236: Procedure is already defined
-GSHARE.ASM(35): Error! E074: Constant operand is expected
-../../INC/DOSMAC.INC(393): Error! E227: Invalid register
-../../INC/DOSMAC.INC(393): Note! N291: macro called from file GSHARE.ASM(189)
-GSHARE.ASM(1589): Error! E230: Label 'lock_all' is already defined
-GSHARE.ASM(2383): Warning! W249: End directive required at end of file
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.n2FqRtR6pj/GSHARE.ASM(34): Error! E236: Procedure is already defined
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.n2FqRtR6pj/GSHARE.ASM(35): Error! E074: Constant operand is expected
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.n2FqRtR6pj/inc_______INC/DOSMAC.INC(393): Error! E227: Invalid register
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.n2FqRtR6pj/inc_______INC/DOSMAC.INC(393): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.n2FqRtR6pj/GSHARE.ASM(189)
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.n2FqRtR6pj/GSHARE.ASM(1589): Error! E230: Label 'lock_all' is already defined
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.n2FqRtR6pj/GSHARE.ASM(2383): Warning! W249: End directive required at end of file

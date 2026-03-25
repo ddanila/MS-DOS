@@ -1,36 +1,36 @@
-../MEMM/VM386.INC(46): Error! E094: This instruction is not supported
-../MEMM/VM386.INC(46): Note! N290: included by file EMMP.ASM(39)
-../MEMM/VM386.INC(47): Error! E094: This instruction is not supported
-../MEMM/VM386.INC(47): Note! N290: included by file EMMP.ASM(39)
-EMMP.ASM(436): Warning! W096: size not specified -- WORD PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8xb7df9Y0e/inc____MEMM/VM386.INC(46): Error! E094: This instruction is not supported
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8xb7df9Y0e/inc____MEMM/VM386.INC(46): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8xb7df9Y0e/EMMP.ASM(39)
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8xb7df9Y0e/inc____MEMM/VM386.INC(47): Error! E094: This instruction is not supported
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8xb7df9Y0e/inc____MEMM/VM386.INC(47): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8xb7df9Y0e/EMMP.ASM(39)
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8xb7df9Y0e/EMMP.ASM(436): Warning! W096: size not specified -- WORD PTR is assumed
 EMMDEF.INC(276): Error! E085: Only register or label is expected in override
-EMMDEF.INC(276): Note! N291: macro called from file EMMP.ASM(577)
+EMMDEF.INC(276): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8xb7df9Y0e/EMMP.ASM(577)
 EMMDEF.INC(276): Error! E085: Only register or label is expected in override
-EMMDEF.INC(276): Note! N291: macro called from file EMMP.ASM(620)
+EMMDEF.INC(276): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8xb7df9Y0e/EMMP.ASM(620)
 EMMDEF.INC(276): Error! E085: Only register or label is expected in override
-EMMDEF.INC(276): Note! N291: macro called from file EMMP.ASM(682)
+EMMDEF.INC(276): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8xb7df9Y0e/EMMP.ASM(682)
 EMMDEF.INC(276): Error! E085: Only register or label is expected in override
-EMMDEF.INC(276): Note! N291: macro called from file EMMP.ASM(743)
+EMMDEF.INC(276): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8xb7df9Y0e/EMMP.ASM(743)
 EMMDEF.INC(276): Error! E085: Only register or label is expected in override
-EMMDEF.INC(276): Note! N291: macro called from file EMMP.ASM(795)
+EMMDEF.INC(276): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8xb7df9Y0e/EMMP.ASM(795)
 EMMDEF.INC(276): Error! E085: Only register or label is expected in override
-EMMDEF.INC(276): Note! N291: macro called from file EMMP.ASM(838)
+EMMDEF.INC(276): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8xb7df9Y0e/EMMP.ASM(838)
 EMMDEF.INC(276): Error! E085: Only register or label is expected in override
-EMMDEF.INC(276): Note! N291: macro called from file EMMP.ASM(1125)
-EMMP.ASM(281): Error! E048: Immediate data out of range
-EMMP.ASM(281): Note! N291: macro called from file EMMP.ASM(2414)
-EMMP.ASM(281): Error! E040: Invalid instruction operands
-EMMP.ASM(281): Note! N291: macro called from file EMMP.ASM(2414)
-EMMP.ASM(281): Error! E048: Immediate data out of range
-EMMP.ASM(281): Note! N291: macro called from file EMMP.ASM(2415)
-EMMP.ASM(281): Error! E040: Invalid instruction operands
-EMMP.ASM(281): Note! N291: macro called from file EMMP.ASM(2415)
+EMMDEF.INC(276): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8xb7df9Y0e/EMMP.ASM(1125)
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8xb7df9Y0e/EMMP.ASM(281): Error! E048: Immediate data out of range
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8xb7df9Y0e/EMMP.ASM(281): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8xb7df9Y0e/EMMP.ASM(2414)
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8xb7df9Y0e/EMMP.ASM(281): Error! E040: Invalid instruction operands
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8xb7df9Y0e/EMMP.ASM(281): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8xb7df9Y0e/EMMP.ASM(2414)
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8xb7df9Y0e/EMMP.ASM(281): Error! E048: Immediate data out of range
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8xb7df9Y0e/EMMP.ASM(281): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8xb7df9Y0e/EMMP.ASM(2415)
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8xb7df9Y0e/EMMP.ASM(281): Error! E040: Invalid instruction operands
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8xb7df9Y0e/EMMP.ASM(281): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8xb7df9Y0e/EMMP.ASM(2415)
 EMMDEF.INC(276): Error! E085: Only register or label is expected in override
-EMMDEF.INC(276): Note! N291: macro called from file EMMP.ASM(2627)
+EMMDEF.INC(276): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8xb7df9Y0e/EMMP.ASM(2627)
 EMMDEF.INC(276): Error! E085: Only register or label is expected in override
-EMMDEF.INC(276): Note! N291: macro called from file EMMP.ASM(2658)
+EMMDEF.INC(276): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8xb7df9Y0e/EMMP.ASM(2658)
 EMMDEF.INC(276): Error! E085: Only register or label is expected in override
-EMMDEF.INC(276): Note! N291: macro called from file EMMP.ASM(2691)
+EMMDEF.INC(276): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8xb7df9Y0e/EMMP.ASM(2691)
 EMMDEF.INC(276): Error! E085: Only register or label is expected in override
-EMMDEF.INC(276): Note! N291: macro called from file EMMP.ASM(2740)
-EMMP.ASM(2975): Warning! W249: End directive required at end of file
+EMMDEF.INC(276): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8xb7df9Y0e/EMMP.ASM(2740)
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8xb7df9Y0e/EMMP.ASM(2975): Warning! W249: End directive required at end of file

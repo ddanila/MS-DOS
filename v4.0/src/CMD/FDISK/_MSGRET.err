@@ -1,0 +1,37 @@
+FDISK.CLA(12): Error! E050: Offset cannot be smaller than WORD size
+FDISK.CLA(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pumLzVjtsg/inc_______INC/SYSMSG.INC(446)
+FDISK.CLA(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pumLzVjtsg/inc_______INC/SYSMSG.INC(410)
+FDISK.CLA(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pumLzVjtsg/_MSGRET.ASM(47)
+FDISK.CLB(12): Error! E050: Offset cannot be smaller than WORD size
+FDISK.CLB(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pumLzVjtsg/inc_______INC/SYSMSG.INC(446)
+FDISK.CLB(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pumLzVjtsg/inc_______INC/SYSMSG.INC(410)
+FDISK.CLB(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pumLzVjtsg/_MSGRET.ASM(47)
+FDISK.CL1(12): Error! E050: Offset cannot be smaller than WORD size
+FDISK.CL1(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pumLzVjtsg/inc_______INC/SYSMSG.INC(446)
+FDISK.CL1(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pumLzVjtsg/inc_______INC/SYSMSG.INC(410)
+FDISK.CL1(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pumLzVjtsg/_MSGRET.ASM(47)
+FDISK.CL1(39): Error! E299: '$M_MSGSERV_1' is already defined
+FDISK.CL1(39): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pumLzVjtsg/inc_______INC/SYSMSG.INC(446)
+FDISK.CL1(39): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pumLzVjtsg/inc_______INC/SYSMSG.INC(410)
+FDISK.CL1(39): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pumLzVjtsg/_MSGRET.ASM(47)
+FDISK.CL1(50): Error! E206: Block nesting error
+FDISK.CL1(50): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pumLzVjtsg/inc_______INC/SYSMSG.INC(446)
+FDISK.CL1(50): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pumLzVjtsg/inc_______INC/SYSMSG.INC(410)
+FDISK.CL1(50): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pumLzVjtsg/_MSGRET.ASM(47)
+FDISK.CL2(12): Error! E050: Offset cannot be smaller than WORD size
+FDISK.CL2(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pumLzVjtsg/inc_______INC/SYSMSG.INC(446)
+FDISK.CL2(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pumLzVjtsg/inc_______INC/SYSMSG.INC(410)
+FDISK.CL2(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pumLzVjtsg/_MSGRET.ASM(47)
+FDISK.CL2(39): Error! E299: '$M_MSGSERV_2' is already defined
+FDISK.CL2(39): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pumLzVjtsg/inc_______INC/SYSMSG.INC(446)
+FDISK.CL2(39): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pumLzVjtsg/inc_______INC/SYSMSG.INC(410)
+FDISK.CL2(39): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pumLzVjtsg/_MSGRET.ASM(47)
+FDISK.CL2(50): Error! E206: Block nesting error
+FDISK.CL2(50): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pumLzVjtsg/inc_______INC/SYSMSG.INC(446)
+FDISK.CL2(50): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pumLzVjtsg/inc_______INC/SYSMSG.INC(410)
+FDISK.CL2(50): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pumLzVjtsg/_MSGRET.ASM(47)
+FDISK.CTL(1): Error! E230: Label '$M_NUM_CLS' is already defined
+FDISK.CTL(1): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pumLzVjtsg/inc_______INC/SYSMSG.INC(446)
+FDISK.CTL(1): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pumLzVjtsg/inc_______INC/SYSMSG.INC(410)
+FDISK.CTL(1): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pumLzVjtsg/_MSGRET.ASM(47)
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pumLzVjtsg/_MSGRET.ASM(263): Warning! W249: End directive required at end of file

@@ -1,8 +1,8 @@
-EDLIN.ASM(568): Error! E048: Immediate data out of range
-EDLIN.ASM(568): Error! E040: Invalid instruction operands
-EDLIN.ASM(732): Error! E048: Immediate data out of range
-EDLIN.ASM(732): Error! E040: Invalid instruction operands
-EDLIN.ASM(1406): Error! E040: Invalid instruction operands
-EDLIN.ASM(1743): Error! E048: Immediate data out of range
-EDLIN.ASM(1743): Error! E040: Invalid instruction operands
-EDLIN.ASM(1873): Warning! W249: End directive required at end of file
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.KtVMMTbVIE/EDLIN.ASM(568): Error! E048: Immediate data out of range
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.KtVMMTbVIE/EDLIN.ASM(568): Error! E040: Invalid instruction operands
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.KtVMMTbVIE/EDLIN.ASM(732): Error! E048: Immediate data out of range
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.KtVMMTbVIE/EDLIN.ASM(732): Error! E040: Invalid instruction operands
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.KtVMMTbVIE/EDLIN.ASM(1406): Error! E040: Invalid instruction operands
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.KtVMMTbVIE/EDLIN.ASM(1743): Error! E048: Immediate data out of range
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.KtVMMTbVIE/EDLIN.ASM(1743): Error! E040: Invalid instruction operands
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.KtVMMTbVIE/EDLIN.ASM(1873): Warning! W249: End directive required at end of file

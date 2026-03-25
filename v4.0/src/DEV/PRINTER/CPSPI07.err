@@ -1,29 +1,50 @@
 CPSPEQU.INC(65): Error! E065: Operator is expected
-CPSPEQU.INC(65): Note! N290: included by file CPSPI07.ASM(25)
+CPSPEQU.INC(65): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.wMrmMsLo3f/CPSPI07.ASM(25)
 CPSPEQU.INC(65): Error! E021: Expecting number
-CPSPEQU.INC(65): Note! N290: included by file CPSPI07.ASM(25)
+CPSPEQU.INC(65): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.wMrmMsLo3f/CPSPI07.ASM(25)
 CPSPEQU.INC(82): Error! E065: Operator is expected
-CPSPEQU.INC(82): Note! N290: included by file CPSPI07.ASM(25)
+CPSPEQU.INC(82): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.wMrmMsLo3f/CPSPI07.ASM(25)
 CPSPEQU.INC(82): Error! E021: Expecting number
-CPSPEQU.INC(82): Note! N290: included by file CPSPI07.ASM(25)
+CPSPEQU.INC(82): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.wMrmMsLo3f/CPSPI07.ASM(25)
 CPSPEQU.INC(99): Error! E065: Operator is expected
-CPSPEQU.INC(99): Note! N290: included by file CPSPI07.ASM(25)
+CPSPEQU.INC(99): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.wMrmMsLo3f/CPSPI07.ASM(25)
 CPSPEQU.INC(99): Error! E021: Expecting number
-CPSPEQU.INC(99): Note! N290: included by file CPSPI07.ASM(25)
+CPSPEQU.INC(99): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.wMrmMsLo3f/CPSPI07.ASM(25)
 CPSPEQU.INC(218): Error! E065: Operator is expected
-CPSPEQU.INC(218): Note! N290: included by file CPSPI07.ASM(25)
+CPSPEQU.INC(218): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.wMrmMsLo3f/CPSPI07.ASM(25)
 CPSPEQU.INC(426): Error! E065: Operator is expected
-CPSPEQU.INC(426): Note! N290: included by file CPSPI07.ASM(25)
+CPSPEQU.INC(426): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.wMrmMsLo3f/CPSPI07.ASM(25)
 CPSPEQU.INC(426): Error! E021: Expecting number
-CPSPEQU.INC(426): Note! N290: included by file CPSPI07.ASM(25)
+CPSPEQU.INC(426): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.wMrmMsLo3f/CPSPI07.ASM(25)
 CPSPEQU.INC(454): Error! E065: Operator is expected
-CPSPEQU.INC(454): Note! N290: included by file CPSPI07.ASM(25)
+CPSPEQU.INC(454): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.wMrmMsLo3f/CPSPI07.ASM(25)
 CPSPEQU.INC(454): Error! E021: Expecting number
-CPSPEQU.INC(454): Note! N290: included by file CPSPI07.ASM(25)
-../../INC/MSGSERV.ASM(206): Error! E074: Constant operand is expected
-../../INC/MSGSERV.ASM(206): Note! N290: included by file ../../INC/SYSMSG.INC(361)
-../../INC/MSGSERV.ASM(206): Note! N291: macro called from file CPSPI07.ASM(33)
-../../INC/MSGDCL.INC(38): Error! E074: Constant operand is expected
-../../INC/MSGDCL.INC(38): Note! N291: macro called from file ../../INC/MSGDCL.INC(16)
-../../INC/MSGDCL.INC(38): Note! N291: macro called from file ../../INC/MSGDCL.INC(101)
-../../INC/MSGDCL.INC(38): Note! N290: included by file CPSPI07.ASM(1413)
+CPSPEQU.INC(454): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.wMrmMsLo3f/CPSPI07.ASM(25)
+PRINTER.CL1(12): Error! E050: Offset cannot be smaller than WORD size
+PRINTER.CL1(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.wMrmMsLo3f/inc_______INC/SYSMSG.INC(446)
+PRINTER.CL1(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.wMrmMsLo3f/inc_______INC/SYSMSG.INC(410)
+PRINTER.CL1(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.wMrmMsLo3f/CPSPI07.ASM(1408)
+PRINTER.CL1(41): Error! E299: '$M_MSGSERV_1' is already defined
+PRINTER.CL1(41): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.wMrmMsLo3f/inc_______INC/SYSMSG.INC(446)
+PRINTER.CL1(41): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.wMrmMsLo3f/inc_______INC/SYSMSG.INC(410)
+PRINTER.CL1(41): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.wMrmMsLo3f/CPSPI07.ASM(1408)
+PRINTER.CL1(50): Error! E206: Block nesting error
+PRINTER.CL1(50): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.wMrmMsLo3f/inc_______INC/SYSMSG.INC(446)
+PRINTER.CL1(50): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.wMrmMsLo3f/inc_______INC/SYSMSG.INC(410)
+PRINTER.CL1(50): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.wMrmMsLo3f/CPSPI07.ASM(1408)
+PRINTER.CL2(12): Error! E050: Offset cannot be smaller than WORD size
+PRINTER.CL2(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.wMrmMsLo3f/inc_______INC/SYSMSG.INC(446)
+PRINTER.CL2(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.wMrmMsLo3f/inc_______INC/SYSMSG.INC(410)
+PRINTER.CL2(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.wMrmMsLo3f/CPSPI07.ASM(1409)
+PRINTER.CL2(41): Error! E299: '$M_MSGSERV_2' is already defined
+PRINTER.CL2(41): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.wMrmMsLo3f/inc_______INC/SYSMSG.INC(446)
+PRINTER.CL2(41): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.wMrmMsLo3f/inc_______INC/SYSMSG.INC(410)
+PRINTER.CL2(41): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.wMrmMsLo3f/CPSPI07.ASM(1409)
+PRINTER.CL2(50): Error! E206: Block nesting error
+PRINTER.CL2(50): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.wMrmMsLo3f/inc_______INC/SYSMSG.INC(446)
+PRINTER.CL2(50): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.wMrmMsLo3f/inc_______INC/SYSMSG.INC(410)
+PRINTER.CL2(50): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.wMrmMsLo3f/CPSPI07.ASM(1409)
+PRINTER.CLA(12): Error! E050: Offset cannot be smaller than WORD size
+PRINTER.CLA(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.wMrmMsLo3f/inc_______INC/SYSMSG.INC(446)
+PRINTER.CLA(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.wMrmMsLo3f/inc_______INC/SYSMSG.INC(410)
+PRINTER.CLA(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.wMrmMsLo3f/CPSPI07.ASM(1410)

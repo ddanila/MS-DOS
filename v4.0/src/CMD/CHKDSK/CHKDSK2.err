@@ -1,13 +1,2 @@
-CHKEQU.INC(7): Error! E230: Label 'stderr' is already defined
-CHKEQU.INC(7): Note! N290: included by file CHKDSK2.ASM(8)
-CHKEQU.INC(9): Error! E230: Label 'FALSE' is already defined
-CHKEQU.INC(9): Note! N290: included by file CHKDSK2.ASM(8)
-CHKEQU.INC(10): Error! E230: Label 'TRUE' is already defined
-CHKEQU.INC(10): Note! N290: included by file CHKDSK2.ASM(8)
-CHKMACRO.INC(2): Error! E236: Procedure is already defined
-CHKMACRO.INC(2): Note! N290: included by file CHKDSK2.ASM(9)
-CHKMACRO.INC(59): Error! E236: Procedure is already defined
-CHKMACRO.INC(59): Note! N290: included by file CHKDSK2.ASM(9)
-CHKDSK2.ASM(441): Error! E299: 'PRINTF_CRLF' is already defined
-CHKDSK2.ASM(450): Error! E302: Procedure Proc_Name is not closed
-CHKDSK2.ASM(451): Warning! W249: End directive required at end of file
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.s6cBDyKoum/CHKDSK2.ASM(441): Error! E299: 'PRINTF_CRLF' is already defined
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.s6cBDyKoum/CHKDSK2.ASM(451): Warning! W249: End directive required at end of file

@@ -1,2 +1,2 @@
-DCOPYPAR.ASM(389): Error! E050: Offset cannot be smaller than WORD size
-DCOPYPAR.ASM(413): Warning! W249: End directive required at end of file
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.Ss9SfJSVw5/DCOPYPAR.ASM(389): Error! E050: Offset cannot be smaller than WORD size
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.Ss9SfJSVw5/DCOPYPAR.ASM(413): Warning! W249: End directive required at end of file

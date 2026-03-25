@@ -1,17 +1,17 @@
-IFSUTIL.ASM(247): Warning! W095: size not specified -- BYTE PTR is assumed
-IFSUTIL.ASM(343): Warning! W095: size not specified -- BYTE PTR is assumed
-IFSUTIL.ASM(411): Warning! W095: size not specified -- BYTE PTR is assumed
-IFSUTIL.ASM(801): Warning! W095: size not specified -- BYTE PTR is assumed
-IFSUTIL.ASM(819): Error! E040: Invalid instruction operands
-IFSUTIL.ASM(823): Warning! W095: size not specified -- BYTE PTR is assumed
-IFSUTIL.ASM(824): Warning! W095: size not specified -- BYTE PTR is assumed
-IFSUTIL.ASM(825): Warning! W095: size not specified -- BYTE PTR is assumed
-IFSUTIL.ASM(826): Warning! W095: size not specified -- BYTE PTR is assumed
-IFSUTIL.ASM(987): Error! E048: Immediate data out of range
-IFSUTIL.ASM(987): Error! E040: Invalid instruction operands
-IFSUTIL.ASM(2100): Error! E048: Immediate data out of range
-IFSUTIL.ASM(2100): Error! E040: Invalid instruction operands
-IFSUTIL.ASM(2136): Error! E048: Immediate data out of range
-IFSUTIL.ASM(2136): Error! E040: Invalid instruction operands
-IFSUTIL.ASM(2398): Warning! W095: size not specified -- BYTE PTR is assumed
-IFSUTIL.ASM(2399): Warning! W095: size not specified -- BYTE PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.XBvNKat5Hk/IFSUTIL.ASM(247): Warning! W095: size not specified -- BYTE PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.XBvNKat5Hk/IFSUTIL.ASM(343): Warning! W095: size not specified -- BYTE PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.XBvNKat5Hk/IFSUTIL.ASM(411): Warning! W095: size not specified -- BYTE PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.XBvNKat5Hk/IFSUTIL.ASM(801): Warning! W095: size not specified -- BYTE PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.XBvNKat5Hk/IFSUTIL.ASM(819): Error! E040: Invalid instruction operands
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.XBvNKat5Hk/IFSUTIL.ASM(823): Warning! W095: size not specified -- BYTE PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.XBvNKat5Hk/IFSUTIL.ASM(824): Warning! W095: size not specified -- BYTE PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.XBvNKat5Hk/IFSUTIL.ASM(825): Warning! W095: size not specified -- BYTE PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.XBvNKat5Hk/IFSUTIL.ASM(826): Warning! W095: size not specified -- BYTE PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.XBvNKat5Hk/IFSUTIL.ASM(987): Error! E048: Immediate data out of range
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.XBvNKat5Hk/IFSUTIL.ASM(987): Error! E040: Invalid instruction operands
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.XBvNKat5Hk/IFSUTIL.ASM(2100): Error! E048: Immediate data out of range
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.XBvNKat5Hk/IFSUTIL.ASM(2100): Error! E040: Invalid instruction operands
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.XBvNKat5Hk/IFSUTIL.ASM(2136): Error! E048: Immediate data out of range
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.XBvNKat5Hk/IFSUTIL.ASM(2136): Error! E040: Invalid instruction operands
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.XBvNKat5Hk/IFSUTIL.ASM(2398): Warning! W095: size not specified -- BYTE PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.XBvNKat5Hk/IFSUTIL.ASM(2399): Warning! W095: size not specified -- BYTE PTR is assumed

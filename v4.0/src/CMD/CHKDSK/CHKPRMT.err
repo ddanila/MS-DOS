@@ -1,1 +1,3 @@
-CHKPRMT.ASM(93): Warning! W249: End directive required at end of file
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pxsxzGhBAm/CHKPRMT.ASM(57): Error! E032: Syntax error
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pxsxzGhBAm/CHKPRMT.ASM(88): Error! E206: Block nesting error
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pxsxzGhBAm/CHKPRMT.ASM(93): Warning! W249: End directive required at end of file

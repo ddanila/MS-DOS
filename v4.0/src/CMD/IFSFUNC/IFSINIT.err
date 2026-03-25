@@ -1,20 +1,20 @@
 ifsfunc.cla(12): Error! E050: Offset cannot be smaller than WORD size
-ifsfunc.cla(12): Note! N290: included by file ../../INC/SYSMSG.INC(437)
-ifsfunc.cla(12): Note! N291: macro called from file ../../INC/SYSMSG.INC(401)
-ifsfunc.cla(12): Note! N291: macro called from file IFSINIT.ASM(669)
+ifsfunc.cla(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rdKLzulIn6/inc_______INC/SYSMSG.INC(446)
+ifsfunc.cla(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rdKLzulIn6/inc_______INC/SYSMSG.INC(410)
+ifsfunc.cla(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rdKLzulIn6/IFSINIT.ASM(669)
 ifsfunc.cl2(12): Error! E050: Offset cannot be smaller than WORD size
-ifsfunc.cl2(12): Note! N290: included by file ../../INC/SYSMSG.INC(437)
-ifsfunc.cl2(12): Note! N291: macro called from file ../../INC/SYSMSG.INC(401)
-ifsfunc.cl2(12): Note! N291: macro called from file IFSINIT.ASM(669)
+ifsfunc.cl2(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rdKLzulIn6/inc_______INC/SYSMSG.INC(446)
+ifsfunc.cl2(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rdKLzulIn6/inc_______INC/SYSMSG.INC(410)
+ifsfunc.cl2(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rdKLzulIn6/IFSINIT.ASM(669)
 ifsfunc.cl2(89): Error! E299: '$M_MSGSERV_2' is already defined
-ifsfunc.cl2(89): Note! N290: included by file ../../INC/SYSMSG.INC(437)
-ifsfunc.cl2(89): Note! N291: macro called from file ../../INC/SYSMSG.INC(401)
-ifsfunc.cl2(89): Note! N291: macro called from file IFSINIT.ASM(669)
+ifsfunc.cl2(89): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rdKLzulIn6/inc_______INC/SYSMSG.INC(446)
+ifsfunc.cl2(89): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rdKLzulIn6/inc_______INC/SYSMSG.INC(410)
+ifsfunc.cl2(89): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rdKLzulIn6/IFSINIT.ASM(669)
 ifsfunc.cl2(98): Error! E206: Block nesting error
-ifsfunc.cl2(98): Note! N290: included by file ../../INC/SYSMSG.INC(437)
-ifsfunc.cl2(98): Note! N291: macro called from file ../../INC/SYSMSG.INC(401)
-ifsfunc.cl2(98): Note! N291: macro called from file IFSINIT.ASM(669)
-IFSINIT.ASM(1193): Warning! W095: size not specified -- BYTE PTR is assumed
-IFSINIT.ASM(1229): Error! E039: Operands must be the same size
-IFSINIT.ASM(1229): Warning! W041: Immediate constant too large
-IFSINIT.ASM(1410): Warning! W249: End directive required at end of file
+ifsfunc.cl2(98): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rdKLzulIn6/inc_______INC/SYSMSG.INC(446)
+ifsfunc.cl2(98): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rdKLzulIn6/inc_______INC/SYSMSG.INC(410)
+ifsfunc.cl2(98): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rdKLzulIn6/IFSINIT.ASM(669)
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rdKLzulIn6/IFSINIT.ASM(1193): Warning! W095: size not specified -- BYTE PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rdKLzulIn6/IFSINIT.ASM(1229): Error! E039: Operands must be the same size
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rdKLzulIn6/IFSINIT.ASM(1229): Warning! W041: Immediate constant too large
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.rdKLzulIn6/IFSINIT.ASM(1410): Warning! W249: End directive required at end of file

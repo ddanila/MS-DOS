@@ -1,12 +1,33 @@
-../../INC/MSGSERV.ASM(206): Error! E074: Constant operand is expected
-../../INC/MSGSERV.ASM(206): Note! N290: included by file ../../INC/SYSMSG.INC(361)
-../../INC/MSGSERV.ASM(206): Note! N291: macro called from file _MSGRET.ASM(24)
-../../INC/MSGDCL.INC(38): Error! E074: Constant operand is expected
-../../INC/MSGDCL.INC(38): Note! N291: macro called from file ../../INC/MSGDCL.INC(16)
-../../INC/MSGDCL.INC(38): Note! N291: macro called from file ../../INC/MSGDCL.INC(101)
-../../INC/MSGDCL.INC(38): Note! N290: included by file _MSGRET.ASM(230)
-../../INC/MSGDCL.INC(38): Error! E074: Constant operand is expected
-../../INC/MSGDCL.INC(38): Note! N291: macro called from file ../../INC/MSGDCL.INC(16)
-../../INC/MSGDCL.INC(38): Note! N291: macro called from file ../../INC/MSGDCL.INC(101)
-../../INC/MSGDCL.INC(38): Note! N290: included by file _MSGRET.ASM(230)
-_MSGRET.ASM(233): Warning! W249: End directive required at end of file
+ATTRIB.CLA(12): Error! E050: Offset cannot be smaller than WORD size
+ATTRIB.CLA(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.Rmtlz6j4WK/inc_______INC/SYSMSG.INC(446)
+ATTRIB.CLA(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.Rmtlz6j4WK/inc_______INC/SYSMSG.INC(410)
+ATTRIB.CLA(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.Rmtlz6j4WK/_MSGRET.ASM(70)
+ATTRIB.CLB(12): Error! E050: Offset cannot be smaller than WORD size
+ATTRIB.CLB(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.Rmtlz6j4WK/inc_______INC/SYSMSG.INC(446)
+ATTRIB.CLB(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.Rmtlz6j4WK/inc_______INC/SYSMSG.INC(410)
+ATTRIB.CLB(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.Rmtlz6j4WK/_MSGRET.ASM(70)
+ATTRIB.CL1(12): Error! E050: Offset cannot be smaller than WORD size
+ATTRIB.CL1(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.Rmtlz6j4WK/inc_______INC/SYSMSG.INC(446)
+ATTRIB.CL1(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.Rmtlz6j4WK/inc_______INC/SYSMSG.INC(410)
+ATTRIB.CL1(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.Rmtlz6j4WK/_MSGRET.ASM(70)
+ATTRIB.CL1(39): Error! E299: '$M_MSGSERV_1' is already defined
+ATTRIB.CL1(39): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.Rmtlz6j4WK/inc_______INC/SYSMSG.INC(446)
+ATTRIB.CL1(39): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.Rmtlz6j4WK/inc_______INC/SYSMSG.INC(410)
+ATTRIB.CL1(39): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.Rmtlz6j4WK/_MSGRET.ASM(70)
+ATTRIB.CL1(50): Error! E206: Block nesting error
+ATTRIB.CL1(50): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.Rmtlz6j4WK/inc_______INC/SYSMSG.INC(446)
+ATTRIB.CL1(50): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.Rmtlz6j4WK/inc_______INC/SYSMSG.INC(410)
+ATTRIB.CL1(50): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.Rmtlz6j4WK/_MSGRET.ASM(70)
+ATTRIB.CL2(12): Error! E050: Offset cannot be smaller than WORD size
+ATTRIB.CL2(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.Rmtlz6j4WK/inc_______INC/SYSMSG.INC(446)
+ATTRIB.CL2(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.Rmtlz6j4WK/inc_______INC/SYSMSG.INC(410)
+ATTRIB.CL2(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.Rmtlz6j4WK/_MSGRET.ASM(70)
+ATTRIB.CL2(39): Error! E299: '$M_MSGSERV_2' is already defined
+ATTRIB.CL2(39): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.Rmtlz6j4WK/inc_______INC/SYSMSG.INC(446)
+ATTRIB.CL2(39): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.Rmtlz6j4WK/inc_______INC/SYSMSG.INC(410)
+ATTRIB.CL2(39): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.Rmtlz6j4WK/_MSGRET.ASM(70)
+ATTRIB.CL2(50): Error! E206: Block nesting error
+ATTRIB.CL2(50): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.Rmtlz6j4WK/inc_______INC/SYSMSG.INC(446)
+ATTRIB.CL2(50): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.Rmtlz6j4WK/inc_______INC/SYSMSG.INC(410)
+ATTRIB.CL2(50): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.Rmtlz6j4WK/_MSGRET.ASM(70)
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.Rmtlz6j4WK/_MSGRET.ASM(233): Warning! W249: End directive required at end of file

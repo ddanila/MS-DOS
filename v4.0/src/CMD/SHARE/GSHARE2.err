@@ -1,10 +1,10 @@
-GSHARE2.ASM(39): Error! E236: Procedure is already defined
-GSHARE2.ASM(40): Error! E074: Constant operand is expected
-GSHARE2.ASM(953): Error! E032: Syntax error
-GSHARE2.ASM(1315): Error! E032: Syntax error
-GSHARE2.ASM(2013): Error! E206: Block nesting error
-GSHARE2.ASM(2095): Error! E050: Offset cannot be smaller than WORD size
-GSHARE2.ASM(2633): Error! E050: Offset cannot be smaller than WORD size
-GSHARE2.ASM(2651): Error! E050: Offset cannot be smaller than WORD size
-GSHARE2.ASM(2652): Error! E050: Offset cannot be smaller than WORD size
-GSHARE2.ASM(3011): Warning! W249: End directive required at end of file
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.OigfsAxoxM/GSHARE2.ASM(39): Error! E236: Procedure is already defined
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.OigfsAxoxM/GSHARE2.ASM(40): Error! E074: Constant operand is expected
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.OigfsAxoxM/GSHARE2.ASM(953): Error! E032: Syntax error
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.OigfsAxoxM/GSHARE2.ASM(1315): Error! E032: Syntax error
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.OigfsAxoxM/GSHARE2.ASM(2013): Error! E206: Block nesting error
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.OigfsAxoxM/GSHARE2.ASM(2095): Error! E050: Offset cannot be smaller than WORD size
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.OigfsAxoxM/GSHARE2.ASM(2633): Error! E050: Offset cannot be smaller than WORD size
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.OigfsAxoxM/GSHARE2.ASM(2651): Error! E050: Offset cannot be smaller than WORD size
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.OigfsAxoxM/GSHARE2.ASM(2652): Error! E050: Offset cannot be smaller than WORD size
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.OigfsAxoxM/GSHARE2.ASM(3011): Warning! W249: End directive required at end of file

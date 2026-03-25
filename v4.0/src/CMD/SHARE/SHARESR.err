@@ -1,4 +1,30 @@
-../../INC/MSGSERV.ASM(206): Error! E074: Constant operand is expected
-../../INC/MSGSERV.ASM(206): Note! N290: included by file ../../INC/SYSMSG.INC(361)
-../../INC/MSGSERV.ASM(206): Note! N291: macro called from file SHARESR.ASM(21)
-SHARESR.ASM(73): Warning! W249: End directive required at end of file
+SHARE.CLA(12): Error! E050: Offset cannot be smaller than WORD size
+SHARE.CLA(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8lEpRe2ABf/inc_______INC/SYSMSG.INC(446)
+SHARE.CLA(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8lEpRe2ABf/inc_______INC/SYSMSG.INC(410)
+SHARE.CLA(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8lEpRe2ABf/SHARESR.ASM(42)
+SHARE.CL1(12): Error! E050: Offset cannot be smaller than WORD size
+SHARE.CL1(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8lEpRe2ABf/inc_______INC/SYSMSG.INC(446)
+SHARE.CL1(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8lEpRe2ABf/inc_______INC/SYSMSG.INC(410)
+SHARE.CL1(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8lEpRe2ABf/SHARESR.ASM(42)
+SHARE.CL1(49): Error! E299: '$M_MSGSERV_1' is already defined
+SHARE.CL1(49): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8lEpRe2ABf/inc_______INC/SYSMSG.INC(446)
+SHARE.CL1(49): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8lEpRe2ABf/inc_______INC/SYSMSG.INC(410)
+SHARE.CL1(49): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8lEpRe2ABf/SHARESR.ASM(42)
+SHARE.CL1(58): Error! E206: Block nesting error
+SHARE.CL1(58): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8lEpRe2ABf/inc_______INC/SYSMSG.INC(446)
+SHARE.CL1(58): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8lEpRe2ABf/inc_______INC/SYSMSG.INC(410)
+SHARE.CL1(58): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8lEpRe2ABf/SHARESR.ASM(42)
+SHARE.CL2(12): Error! E050: Offset cannot be smaller than WORD size
+SHARE.CL2(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8lEpRe2ABf/inc_______INC/SYSMSG.INC(446)
+SHARE.CL2(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8lEpRe2ABf/inc_______INC/SYSMSG.INC(410)
+SHARE.CL2(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8lEpRe2ABf/SHARESR.ASM(42)
+SHARE.CL2(65): Error! E299: '$M_MSGSERV_2' is already defined
+SHARE.CL2(65): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8lEpRe2ABf/inc_______INC/SYSMSG.INC(446)
+SHARE.CL2(65): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8lEpRe2ABf/inc_______INC/SYSMSG.INC(410)
+SHARE.CL2(65): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8lEpRe2ABf/SHARESR.ASM(42)
+SHARE.CL2(74): Error! E206: Block nesting error
+SHARE.CL2(74): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8lEpRe2ABf/inc_______INC/SYSMSG.INC(446)
+SHARE.CL2(74): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8lEpRe2ABf/inc_______INC/SYSMSG.INC(410)
+SHARE.CL2(74): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8lEpRe2ABf/SHARESR.ASM(42)
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8lEpRe2ABf/SHARESR.ASM(48): Error! E230: Label 'FALSE' is already defined
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.8lEpRe2ABf/SHARESR.ASM(73): Warning! W249: End directive required at end of file

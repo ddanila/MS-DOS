@@ -1,17 +1,17 @@
 DEBEQU.ASM(48): Error! E230: Label 'IBMJAPAN' is already defined
-DEBEQU.ASM(48): Note! N290: included by file DEBCOM2.ASM(56)
-DEBCOM2.ASM(203): Error! E066: Operand is expected
-DEBCOM2.ASM(208): Error! E066: Operand is expected
-DEBCOM2.ASM(301): Error! E066: Operand is expected
-DEBCOM2.ASM(625): Error! E066: Operand is expected
-DEBCOM2.ASM(634): Error! E066: Operand is expected
-DEBCOM2.ASM(771): Error! E066: Operand is expected
-DEBCOM2.ASM(890): Error! E066: Operand is expected
-DEBCOM2.ASM(1052): Error! E066: Operand is expected
-DEBCOM2.ASM(1053): Error! E066: Operand is expected
-DEBCOM2.ASM(1054): Error! E066: Operand is expected
-DEBCOM2.ASM(1074): Error! E066: Operand is expected
-DEBCOM2.ASM(1078): Error! E066: Operand is expected
-DEBCOM2.ASM(1080): Error! E066: Operand is expected
-DEBCOM2.ASM(1082): Error! E066: Operand is expected
-DEBCOM2.ASM(1308): Warning! W249: End directive required at end of file
+DEBEQU.ASM(48): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pBfxQ3M2hQ/DEBCOM2.ASM(56)
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pBfxQ3M2hQ/DEBCOM2.ASM(203): Error! E066: Operand is expected
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pBfxQ3M2hQ/DEBCOM2.ASM(208): Error! E066: Operand is expected
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pBfxQ3M2hQ/DEBCOM2.ASM(301): Error! E066: Operand is expected
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pBfxQ3M2hQ/DEBCOM2.ASM(625): Error! E066: Operand is expected
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pBfxQ3M2hQ/DEBCOM2.ASM(634): Error! E066: Operand is expected
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pBfxQ3M2hQ/DEBCOM2.ASM(771): Error! E066: Operand is expected
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pBfxQ3M2hQ/DEBCOM2.ASM(890): Error! E066: Operand is expected
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pBfxQ3M2hQ/DEBCOM2.ASM(1052): Error! E066: Operand is expected
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pBfxQ3M2hQ/DEBCOM2.ASM(1053): Error! E066: Operand is expected
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pBfxQ3M2hQ/DEBCOM2.ASM(1054): Error! E066: Operand is expected
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pBfxQ3M2hQ/DEBCOM2.ASM(1074): Error! E066: Operand is expected
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pBfxQ3M2hQ/DEBCOM2.ASM(1078): Error! E066: Operand is expected
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pBfxQ3M2hQ/DEBCOM2.ASM(1080): Error! E066: Operand is expected
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pBfxQ3M2hQ/DEBCOM2.ASM(1082): Error! E066: Operand is expected
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.pBfxQ3M2hQ/DEBCOM2.ASM(1308): Warning! W249: End directive required at end of file

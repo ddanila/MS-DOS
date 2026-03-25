@@ -1,16 +1,16 @@
-IFSDEV.ASM(208): Warning! W095: size not specified -- BYTE PTR is assumed
-IFSDEV.ASM(215): Warning! W095: size not specified -- BYTE PTR is assumed
-IFSDEV.ASM(225): Warning! W095: size not specified -- BYTE PTR is assumed
-IFSDEV.ASM(239): Warning! W095: size not specified -- BYTE PTR is assumed
-IFSDEV.ASM(243): Warning! W095: size not specified -- BYTE PTR is assumed
-IFSDEV.ASM(333): Error! E040: Invalid instruction operands
-IFSDEV.ASM(394): Error! E002: Invalid instruction with current CPU setting
-IFSDEV.ASM(442): Warning! W095: size not specified -- BYTE PTR is assumed
-IFSDEV.ASM(445): Warning! W095: size not specified -- BYTE PTR is assumed
-IFSDEV.ASM(560): Warning! W095: size not specified -- BYTE PTR is assumed
-IFSDEV.ASM(694): Warning! W095: size not specified -- BYTE PTR is assumed
-IFSDEV.ASM(698): Error! E040: Invalid instruction operands
-IFSDEV.ASM(702): Warning! W095: size not specified -- BYTE PTR is assumed
-IFSDEV.ASM(811): Warning! W095: size not specified -- BYTE PTR is assumed
-IFSDEV.ASM(814): Warning! W095: size not specified -- BYTE PTR is assumed
-IFSDEV.ASM(1121): Warning! W095: size not specified -- BYTE PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.AoJ44MDls1/IFSDEV.ASM(208): Warning! W095: size not specified -- BYTE PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.AoJ44MDls1/IFSDEV.ASM(215): Warning! W095: size not specified -- BYTE PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.AoJ44MDls1/IFSDEV.ASM(225): Warning! W095: size not specified -- BYTE PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.AoJ44MDls1/IFSDEV.ASM(239): Warning! W095: size not specified -- BYTE PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.AoJ44MDls1/IFSDEV.ASM(243): Warning! W095: size not specified -- BYTE PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.AoJ44MDls1/IFSDEV.ASM(333): Error! E040: Invalid instruction operands
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.AoJ44MDls1/IFSDEV.ASM(394): Error! E002: Invalid instruction with current CPU setting
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.AoJ44MDls1/IFSDEV.ASM(442): Warning! W095: size not specified -- BYTE PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.AoJ44MDls1/IFSDEV.ASM(445): Warning! W095: size not specified -- BYTE PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.AoJ44MDls1/IFSDEV.ASM(560): Warning! W095: size not specified -- BYTE PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.AoJ44MDls1/IFSDEV.ASM(694): Warning! W095: size not specified -- BYTE PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.AoJ44MDls1/IFSDEV.ASM(698): Error! E040: Invalid instruction operands
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.AoJ44MDls1/IFSDEV.ASM(702): Warning! W095: size not specified -- BYTE PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.AoJ44MDls1/IFSDEV.ASM(811): Warning! W095: size not specified -- BYTE PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.AoJ44MDls1/IFSDEV.ASM(814): Warning! W095: size not specified -- BYTE PTR is assumed
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.AoJ44MDls1/IFSDEV.ASM(1121): Warning! W095: size not specified -- BYTE PTR is assumed

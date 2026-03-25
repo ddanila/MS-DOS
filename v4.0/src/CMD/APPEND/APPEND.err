@@ -1,12 +1,42 @@
-../../INC/MSGSERV.ASM(206): Error! E074: Constant operand is expected
-../../INC/MSGSERV.ASM(206): Note! N290: included by file ../../INC/SYSMSG.INC(361)
-../../INC/MSGSERV.ASM(206): Note! N291: macro called from file APPEND.ASM(5)
-APPEND.ASM(236): Error! E230: Label 'CR' is already defined
-APPEND.ASM(237): Error! E230: Label 'LF' is already defined
-APPEND.ASM(239): Error! E230: Label 'STDOUT' is already defined
-APPEND.ASM(240): Error! E230: Label 'STDERR' is already defined
-APPEND.ASM(241): Error! E230: Label 'NULL' is already defined
-APPEND.ASM(374): Error! E032: Syntax error
-APPEND.ASM(2885): Error! E048: Immediate data out of range
-APPEND.ASM(2885): Error! E040: Invalid instruction operands
-APPEND.ASM(3491): Warning! W249: End directive required at end of file
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.3nRrKdpyrt/APPEND.ASM(231): Error! E230: Label 'FALSE' is already defined
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.3nRrKdpyrt/APPEND.ASM(236): Error! E230: Label 'CR' is already defined
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.3nRrKdpyrt/APPEND.ASM(237): Error! E230: Label 'LF' is already defined
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.3nRrKdpyrt/APPEND.ASM(239): Error! E230: Label 'STDOUT' is already defined
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.3nRrKdpyrt/APPEND.ASM(240): Error! E230: Label 'STDERR' is already defined
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.3nRrKdpyrt/APPEND.ASM(241): Error! E230: Label 'NULL' is already defined
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.3nRrKdpyrt/APPEND.ASM(374): Error! E032: Syntax error
+APPEND.CLA(12): Error! E050: Offset cannot be smaller than WORD size
+APPEND.CLA(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.3nRrKdpyrt/inc_______INC/SYSMSG.INC(446)
+APPEND.CLA(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.3nRrKdpyrt/inc_______INC/SYSMSG.INC(410)
+APPEND.CLA(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.3nRrKdpyrt/APPEND.ASM(431)
+APPEND.CL1(12): Error! E050: Offset cannot be smaller than WORD size
+APPEND.CL1(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.3nRrKdpyrt/inc_______INC/SYSMSG.INC(446)
+APPEND.CL1(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.3nRrKdpyrt/inc_______INC/SYSMSG.INC(410)
+APPEND.CL1(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.3nRrKdpyrt/APPEND.ASM(431)
+APPEND.CTL(1): Error! E230: Label '$M_NUM_CLS' is already defined
+APPEND.CTL(1): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.3nRrKdpyrt/inc_______INC/SYSMSG.INC(446)
+APPEND.CTL(1): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.3nRrKdpyrt/inc_______INC/SYSMSG.INC(410)
+APPEND.CTL(1): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.3nRrKdpyrt/APPEND.ASM(431)
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.3nRrKdpyrt/APPEND.ASM(2885): Error! E048: Immediate data out of range
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.3nRrKdpyrt/APPEND.ASM(2885): Error! E040: Invalid instruction operands
+APPEND.CLB(12): Error! E050: Offset cannot be smaller than WORD size
+APPEND.CLB(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.3nRrKdpyrt/inc_______INC/SYSMSG.INC(446)
+APPEND.CLB(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.3nRrKdpyrt/inc_______INC/SYSMSG.INC(410)
+APPEND.CLB(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.3nRrKdpyrt/APPEND.ASM(3474)
+APPEND.CL2(12): Error! E050: Offset cannot be smaller than WORD size
+APPEND.CL2(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.3nRrKdpyrt/inc_______INC/SYSMSG.INC(446)
+APPEND.CL2(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.3nRrKdpyrt/inc_______INC/SYSMSG.INC(410)
+APPEND.CL2(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.3nRrKdpyrt/APPEND.ASM(3474)
+APPEND.CL2(41): Error! E299: '$M_MSGSERV_2' is already defined
+APPEND.CL2(41): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.3nRrKdpyrt/inc_______INC/SYSMSG.INC(446)
+APPEND.CL2(41): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.3nRrKdpyrt/inc_______INC/SYSMSG.INC(410)
+APPEND.CL2(41): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.3nRrKdpyrt/APPEND.ASM(3474)
+APPEND.CL2(50): Error! E206: Block nesting error
+APPEND.CL2(50): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.3nRrKdpyrt/inc_______INC/SYSMSG.INC(446)
+APPEND.CL2(50): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.3nRrKdpyrt/inc_______INC/SYSMSG.INC(410)
+APPEND.CL2(50): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.3nRrKdpyrt/APPEND.ASM(3474)
+APPEND.CTL(1): Error! E230: Label '$M_NUM_CLS' is already defined
+APPEND.CTL(1): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.3nRrKdpyrt/inc_______INC/SYSMSG.INC(446)
+APPEND.CTL(1): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.3nRrKdpyrt/inc_______INC/SYSMSG.INC(410)
+APPEND.CTL(1): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.3nRrKdpyrt/APPEND.ASM(3474)
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.3nRrKdpyrt/APPEND.ASM(3491): Warning! W249: End directive required at end of file

@@ -1,7 +1,12 @@
-../../INC/MSGSERV.ASM(206): Error! E074: Constant operand is expected
-../../INC/MSGSERV.ASM(206): Note! N290: included by file ../../INC/SYSMSG.INC(361)
-../../INC/MSGSERV.ASM(206): Note! N291: macro called from file FASTSM.ASM(109)
-../../INC/MSGDCL.INC(38): Error! E074: Constant operand is expected
-../../INC/MSGDCL.INC(38): Note! N291: macro called from file ../../INC/MSGDCL.INC(16)
-../../INC/MSGDCL.INC(38): Note! N291: macro called from file ../../INC/MSGDCL.INC(101)
-../../INC/MSGDCL.INC(38): Note! N290: included by file FASTSM.ASM(139)
+FASTOPEN.CLA(12): Error! E050: Offset cannot be smaller than WORD size
+FASTOPEN.CLA(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.lhewh4jcRo/inc_______INC/SYSMSG.INC(446)
+FASTOPEN.CLA(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.lhewh4jcRo/inc_______INC/SYSMSG.INC(410)
+FASTOPEN.CLA(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.lhewh4jcRo/FASTSM.ASM(128)
+FASTOPEN.CL1(12): Error! E050: Offset cannot be smaller than WORD size
+FASTOPEN.CL1(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.lhewh4jcRo/inc_______INC/SYSMSG.INC(446)
+FASTOPEN.CL1(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.lhewh4jcRo/inc_______INC/SYSMSG.INC(410)
+FASTOPEN.CL1(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.lhewh4jcRo/FASTSM.ASM(128)
+FASTOPEN.CL2(12): Error! E050: Offset cannot be smaller than WORD size
+FASTOPEN.CL2(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.lhewh4jcRo/inc_______INC/SYSMSG.INC(446)
+FASTOPEN.CL2(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.lhewh4jcRo/inc_______INC/SYSMSG.INC(410)
+FASTOPEN.CL2(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.lhewh4jcRo/FASTSM.ASM(128)

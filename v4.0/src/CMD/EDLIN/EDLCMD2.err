@@ -1,7 +1,7 @@
-EDLCMD2.ASM(1063): Error! E048: Immediate data out of range
-EDLCMD2.ASM(1063): Error! E040: Invalid instruction operands
-EDLCMD2.ASM(1088): Error! E048: Immediate data out of range
-EDLCMD2.ASM(1088): Error! E040: Invalid instruction operands
-EDLCMD2.ASM(1152): Error! E048: Immediate data out of range
-EDLCMD2.ASM(1152): Error! E040: Invalid instruction operands
-EDLCMD2.ASM(1203): Warning! W249: End directive required at end of file
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.lV0r888iw1/EDLCMD2.ASM(1063): Error! E048: Immediate data out of range
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.lV0r888iw1/EDLCMD2.ASM(1063): Error! E040: Invalid instruction operands
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.lV0r888iw1/EDLCMD2.ASM(1088): Error! E048: Immediate data out of range
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.lV0r888iw1/EDLCMD2.ASM(1088): Error! E040: Invalid instruction operands
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.lV0r888iw1/EDLCMD2.ASM(1152): Error! E048: Immediate data out of range
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.lV0r888iw1/EDLCMD2.ASM(1152): Error! E040: Invalid instruction operands
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.lV0r888iw1/EDLCMD2.ASM(1203): Warning! W249: End directive required at end of file

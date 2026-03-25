@@ -1,13 +1,3 @@
-../../INC/POSTEQU.INC(162): Error! E230: Label 'KB_ERR' is already defined
-../../INC/POSTEQU.INC(162): Note! N290: included by file KEYBI9.ASM(42)
-KEYBSHAR.INC(274): Error! E065: Operator is expected
-KEYBSHAR.INC(274): Note! N290: included by file KEYBI9.ASM(43)
-KEYBSHAR.INC(274): Error! E050: Offset cannot be smaller than WORD size
-KEYBSHAR.INC(274): Note! N290: included by file KEYBI9.ASM(43)
-KEYBSHAR.INC(281): Error! E065: Operator is expected
-KEYBSHAR.INC(281): Note! N290: included by file KEYBI9.ASM(43)
-KEYBSHAR.INC(281): Error! E050: Offset cannot be smaller than WORD size
-KEYBSHAR.INC(281): Note! N290: included by file KEYBI9.ASM(43)
-KEYBI9.ASM(168): Error! E048: Immediate data out of range
-KEYBI9.ASM(168): Error! E040: Invalid instruction operands
-KEYBI9.ASM(543): Warning! W041: Immediate constant too large
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.EMIVEz2VjT/KEYBI9.ASM(168): Error! E048: Immediate data out of range
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.EMIVEz2VjT/KEYBI9.ASM(168): Error! E040: Invalid instruction operands
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.EMIVEz2VjT/KEYBI9.ASM(543): Warning! W041: Immediate constant too large

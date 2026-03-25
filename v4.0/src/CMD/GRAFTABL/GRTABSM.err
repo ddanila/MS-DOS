@@ -1,18 +1,21 @@
-../../INC/MSGSERV.ASM(206): Error! E074: Constant operand is expected
-../../INC/MSGSERV.ASM(206): Note! N290: included by file ../../INC/SYSMSG.INC(361)
-../../INC/MSGSERV.ASM(206): Note! N291: macro called from file GRTABSM.ASM(108)
-../../INC/MSGHAN.INC(71): Error! E094: This instruction is not supported
-../../INC/MSGHAN.INC(71): Note! N290: included by file GRTABSM.ASM(122)
 GRTABMS.INC(50): Error! E032: Syntax error
-GRTABMS.INC(50): Note! N290: included by file GRTABSM.ASM(123)
+GRTABMS.INC(50): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.4rTYPq7VQr/GRTABSM.ASM(123)
 GRTABMS.INC(50): Error! E065: Operator is expected
-GRTABMS.INC(50): Note! N290: included by file GRTABSM.ASM(123)
+GRTABMS.INC(50): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.4rTYPq7VQr/GRTABSM.ASM(123)
 GRTABMS.INC(67): Error! E032: Syntax error
-GRTABMS.INC(67): Note! N290: included by file GRTABSM.ASM(123)
+GRTABMS.INC(67): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.4rTYPq7VQr/GRTABSM.ASM(123)
 GRTABMS.INC(67): Error! E065: Operator is expected
-GRTABMS.INC(67): Note! N290: included by file GRTABSM.ASM(123)
-../../INC/MSGDCL.INC(38): Error! E074: Constant operand is expected
-../../INC/MSGDCL.INC(38): Note! N291: macro called from file ../../INC/MSGDCL.INC(16)
-../../INC/MSGDCL.INC(38): Note! N291: macro called from file ../../INC/MSGDCL.INC(101)
-../../INC/MSGDCL.INC(38): Note! N290: included by file GRTABSM.ASM(149)
-GRTABSM.ASM(152): Warning! W249: End directive required at end of file
+GRTABMS.INC(67): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.4rTYPq7VQr/GRTABSM.ASM(123)
+GRAFTABL.CLA(12): Error! E050: Offset cannot be smaller than WORD size
+GRAFTABL.CLA(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.4rTYPq7VQr/inc_______INC/SYSMSG.INC(446)
+GRAFTABL.CLA(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.4rTYPq7VQr/inc_______INC/SYSMSG.INC(410)
+GRAFTABL.CLA(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.4rTYPq7VQr/GRTABSM.ASM(124)
+GRAFTABL.CL1(12): Error! E050: Offset cannot be smaller than WORD size
+GRAFTABL.CL1(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.4rTYPq7VQr/inc_______INC/SYSMSG.INC(446)
+GRAFTABL.CL1(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.4rTYPq7VQr/inc_______INC/SYSMSG.INC(410)
+GRAFTABL.CL1(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.4rTYPq7VQr/GRTABSM.ASM(124)
+GRAFTABL.CL2(12): Error! E050: Offset cannot be smaller than WORD size
+GRAFTABL.CL2(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.4rTYPq7VQr/inc_______INC/SYSMSG.INC(446)
+GRAFTABL.CL2(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.4rTYPq7VQr/inc_______INC/SYSMSG.INC(410)
+GRAFTABL.CL2(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.4rTYPq7VQr/GRTABSM.ASM(124)
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.4rTYPq7VQr/GRTABSM.ASM(152): Warning! W249: End directive required at end of file

@@ -1,12 +1,2 @@
-KEYBSHAR.INC(274): Error! E065: Operator is expected
-KEYBSHAR.INC(274): Note! N290: included by file COMMSUBS.ASM(48)
-KEYBSHAR.INC(274): Error! E050: Offset cannot be smaller than WORD size
-KEYBSHAR.INC(274): Note! N290: included by file COMMSUBS.ASM(48)
-KEYBSHAR.INC(281): Error! E065: Operator is expected
-KEYBSHAR.INC(281): Note! N290: included by file COMMSUBS.ASM(48)
-KEYBSHAR.INC(281): Error! E050: Offset cannot be smaller than WORD size
-KEYBSHAR.INC(281): Note! N290: included by file COMMSUBS.ASM(48)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/POSTEQU.INC(162): Error! E230: Label 'KB_ERR' is already defined
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/POSTEQU.INC(162): Note! N290: included by file COMMSUBS.ASM(51)
-COMMSUBS.ASM(345): Error! E048: Immediate data out of range
-COMMSUBS.ASM(345): Error! E040: Invalid instruction operands
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.YYbiXPxXyW/COMMSUBS.ASM(345): Error! E048: Immediate data out of range
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.YYbiXPxXyW/COMMSUBS.ASM(345): Error! E040: Invalid instruction operands

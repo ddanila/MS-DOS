@@ -1,13 +1,11 @@
 KEYBSHAR.INC(271): Error! E065: Operator is expected
-KEYBSHAR.INC(271): Note! N290: included by file KDFFR120.ASM(19)
+KEYBSHAR.INC(271): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.GKy4XZNqZ4/KDFFR120.ASM(19)
 KEYBSHAR.INC(271): Error! E050: Offset cannot be smaller than WORD size
-KEYBSHAR.INC(271): Note! N290: included by file KDFFR120.ASM(19)
+KEYBSHAR.INC(271): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.GKy4XZNqZ4/KDFFR120.ASM(19)
 KEYBSHAR.INC(278): Error! E065: Operator is expected
-KEYBSHAR.INC(278): Note! N290: included by file KDFFR120.ASM(19)
+KEYBSHAR.INC(278): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.GKy4XZNqZ4/KDFFR120.ASM(19)
 KEYBSHAR.INC(278): Error! E050: Offset cannot be smaller than WORD size
-KEYBSHAR.INC(278): Note! N290: included by file KDFFR120.ASM(19)
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/POSTEQU.INC(162): Error! E230: Label 'KB_ERR' is already defined
-/home/ddanila/fun/msdos/MS-DOS/v4.0/src/INC/POSTEQU.INC(162): Note! N290: included by file KDFFR120.ASM(20)
+KEYBSHAR.INC(278): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.GKy4XZNqZ4/KDFFR120.ASM(19)
 KEYBMAC.INC(263): Error! E094: This instruction is not supported
-KEYBMAC.INC(263): Note! N290: included by file KDFFR120.ASM(21)
-KDFFR120.ASM(58): Error! E094: This instruction is not supported
+KEYBMAC.INC(263): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.GKy4XZNqZ4/KDFFR120.ASM(21)
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.GKy4XZNqZ4/KDFFR120.ASM(58): Error! E094: This instruction is not supported

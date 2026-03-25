@@ -1,0 +1,63 @@
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/E2BINIT.ASM(59): Error! E050: Offset cannot be smaller than WORD size
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/FILEMODE.INC(5): Error! E230: Label 'STDIN' is already defined
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/FILEMODE.INC(5): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/DOSSYM.INC(150)
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/FILEMODE.INC(5): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/E2BINIT.ASM(140)
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/FILEMODE.INC(6): Error! E230: Label 'STDOUT' is already defined
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/FILEMODE.INC(6): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/DOSSYM.INC(150)
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/FILEMODE.INC(6): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/E2BINIT.ASM(140)
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/FILEMODE.INC(7): Error! E230: Label 'STDERR' is already defined
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/FILEMODE.INC(7): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/DOSSYM.INC(150)
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/FILEMODE.INC(7): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/E2BINIT.ASM(140)
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/FILEMODE.INC(8): Error! E230: Label 'STDAUX' is already defined
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/FILEMODE.INC(8): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/DOSSYM.INC(150)
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/FILEMODE.INC(8): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/E2BINIT.ASM(140)
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/FILEMODE.INC(9): Error! E230: Label 'STDPRN' is already defined
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/FILEMODE.INC(9): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/DOSSYM.INC(150)
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/FILEMODE.INC(9): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/E2BINIT.ASM(140)
+E2BMACRO.INC(33): Error! E236: Procedure is already defined
+E2BMACRO.INC(33): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/E2BINIT.ASM(142)
+E2BEQU.INC(28): Error! E230: Label 'CR' is already defined
+E2BEQU.INC(28): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/E2BINIT.ASM(143)
+E2BTABLE.INC(71): Error! E230: Label 'NO_INPUT' is already defined
+E2BTABLE.INC(71): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/E2BINIT.ASM(144)
+E2BPARSE.INC(51): Error! E230: Label 'TAB' is already defined
+E2BPARSE.INC(51): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/E2BINIT.ASM(145)
+E2BPARSE.INC(71): Error! E230: Label 'No_Error' is already defined
+E2BPARSE.INC(71): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/E2BINIT.ASM(145)
+EXE2BIN.CLA(12): Error! E050: Offset cannot be smaller than WORD size
+EXE2BIN.CLA(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/SYSMSG.INC(446)
+EXE2BIN.CLA(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/SYSMSG.INC(410)
+EXE2BIN.CLA(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/E2BINIT.ASM(163)
+EXE2BIN.CLB(12): Error! E050: Offset cannot be smaller than WORD size
+EXE2BIN.CLB(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/SYSMSG.INC(446)
+EXE2BIN.CLB(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/SYSMSG.INC(410)
+EXE2BIN.CLB(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/E2BINIT.ASM(163)
+EXE2BIN.CL1(12): Error! E050: Offset cannot be smaller than WORD size
+EXE2BIN.CL1(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/SYSMSG.INC(446)
+EXE2BIN.CL1(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/SYSMSG.INC(410)
+EXE2BIN.CL1(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/E2BINIT.ASM(164)
+EXE2BIN.CL1(97): Error! E299: '$M_MSGSERV_1' is already defined
+EXE2BIN.CL1(97): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/SYSMSG.INC(446)
+EXE2BIN.CL1(97): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/SYSMSG.INC(410)
+EXE2BIN.CL1(97): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/E2BINIT.ASM(164)
+EXE2BIN.CL1(106): Error! E243: Procedure name does not match
+EXE2BIN.CL1(106): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/SYSMSG.INC(446)
+EXE2BIN.CL1(106): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/SYSMSG.INC(410)
+EXE2BIN.CL1(106): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/E2BINIT.ASM(164)
+EXE2BIN.CL2(12): Error! E050: Offset cannot be smaller than WORD size
+EXE2BIN.CL2(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/SYSMSG.INC(446)
+EXE2BIN.CL2(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/SYSMSG.INC(410)
+EXE2BIN.CL2(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/E2BINIT.ASM(164)
+EXE2BIN.CL2(41): Error! E299: '$M_MSGSERV_2' is already defined
+EXE2BIN.CL2(41): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/SYSMSG.INC(446)
+EXE2BIN.CL2(41): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/SYSMSG.INC(410)
+EXE2BIN.CL2(41): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/E2BINIT.ASM(164)
+EXE2BIN.CL2(50): Error! E243: Procedure name does not match
+EXE2BIN.CL2(50): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/SYSMSG.INC(446)
+EXE2BIN.CL2(50): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/SYSMSG.INC(410)
+EXE2BIN.CL2(50): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/E2BINIT.ASM(164)
+EXE2BIN.CTL(1): Error! E230: Label '$M_NUM_CLS' is already defined
+EXE2BIN.CTL(1): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/SYSMSG.INC(446)
+EXE2BIN.CTL(1): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/inc_______INC/SYSMSG.INC(410)
+EXE2BIN.CTL(1): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/E2BINIT.ASM(165)
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ghV5vV89Qy/E2BINIT.ASM(249):   273: Too many errors

@@ -1,3 +1,3 @@
 DEBEQU.ASM(48): Error! E230: Label 'IBMJAPAN' is already defined
-DEBEQU.ASM(48): Note! N290: included by file DEBDATA.ASM(47)
-DEBDATA.ASM(227): Warning! W249: End directive required at end of file
+DEBEQU.ASM(48): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ZK295OKJJB/DEBDATA.ASM(47)
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.ZK295OKJJB/DEBDATA.ASM(227): Warning! W249: End directive required at end of file

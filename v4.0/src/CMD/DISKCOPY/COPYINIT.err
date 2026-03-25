@@ -1,3 +1,3 @@
 DISKCOPY.EQU(2): Error! E032: Syntax error
-DISKCOPY.EQU(2): Note! N290: included by file COPYINIT.ASM(114)
-COPYINIT.ASM(1046): Warning! W249: End directive required at end of file
+DISKCOPY.EQU(2): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.lWX5MPERmJ/COPYINIT.ASM(114)
+/var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.lWX5MPERmJ/COPYINIT.ASM(1046): Warning! W249: End directive required at end of file

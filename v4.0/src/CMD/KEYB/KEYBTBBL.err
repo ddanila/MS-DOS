@@ -1,9 +1,1 @@
-KEYBSHAR.INC(274): Error! E065: Operator is expected
-KEYBSHAR.INC(274): Note! N290: included by file KEYBTBBL.ASM(53)
-KEYBSHAR.INC(274): Error! E050: Offset cannot be smaller than WORD size
-KEYBSHAR.INC(274): Note! N290: included by file KEYBTBBL.ASM(53)
-KEYBSHAR.INC(281): Error! E065: Operator is expected
-KEYBSHAR.INC(281): Note! N290: included by file KEYBTBBL.ASM(53)
-KEYBSHAR.INC(281): Error! E050: Offset cannot be smaller than WORD size
-KEYBSHAR.INC(281): Note! N290: included by file KEYBTBBL.ASM(53)
 KEYBTBBL.ASM(855): Warning! W249: End directive required at end of file

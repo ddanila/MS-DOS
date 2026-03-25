@@ -1,16 +1,16 @@
 SORT.ctl(1): Error! E230: Label '$M_NUM_CLS' is already defined
-SORT.ctl(1): Note! N290: included by file ../../INC/SYSMSG.INC(437)
-SORT.ctl(1): Note! N291: macro called from file ../../INC/SYSMSG.INC(401)
-SORT.ctl(1): Note! N291: macro called from file SORT.ASM(357)
+SORT.ctl(1): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.G21Ol5IT78/inc_______INC/SYSMSG.INC(446)
+SORT.ctl(1): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.G21Ol5IT78/inc_______INC/SYSMSG.INC(410)
+SORT.ctl(1): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.G21Ol5IT78/SORT.ASM(357)
 SORT.cla(12): Error! E050: Offset cannot be smaller than WORD size
-SORT.cla(12): Note! N290: included by file ../../INC/SYSMSG.INC(437)
-SORT.cla(12): Note! N291: macro called from file ../../INC/SYSMSG.INC(401)
-SORT.cla(12): Note! N291: macro called from file SORT.ASM(357)
+SORT.cla(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.G21Ol5IT78/inc_______INC/SYSMSG.INC(446)
+SORT.cla(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.G21Ol5IT78/inc_______INC/SYSMSG.INC(410)
+SORT.cla(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.G21Ol5IT78/SORT.ASM(357)
 SORT.cl1(12): Error! E050: Offset cannot be smaller than WORD size
-SORT.cl1(12): Note! N290: included by file ../../INC/SYSMSG.INC(437)
-SORT.cl1(12): Note! N291: macro called from file ../../INC/SYSMSG.INC(401)
-SORT.cl1(12): Note! N291: macro called from file SORT.ASM(357)
+SORT.cl1(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.G21Ol5IT78/inc_______INC/SYSMSG.INC(446)
+SORT.cl1(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.G21Ol5IT78/inc_______INC/SYSMSG.INC(410)
+SORT.cl1(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.G21Ol5IT78/SORT.ASM(357)
 SORT.cl2(12): Error! E050: Offset cannot be smaller than WORD size
-SORT.cl2(12): Note! N290: included by file ../../INC/SYSMSG.INC(437)
-SORT.cl2(12): Note! N291: macro called from file ../../INC/SYSMSG.INC(401)
-SORT.cl2(12): Note! N291: macro called from file SORT.ASM(357)
+SORT.cl2(12): Note! N290: included by file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.G21Ol5IT78/inc_______INC/SYSMSG.INC(446)
+SORT.cl2(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.G21Ol5IT78/inc_______INC/SYSMSG.INC(410)
+SORT.cl2(12): Note! N291: macro called from file /var/folders/ss/gwtjwn753g54d65c43lsc_4m0000gp/T/tmp.G21Ol5IT78/SORT.ASM(357)
