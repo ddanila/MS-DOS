@@ -509,11 +509,11 @@ ENDM						 ;
 $M_MAKE Macro $m_append 			 ;
 IF  FARmsg					 ;
     CALL    FAR PTR $M_CLS_&$m_append		 ;  Get addressibilty to class &$M_APPEND (ES:DI)
-    MOV     WORD PTR DS:$M_RT.$M_CLASS_ADDRS+$M_INDEX+2-1,ES ;  WASM: -1 compensates EQU alias offset bug
-    MOV     WORD PTR DS:$M_RT.$M_CLASS_ADDRS+$M_INDEX-1,DI ;
+    MOV     WORD PTR DS:$M_RT.$M_CLASS_ADDRS+$M_INDEX+2,ES ;
+    MOV     WORD PTR DS:$M_RT.$M_CLASS_ADDRS+$M_INDEX,DI ;
 ELSE						 ;
     CALL    $M_CLS_&$m_append			 ;  Get addressibilty to class &$M_APPEND (ES:DI)
-    MOV     WORD PTR DS:$M_RT.$M_CLASS_ADDRS+$M_INDEX-1,DI ;  WASM: -1 compensates EQU alias offset bug
+    MOV     WORD PTR DS:$M_RT.$M_CLASS_ADDRS+$M_INDEX,DI ;
 ENDIF						 ;
 $M_INDEX =  $M_INDEX + 4			 ;  Set next available table location
 						 ;
