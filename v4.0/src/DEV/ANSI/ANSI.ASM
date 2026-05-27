@@ -407,7 +407,7 @@ MODE_TABLE   <>                         ; WGR                                   
 MODE_TABLE   <>                         ; WGR                                            ;AN000;
 MODE_TABLE   <>                         ; WGR                                            ;AN000;
 VIDEO_TABLE_MAX     EQU  $              ; WGR maximum address for video table            ;AN000;
-MAX_VIDEO_TAB_NUM   EQU  ($-VIDEO_MODE_TABLE)/TYPE MODE_TABLE ;P1767 Max number of table
+MAX_VIDEO_TAB_NUM   EQU  ($-VIDEO_MODE_TABLE)/13 ; TYPE MODE_TABLE = 13 (WASM hardcoded) ;P1767 Max number of table
                                                                                          ;AN000;
 ;-------------------------------------------------------------
 ;

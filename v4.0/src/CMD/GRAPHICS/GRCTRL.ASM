@@ -1653,7 +1653,7 @@ STORE_1_PS2_COLOR:								;AN000;
 										;AN000;
 	CALL	RGB2XLT_TAB		; Store mapping in the translation table;AN000;
 	INC	DI			; Get next palette register number	;AN000;
-	INC	PAL_REGISTER_NB 	;					;AN000;
+	INC	BYTE PTR PAL_REGISTER_NB 	;					;AN000;
 	LOOP	STORE_1_PS2_COLOR	; Read it.				;AN000;
 .ENDSELECT									;AN000;
 										;AN000;
