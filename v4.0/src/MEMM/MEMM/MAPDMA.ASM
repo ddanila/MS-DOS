@@ -108,7 +108,7 @@ extrn	Page_Dir:word
 xfer_map	dw	0	; map of windows participating in DMA xfer
 _DATA	ends
 
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 
 	extrn	ErrHndlr:near
 	extrn	MapLinear:near
@@ -134,7 +134,7 @@ DMA_PAGE_COUNT	dw	0		    ; number of above initialised
 _DATA	ends
 
 ;------------------------------------------------------------------------------
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 
 	assume	cs:_TEXT, ds:DGROUP, es:DGROUP, ss:DGROUP		   
 	page

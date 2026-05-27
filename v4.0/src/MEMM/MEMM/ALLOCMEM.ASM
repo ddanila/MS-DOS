@@ -106,7 +106,7 @@ endif
 _DATA	ends
 
 
-LAST	segment
+LAST	SEGMENT PARA USE16 PUBLIC 'LAST'
 	extrn	mappable_segs:byte	; mappable segment map
 	extrn	set_ext:near		; routine to set amount of ext mem
 					; reported by int15 handler
@@ -150,7 +150,7 @@ _DATA	ends
 ;
 ;******************************************************************************
 ;
-LAST	segment
+LAST	SEGMENT PARA USE16 PUBLIC 'LAST'
 	assume	cs:LAST, ds:DGROUP, es:DGROUP
 
 	page

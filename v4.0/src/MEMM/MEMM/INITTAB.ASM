@@ -103,7 +103,7 @@ _DATA	segment
 
 _DATA	ends
 
-LAST	segment
+LAST	SEGMENT PARA USE16 PUBLIC 'LAST'
 ifndef	NOHIMEM
 	extrn	HiSysAlloc:near 	; allocate high system memory
 	extrn	UnLockROM:near
@@ -117,11 +117,11 @@ endif
 
 LAST	ends
 
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 	extrn	Real_Seg:word	; fixup for _TEXT in RetReal (retreal.asm)
 _TEXT	ends
 
-R_CODE	segment
+R_CODE	SEGMENT PARA USE16 PUBLIC 'R_CODE'
 	extrn	EFunTab:word	; table of ELIM functions
 	extrn	EFUN_CNT:abs	; # of entries in table
 	extrn	EMM_rEfix:near	; far call to EMM function dispatcher in _TEXT
@@ -133,7 +133,7 @@ R_CODE	ends
 ;******************************************************************************
 ;
 ;------------------------------------------------------------------------------
-LAST	segment
+LAST	SEGMENT PARA USE16 PUBLIC 'LAST'
 	assume	cs:LAST, ds:DGROUP, es:DGROUP, ss:DGROUP
 	page
 ;******************************************************************************

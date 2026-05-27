@@ -67,7 +67,7 @@ _DATA	segment
 ;extrn	LIMP_Addr:word
 _DATA	ends
 
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 ;
 extrn	RRP_Handler:near
 extrn	A20_Handler:near	; Kybd Data port - A20 watch
@@ -105,7 +105,7 @@ _TEXT	ends
 
 ;
 ;------------------------------------------------------------------------------
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 	assume	cs:_TEXT, ds:DGROUP, es:DGROUP, ss:DGROUP
 ;
 ;   IOTrapTab

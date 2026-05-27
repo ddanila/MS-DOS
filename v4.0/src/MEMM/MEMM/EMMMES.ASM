@@ -86,7 +86,7 @@
 ;
 ;******************************************************************************
 ;
-LAST	segment
+LAST	SEGMENT PARA USE16 PUBLIC 'LAST'
 
 InitMess	db	CR,LF
 		db	"MICROSOFT Expanded Memory Manager 386  Version 4.00",CR,LF

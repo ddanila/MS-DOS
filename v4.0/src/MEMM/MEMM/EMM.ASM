@@ -116,7 +116,7 @@ extrn	_regp:word		; pointer to args on stack
 
 _DATA	ends
 
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 
 extrn	int67_Entry:far		; it's far because we need CS on stack too
 extrn	GoVirtual:near
@@ -165,7 +165,7 @@ _DATA	ends
 ;
 ;******************************************************************************
 ;
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 	assume	cs:_TEXT, ds:DGROUP, es:DGROUP
 ;******************************************************************************
 ;	protected mode dispatch table
@@ -488,7 +488,7 @@ _TEXT	ends
 ;
 ;******************************************************************************
 ;
-R_CODE	segment
+R_CODE	SEGMENT PARA USE16 PUBLIC 'R_CODE'
 	assume	cs:R_CODE, ds:DGROUP, es:DGROUP
 
 	page

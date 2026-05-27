@@ -64,7 +64,7 @@ page	58,132
 ;******************************************************************************
 ;
 
-LAST	segment
+LAST	SEGMENT PARA USE16 PUBLIC 'LAST'
 
 ifndef	NOHIMEM
 extrn	Hi_Mem_Size:near
@@ -119,7 +119,7 @@ a_cnt		dw	0	; # of EMM pages after 1st 64k bndry
 _DATA	ends
 ;
 ;------------------------------------------------------------------------------
-LAST	segment
+LAST	SEGMENT PARA USE16 PUBLIC 'LAST'
 	assume	cs:LAST, ds:DGROUP, es:DGROUP, ss:DGROUP
 	page
 ;******************************************************************************

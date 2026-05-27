@@ -72,7 +72,7 @@ _DATA	segment
 	extrn	Active_Status:byte
 _DATA	ends
 
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 
 	extrn	SelToSeg:near		; selector to segment	(I286)
 	extrn	DisableA20:near 	; disable A20 line	(MODESW)
@@ -90,7 +90,7 @@ TRUE	equ	not FALSE
 ;			S E G M E N T	D E F I N I T I O N
 ;******************************************************************************
 
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 	assume	cs:_TEXT, ds:DGROUP
 
 ;***	RetReal - cause a 386 mode switch to real mode

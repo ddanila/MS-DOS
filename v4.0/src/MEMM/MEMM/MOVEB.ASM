@@ -106,7 +106,7 @@ DescrMap	MACRO
 ;*******************************************************************************
 ;	 E X T E R N A L   R E F E R E N C E S
 ;*******************************************************************************
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 
 	extrn	MapLinear:near
 	extrn	Set_Par_Vect:near
@@ -138,7 +138,7 @@ _DATA	ends
 ;****************************************
 ;	C O D E    S E G M E N T   _TEXT
 ;****************************************
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 	assume	cs:_TEXT, ds:DGROUP, es:DGROUP
 
 	page
@@ -367,7 +367,7 @@ _TEXT	ends
 ;****************************************
 ;	C O D E    S E G M E N T   R_CODE
 ;****************************************
-R_CODE	segment
+R_CODE	SEGMENT PARA USE16 PUBLIC 'R_CODE'
 	assume	cs:R_CODE, ds:DGROUP, es:DGROUP
 
 ;*************************************************************************

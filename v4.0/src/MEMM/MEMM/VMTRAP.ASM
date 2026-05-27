@@ -139,7 +139,7 @@ ABS0	segment at 0000h
 ABS0	ends
 ;
 ;------------------------------------------------------------------------------
-_TEXT	 segment
+_TEXT	 SEGMENT BYTE USE16 PUBLIC 'CODE'
 	assume	cs:_TEXT, ds:NOTHING, es:NOTHING, ss:NOTHING
 VmTrap	label	byte
 ;

@@ -97,7 +97,7 @@ PF_LENGTH	equ	0400h		; length of a page frame (*16)
 ;******************************************************************************
 ;		S E G M E N T S
 ;******************************************************************************
-LAST	segment
+LAST	SEGMENT PARA USE16 PUBLIC 'LAST'
 	ASSUME	CS:LAST, DS:DGROUP
 ;
 	page

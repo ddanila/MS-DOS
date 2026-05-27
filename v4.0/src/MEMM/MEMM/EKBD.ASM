@@ -46,7 +46,7 @@
 ;******************************************************************************
 ;	Externs
 ;******************************************************************************
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 _TEXT	ends
 
 _DATA	segment
@@ -79,7 +79,7 @@ _DATA	ends
 ;	stack:
 ;
 ;******************************************************************************
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 	ASSUME	CS:_TEXT, DS:DGROUP, ES:DGROUP
 egetc	proc	near
 ;

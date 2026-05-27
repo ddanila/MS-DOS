@@ -114,15 +114,15 @@ extrn	vdata_begin:byte
 VDATA	ends
 endif
 
-LAST	segment
+LAST	SEGMENT PARA USE16 PUBLIC 'LAST'
 extrn	mappable_segs:byte
 LAST	ends
 
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 extrn  InitELIM:far
 _TEXT	ends
 
-LAST	segment
+LAST	SEGMENT PARA USE16 PUBLIC 'LAST'
 extrn	InitEPage:near
 LAST	ends
 

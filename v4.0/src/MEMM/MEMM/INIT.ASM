@@ -132,14 +132,14 @@ i67_vector	dw	0
 ABS0	ends
 
 ;
-R_CODE	segment
+R_CODE	SEGMENT PARA USE16 PUBLIC 'R_CODE'
 extrn	i15_Entry:near		; int15h patch code
 extrn	EMM_rEntry:near 	; int67h patch code
 extrn	i15_Old:word		; old int15 vector
 R_CODE	ends
 
 ;
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 
 	extrn	Inst_chk_f:far		; check for MEMM already installed
 	extrn	FarGoVirtual:far	; go to virtual mode
@@ -147,7 +147,7 @@ _TEXT	segment
 
 _TEXT	ends
 ;
-LAST	segment
+LAST	SEGMENT PARA USE16 PUBLIC 'LAST'
 
 	extrn	VerifyMachine:near
 	extrn	InitMess:byte
@@ -230,7 +230,7 @@ _DATA	ends
 ;
 ;******************************************************************************
 ;
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 	assume	cs:_TEXT
 
 
@@ -246,7 +246,7 @@ get_token_far		proc	far
 get_token_far		endp
 _TEXT	ends
 
-LAST	segment
+LAST	SEGMENT PARA USE16 PUBLIC 'LAST'
 	assume	cs:LAST, ds:DGROUP, es:DGROUP
 
 	page

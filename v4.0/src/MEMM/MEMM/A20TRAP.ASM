@@ -64,7 +64,7 @@ _DATA	segment
 ;	(none)
 _DATA	ends
 
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 
 	extrn	PortTrap:near
 
@@ -117,7 +117,7 @@ _DATA	ends
 ;
 	page
 ;------------------------------------------------------------------------------
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 	assume	cs:_TEXT, ds:DGROUP, es:DGROUP, ss:DGROUP
 ;
 ;******************************************************************************
@@ -433,7 +433,7 @@ togl_A20    endp
 
 _TEXT	ends				; end of segment
 
-LAST   segment
+LAST   SEGMENT PARA USE16 PUBLIC 'LAST'
 
 	assume	cs:LAST, ds:DGROUP, es:DGROUP, ss:DGROUP
 

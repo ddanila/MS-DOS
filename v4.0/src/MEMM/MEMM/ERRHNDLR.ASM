@@ -54,7 +54,7 @@
 ;******************************************************************************
 ;  	Externs
 ;******************************************************************************
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 	extrn	RetReal:near		; return to real mode
 	extrn	egetc:near		; get keyboard character
 	extrn	WaitKBD:near		; wait for keyboard ready
@@ -132,7 +132,7 @@ _DATA	ends
 ;	stack: 
 ;
 ;******************************************************************************
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 	ASSUME	CS:_TEXT, DS:DGROUP, ES:DGROUP
 ErrHndlr	proc	near
 ;

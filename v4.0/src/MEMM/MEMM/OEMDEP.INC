@@ -32,7 +32,7 @@ ifndef INC_LIST
 endif
 
 
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 
 extrn	MaskIntAll:near 		; Mask interrupts routine
 extrn	RestIntMask:near		; restore interrupt mask routine
@@ -46,7 +46,7 @@ extrn	MB_Start:near			; Move block start move hook
 _TEXT	ends
 
 
-LAST	segment
+LAST	SEGMENT PARA USE16 PUBLIC 'LAST'
 
 extrn	VerifyMachine:near		; Verify machine valid for software
 
@@ -56,14 +56,14 @@ ifndef	NOHIMEM 			; only for high memory
 
 ;Define routines in OEMPROC module
 
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 
 extrn	HwMemLock:near
 extrn	HwMemUnlock:near
 
 _TEXT	ends
 
-LAST	segment
+LAST	SEGMENT PARA USE16 PUBLIC 'LAST'
 
 extrn	hbuf_chk:near
 extrn	HiAlloc:near

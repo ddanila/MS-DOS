@@ -79,7 +79,7 @@ TSS	segment
 TSS	ends
 
 
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 
 	extrn	A20_Trap_Init:near	; (a20trap.asm)
 	extrn	RR_Trap_Init:near	; (RRtrap.asm)
@@ -102,7 +102,7 @@ _DATA	ends
 ;******************************************************************************
 ;
 ;------------------------------------------------------------------------------
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 	assume	cs:_TEXT, ds:DGROUP, es:DGROUP, ss:DGROUP
 vminit	label	byte
 	page

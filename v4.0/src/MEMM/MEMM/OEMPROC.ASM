@@ -83,13 +83,13 @@ _DATA	segment
 _DATA	ends
 
 
-LAST	segment
+LAST	SEGMENT PARA USE16 PUBLIC 'LAST'
 	extrn	set_src_selector:near
 	extrn	set_dest_selector:near
 	extrn	SetPageEntry:near
 LAST	ends
 
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 	extrn	MB_Exit:near
 _TEXT	ends
 
@@ -178,7 +178,7 @@ _DATA	ends
 ;****** REMOVE BEFORE DISTRIBUTION end
 
 
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 	ASSUME	CS:_TEXT, DS:DGROUP
 
 ;******************************************************************************
@@ -633,7 +633,7 @@ DisableNMI     endp
 
 _TEXT	ends
 
-LAST	segment
+LAST	SEGMENT PARA USE16 PUBLIC 'LAST'
 
 ;******************************************************************************
 ;

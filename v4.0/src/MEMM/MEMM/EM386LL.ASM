@@ -154,11 +154,11 @@ extrn	ELOff:word		; offset of 386 loadall buffer
 _DATA	 ends
 
 
-R_CODE	segment
+R_CODE	SEGMENT PARA USE16 PUBLIC 'R_CODE'
 extrn	JumpReal:far		; continue client in real mode (rrtrap.asm)
 R_CODE	ends
 
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 extrn	MapLinear:near		; maps linear addresses	 (maplin.asm)
 extrn	PortTrap:near		; IOBM trap set function (vminit.asm)
 extrn	ErrHndlr:near		; error handler		 (errhndlr.asm)
@@ -170,7 +170,7 @@ _TEXT	ends
 ;			S E G M E N T	D E F I N I T I O N
 ;******************************************************************************
 ;
-_TEXT	 segment
+_TEXT	 SEGMENT BYTE USE16 PUBLIC 'CODE'
 	ASSUME CS:_TEXT,DS:DGROUP,ES:DGROUP
 
 ;******************************************************************************

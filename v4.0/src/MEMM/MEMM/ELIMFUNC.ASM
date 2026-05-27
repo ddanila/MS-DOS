@@ -65,7 +65,7 @@ _DATA	segment
 	extrn	Auto_Mode:byte
 _DATA	ends
 
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 	extrn	_AutoUpdate:near	; update auto mode status
 	extrn	GoVirtual:near
 	extrn	RRProc:near		; Return processor to real mode(RRTrap)
@@ -82,7 +82,7 @@ _TEXT	ends
 ;
 ;******************************************************************************
 ;
-R_CODE	segment
+R_CODE	SEGMENT PARA USE16 PUBLIC 'R_CODE'
 	assume	cs:R_CODE, ds:DGROUP, es:DGROUP
 ;
 ;	ELIM functions table	- far calls
@@ -150,7 +150,7 @@ R_CODE	ends
 ;	Code Segment _TEXT
 ;
 ;******************************************************************************
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 	assume	cs:_TEXT, ds:DGROUP, es:DGROUP
 
 ;******************************************************************************

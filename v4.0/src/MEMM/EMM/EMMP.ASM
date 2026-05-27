@@ -47,7 +47,7 @@ page	58,132
 ;******************************************************************************
 ;	P U B L I C S
 ;******************************************************************************
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 	public	_MapHandlePage
 	public	_SavePageMap
 	public	_RestorePageMap
@@ -71,7 +71,7 @@ _TEXT	ends
 ;	E X T E R N A L   R E F E R E N C E S
 ;******************************************************************************
 
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 
 extrn	_source_addr:near
 extrn	_dest_addr:near

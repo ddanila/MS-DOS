@@ -87,7 +87,7 @@ STACK	ends
 
 ifndef	NOHIMEM
 
-R_CODE	segment
+R_CODE	SEGMENT PARA USE16 PUBLIC 'R_CODE'
 extrn	InitLock:far
 R_CODE	ends
 

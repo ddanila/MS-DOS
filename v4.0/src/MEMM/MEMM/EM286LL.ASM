@@ -145,7 +145,7 @@ SLBuff	LoadAllBuf286	<>			; 286 loadall buffer
 
 L286BUFF	ends
 
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 
 	extrn	MapLinear:near		; map linear address
 	extrn	PortTrap:near		; IOBM trap set function (VMINIT)
@@ -172,7 +172,7 @@ _DATA	 ends
 ;			S E G M E N T	D E F I N I T I O N
 ;******************************************************************************
 ;
-_TEXT	 segment
+_TEXT	 SEGMENT BYTE USE16 PUBLIC 'CODE'
 	ASSUME CS:_TEXT,DS:DGROUP,ES:DGROUP
 
 ;******************************************************************************

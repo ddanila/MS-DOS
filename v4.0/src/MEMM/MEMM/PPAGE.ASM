@@ -83,7 +83,7 @@ _DATA	segment
 _DATA	ends
 
 ;
-LAST	segment
+LAST	SEGMENT PARA USE16 PUBLIC 'LAST'
 ;
 	extrn	rom_srch:near
 ;
@@ -101,10 +101,10 @@ LAST	ends
 ;
 ;******************************************************************************
 ;
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 _TEXT	ends
 
-LAST	segment
+LAST	SEGMENT PARA USE16 PUBLIC 'LAST'
 	assume	cs:LAST, ds:DGROUP, es:DGROUP
 
 	page

@@ -62,7 +62,7 @@ page	58,132
 ;******************************************************************************
 ;			E X T E R N A L   R E F E R E N C E S
 ;
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 extrn	RetReal:near
 extrn	PortTrap:near
 _TEXT	ends
@@ -103,7 +103,7 @@ _DATA	ends
 ;------------------------------------------------------------------------------
 ;	_TEXT code
 ;------------------------------------------------------------------------------
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 	assume	cs:_TEXT, ds:DGROUP, es:DGROUP, ss:DGROUP
 
 	page
@@ -314,7 +314,7 @@ _TEXT	ends				    ; end of segment
 ;------------------------------------------------------------------------------
 ;	R_CODE code
 ;------------------------------------------------------------------------------
-R_CODE	segment
+R_CODE	SEGMENT PARA USE16 PUBLIC 'R_CODE'
 	assume	cs:R_CODE, ds:DGROUP, es:DGROUP, ss:DGROUP
 ;
 ;******************************************************************************

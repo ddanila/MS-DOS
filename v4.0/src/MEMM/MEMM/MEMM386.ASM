@@ -184,15 +184,15 @@ int67	dw	?		; offset of vector
 	dw	?		; segment of vector
 abs0	ends
 
-LAST	segment
+LAST	SEGMENT PARA USE16 PUBLIC 'LAST'
 extrn	Init_MEMM386:far		; initializes VDM,EMM, and driver
 LAST	ends
 
-R_CODE	segment
+R_CODE	SEGMENT PARA USE16 PUBLIC 'R_CODE'
 extrn	ELIM_Entry:far		; general entry point for MEMM functions
 R_CODE	ends
 
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 extrn	onf_func:near		; perform on, off, or auto checking for elim.exe
 _TEXT	ends
 
@@ -207,7 +207,7 @@ _TEXT	ends
 ;
 ;******************************************************************************
 ;
-R_CODE	segment
+R_CODE	SEGMENT PARA USE16 PUBLIC 'R_CODE'
 	assume	cs:R_CODE, ds:R_CODE, es:R_CODE, ss:R_CODE
 
 Start:
@@ -381,7 +381,7 @@ R_CODE	ends
 ;	_TEXT Code Segment
 ;
 ;******************************************************************************
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 	assume	cs:_TEXT, ds:_TEXT, es:_TEXT, ss:_TEXT
 
 FarLink	dd	0		; far pointer to installed memm386 entry point

@@ -273,7 +273,7 @@ extrn	Page_Dir:word
 SaveAL  db      ?
 _DATA	ends
 
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 
 extrn	PortTrap:near		; set port bit in I/O bit Map
 extrn	MapLinear:near
@@ -353,7 +353,7 @@ _DATA	ends
 
 ;------------------------------------------------------------------------------
 
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 	assume	cs:_TEXT, ds:DGROUP, es:DGROUP, ss:DGROUP
 
 ;******************************************************************************

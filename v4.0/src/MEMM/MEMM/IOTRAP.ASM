@@ -61,7 +61,7 @@ TRUE	equ	not FALSE
 ;			E X T E R N A L   R E F E R E N C E S
 ;******************************************************************************
 
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 
 extrn	IOTrap_Tab:word 	; System board IO trap routine address table
 extrn	IOT_BadT:near		; Routine to execute for unknown port
@@ -74,7 +74,7 @@ _TEXT	ends
 ;			S E G M E N T	D E F I N I T I O N
 ;******************************************************************************
 
-_TEXT	segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'
 	assume	cs:_TEXT, ds:DGROUP, es:DGROUP, ss:DGROUP
 
 ;******************************************************************************

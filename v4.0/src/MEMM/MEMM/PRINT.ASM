@@ -62,7 +62,7 @@ NAME	print
 ;
 ;	USES	flags
 ;
-_TEXT	 segment
+_TEXT	 SEGMENT BYTE USE16 PUBLIC 'CODE'
 
 	assume	cs:_TEXT, ds:nothing, es:nothing, ss:nothing
 
@@ -106,7 +106,7 @@ BS	equ	8				; backspace
 
 COLOUR_PARA	equ	0b800h
 
-_TEXT	 segment
+_TEXT	 SEGMENT BYTE USE16 PUBLIC 'CODE'
 
 	assume	cs:_TEXT, ds:_DATA, es:nothing, ss:nothing
 
@@ -262,7 +262,7 @@ CURSOR_POSN	equ	050h
 CRT_START	equ	04eh
 ADDR_6845	equ	063h
 
-_TEXT	 segment
+_TEXT	 SEGMENT BYTE USE16 PUBLIC 'CODE'
 
 	assume	cs:_TEXT, ds:_DATA, es:nothing, ss:nothing
 
@@ -332,7 +332,7 @@ _TEXT		 ends
 ;	USES	Flags
 ;
 
-_TEXT	 segment
+_TEXT	 SEGMENT BYTE USE16 PUBLIC 'CODE'
 
 	assume	cs:_TEXT, ds:nothing, es:nothing, ss:nothing
 
@@ -371,7 +371,7 @@ _TEXT	 ends
 ;		ES:DI	storage string location
 ;
 
-_TEXT	 segment
+_TEXT	 SEGMENT BYTE USE16 PUBLIC 'CODE'
 
 	assume	cs:_TEXT, ds:nothing, es:nothing, ss:nothing
 
