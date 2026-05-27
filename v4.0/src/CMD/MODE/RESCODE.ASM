@@ -81,6 +81,10 @@ overrun_error	EQU	0000001000000000B ;bit returned in AX from com status			 ;AN00
 parity_error	EQU	0000010000000000B ;bit returned in AX from com status			 ;AN001;
 P14_model_byte	EQU	0F9H		  ;P14's have a F9 at F000:FFFE
 R		EQU	3		  ;value of "res_com_retry_type" for R retry requested	 ;AN001;
+; WASM: add missing EQUs for serial-port modem-status bits referenced on
+;       line ~289 but never defined in the original source.
+clear_to_send	EQU	0000000000010000B ;CTS bit in modem status register             ;AN001;
+data_set_ready	EQU	0000000000100000B ;DSR bit in modem status register             ;AN001;
 shift_empty	EQU	0100000000000000B ;bit returned in AX from com status			 ;AN001;
 time_out	EQU	1000000000000000B ;time out bit returned in AX from com status		 ;AN001;
 TO_SCREEN	EQU	9		  ;REQUEST OUTPUT TO SCREEN
@@ -463,8 +467,7 @@ PTCHR:
 ;			IF TRANSFER HOLDING REG EMPTY, AND
 ;			IF TRANSMIT SHIFT REGISTER READY, THEN SERIAL PORT
 ;			NOT BUSY
-CLEAR_TO_SEND	EQU	10H
-DATA_SET_READY	EQU	20H		;DATA SET READY LINE HIGH
+; WASM: CLEAR_TO_SEND/DATA_SET_READY EQUs moved to top (lowercase) -- removed dup here
 	AND	AL,CLEAR_TO_SEND+DATA_SET_READY 	;SEE IF PRINTER HAS A CHANCE
 ;	$IF	Z			;DSR and CTS low, so probably off or out of paper
 	JNZ $$IF1
