@@ -4,6 +4,7 @@
 ;			$SALUT (4,25,30,41)
 			INCLUDE PRIDEFS.INC
 
+			purge SaveReg, RestoreReg	; WASM: override PRIDEFS.INC versions
 SaveReg 		MACRO reglist	;; push those registers
 IRP			reg,<reglist>
 			PUSH reg
@@ -544,7 +545,7 @@ P_PTR_H 		DW   ?		; SPACE FOR POINTER / VALUE - HIGH
 
 SUBLIST 		LABEL WORD
 
-			DB   sub_size	; size of sublist
+			DB   11		; size of sublist (sub_size, computed below; WASM forward-EQU workaround)
 			DB   0		; reserved
 insert_ptr_off		DW   0		; pointer to insert - offset
 insert_ptr_seg		DW   DG 	; pointer to insert - segment
