@@ -165,7 +165,7 @@ INIT_STATE_PROCESSING:                 ;;
                                        ;; Q..in shift state?
         TEST   ES:KB_FLAG,RIGHT_SHIFT+LEFT_SHIFT
         JNZ    IN_SHIFT_STATE          ;; Y..go set bit
-        AND    EXT_KB_FLAG,NOT EITHER_SHIFT ;; N..clear bit
+        AND    EXT_KB_FLAG,(NOT EITHER_SHIFT) AND 0FFh ;; N..clear bit
         JMP    SHORT TEST_CTL          ;;
 IN_SHIFT_STATE:                        ;;
         OR     EXT_KB_FLAG,EITHER_SHIFT ;;
@@ -174,7 +174,7 @@ TEST_CTL:                              ;;
         JNZ    IN_CTL_STATE            ;; Y..go set bit
         TEST   ES:KB_FLAG_3,R_CTL_SHIFT ;; Q..how bout the right ctl?
         JNZ    IN_CTL_STATE            ;; Y..go set the bit
-        AND    EXT_KB_FLAG,NOT EITHER_CTL ;; N..clear the bit
+        AND    EXT_KB_FLAG,(NOT EITHER_CTL) AND 0FFh ;; N..clear the bit
         JMP    SHORT TEST_ALT          ;;
 IN_CTL_STATE:                          ;;
         OR     EXT_KB_FLAG,EITHER_CTL   ;;
@@ -183,7 +183,7 @@ TEST_ALT:                              ;;
         JNZ    IN_ALT_STATE            ;; Y..go set bit
         TEST   ES:KB_FLAG_3,R_ALT_SHIFT ;; Q..how bout the right alt?
         JNZ    IN_ALT_STATE            ;; Y..go set the bit
-        AND    EXT_KB_FLAG,NOT EITHER_ALT ;; N..clear the bit
+        AND    EXT_KB_FLAG,(NOT EITHER_ALT) AND 0FFh ;; N..clear the bit
         JMP    SHORT COPY_FLAGS        ;;
 IN_ALT_STATE:                          ;;
         OR     EXT_KB_FLAG,EITHER_ALT   ;;
