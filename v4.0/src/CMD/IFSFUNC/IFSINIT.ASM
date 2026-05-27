@@ -38,6 +38,10 @@ msg_utilname <IFSFUNC>			; resident msgret stuff 		 ;AN000;
 .list											 ;AN000;
 											 ;AN000;
 AsmVars <IBM, INSTALLED, DEBUG, PATHGEN>						 ;AN000;
+; WASM: AsmVars defines INSTALLED but WASM disagrees on size at use site.
+;       Force the value with reassignable '=' (AsmVars uses '=' too).
+INSTALLED = -1  ; force size-compatible value (TRUE -> take installed-INT path, not CALL SHAREInstall) for 'CMP AL,INSTALLED'
+
 											 ;AN000;
 IFSSEG	SEGMENT BYTE PUBLIC 'IFSSEG'                                                     ;AN000;
 IFSSEG	ENDS										 ;AN000;
@@ -612,7 +616,7 @@ ASSUME	DS:IFSSEG									 ;AN000;
 ASSUME	DS:DOSGROUP									 ;AN000;
 	DOSInvoke	SERVER_IFSFUNC_DATA_AREA						 ;AN000;
 	POP	DS									 ;AN000;
-	DOSInvoke	SET_IFS_DOSCALL@							 ;AN003;
+	DOSInvoke	SET_IFS_DOSCALL ; WASM: dropped trailing @							 ;AN003;
 											 ;AN000;
 	PUSH	CS									 ;AN000;
 	POP	ES									 ;AN000;
