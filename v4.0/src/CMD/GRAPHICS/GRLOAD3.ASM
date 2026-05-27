@@ -399,7 +399,7 @@ PARSE_COLORSELECT  PROC 	       ;;					;AN000;
      SHL  BX,1			       ;; calc index to store band in value list;AN000;
      MOV  AL,ES:[DI]		       ;; get BAND ID FROM PARSEr		;AN000;
      MOV  BAND_VAL_LIST[BX],AL	       ;;					;AN000;
-     INC  NUM_BANDS		       ;; bump number of bands			;AN000;
+     INC  BYTE PTR NUM_BANDS		       ;; bump number of bands			;AN000;
  .ENDIF 			       ;;					;AN000;
 				       ;;					;AN000;
   POP  DI			       ;;					;AN000;

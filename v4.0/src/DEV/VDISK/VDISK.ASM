@@ -1797,7 +1797,7 @@ UPDATE_AVAIL	ENDP
 ;	Directory) into extended memory.				;
 ;-----------------------------------------------------------------------;
 
-MOVE_RH    DB	MOVE_RH_L		;length of request header
+MOVE_RH    DB	22			;length of request header (MOVE_RH_L, computed below; WASM forward-EQU workaround)
 	   DB	0			;sub unit
 	   DB	8			;output operation
 	   DW	0			;status
