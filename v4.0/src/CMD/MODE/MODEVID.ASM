@@ -2,7 +2,7 @@
 	TITLE	MODEVID.SAL
 
 .XLIST
-INCLUDE STRUC.INC		 ;macro library for 'struc'
+	INCLUDE STRUC.INC		 ;macro library for 'struc'
 .LIST
 
 ;ษออออออออออออออออออออออออออออออออ  P R O L O G  อออออออออออออออออออออออออออออออออออออออออป				   ;AN000;

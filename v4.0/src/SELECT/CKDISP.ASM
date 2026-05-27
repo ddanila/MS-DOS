@@ -4,7 +4,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 .ALPHA					;AN000;
 .XLIST					;AN000;
-INCLUDE    STRUC.INC			;AN000;
+	INCLUDE    STRUC.INC			;AN000;
 .LIST					;AN000;
 					;
 	PUBLIC	MONO, CGA, EGA, LCD	;AN000;

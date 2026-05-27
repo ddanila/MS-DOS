@@ -43,7 +43,7 @@ INCLUDE VECTOR.INC
 INCLUDE MULT.INC
 INCLUDE ANSI.INC                ; WGR equates and structures                             ;AN000;
 .xlist
-INCLUDE STRUC.INC               ; WGR include STRUC macros                               ;AN000;
+	INCLUDE STRUC.INC               ; WGR include STRUC macros                               ;AN000;
 .list
 
 BREAK <ANSI driver code>

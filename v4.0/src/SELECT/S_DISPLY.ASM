@@ -13,7 +13,7 @@
 ;********************************************************************************
 .ALPHA						 ;AN000;
 .XLIST						 ;AN000;
-INCLUDE  STRUC.INC				 ;AN000;
+	INCLUDE  STRUC.INC				 ;AN000;
 .LIST						 ;AN000;
 
 DATA	 SEGMENT   BYTE PUBLIC 'DATA'            ;AN000;

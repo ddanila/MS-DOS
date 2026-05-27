@@ -308,7 +308,7 @@ UTILITY 	db	"NLSFUNC",0           ;AC000;
 
 .xlist
 include COPYRIGH.INC			;AN000;
-include STRUC.INC
+	include STRUC.INC
 include DOESMAC.INC
 include MULT.INC
 include SF.INC				;AN001;

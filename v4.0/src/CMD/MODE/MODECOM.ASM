@@ -2,7 +2,7 @@ PAGE ,132 ;														   ;AN000;
 TITLE MODECOM.ASM - RS232 SUPPORT FOR THE MODE COMMAND									   ;AN000;
 															   ;AN000;
 .XLIST															   ;AN000;
-INCLUDE STRUC.INC													   ;AN000;
+	INCLUDE STRUC.INC													   ;AN000;
 .LIST															   ;AN000;
 
 ;ษออออออออออออออออออออออออออออออออ  P R O L O G  อออออออออออออออออออออออออออออออออออออออออป				   ;AN000;

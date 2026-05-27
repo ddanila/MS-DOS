@@ -57,7 +57,7 @@ TITLE	PRINTER.SYS INT2FH Code
 ;****************** END OF SPECIFICATIONS ****************************
 
 .XLIST
-INCLUDE  STRUC.INC								    ;AN000;
+	INCLUDE  STRUC.INC								    ;AN000;
 .LIST
 
 

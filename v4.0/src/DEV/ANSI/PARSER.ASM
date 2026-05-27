@@ -55,7 +55,7 @@ TITLE	    PARSE CODE AND CONTROL BLOCKS FOR ANSI.SYS
 
 INCLUDE     ANSI.INC	    ; ANSI equates and structures				 ;AN000;
 .XLIST
-INCLUDE     STRUC.INC	    ; Structured macros 					 ;AN000;
+	INCLUDE     STRUC.INC	    ; Structured macros 					 ;AN000;
 
 INCLUDE     SYSMSG.INC	    ; Message retriever code					 ;AN000;
 MSG_UTILNAME <ANSI>	    ; Let message retriever know its ANSI.SYS			 ;AN000;

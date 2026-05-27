@@ -84,7 +84,7 @@ INVALID_PARAM	     EQU  10
 VALUE_DISALLOW	     EQU  8
 
 .XLIST
-INCLUDE     STRUC.INC	    ; Structured macros 				    ;AN000
+	INCLUDE     STRUC.INC	    ; Structured macros 				    ;AN000
 .LIST
 
 PUBLIC	    PARSE_PARAMETERS ;AN003;; near procedure for parsing command line		   ;AN000

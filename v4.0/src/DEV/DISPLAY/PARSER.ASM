@@ -185,7 +185,7 @@ TITLE	    PARSE CODE AND CONTROL BLOCKS FOR DISPLAY.SYS
 INCLUDE     DEF-EQU.INC      ; structures and equates					 ;AN000;
 
 .XLIST
-INCLUDE     STRUC.INC	     ; Structured macros					 ;AN000;
+	INCLUDE     STRUC.INC	     ; Structured macros					 ;AN000;
 .LIST
 
 PUBLIC	    PARSER	     ; near procedure for parsing DEVICE= statement		 ;AN000;

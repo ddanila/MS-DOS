@@ -198,7 +198,7 @@ CLEAR_SCREEN2	MACRO;AN000;
 ;--------------------------------
 ;   Include Files
 ;--------------------------------
-INCLUDE STRUC.INC			;AN000; SAR
+	INCLUDE STRUC.INC			;AN000; SAR
 INCLUDE XMAINMSG.EQU			;AN000;message file
 INCLUDE DOS.EQU        ;AN000;
 INCLUDE XCOPY.EQU      ;AN000;

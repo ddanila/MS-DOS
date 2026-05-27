@@ -187,7 +187,7 @@ TITLE	    PARSE CODE AND CONTROL BLOCKS FOR PRINTER.SYS
 
 
 .XLIST
-INCLUDE     STRUC.INC	     ; Structured macros				    ;AN000;
+	INCLUDE     STRUC.INC	     ; Structured macros				    ;AN000;
 .LIST
 
 INCLUDE     CPSPEQU.INC 							    ;AN000;

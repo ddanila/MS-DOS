@@ -71,7 +71,7 @@ INCLUDE GRSHAR.INC			;  for both set of print modules	;AN000;
 INCLUDE GRPATTRN.INC			;					;AN000;
 					;					;AN000;
 INCLUDE GRCTRL_EXT.INC			; Externals from PRT_SCR control module ;AN000;
-INCLUDE STRUC.INC			;					;AN000;
+	INCLUDE STRUC.INC			;					;AN000;
 .LIST					;					;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AN000;
 ;;										;AN000;

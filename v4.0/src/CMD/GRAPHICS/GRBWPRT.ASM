@@ -65,7 +65,7 @@ INCLUDE GRCTRL.INC			; Stuctures needed			;AN000;
 INCLUDE GRSHAR.INC			;  for both set of print modules	;AN000;
 INCLUDE GRPATTRN.INC			;					;AN000;
 INCLUDE GRCTRL_EXT.INC			; Externals from PRT_SCR control module ;AN000;
-INCLUDE STRUC.INC			;					;AN000;
+	INCLUDE STRUC.INC			;					;AN000;
 										;AN000;
 	PUBLIC PRINT_BW_APA		; Black and white modules,		;AN000;
 .LIST										;AN000;
