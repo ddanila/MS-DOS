@@ -59,7 +59,7 @@
 	EXTRN	ACTIVE:BYTE	;AN000;
 	EXTRN	ALTERNATE:BYTE	;AN000;
 	EXTRN	LCD:ABS 	;AN000;
-	EXTRN	E_RETURN:ABS	;AN000;
+;	EXTRN	E_RETURN:ABS	;AN000;  (WASM: duplicate of earlier line, removed)
 	EXTRN	ERROR_ACTIVE:BYTE;AN000;
 	EXTRN	MEM_SIZE:WORD	;AN024;
 				;;;;;;;;;
@@ -168,6 +168,7 @@ ENDIF					;AN000;
 ;	  BX	       = Current element
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	purge PUSHH, POPP, DOSCALL	; WASM: override MACROS.INC versions
 PUSHH	MACRO	REG_LIST	;;AN000;
 	IRP	REG,<REG_LIST>	;;AN000;
 	PUSH	REG		;;AN000; save registers
