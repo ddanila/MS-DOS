@@ -234,7 +234,7 @@ MEMM_Entry	dw	offset	ELIM_Entry		; general entry point
 ;	       MEMM signature
 ;******************************************************************************
 memmsig	db	'MICROSOFT EXPANDED MEMORY MANAGER 386'
-SIG_LENGTH	equ	(this byte - memmsig)
+SIG_LENGTH	equ	($ - memmsig)
 
 	page
 ;******************************************************************************
@@ -258,7 +258,7 @@ Cmd_Table	LABEL		NEAR
 	DW		Null_Exit		;A - Output status
 	DW		Null_Exit		;B - Output buffer flush
 	DW		Null_Exit		;C - IOCTL output
-TBL_LENGTH	EQU		(THIS BYTE-CMD_TABLE)/2 ;Dispatch table length
+TBL_LENGTH	equ	($-CMD_TABLE)/2 ;Dispatch table length
 
 	public	ReqPtr
 ReqPtr		label	dword	; dword ptr to Request Header
