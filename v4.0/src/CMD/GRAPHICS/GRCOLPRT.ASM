@@ -66,9 +66,9 @@ CODE	SEGMENT PUBLIC 'CODE'                                                   ;AN
 	PUBLIC	LEN_OF_COLOR_MODULES   ;;					;AN000;
 				       ;;					;AN000;
 .XLIST					;					;AN000;
-INCLUDE GRCTRL.STR			; Stuctures needed			;AN000;
-INCLUDE GRSHAR.STR			;  for both set of print modules	;AN000;
-INCLUDE GRPATTRN.STR			;					;AN000;
+INCLUDE GRCTRL.INC			; Stuctures needed			;AN000;
+INCLUDE GRSHAR.INC			;  for both set of print modules	;AN000;
+INCLUDE GRPATTRN.INC			;					;AN000;
 					;					;AN000;
 INCLUDE GRCTRL.EXT			; Externals from PRT_SCR control module ;AN000;
 INCLUDE STRUC.INC			;					;AN000;

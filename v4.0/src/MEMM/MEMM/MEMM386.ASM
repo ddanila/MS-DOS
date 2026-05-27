@@ -156,7 +156,7 @@
 ;******************************************************************************
 ;
 	include	DRIVER.EQU
-	include	DRIVER.STR
+	include	DRIVER.INC
 	include	VDMSEG.INC
 
 FALSE	equ	0

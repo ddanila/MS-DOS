@@ -56,12 +56,12 @@ CODE	SEGMENT PUBLIC 'CODE' BYTE     ;;                                       ;AN
 	INCLUDE STRUC.INC	       ;;					;AN000;
 	INCLUDE GRINST.EXT	       ;; Bring in external declarations	;AN000;
 				       ;;  for transient command processing	;AN000;
-	INCLUDE GRSHAR.STR	       ;;					;AN000;
+	INCLUDE GRSHAR.INC	       ;;					;AN000;
 	INCLUDE GRMSG.EQU	       ;;					;AN000;
 	INCLUDE GRINST.EXT	       ;;					;AN000;
 	INCLUDE GRLOAD.EXT	       ;;					;AN000;
 	INCLUDE GRPARSE.EXT	       ;;					;AN000;
-	INCLUDE GRPATTRN.STR	       ;;					;AN000;
+	INCLUDE GRPATTRN.INC	       ;;					;AN000;
 	INCLUDE GRPATTRN.EXT	       ;;					;AN000;
 				       ;;					;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;					;AN000;

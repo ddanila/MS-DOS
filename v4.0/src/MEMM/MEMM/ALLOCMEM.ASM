@@ -71,7 +71,7 @@
 	include VDMSEL.INC
 	include EMM386.INC
 	include DRIVER.EQU
-	include DRIVER.STR
+	include DRIVER.INC
 	include ROMXBIOS.EQU
 	include DESC.INC
 	include ASCII_SM.EQU

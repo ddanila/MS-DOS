@@ -76,7 +76,7 @@
 	include DESC.INC	; "   "      "
 	include EMM386.INC
 	include DRIVER.EQU
-	include DRIVER.STR
+	include DRIVER.INC
 	include ASCII_SM.EQU
 ;
 ;  maximum value for SIZE parameter

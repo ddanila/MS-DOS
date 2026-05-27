@@ -73,7 +73,7 @@ CODE	SEGMENT PUBLIC 'CODE'          ;;                                       ;AN
 	ASSUME	CS:CODE,DS:CODE        ;;					;AN000;
 				       ;;					;AN000;
 .XLIST				       ;;					;AN000;
-	INCLUDE GRSHAR.STR	       ;; Include the Shared data area structure;AN000;
+	INCLUDE GRSHAR.INC	       ;; Include the Shared data area structure;AN000;
 	INCLUDE SYSMSG.INC	       ;; Include DOS message retriever 	;AN000;
 	INCLUDE STRUC.INC	       ;; Include macros - Structured Assembler ;AN000;
 	INCLUDE GRLOAD.EXT	       ;; Bring in external declarations	;AN000;

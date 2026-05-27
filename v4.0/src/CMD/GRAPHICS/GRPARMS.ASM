@@ -62,7 +62,7 @@ PARSE_PARMS PROC NEAR								;AN000;
 PUBLIC PARSE_PARMS								;AN000;
 .XLIST										;AN000;
 INCLUDE GRMSG.EQU		; Include GRAPHICS error messages equates	;AN000;
-INCLUDE GRSHAR.STR		; Include the Shared data area structure	;AN000;
+INCLUDE GRSHAR.INC		; Include the Shared data area structure	;AN000;
 INCLUDE GRINST.EXT		; Include externals for the installation module ;AN000;
 INCLUDE GRPARSE.EXT		; Include externals for the DOS parse code	;AN000;
 INCLUDE STRUC.INC		; Include macros for using STRUCTURES		;AN000;

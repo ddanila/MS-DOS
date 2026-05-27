@@ -74,6 +74,6 @@ INC_LIST	EQU	1		; list include files
 	include	VM386.INC
 
 	page
-	include	DRIVER.STR
+	include	DRIVER.INC
 
 	end
