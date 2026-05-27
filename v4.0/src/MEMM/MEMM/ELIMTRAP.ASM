@@ -762,13 +762,13 @@ DMAPgN:
 PgN_FF:
 	xor	bh, bh				; make BX = flip-flop state
 
-        mov     byte ptr DMARegSav.DMALinAdr.HighWord[si], al ; save value
+        mov     byte ptr DMARegSav.DMALinAdr.HiWord[si], al ; save value
         call    DMA_DMAFixup                    ; Translate Lin to Phys
 						; & Update DMARegSav
 	call	DMA_WrtAdrReg 		        ; emulate the write
 	jmp	short DPExit
 Pg_rd_port:
-        mov     al, byte ptr DMARegSav.DMALinAdr.HighWord[si]
+        mov     al, byte ptr DMARegSav.DMALinAdr.HiWord[si]
         mov     [SaveAL], al
 DPExit:
         pop     dx
@@ -1009,7 +1009,7 @@ SaveIt:
         ; set page register
 	xor	dh, dh
         mov     dl, byte ptr DMARegSav.DMAPagePort[si]
-        mov     al, byte ptr DMARegSav.DMAPhyAdr.HighWord[si]
+        mov     al, byte ptr DMARegSav.DMAPhyAdr.HiWord[si]
         out     dx, al
 
         ; set base address register
@@ -1180,7 +1180,7 @@ DMA_WrtAdrReg proc    near
         xor     bx, 1                           ; toggle flip-flop
 
 						; Page Register...
-        mov     al, byte ptr DMARegSav.DMAPhyAdr.HighWord[si] ; fetch value
+        mov     al, byte ptr DMARegSav.DMAPhyAdr.HiWord[si] ; fetch value
         mov     dl, byte ptr DMARegSav.DMAPagePort[si]
         out     dx,al                           ; output the byte
 

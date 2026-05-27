@@ -219,7 +219,7 @@ MOV   BL,AL			    ;BX=disp from 40:0 of com port address word
 	       POP	   DI
 	       POP	   ES	   ;RESTORE SEG REG USED FOR CHECKING/SETTING ADDRESS
 			   ; WORDS AND NEW_PTSFLAG
-	       CALL	   ECHO     ;CHANGE JMP IN MODEPTS COPY IN LOW MEMORY
+	       CALL	   do_echo     ;CHANGE JMP IN MODEPTS COPY IN LOW MEMORY
    ;				    SO PROPER LPTn GETS REDIRECTED
 	       DISPLAY	   CRLF 					;AN000;
 	       DISPLAY	   REDIRMSG
@@ -298,7 +298,7 @@ ENDIF07:
 ;AT POWER UP INITIALIZATION TIME. IF THE PRINTER DOESN'T EXIST, THE ADDRESS
 ;WORD IS NOW EQUAL TO 0000H.
 ;
-	    CALL	ECHO		;GO INFORM THE RESIDENT CODE
+	    CALL	do_echo		;GO INFORM THE RESIDENT CODE
 ;
 ENDIF05:
 	    DISPLAY	CRLF	       ;AN000;carriage return linefeed
@@ -315,7 +315,7 @@ ENDIF06:
 	RET			;RETURN TO CALLER
 MODEECNO ENDP
 ;***************************************************************
-ECHO	PROC	NEAR
+do_echo	PROC	NEAR
 ;'MODEPTS' STARTS WITH THREE INSTRUCTIONS:
 ;	F6 C2 01	TEST  DL,1
 ;	75 05		JNZ   CK
@@ -399,7 +399,7 @@ ENDC:
 	STI			;REENABLE INTERRUPTS
 	POP	BX
 	RET
-ECHO	ENDP
+do_echo	ENDP
 
 
 ;旼컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴�					   ;AN000;

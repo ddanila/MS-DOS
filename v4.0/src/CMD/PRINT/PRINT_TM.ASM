@@ -17,7 +17,7 @@ BREAK			<Transient Messages>
 ;
 
 
-addr			macro sym,name
+set_addr			macro sym,name
 			public name
 			ifidn <name>,<>
 

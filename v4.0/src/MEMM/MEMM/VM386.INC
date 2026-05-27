@@ -43,8 +43,8 @@ WordS	struc
 WordS	ends
 
 DwordS	struc
-	LowWord 	dw	?
-	HighWord	dw	?
+	LoWord 	dw	?
+	HiWord	dw	?
 DwordS	ends
 
 ;
