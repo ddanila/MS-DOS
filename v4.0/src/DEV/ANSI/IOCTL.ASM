@@ -119,7 +119,7 @@ SCAN_LINE_TABLE  LABEL    BYTE                                                  
    SCAN_LINE_STR <200,000000001B,0>            ; 200 scan lines                                    ;AN000;
    SCAN_LINE_STR <344,000000010B,1>            ; 350 scan lines                                    ;AN000;
    SCAN_LINE_STR <400,000000100B,2>            ; 400 scan lines                                    ;AN000;
-SCANS_AVAILABLE  EQU  ($ - SCAN_LINE_TABLE)/TYPE SCAN_LINE_STR                                     ;AN000;
+SCANS_AVAILABLE  EQU  ($ - SCAN_LINE_TABLE)/4 ; TYPE SCAN_LINE_STR = 4 (WASM hardcoded)                                     ;AN000;
                                                                                                   ;AN000;
 ;This is used when ANSI calls Get_IOCTL, Set_IOCTL by itself.
 In_Generic_IOCTL_flag   db      0                               ;AN004;
