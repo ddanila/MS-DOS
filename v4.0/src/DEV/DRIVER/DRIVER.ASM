@@ -1050,7 +1050,7 @@ Set_RecBPB:
 	add	di,RBytePerSec		; es:di -> Recommended BPB
 	mov	cx,BPBSIZ
 	cld
-	repe	movsb			; move BPBSIZ bytes
+	REP	movsb			; move BPBSIZ bytes
 
 	call	Handle_Switches 	; replace with 'new' values as
 					; specified in switches.
