@@ -1308,7 +1308,7 @@ MatchLoop:
 
 CharMatch:
 
-   cmp	es:byte ptr es:[di],0		; was this the terminating nul?
+   cmp	byte ptr es:[di],0		; was this the terminating nul?
    je	NameFound			; yes we got our file...
    inc	di
    jmp	MatchLoop
@@ -2256,7 +2256,7 @@ PSTAT:
    ASSUME DS:CodeR
 
    push bx
-   inc	[ERRCNT]
+   inc	WORD PTR [ERRCNT]
    mov	BL,DEVOST
    mov	[IOCALL],DSTATHL
    call DOCALL
