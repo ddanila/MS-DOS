@@ -12,7 +12,7 @@
 ;    $OUT GRTABCF.ASM...
 	ENDIF
 CSEG	SEGMENT PARA PUBLIC
-TABLECF EQU	THIS BYTE
+TABLECF LABEL BYTE
 	PUBLIC	TABLECF
 
 ;(note: the display of the character to the right of the decimal number

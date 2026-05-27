@@ -12,7 +12,7 @@
 ;    %OUT GRTABPO.ASM...
 	ENDIF
 CSEG	SEGMENT PARA PUBLIC
-TABLEPO EQU	THIS BYTE
+TABLEPO LABEL BYTE
 	PUBLIC	TABLEPO
 
 ;(note: the display of the character to the right of the decimal number

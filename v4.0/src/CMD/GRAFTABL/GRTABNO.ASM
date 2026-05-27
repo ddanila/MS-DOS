@@ -12,7 +12,7 @@
 ;    %OUT GRTABNO.ASM...
 	ENDIF
 CSEG	SEGMENT PARA PUBLIC
-TABLENO EQU	THIS BYTE
+TABLENO LABEL BYTE
 	PUBLIC	TABLENO
 
 ;(note: the display of the character to the right of the decimal number

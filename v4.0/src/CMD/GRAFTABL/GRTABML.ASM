@@ -12,7 +12,7 @@
 ;    %OUT GRTABML.ASM...
 	ENDIF				;AN000;
 CSEG	SEGMENT PARA PUBLIC		;AN000;
-TABLEML EQU	THIS BYTE		;AN000;
+TABLEML LABEL BYTE		;AN000;
 	PUBLIC	TABLEML 		;AN000;
 
 ;(note: the display of the character to the right of the decimal number

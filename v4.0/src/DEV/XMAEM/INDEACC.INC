@@ -43,7 +43,7 @@ PAGE
 
 ;       Define the bit fields for the access rights byte
 
-DATA_ACC RECORD PRESENT:1,DPL:2,SEG_TYPE:1,XQTBLE:1,EXPDIR:1,WRTBLE:1,ACCESSED:1
+;DATA_ACC RECORD PRESENT:1,DPL:2,SEG_TYPE:1,XQTBLE:1,EXPDIR:1,WRTBLE:1,ACCESSED:1 (WASM: RECORD unsupported; no MASK refs in tree)
 
               ; PRESENT  (1 bit)   0 = segment not present in memory
               ;                    1 = segment present in memory
@@ -103,7 +103,7 @@ PAGE
 ;                       Identical to data segments except for two fields.
 
 
-CODE_ACC        RECORD  DATA_HI:5,CONFORM:1,READABLE:1,DATA_LO:1
+;CODE_ACC       RECORD  DATA_HI:5,CONFORM:1,READABLE:1,DATA_LO:1 (WASM: RECORD unsupported; no MASK refs in tree)
 
               ; DATA_HI  (5 bits)  Same five bits as described for data segments
               ;                    PPRESENT (1), DPL (2), SEG_TYPE (1) and
@@ -164,7 +164,7 @@ PAGE
 ;                         occupies the lowermost 4 bits.
 
 
-SYSTEM_ACC      RECORD  DATA_H:4,DESC_TYPE:4
+;SYSTEM_ACC     RECORD  DATA_H:4,DESC_TYPE:4 (WASM: RECORD unsupported; no MASK refs in tree)
 
               ; DATA_H   (4 bits)  Same four bits as described for data segments
               ;                    PPRESENT (1), DPL (2) and SEG_TYPE (1)

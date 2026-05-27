@@ -348,7 +348,7 @@ GATE_DESC       ENDS
 
 ;       Record for the fields in a selector
 
-SELECTOR        RECORD  INDEX:13,TI:1,RPL:2   ; Standard 286 selector format
+;SELECTOR       RECORD  INDEX:13,TI:1,RPL:2   ; Standard 286 selector format (WASM: RECORD unsupported; no MASK refs in tree)
 
 SUBTTL  TSS - Task State Segment
 PAGE
