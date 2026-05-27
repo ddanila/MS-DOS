@@ -133,7 +133,7 @@ EMM386	proc	near
 ;
 
 oursig	db	'MICROSOFT EXPANDED MEMORY MANAGER 386'
-SIG_LENGTH	equ	(this byte - oursig)
+SIG_LENGTH	equ	($ - oursig)
 ;
 ;	define double word to store segment/offset of status routine for far call
 ;
