@@ -951,8 +951,7 @@ cps3:
 
 cps31:
 
-   RestoreReg <
-
+;  RestoreReg <                ; WASM: empty/unterminated macro arg removed
    RestoreReg <CX,BX,AX,DI,ES,SI,DS>
 
    ret
@@ -2093,7 +2092,7 @@ N_SW	DB	"/NC",0 	   ; /NC: INDICATES no checking required
 VALUES	LABEL	BYTE
 	DB	1		   ; ONE VALUE ALLOWED
 	DB	1		   ; ONLY ONE RANGE
-	DB	FILE_SWITCH	   ; IDENTIFY IT AS n
+	DB	1		   ; IDENTIFY IT AS n (FILE_SWITCH; WASM forward-EQU workaround)
 	DD	1,65535 	   ; USER CAN SPECIFY /+1 THROUGH /+65535
 
 				   ;---------------------------------------
@@ -2631,7 +2630,7 @@ $$IF70:
 					;   for parseing.
 SUBLIST 		  LABEL  WORD
 
-			  db	 sub_size ; size of sublist
+			  db	 11 ; size of sublist (sub_size, computed below; WASM forward-EQU workaround)
 			  db	 0	; reserved
 msg_offset		  dw	 offset SHARE_Name ; insert 'SHARE'
 
@@ -2649,8 +2648,8 @@ ENDIF
 
 num_ins 		  db	 1	; only one insert
 			  db	 Char_Field_ASCIIZ ; data type flag - ascii z string
-max_ins 		  db	 SHARE_Name_Size ; maximum field size
-min_ins 		  db	 SHARE_Name_Size ; minimum field size
+max_ins 		  db	 5 ; maximum field size (SHARE_Name_Size; WASM forward-EQU workaround)
+min_ins 		  db	 5 ; minimum field size (SHARE_Name_Size; WASM forward-EQU workaround)
 			  db	 " "	; pad character
 
 sub_size		  equ	 $ - SUBLIST
