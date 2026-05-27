@@ -331,7 +331,7 @@ ASSUME	DS:NOTHING,ES:NOTHING								 ;AN000;
 	LocalVar    Src,DWORD				; ** netprn parse code begins	 ;AN000;
 	LocalVar    Dst,DWORD								 ;AN000;
 	LocalVar    DotPos,WORD 							 ;AN000;
-	Enter										 ;AN000;
+	FrameEnter										 ;AN000;
 ;											 ;AN000;
 ; Preserve all of the input quantities							 ;AN000;
 ;											 ;AN000;
@@ -696,7 +696,7 @@ IDO_40: 					; ** Loop here thru DFL list entries	 ;AN000;
 	CMP	AL,CLOSE_SPOOL_FILES		;		   db truncate flag	 ;AN000;
 	JE	IDO_60									 ;AN000;
 	MOV	BYTE PTR DS:[SI+1],AH							 ;AC002;
-	INC	ES:[BX.IFSR_BUFSIZE]
+	INC	WORD PTR ES:[BX.IFSR_BUFSIZE]
 IDO_60: 										 ;AN000;
 	DOSInvoke	SET_CATEGORY								 ;AN000;
 	MOV	ES:[BX.IFSR_CATEGORY],CL						 ;AN002;
