@@ -436,7 +436,7 @@ RTARROW        EQU  77*256		     ;AN000;right arrow
 PGUP	       EQU  73			     ;AN000;
 PGDN	       EQU  81			     ;AN000;
 ESCAPE	       EQU  27			     ;AN000;
-ENTER	       EQU  13			     ;AN000;
+ENTER_KEY	       EQU  13			     ;AN000;
 SPACE	       EQU  32			     ;AN000;
 TAB	       EQU   9			     ;AN000;
 F1	       EQU  59			     ;AN000;
