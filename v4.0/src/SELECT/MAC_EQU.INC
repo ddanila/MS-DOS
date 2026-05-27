@@ -1,7 +1,14 @@
+IFNDEF MAC_EQU_INC_
+MAC_EQU_INC_		EQU	1		; WASM: include guard (MAC_EQU.INC is pulled both directly and via MACROS.INC)
+
 INCLUDE VERSIONA.INC				;AN047;SEH check DOS version in VERSIONA.INC instead of in MAC_EQU.INC
 
+IFNDEF TRUE
 TRUE			=	  1		;AN000;
+ENDIF
+IFNDEF FALSE
 FALSE			=	  0		;AN000;
+ENDIF
 
 ; Equates from PRN_DEF.ASM
 
@@ -85,3 +92,5 @@ MSG_RELOADING		    EQU       9 	;AN000;
 ; SEL_FLG   DB	0
 INSTALLRW		EQU	  80H		;AN000;The INSTALL diskette is read/write
 
+
+ENDIF	; MAC_EQU_INC_

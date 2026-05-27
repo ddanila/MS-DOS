@@ -45,8 +45,7 @@ GWR_RN         EQU  3010H             ;           PCGRPWR             PCGRPWR
 GRD_RN         EQU  3011H             ;           PCGRPRD             PCGRPRD
 IWR_RN         EQU  3012H             ;           PCINPWR             PCINPWR
 IRD_RN         EQU  3013H             ;           PCINPRD             PCINPRD
-M1_RN          EQU  3014H             ;                               PCMSDRV
-M1_RN          EQU  3014H             ;                               PCIBMDRV
+M1_RN          EQU  3014H             ;                               PCMSDRV / PCIBMDRV
 INC_RN         EQU  3015H             ;           PCINCHA             PCINCHA
 DBC_RN         EQU  3016H             ;           PCINDBC             PCINDBC
 C0H_RN         EQU  3017H             ;           PCGEQUP
