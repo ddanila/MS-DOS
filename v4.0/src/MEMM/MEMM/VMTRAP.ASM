@@ -507,7 +507,7 @@ vm_trap50	proc	near
 	PUSH_EBP
 	mov	bp,sp			; set up BP frame pointer
 	push	0050h
-	jmp	short hw_int		; enter common code
+	jmp	 hw_int		; enter common code
 vm_trap50	endp
 
 ;------------------------------------------------------------------------------
@@ -515,7 +515,7 @@ vm_trap51	proc	near
 	PUSH_EBP
 	mov	bp,sp			; set up BP frame pointer
 	push	0051h
-	jmp	short hw_int		; enter common code
+	jmp	 hw_int		; enter common code
 vm_trap51	endp
 
 ;------------------------------------------------------------------------------
@@ -523,7 +523,7 @@ vm_trap52	proc	near
 	PUSH_EBP
 	mov	bp,sp			; set up BP frame pointer
 	push	0052h
-	jmp	short hw_int		; enter common code
+	jmp	 hw_int		; enter common code
 vm_trap52	endp
 
 ;------------------------------------------------------------------------------
@@ -531,7 +531,7 @@ vm_trap53	proc	near
 	PUSH_EBP
 	mov	bp,sp			; set up BP frame pointer
 	push	0053h
-	jmp	short hw_int		; enter common code
+	jmp	 hw_int		; enter common code
 vm_trap53	endp
 
 ;------------------------------------------------------------------------------
@@ -539,7 +539,7 @@ vm_trap54	proc	near
 	PUSH_EBP
 	mov	bp,sp			; set up BP frame pointer
 	push	0054h
-	jmp	short	hw_int		; enter common code
+	jmp		hw_int		; enter common code
 vm_trap54	endp
 
 ;------------------------------------------------------------------------------
@@ -547,7 +547,7 @@ vm_trap55	proc	near
 	PUSH_EBP
 	mov	bp,sp			; set up BP frame pointer
 	push	0055h
-	jmp	short hw_int		; enter common code
+	jmp	 hw_int		; enter common code
 vm_trap55	endp
 
 ;------------------------------------------------------------------------------
@@ -555,7 +555,7 @@ vm_trap56	proc	near
 	PUSH_EBP
 	mov	bp,sp			; set up BP frame pointer
 	push	0056h
-	jmp	short hw_int		; enter common code
+	jmp	 hw_int		; enter common code
 vm_trap56	endp
 
 ;------------------------------------------------------------------------------
@@ -563,7 +563,7 @@ vm_trap57	proc	near
 	PUSH_EBP
 	mov	bp,sp			; set up BP frame pointer
 	push	0057h
-	jmp	short hw_int		; enter common code
+	jmp	 hw_int		; enter common code
 vm_trap57	endp
 
 ;******************************************************************************
@@ -580,7 +580,7 @@ vm_trap70	proc	near
 	PUSH_EBP
 	mov	bp,sp			; set up BP frame pointer
 	push	0070h
-	jmp	short hw_int		; enter common code
+	jmp	 hw_int		; enter common code
 vm_trap70	endp
 
 ;------------------------------------------------------------------------------
@@ -588,7 +588,7 @@ vm_trap71	proc	near
 	PUSH_EBP
 	mov	bp,sp			; set up BP frame pointer
 	push	0071h
-	jmp	short hw_int		; enter common code
+	jmp	 hw_int		; enter common code
 vm_trap71	endp
 
 ;------------------------------------------------------------------------------
@@ -596,7 +596,7 @@ vm_trap72	proc	near
 	PUSH_EBP
 	mov	bp,sp			; set up BP frame pointer
 	push	0072h
-	jmp	short hw_int		; enter common code
+	jmp	 hw_int		; enter common code
 vm_trap72	endp
 
 ;------------------------------------------------------------------------------
@@ -604,7 +604,7 @@ vm_trap73	proc	near
 	PUSH_EBP
 	mov	bp,sp			; set up BP frame pointer
 	push	0073h
-	jmp	short hw_int		; enter common code
+	jmp	 hw_int		; enter common code
 vm_trap73	endp
 
 ;------------------------------------------------------------------------------
@@ -612,7 +612,7 @@ vm_trap74	proc	near
 	PUSH_EBP
 	mov	bp,sp			; set up BP frame pointer
 	push	0074h
-	jmp	short	hw_int		; enter common code
+	jmp		hw_int		; enter common code
 vm_trap74	endp
 
 ;------------------------------------------------------------------------------
@@ -620,7 +620,7 @@ vm_trap75	proc	near
 	PUSH_EBP
 	mov	bp,sp			; set up BP frame pointer
 	push	0075h
-	jmp	short hw_int		; enter common code
+	jmp	 hw_int		; enter common code
 vm_trap75	endp
 
 ;------------------------------------------------------------------------------
@@ -628,7 +628,7 @@ vm_trap76	proc	near
 	PUSH_EBP
 	mov	bp,sp			; set up BP frame pointer
 	push	0076h
-	jmp	short hw_int		; enter common code
+	jmp	 hw_int		; enter common code
 vm_trap76	endp
 
 ;------------------------------------------------------------------------------
@@ -636,7 +636,7 @@ vm_trap77	proc	near
 	PUSH_EBP
 	mov	bp,sp			; set up BP frame pointer
 	push	0077h
-	jmp	short hw_int		; enter common code
+	jmp	 hw_int		; enter common code
 vm_trap77	endp
 
 	page

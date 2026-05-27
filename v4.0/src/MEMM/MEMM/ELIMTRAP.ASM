@@ -230,7 +230,7 @@ DMA_WADDR_TO_BADDR	MACRO
 	shr	al,1				; adjust for D0 null in page reg
 	rol	eax,17				; EAX = address w/ adjust for
 					        ; 'A0' offset
-Not_At:
+Not_AT:
 	shl	ecx, 1				; Adjust for word units
 	ENDM
 
@@ -258,7 +258,7 @@ DMA_BADDR_TO_WADDR	MACRO
 	xor	ax, ax
 	shl	eax, 1				; Adjust for unused Pg Reg D0
 	pop	ax				; Restore A16-A1
-Not_At:
+Not_AT:
         ENDM
 
 ;******************************************************************************
