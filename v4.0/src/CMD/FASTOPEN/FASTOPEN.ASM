@@ -374,18 +374,18 @@ Chk_13:
 	cmp	al,FSK_DELETE		   ; DELETE ??							;AN000;
 	jne	chk_16											;AN000;
 	CALL	FSEEK_DELETE		   ; process delete						;AN000;
-	jmp	short  exit										       ;AN000;
+	jmp	  exit										       ;AN000;
 Chk_16:
 	cmp	al,FSK_Trunc		   ; TRUNCATE ??						;AN000;
 	jne	Chk_05			   ;
 	CALL	FSEEK_TRUNCATE		   ; process truncate						;AN000;
-	jmp	short exit										      ;AN000;
+	jmp	 exit										      ;AN000;
 
 Chk_05:
 	cmp	cs:Purge_Flag, 1	   ; previous call is purge ??				    ;AN000;
 	jne	Purge_buffs		   ; no - purge the buffers
 	clc				   ; yes - exit
-	jmp	short exit										      ;AN000;
+	jmp	 exit										      ;AN000;
 
 Purge_Buffs:
 	mov	cs:Purge_Flag,1 	   ; set purge flag
@@ -400,7 +400,7 @@ Reset_Fopen:
 
 Reset_Exit:
 	clc
-	jmp	short exit										 ;AN000;
+	jmp	 exit										 ;AN000;
 
 
 ; NOTE: Carry Flag state from Function calls must be correctly returned
@@ -416,23 +416,23 @@ DISPATCH_FOPEN: 		      ; dispatch FOPEN functions
 	cmp	al, FONC_update 								   ;AN000;
 	jne	Chk_02										   ;AN000;
 	CALL	CS:Fopen_Update       ; UPDATE							   ;AN000;
-	jmp	short exit										 ;AN000;
+	jmp	 exit										 ;AN000;
 
 Chk_02:
 	cmp	al, FONC_insert 								   ;AN000;
 	jne	Chk_01										   ;AN000;
 	CALL	CS:Fopen_Insert       ; INSERT							   ;AN000;
-	jmp	short exit										 ;AN000;
+	jmp	 exit										 ;AN000;
 Chk_01:
 	cmp	al, FONC_look_up								   ;AN000;
 	jne	chk_03										   ;AN000;
 	CALL	CS:Fopen_lookup       ; LOOKUP							   ;AN000;
-	jmp	short exit										 ;AN000;
+	jmp	 exit										 ;AN000;
 Chk_03:
 	cmp	al, FONC_delete 								   ;AN000;
 	jne	Error_Exit									   ;AN000;
 	CALL	CS:Fopen_delete       ; DELETE							   ;AN000;
-	jmp	short exit										 ;AN000;
+	jmp	 exit										 ;AN000;
 
 
 
@@ -545,7 +545,7 @@ RESTORE_PAGE_STATE    PROC  NEAR	;RESTORE EMS PAGE STATE
 	PUSHF				;save flag					     ;AN000;
 	CMP	CS:MAIN_EMS_FLAG, 0	;EMS enabled ?? 					   ;AN000;
 	JNE	REST_PUSH_REGS		;yes, restore registers
-	JMP	SHORT RESTORE_EXIT	;no, exit						   ;AN000;
+	JMP	RESTORE_EXIT		;no, exit (WASM: was JMP SHORT, target now too far)	   ;AN000;
 					;yes, restore page registers
 REST_PUSH_REGS:
 	PUSH	AX			; save function code
