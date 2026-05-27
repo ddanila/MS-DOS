@@ -56,7 +56,7 @@ Command_Line_Length equ $ - Command_Line_Buffer 			;AN000;
 
 Fatal_Error db	0							;AN000;
 
-Command_Line db NO
+Command_Line db 0  ; was NO (= 0 in E2BEQU.INC; WASM forward-EQU workaround)
 
 
 
@@ -199,7 +199,8 @@ MSG_SERVICES <EXE2BIN.CTL>						;AN000;
 
 E2B_HELP_STR	DB  "EXE2BIN [drive:][path]input[.EXE] [[drive:][path]output[.BIN]]",0Dh,0Ah,"$"
 
-procedure Main_Init near		;				;AN000;
+Public Main_Init
+Main_Init PROC near		;				;AN000; ;WASM: expanded from 'procedure Main_Init near'
 
 	ASSUME	DS:NOTHING		; THIS IS WHAT dos GIVES YOU	;AN000;
 	ASSUME	ES:NOTHING						;AN000;
@@ -270,7 +271,8 @@ Main_Init endp								;AN000;
 ;
 ;*****************************************************************************
 
-procedure Init_Input_Output near					;AN000;
+Public Init_Input_Output
+Init_Input_Output PROC near					;AN000; ;WASM: expanded from 'procedure Init_Input_Output near'
 
 	call	Preload_Messages	;Load up message retriever	;AN000;
 	cmp	Fatal_Error,YES 	;Quit?				;AN000;
@@ -300,7 +302,8 @@ Init_Input_Output endp							;AN000;
 ;
 ;*****************************************************************************
 
-procedure Preload_Messages near 					;AN000;
+Public Preload_Messages
+Preload_Messages PROC near 					;AN000; ;WASM: expanded from 'procedure Preload_Messages near'
 
 	call	SYSLOADMSG		;Preload the messages		;AN000;
 ;	$IF	C			;Error? 			;AN000;
@@ -458,7 +461,8 @@ INCLUDE PARSE.ASM
 ;*****************************************************************************
 
 
-procedure LOCATE near
+Public LOCATE
+LOCATE PROC near ;WASM: expanded from 'procedure LOCATE near'
 
 	push	ds							;AN000;
 	ASSUME	ES:NOTHING		; THIS IS THE WAY IT GETS HERE! ;AN000;
@@ -1060,7 +1064,8 @@ IsBlank proc	near
 IsBlank Endp
 
 
-procedure copyfs near
+Public copyfs
+copyfs PROC near ;WASM: expanded from 'procedure copyfs near'
 
 	push	ax							;AN000;
 
@@ -1083,7 +1088,8 @@ $$EN16:
 copyfs	endp								;AN000;
 
 
-procedure dbcs_check near
+Public dbcs_check
+dbcs_check PROC near ;WASM: expanded from 'procedure dbcs_check near'
 
 	push	ds				;Save registers 	;AC000;
 	push	si				; "  "	  "  "		;AC000;

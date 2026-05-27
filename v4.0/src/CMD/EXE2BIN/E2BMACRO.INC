@@ -30,11 +30,14 @@ MESSAGE macro   Message_Name                    ;                               
 ;*****************************************************************************
 ;
 
-Procedure       macro   Proc_Name
-
+; WASM: rewritten to accept (name, distance) to match DOSMAC.INC's
+;       'procedure name, distance' signature -- callers use 'procedure
+;       Main_Init near' (2 args). The old 1-arg form silently dropped
+;       the distance.
+        purge Procedure
+Procedure       macro   Proc_Name, distance
 Public  Proc_Name
-Proc_Name    proc
-
+Proc_Name    proc    distance
         endm
 ;-----------------------------------------------------------------------------
 
