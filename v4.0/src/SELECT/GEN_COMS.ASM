@@ -26,6 +26,13 @@ SUBTTL	GEN_COMS					;AN000;
 ;	 DATA SEGMENT
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; WASM: moved INCLUDEs ahead of DATA SEGMENT so the EXT.INC E_CR/E_LF
+;       constants are defined before the DB '...',E_CR,E_LF uses below
+	INCLUDE EXT.INC 					;AN000;
+	INCLUDE STRUC.INC					;AN000;
+	INCLUDE MACROS.INC					;AN000;
+	INCLUDE ROUT_EXT.INC					;AN000;
+
 DATA	SEGMENT BYTE PUBLIC 'DATA'                              ;AN000;
 								;
 SC_CD		DW	MC_CD					;AN000;
@@ -307,10 +314,7 @@ DATA		ENDS						;AN000;DATA
 ;
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	INCLUDE EXT.INC 					;AN000;
-	INCLUDE STRUC.INC					;AN000;
-	INCLUDE MACROS.INC					;AN000;
-	INCLUDE ROUT_EXT.INC					;AN000;
+; WASM: INCLUDEs above moved ahead of DATA SEGMENT for E_CR/E_LF visibility
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
 ;

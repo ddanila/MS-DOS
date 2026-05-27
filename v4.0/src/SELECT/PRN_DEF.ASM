@@ -523,7 +523,7 @@ SEARCH_LINE   ENDP;AN000;
 ;********************************************************************************
 ALLOCATE_MEMORY    PROC NEAR;AN000;
 
-    AND  ALLOC_FLAG,NOT ALLOCATED
+    AND  ALLOC_FLAG,(NOT ALLOCATED) AND 0FFh
     MOV  BX, 0FFFH				 ;AN000; Try to allocate this amount of memory
     MOV  SEGMENT_SIZE, BX			 ;AN000; Save the amount of memory asked for
     MOV  AH, 48H				 ;AN000; DOS Fn. for allocating memory
