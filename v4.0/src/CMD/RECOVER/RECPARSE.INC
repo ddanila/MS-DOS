@@ -85,7 +85,7 @@ data	segment public para 'DATA'  ;AC000;bgb
 ;***************************************************************************** ;AN000;bgb
 ;;;;db 'PARSE TABLE AREA'                                                      ;AN000;bgb
  public parms_input_block, parms_ext_block, control_block, value_list_block
- public results_block, parse_type, parse_code, parse_addr,
+ public results_block, parse_type, parse_code, parse_addr
 									       ;AN000;bgb
 ;***************************************************************************** ;AN000;bgb
 ; This is the parms input block pointed to by es:di before calling sysparse.   ;AN000;bgb
@@ -111,7 +111,7 @@ parms_ext_block LABEL	BYTE						       ;AN000;bgb
 ; both "c:filename.ext" entered in the command line. it is pointed to by the   ;AN000;bgb
 ; parms extension block.						       ;AN000;bgb
 control_block	LABEL	BYTE						       ;AN000;bgb
-		Dw	$p_file_spc+$p_drv_only ; allowable return values	;AN000;bgb
+		Dw	0300h			; $P_File_Spc+$P_Drv_Only — see PSDATA.INC ;AN000;bgb
 						; 0200 = filespec	       ;AN000;bgb
 						; 0100 = drive only	       ;AN000;bgb
 		DW	1			; capitalize - file table	;AN000;bgb

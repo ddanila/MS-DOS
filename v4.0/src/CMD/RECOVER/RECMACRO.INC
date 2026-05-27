@@ -49,6 +49,7 @@ Extended_Message macro				;				;AN000;
 ;*****************************************************************************
 ;
 
+purge Procedure					; override DOSMAC.INC procedure macro
 Procedure	macro	Proc_Name		;				;AN000;
 						;
 Public	Proc_Name				;				;AN000;

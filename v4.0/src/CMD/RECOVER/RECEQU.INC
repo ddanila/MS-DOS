@@ -3,7 +3,9 @@ const	segment public para 'const'     ;AC000;bgb
 Len_FS_ID_String equ 8			; length of fat_12 and fat_16 strings ;AN000;bgb
 Command_Line_Length equ 128		; length of command line area  ;AN000;bgb
 Len_FS_String_End equ 8 		; length of rec.exe + 0H   ;AN000;bgb
+IFNDEF FALSE
 FALSE	EQU	0
+ENDIF
 ;TRUE	 EQU	 -1
 
 bdos	equ	21h
@@ -15,8 +17,6 @@ awrite	equ	26h
 ;IBMVER	EQU	false ; not for single drive system ;AC000;bgb
 ;KANJI	EQU	true  ; set this to true for assembling jap version ;AC000;bgb
 tab	equ	09h
-aread	equ	25h
-awrite	equ	26h
 fcb	equ	5ch
 FCB1	equ	5Ch
 FCB2	equ	6Ch
@@ -77,13 +77,12 @@ Append_X		equ    0B706h			       ;		;AN000;;
 Append_X_Set		equ 1				   ;			;AN000;
 Append_Off		equ  0				     ;			;AN000;
 Append_ON		equ   1 			      ; 		;AN000;
-fcb1			equ	05ch		;				;AN000;bgb
-
 String_Done equ 0
 No_Error equ	0
 rec_error   equ     1
+IFNDEF Stderr
 Stderr	equ	2
-Len_FS_String_Buffer equ 13
+ENDIF
 
 
 
