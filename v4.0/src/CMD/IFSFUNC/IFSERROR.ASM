@@ -385,7 +385,7 @@ I2F5_220:										 ;AN000;
 	PUSHF					; save carry				 ;AN005;
 	TEST	CS:IFSPROC_FLAGS,IsMsgRet	; if msgret reset semaphore		 ;AN005;
 	JZ	I2F5_240								 ;AN005;
-	AND	CS:IFSSEM,NOT MR_ERRMSG_SEM						 ;AN005;
+	AND	CS:IFSSEM,(NOT MR_ERRMSG_SEM) AND 0FFh						 ;AN005;
 I2F5_240:										 ;AN005;
 	POPF					; restore carry 			 ;AN005;
 	RestoreReg <BX,SI,DS>			; retrieve command.com regs		 ;AN002;AC003;

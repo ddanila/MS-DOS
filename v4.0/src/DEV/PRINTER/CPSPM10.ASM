@@ -2473,7 +2473,7 @@ GET_CODEPAGE :				;; **** LOOP ****
 	MOV	AX,CS:[SI].SLT_AT	;;
 	AND	AX,AT_HWCP		;;
 	JZ	GET_NEXT		;; not NEW and not HWCP
-	AND	CS:[SI].SLT_AT, NOT AT_OLD  ;; also load for HWCP
+	AND	CS:[SI].SLT_AT, (NOT AT_OLD) AND 0FFFFh  ;; also load for HWCP
 					;;
 NEW_CODEPAGE :				;;
 	MOV	AX,CS:[DI]		;; -- SLOT_AT is not old
