@@ -366,6 +366,16 @@ slim	    dw	    9
 
 Switches    dw	0
 
+; WASM: moved flag* equates above the first test/or use (was at original line 1281)
+; The following depend on the positions of the various letters in SwitchList
+
+flagdrive   equ     0004H
+flagcyln    equ     0008H
+flagseclim  equ     0010H
+flagheads   equ     0020H
+flagff	    equ     0040H
+
+
 Drive_Let_Sublist	label	dword
 	db     11	;AN000;length of this table
 	db	0	;AN000;reserved
@@ -1275,14 +1285,6 @@ BPBTable    dw	    BPB48T		; 48tpi drives
 	    dw	    BPB35		; Not Used - Other
 
 switchlist  db	7,"FHSTDCN"         ; Preserve the positions of N and C.
-
-; The following depend on the positions of the various letters in SwitchList
-
-flagdrive   equ     0004H
-flagcyln    equ     0008H
-flagseclim  equ     0010H
-flagheads   equ     0020H
-flagff	    equ     0040H
 
 ;AN000;
 ;Equates for message number
