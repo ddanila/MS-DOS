@@ -1,5 +1,6 @@
 	page	80,132
 	TITLE	4.00 PRINT  TRANSIENT
+	.386				; 80186+ instructions used (PUSH mem, etc.)
 ;			$SALUT (4,25,30,41)
 			INCLUDE PRIDEFS.INC
 

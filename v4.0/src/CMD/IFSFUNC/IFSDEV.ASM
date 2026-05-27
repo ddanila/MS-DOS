@@ -2,6 +2,7 @@
 ;	SCCSID = @(#)ifsdev.asm 1.0 87/05/11						 ;AN000;
 TITLE	IFSFUNC DEVICE ROUTINES - Device/IOCTL routines 				 ;AN000;
 NAME	IFSDEV										 ;AN000;
+	.386					; 80186+ instructions used (PUSH mem, etc.)
 											 ;AN000;
 ;******************************************************************************
 ;

@@ -771,7 +771,7 @@ hn_set:
 	mov	cx,8			;8 bytes to compare			;an000; dms;
 	cld
 	cli				;ints off				;an000; dms;
-	rep	cmpsb			;null string entered?			;an000; dms;
+	REPE	cmpsb			;null string entered?			;an000; dms;
 	sti				;ints on				;an000; dms;
 
 	pop	es			;restore regs				;an000; dms;
@@ -1066,7 +1066,7 @@ HD1_ACTIVE:
 	add	di,offset Handle_LookUp_Table	;point to entry 		;an000; dms;
 	add	di,offset H_Name	; must point to area for handle name now;an000; dms;
 
-rep	cmpsb				; compare the strings
+REPE	cmpsb				; compare the strings
 
 	pop	di			; restore di for outer loop
 	pop	si			; restore si for outer loop

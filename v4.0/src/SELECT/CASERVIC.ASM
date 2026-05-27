@@ -31,6 +31,7 @@
 ;		 selection is made by numeric input.
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+.386					; 80186+ instructions used (PUSH mem, etc.)
 .ALPHA					;AN000;
 	INCLUDE    STRUC.INC		;AN000;
 	INCLUDE    MACROS.INC		;AN006;JW

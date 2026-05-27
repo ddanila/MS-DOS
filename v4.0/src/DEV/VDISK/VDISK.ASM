@@ -1345,7 +1345,7 @@ DETERMINE_START PROC
 					;this VDISK
 
 	MOV	CX,VOL_LABEL_LEN	;length of volume label
-	REP	CMPSB			;does INT 19H vector point to a VDISK
+	REPE	CMPSB			;does INT 19H vector point to a VDISK
 					;device driver?
 	JNE	DETERMINE_START_A	;jump if this is the first VDISK
 
