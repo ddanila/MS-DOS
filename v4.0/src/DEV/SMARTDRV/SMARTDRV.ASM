@@ -144,7 +144,7 @@ BREAK	MACRO	subtitle
 	PAGE
 ENDM
 
-.286p				; Use some 286 instructions in /E code
+.386p				; Use some 286 instructions in /E code
 
 DEBUG	EQU	0
 S_OLIVETTI	EQU	1	; Flag for olivetti 6300 plus machine
@@ -1926,7 +1926,7 @@ cache_write:
 ;
 	or	[bp.user_fl],f_Carry	; error then set carry
 	mov	byte ptr [bp.user_ax.1],ah	 ; and error code
-	jmp	short errorw		; and take error exit
+	jmp	 errorw		; and take error exit
 ;
 ;	int 13 was successful, now we have to update cache as well
 ;
@@ -2052,7 +2052,7 @@ read_disk:
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
 read_bufferj:
-	jmp	      short read_buffer
+	jmp	       read_buffer
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
@@ -3490,7 +3490,11 @@ NR_ERR:
 
 move_main_loop: 			;sp
 assume ds:nothing			;sp
-	jcxz	io_done 		;sp
+; WASM: 'jcxz io_done' (8-bit only) widened -- io_done is now too far
+	test	cx, cx			;sp
+	jnz	mvloop_cont_io
+	jmp	io_done
+mvloop_cont_io:
 	mov	cs:[ldx],cx		   ;sp
 	MOV	AX,80H
 	MOV	DS,AX
@@ -7050,7 +7054,7 @@ ab_error:
 	add	sp,4
 	mov	al,0bbh			; general failure
 	stc
-	jmp	short REST_CONT		; RESTORE CONTEXT!!!
+	jmp	 REST_CONT		; RESTORE CONTEXT!!!
 aar_cd:
 	pop	cx
 	pop	bx
