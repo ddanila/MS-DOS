@@ -36,6 +36,7 @@ OFF				   Macro reg,val
 				   ENDIF
 				   ENDM
 
+				   purge ERRNZ		; WASM: override DOSMAC.INC errnz macro
 ERRNZ				   Macro x
 				   IF	x    NE 0
 				   ;%out ERRNZ failed
