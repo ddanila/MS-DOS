@@ -1,6 +1,7 @@
 	PAGE	,132				; 					 ;AN000;
 ;	SCCSID = @(#)IFSERROR.INC	1.0 87/05/11					 ;AN000;
-TITLE	IFSFUNC ERROR ROUTINES								 ;AN000;
+; WASM: TITLE stripped (ERROR conflicted with error macro)
+; TITLE	IFSFUNC ERROR ROUTINES								 ;AN000;
 NAME	IFSERROR									 ;AN000;
 ;************************************************************************************	 ;AN000;
 ;											 ;AN000;
