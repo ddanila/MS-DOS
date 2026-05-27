@@ -21,6 +21,7 @@ title	C	to Message Retriever
 
 	MSG_UTILNAME <BACKUP>		;IDENTIFY THE COMPONENT 		;AN000;
 
+	.286				; PUSH mem (line 189) needs 80186+
 	.8087
 _TEXT	SEGMENT BYTE PUBLIC 'CODE'
 _TEXT	ENDS
