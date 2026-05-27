@@ -371,18 +371,18 @@ save_ext_err	DPL	<>		; reserve a DPL for first extended
 ;			APPEND functions and modes.			 ;AN001;
 ;									 ;AN001;
 ;-------------------------------------------------------------------	 ;AN001;
-mode_flags	dw	Path_mode + Drive_mode + Enabled		 ;AN001;
-					; mode control flags		 ;AN001;
-					; initially - path, drive and	 ;AN001;
-					; enabled			 ;AN001;
-
-;	equates for mode_flags follow:					 ;AN001;
+;	equates for mode_flags (moved before DW for WASM: forward EQU rejected)
 
 X_mode		equ	8000h		; in /X mode
 E_mode		equ	4000h		; in /E mode
 Path_mode	equ	2000h		; PATH in string OK		 ;AN001;
 Drive_mode	equ	1000h		; DRIVE in string OK		 ;AN001;
 Enabled 	equ	0001h		; APPEND enabled		 ;AN001;
+
+mode_flags	dw	Path_mode + Drive_mode + Enabled		 ;AN001;
+					; mode control flags		 ;AN001;
+					; initially - path, drive and	 ;AN001;
+					; enabled			 ;AN001;
 
 ;-------------------------------------------------------------------
 
@@ -2882,7 +2882,7 @@ check_x:
 
 	cmp	x_result.$P_Item_Tag,1	; was /X or /X:ON specified?
 	je	set_x			; yes, set X mode on
-	and	mode_flags,NOT x_mode	; no, clear it
+	and	mode_flags,(NOT x_mode) AND 0FFFFh	; no, clear it
 	jmp	get_pars_info
 
 set_x:
