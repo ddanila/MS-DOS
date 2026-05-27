@@ -566,7 +566,7 @@ _Names_Match proc    near
 	mov	si, word ptr [bp+name2]	; Second name
 	cld
 	mov	cx, 2				; Compare 2 dwords
-	rep 	cmpsd		; do it
+	repe 	cmpsd		; do it
 	jne	SHORT Names_Dont_Match
 	not	ax		; They match!
 

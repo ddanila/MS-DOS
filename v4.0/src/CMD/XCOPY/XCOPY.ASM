@@ -3876,7 +3876,7 @@ MY_INT24:
 	JMP	MAIN_EXIT		;show files copied message
 					;restore default value and exit
 MI_ABORT:
-	INC	CS:INT24_ABORT_CNT	;increase the count of int24_abort
+	INC	BYTE PTR CS:INT24_ABORT_CNT	;increase the count of int24_abort
 	JMP	MAIN_EXIT_A		;restore default value and exit
 MI_JUST_EXIT:
 	POP	CX

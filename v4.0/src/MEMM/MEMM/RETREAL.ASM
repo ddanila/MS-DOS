@@ -199,7 +199,7 @@ Real_Seg	label	word
 	dw	_TEXT			; destination segment
 rl386_b:
 	OP32				; load up full IDT address
-	lidt	qword ptr cs:[real_idt]
+	lidt	fword ptr cs:[real_idt]
 
 	sti
 

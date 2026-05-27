@@ -152,7 +152,7 @@ ifndef	NoBugMode
 	mov	ax, [GDT_Seg]
 	mov	ds, ax
 
-	lgdt	qword ptr ds:[GDTD_GSEL]
+	lgdt	fword ptr ds:[GDTD_GSEL]
 
 	mov	si, IDTD_GSEL
 	mov	cx, 6

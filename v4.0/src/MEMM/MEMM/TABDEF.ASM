@@ -332,7 +332,7 @@ IDT_ENTRY	VDMC_GSEL,<offset _TEXT:vm_trap76>,D_386INT0 ; 76 IRQ14 - Fixed disk
 IDT_ENTRY	VDMC_GSEL,<offset _TEXT:vm_trap77>,D_386INT0 ; 77 IRQ15
 
 	public	IDTLEN
-idtlen		equ	this byte - idtstart
+idtlen		equ	$ - idtstart
 
 IDT ends
 

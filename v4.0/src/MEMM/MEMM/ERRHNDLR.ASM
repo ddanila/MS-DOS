@@ -91,7 +91,7 @@ DIS_NMI         =	080H		; Value to write to disable NMI
 ENA_NMI		=	008H		; Value to write to enable NMI
 B		=	48 		; make code for B
 C		=	46 		; make code for C
-ENTER		=	28 		; make code for enter key
+ENTER_KEY		=	28 		; make code for enter key
 ATTR		=	07		; attribute for write string
 WRSTR		=	1301h		; write string function code (format 1)
 CPOSN		=	5*256+0		; cursor position to write
@@ -203,7 +203,7 @@ excep:
 	mov	di,offset DGROUP:EXCPE_ERR
 	mov	ax,[GPsavERR]
 	call	b2asc16
-	mov	[boot],ENTER		; key to reboot
+	mov	[boot],ENTER_KEY		; key to reboot
 	mov	[continue],0ffh		; can't continue
 skip_exc:
 	mov	ah,0fh			; read video state
