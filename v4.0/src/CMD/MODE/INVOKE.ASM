@@ -51,8 +51,8 @@ ENDM															   ;AN000;
 															   ;AN000;
 															   ;AN000;
 															   ;AN000;
-DISPLAY MACRO	MESSAGE 												   ;AN000;
-	MOV	DX,OFFSET MESSAGE											   ;AN000;
+DISPLAY MACRO	MSG 												   ;AN000;
+	MOV	DX,OFFSET MSG											   ;AN000;
 	CALL	PRINTF													   ;AN000;
 ENDM															   ;AN000;
 															   ;AN000;
@@ -145,6 +145,9 @@ des_strt_packet   ENDS													   ;AN000;
 ;set and 3 then DISPLAY.SYS does not have the appropriate RAM font loaded to						   ;AN000;
 ;support the requested function.											   ;AN000;
 															   ;AN000;
+; WASM: COMMON.STC moved here so bogus EQU is defined before IOCTL0C_def uses it
+INCLUDE COMMON.STC	;includes the following strucs									   ;AN000;
+
 IOCTL0C_def STRUC													   ;AN000;
 															   ;AN000;
 info_level  DB	  0	;return code: 0 on input, 1 ?, 2 or 3 as returns						   ;AN000;
@@ -161,7 +164,6 @@ rows	    DW	  bogus ;number of text rows										   ;AN000;
 															   ;AN000;
 IOCTL0C_def ENDS													   ;AN000;
 															   ;AN000;
-INCLUDE COMMON.STC	;includes the following strucs									   ;AN000;
 															   ;AN000;
 ;codepage_parms STRUC													   ;AN000;
 ;   cp_device	   DW	 ?												   ;AN000;
@@ -1345,7 +1347,7 @@ PUBLIC	 printer_status_case
 ;AC002;PUSH  AX 	 ;AN000;save
 															   ;AN000;
       display  status_for_device											   ;AN000;
-      display  long_underline				      "Status for device LPTX?"                                    ;AN000;
+      display  long_underline				      ;"Status for device LPTX?" (WASM: stranded string commented)                                    ;AN000;
       display  five_char_underline	     ;has CRLF on it   -----------------------					   ;AN000;
       call  display_printer_reroute_status		 ;see modeecho.asm					       ;AN000;
 ;AC002;POP   AX 					 ;restore "device_request"                                          ;AN000;
@@ -1419,7 +1421,7 @@ PUBLIC	 printer_status_case
 															   ;AN000;
 		  .IF <parm_list_BX[DI].keyword_switch_ptr EQ <OFFSET RATE_equal>> THEN 				   ;AN000;
 															   ;AN000;
-	       MOV   AL,BYTE PTR parm_list_BX[DI].value1       ;save the rate requested in binary form, always <255	   ;AN000;
+	       MOV	AX,parm_list_BX[DI].value1       ;save the rate requested in binary form, always <255	   ;AN000;
 	       MOV   rate_holder,AL											   ;AN000;
 	       MOV   need_typamat_call,true										   ;AN000;
 	       BREAK 1													   ;AN000;
@@ -1432,7 +1434,7 @@ PUBLIC	 printer_status_case
 		  .IF <parm_list_BX[DI].keyword_switch_ptr EQ <OFFSET DELAY_equal>> OR					   ;AN000;
 		  .IF <parm_list_BX[DI].keyword_switch_ptr EQ <OFFSET DEL_equal>> THEN					   ;AN000;
 															   ;AN000;
-	       MOV   AL,BYTE PTR parm_list_BX[DI].value1      ;save delay requested (binary), always <255		   ;AN000;
+	       MOV	AX,parm_list_BX[DI].value1      ;save delay requested (binary), always <255		   ;AN000;
 	       MOV   delay_holder,AL											   ;AN000;
 	       MOV   need_typamat_call,true										   ;AN000;
 	       BREAK 1													   ;AN000;

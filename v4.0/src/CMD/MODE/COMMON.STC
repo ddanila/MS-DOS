@@ -1,6 +1,8 @@
 ;common structures
 
-bogus	 EQU   88H	;totally invalid value
+IFNDEF bogus
+bogus	 EQU   88H	;totally invalid value (WASM: guarded; also defined in MODEQUAT.INC)
+ENDIF
 
 codepage_parms STRUC
    cp_device	  DW	?
