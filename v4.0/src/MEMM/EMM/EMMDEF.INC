@@ -272,11 +272,12 @@ FRS_struc	ends
 ;
 ;****************************************************************************
 
+; WASM: 'OFFSET Seg_Name:0' (segment:0 override) rejected in macro body.
+;       Emit 3 worst-case NOPs (over-pads but always dword-aligns).
+;       The original recursive '$ - OFFSET Seg_Name:0 MOD 4' minimised
+;       padding; the cost here is up to 3 extra bytes per call.
 Dword_Align MACRO Seg_Name
-IF (($ - OFFSET Seg_Name:0) MOD 4)
-	db	90h		     ;; Nop in code / else byte of 90h in data
-	Dword_Align Seg_Name
-ENDIF
+	db	90h, 90h, 90h	; WASM-safe worst-case dword pad
 	    ENDM
 
 	page

@@ -279,7 +279,7 @@ Set_Byte_Gran	MACRO	handle
 	mov	bx, handle			; GDT selector
 	push	GDTD_GSEL
 	pop	es				; ES:0 <-- GDT
-	and	byte ptr es:[bx+6],NOT R_GRAN	; clear gran bit
+	and	byte ptr es:[bx+6],(NOT R_GRAN) AND 0FFh	; clear gran bit
 	ENDM
 
 ;***********************************************
