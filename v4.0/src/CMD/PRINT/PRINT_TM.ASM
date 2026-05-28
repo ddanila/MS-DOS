@@ -37,21 +37,21 @@ name			    dw	 offset dg:sym
 
 ; include msgserv.asm
 
-			.xlist
-			.xcref
+			;; .xlist
+			;; .xcref
 			MSG_SERVICES <MSGDATA>
 			MSG_SERVICES <NEARmsg,LOADmsg,GETmsg,DISPLAYmsg,INPUTmsg,CHARmsg>
-			.cref
-			.list
+			;; .cref
+			;; .list
 
 ; include message class 1, 2, A, B, C, and D
 
-			.xlist
-			.xcref
+			;; .xlist
+			;; .xcref
 			MSG_SERVICES <NEARmsg,PRINT.CL1,PRINT.CL2>
 			MSG_SERVICES <NEARmsg,PRINT.CLA,PRINT.CLB,PRINT.CLC,PRINT.CLD>
-			.cref
-			.list
+			;; .cref
+			;; .list
 ;  $SALUT (4,4,9,41)
 
 

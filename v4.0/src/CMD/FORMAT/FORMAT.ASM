@@ -278,7 +278,7 @@ data	ends
 
 
 debug	equ	0
-	.xlist
+	;; .xlist
 	INCLUDE VERSIONA.INC
 	INCLUDE DOSMAC.INC
 	INCLUDE SYSCALL.INC
@@ -294,7 +294,7 @@ debug	equ	0
 	INCLUDE IOCTL.INC
 	INCLUDE FORSWTCH.INC
 	INCLUDE SYSVAR.INC
-	.list
+	;; .list
 
 
 ;-------------------------------------------------------------------------------

@@ -51,12 +51,12 @@ code	ends
 ;*****************************************************************************
 ;
 
-.xlist
+;; .xlist
 INCLUDE FORCHNG.INC
 INCLUDE FORMACRO.INC
 INCLUDE SYSCALL.INC
 INCLUDE FOREQU.INC
-.list
+;; .list
 
 ;
 ;*****************************************************************************

@@ -26,9 +26,9 @@ INCLUDE CPSPEQU.INC			;;
 INT2F_LOW	EQU	(4*2FH) 	;; WGR interrupt 2F vector location	    ;AN000;
 INT2F_HI	EQU	(4*2FH)+2	;; WGR					    ;AN000;
 					;;
-.XLIST					;;
+;; .XLIST					;;
 INCLUDE SYSMSG.INC			;; WGR					    ;AN000;
-.LIST					;;
+;; .LIST					;;
 					;;
 MSG_UTILNAME <PRINTER>			;; WGR					    ;AN000;
 					;;
@@ -1402,13 +1402,13 @@ LI_0:						   ;				    ;AN000;
 LI_1:	   RET					   ;				    ;AN000;
 LOAD_INT2F ENDP
 
-.XLIST
+;; .XLIST
 MSG_SERVICES <MSGDATA>			  ; WGR 				    ;AN000;
 MSG_SERVICES <DISPLAYmsg,LOADmsg,CHARmsg> ; WGR 				    ;AN000;
 MSG_SERVICES <PRINTER.CL1>		  ; WGR 				    ;AN000;
 MSG_SERVICES <PRINTER.CL2>		  ; WGR 				    ;AN000;
 MSG_SERVICES <PRINTER.CLA>		  ; WGR 				    ;AN000;
-.LIST
+;; .LIST
 
 include MSGDCL.INC
 

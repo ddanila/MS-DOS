@@ -3,10 +3,10 @@
 TITLE   SHARELNK LINK FIX ROUTINES - Routines to resolve SHARE externals
 NAME    SHARELNK
 
-.xlist
+;; .xlist
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
-.list
+;; .list
 
 CODE    SEGMENT BYTE PUBLIC 'CODE'
 code    ENDS

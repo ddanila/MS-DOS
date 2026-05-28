@@ -99,9 +99,9 @@
 	INCLUDE PATHMAC.INC		;AN006;
 ; =  =	=  =  =  =  =  =  =  =	=  =
 HEADER	MACRO	TEXT			;;AN000;
-.XLIST					;AN000;
-	SUBTTL	TEXT			;AN000;
-.LIST					;AN000;
+;; .XLIST					;AN000;
+	;; SUBTTL	TEXT			;AN000;
+;; .LIST					;AN000;
 	PAGE				;AN000;
 	ENDM				;;AN000;
 ; =  =	=  =  =  =  =  =  =  =	=  =

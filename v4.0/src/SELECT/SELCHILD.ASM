@@ -1,7 +1,7 @@
 PAGE 55,132				;AN000;
 NAME	SELCHILD			;AN000;
 TITLE	SELCHILD - CHILD processing for SELECT.EXE;AN000;
-SUBTTL	selchild.asm			;AN000;
+;; SUBTTL	selchild.asm			;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
 ;	HANDLE_CHILDREN

@@ -1,14 +1,14 @@
 TITLE	CHKPRMT - Procedures called from chkdsk which prompt			;an000;bgb
 page	,132					;				;an000;bgb
 										;an000;bgb
-	.xlist									;an000;bgb
+	;; .xlist									;an000;bgb
 	include CHKSEG.INC							;an000;bgb
 	INCLUDE CHKCHNG.INC							;an000;bgb
 	INCLUDE SYSCALL.INC							;an000;bgb
 	INCLUDE CHKEQU.INC							;an000;bgb
 	INCLUDE CHKMACRO.INC							;an000;bgb
 	include PATHMAC.INC							;an000;bgb
-	.list									;an000;bgb
+	;; .list									;an000;bgb
 										;an000;bgb
 										;an000;bgb
 CONST	SEGMENT PUBLIC PARA 'DATA'						;an000;bgb

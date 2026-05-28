@@ -28,10 +28,10 @@ kbdxxx	segment byte public 'kbd'
 ; *************************************************************************
 
 	public kbdcharin
-	.sall
-	.xlist
+	;; .sall
+	;; .xlist
 	include KBD.INC
-	.list
+	;; .list
 	extrn	savedkbdinput:word
 
 

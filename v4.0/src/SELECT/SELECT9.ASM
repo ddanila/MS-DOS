@@ -3,7 +3,7 @@
 PAGE 55,132
 NAME	SELECT
 TITLE	SELECT - DOS - SELECT.EXE
-SUBTTL	SELECT9.asm
+;; SUBTTL	SELECT9.asm
 .ALPHA
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
@@ -53,7 +53,7 @@ SET_BLOCK	equ	4AH
 ;
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-.XLIST
+;; .XLIST
 	INCLUDE    PANEL.MAC
 	INCLUDE    SELECT.INC
 	INCLUDE    PAN-LIST.INC
@@ -65,7 +65,7 @@ SET_BLOCK	equ	4AH
 	INCLUDE    EXT.INC
 	INCLUDE    VARSTRUC.INC
 	INCLUDE    ROUT_EXT.INC
-.LIST
+;; .LIST
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
 ;

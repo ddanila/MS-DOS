@@ -70,7 +70,7 @@ DefKeepVal	EQU	0								 ;AN000;
 NewNumFCB	EQU    16								 ;AN000;
 NewKeepVal	EQU	8								 ;AN000;
 											 ;AN000;
-SUBTTL	IFSFUNC Data									 ;AN000;
+;; SUBTTL	IFSFUNC Data									 ;AN000;
 PAGE											 ;AN000;
 ; miscellaneous IFS equates								 ;AN000;
 MINUS_ONE	EQU	-1								 ;AN000;

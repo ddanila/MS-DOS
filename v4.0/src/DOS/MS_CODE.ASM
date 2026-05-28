@@ -3,14 +3,14 @@
 ; MSCODE.ASM -- MSDOS code
 ;
 
-.xlist
+;; .xlist
 include DOSSYM.INC
 include DEVSYM.INC
 include DOSSEG.ASM
 include IFSSYM.INC
 include FASTOPEN.INC
 include FASTXXXX.INC
-.list
+;; .list
 
 AsmVars <Kanji, Debug>
 

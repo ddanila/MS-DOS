@@ -18,7 +18,7 @@
 ;*************************************************************************
 ;				NEW CODE				 *
 ;*************************************************************************
-subttl get extended country data
+;; subttl get extended country data
 page
 ;
 ;***************************************
@@ -213,7 +213,7 @@ page
 ;error_routine	endp
 ;*******************************************************************************
 ;**********************************INTRO****************************************
-subttl	Revision History
+;; subttl	Revision History
 page
 ;****************************** Revision History *************************** ;
 ;
@@ -272,7 +272,7 @@ page
 ;AN001; P2685 NLSFUNC should not visit the same device repeatedly. 01/15/88 J.K.
 ;AN002; P3934 Bad write on sacred DOS area - segmentation incorrect  03/22/88 CNS
 ;*******************************************************************************
-subttl macros
+;; subttl macros
 page
 PUSHALL       macro  reg1,reg2,reg3			;used to save all
 		push reg1				;registers needed
@@ -297,7 +297,7 @@ POPALL	     macro   reg1,reg2,reg3			;used to restore all
 
 EXTRN		SYSPARSE:NEAR
 
-subttl NLSFUNC data
+;; subttl NLSFUNC data
 page
 NLS_DATA	SEGMENT byte PUBLIC 'DATA'
 
@@ -306,7 +306,7 @@ NLS_DATA	SEGMENT byte PUBLIC 'DATA'
 UTILITY 	db	"NLSFUNC",0           ;AC000;
 ;***************************** MSG DATA ************************************
 
-.xlist
+;; .xlist
 include COPYRIGH.INC			;AN000;
 	include STRUC.INC
 include DOESMAC.INC
@@ -322,7 +322,7 @@ include FUNCPARM.INC			;AN000;
 
 MSG_UTILNAME <NLSFUNC>			;AN000;
 
-.list
+;; .list
 MULT_NLSFUNC	equ	14h
 INSTALLED	equ	0ffh
 ; nlsfunc function codes
@@ -355,7 +355,7 @@ PERIOD		 equ	'.'
 ;COLON		  equ	 ':'
 ;
 ;**************** NEW VARIABLE	****************
-subttl NLSFUNC data
+;; subttl NLSFUNC data
 page
 IN_DEX		  equ	 bp			       ;AN000;
 FILESPEC_PTR	  equ	 byte ptr ds:[in_dex]	       ;AN000;
@@ -439,7 +439,7 @@ NLS_INIT_CODE	SEGMENT BYTE PUBLIC 'CODE'
 
 INT_2f_NEXT	DD	?	;Chain location.
 TEMPHOLD	DW	0
-subttl resident code
+;; subttl resident code
 page
 ;**************************** resident portion ********************************
 
@@ -591,7 +591,7 @@ ERROR_ROUTINE:
 
 NLSRES_CODE	ENDP
 ;*******************************END OF NLSRES_CODE******************************
-subttl resident main routine
+;; subttl resident main routine
 page
 ;*******************************RES_MAIN****************************************
 RES_MAIN	PROC	NEAR
@@ -613,7 +613,7 @@ RES_MAIN	PROC	NEAR
 
 RES_MAIN	ENDP
 ;*******************************END RES_MAIN************************************
-subttl	check open procedure
+;; subttl	check open procedure
 page
 ;******************************CHECK OPEN PROCEDURE****************************
 CHK_OPEN	PROC	NEAR
@@ -648,7 +648,7 @@ END_OPEN:
 
    CHK_OPEN	ENDP
 ;******************************END OF CHKOPEN**********************************
-subttl transfer country data
+;; subttl transfer country data
 page
 ;******************************TRANS_CTY__DATA ********************************
 TRANS_CTY_DATA	PROC	NEAR
@@ -899,7 +899,7 @@ END_TRANS:
 TRANS_CTY_DATA	ENDP
 
 ;******************************END TRANS_CTY_DATA ******************************
-subttl get DOS country destination
+;; subttl get DOS country destination
 page
 ;****************************GETCTY_DEST***********************************************
 GetDOSCty_Dest	 proc	 near
@@ -950,7 +950,7 @@ GetCntryDest_Exit:
 
 GetDOSCty_Dest	 endp
 ;****************************GETDOSCTY_DEST*************************************
-subttl get extended country data
+;; subttl get extended country data
 page
 ;****************************GETEXT_CTY*****************************************
 GETEXT_CTY	proc
@@ -1029,7 +1029,7 @@ GET_EXT_END:
 
 GETEXT_CTY	endp
 ;*****************************END GETEXT_CTY*************************************
-subttl read into control buffer
+;; subttl read into control buffer
 page
 ;**************************READ_CTLBUFF*****************************************
 ;
@@ -1072,7 +1072,7 @@ RICB_exit:				  ;In this case 64 bytes
 
 READ_CTLBUFF	  endp
 ;****************************END READ_CTLBUFF***********************************
-subttl check / adjust / move data into DOS buffer
+;; subttl check / adjust / move data into DOS buffer
 page
 ;****************************CHK_ADJUST*****************************************
 CHK_ADJUST	PROC  NEAR
@@ -1123,7 +1123,7 @@ ADJUST_END:
 		ret
 CHK_ADJUST	ENDP
 ;*******************************END CHK_ADJUST *********************************
-subttl walk through device drivers and invoke
+;; subttl walk through device drivers and invoke
 page
 ;************************ WALK DEVICE DRIVERS **********************************
 ;=E=E=E=E=E=E=E=E=E=E=E=E=E=E=E=E=E=E=E=E=E=E=E=E=E=E=E=E=E=E=E=E=E=E=E=E=E=E=E=
@@ -1377,10 +1377,10 @@ Chk_Rvst_Ret:					;AN001;
 	ret					;AN001;
 Chk_Revisit	endp
 
-subttl end nlsfunc resident code
+;; subttl end nlsfunc resident code
 page
  NLSRES_LENG	equ	$-NLSRES_CODE+DATASIZE
-subttl initialization
+;; subttl initialization
 page
 ;***************************** NLSFUNC Initialization **************************
 
@@ -1485,7 +1485,7 @@ NO_FREEDOM:
 		MAIN	ENDP
 
 ;****************************** EXIT PROG *********************************************
-subttl parse
+;; subttl parse
 page
 ; On entry: ES points at the PSP
 ;	    DS points at NLS_DATA
@@ -1764,7 +1764,7 @@ PROCESS_PATH	ENDP
 ;
 
 ;****************************** CNS *******************************************
-subttl install NLSFUNC
+;; subttl install NLSFUNC
 page
 ;******************************** INSTALL NLSFUNC *****************************
 
@@ -1830,7 +1830,7 @@ msg_services <nlsfunc.cl1,nlsfunc.cl2,nlsfunc.cla>    ;AN000;
 
 ;******************************** END OF NLS_INIT_CODE **************************
 NLS_INIT_CODE	 ENDS
-subttl stack
+;; subttl stack
 page
 
 STACK	SEGMENT   PARA	STACK 'STACK'

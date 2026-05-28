@@ -21,9 +21,9 @@ TITLE	ANSI Console device CON$INIT routine
 ;-------------------------------------------------------------------------------
 
 INCLUDE    ANSI.INC		   ; WGR equates and strucs				 ;AN000;
-.XLIST
+;; .XLIST
 	INCLUDE    STRUC.INC		   ; WGR structured macros				 ;AN000;
-.LIST
+;; .LIST
 
 PUBLIC	   CON$INIT		   ; WGR						 ;AN000;
 

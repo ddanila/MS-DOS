@@ -53,7 +53,7 @@
 ;	(since only numbers are interpreted, you may comment the line with
 ;	non-numeric characters)
 
-	SUBTTL	Structure Definitions
+	;; SUBTTL	Structure Definitions
 	PAGE
 ;-----------------------------------------------------------------------;
 ;	Request Header (Common portion) 				;
@@ -139,7 +139,7 @@ DESC_BASEH DB	0		;bits 23-16 of physical address
 	   DW	0		;reserved
 DESC	ENDS
 
-	SUBTTL	Equates and Macro Definitions
+	;; SUBTTL	Equates and Macro Definitions
 	PAGE
 
 MEM_SIZE   EQU	12H		;BIOS memory size determination INT
@@ -189,7 +189,7 @@ MSG	MACRO	TEXT
 	ENDM
 
 
-	SUBTTL	Resident Data Area
+	;; SUBTTL	Resident Data Area
 	PAGE
 ;-----------------------------------------------------------------------;
 ;	Map INT 19H vector in low storage				;
@@ -327,7 +327,7 @@ TGT	DESC	<,,,93H,>	;target descriptor
 	DESC	<>		;BIOS CS descriptor
 	DESC	<>		;stack segment descriptor
 
-	SUBTTL	INT 19H (boot) interrupt handler
+	;; SUBTTL	INT 19H (boot) interrupt handler
 	PAGE
 ;-----------------------------------------------------------------------;
 ;	INT 19H Interrupt Handler routine				;
@@ -369,7 +369,7 @@ VDISK_INT19 ENDP
 
 	ASSUME	DS:NOTHING
 
-	SUBTTL	Device Strategy & interrupt entry points
+	;; SUBTTL	Device Strategy & interrupt entry points
 	PAGE
 ;-----------------------------------------------------------------------;
 ;	Device "strategy" entry point                                   ;
@@ -479,7 +479,7 @@ IRPT_CMD_EXIT:			;return from command routine
 	RET
 IRPT	ENDP
 
-	SUBTTL	Command Processing routines
+	;; SUBTTL	Command Processing routines
 	PAGE
 ;-----------------------------------------------------------------------;
 ;	Command Code 1 - Media Check					;
@@ -628,7 +628,7 @@ INOUT_E:				;do while SECT_LEFT <> zero
 	JNZ	INOUT_C 		;go back to transfer some sectors
 	RET				;AX = zero, all sectors transferred
 
-	SUBTTL	Extended Memory I/O routine
+	;; SUBTTL	Extended Memory I/O routine
 	PAGE
 ;-----------------------------------------------------------------------;
 ;	Extended Memory I/O routine					;
@@ -757,7 +757,7 @@ INOUT	ENDP
 	DW	40 DUP (?)		;stack for extended memory I/O
 EM_STACK LABEL	WORD
 
-	SUBTTL	Boot Record
+	;; SUBTTL	Boot Record
 	PAGE
 ;-----------------------------------------------------------------------;
 ;	Adjust the assembly-time instruction counter to a paragraph	;
@@ -943,7 +943,7 @@ expected_version    equ     (MINOR_VERSION SHL 8)+MAJOR_VERSION
 err_flag2	    db	    0
 err_baddos	    equ     01h ; Invalid DOS Version
 
-	SUBTTL	Initialization, Part one
+	;; SUBTTL	Initialization, Part one
 	PAGE
 ;-----------------------------------------------------------------------;
 ;	Command Code 0 - Initialization 				;
@@ -1059,7 +1059,7 @@ INIT_P1_A:
 					;this is redundant if the VDISK is in
 					;extended memory, but is executed anyway
 
-	SUBTTL	GET_PARMS Parameter Line Scan
+	;; SUBTTL	GET_PARMS Parameter Line Scan
 	PAGE
 ;-----------------------------------------------------------------------;
 ;GET_PARMS gets the parameters from the CONFIG.SYS statement		;
@@ -1252,7 +1252,7 @@ GET_NUMBER ENDP
 
 GET_PARMS ENDP
 
-	SUBTTL	APPLY_DEFAULTS
+	;; SUBTTL	APPLY_DEFAULTS
 	PAGE
 ;-----------------------------------------------------------------------;
 ;	APPLY_DEFAULTS supplies any parameter values that the user	;
@@ -1294,7 +1294,7 @@ APPLY_DEFAULTS_D:
 	RET
 APPLY_DEFAULTS	ENDP
 
-	SUBTTL	DETERMINE_START address of VDISK buffer
+	;; SUBTTL	DETERMINE_START address of VDISK buffer
 	PAGE
 ;-----------------------------------------------------------------------;
 ;	DETERMINE_START figures out the starting address of the VDISK	;
@@ -1374,7 +1374,7 @@ DETERMINE_START_X:
 	RET
 DETERMINE_START ENDP
 
-	SUBTTL	VALIDATE parameters
+	;; SUBTTL	VALIDATE parameters
 	PAGE
 ;-----------------------------------------------------------------------;
 ;	VALIDATE adjusts parameters as necessary			;
@@ -1449,7 +1449,7 @@ VALIDATE_C:				;not enough space for any VDISK
 VALIDATE_X:
 	RET
 
-	SUBTTL	VAL_BSIZE Validate buffer size
+	;; SUBTTL	VAL_BSIZE Validate buffer size
 	PAGE
 ;-----------------------------------------------------------------------;
 ;	VAL_BSIZE adjusts the buffer size as necessary			;
@@ -1516,7 +1516,7 @@ GET_MSIZE	ENDP
 
 VAL_BSIZE	ENDP
 
-	SUBTTL	VAL_SSZ Validate Sector Size
+	;; SUBTTL	VAL_SSZ Validate Sector Size
 	PAGE
 ;-----------------------------------------------------------------------;
 ;	VAL_SSZ validates sector size, adjusting if necessary		;
@@ -1566,7 +1566,7 @@ SIZE_DONE:
 	RET
 VAL_SSZ ENDP
 
-	SUBTTL	VAL_DIRN Validate number of directory entries
+	;; SUBTTL	VAL_DIRN Validate number of directory entries
 	PAGE
 ;-----------------------------------------------------------------------;
 ;	VAL_DIRN validates and adjusts the number of directory entries. ;
@@ -1613,7 +1613,7 @@ VAL_DIRN_D:
 	RET
 VAL_DIRN ENDP
 
-	SUBTTL	VAL_FAT Validate File Allocation Table (FAT)
+	;; SUBTTL	VAL_FAT Validate File Allocation Table (FAT)
 	PAGE
 ;-----------------------------------------------------------------------;
 ;VAL_FAT computes:							;
@@ -1681,7 +1681,7 @@ VAL_FAT ENDP
 
 VALIDATE	ENDP
 
-	SUBTTL	COPY_BPB Copy BPB to Boot Record
+	;; SUBTTL	COPY_BPB Copy BPB to Boot Record
 	PAGE
 ;-----------------------------------------------------------------------;
 ;	COPY_BPB copies the BIOS Parameter Block (BPB)			;
@@ -1699,7 +1699,7 @@ COPY_BPB	PROC			;Copy BBP to Boot Record
 	RET
 COPY_BPB	ENDP
 
-	SUBTTL	VERIFY_EXTENDER
+	;; SUBTTL	VERIFY_EXTENDER
 	PAGE
 ;-----------------------------------------------------------------------;
 ;	VERIFY_EXTENDER makes sure that if an Expansion Unit is 	;
@@ -1771,7 +1771,7 @@ VERIFY_EXTENDER_X:
 	RET
 VERIFY_EXTENDER ENDP
 
-	SUBTTL	UPDATE_AVAIL
+	;; SUBTTL	UPDATE_AVAIL
 	PAGE
 ;-----------------------------------------------------------------------;
 ;	UPDATE_AVAIL updates the address of the first byte in extended	;
@@ -1789,7 +1789,7 @@ UPDATE_AVAIL	PROC		;update AVAIL_LO and AVAIL_HI of first VDISK
 	RET
 UPDATE_AVAIL	ENDP
 
-	SUBTTL	FORMAT_VDISK
+	;; SUBTTL	FORMAT_VDISK
 	PAGE
 ;-----------------------------------------------------------------------;
 ;	This Request Header is used by MOVE_VDISK to move the		;
@@ -1871,7 +1871,7 @@ FORMAT_VDISK_A: 			;set up one FAT
 	RET
 FORMAT_VDISK	ENDP
 
-	SUBTTL	MOVE_VDISK
+	;; SUBTTL	MOVE_VDISK
 	PAGE
 ;-----------------------------------------------------------------------;
 ;	MOVE_VDISK moves the formatted boot sector, FAT, and directory	;
@@ -1893,7 +1893,7 @@ MOVE_VDISK	PROC
 	RET
 MOVE_VDISK	ENDP
 
-	SUBTTL	UPDATE_BOOT
+	;; SUBTTL	UPDATE_BOOT
 	PAGE
 ;-----------------------------------------------------------------------;
 ;	UPDATE_BOOT updates the BOOT_EM word in the first extended	;
@@ -1937,7 +1937,7 @@ UPDATE_BOOT	PROC
 	RET
 UPDATE_BOOT	ENDP
 
-	SUBTTL	STEAL_INT19
+	;; SUBTTL	STEAL_INT19
 	PAGE
 ;-----------------------------------------------------------------------;
 ;	STEAL_INT19 changes the INT 19H vector to point to this VDISK	;
@@ -1961,7 +1961,7 @@ STEAL_INT19	PROC
 	RET
 STEAL_INT19	ENDP
 
-	SUBTTL	FILL_RH Fill in Request Header
+	;; SUBTTL	FILL_RH Fill in Request Header
 	PAGE
 ;-----------------------------------------------------------------------;
 ;	FILL_RH fills in the Request Header returned to DOS		;
@@ -2000,7 +2000,7 @@ FILL_RH_B:
 	RET
 FILL_RH ENDP
 
-	SUBTTL	WRITE_MESSAGES and associated routines
+	;; SUBTTL	WRITE_MESSAGES and associated routines
 	PAGE
 ;-----------------------------------------------------------------------;
 ;	WRITE_MESSAGE writes a series of messages to the standard	;

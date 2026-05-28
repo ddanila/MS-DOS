@@ -24,7 +24,7 @@
 ;   05/25/88            Changed to meet LIM 4.0 Spec (PC)
 ;******************************************************************************
 ifndef	INC_LIST
-.xlist
+;; .xlist
 endif
 
 ;******************************************************************************
@@ -325,7 +325,7 @@ Handle2HandlePtr MACRO
 
 	ENDM
 
-.list		; end of EMMDEF.INC
+;; .list		; end of EMMDEF.INC
 
 
 

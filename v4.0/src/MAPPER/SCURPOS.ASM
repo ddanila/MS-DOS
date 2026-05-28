@@ -25,10 +25,10 @@ vioxxx  segment byte public 'vio'
 ; *************************************************************************
 
         public  viosetcurpos
-        .sall
-        .xlist
+        ;; .sall
+        ;; .xlist
         include MACROS.INC
-        .list
+        ;; .list
 
 error_bvs_parameter equ    0002h
 

@@ -23,7 +23,7 @@ NAME	Dir
 ;
 ; get the appropriate segment definitions
 ;
-.xlist
+;; .xlist
 include DOSSEG.ASM
 include FASTOPEN.INC
 
@@ -31,7 +31,7 @@ CODE	SEGMENT BYTE PUBLIC  'CODE'
 	ASSUME	SS:DOSGROUP,CS:DOSGROUP
 
 include DOSSYM.INC
-.list
+;; .list
 
 asmvar	Kanji
 

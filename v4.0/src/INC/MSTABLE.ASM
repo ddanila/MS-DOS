@@ -3,9 +3,9 @@
 ; Table Segment for DOS
 ;
 
-.xlist
+;; .xlist
 include MSSW.ASM
-.list
+;; .list
 
 TITLE	IBMTABLE - Table segment for DOS
 NAME	IBMTABLE

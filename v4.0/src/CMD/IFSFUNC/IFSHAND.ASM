@@ -48,13 +48,13 @@ NAME	IFSHANDLE									 ;AN000;
 ;
 ;******************************************************************************
 											 ;AN000;
-.xlist											 ;AN000;
+;; .xlist											 ;AN000;
 INCLUDE IFSSYM.INC									 ;AN000;
 INCLUDE IFSFSYM.INC									 ;AN000;
 INCLUDE DOSSYM.INC									 ;AN000;
 INCLUDE DEVSYM.INC									 ;AN000;
 											 ;AN000;
-.list											 ;AN000;
+;; .list											 ;AN000;
 											 ;AN000;
 AsmVars <IBM, Installed, DEBUG> 							 ;AN000;
 											 ;AN000;

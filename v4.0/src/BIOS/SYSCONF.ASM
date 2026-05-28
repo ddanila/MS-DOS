@@ -83,7 +83,7 @@ NOEXEC	EQU	FALSE
 DOSSIZE EQU	0A000H
 ;dossize equ	 0C000H 	;J.K. for the debugging version of IBMDOS.
 
-.xlist
+;; .xlist
 ;	INCLUDE dossym.INC
 	include SMDOSSYM.INC	;J.K. Reduced version of DOSSYM.INC
 	INCLUDE DEVSYM.INC
@@ -92,7 +92,7 @@ DOSSIZE EQU	0A000H
 	include SMIFSSYM.INC	;AN000; Reduced version of IFSSYM.INC.
 	include DEVMARK.INC	;AN004;
 	include VERSION.INC
-.list
+;; .list
 
 	IF IBMJAPVER EQ 0
 	EXTRN	RE_INIT:FAR
@@ -209,10 +209,10 @@ XMAEM_file	db	'XMAEM.SYS',0	;AN029;
 ;Take care of Config.sys file.
 ;SYSTEM parser data and code.
 ;******************************************************************************
-.xlist
+;; .xlist
 	include PSOPTION.INC			;Parsing options for SYSCONF.
 	include PARSE.ASM			;together with PSDATA.INC
-.list
+;; .list
 ;Control block definitions for PARSER.
 ;---------------------------------------------------
 ; BUFFER = [n | n,m] {/E}

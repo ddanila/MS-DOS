@@ -191,7 +191,7 @@ ENDIF				   ;;						;AN000;
 ; =  =	=  =  =  =  =  =  =  =	=  =
 HEADER		  MACRO TEXT	   ;;						;AN000;
 		  FIXLIST LISTPARM,.XLIST ;;					;AN000;
-		  SUBTTL TEXT	   ;;						;AN000;
+		  ;; SUBTTL TEXT	   ;;						;AN000;
 		  FIXLIST LISTPARM,.LIST ;;					;AN000;
 		  PAGE		   ;;						;AN000;
 		  ENDM		   ;;						;AN000;
@@ -315,7 +315,7 @@ SHIFT_SIZE	  EQU PSPSIZE - MOV_DEST ; HOW FAR HANDLER/TABLE MOVED
 SHIFT_SIZE_SEG	  EQU SHIFT_SIZE SHR NIBBLE_SIZE ;DIVIDE BY 16			;AN000;
 				   ; TO CONVERT BYTES TO SEGS
 ; = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-.LIST
+;; .LIST
 		  HEADER <EXTERNALS AND WORKAREA>
 ;    $SALUT (4,6,12,28)
 

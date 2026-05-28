@@ -27,10 +27,10 @@ dosxxx  segment byte public 'dos'
 ; *************************************************************************
 
         public  dosfreeseg
-        .sall
-        .xlist
+        ;; .sall
+        ;; .xlist
         include MACROS.INC
-        .list
+        ;; .list
 
 invalid_selector equ 0006h
 

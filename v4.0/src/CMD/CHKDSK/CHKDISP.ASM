@@ -16,16 +16,16 @@ page	,132	;								;an000;bgb
 ;*****************************************************************************	;an000;bgb
 ; Include Files 								;an000;bgb
 ;*****************************************************************************	;an000;bgb
-.xlist										;an000;bgb
+;; .xlist										;an000;bgb
 include PATHMAC.INC								;an040;bgb
 include CHKSEG.INC								;an000;bgb
 INCLUDE CPMFCB.INC								;an000;bgb
 INCLUDE CHKEQU.INC								;an000;bgb
-.list										;an000;bgb
+;; .list										;an000;bgb
 INCLUDE CHKMSG.INC								;an000;bgb
-.xlist										;an000;bgb
+;; .xlist										;an000;bgb
 INCLUDE SYSMSG.INC								;an000;bgb
-.list										;an000;bgb
+;; .list										;an000;bgb
       ; 									;an000;bgb
 cstack	 segment para stack 'STACK'                                             ;an000;bgb
 	db	62 dup ("-Stack!-")      ; (362-80h) is the additional IBM ROM  ;an000;bgb
@@ -50,7 +50,7 @@ Msg_Services	<DISPLAYmsg,CHARmsg,NUMmsg,TIMEmsg,DATEmsg>			;an000;bgb
 pathlabl	msgret								;an040;bgb
 Msg_Services	<CHKDSK.CLA,CHKDSK.CLB,CHKDSK.CLC,CHKDSK.CLD,CHKDSK.CL1,CHKDSK.CL2,CHKDSK.CTL> ;an037;bgb
 code	ends									;an000;bgb
-.list										;an000;bgb
+;; .list										;an000;bgb
 										;an000;bgb
 ;										;an000;bgb
 ;*****************************************************************************	;an000;bgb

@@ -1,8 +1,8 @@
 PAGE ,132 ;
 TITLE MODEPRIN.SAL - PRINTER SUPPORT FOR THE MODE COMMAND
-.XLIST
+;; .XLIST
 	INCLUDE STRUC.INC
-.LIST
+;; .LIST
 
 
 ;ษออออออออออออออออออออออออออออออออ  P R O L O G  อออออออออออออออออออออออออออออออออออออออออป				   ;AN000;

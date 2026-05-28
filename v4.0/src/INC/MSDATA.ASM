@@ -3,7 +3,7 @@
 ; DATA Segment for DOS.
 ;
 
-.xlist
+;; .xlist
 include MSSW.ASM
 include DOSSEG.ASM
 debug = FALSE                           ; No dossym (too big)
@@ -19,7 +19,7 @@ INCLUDE DEVSYM.INC
 INCLUDE PDB.INC
 INCLUDE FIND.INC
 INCLUDE MI.INC
-.list
+;; .list
 
 TITLE   IBMDATA - DATA segment for DOS
 NAME    IBMDATA

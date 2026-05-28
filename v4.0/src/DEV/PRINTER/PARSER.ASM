@@ -186,9 +186,9 @@ TITLE	    PARSE CODE AND CONTROL BLOCKS FOR PRINTER.SYS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-.XLIST
+;; .XLIST
 	INCLUDE     STRUC.INC	     ; Structured macros				    ;AN000;
-.LIST
+;; .LIST
 
 INCLUDE     CPSPEQU.INC 							    ;AN000;
 
@@ -215,9 +215,9 @@ CSEG	      SEGMENT  PARA PUBLIC 'CODE'                                          
 EXTRN	    TABLE:WORD	     ; table for variable storage used by INIT module.	    ;AN000;
 EXTRN	    DEVICE_NUM:WORD							    ;AN000;
 
-.XLIST
+;; .XLIST
 INCLUDE     PARSE.ASM	    ; Parsing code					    ;AN000;
-.LIST
+;; .LIST
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

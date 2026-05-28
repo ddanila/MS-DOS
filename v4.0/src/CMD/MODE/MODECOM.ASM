@@ -1,9 +1,9 @@
 PAGE ,132 ;														   ;AN000;
 TITLE MODECOM.ASM - RS232 SUPPORT FOR THE MODE COMMAND									   ;AN000;
 															   ;AN000;
-.XLIST															   ;AN000;
+;; .XLIST															   ;AN000;
 	INCLUDE STRUC.INC													   ;AN000;
-.LIST															   ;AN000;
+;; .LIST															   ;AN000;
 
 ;ษออออออออออออออออออออออออออออออออ  P R O L O G  อออออออออออออออออออออออออออออออออออออออออป				   ;AN000;
 ;บ											  บ				   ;AN000;
@@ -208,7 +208,7 @@ retry_index	DW   0													   ;AN000;
 ;ศอออออออออออออออออออออออออออออออออออ  D A T A	ออออออออออออออออออออออออออออออออออออออออออผ				   ;AN000;
 															   ;AN000;
 															   ;AN000;
-SUBTTL SET UP FOR SERIAL RETRY												   ;AN000;
+;; SUBTTL SET UP FOR SERIAL RETRY												   ;AN000;
 PAGE															   ;AN000;
 ;
 ;
@@ -369,7 +369,7 @@ SETTO ENDP														   ;AN663;
 
 
 
-SUBTTL SET SERIAL PROTOCOL
+;; SUBTTL SET SERIAL PROTOCOL
 PAGE
 
 ;------------------------------------------------------------------------------
@@ -544,7 +544,7 @@ MOV   BL,0		      ;assume stop bits was 1, message already set up				      ;AN00
 SETCOM ENDP														   ;AN000;
 															   ;AN000;
 															   ;AN000;
-SUBTTL															   ;AN000;
+;; SUBTTL															   ;AN000;
 PAGE															   ;AN000;
 															   ;AN000;
 															   ;AN000;

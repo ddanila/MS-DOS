@@ -54,7 +54,7 @@ COMMENT #
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 #
 
-SUBTTL     Patch Area
+;; SUBTTL     Patch Area
 PAGE
 
 PROG       SEGMENT PARA PUBLIC  'PROG'

@@ -6,11 +6,11 @@
 ;
 ;********************************************************************************
 .ALPHA					;AN000;
-.XLIST					;AN000;
+;; .XLIST					;AN000;
 INCLUDE  MACROS.INC			;AN000;
 	INCLUDE  STRUC.INC			;AN000;
 INCLUDE  EXT.INC			;AN000;
-.LIST					;AN000;
+;; .LIST					;AN000;
 
 
 PUBLIC	 SCAN_PARAMETERS_ROUTINE	;AN000;

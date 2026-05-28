@@ -1,8 +1,8 @@
 ;	SCCSID = @(#)forproc.asm	1.2 85/07/25
 ;
-.xlist
+;; .xlist
 BREAK	MACRO	subtitle
-	SUBTTL	subtitle
+	;; SUBTTL	subtitle
 	PAGE
 ENDM
 
@@ -12,7 +12,7 @@ ENDM
 	INCLUDE FORMACRO.INC
 	INCLUDE FORSWTCH.INC
 	INCLUDE IOCTL.INC
-.list
+;; .list
 data	segment public para 'DATA'
 data	ends
 

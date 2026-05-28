@@ -29,14 +29,14 @@ Title   LOCATE (EXE2BIN)
 
 OLDLINK EQU     0                  ;1 to enable, 0 to disable
 
-        .xlist
+        ;; .xlist
 
 ;       INCLUDE DOSSYM.INC              ; also versiona.inc
 ;       INCLUDE E2BMACRO.INC
 
-        .list
+        ;; .list
 
-        subttl  Main Code Area
+        ;; subttl  Main Code Area
         page
 
 DATA    SEGMENT PUBLIC BYTE

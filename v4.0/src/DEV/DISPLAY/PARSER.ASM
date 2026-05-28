@@ -184,9 +184,9 @@ TITLE	    PARSE CODE AND CONTROL BLOCKS FOR DISPLAY.SYS
 
 INCLUDE     DEF-EQU.INC      ; structures and equates					 ;AN000;
 
-.XLIST
+;; .XLIST
 	INCLUDE     STRUC.INC	     ; Structured macros					 ;AN000;
-.LIST
+;; .LIST
 
 PUBLIC	    PARSER	     ; near procedure for parsing DEVICE= statement		 ;AN000;
 PUBLIC	    TABLE	     ; table for variable storage used by INIT module.		 ;AN000;
@@ -210,9 +210,9 @@ CODE	      SEGMENT  PUBLIC BYTE 'CODE'
 	      ASSUME CS:CODE
 
 
-.XLIST
+;; .XLIST
 INCLUDE     PARSE.ASM	    ; Parsing code						 ;AN000;
-.LIST
+;; .LIST
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

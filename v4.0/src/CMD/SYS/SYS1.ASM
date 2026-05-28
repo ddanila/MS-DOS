@@ -178,13 +178,13 @@ fat_16			DB   "FAT16   " ; 16 or 32 bit FAT
 					; SUBLIST for Message call
 					;---------------------------------------
 
-.xlist
+;; .xlist
 			include SYSMSG.INC
 
 			MSG_UTILNAME <SYS> ;				       ;AN000;
 
 			MSG_SERVICES <MSGDATA> ;			       ;AN000;
-.list
+;; .list
 
 ;;  WASM: sub_size = $ - SUBLIST can't be forward-referenced; pre-define as 11 (structure size)
 sub_size		equ  11         ;; WASM: was ($ - SUBLIST); 1+1+2+2+1+1+1+1+1 = 11 bytes
@@ -263,9 +263,9 @@ pDOSEnd 		DW   ?		; offset of end of DOS in buffer
 
 public			boot
 BOOT			LABEL BYTE
-.xlist
+;; .xlist
 			INCLUDE BOOT.INC
-.list
+;; .list
 					;
 					; Following structure used by Generic IOCTL call Get Device Parameters to get
 					; the BPB of a hard disk. It 'overflows' into area of BUF.

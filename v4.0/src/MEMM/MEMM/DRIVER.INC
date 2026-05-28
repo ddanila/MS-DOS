@@ -25,7 +25,7 @@
 ;
 ;******************************************************************************
 ifndef INC_LIST
-.xlist
+;; .xlist
 endif
 
 ;
@@ -126,4 +126,4 @@ NUMBER_OF_HEADS 	DW		0
 HIDDEN_SECTORS		DW		0
 BPB_OPTION		ENDS
 
-.list	; end of DRIVER.STR
+;; .list	; end of DRIVER.STR

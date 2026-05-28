@@ -3,9 +3,9 @@
 ; Pseudo EXEC system call for MSDOS
 ;
 
-.xlist
+;; .xlist
 include STDSW.ASM
-.list
+;; .list
 
 TITLE   STDPROC - process maintenance for MSDOS
 NAME    STDPROC

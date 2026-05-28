@@ -3,10 +3,10 @@ page 80,132
 ;
 title CP/DOS KbdSetStatus
 
-        .sall
-        .xlist
+        ;; .sall
+        ;; .xlist
         include KBD.INC       ; kbd set status data structure
-        .list
+        ;; .list
 
 kbddata segment word public 'kbddata'
 

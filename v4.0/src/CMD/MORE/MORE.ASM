@@ -32,17 +32,17 @@ EAISBINARY	      equ     02h	 ;AN001; ;ea_type
 EASYSTEM	      equ     8000h	 ;AN001; ;ea_flags
 
 BREAK	MACRO	subtitle
-	SUBTTL	subtitle
+	;; SUBTTL	subtitle
 	PAGE
 ENDM
 
 	INCLUDE SYSCALL.INC
 
 	INCLUDE MORE.INC		 ;AN000; ;MORE strucs and equates
-	.XLIST				 ;AN000;
+	;; .XLIST				 ;AN000;
 	INCLUDE STRUC.INC		 ;AN000; ;Structured macros
 	INCLUDE SYSMSG.INC		 ;AN000; ;Message retriever code
-	.LIST				 ;AN000;
+	;; .LIST				 ;AN000;
 
 MSG_UTILNAME <MORE>			 ;AN000;
 
@@ -275,13 +275,13 @@ CURCOL	DB	1
 
 ANSI_BUF ANSI_STR <>			;AN000; ;buffer for IOCTL call
 
-.XLIST					;AN000;
+;; .XLIST					;AN000;
 MSG_SERVICES <MSGDATA>			;AN000; ;message retriever code
 MSG_SERVICES <LOADmsg,DISPLAYmsg,NOCHECKSTDIN>	;AN002;
 MSG_SERVICES <MORE.CL1> 		;AN000;
 MSG_SERVICES <MORE.CL2> 		;AN000;
 MSG_SERVICES <MORE.CLA> 		;AN000;
-.LIST					;AN000;
+;; .LIST					;AN000;
 
 CRLF	    DB	   13,10		   ;AC000;
 CRLF_LEN    DW	   $ - CRLF		   ;AC000;

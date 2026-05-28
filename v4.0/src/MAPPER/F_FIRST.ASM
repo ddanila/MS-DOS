@@ -95,10 +95,10 @@ dosxxx  segment byte public 'dos'
 ; *************************************************************************
 ;
         public  DosFindFirst
-        .sall
-        .xlist
+        ;; .sall
+        ;; .xlist
         include MACROS.INC
-        .list
+        ;; .list
 
 
 argframe     struc

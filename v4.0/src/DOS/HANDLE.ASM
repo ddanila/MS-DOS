@@ -27,7 +27,7 @@ NAME	HANDLE
 ;	A000  version 4.00  Jan. 1988
 ;
 
-.xlist
+;; .xlist
 ;
 ; get the appropriate segment definitions
 ;
@@ -40,7 +40,7 @@ INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
 include EA.INC
 include VERSION.INC
-.list
+;; .list
 
 	EXTRN	DOS_Read:NEAR, DOS_Write:NEAR
 

@@ -1,7 +1,7 @@
 
 
 
-.xlist									  ;AN000;
+;; .xlist									  ;AN000;
 include    DOSSEG.ASM							  ;AN000;
 
 CODE	SEGMENT BYTE PUBLIC  'CODE'                                       ;AN000;
@@ -9,7 +9,7 @@ CODE	SEGMENT BYTE PUBLIC  'CODE'                                       ;AN000;
 include    DOSSYM.INC							  ;AN000;
 include    DEVSYM.INC							  ;AN000;
 include    DOSCNTRY.INC 						  ;AN000;
-.list
+;; .list
 StackSize   =	180h			; gross but effective
 
 	i_need	VERFLG		       ; verify status flag		  ;AN000;

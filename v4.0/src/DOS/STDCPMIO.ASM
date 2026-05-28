@@ -3,10 +3,10 @@
 ; Standard device IO for MSDOS (first 12 function calls)
 ;
 
-.xlist
+;; .xlist
 include STDSW.ASM
 include DOSSEG.ASM
-.list
+;; .list
 
 TITLE   STDCPMIO - device IO for MSDOS
 NAME    STDCPMIO

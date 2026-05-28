@@ -22,7 +22,7 @@ dosxxx  segment byte public 'dos'
 ;*********************************************************************
 
             public   dosmkdir
-            .sall
+            ;; .sall
             include  MACROS.INC
 
 argframe         struc

@@ -62,7 +62,7 @@ title	DOS Print Utility
 ;    itself through in depth study of the comments AND the code.
 
 
-subttl	General Definition
+;; subttl	General Definition
 page
 
 
@@ -140,9 +140,9 @@ MaxFileLen equ	64
 					;    DOS filename
 
 
-.xlist
+;; .xlist
 BREAK	MACRO	subtitle
-	SUBTTL	subtitle
+	;; SUBTTL	subtitle
 	PAGE
 ENDM
 
@@ -162,7 +162,7 @@ stdprn	    EQU     4
 	INCLUDE SYSCALL.INC
 	INCLUDE MI.INC
 	include VERSIONA.INC
-.list
+;; .list
 
 
 error_busy		EQU	9

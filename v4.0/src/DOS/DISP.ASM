@@ -4,10 +4,10 @@
 ; Dispatcher code
 ;
 
-.xlist
+;; .xlist
 INCLUDE DOSSYM.INC
 include DOSSEG.ASM
-.list
+;; .list
 
 AsmVars <Kanji, Debug>
 

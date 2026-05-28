@@ -1,7 +1,7 @@
 TITLE	CHKDISK  - procedures that read or write to the disk
 page	,132					;
 
-	.xlist
+	;; .xlist
 	include CHKSEG.INC							;an005;bgb
 	INCLUDE CHKCHNG.INC
 	INCLUDE DOSSYM.INC
@@ -40,7 +40,7 @@ ASSUME	CS:DG,DS:DG,ES:DG,SS:DG
 	EXTRN	CHECKNOFMES:NEAR
 public read_disk, Read_once, write_disk, Write_once				;an005;bgb
 public ReadFt, seg_adj, calc_sp64k						;an005;bgb
-	.list
+	;; .list
 
 
 	pathlabl chkdisk

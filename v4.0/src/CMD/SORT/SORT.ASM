@@ -69,7 +69,7 @@ TITLE   SORT FILTER FOR DOS
 ;---    Macro definitions
 ;-------------------------
 BREAK   MACRO   subtitle
-        SUBTTL  subtitle
+        ;; SUBTTL  subtitle
         PAGE
 ENDM
 
@@ -157,15 +157,15 @@ EASYSTEM              equ     8000h      ;AN001;  ea_flags
 
         PAGE   ;
 ;---------------------;
-.xlist                ;
+;; .xlist                ;
 INCLUDE SYSCALL.INC   ;
 INCLUDE SYSMSG.INC    ;                 ;AN000; Include message equates and MACROS
-.list                 ;
+;; .list                 ;
 ;---------------------;
 
 MSG_UTILNAME <SORT>                     ;AN000;
 
-SUBTTL  Segments used in load order
+;; SUBTTL  Segments used in load order
 
 
 CODE    SEGMENT
@@ -989,10 +989,10 @@ prt_sort endp                           ;AN003;
 
         PAGE   ;
 ;--------------------
-.xlist
+;; .xlist
 INCLUDE PARSE.ASM
 include MSGDCL.INC
-.list
+;; .list
 ;--------------------
 
 CODE    ENDS
@@ -1012,7 +1012,7 @@ CONST   ENDS
 
 
 
-SUBTTL  Initialized Data
+;; SUBTTL  Initialized Data
 ;-------------------------------
 ;---    Stack Segment
 ;-------------------------------

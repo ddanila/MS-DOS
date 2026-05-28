@@ -90,13 +90,13 @@ COMMENT #
 
         .286P                 ; Enable recognition of 286 privileged instructs.
 
-        .XLIST                ; Turn off the listing
+        ;; .XLIST                ; Turn off the listing
         INCLUDE INDEDAT.INC   ; Include system data
 
         IF1                   ; Only include macros on the first pass of
         INCLUDE INDEOVP.MAC   ;   of the assembler
         ENDIF
-        .LIST                 ; Turn on the listing
+        ;; .LIST                 ; Turn on the listing
 
 SEX_ATTR        EQU     04B00H
 STACK_ATTR      EQU     00700H
@@ -632,7 +632,7 @@ POPREGS:                                ;                                   @P1C
 
 SEX     ENDP
 
-SUBTTL  HEXD - Convert DWORD in EAX to ASCII string at ES:DI
+;; SUBTTL  HEXD - Convert DWORD in EAX to ASCII string at ES:DI
 PAGE
 ;
 ;       INPUT:   EAX   = hex double word to display
@@ -666,7 +666,7 @@ HEXD    PROC    NEAR
 
 HEXD    ENDP
 
-SUBTTL  HEXW - Convert WORD in AX to ASCII string at ES:DI
+;; SUBTTL  HEXW - Convert WORD in AX to ASCII string at ES:DI
 PAGE
 ;
 ;       INPUT:   AX    = hex word to display
@@ -689,7 +689,7 @@ HEXW    PROC    NEAR
 
 HEXW    ENDP
 
-SUBTTL  HEXD - Convert BYTE in AL to ASCII string at ES:DI
+;; SUBTTL  HEXD - Convert BYTE in AL to ASCII string at ES:DI
 PAGE
 ;
 ;       INPUT:   AL    = hex byte to display
@@ -740,7 +740,7 @@ REG     MACRO   NAME,ROW,COL,L
         DW      &L                      ; Number of words in the register
         ENDM
 
-SUBTTL  Register table
+;; SUBTTL  Register table
 PAGE
 REG_TABLE LABEL NEAR
 ;

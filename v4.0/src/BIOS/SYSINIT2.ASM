@@ -60,13 +60,13 @@ flagseclim	equ 00100000B
 flagheads	equ 01000000B
 flagff		equ 10000000B
 
-.xlist
+;; .xlist
 ;	INCLUDE dossym.INC
 	include SMDOSSYM.INC	;J.K. Reduced version of DOSSYM.INC
 	INCLUDE DEVSYM.INC
 	include IOCTL.INC
 	include DEVMARK.INC
-.list
+;; .list
 
 	IF IBM EQ 0
 	IF IBMJAPVER EQ 0

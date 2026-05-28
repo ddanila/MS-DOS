@@ -106,7 +106,7 @@
 ;-      MACRO DEFINITIONS
 ;--------------------------
 BREAK   MACRO   subtitle
-        SUBTTL  subtitle
+        ;; SUBTTL  subtitle
         PAGE
 ENDM
 
@@ -114,11 +114,11 @@ ENDM
 ;---------------------------;
 ;-      INCLUDE FILES       ;
 ;---------------------------;
-.xlist                      ;
+;; .xlist                      ;
         INCLUDE SYSCALL.INC ;
         INCLUDE SYSMSG.INC  ;   ;AN000; Include message equates and MACROS
         INCLUDE FIND.INC    ;   ;AN000; Include find equates and MACROS
-.list                       ;
+;; .list                       ;
 ;---------------------------;
 
 MSG_UTILNAME <FIND>             ;AN000;
@@ -235,9 +235,9 @@ code    segment public
 
 ;
 ;--------------------
-.xlist
+;; .xlist
 INCLUDE PARSE.ASM
-.list
+;; .list
 ;--------------------
 
         EXTRN   heading:byte,heading_len:byte

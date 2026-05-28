@@ -173,10 +173,10 @@ dosxxx	segment byte public 'dos'
 ;*********************************************************************
 ;
 	    public   dosgetmessage
-	    .sall
-	    .xlist
+	    ;; .sall
+	    ;; .xlist
 	    include  MACROS.INC
-	    .list
+	    ;; .list
 
 argframe	    struc
 old_bp	    dw	     ?

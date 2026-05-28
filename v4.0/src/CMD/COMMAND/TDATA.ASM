@@ -25,7 +25,7 @@ btab	macro	b,sym
     dw	    WORD PTR offset sym		;; WASM: avoid E050 - force WORD type for EXTRN offset
     endm
 
-.xlist
+;; .xlist
 	INCLUDE COMSW.ASM				;AC000;
 	INCLUDE COMSEG.ASM
 	INCLUDE EA.INC					;AN030;
@@ -35,7 +35,7 @@ BREAK	MACRO	subtitle			;; WASM: moved before DIRENT.INC (uses Break)
 ENDM
 
 	INCLUDE DIRENT.INC				;AN042;
-.list
+;; .list
 
 ;
 ; WARNING: DO NOT INCLUDE DOSSYM.INC BECAUSE IT DESTROYS THE MACRO 'FMT' THAT
@@ -819,11 +819,11 @@ TRANDATA	ENDS
 
 TRANCODE	SEGMENT PUBLIC BYTE		;AN000;
 
-.xlist
+;; .xlist
 
 INCLUDE SYSMSG.INC				;AN000;
 
-.list
+;; .list
 
 ASSUME DS:TRANGROUP,ES:TRANGROUP,CS:TRANGROUP
 

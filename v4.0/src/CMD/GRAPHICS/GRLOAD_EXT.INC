@@ -1,4 +1,4 @@
-.XLIST										;AN000;
+;; .XLIST										;AN000;
 										;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;					;AN000;
 ;; DOS - GRAPHICS Command
@@ -52,4 +52,4 @@ SEQUENCE    EQU 4		       ;; Statement out of sequence		;AN000;
    EXTRN  PRT_BOX_ERROR:BYTE							;AN000;
 				       ;;					;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;					;AN000;
-.LIST										;AN000;
+;; .LIST										;AN000;

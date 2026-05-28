@@ -40,12 +40,12 @@ page	58,132
 NAME	tabdef
 ;
 
-.xlist
+;; .xlist
 	include VDMSEG.INC
 	include VDMSEL.INC
 	include DESC.INC
 	include PAGE.INC
-.list
+;; .list
 
 
 _TEXT SEGMENT

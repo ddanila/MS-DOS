@@ -19,7 +19,7 @@ dosxxx	segment byte public 'dos'
 ;*********************************************************************
 
 	    public   dosgetversion
-	    .sall
+	    ;; .sall
 	    include  MACROS.INC
 
 argframe	    struc

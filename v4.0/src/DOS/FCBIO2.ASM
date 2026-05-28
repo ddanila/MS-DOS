@@ -34,7 +34,7 @@ NAME	FCBIO2
 ;
 ;	A000	version 4.00  Jan. 1988
 ;
-.xlist
+;; .xlist
 ;
 ; get the appropriate segment definitions
 ;
@@ -46,7 +46,7 @@ CODE	SEGMENT BYTE PUBLIC  'CODE'
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
 include VERSION.INC
-.list
+;; .list
 
 	EXTRN	DOS_Read:NEAR, DOS_Write:NEAR
 	EXTRN	DOS_Open:NEAR, DOS_Create:NEAR

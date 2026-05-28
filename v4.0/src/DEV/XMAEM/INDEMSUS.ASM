@@ -56,7 +56,7 @@ COMMENT #
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 #
 
-SUBTTL	   Messages							;   D0A
+;; SUBTTL	   Messages							;   D0A
 PAGE									;   D0A
 									;   D0A
 PROG	   SEGMENT PARA PUBLIC	'PROG'                                  ;   D0A

@@ -3,7 +3,7 @@
 PAGE 55,132				;AN000;
 NAME	SELQUIT 			;AN000;
 TITLE	SELQUIT - Exit Panel support for SELECT.EXE;AN000;
-SUBTTL	selquit.asm			;AN000;
+;; SUBTTL	selquit.asm			;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
 ;
@@ -20,7 +20,7 @@ SUBTTL	selquit.asm			;AN000;
 ;	   ;AN001; Added flag to indicate error processing was in effect.
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-.XLIST					;AN000;
+;; .XLIST					;AN000;
 	INCLUDE    PANEL.MAC		;AN000;
 	INCLUDE    PCEQUATE.INC 	;AN000;
 	INCLUDE    PAN-LIST.INC 	;AN000;
@@ -28,7 +28,7 @@ SUBTTL	selquit.asm			;AN000;
 	INCLUDE    EXT.INC		;AN000;
 	INCLUDE    STRUC.INC		;AN000;
 	INCLUDE    MACROS.INC		;AN000;
-.LIST					;AN000;
+;; .LIST					;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
 ; Setup Environment

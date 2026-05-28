@@ -2,11 +2,11 @@
 
 ; include SYSMSG.INC
 
-.xlist
+;; .xlist
 
 	include SYSMSG.INC		;				       ;AN000;
 
-.list
+;; .list
 
 	MSG_UTILNAME <SYS>		;				       ;AN000;
 
@@ -21,19 +21,19 @@ ASSUME	CS:CODE,DS:nothing,ES:nothing
 
 ;  MSG_SERVICES <SYS.CL1,SYS.CL2,SYS.CLA,SYS.CLB,SYS.CLC,SYS.CLD>		;AN000;
 
-.xlist
+;; .xlist
 
 	MSG_SERVICES <SYS.CL1,SYS.CL2,SYS.CLA,SYS.CLB,SYS.CLC,SYS.CLD> ;       ;AN000;
 
-.list
+;; .list
 
 ;  MSG_SERVICES <LOADmsg,DISPLAYmsg,INPUTmsg,CHARmsg,NOVERCHECKmsg>
 
-.xlist
+;; .xlist
 
 	MSG_SERVICES <LOADmsg,DISPLAYmsg,INPUTmsg,CHARmsg,NOVERCHECKmsg> ;		     ;AN000;
 
-.list
+;; .list
 
 
 IFNDEF FALSE				;; WASM: -Mx uppercases 'false'; DOSMAC.INC already defines FALSE=0
@@ -62,7 +62,7 @@ ASSUME	CS:CODE,DS:CODE,ES:nothing
 
 include PARSE.ASM			;				       ;AN000;
 
-.list
+;; .list
 
 Data_Space LABEL BYTE			;				       ;AN000;
 

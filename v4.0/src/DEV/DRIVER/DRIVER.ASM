@@ -30,9 +30,9 @@ code segment byte public
 assume cs:code,ds:code,es:code
 
 ;AN000;
-.xlist
+;; .xlist
 include SYSMSG.INC			;equates and macros
-.list
+;; .list
 MSG_UTILNAME <DRIVER>
 
 iTEST = 0

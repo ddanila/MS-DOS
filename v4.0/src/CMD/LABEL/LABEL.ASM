@@ -125,9 +125,9 @@
 ;*									     *
 ;*****************************************************************************
 HEADER	MACRO	TEXT
-.XLIST
-	SUBTTL	&TEXT
-.LIST
+;; .XLIST
+	;; SUBTTL	&TEXT
+;; .LIST
 	PAGE
 	ENDM
 	HEADER	<DEFINITIONS - LOCAL MACROS AND LOCAL EQUATES>

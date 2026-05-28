@@ -1,5 +1,5 @@
 
-.XLIST
+;; .XLIST
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; DOS - NLS Support - KEYB Command
@@ -46,5 +46,5 @@ DESIG_CP_STRUC	 STRUC		       ;;
 DESIG_CP_STRUC	  ENDS		       ;;
 				       ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-.LIST
+;; .LIST
 

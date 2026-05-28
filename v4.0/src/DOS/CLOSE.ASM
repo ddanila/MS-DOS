@@ -17,7 +17,7 @@ NAME	DOS_CLOSE
 ;
 ; get the appropriate segment definitions
 ;
-.xlist
+;; .xlist
 include DOSSEG.ASM
 
 CODE	SEGMENT BYTE PUBLIC  'CODE'
@@ -25,7 +25,7 @@ CODE	SEGMENT BYTE PUBLIC  'CODE'
 
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
-.list
+;; .list
 
 Installed = TRUE
 

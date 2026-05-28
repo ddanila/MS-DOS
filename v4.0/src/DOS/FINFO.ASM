@@ -15,7 +15,7 @@ NAME	FILE_INFO
 ;
 ; get the appropriate segment definitions
 ;
-.xlist
+;; .xlist
 include DOSSEG.ASM
 
 CODE	SEGMENT BYTE PUBLIC  'CODE'
@@ -25,7 +25,7 @@ INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
 include FASTXXXX.INC
 include FASTOPEN.INC
-.list
+;; .list
 
 Installed = TRUE
 

@@ -28,10 +28,10 @@ vioxxx  segment byte public 'vio'
 ; *************************************************************************
 
         public  viowrtcharstratt
-        .sall
-        .xlist
+        ;; .sall
+        ;; .xlist
         include MACROS.INC
-        .list
+        ;; .list
 
 full_scr_err equ 0001h
 error_bvs_parameter     equ 0002h

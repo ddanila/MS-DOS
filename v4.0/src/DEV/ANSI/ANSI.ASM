@@ -23,7 +23,7 @@ TRUE     EQU 0FFFFh
 FALSE    EQU 0
 
 BREAK   MACRO   subtitle
-        SUBTTL  subtitle
+        ;; SUBTTL  subtitle
         PAGE    ,132
 ENDM
 
@@ -42,9 +42,9 @@ ENDM
 INCLUDE VECTOR.INC
 INCLUDE MULT.INC
 INCLUDE ANSI.INC                ; WGR equates and structures                             ;AN000;
-.xlist
+;; .xlist
 	INCLUDE STRUC.INC               ; WGR include STRUC macros                               ;AN000;
-.list
+;; .list
 
 BREAK <ANSI driver code>
 

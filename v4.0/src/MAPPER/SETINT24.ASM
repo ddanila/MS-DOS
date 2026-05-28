@@ -19,10 +19,10 @@ dosxxx	segment byte public 'dos'                               ;AN000;
 
 
 	    public   set_int24_vector				;AN000;
-	    .sall						;AN000;
-	    .xlist						;AN000;
+	    ;; .sall						;AN000;
+	    ;; .xlist						;AN000;
 	    include  MACROS.INC 				;AN000;
-	    .list						;AN000;
+	    ;; .list						;AN000;
 
 argframe	    struc						;AN000;
 old_bp	    dw	     ?						;AN000;

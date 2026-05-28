@@ -44,10 +44,10 @@ ENDIF					;
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 					;
-.XLIST					;
+;; .XLIST					;
 INCLUDE SYSMSG.INC			; WGR				       ;AN000;
 MSG_UTILNAME <DISPLAY>			; WGR				       ;AN000;
-.LIST					;
+;; .LIST					;
 					;
 					;
 CODE	SEGMENT PUBLIC BYTE 'CODE'      ;
@@ -949,13 +949,13 @@ MODIFY_ID_NAME	ENDP			;
 ;
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-.XLIST
+;; .XLIST
 MSG_SERVICES <MSGDATA>			; WGR				       ;AN000;
 MSG_SERVICES <DISPLAYmsg,LOADmsg,CHARmsg> ; WGR 			       ;AN000;
 MSG_SERVICES <DISPLAY.CL1>		; WGR				       ;AN000;
 MSG_SERVICES <DISPLAY.CL2>		; WGR				       ;AN000;
 MSG_SERVICES <DISPLAY.CLA>		; WGR				       ;AN000;
-.LIST					;
+;; .LIST					;
 					;
 include MSGDCL.INC			;
 					;

@@ -112,8 +112,8 @@ IF1
 ENDIF
 NAME	FASTINIT
 
-.XCREF
-.XLIST
+;; .XCREF
+;; .XLIST
 
 
 TRUE	   EQU	  0FFFFh									   ;AN000;
@@ -132,8 +132,8 @@ INCLUDE    FILEMODE.INC 									   ;AN000;
 INCLUDE    MULT.INC										   ;AN000;
 include	   VERSION.INC
 
-.LIST
-.CREF
+;; .LIST
+;; .CREF
 
 INCLUDE    FASTSEGS.INC 									   ;AN000;
 INCLUDE    FASTOPEN.INC 									   ;AN000;
@@ -2563,7 +2563,7 @@ SET_DRIVE_CACHE_HEADER	 ENDP
 
 
 
-subttl	Convert to caps
+;; subttl	Convert to caps
 page
 ;=========================================================================
 ; Procedure: Convert_to_caps

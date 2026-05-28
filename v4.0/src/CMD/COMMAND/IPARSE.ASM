@@ -3,9 +3,9 @@
 ;	SCCSID = @(#)iparse.asm 4.1 87/04/28
 TITLE	COMMAND interface to SYSPARSE
 
-.xlist
+;; .xlist
 	INCLUDE COMSEG.ASM		;AN000;
-.list
+;; .list
 
 
 INIT		SEGMENT PUBLIC PARA	;AN000;
@@ -24,9 +24,9 @@ ASSUME	CS:RESGROUP,DS:RESGROUP,ES:NOTHING,SS:NOTHING	;AN000;
 	QusSW	equ	0		;AN025; do not include quoted string
 	DrvSW	equ	0		;AN025; do not include drive only
 
-.xlist
+;; .xlist
 ;AD054; INCLUDE parse.asm		;AN000;
-.list
+;; .list
 
 
 INIT	    ends			;AN000;

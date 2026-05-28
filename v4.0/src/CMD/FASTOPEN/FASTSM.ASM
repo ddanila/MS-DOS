@@ -99,9 +99,9 @@
 ; =  =	=  =  =  =  =  =  =  =	=  =
 
 HEADER	MACRO	TEXT			;;					;AN000;
-.XLIST					;;
-	SUBTTL	TEXT
-.LIST					;;
+;; .XLIST					;;
+	;; SUBTTL	TEXT
+;; .LIST					;;
 	PAGE				;;					;AN000;
 	ENDM				;;					;AN000;
 ; =  =	=  =  =  =  =  =  =  =	=  =
@@ -134,10 +134,10 @@ COPYRIGHT  DB	 "MS DOS FASTOPEN Utility " ;                 ;AN000;
 				   ;DEFAULT=NO TIMEmsg
 				   ;DEFAULT=NO DATEmsg
 
-.xlist
+;; .xlist
 	MSG_SERVICES <LOADmsg,GETmsg,DISPLAYmsg,INPUTmsg,CHARmsg,NUMmsg> ;AN000;
 	include MSGDCL.INC
-.list
+;; .list
 ; = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 CSEG_INIT	ENDS			;
 	   END			   ;						;AN000;

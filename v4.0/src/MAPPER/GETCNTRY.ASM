@@ -28,7 +28,7 @@ dosxxx  segment byte public 'dos'
 ;*********************************************************************
 
             public   dosgetctryinfo
-            .sall
+            ;; .sall
             include  MACROS.INC
 
 

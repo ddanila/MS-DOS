@@ -1,7 +1,7 @@
 TITLE	CHKFAT	- procedures that acces the fat and/or fatmap
 page	,132					;
 
-	.xlist
+	;; .xlist
 	include CHKSEG.INC							;an005;bgb
 	INCLUDE CHKCHNG.INC
 	INCLUDE DOSSYM.INC
@@ -58,7 +58,7 @@ public CHAINREC, MAKFILLP, GOTENT, OPAGAIN, GOTORPHNAM, ENTMADE, NEXTENT
 public NXTORP, RET100, nextorph
 public AMDONE, REWRITE, WRTLOOP
 public WRTOK, NOWRITE, DONE, CROSSCHK, calc_fat_addr, pack, unpack
-	.list
+	;; .list
 PHONEY_STACK DW 5 DUP(0)							;ac048;bgb
 
 	pathlabl chkfat
@@ -885,7 +885,7 @@ RET100: pop	es			;restore es				;ac048;bgb
 
 ;*****************************************************************************
 ;*****************************************************************************
-SUBTTL	AMDONE	- Finish up routine
+;; SUBTTL	AMDONE	- Finish up routine
 PAGE
 Public	AmDone
 AMDONE:

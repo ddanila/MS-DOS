@@ -3,7 +3,7 @@
 PAGE 55,132							;AN000;
 NAME	SELECT							;AN000;
 TITLE	SELECT - DOS - SELECT.EXE				;AN000;
-SUBTTL	SELECT5A.asm						;AN000;
+;; SUBTTL	SELECT5A.asm						;AN000;
 .ALPHA								;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
@@ -34,7 +34,7 @@ DATA	SEGMENT BYTE PUBLIC 'DATA'                              ;AN000;
 	EXTRN	SEL_FLG:BYTE					;AN000;
 DATA	       ENDS						;AN000;
 								;
-.XLIST								;AN000;
+;; .XLIST								;AN000;
 	INCLUDE    PANEL.MAC					;AN000;
 	INCLUDE    SELECT.INC					;AN000;
 	INCLUDE    CASTRUC.INC					;AN000;
@@ -44,7 +44,7 @@ DATA	       ENDS						;AN000;
 	INCLUDE    VARSTRUC.INC 				;AN000;
 	INCLUDE    ROUT_EXT.INC 				;AN000;
 	INCLUDE    PAN-LIST.INC 				;AN000;
-.LIST								;AN000;
+;; .LIST								;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 SELECT	SEGMENT PARA PUBLIC 'SELECT'                            ;AN000;segment for far routine
 	ASSUME	CS:SELECT,DS:DATA				;AN000;

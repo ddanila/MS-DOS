@@ -6,12 +6,12 @@ TITLE	PART4 COMMAND Transient routines.
 ;	Internal commands DIR,PAUSE,ERASE,TYPE,VOL,VER
 
 	INCLUDE COMSW.ASM
-.xlist
+;; .xlist
 	INCLUDE DOSSYM.INC
 	INCLUDE COMSEG.ASM
 	INCLUDE COMEQU.ASM		;AC000;
 	include IOCTL.INC		;AN000;
-.list
+;; .list
 
 DATARES SEGMENT PUBLIC BYTE		;AN020;
 	EXTRN	append_flag:byte	;AN020;

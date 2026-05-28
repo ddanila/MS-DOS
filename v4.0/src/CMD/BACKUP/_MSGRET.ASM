@@ -43,12 +43,12 @@ DGROUP	GROUP	CONST, _BSS, _DATA
 ;-------------------------------------------------------------------
 
 _DATA	segment
-.XLIST
-.XCREF
+;; .XLIST
+;; .XCREF
 	MSG_SERVICES <MSGDATA>		;DATA AREA FOR THE MESSAGE HANDLER	     ;AN000;
 
-.LIST
-.CREF
+;; .LIST
+;; .CREF
 _DATA	ends
 
 
@@ -61,12 +61,12 @@ _TEXT	segment
 					;DEFAULT=NUMmsg
 					;DEFAULT=NO TIMEmsg
 					;DEFAULT=NO DATEmsg
-.XLIST
-.XCREF
+;; .XLIST
+;; .XCREF
 	MSG_SERVICES <LOADmsg,DISPLAYmsg,GETmsg,INPUTmsg,CHARmsg,NUMmsg,TIMEmsg,DATEmsg,FARmsg> ;AN000;
 	MSG_SERVICES <BACKUP.CTL,BACKUP.CLA,BACKUP.CL1,BACKUP.CL2> ;AN000;
-.LIST
-.CREF
+;; .LIST
+;; .CREF
 ;-------------------------------------------------------------------
 
 _sysloadmsg proc near

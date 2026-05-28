@@ -6,9 +6,9 @@ NAME    DISP
 ; System call dispatch code
 ;
 
-.xlist
+;; .xlist
 include STDSW.ASM
-.list
+;; .list
 
 include DISP.ASM
 	END

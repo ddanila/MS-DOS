@@ -46,10 +46,10 @@ FindSegment     ends
 ; *************************************************************************
 
         public  DosFindClose
-        .sall
-        .xlist
+        ;; .sall
+        ;; .xlist
         include MACROS.INC
-        .list
+        ;; .list
 
 argframe     struc
 old_bp    dw      ?

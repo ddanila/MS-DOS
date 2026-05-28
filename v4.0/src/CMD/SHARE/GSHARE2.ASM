@@ -12,12 +12,12 @@
 
 					   ;  INCLUDE DOSSYM.INC
 					   ;  INCLUDE SYSMSG.INC
-				   .xlist
-				   .xcref
+				   ;; .xlist
+				   ;; .xcref
 				   INCLUDE DOSSYM.INC
 				   INCLUDE SYSMSG.INC
-				   .cref
-				   .list
+				   ;; .cref
+				   ;; .list
 				   page 80,132
 
 				   MSG_UTILNAME <SHARE>
@@ -104,7 +104,7 @@ ERRNZ				   Macro x
 				   ; define our own code segment
 				   ;---------------------------------------
 
-	.sall
+	;; .sall
 	IF INSTALLED EQ 0
 
 	    CODE    SEGMENT BYTE PUBLIC 'CODE'
@@ -1312,7 +1312,7 @@ ShCloseDone:
 
    EndProc ShCloseFile
 
-   .xall
+   ;; .xall
    Break <ShSU - update all SFTs for a specified change>
 ;******************* START OF SPECIFICATIONS ***********************************
 ;

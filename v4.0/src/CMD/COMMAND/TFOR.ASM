@@ -6,13 +6,13 @@ TITLE	Part3 COMMAND Transient Routines
 ;     For loop processing routines
 
 
-.xlist
+;; .xlist
 	include COMSW.ASM
 	INCLUDE DOSSYM.INC
 	INCLUDE DEVSYM.INC
 	include COMSEG.ASM
 	include COMEQU.ASM
-.list
+;; .list
 
 
 DATARES 	SEGMENT PUBLIC BYTE	;AC000;

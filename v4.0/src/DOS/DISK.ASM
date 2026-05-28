@@ -25,7 +25,7 @@ NAME	Disk
 ;
 ; get the appropriate segment definitions
 ;
-.xlist
+;; .xlist
 include DOSSEG.ASM
 include FASTSEEK.INC				;AN000;
 include FASTXXXX.INC				;AN000;
@@ -36,7 +36,7 @@ CODE	SEGMENT BYTE PUBLIC  'CODE'
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
 include VERSION.INC
-.list
+;; .list
 
 Installed = TRUE
 

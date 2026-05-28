@@ -5,13 +5,13 @@ TITLE	COMMAND Initialization
 
 	INCLUDE COMSW.ASM
 
-.xlist
+;; .xlist
 	INCLUDE DOSSYM.INC
 	include DOSCNTRY.INC		;AC000;
 	INCLUDE COMSEG.ASM
 	INCLUDE COMEQU.ASM
 	include RESMSG.EQU		;AN000;
-.list
+;; .list
 
 
 ENVIRONSIZ		EQU	0A0H	;Must agree with values in EVIRONMENT segment
@@ -1709,11 +1709,11 @@ Set_ext_2f	endp				;AN060;
 
 ASSUME	DS:RESGROUP, ES:RESGROUP
 
-.xlist
+;; .xlist
 
 INCLUDE SYSMSG.INC				;AN000; include message services
 
-.list
+;; .list
 
 MSG_UTILNAME <COMMAND>				;AN000; define utility name
 

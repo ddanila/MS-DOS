@@ -30,7 +30,7 @@
 ;
 ;******************************************************************************
 ifndef INC_LIST
-.xlist
+;; .xlist
 endif
 
 ifndef	NOHIMEM
@@ -164,5 +164,5 @@ endif
 ; ring 0 stack size
 STACK0_SIZE	equ	512
 
-.list	; end of VDMSEG.INC
+;; .list	; end of VDMSEG.INC
 

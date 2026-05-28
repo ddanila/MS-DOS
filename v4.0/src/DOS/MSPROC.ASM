@@ -3,9 +3,9 @@
 ; Pseudo EXEC system call for DOS
 ;
 
-.xlist
+;; .xlist
 include MSSW.ASM
-.list
+;; .list
 
 TITLE	IBMPROC - process maintenance
 NAME	IBMPROC

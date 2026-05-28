@@ -1,6 +1,6 @@
 	PAGE	,132								;AN000;
 	TITLE	DOS - GRAPHICS Command  -	Common modules			;AN000;
-.xlist										;AN000;
+;; .xlist										;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;					;AN000;
 ;; DOS - GRAPHICS Command
 ;; (c) Copyright 1988 Microsoft
@@ -40,7 +40,7 @@
 ;;										;AN000;
 ;;										;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;					;AN000;
-.list										;AN000;
+;; .list										;AN000;
 CODE	SEGMENT PUBLIC 'CODE'                                                   ;AN000;
 	ASSUME		CS:CODE,DS:CODE 					;AN000;
 INCLUDE GRPATTRN.INC								;AN000;

@@ -1,4 +1,4 @@
-.XLIST
+;; .XLIST
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; DOS - NLS Support - KEYB Command
@@ -48,5 +48,5 @@
         EXTRN    TEMP_SHARED_DATA:BYTE        ;;
                                               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-.LIST
+;; .LIST
 

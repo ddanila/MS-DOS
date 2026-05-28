@@ -23,10 +23,10 @@ dosxxx	segment byte public 'dos'
 ;*********************************************************************
 
 	    public   dosqfilemode
-	    .sall
-	    .xlist
+	    ;; .sall
+	    ;; .xlist
 	    include  MACROS.INC
-	    .list
+	    ;; .list
 
 error_code  equ      0002h
 

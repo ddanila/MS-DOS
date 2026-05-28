@@ -54,12 +54,12 @@ TITLE	    PARSE CODE AND CONTROL BLOCKS FOR ANSI.SYS
 
 
 INCLUDE     ANSI.INC	    ; ANSI equates and structures				 ;AN000;
-.XLIST
+;; .XLIST
 	INCLUDE     STRUC.INC	    ; Structured macros 					 ;AN000;
 
 INCLUDE     SYSMSG.INC	    ; Message retriever code					 ;AN000;
 MSG_UTILNAME <ANSI>	    ; Let message retriever know its ANSI.SYS			 ;AN000;
-.LIST
+;; .LIST
 
 PUBLIC	    PARSE_PARM	     ; near procedure for parsing DEVICE= statement		 ;AN000;
 
@@ -84,7 +84,7 @@ Val3SW	      EQU     0 								 ;AN000;
 CODE	      SEGMENT  PUBLIC BYTE
 	      ASSUME CS:CODE
 
-.XLIST
+;; .XLIST
 MSG_SERVICES <MSGDATA>									 ;AN000;
 MSG_SERVICES <DISPLAYmsg,LOADmsg,CHARmsg>						 ;AN000;
 MSG_SERVICES <ANSI.CL1> 								 ;AN000;
@@ -92,7 +92,7 @@ MSG_SERVICES <ANSI.CL2> 								 ;AN000;
 MSG_SERVICES <ANSI.CLA> 								 ;AN000;
 
 INCLUDE     PARSE.ASM	    ; Parsing code						 ;AN000;
-.LIST
+;; .LIST
 
 
 EXTRN	    SWITCH_X:BYTE	 ; /X switch flag						 ;AN000;

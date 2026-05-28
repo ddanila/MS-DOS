@@ -86,9 +86,9 @@ TITLE   ANSI Generic IOCTL Code
 ;******************************************************************************
 
 INCLUDE     ANSI.INC                                                                               ;AN000;
-.XLIST                                                                                             ;AN000;
+;; .XLIST                                                                                             ;AN000;
 	INCLUDE     STRUC.INC                                                                              ;AN000;
-.LIST                                                                                              ;AN000;
+;; .LIST                                                                                              ;AN000;
                                                                                                    ;AN000;
 PUBLIC      GENERIC_IOCTL                                                                          ;AN000;
 PUBLIC      FUNC_INFO                                                                              ;AN000;

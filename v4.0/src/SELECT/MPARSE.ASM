@@ -11,7 +11,7 @@ DATA	       ENDS			;AN000;DATA
 ;	PARSER INFORMATION
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-.XLIST					;AN000;
+;; .XLIST					;AN000;
 FARSW	EQU	1			;AN000;
 DATESW	EQU	0			;AN000;
 TIMESW	EQU	0			;AN000;
@@ -25,7 +25,7 @@ SWSW	EQU	0			;AN000;
 VAL1SW	EQU	1			;AN000;
 VAL2SW	EQU	1			;AN000;
 VAL3SW	EQU	1			;AN000;
-.LIST					;AN000;
+;; .LIST					;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 PARSER	SEGMENT PARA PUBLIC 'PARSER'    ;AN000;
 	ASSUME	CS:PARSER,DS:DATA,ES:DATA;AN000;

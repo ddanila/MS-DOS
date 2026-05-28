@@ -28,11 +28,11 @@ dosxxx	segment byte public 'dos'
 ; *************************************************************************
 
 	public	DosSetFsInfo
-	.sall
-	.xlist
+	;; .sall
+	;; .xlist
 	include MACROS.INC
 	include ERROR.INC
-	.list
+	;; .list
 
 argframe	struc
 old_bp	dw	?

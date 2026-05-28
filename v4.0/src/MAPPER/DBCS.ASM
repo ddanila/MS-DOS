@@ -21,7 +21,7 @@ dosxxx	segment byte public 'dos'
 ;*********************************************************************
 ;
 	public	DosGetDBCSEv
-	.sall
+	;; .sall
 	include MACROS.INC
 
 argframe	struc

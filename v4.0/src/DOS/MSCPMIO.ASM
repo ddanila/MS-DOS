@@ -3,10 +3,10 @@
 ; Standard device IO for MSDOS (first 12 function calls)
 ;
 
-.xlist
+;; .xlist
 include MSSW.ASM
 include DOSSEG.ASM
-.list
+;; .list
 
 TITLE	IBMCPMIO - device IO for MSDOS
 NAME	IBMCPMIO

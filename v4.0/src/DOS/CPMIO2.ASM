@@ -2,9 +2,9 @@
 TITLE	CPMIO2 - device IO for MSDOS
 NAME	CPMIO2
 
-.xlist
+;; .xlist
 include DOSSEG.ASM
-.list
+;; .list
 
 ;
 ; Old style CP/M 1-12 system calls to talk to reserved devices
@@ -28,10 +28,10 @@ include DOSSEG.ASM
 CODE	SEGMENT BYTE PUBLIC  'CODE'
 	ASSUME	SS:DOSGROUP,CS:DOSGROUP
 
-.xlist
+;; .xlist
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
-.list
+;; .list
 
 ; The following routines form the console I/O group (funcs 1,2,6,7,8,9,10,11).
 ; They assume ES and DS NOTHING, while not strictly correct, this forces data

@@ -125,7 +125,7 @@ data	ends
 ;-------------------------------------------------------------------------------
 ; Constants
 
-.xlist
+;; .xlist
 INCLUDE DOSMAC.INC
 INCLUDE FORMACRO.INC
 INCLUDE FOREQU.INC
@@ -145,7 +145,7 @@ INCLUDE DIRENT.INC
 INCLUDE IOCTL.INC
 INCLUDE VERSION.INC
 
-.list
+;; .list
 
 ;-------------------------------------------------------------------------------
 ; And this is the actual data

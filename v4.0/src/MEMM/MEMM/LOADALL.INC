@@ -27,7 +27,7 @@
 ;******************************************************************************
 ;
 ifndef INC_LIST
-.xlist
+;; .xlist
 endif
 
 LODAL286	equ	050Fh		; instruction as a WORD
@@ -170,4 +170,4 @@ ll3_temps	db	134h dup (00)	; padding for internal temps
 
 LoadAllBuf386	ends
 
-.list	; end of LOADALL.INC
+;; .list	; end of LOADALL.INC

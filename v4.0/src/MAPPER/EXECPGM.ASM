@@ -47,10 +47,10 @@ dosxxx	segment byte public 'dos'
 ; *************************************************************************
 
 	public	dosexecpgm
-	.sall
-	.xlist
+	;; .sall
+	;; .xlist
 	include MACROS.INC
-	.list
+	;; .list
 
 inv_parm equ 0002
 not_suf_mem equ 0004

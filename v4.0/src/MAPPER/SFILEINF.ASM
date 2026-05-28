@@ -33,10 +33,10 @@ dosxxx	segment byte public 'dos'
 ;*********************************************************************
 
 	    public   dossetfileinfo
-	    .sall
-	    .xlist
+	    ;; .sall
+	    ;; .xlist
 	    include  MACROS.INC
-	    .list
+	    ;; .list
 
 
 

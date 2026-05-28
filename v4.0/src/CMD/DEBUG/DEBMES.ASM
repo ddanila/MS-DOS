@@ -61,11 +61,11 @@ PAGE	60,132				;
 ;	     "Licensed Material - Property of Microsoft  "
 ;
 ;******************** END OF SPECIFICATIONS ******************************
-.xlist
+;; .xlist
 
 	include SYSMSG.INC		;an000;message retriever
 
-.list
+;; .list
 
 msg_utilname <DEBUG>			;an000;DEBUG messages
 
@@ -152,11 +152,11 @@ code	segment public byte		;an000;code segment
 ;;	public	disp_fatal		;an000;fatal error display
 	public	pre_load_message	;an000;message pre load
 
-.xlist
+;; .xlist
 
 msg_services <MSGDATA>
 
-.list
+;; .list
 
 ;=========================================================================
 ;	  include sysmsg.inc - message retriever services
@@ -173,7 +173,7 @@ msg_services <MSGDATA>
 ;		   CLSDmsg
 ;=========================================================================
 
-.xlist
+;; .xlist
 
 msg_services <LOADmsg>			;an000;load the messages
 msg_services <DISPLAYmsg,CHARmsg,NUMmsg>;an000;get and display messages
@@ -182,7 +182,7 @@ msg_services <DEBUG.CLA,DEBUG.CLB>	;an000;message types
 msg_services <DEBUG.CLC,DEBUG.CLD>	;an000;
 msg_services <DEBUG.CL1,DEBUG.CL2>	;an000;
 
-.list
+;; .list
 
 ;=========================================================================
 ; printf: printf is a replacement of the printf procedure used in DOS

@@ -3,7 +3,7 @@
 PAGE	60,132							;AN000;
 NAME	SELECT							;AN000;
 TITLE	SELECT0 - DOS - SELECT.EXE				;AN000;
-SUBTTL	select0.asm						;AN000;
+;; SUBTTL	select0.asm						;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
 ;	SELECT0.ASM : Copyright 1988 Microsoft
@@ -252,7 +252,7 @@ AGROUP GROUP CODE,CODE_FAR,DATA,PARSER,SERVICE,SELECT,OUR_STACK,ZSEG  ;AN000;
 ;
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-.XLIST								;AN000;
+;; .XLIST								;AN000;
 	INCLUDE PANEL.MAC					;AN000;
 	INCLUDE STRUC.INC					;AN000;
 	INCLUDE MACROS.INC					;AN000;
@@ -260,7 +260,7 @@ AGROUP GROUP CODE,CODE_FAR,DATA,PARSER,SERVICE,SELECT,OUR_STACK,ZSEG  ;AN000;
 	INCLUDE ROUT_EXT.INC					;AN000;
 	INCLUDE EXT.INC 					;AN000;
 	INCLUDE PAN-LIST.INC					;AN000;
-.LIST								;AN000;
+;; .LIST								;AN000;
 								;
 	EXTRN	DEALLOCATE_MEMORY_CALL:FAR			;AN000;
 	EXTRN	CHECK_VERSION:NEAR				;AN000;

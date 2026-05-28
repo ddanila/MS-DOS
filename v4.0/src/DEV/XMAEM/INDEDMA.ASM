@@ -97,14 +97,14 @@ COMMENT #
 
         .286P                 ; Enable recognition of 286 privileged instructs.
 
-        .XLIST                ; Turn off the listing
+        ;; .XLIST                ; Turn off the listing
         INCLUDE INDEDAT.INC   ; Include system data structures and equates
 
         IF1                   ; Only include macros on the first pass
         INCLUDE INDEOVP.MAC   ; Override prefix macros
         INCLUDE INDEINS.MAC   ; 386 instruction macros
         ENDIF
-        .LIST                 ; Turn the listing back on
+        ;; .LIST                 ; Turn the listing back on
 
 PROG    SEGMENT PARA PUBLIC 'PROG'
 
@@ -217,11 +217,11 @@ PAGE
 ; handle are set to the corresponding routines for those ports.
 
 OUT_TABLE:
-        .XLIST
+        ;; .XLIST
         REPT    32
         JMP     DOOUT
         ENDM
-        .LIST
+        ;; .LIST
 OUT_TABLE_END:
 
 ; Set the entries for the ports we want to handle.

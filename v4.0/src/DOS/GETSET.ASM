@@ -29,7 +29,7 @@ NAME   GETSET
 ;	A006   D503-- fake version for IBMCACHE
 ;	A008   P4070- faske version for MS WINDOWS
 
-.xlist
+;; .xlist
 ;
 ; get the appropriate segment definitions
 ;
@@ -45,7 +45,7 @@ CODE	SEGMENT BYTE PUBLIC  'CODE'
 include DOSSYM.INC
 include DEVSYM.INC
 include DOSCNTRY.INC
-.list
+;; .list
 
 	i_need	USERNUM,WORD
 	i_need	MSVERS,WORD

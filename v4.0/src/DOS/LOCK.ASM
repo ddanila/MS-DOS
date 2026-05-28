@@ -15,11 +15,11 @@ include DOSSEG.ASM
 CODE	SEGMENT BYTE PUBLIC  'CODE'
 	ASSUME	SS:DOSGROUP,CS:DOSGROUP
 
-.xlist
+;; .xlist
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
 include LOCK.INC		     ;AN000;
-.list
+;; .list
 
 AsmVars <IBM, Installed>
 

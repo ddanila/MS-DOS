@@ -91,9 +91,9 @@
 ; =  =	=  =  =  =  =  =  =  =	=  =
 
 HEADER	MACRO	TEXT			;;					;AN000;
-.XLIST
-	SUBTTL	TEXT
-.LIST
+;; .XLIST
+	;; SUBTTL	TEXT
+;; .LIST
 	PAGE				;;					;AN000;
 	ENDM				;;					;AN000;
 

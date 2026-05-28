@@ -38,10 +38,10 @@ dosxxx  segment byte public 'dos'
 ; *************************************************************************
 
         public  DosChDir
-        .sall
-        .xlist
+        ;; .sall
+        ;; .xlist
         include MACROS.INC
-        .list
+        ;; .list
 
 argframe     struc
 old_bp  dw      ?

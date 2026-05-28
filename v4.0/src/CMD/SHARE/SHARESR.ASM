@@ -10,13 +10,13 @@
 
 				   NAME Sharsr
 
-				   .xlist
-				   .xcref
+				   ;; .xlist
+				   ;; .xcref
 
 				   include SYSMSG.INC
 
-				   .cref
-				   .list
+				   ;; .cref
+				   ;; .list
 
 				   MSG_UTILNAME <SHARE>
 
@@ -29,8 +29,8 @@ Share				   SEGMENT BYTE PUBLIC 'SHARE'
 					   ; include Message Code
 
 
-				   .xlist
-				   .xcref
+				   ;; .xlist
+				   ;; .xcref
 
 
 				   MSG_SERVICES <MSGDATA>
@@ -41,8 +41,8 @@ Share				   SEGMENT BYTE PUBLIC 'SHARE'
 
 				   MSG_SERVICES <SHARE.CLA,SHARE.CL1,SHARE.CL2>
 
-				   .cref
-				   .list
+				   ;; .cref
+				   ;; .list
 
 
 false				   =	0
@@ -59,12 +59,12 @@ Val3SW				   equ	false
 
 
 				   ; include parse.asm
-				   .xlist
-				   .xcref
+				   ;; .xlist
+				   ;; .xcref
 				   include PARSE.ASM
 				   include MSGDCL.INC
-				   .cref
-				   .list
+				   ;; .cref
+				   ;; .list
 
 
 

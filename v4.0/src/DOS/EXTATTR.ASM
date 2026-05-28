@@ -25,7 +25,7 @@ NAME	EXTATTR
 ;
 ;
 
-.xlist
+;; .xlist
 ;
 ;
 ; get the appropriate segment definitions
@@ -38,7 +38,7 @@ CODE	SEGMENT BYTE PUBLIC  'CODE'          ;AN000;
 INCLUDE DOSSYM.INC			     ;AN000;
 INCLUDE DEVSYM.INC			     ;AN000;
 include EA.INC				     ;AN000;
-.list
+;; .list
 
 
 ;	I_need	XA_from,BYTE		;AN000;

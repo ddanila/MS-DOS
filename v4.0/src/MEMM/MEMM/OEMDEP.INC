@@ -28,7 +28,7 @@
 ;
 ;******************************************************************************
 ifndef INC_LIST
-.xlist
+;; .xlist
 endif
 
 
@@ -108,4 +108,4 @@ endif
 
 	ENDM
 
-.list	; end of OEMDEP.INC
+;; .list	; end of OEMDEP.INC

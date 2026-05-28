@@ -1,8 +1,8 @@
 ;      SCCSID = @(#)d_gctrcd.asm        1.1 86/06/03
-.xlist
+;; .xlist
 ;  include struc.inc
 include NLSAPI.INC
-.list
+;; .list
 
 DGROUP  group   _DATA
 

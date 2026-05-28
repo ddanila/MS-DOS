@@ -9,7 +9,7 @@ NAME	DOSPRINT
 ;	Created: MZ 16 June 1984
 ;
 
-.xlist
+;; .xlist
 ;
 ; get the appropriate segment definitions
 ;
@@ -20,7 +20,7 @@ CODE	SEGMENT BYTE PUBLIC  'CODE'
 
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
-.list
+;; .list
 
 	I_Need	Proc_ID,WORD
 	I_Need	User_ID,WORD

@@ -83,9 +83,9 @@ TOO_MANY	     EQU  1
 INVALID_PARAM	     EQU  10
 VALUE_DISALLOW	     EQU  8
 
-.XLIST
+;; .XLIST
 	INCLUDE     STRUC.INC	    ; Structured macros 				    ;AN000
-.LIST
+;; .LIST
 
 PUBLIC	    PARSE_PARAMETERS ;AN003;; near procedure for parsing command line		   ;AN000
 PUBLIC	    CUR_PTR ;AN003;; near procedure for parsing command line		  ;AN000
@@ -117,9 +117,9 @@ Val3SW	      EQU     0 		;AN000; 					   ;AN000
 CODE	      SEGMENT  PUBLIC 'CODE' BYTE            ;AN000;                               ;AN000
 	      ASSUME CS:CODE,DS:CODE		     ;AN000;				   ;AN000
 
-.XLIST
+;; .XLIST
 INCLUDE     PARSE.ASM	    ; Parsing code					    ;AN000
-.LIST
+;; .LIST
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

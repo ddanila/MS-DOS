@@ -6,9 +6,9 @@ NAME    STDCODE
 ; System call dispatch code
 ;
 
-.xlist
+;; .xlist
 include STDSW.ASM
-.list
+;; .list
 
 include MS_CODE.ASM
 	END

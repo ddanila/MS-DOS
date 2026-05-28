@@ -3,7 +3,7 @@ TITLE	RECPROC.SAL
 ;*****************************************************************************
 ; Include files
 ;*****************************************************************************
-.xlist
+;; .xlist
 	include RECSEG.INC		;AN000;bgb
  include DOSSYM.INC	;AN000;bgb
  INCLUDE SYSCALL.INC	;AN000;bgb
@@ -11,7 +11,7 @@ TITLE	RECPROC.SAL
  include RECEQU.INC	;AN000;bgb
 	include PATHMAC.INC
 BREAK	MACRO	subtitle
-	SUBTTL	subtitle
+	;; SUBTTL	subtitle
 	PAGE
 ENDM
 ;
@@ -47,7 +47,7 @@ public Write_Disk			;AN000;bgb
 public Build_String			;AN000;bgb
 public ChANge_BlANks			;AN000;bgb
 public Check_DBCS_CharACter		;AN000;bgb
-.list
+;; .list
 
 ;******************************************
 ; Prints the XXX of YYY bytes recovered message.

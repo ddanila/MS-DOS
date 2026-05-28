@@ -8,9 +8,9 @@
 ;***************************************************************************;
 
 HEADER	MACRO	TEXT		       ;;AN000;
-.XLIST				       ;;AN000;
-	SUBTTL	&TEXT		       ;;AN000;
-.LIST				       ;;AN000;
+;; .XLIST				       ;;AN000;
+	;; SUBTTL	&TEXT		       ;;AN000;
+;; .LIST				       ;;AN000;
 	PAGE			       ;;AN000;
 	ENDM			       ;;AN000;
 ;  =  =  =  =  =  =  =	=  =
@@ -30,12 +30,12 @@ PRINT	MACRO	MESSAGE 		   ;;AN000;
 				   CALL    SENDMSG ;;AC000;
 	ENDM					   ;;AN000;
 ;  =  =  =  =  =  =  =	=  =
-.xlist						   ;AN000;
+;; .xlist						   ;AN000;
 ;INPUT	 MACRO	 MESSAGE
 ;				    PRINT   MESSAGE
 ;				    CALL PROMPT
 ;	 ENDM
-.list						   ;AN000;
+;; .list						   ;AN000;
 ;	       $SALUT (0,16,22,36)
 MY_TRACKLAYOUT MACRO		   ;;AN000;
 	       LOCAL CSECT_F	   ;;AN000;

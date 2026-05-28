@@ -173,7 +173,7 @@ PAGE	58,132
 ;			     no longer attempted.
 
 BREAK	MACRO	subtitle
-	SUBTTL	subtitle
+	;; SUBTTL	subtitle
 	PAGE
 ENDM
 
@@ -187,12 +187,12 @@ IF1
     ENDIF
 ENDIF
 
-.xlist
+;; .xlist
 	include DEVSYM.INC
 	include SYSCALL.INC
 	include DIRENT.INC
 	include MI.INC
-.list
+;; .list
 
 ; The RAMDrive device driver has 4 basic configurations.
 ;

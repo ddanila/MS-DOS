@@ -22,7 +22,7 @@ dosxxx  segment
 ;*********************************************************************
 
             public   dossetctrycode
-            .sall
+            ;; .sall
             include  MACROS.INC
 
 argframe         struc

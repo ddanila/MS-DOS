@@ -30,13 +30,13 @@ TITLE	COMMAND Transient Printf routine
 ;*
 ;****************************************************************
 
-.xlist
+;; .xlist
 	INCLUDE COMSW.ASM		;AC000;
 	INCLUDE DOSSYM.INC
 	INCLUDE COMSEG.ASM
 	INCLUDE COMEQU.ASM		;AN000;
 	INCLUDE SYSMSG.INC		;AN000;
-.list
+;; .list
 
 datares segment public
 	extrn	pipeflag:byte

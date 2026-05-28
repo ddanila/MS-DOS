@@ -15,7 +15,7 @@ NAME    UTIL
 ;       Created: MZ 1 April 1983
 ;
 
-.xlist
+;; .xlist
 ;
 ; get the appropriate segment definitions
 ;
@@ -26,7 +26,7 @@ CODE    SEGMENT BYTE PUBLIC  'CODE'
 
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
-.list
+;; .list
 
 	I_need  CurrentPDB,WORD         ; current process data block location
 	I_need  SFT_Addr,DWORD          ; pointer to beginning of table

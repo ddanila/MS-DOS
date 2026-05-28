@@ -26,7 +26,7 @@ NAME	DOS_DELETE
 ;
 ; get the appropriate segment definitions
 ;
-.xlist
+;; .xlist
 include DOSSEG.ASM
 
 CODE	SEGMENT BYTE PUBLIC  'CODE'
@@ -37,7 +37,7 @@ INCLUDE DEVSYM.INC
 INCLUDE FASTOPEN.INC
 INCLUDE FASTSEEK.INC
 INCLUDE FASTXXXX.INC
-.list
+;; .list
 
 Installed = TRUE
 

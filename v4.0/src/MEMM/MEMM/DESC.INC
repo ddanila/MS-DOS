@@ -28,7 +28,7 @@
 ;
 ;******************************************************************************
 ifndef INC_LIST
-.xlist
+;; .xlist
 endif
 
 ; ---------------------------------------------------
@@ -273,4 +273,4 @@ TSS386STRUC	struc
 	BitMapBase	dw	0		; offset of Base of Bit Map
 TSS386STRUC	ends
 
-.list	; end of DESC.INC
+;; .list	; end of DESC.INC

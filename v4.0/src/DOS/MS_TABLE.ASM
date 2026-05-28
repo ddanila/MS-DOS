@@ -4,12 +4,12 @@
 ;         A001   DCR 486 - Share installation for >32mb drives
 ;         A006   DCR 503 - fake version for IBMCACHE
 ;         A008   PTM 4070 - fake version for MS WINDOWS
-.xlist
+;; .xlist
 include DOSSEG.ASM
 include EA.INC                           ;AN000;; for Extended Attributes
 include FASTOPEN.INC                     ;AN000;; for Extended Attributes
 include DOSSYM.INC
-.list
+;; .list
 
         AsmVars <Kanji, Debug, Redirector, ShareF>
 

@@ -1,5 +1,5 @@
 PAGE	,132									;AN000;
-.XLIST										;AN000;
+;; .XLIST										;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;					;AN000;
 ;; DOS - GRAPHICS Command
 ;; (C) Copyright 1988 Microsoft
@@ -19,7 +19,7 @@ PAGE	,132									;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;					;AN000;
 				       ;;					;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;					;AN000;
-.LIST										;AN000;
+;; .LIST										;AN000;
 EXTRN PAT_4X2:BYTE								;AN000;
 EXTRN PAT_4X4:BYTE								;AN000;
 EXTRN PAT_6X2:BYTE								;AN000;

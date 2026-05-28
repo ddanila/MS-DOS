@@ -43,7 +43,7 @@
 
 include EDLEQU.ASM
 
-SUBTTL	Contants and Data areas
+;; SUBTTL	Contants and Data areas
 PAGE
 
 

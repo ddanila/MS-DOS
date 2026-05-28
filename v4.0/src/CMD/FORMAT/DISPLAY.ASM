@@ -52,12 +52,12 @@ End_Of_Memory    ends                           ;
 ;*****************************************************************************
 ;
 
-.xlist
+;; .xlist
 INCLUDE FORCHNG.INC
 INCLUDE FOREQU.INC
 INCLUDE FORMSG.INC
 INCLUDE SYSMSG.INC
-.list
+;; .list
 
 ;
 ;*****************************************************************************

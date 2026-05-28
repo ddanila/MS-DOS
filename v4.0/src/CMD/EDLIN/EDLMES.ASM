@@ -53,12 +53,12 @@
 ;		      N. P
 ;======================= END OF SPECIFICATIONS ===========================
 
-.xlist
+;; .xlist
 
 include SYSMSG.INC				;an000;message retriever
 
 msg_utilname <EDLIN>				;an000;EDLIN messages
-.list
+;; .list
 ;-----------------------------------------------------------------------;
 ;									;
 ;	Done for Vers 2.00 (rev 9) by Aaron R				;
@@ -157,9 +157,9 @@ code	segment public	byte			;an000;code segment
 	public	disp_fatal			;an000;fatal error display
 	public	pre_load_message		;an000;message loader
 
-.xlist
+;; .xlist
 msg_services <MSGDATA>				;an000;
-.list
+;; .list
 
 ;======================= sysmsg.inc invocation ===========================
 ;
@@ -178,7 +178,7 @@ msg_services <MSGDATA>				;an000;
 ;
 ;=========================================================================
 
-.xlist
+;; .xlist
 
  msg_services <LOADmsg> 			;an000;no version check
  msg_services <DISPLAYmsg,CHARmsg,NUMmsg,INPUTmsg>  ;an000;display messages
@@ -186,7 +186,7 @@ msg_services <MSGDATA>				;an000;
  msg_services <EDLIN.CL1,EDLIN.CL2>		;an000;message types
  msg_services <EDLIN.CTL>			;an000;
 
-.list
+;; .list
 
 ;=========================================================================
 ; printf: printf is a replacement of the printf procedure used in DOS

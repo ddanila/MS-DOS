@@ -1,16 +1,16 @@
 TITLE	CHKDSK - MS-DOS Disk consistancy checker
 page	,132					;
 
-	.xlist
+	;; .xlist
 	include CHKSEG.INC
 	INCLUDE CHKCHNG.INC
 	INCLUDE DOSSYM.INC
 	INCLUDE CHKEQU.INC
 	INCLUDE CHKMACRO.INC
 	include PATHMAC.INC
-	.list
+	;; .list
 
-SUBTTL	Initialized Data
+;; SUBTTL	Initialized Data
 PAGE
 CONST	SEGMENT PUBLIC PARA 'DATA'
 	EXTRN  BADVER:byte,BADDRV_ARG:word,INVPATH_ARG:word
@@ -45,7 +45,7 @@ CONST	SEGMENT PUBLIC PARA 'DATA'
 	extrn	Idmes2:Byte,Idmes1:Byte,idmes3:byte				;an017;bgb
 CONST	ENDS
 
-SUBTTL	Un-initialized Data
+;; SUBTTL	Un-initialized Data
 PAGE
 DATA	SEGMENT PUBLIC PARA 'DATA'
 	extrn	THISDPB:dword,DOTSNOGOOD:byte,NUL_ARG:byte

@@ -32,10 +32,10 @@ dosxxx	segment byte public 'dos'
 ;*********************************************************************
 
 	    public   dosQfileinfo
-	    .sall
-	    .xlist
+	    ;; .sall
+	    ;; .xlist
 	    include  MACROS.INC
-	    .list
+	    ;; .list
 
 
 FileInfo	struc

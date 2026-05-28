@@ -3,13 +3,13 @@
 ;	SCCSID = @(#)uinit.asm	4.5 85/12/04
 TITLE	COMMAND Initialization messages
 
-.XCREF
-.XLIST
+;; .XCREF
+;; .XLIST
 include COMSW.ASM
 include COMSEG.ASM
 include IFEQU.ASM
-.LIST
-.CREF
+;; .LIST
+;; .CREF
 
 cmdaddr macro sym,name	;; WASM: renamed from 'addr' (reserved keyword in WASM)
      public name
@@ -249,11 +249,11 @@ NO_VAL		DB	0			;AN000; no values
 num_positionals DW	0			;AN000; counter for positionals
 old_parse_ptr	DW	0			;AN057; SI position before calling parser
 
-.xlist
+;; .xlist
 
 INCLUDE SYSMSG.INC				;AN000; get message services routine
 
-.list
+;; .list
 
 ASSUME DS:RESGROUP,ES:RESGROUP,CS:RESGROUP
 

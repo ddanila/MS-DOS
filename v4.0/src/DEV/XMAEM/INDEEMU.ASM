@@ -102,14 +102,14 @@ COMMENT #
 
         .286P                 ; Enable recognition of 286 privileged instructs.
 
-        .XLIST                ; Turn off the listing
+        ;; .XLIST                ; Turn off the listing
         INCLUDE INDEDAT.INC
 
         IF1                   ; Only include macros on the first pass
         INCLUDE INDEOVP.MAC
         INCLUDE INDEINS.MAC
         ENDIF
-        .LIST                 ; Turn on the listing
+        ;; .LIST                 ; Turn on the listing
 
         PUBLIC  INDEEMU
 
@@ -152,11 +152,11 @@ PAGE
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 TABLE:
-        .XLIST
+        ;; .XLIST
         REPT    256             ; Initialize the table so that all instructions
         JMP     UNEXPECTED      ;   jump to UNEXPECTED
         ENDM
-        .LIST
+        ;; .LIST
 
 ; Now set up the entries for the instructions we want to emulate
 

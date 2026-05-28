@@ -93,9 +93,9 @@
 		    HEADER <MACRO DEFINITIONS, STRUC DEFINITIONS, EQUATES>
 		    INCLUDE PATHMAC.INC ;AN006;
 HEADER		    MACRO TEXT
-.XLIST
-		    SUBTTL TEXT
-.LIST
+;; .XLIST
+		    ;; SUBTTL TEXT
+;; .LIST
 		    PAGE
 		    ENDM
 ; = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =

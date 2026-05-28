@@ -2,10 +2,10 @@
 Title	FASTOPEN
 
 ;--------------- INCLUDE FILES -----------------
-.xlist
+;; .xlist
 debug=0 		  ;this is an equate only for DOSMAC.inc
 INCLUDE DOSMAC.INC
-.list
+;; .list
 INCLUDE DIRENT.INC
 INCLUDE FASTSEGS.INC	  ; Cannot declare this in DOS includes
 INCLUDE FASTOPEN.INC	  ; This include file also contains DOS equates

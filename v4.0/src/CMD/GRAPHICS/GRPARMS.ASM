@@ -60,13 +60,13 @@ CODE	SEGMENT PUBLIC 'CODE'                                                   ;AN
 PARSE_PARMS PROC NEAR								;AN000;
 	jmp	PARSE_PARMS_START						;AN000;
 PUBLIC PARSE_PARMS								;AN000;
-.XLIST										;AN000;
+;; .XLIST										;AN000;
 INCLUDE GRMSG.EQU		; Include GRAPHICS error messages equates	;AN000;
 INCLUDE GRSHAR.INC		; Include the Shared data area structure	;AN000;
 INCLUDE GRINST_EXT.INC		; Include externals for the installation module ;AN000;
 INCLUDE GRPARSE_EXT.INC		; Include externals for the DOS parse code	;AN000;
 	INCLUDE STRUC.INC		; Include macros for using STRUCTURES		;AN000;
-.LIST										;AN000;
+;; .LIST										;AN000;
 										;AN000;
 PAGE										;AN000;
 ;===============================================================================;AN000;

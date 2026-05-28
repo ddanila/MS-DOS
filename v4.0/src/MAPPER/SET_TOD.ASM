@@ -23,7 +23,7 @@ dosxxx	segment byte public 'dos'
 ;*********************************************************************
 
 	    public   dossetdatetime
-	    .sall
+	    ;; .sall
 	    include  MACROS.INC
 
 error_ts_datetime equ 0002h

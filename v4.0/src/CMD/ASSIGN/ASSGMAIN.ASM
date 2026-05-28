@@ -115,7 +115,7 @@
 page
 DEBUG	=	0
 
-.xlist
+;; .xlist
 	INCLUDE SYSMSG.INC		;AN000;
 	INCLUDE SYSVAR.INC
 	INCLUDE CURDIR.INC
@@ -124,14 +124,14 @@ DEBUG	=	0
 
 MSG_UTILNAME <ASSIGN>
 
-.list
+;; .list
 
 ; = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 	BREAK	<MACRO DEFINITIONS>
 BREAK	MACRO	subtitle
-.XLIST
-	SUBTTL	subtitle
-.LIST
+;; .XLIST
+	;; SUBTTL	subtitle
+;; .LIST
 	PAGE
 	ENDM
 ; = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -1777,14 +1777,14 @@ Set_Vectors		endp		;					;an001; dms;
 
 
 
-.xlist
+;; .xlist
 MSG_SERVICES <MSGDATA>
 msg_services <NEARmsg>
 msg_services <LOADmsg>
 msg_services <DISPLAYmsg,CHARmsg>
 msg_services <assign.cla,assign.cl1>
 msg_services <assign.cl2>
-.list
+;; .list
 
 include MSGDCL.INC
 

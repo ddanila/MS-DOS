@@ -152,14 +152,14 @@ COMMENT #
 
         .286P                 ; Enable recognition of 286 privileged instructs.
 
-        .XLIST                ; Turn off the listing
+        ;; .XLIST                ; Turn off the listing
         INCLUDE INDEDAT.INC   ; Include system data structures
 
         IF1                   ; Only include macros on the first pass
         INCLUDE INDEOVP.MAC
         INCLUDE INDEINS.MAC
         ENDIF
-        .LIST                 ; Turn on the listing
+        ;; .LIST                 ; Turn on the listing
 
 CRT_SELECTOR    EQU     00030H          ; Selector for mono display buffer
 SEX_ATTR        EQU     04B00H          ; Attribute for turquoise on red

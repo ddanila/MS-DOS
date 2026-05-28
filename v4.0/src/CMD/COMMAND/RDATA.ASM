@@ -4,9 +4,9 @@
 TITLE	COMMAND Resident DATA
 
 include COMSW.ASM
-.xlist
+;; .xlist
 include COMSEG.ASM
-.list
+;; .list
 
 ;
 ; Equates for initialization (from COMEQU)
@@ -583,11 +583,11 @@ olderrno	dw	?
 
 RESMSGEND	DW	0			;AN000;; holds offset of msg end (end of resident)
 
-.xlist
+;; .xlist
 
 INCLUDE SYSMSG.INC				;AN000; include message services
 
-.list
+;; .list
 
 ASSUME DS:RESGROUP,ES:RESGROUP,CS:RESGROUP
 

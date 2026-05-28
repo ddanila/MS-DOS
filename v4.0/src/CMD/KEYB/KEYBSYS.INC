@@ -1,4 +1,4 @@
-.XLIST
+;; .XLIST
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; DOS - NLS Support - KEYB Command
@@ -133,5 +133,5 @@ KX_FIRST_XLAT	 DB    ?	       ;; XLAT tables begin here
 KEYBSYS_STATE	    ENDS	       ;;
 				       ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-.LIST
+;; .LIST
 

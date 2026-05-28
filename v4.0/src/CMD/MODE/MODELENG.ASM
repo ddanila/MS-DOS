@@ -5,9 +5,9 @@ TITLE MODELENG.ASM - VARIOUS SERVICE ROUTINES
 ;MODELENG - convert 3 digit or less ASCII string to binary number
 ;GET_MACHINE_TYPE - determine the machine type based on model byte and sub model byte
 
-.XLIST
+;; .XLIST
    INCLUDE STRUC.INC
-.LIST
+;; .LIST
 ;.SALL
 
 ;ษออออออออออออออออออออออออออออออออ  P R O L O G  อออออออออออออออออออออออออออออออออออออออออป

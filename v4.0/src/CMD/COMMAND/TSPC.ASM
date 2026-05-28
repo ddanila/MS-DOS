@@ -4,12 +4,12 @@
 TITLE	COMMAND Transient Uninitialized DATA
 
 	INCLUDE COMSW.ASM
-.xlist
+;; .xlist
 	INCLUDE DOSSYM.INC
 	INCLUDE COMEQU.ASM
 	INCLUDE COMSEG.ASM
 	INCLUDE EA.INC			;AN030;
-.list
+;; .list
 
 ; Uninitialized transient data
 TRANSPACE	SEGMENT PUBLIC BYTE

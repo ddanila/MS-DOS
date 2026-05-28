@@ -2,11 +2,11 @@
 TITLE	CONST2 - More constants data
 NAME	CONST2
 
-.xlist
+;; .xlist
 INCLUDE DOSSYM.INC
 include DOSSEG.ASM
 INCLUDE DEVSYM.INC
-.list
+;; .list
 
 Break <Initialized data and data used at DOS initialization>
 

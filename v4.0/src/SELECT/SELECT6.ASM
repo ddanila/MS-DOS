@@ -3,7 +3,7 @@
 PAGE 55,132							;AN000;
 NAME	SELECT							;AN000;
 TITLE	SELECT - DOS - SELECT.EXE				;AN000;
-SUBTTL	SELECT6.asm						;AN000;
+;; SUBTTL	SELECT6.asm						;AN000;
 .ALPHA								;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
@@ -57,7 +57,7 @@ SET_BLOCK	equ	4AH		;AN072;
 ;
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-.XLIST								;AN000;
+;; .XLIST								;AN000;
 	INCLUDE    PANEL.MAC					;AN000;
 	INCLUDE    SELECT.INC					;AN000;
 	INCLUDE    CASTRUC.INC					;AN000;
@@ -68,7 +68,7 @@ SET_BLOCK	equ	4AH		;AN072;
 	INCLUDE    VARSTRUC.INC 				;AN000;
 	INCLUDE    ROUT_EXT.INC 				;AN000;
 	INCLUDE    PAN-LIST.INC 				;AN000;
-.LIST								;AN000;
+;; .LIST								;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 								;
 	EXTRN	DEALLOCATE_HELP:FAR				;AN000;DT

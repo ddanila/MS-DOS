@@ -1,4 +1,4 @@
-.XLIST
+;; .XLIST
 PAGE  ,132									;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;					;AN000;
 ;; DOS - GRAPHICS Command
@@ -19,7 +19,7 @@ PAGE  ,132									;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;					;AN000;
 				       ;;					;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;					;AN000;
-.LIST										;AN000;
+;; .LIST										;AN000;
    EXTRN   PRINT_MODULE_START:NEAR	;;					;AN000;
    EXTRN   PRINT_COLOR:NEAR							;AN000;
    EXTRN   LEN_OF_COLOR_MODULES:ABS	;;					;AN000;

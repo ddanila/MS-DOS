@@ -6,13 +6,13 @@ TITLE	Part7 COMMAND Transient Routines
 ;	More misc routines
 
 
-.xlist
+;; .xlist
 	INCLUDE COMSW.ASM
 	INCLUDE DOSSYM.INC
 	INCLUDE COMSEG.ASM
 	INCLUDE COMEQU.ASM
 	INCLUDE IOCTL.INC
-.list
+;; .list
 
 
 CODERES 	SEGMENT PUBLIC BYTE	;AC000;

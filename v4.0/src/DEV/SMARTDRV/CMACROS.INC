@@ -48,21 +48,21 @@ outif ?DF,0,<No segments or groups will be defined>
 outif ?WIN,0,<Windows Support>
 outif ?PLM,0,<PLM calling convention>
 endif
- .XCREF
- .XCREF ?N,?AX,?AH,?AL,?BX,?BH
- .XCREF ?BL,?CX,?CH,?CL,?DX,?DH
- .XCREF ?DL,?SI,?DI,?ES,?DS,?BP
- .XCREF ?SP,?SS,?CS
- .XCREF ?RSL,?CPD,?argl,?argc,?BA
- .XCREF ?ACB,???,?PO
- .XCREF ?PAS,?PC
- .XCREF Uconcat,mPush,mPop
- .XCREF ?RI,?pp,?pp1,?al1
- .XCREF ?aD,?AP,?Atal,?pd,?dd,?dd1,?ex1,?cas
- .XCREF ?pg,?pg1,?aloc,?cs1,?cs2
- .XCREF ?lb1,?lblpu
- .XCREF ?DF,?PLM,?WIN,?IA,?PU,?ADJ
- .CREF
+ ;; .XCREF
+ ;; .XCREF ?N,?AX,?AH,?AL,?BX,?BH
+ ;; .XCREF ?BL,?CX,?CH,?CL,?DX,?DH
+ ;; .XCREF ?DL,?SI,?DI,?ES,?DS,?BP
+ ;; .XCREF ?SP,?SS,?CS
+ ;; .XCREF ?RSL,?CPD,?argl,?argc,?BA
+ ;; .XCREF ?ACB,???,?PO
+ ;; .XCREF ?PAS,?PC
+ ;; .XCREF Uconcat,mPush,mPop
+ ;; .XCREF ?RI,?pp,?pp1,?al1
+ ;; .XCREF ?aD,?AP,?Atal,?pd,?dd,?dd1,?ex1,?cas
+ ;; .XCREF ?pg,?pg1,?aloc,?cs1,?cs2
+ ;; .XCREF ?lb1,?lblpu
+ ;; .XCREF ?DF,?PLM,?WIN,?IA,?PU,?ADJ
+ ;; .CREF
 ?RSL = 0
 ?CPD = 0
 ?ArgL = 0
@@ -120,9 +120,9 @@ SAVE macro rL
 ?RI ?RSL,<rL>
 endm
 smashes macro n,rL
- .xcref
- .xcref ?SM&n
- .cref
+ ;; .xcref
+ ;; .xcref ?SM&n
+ ;; .cref
 ?SM&n = 0
 ?RI ?SM&n,<rL>
 endm
@@ -180,23 +180,23 @@ endm
 endif
 ?pp macro nL,t,l,s
 if ?CPD
- .xcref
+ ;; .xcref
 ife ?PLM
 irp x,<nL>
 ?pp1 x,<t>,%?PO,%?adj,%(?PO+?adj)
 ?PO = ?PO + l
- .xcref ?T&&x
+ ;; .xcref ?T&&x
 ?T&&x = s
 endm
 else
 irp x,<nL>
 ?PO = ?PO + l
 ?pp1 x,<t>,%?PO,%?adj,%(?PO+?adj)
- .xcref ?T&&x
+ ;; .xcref ?T&&x
 ?T&&x = s
 endm
 endif
- .cref
+ ;; .cref
 else
 ;%out Parm(s) "&nl" declared outside proc def.
 endif
@@ -250,17 +250,17 @@ localV macro n,a
 endm
 ?aLoc macro nL,t,l,s,a
 if ?CPD
- .xcref
+ ;; .xcref
 ??? = ??? + l
 if a
 ??? = ((??? + 1) AND 0FFFEH)
 endif
 irp x,<nL>
 ?aL1 x,<t>,%???
- .xcref ?T&&x
+ ;; .xcref ?T&&x
 ?T&&x = s
 endm
- .cref
+ ;; .cref
 else
 ;%out Locals "&nl" declared outside procedure def.
 endif
@@ -420,9 +420,9 @@ endm
 endif
 ?ex1 macro nL,s,d
 irp x,<nL>
- .xcref
- .xcref ?T&&x
- .cref
+ ;; .xcref
+ ;; .xcref ?T&&x
+ ;; .cref
 ?T&&x = s
 ife ?PLM
 extrn _&&x:&d
@@ -486,9 +486,9 @@ irp x,<nL>
 ifidn <x>,<PUBLIC>
 ?lblpu = 1
 else
- .xcref
- .xcref ?T&&x
- .cref
+ ;; .xcref
+ ;; .xcref ?T&&x
+ ;; .cref
 ?T&&x = s
 ife ?PLM
 if ?lblpu
@@ -540,16 +540,16 @@ endm
 endif
 ?aD macro nL,s
 irp x,<nL>
- .xcref
- .xcref ?T&&x
- .cref
+ ;; .xcref
+ ;; .xcref ?T&&x
+ ;; .cref
 ?T&&x = s
 endm
 endm
 regPtr macro n,S,O
- .xcref
- .xcref ?T&n,?SR&n,?OR&n
- .cref
+ ;; .xcref
+ ;; .xcref ?T&n,?SR&n,?OR&n
+ ;; .cref
 ?T&n = 0FFFFH
 ?SR&n = 0
 ?RI ?SR&n,<&S>
@@ -563,9 +563,9 @@ irp x,<aL>
 endm
 endm
 ?Atal macro n,i
- .xcref
- .xcref ?ALI&i
- .cref
+ ;; .xcref
+ ;; .xcref ?ALI&i
+ ;; .cref
 ?ALI&i &macro
 ?AP n
 &endm
@@ -717,9 +717,9 @@ else
 endif
 endm
 ?pg macro n,p,c,a
-    .xcref
+    ;; .xcref
     cBegin &macro g
-	.xcref
+	;; .xcref
 	?pg1 <n>,c,a,%?PO
 	?CPD = 0
 	?argc = 0
@@ -755,7 +755,7 @@ endm
 	    endif
 	    mPush a,1
 	endif
-	.cref
+	;; .cref
 	purge cBegin
     &endm
     ?UTPE &macro
@@ -764,9 +764,9 @@ endm
 endm
 
 ?pg1 macro n,c,a,o
-    .xcref
+    ;; .xcref
     cEnd &macro g
-	.xcref
+	;; .xcref
 	?BA = 0
 	ifidn <g>,<nogen>
 	    if o+a
@@ -791,10 +791,10 @@ endm
 	    endif
 	endif
 	n endp
-	.cref
+	;; .cref
 	purge cEnd
     &endm
-    .cref
+    ;; .cref
 endm
 
 assumes macro s,g

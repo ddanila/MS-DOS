@@ -1,13 +1,13 @@
  page 80,132
 ;	SCCSID = @(#)parse.asm	1.1 85/05/14
 ;	SCCSID = @(#)parse.asm	1.1 85/05/14
-.xlist
+;; .xlist
     INCLUDE DOSSYM.INC
     INCLUDE DEVSYM.INC
     include COMSW.ASM
     include COMSEG.ASM
     include COMEQU.ASM
-.list
+;; .list
 
 
 break <Parse.Asm>

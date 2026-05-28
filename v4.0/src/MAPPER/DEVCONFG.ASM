@@ -24,7 +24,7 @@ dosxxx	segment byte public 'dos'
 ;*********************************************************************
 
 	    public   dosdevconfig
-	    .sall
+	    ;; .sall
 	    include  MACROS.INC
 
 inv_parm    equ      0002h

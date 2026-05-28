@@ -100,9 +100,9 @@
 ; =  =	=  =  =  =  =  =  =  =	=  =
 
 HEADER	MACRO	TEXT			;;AN000;
-.XLIST					;;AN000;
-	SUBTTL	TEXT			;AN000;
-.LIST					;;AN000;
+;; .XLIST					;;AN000;
+	;; SUBTTL	TEXT			;AN000;
+;; .LIST					;;AN000;
 	PAGE				;;AN000;
 	ENDM				;;AN000;
 
@@ -145,11 +145,11 @@ CSEG	   SEGMENT PARA PUBLIC 'CODE' ;AN000;
 				   ;DEFAULT=NO DATEmsg
 				   ;DEFAULT=NO GETmsg
 ;	   MSG_SERVICES <LOADmsg,DISPLAYmsg,CHARmsg,NUMmsg,INPUTmsg>
-.XLIST				   ;AN000;
-.XCREF				   ;AN000;
+;; .XLIST				   ;AN000;
+;; .XCREF				   ;AN000;
 	   MSG_SERVICES <LOADmsg,DISPLAYmsg,CHARmsg,NUMmsg,INPUTmsg> ;AN000;
-.LIST				   ;AN000;
-.CREF				   ;AN000;
+;; .LIST				   ;AN000;
+;; .CREF				   ;AN000;
 ; = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 	   PATHLABL DCOMPSM	   ;AN013;
 

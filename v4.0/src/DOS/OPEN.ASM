@@ -19,7 +19,7 @@ NAME	DOS_OPEN
 ;
 ; get the appropriate segment definitions
 ;
-.xlist
+;; .xlist
 include DOSSEG.ASM
 
 CODE	SEGMENT BYTE PUBLIC  'CODE'
@@ -30,7 +30,7 @@ include DEVSYM.INC
 include FASTOPEN.INC
 include FASTXXXX.INC		       ;AN000;
 include IFSSYM.INC		       ;AN000;
-.list
+;; .list
 
 Installed = TRUE
 

@@ -4,7 +4,7 @@
 TITLE	COMMAND Language modifiable Code Resident
 
 
-.xlist
+;; .xlist
 INCLUDE DOSSYM.INC			;AC000;
 include DOSCNTRY.INC			;AC000;
 DEBUG = 0				; NEED TO SET IT TO WHAT IT IS IN DOSSYM.INC
@@ -15,7 +15,7 @@ DEBUG = 0				; NEED TO SET IT TO WHAT IT IS IN DOSSYM.INC
 	INCLUDE COMSEG.ASM
 	INCLUDE COMEQU.ASM
 	include RESMSG.EQU		;AN000;
-.list
+;; .list
 
 
 Tokenized   =	FALSE
@@ -718,11 +718,11 @@ PUBLIC	SYSGETMSG,SYSDISPMSG
 
 ASSUME	DS:RESGROUP, ES:RESGROUP
 
-.xlist
+;; .xlist
 
 INCLUDE SYSMSG.INC				;AN000; include message services
 
-.list
+;; .list
 
 MSG_UTILNAME <COMMAND>				;AN000; define utility name
 

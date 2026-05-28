@@ -1,9 +1,9 @@
 	PAGE	,132			;
 	TITLE	MODEVID.SAL
 
-.XLIST
+;; .XLIST
 	INCLUDE STRUC.INC		 ;macro library for 'struc'
-.LIST
+;; .LIST
 
 ;ษออออออออออออออออออออออออออออออออ  P R O L O G  อออออออออออออออออออออออออออออออออออออออออป				   ;AN000;
 ;บ											  บ				   ;AN000;

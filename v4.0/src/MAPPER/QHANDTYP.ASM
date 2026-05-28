@@ -31,10 +31,10 @@ dosxxx  segment byte public 'dos'
 ; *************************************************************************
 
         public  dosqhandtype
-        .sall
-        .xlist
+        ;; .sall
+        ;; .xlist
         include MACROS.INC
-        .list
+        ;; .list
 
 
 argframe     struc

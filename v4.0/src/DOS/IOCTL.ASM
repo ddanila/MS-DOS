@@ -19,7 +19,7 @@ NAME	IOCTL
 
 
 
-.xlist
+;; .xlist
 ;
 ; get the appropriate segment definitions
 ;
@@ -32,7 +32,7 @@ INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
 include IOCTL.INC
 include IFSSYM.INC			 ;AN000;
-.list
+;; .list
 
 	i_need	THISCDS,DWORD
 	i_need	IOCALL,BYTE

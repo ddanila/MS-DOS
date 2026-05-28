@@ -53,7 +53,7 @@ page	,132					;
 ;*****************************************************************************
 ; Include files
 ;*****************************************************************************
-.xlist										;an000;bgb
+;; .xlist										;an000;bgb
 include CHKSEG.INC					   ;an005;bgb		;an000;bgb
 include PATHMAC.INC								;an000;bgb
 INCLUDE CHKEQU.INC				;				;an000;bgb;AN000;
@@ -63,7 +63,7 @@ INCLUDE SYSCALL.INC				;				;an000;bgb;AN000;
 INCLUDE CHKMACRO.INC				;				;an000;bgb;AN000;
 INCLUDE CHKPARSE.INC				;				;an000;bgb;AN000;
 INCLUDE IOCTL.INC								;an000;bgb
-.list										;an000;bgb
+;; .list										;an000;bgb
 										;an000;bgb
 										;an000;bgb
 										;an000;bgb

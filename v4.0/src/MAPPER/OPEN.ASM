@@ -63,10 +63,10 @@ dosxxx	segment byte public 'dos'
 ; *************************************************************************
 ;
 	public	DosOpen
-	.sall
-	.xlist
+	;; .sall
+	;; .xlist
 	include MACROS.INC
-	.list
+	;; .list
 
 ACT_FileExisted 	equ	1
 ACT_FileCreated 	equ	2

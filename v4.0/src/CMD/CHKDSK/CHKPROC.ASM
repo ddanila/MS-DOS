@@ -1,14 +1,14 @@
 TITLE	CHKPROC - PART1 Procedures called from chkdsk
 page	,132					;
 
-	.xlist
+	;; .xlist
 	include CHKSEG.INC
 	INCLUDE CHKCHNG.INC
 	INCLUDE DOSSYM.INC
 	INCLUDE CHKEQU.INC
 	INCLUDE CHKMACRO.INC
 	include PATHMAC.INC
-	.list
+	;; .list
 
 
 DATA	SEGMENT PUBLIC PARA 'DATA'
@@ -107,7 +107,7 @@ public FIXDOT									;ac048;bgb
 
 
 	pathlabl chkproc
-SUBTTL	DIRPROC -- Recursive directory processing
+;; SUBTTL	DIRPROC -- Recursive directory processing
 PAGE
 ;**************************************************************************
 ; DOTDOTHARDWAY - change dir to the previous directory using '..'
@@ -763,7 +763,7 @@ $$IF35:
 
 
 
-SUBTTL	fat-Look routines
+;; SUBTTL	fat-Look routines
 PAGE
 ;*****************************************************************************
 ; CROSSLOOK - look at the fat, check for cross linked files
@@ -923,7 +923,7 @@ CHAINDONE:
 	 JMP	 CHAINDONE			 ;Size OK
 
 
-SUBTTL	Routines for manipulating dir entries
+;; SUBTTL	Routines for manipulating dir entries
 PAGE
 
 FIXENT2:

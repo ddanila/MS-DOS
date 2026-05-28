@@ -3,7 +3,7 @@
 PAGE 60,132							;AN000;
 NAME	SELECT							;AN000;
 TITLE	SELECT - DOS - SELECT.EXE				;AN000;
-SUBTTL	SELECT3.asm						;AN000;
+;; SUBTTL	SELECT3.asm						;AN000;
 .ALPHA								;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
@@ -44,7 +44,7 @@ DATA	ENDS							;AN000;
 ;
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-.XLIST								;AN000;
+;; .XLIST								;AN000;
 	INCLUDE    PANEL.MAC					;AN000;
 	INCLUDE    SELECT.INC					;AN000;
 	INCLUDE    PAN-LIST.INC 				;AN000;
@@ -54,7 +54,7 @@ DATA	ENDS							;AN000;
 	INCLUDE    EXT.INC					;AN000;
 	INCLUDE    VARSTRUC.INC 				;AN000;
 	INCLUDE    ROUT_EXT.INC 				;AN000;
-.LIST								;AN000;
+;; .LIST								;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
 ;	Continuation of code ...

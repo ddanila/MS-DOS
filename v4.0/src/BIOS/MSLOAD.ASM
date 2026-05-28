@@ -95,7 +95,7 @@ Org_Rom_Disktable	dd	0
 FAT_Segment		dw	0
 Sectors_Per_Cluster	db	0
 
-subttl	Save Input Values
+;; subttl	Save Input Values
 page
 ;***********************************************************************
 ;  Save_Input_Values
@@ -200,7 +200,7 @@ Save_Input_Values:
 	mov	cs:Drive_Lim_L, ax					     ;AN000;
 	mov	ax, word ptr Boot_Sector.EXT_BOOT_BPB.EBPB_BIGTOTALSECTORS+2 ;AN000;
 	mov	cs:Drive_Lim_H, ax					  ;AN000;
-subttl	Relocate
+;; subttl	Relocate
 page
 ;
 ;***********************************************************************
@@ -280,7 +280,7 @@ Dumbbb	endp				;AN000;
 
 
 
-subttl	Setup Stack
+;; subttl	Setup Stack
 page
 ;***********************************************************************
 ;  Setup_Stack
@@ -310,7 +310,7 @@ Setup_Stack:
 ;	 MOV	 BP,7C00h - 50		 ;Point BP as stack index pointer
 ;	 STI
 
-subttl	Find_Cluster_Size
+;; subttl	Find_Cluster_Size
 page
 ;***********************************************************************
 ;  Find_Cluster_Size
@@ -350,7 +350,7 @@ Find_Cluster_Size:
 	mov	cs:Size_Cluster,ax		;Save it
 
 
-subttl	Determine FAT size
+;; subttl	Determine FAT size
 page
 ;***********************************************************************
 ;  Determine_FAT_Size
@@ -424,7 +424,7 @@ Determine_FAT_Size:
 ;FAT_Size_Found:
 
 
-subttl Read_In_FirstClusters
+;; subttl Read_In_FirstClusters
 page
 ;***********************************************************************
 ;  Read_In_FirstClusters
@@ -483,7 +483,7 @@ Read_In_FirstClusters:
 	pop	ax					;AN000;
 	inc	ax					;AN000;# of clusters read in so far.
 
-subttl Set_Next_Cluster_Number
+;; subttl Set_Next_Cluster_Number
 page
 ;***********************************************************************
 ;  Set_Next_Cluster_Number
@@ -508,7 +508,7 @@ Set_Next_Cluster_Number:
 	inc	ax			      ;AN000; For Last_Found_Cluster
 	mov	cs:Last_Found_Cluster,ax      ;2 is the first data cluster number(0 based)
 
-subttl	Read In FAT
+;; subttl	Read In FAT
 page
 ;***********************************************************************
 ;  Read_In_FAT
@@ -554,7 +554,7 @@ page
 ;	 assume  es:nothing
 ;	 call	 Disk_Read
 ;
-subttl	Keep Loaded BIO
+;; subttl	Keep Loaded BIO
 page
 ;***********************************************************************
 ;  KEEP LOADED BIO
@@ -606,7 +606,7 @@ Keep_Loaded_BIO:
 	mov	cs:Next_Bio_Location,di 	;Save where to load next
 	pop	ds
 
-subttl Get Contiguous Clusters
+;; subttl Get Contiguous Clusters
 page
 ;***********************************************************************
 ;  Get_Contiguous_Clusters
@@ -681,7 +681,7 @@ Get_Contiguous_Cluster:
 	add	cs:Next_Bio_Location,ax ;Point to where to load next
 	jmp	Get_Contiguous_Cluster
 
-subttl	GOTO IBMBIO
+;; subttl	GOTO IBMBIO
 page
 ;***********************************************************************
 ;  GOTO_IBMBIO
@@ -723,7 +723,7 @@ GO_IBMBIO:
 	jmp	far ptr IBMBIO_Address
 
 
-subttl	Disk Read
+;; subttl	Disk Read
 page
 ;***********************************************************************
 ; Disk_Read
@@ -866,7 +866,7 @@ Read_OK:
 Read_Finished:
 	RET
 
-subttl	GET NEXT FAT ENTRY
+;; subttl	GET NEXT FAT ENTRY
 page
 ;***********************************************************************
 ;  GET_NEXT_FAT_ENTRY

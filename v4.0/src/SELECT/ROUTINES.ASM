@@ -33,7 +33,7 @@ EXEC_DEHELP		DB	  0		;AN000;DT
 DATA	       ENDS				;AN000; DATA
 ;**********************************************************************
 
-.XLIST						;AN000;
+;; .XLIST						;AN000;
 	INCLUDE STRUC.INC			;AN000;
 	INCLUDE MACROS.INC			;AN000;
 	INCLUDE VARSTRUC.INC			;AN000;
@@ -51,7 +51,7 @@ DATA	       ENDS				;AN000; DATA
 	EXTRN	INT_2F_FORMAT:NEAR		;AN111;JW
 	EXTRN	ALLOCATE_HELP:FAR		;AN000;
 	EXTRN	DEALLOCATE_HELP:FAR		;AN000;
-.LIST						;AN000;
+;; .LIST						;AN000;
 
 ;**********************************************************************
 CODE_FAR    SEGMENT PARA PUBLIC 'CODE'          ;AN000; Segment for far routine

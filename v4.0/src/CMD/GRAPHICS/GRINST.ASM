@@ -72,7 +72,7 @@
 CODE	SEGMENT PUBLIC 'CODE'          ;;                                       ;AN000;
 	ASSUME	CS:CODE,DS:CODE        ;;					;AN000;
 				       ;;					;AN000;
-.XLIST				       ;;					;AN000;
+;; .XLIST				       ;;					;AN000;
 	INCLUDE GRSHAR.INC	       ;; Include the Shared data area structure;AN000;
 	INCLUDE SYSMSG.INC	       ;; Include DOS message retriever 	;AN000;
 	INCLUDE STRUC.INC	       ;; Include macros - Structured Assembler ;AN000;
@@ -94,7 +94,7 @@ MSG_UTILNAME <GRAPHICS> 	       ;; Identify ourself to Message retriever.;AN000;
 MSG_SERVICES <MSGDATA>		       ;;					;AN000;
 MSG_SERVICES <LOADmsg,DISPLAYmsg,CHARmsg,NUMmsg>  ;;				;AN000;
 MSG_SERVICES <GRAPHICS.CL1,GRAPHICS.CL2,GRAPHICS.CLA,GRAPHICS.CLB,GRAPHICS.CLC> ;AN000;
-.LIST				       ;;					;AN000;
+;; .LIST				       ;;					;AN000;
 				       ;;					;AN000;
 PUBLIC GRAPHICS_INSTALL 	       ;;					;AN000;
 PUBLIC TEMP_SHARED_DATA_PTR	       ;;					;AN000;

@@ -30,7 +30,7 @@
 ;
 ;******************************************************************************
 ifndef INC_LIST
-.xlist
+;; .xlist
 endif
 
 P_SIZE		equ	1000h		; page size
@@ -49,4 +49,4 @@ PAGE_ENTRY	macro	addr,stat
 					; address in high 20
 endm
 
-.list		; end of PAGE.INC
+;; .list		; end of PAGE.INC

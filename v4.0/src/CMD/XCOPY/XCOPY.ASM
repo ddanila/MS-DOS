@@ -2913,7 +2913,7 @@ $$IF169:
 CHK_FILE_NOT_FOUND ENDP
 
 ;
-subttl	string_length
+;; subttl	string_length
 page
 ;******************************************************************************
 ;PURPOSE: Get the length of a string pointed by ES:DI until it encounters
@@ -2954,7 +2954,7 @@ PUBLIC	STRING_LENGTH
 	RET
 STRING_LENGTH ENDP
 ;
-subttl	concat_asciiz
+;; subttl	concat_asciiz
 page
 ;******************************************************************************
 ;PURPOSE: Concatenate two ASCIIZ string into one ASCIIZ string.
@@ -3015,7 +3015,7 @@ $$DO174:
 CONCAT_ASCIIZ ENDP
 ;
 
-subttl	last_dir_out
+;; subttl	last_dir_out
 page
 ;******************************************************************************
 ;PURPOSE: Take off the last directory name from the path pointed by DI.
@@ -3158,7 +3158,7 @@ chk_DBCS ENDP				;AN010;
 ;
 ;
 
-subttl	Compress_Filename
+;; subttl	Compress_Filename
 page
 
 ;

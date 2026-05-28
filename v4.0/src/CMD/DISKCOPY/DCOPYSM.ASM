@@ -101,9 +101,9 @@
 	INCLUDE PATHMAC.INC		;AN015;PATHGEN MACRO
 ; =  =	=  =  =  =  =  =  =  =	=  =
 HEADER	MACRO	TEXT			;;AN000;
-.XLIST					;;AN000;
-	SUBTTL	TEXT			;;AN000;
-.LIST					;;AN000;
+;; .XLIST					;;AN000;
+	;; SUBTTL	TEXT			;;AN000;
+;; .LIST					;;AN000;
 	PAGE				;;AN000;
 	ENDM				;;AN000;
 ; =  =	=  =  =  =  =  =  =  =	=  =
@@ -141,9 +141,9 @@ CSEG	   SEGMENT PARA PUBLIC 'CODE' ;AN000;
 				   ;DEFAULT=NO TIMEmsg
 				   ;DEFAULT=NO DATEmsg
 ;	   MSG_SERVICES <LOADmsg,DISPLAYmsg,CHARmsg,NUMmsg,INPUTmsg>
-.xlist				   ;AN000;
+;; .xlist				   ;AN000;
 	   MSG_SERVICES <LOADmsg,DISPLAYmsg,CHARmsg,NUMmsg,INPUTmsg> ;AN000;
-.list				   ;AN000;
+;; .list				   ;AN000;
 ; = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 	   PATHLABL DCOPYSM	   ;AN015;
 CSEG	   ENDS 		   ;AN000;

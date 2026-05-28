@@ -17,7 +17,7 @@ NAME	DOS_CREATE
 ;
 ; get the appropriate segment definitions
 ;
-.xlist
+;; .xlist
 include DOSSEG.ASM
 
 CODE	SEGMENT BYTE PUBLIC  'CODE'
@@ -26,7 +26,7 @@ CODE	SEGMENT BYTE PUBLIC  'CODE'
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
 include VERSION.INC
-.list
+;; .list
 
 Installed = TRUE
 

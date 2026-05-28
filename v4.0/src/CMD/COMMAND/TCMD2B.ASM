@@ -3,12 +3,12 @@
 ;	SCCSID = @(#)tcmd2b.asm 4.1 85/09/22
 TITLE	PART5 COMMAND Transient routines.
 
-.xlist
+;; .xlist
 	INCLUDE COMSW.ASM
 	INCLUDE DOSSYM.INC
 	INCLUDE COMSEG.ASM
 	INCLUDE COMEQU.ASM
-.list
+;; .list
 
 
 CODERES 	SEGMENT PUBLIC BYTE	;AC000;

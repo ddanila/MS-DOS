@@ -1,7 +1,7 @@
 PAGE 55,132				;AN000;
 NAME	SELECT				;AN000;
 TITLE	SELECT - GET_HELP_ID		;AN000;
-SUBTTL	Get_Help.asm			;AN000;
+;; SUBTTL	Get_Help.asm			;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
 ;	GET_HELP_ID

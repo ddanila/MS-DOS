@@ -21,7 +21,7 @@ NAME	SEARCH
 ;	Created: ARR 4 April 1983
 ;
 
-.xlist
+;; .xlist
 ;
 ; get the appropriate segment definitions
 ;
@@ -34,7 +34,7 @@ INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
 INCLUDE FASTOPEN.INC
 INCLUDE FASTXXXX.INC
-.list
+;; .list
 
 	i_need	SEARCHBUF,53
 	i_need	SATTRIB,BYTE

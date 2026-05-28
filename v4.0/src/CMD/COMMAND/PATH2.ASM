@@ -1,12 +1,12 @@
  page 80,132
 ;	SCCSID = @(#)path2.asm	1.1 85/05/14
 ;	SCCSID = @(#)path2.asm	1.1 85/05/14
-.xlist
+;; .xlist
 INCLUDE DOSSYM.INC
     include COMSW.ASM
     include COMSEG.ASM
     include COMEQU.ASM
-.list
+;; .list
 
 
 DATARES SEGMENT PUBLIC BYTE

@@ -60,7 +60,7 @@ CODE	SEGMENT PUBLIC 'CODE'                                                   ;AN
 	PUBLIC	PRINT_BW_APA							;AN000;
 	PUBLIC	LEN_OF_BW_MODULES						;AN000;
 										;AN000;
-.XLIST										;AN000;
+;; .XLIST										;AN000;
 INCLUDE GRCTRL.INC			; Stuctures needed			;AN000;
 INCLUDE GRSHAR.INC			;  for both set of print modules	;AN000;
 INCLUDE GRPATTRN.INC			;					;AN000;
@@ -68,7 +68,7 @@ INCLUDE GRCTRL_EXT.INC			; Externals from PRT_SCR control module ;AN000;
 	INCLUDE STRUC.INC			;					;AN000;
 										;AN000;
 	PUBLIC PRINT_BW_APA		; Black and white modules,		;AN000;
-.LIST										;AN000;
+;; .LIST										;AN000;
 ;===============================================================================;AN000;
 ;										;AN000;
 ; PRINT_BW_APA : PRINT A GRAPHIC MODE SCREEN ON A BLACK AND WHITE PRINTER	;AN000;

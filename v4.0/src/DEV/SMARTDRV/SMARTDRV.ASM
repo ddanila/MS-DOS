@@ -140,7 +140,7 @@ PAGE	58,132
 ;
 
 BREAK	MACRO	subtitle
-	SUBTTL	subtitle
+	;; SUBTTL	subtitle
 	PAGE
 ENDM
 
@@ -182,11 +182,11 @@ BiosSeg	ends
 R_Mode_IDT  segment at 0h
 R_mode_IDT  ends
 ;
-.xlist
+;; .xlist
 	include DEVSYM.ASM
 	include SYSCALL.ASM
 	include MI.ASM
-.list
+;; .list
 
 ; The INT13 device driver has 2 basic configurations.
 ;

@@ -1,4 +1,4 @@
-.XLIST										;AN000;
+;; .XLIST										;AN000;
 PAGE										;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;					;AN000;
 ;; DOS - GRAPHICS Command
@@ -24,7 +24,7 @@ PAGE										;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;					;AN000;
 				       ;;					;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;					;AN000;
-.LIST										;AN000;
+;; .LIST										;AN000;
 					;					;AN000;
 SHARED_DATA_AREA_STR STRUC		;					;AN000;
   SD_TOTAL_SIZE       DW    ?		; Total # bytes ALLOCATED to the	;AN000;

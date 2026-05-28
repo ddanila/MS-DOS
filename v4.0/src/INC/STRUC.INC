@@ -196,7 +196,7 @@ $EquateLabel macro last,this
 IFNDEF __WASM__		;; WASM: can't compare variable with $ (relocatable)
 	if	$LastLabelOrg eq $
 	    $ll&last = this
-	    .xcref  $ll&last
+	    ;; .xcref  $ll&last
 	endif
 ENDIF
 endm
@@ -204,7 +204,7 @@ endm
 $TraceLabel macro n,a,b
 	if	$ll&a eq $ll&b
 	    $ll&n   = b
-	    .xcref  $ll&n
+	    ;; .xcref  $ll&n
 	else
 	    $TraceLabel n,%$ll&a,%$ll&b
 	endif
@@ -214,7 +214,7 @@ $Label	 macro	 n
 	if1
 	    $EquateLabel %$LastLabel,n
 	    $ll&n   = n
-	    .xcref  $ll&n
+	    ;; .xcref  $ll&n
 	    $LastLabel = n
 	    $LastLabelOrg = $
 $l&n:
@@ -222,8 +222,8 @@ $l&n:
 	    if	    $ll&n eq n
 $l&n:
 	    else
-		.xcref	$l&n
-		.xcref	$ll&n
+		;; .xcref	$l&n
+		;; .xcref	$ll&n
 	    endif
 	endif
 endm
@@ -235,7 +235,7 @@ $CondJump macro l,tf,c
 	    endif
 	    ifndef  <$ll&l>
 		$ll&l	= l
-		.xcref	$ll&l
+		;; .xcref	$ll&l
 	    endif
 	else
 	    $TraceLabel l,l,%$ll&l

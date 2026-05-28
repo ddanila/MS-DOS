@@ -30,7 +30,7 @@ NAME  MISC2
 ;	A001   DCR 486 - Share installation for >32mb drives
 ;	A006   DCR 503 - fake version number for IBMCACHE
 
-.xlist
+;; .xlist
 ;
 ; get the appropriate segment definitions
 ;
@@ -42,7 +42,7 @@ CODE	SEGMENT BYTE PUBLIC  'CODE'
 include DOSSYM.INC
 include FASTSEEK.INC		       ;AN000;
 include FASTXXXX.INC		       ;AN000;
-.list
+;; .list
 
 	i_need	THISCDS,DWORD
 	I_Need	RetryLoop,WORD

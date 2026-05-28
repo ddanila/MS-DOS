@@ -1,7 +1,7 @@
  TITLE	 CHKDSK - MS-DOS Disk consistancy checker ;
 page	,132					;
 
-	.xlist
+	;; .xlist
 	include CHKSEG.INC							;an005;bgb
 	INCLUDE CHKCHNG.INC
 	INCLUDE DOSSYM.INC
@@ -29,7 +29,7 @@ public BAD_STACK, RDLOOP, NORETRY1, RDOK, IDOK, ALLDONE, CHECKFILES, GotPath
 public IS_ROOT_DIR, NOT_ROOT_DIR, VALID_PATH, ParseName, ScanFile, FRAGCHK
 public EACHCLUS, LASTCLUS, NXTCHK, GETNXT, MSGCHK, FILSPOK, CDONE, CDONE1
 public PRINTID, FIGREC, Main_Routine, checkit
-	.list
+	;; .list
 
 
 	pathlabl chkdsk1
@@ -636,7 +636,7 @@ endproc figrec									;ac048;bgb
 
 
 ;*****************************************************************************
-SUBTTL	PRINTID - Print Volume ID info
+;; SUBTTL	PRINTID - Print Volume ID info
 PAGE
 PRINTID:
 ASSUME	DS:DG

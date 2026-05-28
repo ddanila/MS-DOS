@@ -15,7 +15,7 @@ NAME	DOS_DUP
 ;
 ; get the appropriate segment definitions
 ;
-.xlist
+;; .xlist
 include DOSSEG.ASM
 
 CODE	SEGMENT BYTE PUBLIC  'CODE'
@@ -23,7 +23,7 @@ CODE	SEGMENT BYTE PUBLIC  'CODE'
 
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
-.list
+;; .list
 
 	i_need	THISSFT,DWORD
 

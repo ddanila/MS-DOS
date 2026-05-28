@@ -126,12 +126,12 @@ DEV_HDR:DD    -1			    ; Pointer to next device header
 ;	Console Description Table
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-.XLIST					;
+;; .XLIST					;
 STACK_END	DW  1FFH+60H DUP(0)	; 200H + 'my' needs (re/ DOS 3.30 ref)
 STACK_START	DW  0			;
 OLD_STACK_S	DW  ?			;
 OLD_STACK_O	DW  ?			;
-.LIST					;
+;; .LIST					;
 					;
 BUF1:	   BUF_DATA <>			; exclude PAR_EXTRACTO
 					;

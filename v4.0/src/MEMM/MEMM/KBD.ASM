@@ -432,7 +432,7 @@ AltTable label	byte
 
 
 
-	SUBTTL Keyboard Interrupt Handler
+	;; SUBTTL Keyboard Interrupt Handler
 
 
 ;***	Keyboard interrupt handler
@@ -525,7 +525,7 @@ KbI23:
 handler endp
 
 
-	SUBTTL	Key Routines
+	;; SUBTTL	Key Routines
 
 ;***	Key handling routines, called as specified by the key table
 
@@ -1072,7 +1072,7 @@ ppp	endp
 ;	iret
 
 
-	SUBTTL Subroutines
+	;; SUBTTL Subroutines
 
 
 
@@ -1411,7 +1411,7 @@ wai1:				;wait for empty buffer
 	ret
 WaitStatus	endp
 
-	SUBTTL Initialization
+	;; SUBTTL Initialization
 
 
 

@@ -88,7 +88,7 @@ NAME	MACRO2
 ;
 ;   A000  version 4.00  Jan. 1988
 
-.xlist
+;; .xlist
 ;
 ; get the appropriate segment definitions
 ;
@@ -99,7 +99,7 @@ CODE	SEGMENT BYTE PUBLIC  'CODE'
 
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
-.list
+;; .list
 
 Installed = TRUE
 

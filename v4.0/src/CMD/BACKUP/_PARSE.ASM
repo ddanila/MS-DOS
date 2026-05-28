@@ -56,9 +56,9 @@ _TEXT	segment byte public 'CODE'
 	ASSUME	DS: DGROUP
 
 ;-------------------------------------------------------------------
-.xlist
+;; .xlist
 include PARSE.ASM			; include the parser
-.list
+;; .list
 ;-------------------------------------------------------------------
 
 _parse	proc	near

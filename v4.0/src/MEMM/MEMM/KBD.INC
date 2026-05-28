@@ -30,7 +30,7 @@
 ;
 ;******************************************************************************
 ifndef INC_LIST
-.xlist
+;; .xlist
 endif
 
 ;	SCCSID = @(#)keybxx.inc 1.1 85/10/09
@@ -96,4 +96,4 @@ ctrl	dw	-1
 alt	dw	-1
 AccChStruc	ends
 
-.list		; end of KBD.INC
+;; .list		; end of KBD.INC

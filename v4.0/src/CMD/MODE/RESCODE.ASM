@@ -2,9 +2,9 @@
 
 	TITLE	CODE TO BE MADE RESIDENT BY MODE
 
-.XLIST
+;; .XLIST
    INCLUDE STRUC.INC
-.LIST
+;; .LIST
 ;.SALL
 
 ;ษออออออออออออออออออออออออออออออออ  P R O L O G  อออออออออออออออออออออออออออออออออออออออออป				   ;AN000;
@@ -233,7 +233,7 @@ MD_HELP_STR DB "MODE device [options]",0Dh,0Ah
 	    DB "  CON CP SELECT=nnn",0Dh,0Ah
 	    DB "  CON CP REFRESH",0Dh,0Ah
 	    DB "  CON CP /STATUS",0Dh,0Ah,"$"
-	SUBTTL	SERIAL RETRY
+	;; SUBTTL	SERIAL RETRY
 	PAGE
 ;THIS PROC WILL BE POINTED TO BY INT VECTOR 14H
 
@@ -342,7 +342,7 @@ res_com_retry_type LABEL BYTE  ; WASM: was equ $, changed for memory-write via E
 ;					  etc.
 MODETO	ENDP
 ;**************************************************************
-	SUBTTL	DETERMINE PARALLEL TO SERIAL, OR PARALLEL TIMEOUT
+	;; SUBTTL	DETERMINE PARALLEL TO SERIAL, OR PARALLEL TIMEOUT
 	PAGE
 ;THIS PROC MAY BE POINTED TO BY INT VECTOR 17H
 MODEPTS PROC	NEAR
@@ -377,7 +377,7 @@ OFFRETRY EQU	$		;disp into resident code of retry flgs
 VECTOR17 LABEL	WORD
 ASIS:	JMP	PRINTER_IO		;NO REDIRECTION, GO DIRECTLY TO PREVIOUS INT 17H
 ;**************************************************************
-	SUBTTL	RETRY PARALLEL ON TIMEOUT.
+	;; SUBTTL	RETRY PARALLEL ON TIMEOUT.
 	PAGE
 PAR_RETRY:
 RT:
@@ -434,7 +434,7 @@ PTEST:
       POP   AX			    ;RETRIEVE ORIGINAL ENTRY PARAMETERS
       JMP   RT			    ;DO RETRY
 ;**************************************************************
-	SUBTTL	REDIRECT PARALLEL I/O TO SERIAL
+	;; SUBTTL	REDIRECT PARALLEL I/O TO SERIAL
 	PAGE
 CK:
 FIXUP	EQU	CK - NOREDIRECT
@@ -574,7 +574,7 @@ MOVELEN EQU	$ - entpt   ;length of resident code in bytes
 
 ;*******************************************************************************
 
-	SUBTTL	LOAD THE RESIDENT PORTION OF MODE
+	;; SUBTTL	LOAD THE RESIDENT PORTION OF MODE
 
 	PAGE
 
@@ -697,7 +697,7 @@ MODELOAD PROC	NEAR
 MODELOAD ENDP
 
 ;************************************************************
-	SUBTTL	COMMON PARMAMETER LIST AND WORKAREA
+	;; SUBTTL	COMMON PARMAMETER LIST AND WORKAREA
 	PAGE
 ; THE FOLLOWING AREA IS USED TO STORE PARSED PARAMETER LIST, AND WORK STORAGE
 ; USED BY OTHER MODULES

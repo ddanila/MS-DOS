@@ -99,7 +99,7 @@ BPSTACK ENDS
 
 BP_START EQU    0             ; Offset from BP of the start of the stack info
 
-SUBTTL   80386 TSS - Task State Segment
+;; SUBTTL   80386 TSS - Task State Segment
 PAGE
 ;*************************************************
 ;                                                *
@@ -158,10 +158,10 @@ TSS_BM_LEN      EQU     0FFFH-TSS_386_LEN  ; Length of the I/O bit map
                               ;   therefore the descriptor fot the TSS segment
                               ;   must have enough room to include the bit map.
 
-SUBTTL  GDT - Global Descriptor Table
+;; SUBTTL  GDT - Global Descriptor Table
 PAGE
 
-SUBTTL  GDT - GLOBAL DESCRIPTOR TABLE
+;; SUBTTL  GDT - GLOBAL DESCRIPTOR TABLE
 
 ;       THE GLOBAL DESCRIPTOR TABLE DEFINITION
 ;       === ====== ========== ===== ==========
@@ -271,7 +271,7 @@ SCRUBBER        DB     32 DUP (0)     ; RAM scrubber - dispatched when no other
 last_gdt_byte   db     0              ; marker for last GDT byte + 1
 GDT_DEF         ENDS
 
-SUBTTL  Virtual Machine Entry
+;; SUBTTL  Virtual Machine Entry
 PAGE
 ;       Virtual Machine Entry Definition - consists of 4 descriptors
 ;
@@ -293,7 +293,7 @@ LDT_PTR         DQ      0             ; Data pointer to this machine's LDT
 
 VM_GDT_ENTRY    ENDS
 
-SUBTTL  80286 Segment Descriptor
+;; SUBTTL  80286 Segment Descriptor
 PAGE
 ;       DESCRIPTOR TABLE ENTRY STRUCTURES
 ;       ========== ===== ===== ==========
@@ -316,7 +316,7 @@ DATA_DESC       ENDS
 
 SHADOW_ID       EQU     DATA_RESERVED ; For garbage collection
 
-SUBTTL  80286 Gate Descriptor
+;; SUBTTL  80286 Gate Descriptor
 PAGE
 ;       80286 Gate Descriptor
 
@@ -350,7 +350,7 @@ GATE_DESC       ENDS
 
 ;SELECTOR       RECORD  INDEX:13,TI:1,RPL:2   ; Standard 286 selector format (WASM: RECORD unsupported; no MASK refs in tree)
 
-SUBTTL  TSS - Task State Segment
+;; SUBTTL  TSS - Task State Segment
 PAGE
 ;       TASK STATE SEGMENT
 ;       ==== ===== =======
@@ -402,7 +402,7 @@ TASK_STATE_286  ENDS
 ;       Note that the actual stacks for CPLs 2, 1, and 0 are part of the
 ;       task state segment.  CPL 3's stack is in its own address space.
 
-SUBTTL  Length Equates
+;; SUBTTL  Length Equates
 PAGE
 ;       Length equates
 
@@ -443,7 +443,7 @@ NULL_SEG_LEN    EQU     00000H          ; Null segment length = 0
 THIRTY_TWO_K    EQU     08000H          ; Unit of virtual machine size
 
 
-SUBTTL  Location Equates
+;; SUBTTL  Location Equates
 PAGE
 
 
@@ -496,7 +496,7 @@ SS_HI_CACHE     EQU     000H            ;   compatible cache
 
 OTHER_CACHE     EQU     00000H          ; GP zero cache
 
-SUBTTL  Display Equates
+;; SUBTTL  Display Equates
 PAGE
 
 ;       The next equates are system definitions for display buffer addresses.
@@ -532,4 +532,4 @@ NSEG@_HI        EQU     00H             ;
 
 VIRTUAL_ENABLE  EQU     0000000000000001B
 
-SUBTTL
+;; SUBTTL

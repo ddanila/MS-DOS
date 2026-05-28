@@ -3,9 +3,9 @@
 ; Table Segment for MS-DOS DOS
 ;
 
-.xlist
+;; .xlist
 include STDSW.ASM
-.list
+;; .list
 
 TITLE   STDTABLE - Table segment for MS-DOS
 NAME    STDTABLE

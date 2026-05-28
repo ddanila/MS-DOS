@@ -3,7 +3,7 @@
 ; DATA Segment for MS-DOS
 ;
 
-.xlist
+;; .xlist
 include STDSW.ASM
 include DOSSEG.ASM
 debug = FALSE                           ; No dossym (too big)
@@ -19,7 +19,7 @@ INCLUDE DEVSYM.INC
 INCLUDE PDB.INC
 INCLUDE FIND.INC
 INCLUDE MI.INC
-.list
+;; .list
 
 TITLE   STDDATA - DATA segment for MS-DOS
 NAME    STDDATA

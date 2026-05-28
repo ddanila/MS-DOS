@@ -1,4 +1,4 @@
-.XLIST
+;; .XLIST
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; DOS - NLS Support - KEYB Command
@@ -28,4 +28,4 @@ SD               EQU  SHARED_DATA      ;;
 TSD              EQU  TEMP_SHARED_DATA ;;
                                        ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-.LIST
+;; .LIST

@@ -4,10 +4,10 @@
 ; Standard device IO for MSDOS (first 12 function calls)
 ;
 
-.xlist
+;; .xlist
 include STDSW.ASM
 include DOSSEG.ASM
-.list
+;; .list
 
 debug=0
 

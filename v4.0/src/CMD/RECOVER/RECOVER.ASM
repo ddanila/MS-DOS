@@ -7,7 +7,7 @@ TITLE	RECOVER.SAL - MS-DOS File/Disk Recovery Utility
 ;	Copyright 1988 by Microsoft Corporation
 ;
 ;-----------------------------------------------------------
-.xlist
+;; .xlist
 	include RECCHNG.INC		;an000;bgb
 	include RECSEG.INC		;AN000;bgb
 	INCLUDE DOSSYM.INC		;AN000;bgb
@@ -65,7 +65,7 @@ public	fill_fat, rexit2, sfsize, stop_read, calc_fat_addr			;an027;bgb
 	Extrn	Build_String:Near
 	extrn	seg_adj:near
 	extrn	exitpgm:near						       ;an026;bgb
-.list
+;; .list
 
 ;*****************************************************************************	;an005;bgb
 ;   calc_fat_addr - calculate the seg/off of the fat cell from the cell number	;an005;bgb

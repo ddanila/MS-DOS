@@ -214,14 +214,14 @@ CSEG	       SEGMENT PARA PUBLIC 'CODE' ;AN000;
  EXTRN	SYSDISPMSG	    :NEAR  ;AN000;SYSTEM MSG HANDLER DISPLAY
 
  EXTRN	INIT		    :NEAR  ;INITIALIZATION ROUTINE
-.XLIST				   ;
+;; .XLIST				   ;
 ;EXTRN	PRINTF		    :NEAR  ;MESSAGE DISPLAY ROUTINE
 ;EXTRN	PROMPT		    :NEAR  ;MESSAGE DISPLAY AND KEYBOARD INPUT ROUTINE
 ;EXTRN	ERROR_MESSAGE	    :NEAR  ;ERROR MESSAGE DISPLAY ROUTINE
 ;EXTRN	MSG_SOURCE_BAD_PTR  :BYTE
 ;EXTRN	YES		    :BYTE
 ;EXTRN	NO		    :BYTE
-.LIST				   ;
+;; .LIST				   ;
  EXTRN	ASCII_DRV1_ID	    :BYTE  ;AN000;SOURCE DRIVE LETTER CHARACTER
  EXTRN	ASCII_DRV2_ID	    :BYTE  ;AN000;TARGET DRIVE LETTER CHARACTER
  EXTRN	MSG_TRACKS	    :WORD  ;AN000;NUMBER OF TRACKS
@@ -584,11 +584,11 @@ $$DO4:
 ;      $ELSE			   ;ELSE IF ERROR DETECTED IN INIT
        JMP SHORT $$EN3
 $$IF3:
-.XLIST				   ;
+;; .XLIST				   ;
 ;      PUSH  DX
 ;      PUSH  CS
 ;      CALL  PRINTF		   ;DISPLAY ERROR MESSAGE
-.LIST				   ;
+;; .LIST				   ;
 	   MOV	 DI,DX		   ;PASS NUMBER OF ERROR MSG, IF ANY		;AD000;
 				   ;DI HAS OFFSET OF MESSAGE DESCRIPTOR
 	   CALL  SENDMSG	   ;AC000;DISPLAY THE ERROR MESSAGE
@@ -789,7 +789,7 @@ $$IF31:
 $$EN31:
 ;  $ENDSRCH			   ;AN000;
 $$SR27:
-.XLIST				   ;
+;; .XLIST				   ;
 ;	MOV   AL,USER_INPUT
 ;	AND   AL,11011111B	    ;MAKE USER INPUT UPPER CASE
 ;	CMP   AL,YES		    ;IF YES THEN COPY AGAIN
@@ -800,7 +800,7 @@ $$SR27:
 ;   $ENDLOOP E
 ;	STC			    ;SET CARRY TO INDICATE NO REPEAT
 ;   $ENDSRCH
-.LIST				   ;
+;; .LIST				   ;
    RET				   ;
 
 TEST_REPEAT ENDP		   ;
@@ -1169,7 +1169,7 @@ $$IF73:
 ;  $ENDLOOP E			   ;
    JNE $$DO73
 $$EN73:
-.XLIST				   ;
+;; .XLIST				   ;
 ;this next is dead code, nobody calls WO_FATAL, so the move copy_status
 ;and the print not compatible msg should be removed, and just the JMP WO_EXIT
 ;will no longer be needed to skip stuff that is not there.  Kiser
@@ -1177,7 +1177,7 @@ $$EN73:
 ;WO_FATAL:
 ;   MOV   COPY_STATUS, FATAL	    ;WE ARE GOING TO ABORT PROGRAM
 ;   PRINT MSG_NOT_COMPATIBLE	    ;SHOW NOT COMPATIABLE MESSAGE
-.LIST				   ;
+;; .LIST				   ;
 ;  $ENDSRCH			   ;
 $$SR73:
 WO_EXIT:			   ;
@@ -1519,22 +1519,22 @@ $$IF83:
 
    MOV	 AL, LAST_TRACK 	   ;NOW, SHOW THE MESSAGE "COPYING ..."
    INC	 AL			   ;
-.XLIST				   ;
+;; .XLIST				   ;
 ;  MOV	 BYTE PTR MSG_COPYING_PTR+2, AL ;HOW MANY TRACKS?
-.LIST				   ;
+;; .LIST				   ;
    MOV	 BYTE PTR MSG_TRACKS, AL   ;AC000;HOW MANY TRACKS?
 
    MOV	 AL, END_OF_TRACK	   ;
-.XLIST				   ;
+;; .XLIST				   ;
 ;  MOV	 BYTE PTR MSG_COPYING_PTR+4, AL ;HOW MANY SECTORS?
-.LIST				   ;
+;; .LIST				   ;
    MOV	 BYTE PTR MSG_SECTRK,AL    ;AC000;HOW MANY SECTORS?
 
    MOV	 AL, NO_OF_SIDES	   ;TELL USER HOW MANY SIDE TO COPY
    INC	 AL			   ;
-.XLIST				   ;
+;; .XLIST				   ;
 ;  MOV	 BYTE PTR MSG_COPYING_PTR+6, AL
-.LIST				   ;
+;; .LIST				   ;
    MOV	 BYTE PTR MSG_SIDES,AL	   ;AC000;HOW MANY SIDES?
 				   ;CR,LF,"Copying %1 tracks",CR,LF
 				   ;"%2 Sectors/Track, %3 Side(s)",CR,LF
@@ -2122,10 +2122,10 @@ EEH_EXIT:			   ;
    POP	 AX			   ;
    POPF 			   ;
    RET				   ;
-.XLIST				   ;
+;; .XLIST				   ;
 ;EEH_JUST_EXIT:
 ;   JMP   EXIT_PROGRAM		    ;UNCONDITIONAL EXIT (IN MAIN PROC)
-.LIST				   ;
+;; .LIST				   ;
 EXTENDED_ERROR_HANDLER ENDP	   ;
 ;  =  =  =  =  =  =  =	=  =  =  =  =
    HEADER <TRY_FORMAT - ATTEMPT TRACK FORMAT, TRY FOR ERROR RECOVERY> ;AN000;
@@ -2202,7 +2202,7 @@ ERROR_MESSAGE PROC NEAR 	   ;DISPLAY ERROR MESSAGE		     *
 ;									     *
 ;*****************************************************************************
    CMP	 AH,READ_FUNC		   ;ERROR DURING READ ?
-.XLIST				   ;
+;; .XLIST				   ;
 ;	$IF	E
 ;	    MOV     BX,OFFSET READ_ERROR
 ;	    MOV     MSG_HARD_ERR_TYPE,BX ;ERROR DURING READ OP
@@ -2212,7 +2212,7 @@ ERROR_MESSAGE PROC NEAR 	   ;DISPLAY ERROR MESSAGE		     *
 ;	    MOV     MSG_HARD_ERR_TYPE,BX ;ERROR DURING WRITE OP
 ;	    MOV     BL,TRACK_TO_WRITE	;SAVE BAD TRACK NUMBER FOR WRITE
 ;	$ENDIF
-.LIST				   ;
+;; .LIST				   ;
 ;  $IF	 E			   ;AN000;YES, READ ERROR
    JNE $$IF116
        MOV   BL,TRACK_TO_READ	   ;SAVE BAD TRACK NUMBER FOR READ
@@ -2228,10 +2228,10 @@ $$EN116:
    MOV	 DRIVE_LETTER,"A"	   ;
    dec	 dl			   ;change logical drive letter to physical one.
    ADD	 DRIVE_LETTER,DL	   ;SHOW DRIVE LETTER
-.XLIST				   ;
+;; .XLIST				   ;
 ;	MOV	BYTE PTR MSG_HARD_ERROR_PTR+8,AL ;SIDE NUMBER
 ;	MOV	BYTE PTR MSG_HARD_ERROR_PTR+10,BL ;TRACK NUMBER WHERE THE ERROR
-.LIST				   ;
+;; .LIST				   ;
    MOV	 BYTE PTR ERROR_SIDE_NUMBER,AL ;AC000;SIDE NUMBER
    MOV	 BYTE PTR ERROR_TRACK_NUMBER,BL ;AC000;TRACK NUMBER WHERE THE ERROR
 				   ;CR,LF,"Unrecoverable read/write error on drive %1",CR,LF
@@ -2239,7 +2239,7 @@ $$EN116:
 
    RET				   ;
 ERROR_MESSAGE ENDP		   ;
-.XLIST				   ;
+;; .XLIST				   ;
 ; HEADER <PROMPT - READ RESPONSE FROM KEYBOARD>
 ;KB_INPUT_FUNC EQU 0C01H		 ;DOS KEYBOARD INPUT
 ;*****************************************************************************
@@ -2270,7 +2270,7 @@ ERROR_MESSAGE ENDP		   ;
 ;   RET
 ;CALL_PRINTF ENDP
 ;  =  =  =  =  =  =  =	=  =  =  =  =
-.list				   ;
+;; .list				   ;
    HEADER <SENDMSG - PASS IN REGS DATA FROM MSG DESCRIPTOR TO DISP MSG> ;AN000;
 SENDMSG PROC NEAR		   ;AN000;
    PUBLIC SENDMSG		   ;AN000;

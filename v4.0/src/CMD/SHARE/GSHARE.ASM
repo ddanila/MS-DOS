@@ -12,12 +12,12 @@ extrn				   fnm:near, rsc:near, rmn:near, cps:near, ofl:near, sle:near, interr:n
 
 				   NAME Sharer
 
-				   .xlist
-				   .xcref
+				   ;; .xlist
+				   ;; .xcref
 				   INCLUDE DOSSYM.INC
 				   include DPL.ASM
-				   .cref
-				   .list
+				   ;; .cref
+				   ;; .list
 
 AsmVars 			   <IBM, Installed>
 
@@ -88,7 +88,7 @@ DATA	ENDS
 ;   if we are not installed, then the code here is just part of the normal
 ;   MSDOS code segment otherwise, define our own code segment
 
-	.sall
+	;; .sall
 	IF INSTALLED EQ 0
 CODE	    SEGMENT BYTE PUBLIC 'CODE'
 	    ASSUME  SS:DOSGROUP,CS:DOSGROUP

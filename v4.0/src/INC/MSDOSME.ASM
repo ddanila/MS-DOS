@@ -3,10 +3,10 @@
 ; Standard device IO for MSDOS (first 12 function calls)
 ;
 debug=0
-.xlist
+;; .xlist
 include MSSW.ASM
 include DOSSEG.ASM
-.list
+;; .list
 
 TITLE   IBMDOSMES - DOS OEM dependancies
 NAME    IBMDOSMES

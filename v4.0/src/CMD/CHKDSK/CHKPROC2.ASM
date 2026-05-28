@@ -1,7 +1,7 @@
 TITLE	CHKPROC2 - PART2 Procedures called from chkdsk
 page	,132					;
 
-	.xlist
+	;; .xlist
 	include CHKSEG.INC							;an005;bgb
 	INCLUDE CHKCHNG.INC
 	INCLUDE DOSSYM.INC
@@ -55,7 +55,7 @@ public FATAL, hav_fatal_arg,  INT_23, RDONE
 public Systime									;an005;bgb
 public int_24									;an005;bgb
 public CHECK_DBCS_CHARACTER							;an055;bgb
-	.list
+	;; .list
 
 
 

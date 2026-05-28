@@ -1,4 +1,4 @@
-.XLIST
+;; .XLIST
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; DOS - NLS Support - Keyboard Definition File
 ;; (C) Copyright 1988 Microsoft
@@ -316,4 +316,4 @@ CHECK_FOR_CORE_KEY MACRO
        ENDM
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-.LIST
+;; .LIST

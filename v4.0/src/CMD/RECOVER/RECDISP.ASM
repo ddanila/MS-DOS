@@ -4,14 +4,14 @@ page	,132				; ;AN000;bgb
 ; Include files
 ;*****************************************************************************
 ;
-.xlist
+;; .xlist
 	include PATHMAC.INC							;an028;bgb
 	include RECSEG.INC		;AN000;bgb
 	include DOSSYM.INC
 	INCLUDE SYSMSG.INC
 	INCLUDE RECEQU.INC
 	INCLUDE RECMSG.INC
-.list
+;; .list
 ;
 ;*****************************************************************************
 ; external data
@@ -32,7 +32,7 @@ data	segment public para 'DATA'      ;AC000;bgb
 ;*****************************************************************************
 ; Message Services
 ;*****************************************************************************
-.xlist
+;; .xlist
 MSG_UTILNAME  <RECOVER>
 Msg_Services	<MSGDATA>
 data	ends
@@ -61,7 +61,7 @@ Msg_Services	<LOADmsg>
 Msg_Services	<DISPLAYmsg,CHARmsg,NUMmsg>					;an029;bgb
 pathlabl	msgret								;an028;bgb
 Msg_Services	<RECOVER.CLA,RECOVER.CL1,RECOVER.CL2,RECOVER.CTL>
-.list
+;; .list
 ;
 ;*****************************************************************************
 ; Public Routines

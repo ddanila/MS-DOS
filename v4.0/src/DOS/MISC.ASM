@@ -25,7 +25,7 @@ NAME  MISC
 ;	A000   version 4.00   Jan. 1988
 ;	A001   D490 -- Change IOCTL subfunctions from 63h, 43h to 66h , 46h
 
-.xlist
+;; .xlist
 ;
 ; get the appropriate segment definitions
 ;
@@ -36,7 +36,7 @@ CODE	SEGMENT BYTE PUBLIC  'CODE'
 
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
-.list
+;; .list
 
 ENTRYPOINTSEG	EQU	0CH
 MAXDIF		EQU	0FFFH

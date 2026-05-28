@@ -65,14 +65,14 @@ CODE	SEGMENT PUBLIC 'CODE'                                                   ;AN
 	PUBLIC	PRINT_COLOR	       ;;  procedures				;AN000;
 	PUBLIC	LEN_OF_COLOR_MODULES   ;;					;AN000;
 				       ;;					;AN000;
-.XLIST					;					;AN000;
+;; .XLIST					;					;AN000;
 INCLUDE GRCTRL.INC			; Stuctures needed			;AN000;
 INCLUDE GRSHAR.INC			;  for both set of print modules	;AN000;
 INCLUDE GRPATTRN.INC			;					;AN000;
 					;					;AN000;
 INCLUDE GRCTRL_EXT.INC			; Externals from PRT_SCR control module ;AN000;
 	INCLUDE STRUC.INC			;					;AN000;
-.LIST					;					;AN000;
+;; .LIST					;					;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AN000;
 ;;										;AN000;
 ;;										;AN000;

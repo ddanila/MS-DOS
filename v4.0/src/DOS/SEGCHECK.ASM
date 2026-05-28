@@ -2,7 +2,7 @@
 TITLE   SegCheck - internal consistency check
 NAME    SegCheck
 
-.xlist
+;; .xlist
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
 
@@ -11,7 +11,7 @@ ShareF  = FALSE
 IF SHAREF EQ 0
 include DOSSEG.ASM
 ENDIF
-.list
+;; .list
 
 AsmVars <NET, DEBUG>
 

@@ -1,4 +1,4 @@
-.XLIST										;AN000;
+;; .XLIST										;AN000;
 PAGE	,132									;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;					;AN000;
 ;; DOS - GRAPHICS Command
@@ -21,4 +21,4 @@ PAGE	,132									;AN000;
    EXTRN  PARSE_PARMS:NEAR	       ;;					;AN000;
 				       ;;					;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;					;AN000;
-.LIST										;AN000;
+;; .LIST										;AN000;

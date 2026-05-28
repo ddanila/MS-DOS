@@ -127,14 +127,14 @@ COMMENT #
 
 	.286P		      ; Enable recognition of 286 privileged instructs.
 
-	.XLIST		      ; Turn off the listing
+	;; .XLIST		      ; Turn off the listing
 	INCLUDE INDEDAT.INC
 
 	IF1		      ; Only include the macros in the first pass
 	INCLUDE INDEOVP.MAC   ;   of the assembler
 	INCLUDE INDEINS.MAC
 	ENDIF
-	.LIST		      ; Turn on the listing
+	;; .LIST		      ; Turn on the listing
 
 	; Let these variables be known to external procedures
 
@@ -199,7 +199,7 @@ TAB	   EQU	09H		; ASCII tab
 LF	   EQU	0AH		; ASCII line feed
 CR	   EQU	0DH		; ASCII carriage return
 
-SUBTTL	Structure Definitions
+;; SUBTTL	Structure Definitions
 PAGE
 ;------------------------------------------------------------------------------;
 ;	Request Header (Common portion) 				       ;
@@ -258,7 +258,7 @@ RH19_DI     DW	 ?		; Contents of DI			   @D2A
 RH19_RQPK   DD	 ?		; Pointer to Generic IOCTL request packet  @D2A
 RH19	ENDS
 
-SUBTTL	Device Driver Header
+;; SUBTTL	Device Driver Header
 PAGE
 POST	PROC	NEAR
 
@@ -289,7 +289,7 @@ RBX	   DW	?	      ; Temporary save area for register BX	   @P1A
 ISmodel_80 DB	-1	      ; model_80 flag.	Set to 1 if on a model_80  @P1A
 			      ;   Set to 0 if not on a model_80 	   @D1C
 
-SUBTTL	Device Strategy
+;; SUBTTL	Device Strategy
 PAGE
 ;------------------------------------------------------------------------------;
 ;	Device "strategy" entry point                                          ;
@@ -305,7 +305,7 @@ STRATEGY PROC	FAR
 
 STRATEGY ENDP
 
-SUBTTL	Device Interrupt Intry Point
+;; SUBTTL	Device Interrupt Intry Point
 PAGE
 
 ;------------------------------------------------------------------------------;
@@ -455,7 +455,7 @@ POPPED: POP	ES
 	RET
 IRPT	ENDP
 
-SUBTTL	Command Routines
+;; SUBTTL	Command Routines
 PAGE
 
 MEDIA_CHECK:			;
@@ -483,7 +483,7 @@ SET_LOG_DEVICE: 		;					    @D2A
 
 	RET
 
-SUBTTL	Generic IOCTL Service Routine
+;; SUBTTL	Generic IOCTL Service Routine
 PAGE
 
 ;------------------------------------------------------------------------------;
@@ -588,7 +588,7 @@ INT15F88   ENDP 		       ;				    @P7A
 
 LEAVE_RES  LABEL NEAR		      ; Leave code up to here resident.@D0A @D2M
 
-SUBTTL	Initialize Routine
+;; SUBTTL	Initialize Routine
 PAGE
 INIT_P1:
 
@@ -1225,7 +1225,7 @@ TEST_EXIT:			; We are now running in V86 mode
 
 	RET			; Return to IRPT which called INIT_P1
 
-SUBTTL	Gate A20
+;; SUBTTL	Gate A20
 PAGE
 ;------------------------------------------------------------------------------;
 ; GATE_A20								       ;
@@ -1248,7 +1248,7 @@ GATE_A20    PROC
 				;					  15@P4D
 GATE_A20	ENDP
 
-SUBTTL	GET_PARMS parameter line scan
+;; SUBTTL	GET_PARMS parameter line scan
 PAGE
 ;------------------------------------------------------------------------------;
 ; GET_PARMS								       ;

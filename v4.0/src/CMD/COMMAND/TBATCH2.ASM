@@ -5,11 +5,11 @@ TITLE	Batch processing routines part II
 
 	INCLUDE COMSW.ASM
 
-.xlist
+;; .xlist
 	INCLUDE DOSSYM.INC
 	INCLUDE COMSEG.ASM
 	INCLUDE COMEQU.ASM
-.list
+;; .list
 
 
 DATARES 	SEGMENT PUBLIC BYTE	;AC000;

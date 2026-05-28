@@ -29,14 +29,14 @@ NAME	IFSERROR									 ;AN000;
 ;											 ;AN000;
 ;************************************************************************************	 ;AN000;
 											 ;AN000;
-.xlist											 ;AN000;
+;; .xlist											 ;AN000;
 INCLUDE IFSSYM.INC									 ;AN000;
 INCLUDE IFSFSYM.INC									 ;AN000;
 INCLUDE DOSSYM.INC									 ;AN000;
 INCLUDE DEVSYM.INC									 ;AN000;
 INCLUDE SYSMSG.INC
 msg_utilname <IFSFUNC>
-.list											 ;AN000;
+;; .list											 ;AN000;
 											 ;AN000;
 AsmVars <IBM, Installed, Debug> 							 ;AN000;
 											 ;AN000;
@@ -124,9 +124,9 @@ MAXERR	EQU	89		; Don't know errors above 79                             ;AN000;
 											 ;AN000;
 	PUBLIC	 RODS_LABEL
 RODS_LABEL	LABEL	BYTE
-.xlist
+;; .xlist
 MSG_SERVICES <IFSFUNC.CL1>
-.list
+;; .list
 
 ;
 ; The following table defines CLASS ACTION and LOCUS info for the INT 21H/24H

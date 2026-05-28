@@ -89,8 +89,8 @@ Set_Data_Segment     macro
 	pop	es
 	pop	ax
 
-	.LALL
+	;; .LALL
 	assume	ds:dg,es:dg
-	.XALL
+	;; .XALL
 	endm
 

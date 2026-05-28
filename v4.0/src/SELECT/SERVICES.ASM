@@ -3,7 +3,7 @@
 PAGE	60,132				;AN000;
 NAME	SERVICES			;AN000;
 TITLE	SERVICES - DOS - SELECT.EXE	;AN000;
-SUBTTL	services.asm			;AN000;
+;; SUBTTL	services.asm			;AN000;
 	.386					; 80186+ instructions used (PUSH mem, etc.)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;

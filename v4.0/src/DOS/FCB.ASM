@@ -21,7 +21,7 @@ NAME	FCB
 ;
 ; get the appropriate segment definitions
 ;
-.xlist
+;; .xlist
 include DOSSEG.ASM
 
 
@@ -37,7 +37,7 @@ CODE	SEGMENT BYTE PUBLIC  'CODE'
 include DOSSYM.INC
 include DEVSYM.INC
 include DOSCNTRY.INC			;AN000; 	2/12/KK
-.list
+;; .list
 
 	i_need	Name1,BYTE
 	i_need	Creating,BYTE

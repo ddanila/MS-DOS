@@ -13,10 +13,10 @@ kbdxxx	segment byte public 'kbd'
 ; *************************************************************************
 ;
 	public kbdflushbuffer
-	.sall
-	.xlist
+	;; .sall
+	;; .xlist
 	include KBD.INC
-	.list
+	;; .list
 
 	public savedkbdinput
 savedkbdinput	label	word

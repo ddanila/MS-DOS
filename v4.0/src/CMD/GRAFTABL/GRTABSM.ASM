@@ -102,9 +102,9 @@
 	ENDIF				;AN000;
 	INCLUDE PATHMAC.INC		;AN006;
 ;	INCLUDE SYSMSG.INC		;PERMIT SYSTEM MESSAGE HANDLER DEFINITION ;AN000;
-.XLIST					;AN000;
+;; .XLIST					;AN000;
 	INCLUDE SYSMSG.INC		;AN000;PERMIT SYSTEM MESSAGE HANDLER DEFINITION
-.LIST					;AN000;
+;; .LIST					;AN000;
 	MSG_UTILNAME <GRAFTABL> 	;AN000;IDENTIFY THE COMPONENT
 ; =  =	=  =  =  =  =  =  =  =	=  =
 ;	   $SALUT (4,12,18,36)	   ;AN000;
@@ -135,11 +135,11 @@ COPYRIGHT  LABEL BYTE		   ;AN006;
 				   ;DEFAULT=NO TIMEmsg
 				   ;DEFAULT=NO DATEmsg
 ;	   MSG_SERVICES <LOADmsg,GETmsg,DISPLAYmsg,CHARmsg>				;AN000;
-.XLIST				   ;AN000;
-.XCREF				   ;AN000;
+;; .XLIST				   ;AN000;
+;; .XCREF				   ;AN000;
 	   MSG_SERVICES <LOADmsg,GETmsg,DISPLAYmsg,CHARmsg> ;AN000;
-.LIST				   ;AN000;
-.CREF				   ;AN000;
+;; .LIST				   ;AN000;
+;; .CREF				   ;AN000;
 ; = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 	   PATHLABL GRTABSM	   ;AN006;
 

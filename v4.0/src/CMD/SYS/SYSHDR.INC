@@ -212,26 +212,26 @@ ENDIF
 
 
 ;       INCLUDE DOSSYM.INC              ;also defines version of dos
-.xlist
+;; .xlist
         INCLUDE DOSSYM.INC
-.list
+;; .list
 
 
 ;       INCLUDE IOCTL.INC               ; Get / Set Device Parameters IOCTL
-.xlist
+;; .xlist
         INCLUDE IOCTL.INC
-.list
+;; .list
 
 
 ;       INCLUDE BOOTFORM.INC            ; Boot Record Structure
-.xlist
+;; .xlist
         INCLUDE BOOTFORM.INC
 
 
 ;       INCLUDE PATHMAC.INC            ; PATH macro for PATHGEN
-.xlist
+;; .xlist
         INCLUDE PATHMAC.INC
-.list
+;; .list
 
 IFNDEF IBMJAPVER                        ;; WASM: VERSION.INC (via SYSVAR.INC) may define these first
 IBMJAPVER EQU   FALSE                   ; this and the following are mutually

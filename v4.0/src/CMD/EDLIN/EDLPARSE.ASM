@@ -149,11 +149,11 @@ code	segment public	byte			;an000;code segment
 
 
 ;======================= begin main routine ==============================
-.xlist
+;; .xlist
 
 include PARSE.ASM				;an000;parser
 
-.list
+;; .list
 
 parser_command	proc	near			;an000;parse routine
 

@@ -4,14 +4,14 @@
 TITLE	Batch processing routines
 
 
-.xlist
+;; .xlist
 	INCLUDE COMSW.ASM
 	INCLUDE DOSSYM.INC
 	INCLUDE COMSEG.ASM
 	INCLUDE COMEQU.ASM
 	include DOSCNTRY.INC		;AN000;
 	include VERSION.INC
-.list
+;; .list
 
 
 DATARES 	SEGMENT PUBLIC BYTE	;AC000;

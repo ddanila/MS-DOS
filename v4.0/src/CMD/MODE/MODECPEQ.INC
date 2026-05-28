@@ -7,10 +7,10 @@
 HEADER	MACRO	TEXT,EJECT
 ;;example:  header <new subtitle goes here>
 ;;the angle brackets are required
-.XLIST
-	SUBTTL	TEXT
+;; .XLIST
+	;; SUBTTL	TEXT
 IFB	<EJECT>
-.LIST
+;; .LIST
 ENDIF
 	PAGE
 	ENDM

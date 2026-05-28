@@ -4,12 +4,12 @@
 Title	COMMAND Language midifiable Code Transient
 
 
-.xlist
+;; .xlist
 	INCLUDE DOSSYM.INC
 	INCLUDE COMSW.ASM
 	INCLUDE COMSEG.ASM
 	INCLUDE COMEQU.ASM
-.list
+;; .list
 
 
 DATARES 	SEGMENT PUBLIC BYTE	;AC000;

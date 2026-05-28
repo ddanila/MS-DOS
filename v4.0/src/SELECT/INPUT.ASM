@@ -1,7 +1,7 @@
 PAGE	60,132				   ;AN000;
 NAME	SELECT				   ;AN000;
 TITLE	INPUT.ASM - DOS SELECT.EXE	   ;AN000;
-SUBTTL	input.asm			   ;AN000;
+;; SUBTTL	input.asm			   ;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
 ;

@@ -106,9 +106,9 @@
 	INCLUDE PATHMAC.INC		;AN013;
 
 ;	INCLUDE SYSMSG.INC
-.XLIST					;AN000;
+;; .XLIST					;AN000;
 	INCLUDE SYSMSG.INC		;AN000;PERMIT SYSTEM MESSAGE HANDLER DEFINITION
-.LIST					;AN000;
+;; .LIST					;AN000;
 	MSG_UTILNAME <TREE>		;AN000;IDENTIFY THE COMPONENT
 ; =  =	=  =  =  =  =  =  =  =	=  =
 
@@ -134,9 +134,9 @@ CSEG	SEGMENT PARA PUBLIC 'CODE'	;AN000;
 					;DEFAULT=NO TIMEmsg
 					;DEFAULT=NO DATEmsg
 ;	MSG_SERVICES <LOADmsg,DISPLAYmsg,GETmsg,CHARmsg,NUMmsg> 		       ;AN027;
-.xlist					;AN000;
+;; .xlist					;AN000;
 	MSG_SERVICES <LOADmsg,DISPLAYmsg,GETmsg,CHARmsg,NUMmsg> ;AN027; 		     ;AC002;
-.list					;AN000;
+;; .list					;AN000;
 ; = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 	PATHLABL TREESYSM		;AN013;
 	PUBLIC	LAST_BYTE		;AN000;

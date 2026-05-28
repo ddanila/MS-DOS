@@ -1,9 +1,9 @@
 
 	PAGE	,132			;
 	TITLE	MODE COMMAND - COMMAND PARSING
-.XLIST							;AN000;
+;; .XLIST							;AN000;
    INCLUDE STRUC.INC					;AN000;
-.LIST							;AN000;
+;; .LIST							;AN000;
 ;.SALL							;AN000;
 
 

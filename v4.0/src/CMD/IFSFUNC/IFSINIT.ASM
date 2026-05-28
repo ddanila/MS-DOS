@@ -28,14 +28,14 @@ NAME	IFSINIT 									 ;AN000;
 ;
 ;***********************************************************************************
 											 ;AN000;
-.xlist											 ;AN000;
+;; .xlist											 ;AN000;
 INCLUDE IFSFSYM.INC									 ;AN000;
 INCLUDE IFSSYM.INC									 ;AN000;
 INCLUDE DOSSYM.INC									 ;AN000;
 INCLUDE DEVSYM.INC									 ;AN000;
 include SYSMSG.INC								 ;AN000;
 msg_utilname <IFSFUNC>			; resident msgret stuff 		 ;AN000;
-.list											 ;AN000;
+;; .list											 ;AN000;
 											 ;AN000;
 AsmVars <IBM, INSTALLED, DEBUG, PATHGEN>						 ;AN000;
 ; WASM: AsmVars defines INSTALLED but WASM disagrees on size at use site.
@@ -471,11 +471,11 @@ ASSUME	DS:IFSSEG									 ;AN000;
 											 ;AN000;
 	ASSUME	CS:IFSSEG,DS:IFSSEG,ES:NOTHING,SS:STACK 				 ;AN000;
 											 ;AN000;
-.xlist											 ;AN000;
+;; .xlist											 ;AN000;
 	msg_services <MSGDATA>								 ;AN007;
 	PUBLIC	SYSGETMSG
 	msg_services <GETmsg>
-.list											 ;AN000;
+;; .list											 ;AN000;
 											 ;AN000;
 Break	<Installable Network INIT>							 ;AN000;
 											 ;AN000;
@@ -667,11 +667,11 @@ DEFAULT_DFLCount DB	4								 ;AN000;
 ;;;alias DEFAULT_NLSize   DW	 172			 ; 4 * 43			 ;AN000;
 											 ;AN000;
 	ASSUME	CS:IFSSEG,DS:NOTHING							 ;AN000;
-.xlist											 ;AN000;
+;; .xlist											 ;AN000;
 	INCLUDE IFSPARSE.INC								 ;AN000;
 	msg_services <DISPLAYmsg,CHARmsg,LOADmsg>					 ;AN000;
 	msg_services <ifsfunc.cla,ifsfunc.cl2>	; parse/install msgs			 ;AN000;
-.list											 ;AN000;
+;; .list											 ;AN000;
 											 ;AN000;
 ;****************************************************************************** 	 ;AN000;
 ;		!!!!!!!   IFSFUNC starts here	!!!!!!! 	(see END statement)	 ;AN000;

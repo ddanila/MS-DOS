@@ -11,7 +11,7 @@ NAME  CRIT
 ;       Created: ARR 30 March 1983
 ;
 
-.xlist
+;; .xlist
 ;
 ; get the appropriate segment definitions
 ;
@@ -21,7 +21,7 @@ CODE    SEGMENT BYTE PUBLIC  'CODE'
 	ASSUME  SS:NOTHING,CS:DOSGROUP
 
 INCLUDE DOSSYM.INC
-.list
+;; .list
 
 	I_need  User_In_AX,WORD
 	i_need  CurrentPDB,WORD

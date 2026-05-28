@@ -84,7 +84,7 @@ cseg		segment public para 'CODE'
 ;	Equates
 ;-----------------------------------------------------------------------------
 
-.xlist
+;; .xlist
 ;include fsi.lib
 NETSYSUTIL   EQU  0C2H			; SYSTEM UTILITIES
 NETENQ	     EQU  07H			; ENQ RESOURCE
@@ -111,7 +111,7 @@ DPL		ENDS
 include SYSMAC.LIB
 include VERSIONA.INC
 include APPENDP.INC			; parseing stuff for append			 ;AN004;
-.list
+;; .list
 ;		extrn	end_address:near	; end of stay resident stuff
 
 ;		extrn	bad_append_msg:byte	; messages
@@ -430,7 +430,7 @@ MSG_SERVICES <MSGDATA>
 MSG_SERVICES <DISPLAYmsg,CHARmsg>						;an010;bgb
 MSG_SERVICES <APPEND.CLA,APPEND.CL1,APPEND.CTL>
 
-.xlist
+;; .xlist
 ;-----------------------------------------------------------------------------
 ;	macros
 ;-----------------------------------------------------------------------------
@@ -480,7 +480,7 @@ chkchar macro	char							  ; @@12
 	cmp	al,char 						  ; @@12
 	jne	ccn_ret 						  ; @@12
 	endm								  ; @@12
-.list
+;; .list
 
 page
 ;-----------------------------------------------------------------------------

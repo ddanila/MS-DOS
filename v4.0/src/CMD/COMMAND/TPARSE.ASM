@@ -3,9 +3,9 @@
 ;	SCCSID = @(#)tparse.asm 4.1 87/04/28
 TITLE	COMMAND interface to SYSPARSE
 
-.xlist
+;; .xlist
 	INCLUDE COMSEG.ASM		;AN000;
-.list
+;; .list
 
 TRANSPACE	SEGMENT PUBLIC BYTE	;AN000;
 
@@ -16,11 +16,11 @@ TRANSPACE	SEGMENT PUBLIC BYTE	;AN000;
 	QusSW	equ	0		;AN025; do not include quoted string
 	LFEOLSW equ	0		;AN044; do not use 0ah as line terminator
 
-.xlist
+;; .xlist
 
 include PSDATA.INC			;AN000;
 
-.list
+;; .list
 
 TRANSPACE	ENDS			;AN000;
 
@@ -43,9 +43,9 @@ ASSUME	CS:TRANGROUP,DS:NOTHING,ES:NOTHING,SS:NOTHING	 ;AN054;
 
 	public	Cmd_parse		;AN000;
 
-.xlist
+;; .xlist
 	INCLUDE PARSE.ASM		;AN000;
-.list
+;; .list
 
 Cmd_parse	Proc  near		;AN000;
 

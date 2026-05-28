@@ -32,13 +32,13 @@ code	segment public para 'CODE'
 	assume	cs:code,ds:data
 code	ends
 
-.xlist
+;; .xlist
 INCLUDE FORCHNG.INC
 INCLUDE FORMACRO.INC
 INCLUDE SYSCALL.INC
 INCLUDE FOREQU.INC
 INCLUDE FORSWTCH.INC
-.list
+;; .list
 
 ;
 ;*****************************************************************************

@@ -19,7 +19,7 @@ NAME Alloc
 ;       Created: ARR 30 March 1983
 ;
 
-.xlist
+;; .xlist
 ;
 ; get the appropriate segment definitions
 ;
@@ -30,7 +30,7 @@ CODE    SEGMENT BYTE PUBLIC  'CODE'
 
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
-.list
+;; .list
 
 
 PAGE

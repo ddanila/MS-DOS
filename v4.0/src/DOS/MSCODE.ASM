@@ -6,9 +6,9 @@ NAME	IBMCODE
 ; System call dispatch code.
 ;
 
-.xlist
+;; .xlist
 include MSSW.ASM
-.list
+;; .list
 
 include MS_CODE.ASM
 	END

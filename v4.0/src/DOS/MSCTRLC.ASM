@@ -3,9 +3,9 @@
 ; ^C and error handler for MSDOS
 ;
 
-.xlist
+;; .xlist
 include MSSW.ASM
-.list
+;; .list
 
 NAME	IBMCTRLC
 

@@ -66,7 +66,7 @@ NOEXEC	EQU	FALSE
 DOSSIZE EQU	0A000H
 ;dossize equ	 0C000H 	;J.K. for the debugging version of IBMDOS.
 
-.xlist
+;; .xlist
 ;	INCLUDE dossym.INC
 	include SMDOSSYM.INC	;J.K. Reduced version of DOSSYM.INC
 	INCLUDE DEVSYM.INC
@@ -79,7 +79,7 @@ DOSSIZE EQU	0A000H
 
 	include VERSION.INC
 
-.list
+;; .list
 
 ;AN000 J.K. If MYCDS_SIZE <> CURDIRLEN, then force a compilatiaon error.
 	if	MYCDS_SIZE NE CURDIRLEN

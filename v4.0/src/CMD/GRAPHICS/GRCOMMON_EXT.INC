@@ -1,4 +1,4 @@
-.XLIST										;AN000;
+;; .XLIST										;AN000;
 PAGE	,132									;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;					;AN000;
 ;; DOS - GRAPHICS Command
@@ -19,7 +19,7 @@ PAGE	,132									;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;					;AN000;
 				       ;;					;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;					;AN000;
-.LIST										;AN000;
+;; .LIST										;AN000;
 EXTRN	READ_DOT:NEAR								;AN000;
 EXTRN	LOC_MODE_PRT_INFO:NEAR							;AN000;
 EXTRN	STORE_BOX:NEAR								;AN000;

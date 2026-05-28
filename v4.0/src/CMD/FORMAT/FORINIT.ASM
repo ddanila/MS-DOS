@@ -111,7 +111,7 @@ code	ends
 ;*****************************************************************************
 ;
 
-.xlist
+;; .xlist
 INCLUDE FORCHNG.INC
 INCLUDE FORMACRO.INC
 INCLUDE SYSCALL.INC
@@ -119,7 +119,7 @@ INCLUDE IOCTL.INC
 INCLUDE FOREQU.INC
 INCLUDE FORSWTCH.INC  ;; WASM: must precede FORPARSE.INC (Size_xxx EQUs used as db values)
 INCLUDE FORPARSE.INC
-.list
+;; .list
 
 ;
 ;*****************************************************************************

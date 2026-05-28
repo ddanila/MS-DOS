@@ -73,7 +73,7 @@ FILE_PTR		DW	  0			;AN000;
 DATA	       ENDS				 ;AN000; DATA
 ;**********************************************************************
 						 ;
-	.XLIST					 ;AN000;
+	;; .XLIST					 ;AN000;
 	INCLUDE STRUC.INC			 ;AN000;
 	INCLUDE MACROS.INC			 ;AN000;
 	INCLUDE VARSTRUC.INC			 ;AN000;
@@ -84,7 +84,7 @@ DATA	       ENDS				 ;AN000; DATA
 	EXTRN	HOOK_INT_24:FAR 		 ;AN000;
 	EXTRN	RESTORE_INT_24:FAR		 ;AN000;
 	EXTRN	GGET_STATUS:FAR 		 ;AN000;
-	.LIST					 ;AN000;
+	;; .LIST					 ;AN000;
 						 ;
 						 ;
 ;**********************************************************************

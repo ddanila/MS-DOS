@@ -2,10 +2,10 @@
 ; memory routines
 ;
 
-.xlist
+;; .xlist
 include	VERSION.INC
 include CMACROS.INC
-.list
+;; .list
 
 sBegin	code
 assumes cs,code

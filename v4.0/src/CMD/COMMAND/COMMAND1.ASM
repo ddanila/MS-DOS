@@ -316,14 +316,14 @@ NAME	COMMAND
 ;			to the new environment before doing the SETBLOCK.
 ;***********************************************************************************
 
-.XCREF
-.XLIST
+;; .XCREF
+;; .XLIST
 	INCLUDE DOSSYM.INC
 	INCLUDE COMSW.ASM
 	INCLUDE COMEQU.ASM
 	INCLUDE RESMSG.EQU		;AN000;
-.LIST
-.CREF
+;; .LIST
+;; .CREF
 
 CODERES 	SEGMENT PUBLIC BYTE	;AC000;
 CODERES ENDS

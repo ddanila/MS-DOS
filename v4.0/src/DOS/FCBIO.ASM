@@ -34,7 +34,7 @@ NAME	FCBIO
 ;
 ;	A000	 version 4.00  Jan. 1988
 ;
-.xlist
+;; .xlist
 ;
 ; get the appropriate segment definitions
 ;
@@ -46,7 +46,7 @@ CODE	SEGMENT BYTE PUBLIC  'CODE'
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
 INCLUDE FASTOPEN.INC
-.list
+;; .list
 
  AsmVars <Kanji>
 

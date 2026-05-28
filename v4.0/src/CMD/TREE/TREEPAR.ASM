@@ -75,9 +75,9 @@
 ;****************** END OF SPECIFICATIONS *****************************
 ; =  =	=  =  =  =  =  =  =  =	=  =
 HEADER	MACRO	TEXT			;;AN000;
-.XLIST					;;AN000;
-	SUBTTL	&TEXT			;;AN000;
-.LIST					;;AN000;
+;; .XLIST					;;AN000;
+	;; SUBTTL	&TEXT			;;AN000;
+;; .LIST					;;AN000;
 	PAGE				;;AN000;
 	ENDM				;;AN000;
 ; =  =	=  =  =  =  =  =  =  =	=  =

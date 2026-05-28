@@ -12,7 +12,7 @@ NAME  PARSE
 ;               EE PathParse 10 Sept 1983
 ;
 
-.xlist
+;; .xlist
 ;
 ; get the appropriate segment definitions
 ;
@@ -23,7 +23,7 @@ CODE    SEGMENT BYTE PUBLIC  'CODE'
 
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
-.list
+;; .list
 
 BOGUS =FALSE
 	I_Need  chSwitch,BYTE

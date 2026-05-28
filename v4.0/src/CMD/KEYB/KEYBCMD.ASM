@@ -114,16 +114,16 @@
 	EXTRN  OLD_PTR:WORD	       ;an003;
 	EXTRN  ERR_PART:WORD		;an003;
 ;***CNS
-.xlist
+;; .xlist
 	INCLUDE STRUC.INC	       ;AN000;;; WGR structured macros			   ;AN000
 	INCLUDE SYSMSG.INC	       ;AN000;;; WGR message retriever			   ;AN000
-.list
+;; .list
 				       ;;
 MSG_UTILNAME <KEYB>		       ;AN000;;; WGR identify to message retriever	   ;AN000
 				       ;;
 CODE	SEGMENT PUBLIC 'CODE'          ;;
 				       ;;
-.xlist				       ;;
+;; .xlist				       ;;
 	INCLUDE KEYBEQU.INC	       ;;
 	INCLUDE KEYBSYS.INC	       ;;
 	INCLUDE KEYBI9.INC	       ;;
@@ -135,11 +135,11 @@ CODE	SEGMENT PUBLIC 'CODE'          ;;
 	INCLUDE KEYBTBBL.INC	       ;;
 	INCLUDE COMMSUBS.INC	       ;;
 	INCLUDE KEYBCPSD.INC	       ;;
-.xlist
+;; .xlist
 	INCLUDE POSTEQU.INC	       ;;
 	INCLUDE DSEG.INC	       ;;
 				       ;;
-.list
+;; .list
 	ASSUME	CS:CODE,DS:CODE        ;;
 				       ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -2042,13 +2042,13 @@ FIND_FIRST_RETURN:		       ;;
 				       ;;
 FIND_FIRST_CP	     ENDP	       ;;
 				       ;;;;;;;;;;;;;
-.xlist						  ;;
+;; .xlist						  ;;
 MSG_SERVICES <MSGDATA>				  ;AN000;;; WGR 			   ;AN000
 MSG_SERVICES <LOADmsg,DISPLAYmsg,CHARmsg,NUMmsg>  ;AN000;;; WGR 			   ;AN000
 MSG_SERVICES <KEYB.CL1> 			  ;AN000;;; WGR 			   ;AN000
 MSG_SERVICES <KEYB.CL2> 			  ;AN000;;; WGR 			   ;AN000
 MSG_SERVICES <KEYB.CLA> 			  ;AN000;;; WGR 			   ;AN000
-.list						  ;;
+;; .list						  ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Temp Shared Data Area
 ;; Contains data which is required by

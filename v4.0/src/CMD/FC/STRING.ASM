@@ -2,10 +2,10 @@
 ; string functions for lattice C
 ;
 
-.xlist
+;; .xlist
 include	VERSION.INC
 include CMACROS.INC
-.list
+;; .list
 
 sBegin	data
 assumes ds,data

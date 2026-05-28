@@ -26,7 +26,7 @@ Title	E2BINIT(EXE2BIN)
 INCLUDE SYSMSG.INC
 MSG_UTILNAME <EXE2BIN>							;AN000;
 
-	subttl	Main Code Area						;AN000;
+	;; subttl	Main Code Area						;AN000;
 	page
 
 
@@ -136,7 +136,7 @@ LOAD	EQU	ZLOAD
 ;*****************************************************************************
 ;
 
-.xlist
+;; .xlist
 INCLUDE DOSSYM.INC			; also versiona.inc		;AN000;
 INCLUDE SYSCALL.INC							;AN000;
 INCLUDE E2BMACRO.INC							;AN000;
@@ -144,7 +144,7 @@ INCLUDE E2BEQU.INC							;AN000;
 INCLUDE E2BTABLE.INC							;AN000;
 INCLUDE E2BPARSE.INC							;AN000;
 include VERSION.INC
-.list
+;; .list
 
 
 
@@ -157,7 +157,7 @@ psp_ptr dw	1 dup(?)						;AN000;
 ; SysDisplayMsg Declarations
 ;*****************************************************************************
 ;
-.xlist
+;; .xlist
 MSG_SERVICES <LOADmsg>							;AN000;
 MSG_SERVICES <DISPLAYmsg,CHARmsg>					;AN000;
 MSG_SERVICES <EXE2BIN.CLA,EXE2BIN.CLB>					;AN000;
@@ -165,7 +165,7 @@ MSG_SERVICES <EXE2BIN.CL1,EXE2BIN.CL2>					;AN000;
 MSG_SERVICES <EXE2BIN.CTL>						;AN000;
 
 
-.list
+;; .list
 
 ;
 ;*****************************************************************************

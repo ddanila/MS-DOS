@@ -59,9 +59,9 @@ _DATA   segment word public 'DATA'
         public  SysParse
 
 ;-------------------------------------------------------------------
-.xlist
+;; .xlist
 include PARSE.ASM               ; include the parser
-.list
+;; .list
 ;-------------------------------------------------------------------
 
                 public  CallParser

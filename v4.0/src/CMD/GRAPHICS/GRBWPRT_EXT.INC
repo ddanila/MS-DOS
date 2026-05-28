@@ -1,4 +1,4 @@
-.XLIST										;AN000;
+;; .XLIST										;AN000;
 PAGE										;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;					;AN000;
 ;; DOS - GRAPHICS Command
@@ -19,6 +19,6 @@ PAGE										;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;					;AN000;
 				       ;;					;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;					;AN000;
-.LIST										;AN000;
+;; .LIST										;AN000;
    EXTRN   PRINT_BW_APA:NEAR							;AN000;
    EXTRN   LEN_OF_BW_MODULES:ABS	;;					;AN000;

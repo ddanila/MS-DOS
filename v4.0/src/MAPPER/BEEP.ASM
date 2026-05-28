@@ -22,7 +22,7 @@ dosxxx  segment byte public 'dos'
 ;*********************************************************************
 
         public  dosbeep
-        .sall
+        ;; .sall
         include MACROS.INC
 
 inv_parm equ    0002h         ;invalid parameter return code

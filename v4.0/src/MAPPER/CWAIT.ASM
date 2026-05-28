@@ -39,10 +39,10 @@ dosxxx  segment byte public 'dos'
         assume  cs:dosxxx,ds:nothing,es:nothing,ss:nothing
 
         public  doscwait
-        .sall
-        .xlist
+        ;; .sall
+        ;; .xlist
         include MACROS.INC
-        .list
+        ;; .list
 ;
 argframe     struc
 old_bp      dw    ?

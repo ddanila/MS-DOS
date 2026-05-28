@@ -16,10 +16,10 @@ dosxxx	segment byte public 'dos'
 ;*********************************************************************
 
 	    public   dosgetmachinemode
-	    .sall
-	    .xlist
+	    ;; .sall
+	    ;; .xlist
 	    include  MACROS.INC
-	    .list
+	    ;; .list
 
 argframe	    struc
 modeaddr    dw	     ?

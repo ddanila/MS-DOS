@@ -23,7 +23,7 @@ dosxxx	segment byte public 'dos'
 ;*********************************************************************
 
 	    public   dosgetdatetime
-	    .sall
+	    ;; .sall
 	    include  MACROS.INC
 
 argframe	    struc

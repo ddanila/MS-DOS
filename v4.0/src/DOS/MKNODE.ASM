@@ -22,7 +22,7 @@ NAME    MKNODE
 ;
 ; get the appropriate segment definitions
 ;
-.xlist
+;; .xlist
 include DOSSEG.ASM
 include FASTOPEN.INC
 
@@ -31,7 +31,7 @@ CODE    SEGMENT BYTE PUBLIC  'CODE'
 
 include DOSSYM.INC
 include DEVSYM.INC
-.list
+;; .list
 
         i_need  EntFree,WORD
         i_need  DirStart,WORD

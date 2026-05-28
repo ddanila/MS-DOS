@@ -3,10 +3,10 @@ page 80,132
 ;
 title CP/DOS KbdGetStatus
 ;
-	.sall
-	.xlist
+	;; .sall
+	;; .xlist
 	include KBD.INC
-	.list
+	;; .list
 
 kbddata segment word public 'kbddata'
 

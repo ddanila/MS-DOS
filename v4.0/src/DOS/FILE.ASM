@@ -24,7 +24,7 @@ NAME	FILE
 ;	Created: MZ 4 April 1983
 ;	A000   version 4.00  Jan. 1988
 
-.xlist
+;; .xlist
 ;
 ; get the appropriate segment definitions
 ;
@@ -38,7 +38,7 @@ include DEVSYM.INC
 include FASTOPEN.INC
 include EA.INC			     ;AN000;
 include VERSION.INC
-.list
+;; .list
 
 	EXTRN	DOS_OPEN:NEAR,DOS_CREATE:NEAR,DOS_Create_New:NEAR
 

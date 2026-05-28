@@ -26,7 +26,7 @@ NAME    ROM
 ;
 ; get the appropriate segment definitions
 ;
-.xlist
+;; .xlist
 include DOSSEG.ASM
 include FASTSEEK.INC			       ; DOS 4.00
 include FASTXXXX.INC			       ; DOS 4.00
@@ -38,7 +38,7 @@ CODE    SEGMENT BYTE PUBLIC  'CODE'
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
 include EA.INC
-.list
+;; .list
 
         i_need  CLUSNUM,WORD
         i_need  NEXTADD,WORD

@@ -25,7 +25,7 @@ NAME	Dir2
 ;
 ; get the appropriate segment definitions
 ;
-.xlist
+;; .xlist
 include DOSSEG.ASM
 
 CODE	SEGMENT BYTE PUBLIC  'CODE'
@@ -34,7 +34,7 @@ CODE	SEGMENT BYTE PUBLIC  'CODE'
 include DOSSYM.INC
 include DEVSYM.INC
 include FASTOPEN.INC		       ;DOS 3.3
-.list
+;; .list
 
 asmvar	Kanji
 

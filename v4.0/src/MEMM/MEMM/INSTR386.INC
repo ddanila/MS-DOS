@@ -27,7 +27,7 @@
 ;
 ;******************************************************************************
 ifndef INC_LIST
-.xlist
+;; .xlist
 endif
 
 ;***	OP32_IRET - 32 bit mode iret
@@ -560,4 +560,4 @@ XOR_EBP_EBP	macro
 	xor	bp, bp
 	endm
 
-.list	; end of INSTR386.INC
+;; .list	; end of INSTR386.INC

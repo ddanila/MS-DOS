@@ -5,9 +5,9 @@ NAME	CPMIO
 ; Standard device IO for MSDOS (first 12 function calls)
 ;
 
-.xlist
+;; .xlist
 include DOSSEG.ASM
-.list
+;; .list
 
 ;
 ; Old style CP/M 1-12 system calls to talk to reserved devices
@@ -38,11 +38,11 @@ include DOSSEG.ASM
 CODE	SEGMENT BYTE PUBLIC  'CODE'
 	ASSUME	SS:DOSGROUP,CS:DOSGROUP
 
-.xlist
+;; .xlist
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
 include DOSCNTRY.INC			;AN000		2/12/KK
-.list
+;; .list
 
 IFNDEF	KANJI
 KANJI	EQU	0	;FALSE

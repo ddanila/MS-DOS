@@ -24,7 +24,7 @@
 ;
 ;******************************************************************************
 ifndef INC_LIST
-.xlist
+;; .xlist
 endif
 
 ;   STANDARD ROM BIOS MACHINE TYPES used in ROM_BIOS_Machine_ID

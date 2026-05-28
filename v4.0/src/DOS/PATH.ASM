@@ -23,7 +23,7 @@ NAME	PATH
 ;				    current directory.
 ;		 MZ 19 Jan 1983     Brain damaged applications rely on success
 ;				    values of AL.
-.xlist
+;; .xlist
 ;
 ; get the appropriate segment definitions
 ;
@@ -34,7 +34,7 @@ CODE	SEGMENT BYTE PUBLIC  'CODE'
 
 INCLUDE DOSSYM.INC
 INCLUDE DEVSYM.INC
-.list
+;; .list
 
 	EXTRN	DOS_MkDir:NEAR,DOS_RmDir:NEAR
 

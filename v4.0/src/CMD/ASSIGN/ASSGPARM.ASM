@@ -96,9 +96,9 @@
 ; =  =	=  =  =  =  =  =  =  =	=  =
 
 HEADER	MACRO	TEXT
-.XLIST
-	SUBTTL	TEXT
-.LIST
+;; .XLIST
+	;; SUBTTL	TEXT
+;; .LIST
 	PAGE
 	ENDM
 
@@ -134,9 +134,9 @@ QUSSW	EQU	0			;SUPPRESS SUPPORT OF QUOTED STRING FORMAT
 
 					;PARSE WORK AREA & EQUATES
 
-.xlist
+;; .xlist
 	INCLUDE PARSE.ASM
-.list
+;; .list
 
 CODE	ENDS
 	END

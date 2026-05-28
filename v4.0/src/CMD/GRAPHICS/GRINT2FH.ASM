@@ -53,12 +53,12 @@ CODE	SEGMENT PUBLIC 'CODE'          ;;                                       ;AN
 	PUBLIC	SHARED_DATA_AREA_PTR   ;;					;AN000;
 				       ;;					;AN000;
 				       ;;					;AN000;
-.XLIST										;AN000;
+;; .XLIST										;AN000;
 	INCLUDE STRUC.INC								;AN000;
 INCLUDE GRINST_EXT.INC								;AN000;
 INCLUDE GRCTRL_EXT.INC								;AN000;
 INCLUDE GRCPSD_EXT.INC								;AN000;
-.LIST										;AN000;
+;; .LIST										;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;					;AN000;
 ;;										;AN000;
 ;; Module: INT_2FH_DRIVER							;AN000;

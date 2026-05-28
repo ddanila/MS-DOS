@@ -26,10 +26,10 @@ dosxxx  segment byte public 'dos'
 ;*********************************************************************
 
             public   dosdevioctl
-            .sall
-            .xlist
+            ;; .sall
+            ;; .xlist
             include  MACROS.INC
-            .list
+            ;; .list
 
 argframe         struc
 Old_bp      dw       ?

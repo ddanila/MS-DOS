@@ -3,7 +3,7 @@
 PAGE	55,132				;AN000;
 NAME	SELPAN				;AN000;
 TITLE	SELPAN	 - Table of entry points of panels, scroll fields, color ;AN000;
-SUBTTL	sel-pan.asm			;AN000;
+;; SUBTTL	sel-pan.asm			;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
 ;	SELPAN .ASM

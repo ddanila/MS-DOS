@@ -3,9 +3,9 @@
 ; ^C and error handler for MSDOS
 ;
 
-.xlist
+;; .xlist
 include STDSW.ASM
-.list
+;; .list
 
 TITLE   Control C detection, Hard error and EXIT routines
 NAME    STDCTRLC

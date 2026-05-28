@@ -31,7 +31,7 @@
 ;
 ;******************************************************************************
 ifndef INC_LIST
-.xlist
+;; .xlist
 endif
 
 ;
@@ -203,4 +203,4 @@ ErrWrite	equ	0020h	    ; Attempt to write to protected area
 ErrDMA		equ	0021h	    ; Attempt to DMA into page frame (not for user)
 ErrINTProt	equ	0022h	    ; General Protected interrupt error
 
-.list	; end of VM386.INC
+;; .list	; end of VM386.INC

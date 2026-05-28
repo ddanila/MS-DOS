@@ -2,9 +2,9 @@
 ;m															   ;AN000;
 	PAGE	,132			;										   ;AN000;
 	TITLE	ANALYZE_AND_INVOKE - call appropriate routine based on request						   ;AN000;
-.XLIST															   ;AN000;
+;; .XLIST															   ;AN000;
    INCLUDE STRUC.INC													   ;AN000;
-.LIST															   ;AN000;
+;; .LIST															   ;AN000;
 ;.SALL															   ;AN000;
 
 

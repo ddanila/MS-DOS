@@ -123,7 +123,7 @@
 ;
 ;
 ;******************* END OF SPECIFICATIONS *************************************
-                        subttl PRINT - Program Organization
+                        ;; subttl PRINT - Program Organization
                         page
 ;******************* START PROGRAM ORGANIZATION *******************************
 ;
@@ -170,7 +170,7 @@
 ;
 ;*******************  END  ROGRAM ORGANIZATION  ********************************
 
-                        subttl PRINT - Data Space
+                        ;; subttl PRINT - Data Space
                         page
 
 INCLUDE SYSVAR.INC
@@ -467,9 +467,9 @@ Std_Out_Dev             equ  1
 
 ;                                       $SALUT (0,41,46,52)
 
-.xlist
+;; .xlist
 BREAK                                   MACRO subtitle
-                                        SUBTTL subtitle
+                                        ;; SUBTTL subtitle
                                         PAGE
 ENDM
 
@@ -496,7 +496,7 @@ ENDM
                         INCLUDE MI.INC
                         INCLUDE SYSMSG.INC
                         include VERSIONA.INC
-.list
+;; .list
 
 
                         MSG_UTILNAME <PRINT>

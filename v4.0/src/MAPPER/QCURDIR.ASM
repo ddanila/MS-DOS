@@ -29,7 +29,7 @@ dosxxx  segment byte public 'dos'
 ;*********************************************************************
 
             public   dosqcurdir
-            .sall
+            ;; .sall
             include  MACROS.INC
 
 argframe         struc
