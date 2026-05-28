@@ -269,7 +269,7 @@ BUSY_MASK     EQU 00000010B		;busy bit (9) BUSY mask (high order byte)
 ;Ё								       Ё
 ;юддддддддддддддддддддддддддддддддддддддддддддддддддддддддддддддддддддды
 RH0	STRUC
-	DB	(TYPE RHC) DUP (?)	;common portion
+	DB	(SIZE RHC) DUP (?)	;common portion
 
 RH0_NUN DB	?			;number of units
 					;set to 1 if installation succeeds,
@@ -292,7 +292,7 @@ RH0_BPBA EQU	DWORD PTR RH0_BPBO	;OFFSET/SEGMENT OF BPB
 ;Ё	 Output Status command. 				       Ё
 ;юддддддддддддддддддддддддддддддддддддддддддддддддддддддддддддддддддддды
 RH10	STRUC
-	DB	(TYPE RHC) DUP (?)	;common portion
+	DB	(SIZE RHC) DUP (?)	;common portion
 RH10	ENDS
 
 
@@ -301,7 +301,7 @@ RH10	ENDS
 ;юддддддддддддддддддддддддддддддддддддддддддддддддддддддддддддддддддддды
 
 RH19	STRUC
-	    DB	 (TYPE RHC) DUP (?)	; Reserve space for the header	   @RH6
+	    DB	 (SIZE RHC) DUP (?)	; Reserve space for the header	   @RH6
 
 RH19_MAJF   DB	 ?		; Major function			   @RH6
 RH19_MINF   DB	 ?		; Minor function			   @RH6
@@ -509,7 +509,7 @@ map_table	mappable_phys_page_struct <-1, -1, -1, -1>  ;p0   no default
 
 map_count_def	equ	6		; default 6
 map_count	dw	0		;
-map_size	dw	type mappable_phys_page_struct * map_count_def ; size of default table
+map_size	dw	SIZE mappable_phys_page_struct * map_count_def ; size of default table
 ppm_size	equ	6		;size of partial page map entry
 
 ;	flags and a word used in setting up map_table stuff, see parmpars.inc
@@ -992,7 +992,7 @@ Q_Page_Frame_Loop:
 	cmp	cs:[si].Phys_Page_Segment,dx	;page frame match reference	;an000; dms;
 	jne	Q_Page_Frame_Error_Exit 	;no - exit with error		;an000; dms;
 
-	add	si,Type Mappable_Phys_Page_Struct;adjust pointer		;an000; dms;
+	add	si,SIZE Mappable_Phys_Page_Struct;adjust pointer		;an000; dms;
 	add	dx,400h 			;next page frame		;an000; dms;
 	inc	ax				;next page			;an000; dms;
 	loop	Q_Page_Frame_Loop		;continue loop			;an000; dms;
@@ -1087,7 +1087,7 @@ GH_OKFREE:
 	MOV	CX,NUM_HANDLES		;loop counter is #handles
 	DEC	CX			;handle 0 reserved for op. sys.   @RH1
 	MOV	DX,1			;handle assignment set to 1	  @RH1
-	MOV	DI,TYPE H_LOOKUP_STRUC	;init table index to 1st entry	  @RH1
+	MOV	DI,SIZE H_LOOKUP_STRUC	;init table index to 1st entry	  @RH1
 ;--------------------------------
 	CLI				;interrupts OFF during allocation
 ;--------------------------------
@@ -1096,7 +1096,7 @@ GH_FREEHSRCH:
 					;Is this handle available?	  @RH1
 	JE	GH_HFREE		;yes end search  dx=handle id	  @RH1
 	INC	DX			;next handle assignment
-	ADD	DI,TYPE H_LOOKUP_STRUC	;next entry in handle lookup	  @RH1
+	ADD	DI,SIZE H_LOOKUP_STRUC	;next entry in handle lookup	  @RH1
 					;repeat for all table entries
 	LOOP GH_FREEHSRCH
 	    MOV     AH,EMS_CODE85	;no available handles
@@ -1110,7 +1110,7 @@ GH_HFREE:
 	MOV	CX,NUM_HANDLES		;loop counter
 	DEC	CX			;handle 0 reserved for op. sys.    @RH1
 					;si = index to hndl lookup tbl	   @RH1
-	MOV	SI,TYPE H_LOOKUP_STRUC	; for adding pages (skip 0 entry)  @RH1
+	MOV	SI,SIZE H_LOOKUP_STRUC	; for adding pages (skip 0 entry)  @RH1
 	XOR	AX,AX			;clear page counter
 	CLC				;clear carry for addition
 GH_PAGESUM:
@@ -1118,7 +1118,7 @@ GH_PAGESUM:
 	JE	GH_PGSUM_BOT		;If handle is free don't add       @RH4
 	ADD	AX,HANDLE_LOOKUP_TABLE.H_PAGES[SI]
 					;add lengths (pages) of PALs	  @RH1
-	ADD	SI,TYPE H_LOOKUP_STRUC	; next entry in handle lookup	  @RH1
+	ADD	SI,SIZE H_LOOKUP_STRUC	; next entry in handle lookup	  @RH1
 GH_PGSUM_BOT:
 	LOOP	GH_PAGESUM
 	CMP	AX,TOTAL_EMS_PAGES	;pages in handle lookup > total?  @RH1
@@ -1198,7 +1198,7 @@ MLP_DXINRANGE:
 	push	ax			;save affected regs			;an000; dms;
 	push	dx			;					;an000; dms;
 	MOV	AX,DX			;   (DX:AX used in MUL		   @RH1
-	MOV	DX,TYPE H_LOOKUP_STRUC	;SI = entry's offset into          @RH8
+	MOV	DX,SIZE H_LOOKUP_STRUC	;SI = entry's offset into          @RH8
 	MUL	DX			; the handle lookup table	   @RH8
 	MOV	SI,AX			;				   @RH1
 	pop	dx			;restore affected regs			;an000; dms;
@@ -1248,7 +1248,7 @@ MLP_GET_SEG:				;юддддддддддддддддддддддддддддддддддддды
 MLP_PP_CHECK:
 	CMP	AL,BYTE PTR MAP_TABLE.PHYS_PAGE_NUMBER[DI]	    ;AX = table pp? @RH4
 	JE	MLP_PP_OK				   ;Yes..get seg   @RH4
-	ADD	DI,TYPE MAPPABLE_PHYS_PAGE_STRUCT	   ;No..check next @RH4
+	ADD	DI,SIZE MAPPABLE_PHYS_PAGE_STRUCT	   ;No..check next @RH4
 	LOOP	MLP_PP_CHECK				   ; table entry   @RH4
 	    MOV     AH,EMS_CODE8B	;If here physical page not found   @RH1
 	    JMP     MLP_EXIT		; in mappable phys pg table..Error @RH1
@@ -1490,7 +1490,7 @@ MLP_MCARD_SETUP PROC
 MC_GET_CARD:					   ; absolute page (SI)    @RH5
 	CMP	MEM_CARD_TABLE.END_PG_NUM[DI],SI   ;If the last pg this    @RH5
 	JAE	MC_FOUND_CARD			   ; card maps <= SI then  @RH5
-	ADD	DI,TYPE MEM_CARD_STRUC		   ; use this card	   @RH5
+	ADD	DI,SIZE MEM_CARD_STRUC		   ; use this card	   @RH5
 	LOOP	MC_GET_CARD			   ;Else check next card   @RH5
 						   ; Note: if SI = FFFF    @RH5
 						   ;  the last card is	   @RH5
@@ -1522,8 +1522,8 @@ MC_DEACTIVATE:				; Deactivate (inhibit) the translate  ╨
 MC_SRCH_MPP:					      ; 		   @RH5
 	CMP	MAP_TABLE.PHYS_PAGE_SEGMENT[SI],DI    ;If no segment match @RH5
 	JE	MC_CHECK_CUR_PG 		      ; then next entry in @RH5
-	ADD	SI,TYPE MAPPABLE_PHYS_PAGE_STRUCT     ; map phys pg tbl &  @RH5
-	ADD	AX,TYPE MULTIC_PM_STRUC 	      ; multicard pm table @RH5
+	ADD	SI,SIZE MAPPABLE_PHYS_PAGE_STRUCT     ; map phys pg tbl &  @RH5
+	ADD	AX,SIZE MULTIC_PM_STRUC 	      ; multicard pm table @RH5
 	LOOP	MC_SRCH_MPP			      ; 		   @RH5
 
 					;Examine the current card ID and   @RH5
@@ -1624,7 +1624,7 @@ D_Check_Handle:
 D_OKRANGE:				;check if active (valid) handle
 	PUSH	DX			;Save handle id 		   @RH1
 	MOV	AX,DX			;set up indexing into h lookup	   @RH1
-	MOV	DX,TYPE H_LOOKUP_STRUC	;				   @RH8
+	MOV	DX,SIZE H_LOOKUP_STRUC	;				   @RH8
 	MUL	DX			;get handle lookup entry offset    @RH8
 	POP	DX			;Restore handle id		   @RH1
 	MOV	DI,AX			;Put offset into index reg	   @RH1
@@ -1640,7 +1640,7 @@ D_OKHNDL:		; Before deallocation can continue, insure the	 @RH1 ╨
 			;-----------------------------------------------------
 	PUSH	DX				 ;Save handle id	   @RH1
 	MOV	AX,DX				 ;Get the correct offset   @RH1
-	MOV	DX,TYPE H_SAVE_STRUC		 ; into the handle save    @RH8
+	MOV	DX,SIZE H_SAVE_STRUC		 ; into the handle save    @RH8
 	MUL	DX				 ; area for this handle    @RH8
 	POP	DX				 ;Restore handle id	   @RH1
 	MOV	SI,AX				 ;			   @RH1
@@ -1750,7 +1750,7 @@ Deallocate_Chain	proc				;deallocate page	;an000; dms;
 	mov	bx,si					;alloc_ptr		;an000; dms;
 
 	mov	ax,si					;get page_ptr		;an000; dms;
-	mov	dx,Type Page_Alloc_List 		;get entry size 	;an000; dms;
+	mov	dx,SIZE Page_Alloc_List 		;get entry size 	;an000; dms;
 	mul	dx					;get pointer val	;an000; dms;
 	mov	si,ax					;page_ptr		;an000; dms;
 
@@ -1816,7 +1816,7 @@ SAVE_MAP PROC
 SM_DXINRANGE:
 	PUSH	DX			;Handle destroyed by MUL	   @RH1
 	MOV	AX,DX			;SI = requested handle's           @RH1
-	MOV	DX,TYPE H_LOOKUP_STRUC	; offset into the handle	   @RH8
+	MOV	DX,SIZE H_LOOKUP_STRUC	; offset into the handle	   @RH8
 	MUL	DX			; lookup table			   @RH8
 	MOV	SI,AX			;				   @RH1
 	POP	DX			;Restore handle ID		   @RH1
@@ -1827,7 +1827,7 @@ SM_DXINRANGE:
 	    JMP     SM_EXIT		;exit
 SM_HACTIVE:
 	MOV	AX,DX			    ;DI = requested handle's       @RH1
-	MOV	DX,TYPE H_SAVE_STRUC	    ; offset into the handle	   @RH1
+	MOV	DX,SIZE H_SAVE_STRUC	    ; offset into the handle	   @RH1
 	MUL	DX			    ; save area 		   @RH1
 	MOV	DI,AX			    ;Add the table base to	   @RH1
 	ADD	DI,OFFSET HANDLE_SAVE_AREA  ; make ES:DI a pointer	   @RH1
@@ -1889,7 +1889,7 @@ SM_HLP_STORE:					  ;Store the word for the  @RH5
 	STOSW					  ; and logical page into  @RH5
 	MOV	AX,MAP_TABLE.PPM_LOG_PAGE[SI]	  ; the save area at ES:DI @RH5
 	STOSW					  ; STOSW moves AX to ES:DI@RH5
-	ADD	SI,TYPE MAPPABLE_PHYS_PAGE_STRUCT ;Next entry in mpp table @RH5
+	ADD	SI,SIZE MAPPABLE_PHYS_PAGE_STRUCT ;Next entry in mpp table @RH5
 	LOOP	SM_HLP_STORE			  ;			   @RH5
 
 	POP	DS			;Recover these registers
@@ -1929,7 +1929,7 @@ RESTORE_MAP PROC
 RM_DXINRANGE:
 	PUSH	DX			;Handle destroyed by MUL	   @RH1
 	MOV	AX,DX			;SI = requested handle's           @RH1
-	MOV	DX,TYPE H_LOOKUP_STRUC	; offset into the handle	   @RH1
+	MOV	DX,SIZE H_LOOKUP_STRUC	; offset into the handle	   @RH1
 	MUL	DX			; lookup table			   @RH1
 	MOV	SI,AX			;				   @RH1
 	POP	DX			;Restore handle ID		   @RH1
@@ -1940,7 +1940,7 @@ RM_DXINRANGE:
 	    JMP     RM_EXIT		;exit
 RM_HACTIVE:
 	MOV	AX,DX				 ;SI = requested handle's  @RH1
-	MOV	DX,TYPE H_SAVE_STRUC		 ; offset into the handle  @RH1
+	MOV	DX,SIZE H_SAVE_STRUC		 ; offset into the handle  @RH1
 	MUL	DX				 ; save area		   @RH1
 	MOV	SI,AX				 ;Add the table base to    @RH1
 	ADD	SI,OFFSET HANDLE_SAVE_AREA	 ; make DS:SI a pointer    @RH1
@@ -1967,7 +1967,7 @@ RM_SAVE_OK:				;-------------------------------------
 	MOV	CX,map_count		;Clear all saved entries       @RH5
 RM_CLEAR_SA:				    ;Use an overlay to mark the    @RH5
 	MOV	[SI].HSA_LP,REUSABLE_SAVEA  ; save area free - put reusabl @RH5
-	ADD	SI,TYPE H_SAVEA_ENTRY	    ; indicator in the log p field @RH5
+	ADD	SI,SIZE H_SAVEA_ENTRY	    ; indicator in the log p field @RH5
 	LOOP	RM_CLEAR_SA		    ;				   @RH5
 
 RM_EXIT:
@@ -2013,16 +2013,16 @@ RP_RSTR_LP:				;				   @RH5
 	MOV	AX,MAP_TABLE.PHYS_PAGE_NUMBER[DI]  ; the map phys pg tbl   @RH5
 	POP	DS				   ; (only AL is used)	   @RH5
 	MOV	DX,[SI] 			   ;DX = Handle ID..inc SI @RH5
-	ADD	SI,TYPE PG0_HNDL		   ; by len needed for hnd @RH5
+	ADD	SI,SIZE PG0_HNDL		   ; by len needed for hnd @RH5
 	MOV	BX,[SI] 			   ;BX = Log. page..inc SI @RH5
-	ADD	SI,TYPE PG0_LP			   ; by len needed for lp  @RH5
+	ADD	SI,SIZE PG0_LP			   ; by len needed for lp  @RH5
 	CALL	MAP_L_TO_P			   ;Call main Map module   @RH5
 	CMP	AH,0				   ;If an error occurred   @RH5
 	JE	RP_NEXT 			   ; anywhere set software @RH5
 	MOV	AH,EMS_CODE80			   ; error and exit	   @RH5
 	JMP	SHORT RP_EXIT			   ;Else map next page	   @RH5
 RP_NEXT:					   ;Advance offset into    @RH5
-	ADD	DI,TYPE MAPPABLE_PHYS_PAGE_STRUCT  ; map phys page table   @RH5
+	ADD	DI,SIZE MAPPABLE_PHYS_PAGE_STRUCT  ; map phys page table   @RH5
 	LOOP	RP_RSTR_LP			   ;Loop for 4 EMS pages   @RH5
 
 RP_EXIT:
@@ -2061,7 +2061,7 @@ QH_CHECKALL:
 	JE	QH_NEXTH			     ;No..not active..next @RH1
 	INC	BX				     ;Else open handle	   @RH1
 QH_NEXTH:
-	ADD	SI,TYPE H_LOOKUP_STRUC	;Point to next handle lookup entry @RH1
+	ADD	SI,SIZE H_LOOKUP_STRUC	;Point to next handle lookup entry @RH1
 	LOOP	QH_CHECKALL		; and check it out		   @RH1
 	XOR	AH,AH			;good return status
 
@@ -2096,7 +2096,7 @@ Q_ALLOCATE PROC
 	    JMP     Q_ALLOC_EXIT	;exit				   @RH1
 QP_DXINRANGE:
 	MOV	AX,DX				      ;SI = offset into    @RH1
-	MOV	DX,TYPE H_LOOKUP_STRUC		      ; handle lookup tbl  @RH1
+	MOV	DX,SIZE H_LOOKUP_STRUC		      ; handle lookup tbl  @RH1
 	MUL	DX				      ; for the given	   @RH1
 	MOV	SI,AX				      ; handle		   @RH1
 	MOV	BX,HANDLE_LOOKUP_TABLE.H_Pages[SI] ;Return # of pages	@RH1
@@ -2158,7 +2158,7 @@ QHP_CHECKALL:
 	MOV	ES: WORD PTR [DI+2],AX	;Write # of pages in the 2nd word  @RH1
 	ADD	DI,4			;Advance ptr to user's area        @RH1
 QHP_NEXT:				;Check next entry in h lup table   @RH1
-	ADD	SI,TYPE H_LOOKUP_STRUC	;Inc offset into handle lup table  @RH1
+	ADD	SI,SIZE H_LOOKUP_STRUC	;Inc offset into handle lup table  @RH1
 	INC	DX			;Next handle ID
 	LOOP	QHP_CHECKALL
 
@@ -2301,7 +2301,7 @@ GET_SET_SUBFCN ENDP
 ;		  all other registers preserved 			;
 ;-----------------------------------------------------------------------;
 SIZE_SUBFCN PROC
-	MOV	AL,TYPE H_SAVE_STRUC	;get size requirements for save area
+	MOV	AL,SIZE H_SAVE_STRUC	;get size requirements for save area
 	XOR	AH,AH			;good return status
 	RET				;return to caller
 SIZE_SUBFCN ENDP

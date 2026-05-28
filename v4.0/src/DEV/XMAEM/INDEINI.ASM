@@ -227,7 +227,7 @@ STAT_GEN    EQU 800CH		; General error code			     D0A
 ;------------------------------------------------------------------------------;
 
 RH0	STRUC
-	   DB	(TYPE RHC) DUP (?)	; Reserve space for the header
+	   DB	(SIZE RHC) DUP (?)	; Reserve space for the header
 
 RH0_NUN    DB	?		; Number of units
 				; Set to 1 if installation succeeds,
@@ -249,7 +249,7 @@ RH0_BPBA   EQU	DWORD PTR RH0_BPBO  ; Offset & segment of BPB array address.
 ;---------------------------------------------------------------------------D2A;
 
 RH19	STRUC
-	    DB	 (TYPE RHC) DUP (?)	; Reserve space for the header	   @D2A
+	    DB	 (SIZE RHC) DUP (?)	; Reserve space for the header	   @D2A
 
 RH19_MAJF   DB	 ?		; Major function			   @D2A
 RH19_MINF   DB	 ?		; Minor function			   @D2A

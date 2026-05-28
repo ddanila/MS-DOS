@@ -312,10 +312,10 @@ LOAD_TABLE PROC   NEAR									 ;AN000;
 	     MOV    AL,[DI].V_MODE	  ; prepare to check resident table		 ;AN000;
 	     .IF <AL NE UNOCCUPIED> AND   ; if this spot is occupied...and		 ;AN000;
 	     .IF <AL NE [SI].V_MODE>	  ; ...is not the same mode then...		 ;AN000;
-	       ADD    DI,TYPE MODE_TABLE  ; do not touch...go to next mode		 ;AN000;
+	       ADD    DI,SIZE MODE_TABLE  ; do not touch...go to next mode		 ;AN000;
 	     .ELSE			  ; can write at this location			 ;AN000;
 	       PUSH   CX		  ; save record count				 ;AN000;
-	       MOV    CX,TYPE MODE_TABLE  ; load record length				 ;AN000;
+	       MOV    CX,SIZE MODE_TABLE  ; load record length				 ;AN000;
 	       REP    MOVSB		  ; copy record to resident data		 ;AN000;
 	       lea    DI,VIDEO_MODE_TABLE ;AN001; Set DI to the top of the target again.
 	       POP    CX		  ; restore record count and..			 ;AN000;

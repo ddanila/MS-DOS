@@ -111,7 +111,7 @@ MOV   CX,number_of_sublists											 ;AN000;
 MOV   SI,OFFSET first_sublist	       ;address first sublist							 ;AN000;
 repeat_loop: 													 ;AN000;
    MOV	 [SI].sublist_seg,DS	       ;set up the segment part of the pointer field in the sublist block	 ;AN000;
-   ADD	 SI,TYPE sublist_def	       ;point to next sublist block						 ;AN000;
+   ADD	 SI,SIZE sublist_def	       ;point to next sublist block						 ;AN000;
 LOOPNZ	repeat_loop													 ;AN000;
 														 ;AN000;
 RET

@@ -81,7 +81,7 @@ STAT_BUSY   EQU 0200H		;busy bit (9) for Removable Media call
 ;	Request Header for INIT command 				;
 ;-----------------------------------------------------------------------;
 RH0	STRUC
-	   DB	(TYPE RHC) DUP (?)	;common portion
+	   DB	(SIZE RHC) DUP (?)	;common portion
 RH0_NUN    DB	?		;number of units
 				;set to 1 if installation succeeds,
 				;set to 0 to cause installation failure
@@ -99,7 +99,7 @@ RH0_BPBA   EQU	DWORD PTR RH0_BPBO	;offset/segment of BPB array address
 ;	Request Header for MEDIA CHECK Command				;
 ;-----------------------------------------------------------------------;
 RH1	STRUC
-	   DB	(TYPE RHC) DUP (?)	;common portion
+	   DB	(SIZE RHC) DUP (?)	;common portion
 	   DB	?		;media descriptor
 RH1_RET    DB	?		;return information
 RH1	ENDS
@@ -107,7 +107,7 @@ RH1	ENDS
 ;	Request Header for BUILD BPB Command				;
 ;-----------------------------------------------------------------------;
 RH2	STRUC
-	   DB	(TYPE RHC) DUP(?)	;common portion
+	   DB	(SIZE RHC) DUP(?)	;common portion
 	   DB	?		;media descriptor
 	   DW	?		;offset  of transfer address
 	   DW	?		;segment of transfer address
@@ -118,7 +118,7 @@ RH2	ENDS
 ;	Request Header for INPUT, OUTPUT, and OUTPUT with verify	;
 ;-----------------------------------------------------------------------;
 RH4	STRUC
-	   DB	(TYPE RHC) DUP (?)	;common portion
+	   DB	(SIZE RHC) DUP (?)	;common portion
 	   DB	?		;media descriptor
 RH4_DTAO   DW	?		;offset  of transfer address
 RH4_DTAS   DW	?		;segment of transfer address

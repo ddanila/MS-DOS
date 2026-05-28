@@ -330,7 +330,7 @@ VALID_BUFFER :				;;
 					;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 has_restart :				;;
 	PUSH	BX			;; reset all the output fields
-	ADD	BX,TYPE FBUFS		;; FTP = FONT BLOCK
+	ADD	BX,SIZE FBUFS		;; FTP = FONT BLOCK
 	XOR	AX,AX			;;
 					;;
 	MOV	cs:ftag_count,AX	   ;;
@@ -366,7 +366,7 @@ RESET_FTB :				;;
 	MOV	FTP.TARGET_LO,AX	;;
 	MOV	FTP.TARGET_HI,AX	;;
 					;;
-	ADD	BX, TYPE FTBLK		;;
+	ADD	BX, SIZE FTBLK		;;
 					;;
 	DEC	DX			;;
 	AND	DX,DX			;;
@@ -378,7 +378,7 @@ NO_RESTART :				;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 					;; returned ? if so set their status
 					;; from FOUND to COMPLETE
 	PUSH	BX			;;
-	ADD	BX,TYPE FBUFS		;; FTP = FONT BLOCK
+	ADD	BX,SIZE FBUFS		;; FTP = FONT BLOCK
 					;;
 	MOV	DX,cs:num_ftb		   ;;
 					;;
@@ -395,7 +395,7 @@ SET_COMPLETE :				;;
 					;;
 SET_NEXT :				;;
 					;;
-	ADD	BX,TYPE FTBLK		;;
+	ADD	BX,SIZE FTBLK		;;
 					;;
 	DEC	DX			;;
 	AND	DX,DX			;;
@@ -403,7 +403,7 @@ SET_NEXT :				;;
 					;;
 	POP	BX			;;
 					;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	ADD	BX,TYPE FBUFS		;; FTP = FONT BLOCK
+	ADD	BX,SIZE FBUFS		;; FTP = FONT BLOCK
 					;;
 	PUSH	CX			;; STACK 1 = CX
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

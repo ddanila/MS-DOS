@@ -1592,7 +1592,7 @@ CHECK_RETURN :				;;
 					;;
 	MOV	DX,CS:[SI].NUM_FTBLK	;; DX = number fo code pages loaded
 					;;
-	ADD	SI,TYPE FBUFS		;; SI = points to FTBLK
+	ADD	SI,SIZE FBUFS		;; SI = points to FTBLK
 					;;...................................
 PARSE_FTBLK :				;; **** LOOP ****
 					;;
@@ -1649,7 +1649,7 @@ CHECK_FSTAT :				;;
 					;;
 NEXT_FTBLK :				;; **** NEXT IN LOOP ****
 					;;
-	ADD	SI,TYPE FTBLK		;;  SI = points to FTBLK
+	ADD	SI,SIZE FTBLK		;;  SI = points to FTBLK
 	DEC	DX			;;
 	INC	DI			;;########   NEXT SLOT	 ############
 	INC	DI			;;
@@ -2459,7 +2459,7 @@ PREPARE_FTB :				;; Prepare for Font Parser
 	MOV	CS:[BX].BUFFER_LEN,0	;; no data packet
 	MOV	CS:[BX].NUM_FTBLK,0	;;
 					;;
-	ADD	BX,TYPE FBUFS		;; points to the first FTBLK.
+	ADD	BX,SIZE FBUFS		;; points to the first FTBLK.
 	XOR	DX,DX			;; DX = FTBLK entries (no code page yet)
 					;;
 					;;
@@ -2488,7 +2488,7 @@ NEW_CODEPAGE :				;;
 					;;
 	MOV	CS:[BX].FTB_CP,AX	;;
 					;;
-	ADD	BX,type ftblk		;; next FTBLK
+	ADD	BX,SIZE ftblk		;; next FTBLK
 					;;
 					;;
 GET_NEXT :				;; **** NEXT IN LOOP ****
@@ -2535,7 +2535,7 @@ DEFINE_DID :				;;
 	LEA	DI,FTABLE		;;
 	MOV	CS:[DI].NUM_FTBLK,DX	;;
 					;;
-	ADD	DI,TYPE FBUFS		;;
+	ADD	DI,SIZE FBUFS		;;
 	LEA	DI,[DI].FTB_TID 	;;
 					;;
 SET_DID :				;;
@@ -2548,7 +2548,7 @@ SET_DID :				;;
 	POP	DI			;;
 	POP	SI			;;
 					;;
-	ADD	DI,TYPE FTBLK		;; next DID
+	ADD	DI,SIZE FTBLK		;; next DID
 	DEC	DX			;;
 	JNZ	SET_DID 		;;
 					;;
@@ -2560,7 +2560,7 @@ SET_DID :				;;
 	CALL	FONT_PARSER		;; restart font parser
 					;;
 	LEA	BX,FTABLE		;;
-	ADD	BX,TYPE FBUFS		;;
+	ADD	BX,SIZE FBUFS		;;
 	CMP	CS:[BX].FTB_STATUS,FSTAT_SEARCH
 					;;
 	JE	FONT_DOWNL		;;
@@ -2794,7 +2794,7 @@ DST_IVK_CP :				;;
 					;;
 	MOV	SI,BUF.RNORMO		;;
 	MOV	AX,SI			;;
-	ADD	AX,TYPE GIH		;; points to buffer
+	ADD	AX,SIZE GIH		;; points to buffer
 					;;
 	PUSH	AX			;;
 	LEA	SI,[SI].GIH_GBA 	;;
@@ -2872,7 +2872,7 @@ den_write :				;; DESIGNATE WRITE ended
 DEN_FTABLE :				;;
 					;;
 	LEA	DI,FTABLE		;;
-	ADD	DI,TYPE FBUFS		;;
+	ADD	DI,SIZE FBUFS		;;
 	MOV	AX,CS:[DI].FTB_STATUS	;;
 	CMP	AX,FSTAT_COMPLETE	;;
 	JE	DEN_ENDED		;;

@@ -182,7 +182,7 @@ PUBLIC	stop_bits_index 	;set by invoke										   ;AN000;
 															   ;AN000;
 															   ;AN000;
 ;THESE FOLLOWING BAUD RATES REPRESENT THE 1ST 2 CHAR									   ;AN000;
-baud_index  DW	     TYPE parm_list_entry ;holder of the index into the parm list of the baud rate			   ;AN000;
+baud_index  DW	     SIZE parm_list_entry ;holder of the index into the parm list of the baud rate			   ;AN000;
 data_bits_index DW   0	   ;holder of the index into the parm list of the data bits					   ;AN000;
 parity_index	DW   0	   ;holder of the index into the parm list of the parity					   ;AN000;
 stop_bits_index DW   0	   ;holder of the index into the parm list of the stop bits					   ;AN000;

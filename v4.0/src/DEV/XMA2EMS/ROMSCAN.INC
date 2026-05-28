@@ -63,7 +63,7 @@ check_segs:
 	pop	ax
 
 segment_ok:
-	add	di,type mappable_phys_page_struct
+	add	di,SIZE mappable_phys_page_struct
 	loop	check_segs
 
 ;------------------------

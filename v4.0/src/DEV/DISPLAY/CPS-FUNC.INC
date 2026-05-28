@@ -712,7 +712,7 @@ VFP_4:  MOV     AX,[DI].FTB_STATUS      ; GET STATUS OF PARSING TABLE #n
         JNE     VFP_8                   ; IF NOT, THEN AN ERROR OCCURRED....
         CMP     [DI].FTB_DLEFT,ZERO     ; IF SO, THEN NO DATA CAN BE LEFT....
         JNE     VFP_8                   ; OTHERWISE ANOTHER ERROR ?
-VFP_6:  ADD     DI,TYPE FTBLK           ; MOVE POINTERS TO NEXT PARSING TABLE
+VFP_6:  ADD     DI,SIZE FTBLK           ; MOVE POINTERS TO NEXT PARSING TABLE
         LOOP    VFP_4                   ;
         CLC                             ;
         JUMP    VFP_9                   ;

@@ -215,7 +215,7 @@ GET_IOCTL PROC    NEAR                                                          
          MOV     AX,NOT_SUPPORTED                ; no....load unsupported function                 ;AN000;
        .ELSE                                     ;                                                 ;AN000;
          push    di                              ;AN001;AN003;Save Request Buffer pointer
-         MOV     WORD PTR ES:[DI].DATA_LENGTH,(TYPE MODE_TABLE)+1 ;length of data is struc size    ;AN000;
+         MOV     WORD PTR ES:[DI].DATA_LENGTH,(SIZE MODE_TABLE)+1 ;length of data is struc size    ;AN000;
          INC     SI                              ; skip mode value                                 ;AN000;
          ADD     DI,RP_FLAGS                     ; point to flag word                              ;AN000;
          .IF <HDWR_FLAG GE MCGA_ACTIVE>          ; if we have an EGA or better                     ;AN000;
@@ -225,9 +225,9 @@ GET_IOCTL PROC    NEAR                                                          
          .ENDIF                                  ;                                                 ;AN000;
          INC     DI                              ; point to next field..                           ;AN000;
          INC     DI                              ; ..(display mode)                                ;AN000;
-         MOV     CX,(TYPE MODE_TABLE)-1          ; load count                                      ;AN000;
+         MOV     CX,(SIZE MODE_TABLE)-1          ; load count                                      ;AN000;
          REP     MOVSB                           ; transfer data from video table to request packet;AN000;
-         SUB     SI,TYPE MODE_TABLE              ; point back to start of mode data                ;AN000;
+         SUB     SI,SIZE MODE_TABLE              ; point back to start of mode data                ;AN000;
          .IF <[SI].D_MODE EQ TEXT_MODE> AND      ; if we are in text mode and..                    ;AN000;
          .IF <[SI].SCR_ROWS NE DEFAULT_LENGTH>   ; length <> 25 then we have an EGA or VGA         ;AN000;
            DEC    DI                             ; point back to length entry in req packet        ;AN000;
@@ -480,7 +480,7 @@ TEST_LENGTH PROC   NEAR                                                         
                   XOR    CX,CX               ; no...set CX to exit loop.                           ;AN000;
                 .ENDIF                       ;                                                     ;AN000;
               .ELSE                          ;                                                     ;AN000;
-                ADD    BX,TYPE SCAN_LINE_STR ; not this setting..point to next                     ;AN000;
+                ADD    BX,SIZE SCAN_LINE_STR ; not this setting..point to next                     ;AN000;
                 DEC    CX                    ; record and decrement count                          ;AN000;
               .ENDIF                         ;                                                     ;AN000;
             .ENDWHILE                        ;                                                     ;AN000;
@@ -605,7 +605,7 @@ SET_SEARCH PROC   NEAR                                                          
              mov al, cs:INT10_V_Mode                ;AN006;
             .if <AL NE 0FFh> AND                    ;AN006;if issued by INT10h Set Mode call,
             .if <[SI].V_MODE NE AL>                 ;AN006; and V_MODE <> AL
-               add si, type MODE_TABLE              ;AN006; then, this is not the correct entry.
+               add si, SIZE MODE_TABLE              ;AN006; then, this is not the correct entry.
                dec cx                               ;AN006;Let's find the next entry.
             .else                                   ;AN006; Else, continue...
                MOV    AL,ES:[DI].RP_MODE             ; load register for compare.                   ;AN000;
@@ -630,14 +630,14 @@ SET_SEARCH PROC   NEAR                                                          
                   .ENDIF                             ;                                              ;AN000;
                 .ENDIF                               ;                                              ;AN000;
               .ENDIF                                 ;                                              ;AN000;
-               ADD    SI,TYPE MODE_TABLE             ; point to next record and..                   ;AN000;
+               ADD    SI,SIZE MODE_TABLE             ; point to next record and..                   ;AN000;
                DEC    CX                             ; decrement count                              ;AN000;
             .endif                                   ;AN006;
            .ENDWHILE                                 ;                                              ;AN000;
            .IF <BP EQ NOT_FOUND>                     ; if we never found it then..                  ;AN000;
               STC                                    ; set error flag and..                         ;AN000;
            .ELSE                                     ;                                              ;AN000;
-              SUB    SI,TYPE MODE_TABLE              ; position us at the appropriate record        ;AN000;
+              SUB    SI,SIZE MODE_TABLE              ; position us at the appropriate record        ;AN000;
               CLC                                    ; clear error flag                             ;AN000;
            .ENDIF                                    ;                                              ;AN000;
             mov cs:INT10_V_Mode, 0FFh                ;AN006; Done. Reset the value
@@ -669,7 +669,7 @@ GET_SEARCH  PROC   NEAR                                                         
             .WHILE <[SI].V_MODE NE AL> AND          ; while we are not pointing to                 ;AN000;
             .WHILE <[SI].V_MODE NE UNOCCUPIED> AND  ; the right mode and we are still              ;AN000;
             .WHILE <CX NE 0>                        ; looking at valid data..do..                  ;AN000;
-              ADD     SI,TYPE MODE_TABLE            ; point to the next mode                       ;AN000;
+              ADD     SI,SIZE MODE_TABLE            ; point to the next mode                       ;AN000;
               DEC     CX                            ; decrement counter                            ;AN000;
             .ENDWHILE                               ;                                              ;AN000;
             .IF <CX EQ 0> OR                        ; did we find the mode?                        ;AN000;

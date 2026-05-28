@@ -268,14 +268,14 @@ XLAT_OPTIONS        DB    ?            ;; xlat options
 XLAT_STR            ENDS               ;;
                                        ;;
 XLAT_TYPE_1_STR     STRUC              ;; use scan code as index into table
-                    DB TYPE XLAT_STR DUP(?)   ;; filler
+                    DB SIZE XLAT_STR DUP(?)   ;; filler
 XLAT_SCAN_LO        DB    ?            ;; Scan code
 XLAT_SCAN_HI        DB    ?            ;;  range
 XLAT_1_BUF_ENTRY    DB    ?            ;; The table itself
 XLAT_TYPE_1_STR     ENDS               ;;
                                        ;;
 XLAT_TYPE_2_STR     STRUC              ;; search table for scan
-                    DB TYPE XLAT_STR DUP(?)   ;; filler
+                    DB SIZE XLAT_STR DUP(?)   ;; filler
 XLAT_NUM            DB    ?            ;; number of scans
 XLAT_SCAN           DB    ?            ;; Scan code
 XLAT_2_BUF_ENTRY    DB    ?            ;; The table itself

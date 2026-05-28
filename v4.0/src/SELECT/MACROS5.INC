@@ -217,7 +217,7 @@ GET_ALT_KYBD_TABLE	MACRO	NAME_KYBD, VAR_TABLE, VAR_KYB ;;AN000;
     .WHILE <<WORD PTR [SI]> NE DX > AND 	 ;;AN000;
     .WHILE < BL LE AL > 			 ;;AN000;
 	 INC  BL				 ;;AN000;
-	 ADD  SI, TYPE ALT_KYB_DEF		 ;;AN000;
+	 ADD  SI, SIZE ALT_KYB_DEF		 ;;AN000;
     .ENDWHILE					 ;;AN000;
 						 ;;
     .IF < BL GT AL >				 ;;AN000; Entry NOT found
@@ -259,11 +259,11 @@ GET_ALT_KEYBOARD	MACRO	VAR_TABLE, VAR_KYB, VAR_INDEX, NAME_KYBD ;;AN000;
     MOV  SI, VAR_TABLE				 ;;AN000; Pointer to the table
     INC  SI					 ;;AN000; Adjust pointer for table length byte
     .IF < VAR_KYB EQ ALT_FRENCH>		 ;;AN000;
-	 MOV  CX, TYPE FR_STRUC 		 ;;AN000;
+	 MOV  CX, SIZE FR_STRUC 		 ;;AN000;
     .ELSEIF < VAR_KYB EQ ALT_ITALIAN >		 ;;AN000;
-	 MOV  CX, TYPE IT_STRUC 		 ;;AN000;
+	 MOV  CX, SIZE IT_STRUC 		 ;;AN000;
     .ELSE					 ;;AN000;
-	 MOV  CX, TYPE UK_STRUC 		 ;;AN000;
+	 MOV  CX, SIZE UK_STRUC 		 ;;AN000;
     .ENDIF					 ;;AN000;
     MUL  CX					 ;;AN000;
     ADD  SI, AX 				 ;;AN000; Get the address of the required entry

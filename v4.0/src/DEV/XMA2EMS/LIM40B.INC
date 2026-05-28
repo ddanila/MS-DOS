@@ -333,7 +333,7 @@ Map_Page_Request:
 	pop	bx					;restore bx		;an000; dms;
 	or	ah,ah					;error? 		;an000; dms;
 	jnz	Map_Error_Exit				;pass error on & exit	;an000; dms;
-	add	di,Type Log_Phys_Map_Struc		;adjust pointer 	;an000; dms;
+	add	di,SIZE Log_Phys_Map_Struc		;adjust pointer 	;an000; dms;
 	loop	Map_Loop_Continue			;continue loop		;an000; dms;
 	xor	ax,ax					;signal good finish	;an000; dms;
 
@@ -373,7 +373,7 @@ GPSP_Loop:
 	cli						;ints off		;an000; dms;
 	cmp	dx,cs:[di].Phys_Page_Segment		;segment match? 	;an000; dms;
 	je	GPSP_Got_Segment			;yes			;an000; dms;
-	add	di,Type Mappable_Phys_Page_Struct	;adjust pointer 	;an000; dms;
+	add	di,SIZE Mappable_Phys_Page_Struct	;adjust pointer 	;an000; dms;
 	loop	GPSP_Loop				;continue search	;an000; dms;
 
 GPSP_Got_Segment:
@@ -440,7 +440,7 @@ reallocate	proc
 
 
 	mov	ax,cs:[bp].Realloc_Handle		;get handle for search	;an000; dms;
-	mov	cs:[bp].Realloc_Mult,Type H_LookUp_Struc;handle lookup table	;an000; dms;
+	mov	cs:[bp].Realloc_Mult,SIZE H_LookUp_Struc;handle lookup table	;an000; dms;
 	mul	cs:[bp].Realloc_Mult			;obtain index position	;an000; dms;
 	mov	cs:[bp].Realloc_LookUp_Index,ax 	;index to handle	;an000; dms;
 	mov	di,ax					;place index in si	;an000; dms;
@@ -693,7 +693,7 @@ Alter_And_Jump	proc					;modify map		;an000; dms;
 AAJ_Check_Reusable:
 
 	mov	ax,dx					;get handle		;an000; dms;
-	mov	cs:[bp].AAJ_Mult,Type H_LookUp_Struc	;handle lookup table	;an000; dms;
+	mov	cs:[bp].AAJ_Mult,SIZE H_LookUp_Struc	;handle lookup table	;an000; dms;
 	mul	cs:[bp].AAJ_Mult			;obtain index position	;an000; dms;
 	mov	cs:[bp].AAJ_LookUp_Index,ax		;index to handle	;an000; dms;
 	mov	di,ax					;place index in di	;an000; dms;
@@ -828,7 +828,7 @@ MAC_Alter_And_Call:
 MAC_Check_Reusable:
 
 	mov	ax,dx					;get handle		;an000; dms;
-	mov	cs:[bp].MAC_Mult,Type H_LookUp_Struc	;handle lookup table	;an000; dms;
+	mov	cs:[bp].MAC_Mult,SIZE H_LookUp_Struc	;handle lookup table	;an000; dms;
 	mul	cs:[bp].MAC_Mult			;obtain index position	;an000; dms;
 	mov	cs:[bp].MAC_LookUp_Index,ax		;index to handle	;an000; dms;
 	mov	di,ax					;place index in di	;an000; dms;
@@ -923,7 +923,7 @@ MAC_Build_Stack_And_Map:
 	mov	al,[si].MAC_Old_Page_Map_Len		;get length of data	;an000; dms;
 	cbw						;convert to word	;an000; dms;
 	xor	dx,dx					;clear high word	;an000; dms;
-	mov	bx,Type Log_Phys_Map_Struc		;struc size
+	mov	bx,SIZE Log_Phys_Map_Struc		;struc size
 	mul	bx					;get total byte count	;an000; dms;
 	cli						;ints off		;an000; dms;
 	mov	bx,offset MAC_M_C_Log			;offset in struc	;an000; dms;
@@ -942,7 +942,7 @@ MAC_Build_Stack_And_Map:
 	mov	al,[si].MAC_New_Page_Map_Len		;get length of data	;an000; dms;
 	cbw						;conver to word 	;an000; dms;
 	xor	dx,dx					;clear high word	;an000; dms;
-	mov	bx,Type Log_Phys_Map_Struc		;struc size
+	mov	bx,SIZE Log_Phys_Map_Struc		;struc size
 	mul	bx					;get total byte count	;an000; dms;
 	cli						;ints off		;an000; dms;
 	mov	bx,offset MAC_M_C_Log			;Ptr in struc		;an000; dms;
@@ -958,7 +958,7 @@ MAC_Build_Stack_And_Map:
 	mov	ax,ds					;move seg of data to	;an000; dms;
 	mov	es,ax					;  es			;an000; dms;
 	mov	di,si					;move off of data	;an000; dms;
-	mov	ax,Type Map_And_Call_Struc		;get size of structure	;an000; dms;
+	mov	ax,SIZE Map_And_Call_Struc		;get size of structure	;an000; dms;
 	cli						;ints off		;an000; dms;
 	mov	bx,offset MAC_M_C_Data
 	sti						;ints on		;an000; dms;
@@ -976,7 +976,7 @@ MAC_Build_Stack_And_Map:
 	mov	ax,Map_Count				;get context entry count;an000; dms;
 	sti						;ints on		;an000; dms;
 	xor	dx,dx					;clear dx		;an000; dms;
-	mov	bx,Type Mappable_Phys_Page_Struct	;get struc size 	;an000; dms;
+	mov	bx,SIZE Mappable_Phys_Page_Struct	;get struc size 	;an000; dms;
 	mul	bx					;get size in bytes	;an000; dms;
 	cli						;ints off		;an000; dms;
 	mov	bx,offset cs:MAC_Map_Table
@@ -1063,7 +1063,7 @@ MAC_Strip_Stack_And_Map:							;an000; dms;
 	mov	ax,Map_Count				;get entries in context ;an000; dms;
 	sti						;ints on		;an000; dms;
 	xor	dx,dx					;clear dx		;an000; dms;
-	mov	bx,Type Mappable_Phys_Page_Struct	;struc size		;an000; dms;
+	mov	bx,SIZE Mappable_Phys_Page_Struct	;struc size		;an000; dms;
 	mul	bx					;get byte count 	;an000; dms;
 	cli						;ints off		;an000; dms;
 	mov	bx,offset MAC_Map_Table
@@ -1077,7 +1077,7 @@ MAC_Strip_Stack_And_Map:							;an000; dms;
 	mov	ax,ds					;transfer seg of struc	;an000; dms;
 	mov	es,ax					;  to dest. segment	;an000; dms;
 	mov	di,si					;di=dest. offset	;an000; dms;
-	mov	ax,Type Map_And_Call_Struc		;get size to move	;an000; dms;
+	mov	ax,SIZE Map_And_Call_Struc		;get size to move	;an000; dms;
 	cli						;ints off		;an000; dms;
 	mov	bx,offset MAC_M_C_Data
 	sti						;ints on		;an000; dms;
@@ -1094,7 +1094,7 @@ MAC_Strip_Stack_And_Map:							;an000; dms;
 	mov	al,[si].MAC_New_Page_Map_Len		;get length of data	;an000; dms;
 	cbw						;convert to word	;an000; dms;
 	xor	dx,dx					;clear high word	;an000; dms;
-	mov	bx,Type Log_Phys_Map_Struc		;struc size		;an000; dms;
+	mov	bx,SIZE Log_Phys_Map_Struc		;struc size		;an000; dms;
 	mul	bx					;get total byte count	;an000; dms;
 	cli						;ints off		;an000; dms;
 	mov	bx,offset MAC_M_C_Log
@@ -1113,7 +1113,7 @@ MAC_Strip_Stack_And_Map:							;an000; dms;
 	mov	al,[si].MAC_Old_Page_Map_Len		;get length of data	;an000; dms;
 	cbw						;convert to word	;an000; dms;
 	xor	dx,dx					;clear high word	;an000; dms;
-	mov	bx,Type Log_Phys_Map_Struc		;struc size		;an000; dms;
+	mov	bx,SIZE Log_Phys_Map_Struc		;struc size		;an000; dms;
 	mul	bx					;get total byte count	;an000; dms;
 	cli						;ints off		;an000; dms;
 	mov	bx,offset MAC_M_C_Log
@@ -1268,7 +1268,7 @@ ER_Handle_Check 	proc				;check requested handles;an000; dms;
 	push	dx					;save dx		;an000; dms;
 	xor	dx,dx					;clear it		;an000; dms;
 	mov	ax,[si].Source_Handle			;get handle requested	;an000; dms;
-	mov	dx,Type H_LookUp_Struc			;handle lookup table	;an000; dms;
+	mov	dx,SIZE H_LookUp_Struc			;handle lookup table	;an000; dms;
 	mul	dx					;obtain index position	;an000; dms;
 	mov	di,ax					;place index in di	;an000; dms;
 	pop	dx					;restore dx		;an000; dms;
@@ -1284,7 +1284,7 @@ ER_Handle_Check_Dest:
 	push	dx					;save dx		;an000; dms;
 	xor	dx,dx					;clear it		;an000; dms;
 	mov	ax,[si].Dest_Handle			;get handle requested	;an000; dms;
-	mov	dx,Type H_LookUp_Struc			;handle lookup table	;an000; dms;
+	mov	dx,SIZE H_LookUp_Struc			;handle lookup table	;an000; dms;
 	mul	dx					;obtain index position	;an000; dms;
 	mov	di,ax					;place index in di	;an000; dms;
 	pop	dx					;restore dx		;an000; dms;
@@ -1356,7 +1356,7 @@ ER_Length_Check_Cont:
 	push	dx					;save dx		;an000; dms;
 	xor	dx,dx					;clear it		;an000; dms;
 	mov	ax,[si].Source_Handle			;get handle requested	;an000; dms;
-	mov	dx,Type H_LookUp_Struc			;handle lookup table	;an000; dms;
+	mov	dx,SIZE H_LookUp_Struc			;handle lookup table	;an000; dms;
 	mul	dx					;obtain index position	;an000; dms;
 	mov	di,ax					;place index in di	;an000; dms;
 	pop	dx					;restore dx		;an000; dms;
@@ -1393,7 +1393,7 @@ ER_Length_Check_Dest:
 	push	dx					;save dx		;an000; dms;
 	xor	dx,dx					;clear it		;an000; dms;
 	mov	ax,[si].Dest_Handle			;get handle requested	;an000; dms;
-	mov	dx,Type H_LookUp_Struc			;handle lookup table	;an000; dms;
+	mov	dx,SIZE H_LookUp_Struc			;handle lookup table	;an000; dms;
 	mul	dx					;obtain index position	;an000; dms;
 	mov	di,ax					;place index in di	;an000; dms;
 	pop	dx					;restore dx		;an000; dms;
@@ -1609,7 +1609,7 @@ ER_Overlap_Check_Dest:
 	cmp	Map_Count,2				;>= 2 page frames	;an000; dms;
 	sti						;ints on		;an000; dms;
 	jb	ER_Overlap_Check_Dest_1_Frame		;no - use 1st. frame	;an000; dms;
-	add	di,Type Mappable_Phys_Page_Struct	;yes - adjust ptr to	;an000; dms;
+	add	di,SIZE Mappable_Phys_Page_Struct	;yes - adjust ptr to	;an000; dms;
 							;  next frame for dest.
 ER_Overlap_Check_Dest_1_Frame:
 
@@ -2104,7 +2104,7 @@ ER_Save_Context_Loop:
 
 	sti						;ints on		;an000; dms;
 	push	cx					;save cx		;an000; dms;
-	mov	cx,Type Mappable_Phys_Page_Struct	;get byte count to trf	;an000; dms;
+	mov	cx,SIZE Mappable_Phys_Page_Struct	;get byte count to trf	;an000; dms;
 	cli						;ints off		;an000; dms;
 	rep	movsb					;perform save		;an000; dms;
 	sti						;ints on		;an000; dms;
@@ -2167,7 +2167,7 @@ ER_Restore_Context_Loop:
 	call	Map_L_To_P				;map in orig. page	;an000; dms;
 
 	push	cx					;save cx		;an000; dms;
-	mov	cx,Type Mappable_Phys_Page_Struct	;get byte count to trf	;an000; dms;
+	mov	cx,SIZE Mappable_Phys_Page_Struct	;get byte count to trf	;an000; dms;
 	cli						;ints off		;an000; dms;
 	rep	movsb					;perform save		;an000; dms;
 	sti						;ints on		;an000; dms;
@@ -2313,7 +2313,7 @@ ER_Det_Dest_Check:
 	cmp	Map_Count,1				;> 1 page frame?	;an000; dms;
 	sti						;ints on		;an000; dms;
 	jb	ER_Det_Dest_Check1			;don't adjust pointer   ;an000; dms;
-	add	di,Type Mappable_Phys_Page_Struct	;next entry in save buf ;an000; dms;
+	add	di,SIZE Mappable_Phys_Page_Struct	;next entry in save buf ;an000; dms;
 
 ER_Det_Dest_Check1:
 
@@ -3356,7 +3356,7 @@ AR_OKFREE:
 	MOV	CX,NUM_HANDLES		;loop counter is #handles
 	DEC	CX			;handle 0 reserved for op. sys.   @RH1
 	MOV	DX,1			;handle assignment set to 1	  @RH1
-	MOV	DI,TYPE H_LOOKUP_STRUC	;init table index to 1st entry	  @RH1
+	MOV	DI,SIZE H_LOOKUP_STRUC	;init table index to 1st entry	  @RH1
 ;--------------------------------
 	CLI				;interrupts OFF during allocation
 ;--------------------------------
@@ -3365,7 +3365,7 @@ AR_FREEHSRCH:
 					;Is this handle available?	  @RH1
 	JE	AR_HFREE		;yes end search  dx=handle id	  @RH1
 	INC	DX			;next handle assignment
-	ADD	DI,TYPE H_LOOKUP_STRUC	;next entry in handle lookup	  @RH1
+	ADD	DI,SIZE H_LOOKUP_STRUC	;next entry in handle lookup	  @RH1
 					;repeat for all table entries
 	LOOP AR_FREEHSRCH
 	    MOV     AH,EMS_CODE85	;no available handles
@@ -3379,7 +3379,7 @@ AR_HFREE:
 	MOV	CX,NUM_HANDLES		;loop counter
 	DEC	CX			;handle 0 reserved for op. sys.    @RH1
 					;si = index to hndl lookup tbl	   @RH1
-	MOV	SI,TYPE H_LOOKUP_STRUC	; for adding pages (skip 0 entry)  @RH1
+	MOV	SI,SIZE H_LOOKUP_STRUC	; for adding pages (skip 0 entry)  @RH1
 	XOR	AX,AX			;clear page counter
 	CLC				;clear carry for addition
 AR_PAGESUM:
@@ -3387,7 +3387,7 @@ AR_PAGESUM:
 	JE	AR_PGSUM_BOT		;If handle is free don't add       @RH4
 	ADD	AX,HANDLE_LOOKUP_TABLE.H_PAGES[SI]
 					;add lengths (pages) of PALs	  @RH1
-	ADD	SI,TYPE H_LOOKUP_STRUC	; next entry in handle lookup	  @RH1
+	ADD	SI,SIZE H_LOOKUP_STRUC	; next entry in handle lookup	  @RH1
 AR_PGSUM_BOT:
 	LOOP	AR_PAGESUM
 	CMP	AX,TOTAL_EMS_PAGES	;pages in handle lookup > total?  @RH1

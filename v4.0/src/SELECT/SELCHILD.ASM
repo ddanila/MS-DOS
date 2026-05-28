@@ -50,7 +50,7 @@ HC_0:	MOV	AX,ES:[DI]+CHD_PCB	;AN000;
 	CALL	PCDISPQ_CALL		;AN000; push next child on the stack
 	POPP	<DI,ES> 		;AN000;
 					;
-	ADD	DI,TYPE CHD_PB		;AN000; get next child control block
+	ADD	DI,SIZE CHD_PB		;AN000; get next child control block
 	LOOP	HC_0			;AN000;
 					;
 HC_1:	POPP	<ES,DI,CX,BX,AX>	;AN000;

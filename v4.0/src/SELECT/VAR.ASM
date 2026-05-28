@@ -533,7 +533,7 @@ CTY_TAB_A_1	CTY_DEF < 001,E_KYBD_VAL_DEF,'  ',437,850,1,E_CPSW_NOT_REC,0> ;AN000
 		CTY_DEF < 044,E_KYBD_VAL_YES,'UK',437,850,1,E_CPSW_VALID  ,3> ;AN000; (10) United Kingdom
 		CTY_DEF < 045,E_KYBD_VAL_YES,'DK',850,865,2,E_CPSW_VALID  ,0> ;AN000; (11) Denmark
 		CTY_DEF < 046,E_KYBD_VAL_YES,'SV',437,850,1,E_CPSW_VALID  ,0> ;AN000; (12) Sweden
-CTY_A_ITEMS	EQU	($ - CTY_TAB_A_1) / TYPE CTY_DEF ;AN000; no of items
+CTY_A_ITEMS	EQU	($ - CTY_TAB_A_1) / SIZE CTY_DEF ;AN000; no of items
 						      ;
 		PUBLIC	CTY_TAB_B,CTY_TAB_B_1,CTY_B_ITEMS ;AN000;
 CTY_TAB_B	DB	CTY_B_ITEMS		      ;AN000; no of entries in table
@@ -548,7 +548,7 @@ CTY_TAB_B_1	CTY_DEF < 047,E_KYBD_VAL_YES,'NO',850,865,2,E_CPSW_VALID  ,0 > ;AN00
 		CTY_DEF < 358,E_KYBD_VAL_YES,'SU',850,437,1,E_CPSW_VALID  ,0 > ;AN000; (09) Finland
 		CTY_DEF < 785,E_KYBD_VAL_NO ,'  ',000,000,0,E_CPSW_NOT_VAL,0 > ;AN000; (10) Arabic Speaking
 		CTY_DEF < 972,E_KYBD_VAL_NO ,'  ',000,000,0,E_CPSW_NOT_VAL,0 > ;AN000; (11) Hebrew Speaking
-CTY_B_ITEMS	EQU	($ - CTY_TAB_B_1) / TYPE CTY_DEF  ;AN000; no of items
+CTY_B_ITEMS	EQU	($ - CTY_TAB_B_1) / SIZE CTY_DEF  ;AN000; no of items
 						      ;
 ;		Keyboard Codes supported
 		PUBLIC	KYBD_TAB_A,KYBD_TAB_A_1,KYBD_A_ITEMS ;AN000;
@@ -562,7 +562,7 @@ KYBD_TAB_A_1	KYB_DEF < 'BE', E_KYBD_ALT_NO >       ;AN000; (01) Flemish
 		KYB_DEF < 'LA', E_KYBD_ALT_NO >       ;AN000; (07) Latin American (Spanish)
 		KYB_DEF < 'NL', E_KYBD_ALT_NO >       ;AN000; (08) Dutch
 		KYB_DEF < 'NO', E_KYBD_ALT_NO >       ;AN000; (09) Norwegian
-KYBD_A_ITEMS	EQU	($ - KYBD_TAB_A_1) / TYPE KYB_DEF ;AN000; no of items in table
+KYBD_A_ITEMS	EQU	($ - KYBD_TAB_A_1) / SIZE KYB_DEF ;AN000; no of items in table
 						      ;
 		PUBLIC	KYBD_TAB_B,KYBD_TAB_B_1,KYBD_B_ITEMS ;AN000;
 KYBD_TAB_B	DB	KYBD_B_ITEMS		      ;AN000; no of entries in table
@@ -575,7 +575,7 @@ KYBD_TAB_B_1	KYB_DEF < 'PO', E_KYBD_ALT_NO >       ;AN000; (01) Portuguese
 		KYB_DEF < 'UK', E_KYBD_ALT_YES>       ;AN000; (07) UK English
 		KYB_DEF < 'US', E_KYBD_ALT_NO >       ;AN000; (08) US English
 		KYB_DEF < '  ', E_KYBD_ALT_NO >       ;AN000; (09) none of the above
-KYBD_B_ITEMS	EQU	($ - KYBD_TAB_B_1) / TYPE KYB_DEF ;AN000; no of items in table
+KYBD_B_ITEMS	EQU	($ - KYBD_TAB_B_1) / SIZE KYB_DEF ;AN000; no of items in table
 						      ;
 		PUBLIC	ALT_TAB_PTR		      ;AN000;
 ALT_TAB_PTR	DW	?			      ;AN000; pointer keyboard table
@@ -592,25 +592,25 @@ ALT_KYB_TABLE	DB	ALT_KYB_ITEMS				    ;AN000; no of items in table
 ALT_KYB_TAB_1	ALT_KYB_DEF  < 'FR', ALT_KYBD_FR, ALT_FRENCH  >     ;AN000; French keyboard
 		ALT_KYB_DEF  < 'IT', ALT_KYBD_IT, ALT_ITALIAN >     ;AN000; Italian keyboard
 		ALT_KYB_DEF  < 'UK', ALT_KYBD_UK, ALT_UK      >     ;AN000; UK English
-ALT_KYB_ITEMS	EQU	($ - ALT_KYB_TAB_1) / TYPE ALT_KYB_DEF	    ;AN000; no of items
+ALT_KYB_ITEMS	EQU	($ - ALT_KYB_TAB_1) / SIZE ALT_KYB_DEF	    ;AN000; no of items
 						      ;
 		PUBLIC	ALT_KYBD_FR, ALT_KYBD_FR_1, ALT_FR_ITEMS ;AN000;
 ALT_KYBD_FR	DB	ALT_FR_ITEMS		      ;AN000; Alternate French Keyboard-no of entries in table
 ALT_KYBD_FR_1	FR_STRUC  <'120'>                     ;AN000;
 		FR_STRUC  <'189'>                     ;AC000;JW
-ALT_FR_ITEMS	EQU	($ - ALT_KYBD_FR_1) / TYPE FR_STRUC ;AN000;
+ALT_FR_ITEMS	EQU	($ - ALT_KYBD_FR_1) / SIZE FR_STRUC ;AN000;
 						      ;
 		PUBLIC	ALT_KYBD_IT, ALT_KYBD_IT_1, ALT_IT_ITEMS ;AN000;
 ALT_KYBD_IT	DB	ALT_IT_ITEMS		      ;AN000; Alternate Italian keyboard-no of entries in table
 ALT_KYBD_IT_1	IT_STRUC  <'142'>                     ;AC090;JW Switched with '141
 		IT_STRUC  <'141'>                     ;AC090;JW
-ALT_IT_ITEMS	EQU	($ - ALT_KYBD_IT_1) / TYPE IT_STRUC ;AN000;
+ALT_IT_ITEMS	EQU	($ - ALT_KYBD_IT_1) / SIZE IT_STRUC ;AN000;
 						      ;
 		PUBLIC	ALT_KYBD_UK, ALT_KYBD_UK_1, ALT_UK_ITEMS ;AN000;
 ALT_KYBD_UK	DB	ALT_UK_ITEMS		      ;AN000; no of entries in table
 ALT_KYBD_UK_1	UK_STRUC  <'168'>                     ;AN000;
 		UK_STRUC  <'166'>                     ;AC000;JW
-ALT_UK_ITEMS	EQU	($ - ALT_KYBD_UK_1) / TYPE UK_STRUC ;AN000;
+ALT_UK_ITEMS	EQU	($ - ALT_KYBD_UK_1) / SIZE UK_STRUC ;AN000;
 						      ;
 		PUBLIC	ALT_ID_DEF		      ;AN000;
 ALT_ID_DEF	DB	0			      ;AN000;DT
@@ -871,13 +871,13 @@ E_DISK1_REPLACE EQU	2			      ;AN000; replace DOS-partitions exist
 DISK_1_TABLE	DB	M_DISK_1_ITEMS		      ;AN000; maximum no of items in table
 DISK_1_VAL_ITEM DB	0			      ;AN000; number of valid entries in table
 DISK_1_START	DB	(100*TYPE DISK_STATUS) DUP (0) ;AN000;
-M_DISK_1_ITEMS	EQU	($ - DISK_1_START) / TYPE DISK_STATUS ;AN000;
+M_DISK_1_ITEMS	EQU	($ - DISK_1_START) / SIZE DISK_STATUS ;AN000;
 						      ;
 		PUBLIC	DISK_2_TABLE,DISK_2_VAL_ITEM,DISK_2_START,M_DISK_2_ITEMS ;AN000;
 DISK_2_TABLE	DB	M_DISK_2_ITEMS		      ;AN000; maximum no of items in table
 DISK_2_VAL_ITEM DB	0			      ;AN000; number of valid entries in table
 DISK_2_START	DB	(100*TYPE DISK_STATUS) DUP (0) ;AN000;
-M_DISK_2_ITEMS	EQU	($ - DISK_2_START) / TYPE DISK_STATUS ;AN000;
+M_DISK_2_ITEMS	EQU	($ - DISK_2_START) / SIZE DISK_STATUS ;AN000;
 						      ;
 		PUBLIC	N_NAME_PART,N_SIZE_PART,N_STATUS_PART,P_DRIVE_PART,N_TYPE_PART,N_LEVEL1_PART,N_LEVEL2_PART,N_LEVEL3_PART,N_LEVEL4_PART ;AC065;SEH add check for version number ;AN000;
 N_NAME_PART	DB	0			      ;AN000; partition name

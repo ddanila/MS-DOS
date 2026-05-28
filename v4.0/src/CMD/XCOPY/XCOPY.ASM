@@ -867,7 +867,7 @@ $$IF18:
 		OR	MY_FLAG, IS_SOURCE_FLAG ;dealing with source
 		AND	MY_FLAG, RESET_VISIT_PARENT ;going to visit child node
 		CALL	CHANGE_S_DIR	;change source dir
-		ADD	BP, type FIND_DTA ;increase DTAS stack pointer
+		ADD	BP, SIZE FIND_DTA ;increase DTAS stack pointer
 		CALL	TREE_COPY	;tree copy the sub directory
 ;	    $ENDDO
 	    JMP SHORT $$DO13
@@ -897,7 +897,7 @@ $$IF24:
 		OR	MY_FLAG, IS_SOURCE_FLAG
 		OR	MY_FLAG, VISIT_PARENT_FLAG
 		CALL	CHANGE_S_DIR
-		SUB	BP, type FIND_DTA
+		SUB	BP, SIZE FIND_DTA
 ;	    $ENDIF
 $$IF21:
 ;	$ENDIF				;walk the tree

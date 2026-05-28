@@ -36,7 +36,7 @@ COMMENT #
 * $MAC(INDEDAT) COMP(LOAD) PROD(3270PC) :                                     *
 *                                                                             *
 * $D0=D0004700 410 870529 D : NEW FOR WSP RELEASE 1.1                         *
-* $P1=P0000311 410 870804 D : RENAME MODULES'S LIBRARY FILE TYPE TO "INC"     *
+* $P1=P0000311 410 870804 D : RENAME MODULES'S LIBRARY FILE SIZE TO "INC"     *
 * $P2=P0000410 410 870918 D : RELOCATE DATA TO MAKE ROOM FOR I/O BIT MAP      *
 *                                                                             *
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -416,14 +416,14 @@ TSS_LEN         EQU     68H + 2000H     ; TSS structure length -- 68H for regs
 
 LDT_LEN         EQU     00800H          ; LDT structure length (2K)
 
-VM_ENTRY_LENGTH EQU     TYPE VM_GDT_ENTRY ; Length of a VM entry
+VM_ENTRY_LENGTH EQU     SIZE VM_GDT_ENTRY ; Length of a VM entry
 
 VM_ENTRY_WIDTH  EQU     5               ; Shift count for priority. Each
                                         ; VM entry = 32 bytes, and SHL 5
                                         ; is the same as MUL by 32.
-NEXT_DESC       EQU     TYPE DATA_DESC  ; Length of a descriptor
+NEXT_DESC       EQU     SIZE DATA_DESC  ; Length of a descriptor
 
-DESC_LEN        EQU     TYPE DATA_DESC  ; Length of a descriptor
+DESC_LEN        EQU     SIZE DATA_DESC  ; Length of a descriptor
 
 DESC_WIDTH      EQU     3               ; Shift count for desc len (8) is 3
 

@@ -95,7 +95,7 @@ Utility_Msg_Class	equ	0FFh
 
 Reserved		equ	0
 
-Sublist_Length		equ	TYPE sublist_def
+Sublist_Length		equ	SIZE sublist_def
 
 to_be_filled_in 	EQU	 77H	  ;conspicious number
 
@@ -558,7 +558,7 @@ syntax_error_ptr	LABEL WORD
 
 
 
-Number_of_sublists   EQU   (($ - first_sublist) / (TYPE sublist_def))
+Number_of_sublists   EQU   (($ - first_sublist) / (SIZE sublist_def))
 
 
 

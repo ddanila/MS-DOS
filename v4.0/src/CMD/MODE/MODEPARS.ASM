@@ -3166,7 +3166,7 @@ PUBLIC li_or_null_case
 		  PUSH	SI  ;AN000;save pointer to first char past the closing right paren
 		  MOV	AX,parm_list[current_parm_DI].value1	;AN000;
 		  MOV	command_line,AX 			;AN000;point at first char past the left paren
-		  SUB	DI,TYPE parm_list_entry 		;AN000;not parm, just indication of complex, delete from parm list
+		  SUB	DI,SIZE parm_list_entry 		;AN000;not parm, just indication of complex, delete from parm list
 		  MOV	parms.parmsx_ptr,OFFSET prepare_equal_parmsx
 		  MOV	prepare_equal_match_flags,complex     ;AN000;only thing valid next
 		  CALL	parse_parm		;AN000;
@@ -3175,7 +3175,7 @@ PUBLIC li_or_null_case
 		     PUSH  SI  ;AN000;save pointer to first char past the closing right paren
 		     MOV   AX,parm_list[current_parm_DI].value1    ;AN000;
 		     MOV   command_line,AX			   ;AN000;point at first char past the left paren
-		     SUB   DI,TYPE parm_list_entry		;AN000;not parm, just indication of complex, delete from parm list
+		     SUB   DI,SIZE parm_list_entry		;AN000;not parm, just indication of complex, delete from parm list
 		     MOV   prepare_equal_match_flags,numeric+optional ;AN000;number or delimeter only things valid next
 		     MOV   ordinal,0		     ;AN000;zap parms count,make parser count codepage numbers
 		     .REPEAT			   ;AN000;
@@ -3191,7 +3191,7 @@ PUBLIC li_or_null_case
 			      MOV   [SI][BP].des_strt_pkcp1,DX		  ;put the number in the slot for the cp number
 			   .ENDIF   ;AN000;not valid skipped codepage number, i.e. not (,850,,865) for example
 			.ELSEIF <parser_return_code_AX EQ end_of_complex> THEN ;AN000;
-			   SUB	 DI,TYPE parm_list_entry	;don't want an entry in the parm list for the zeroed out ")"
+			   SUB	 DI,SIZE parm_list_entry	;don't want an entry in the parm list for the zeroed out ")"
 			.ELSE
 			   CALL  setup_invalid_parameter       ;AN000;
 			.ENDIF				;AN000;
@@ -3818,7 +3818,7 @@ PUBLIC	 first_parm_case
 	 MOV   command_line,OFFSET first_char_in_command_line	;AN000;start parser at beginning of the command line
 	 MOV   BX,OFFSET parm_lst      ;set up parm_list	;AN000;
 	 XOR   DI,DI						;AN000;
-	 SUB   DI,TYPE parm_list_entry	     ;AN000;DI is negative, set up for first call to parse_parm
+	 SUB   DI,SIZE parm_list_entry	     ;AN000;DI is negative, set up for first call to parse_parm
 
 	 MOV   parms.parmsx_ptr,OFFSET parmsx	   ;AN000;set up parms block for parser input
 
@@ -3908,7 +3908,7 @@ PUBLIC	 dummy5
 		  .IF <parm_list[current_parm_DI].item_tag EQ LPT380_item_tag > THEN ;AN000;
 
 
-	       ADD   DI,TYPE parm_list_entry			;AN000;already have chars per line so skip to next element in list
+	       ADD   DI,SIZE parm_list_entry			;AN000;already have chars per line so skip to next element in list
 	       MOV   parms.parmsx_ptr,OFFSET lpt_parmsx 	;AN000;
 	       MOV   REFRESH_str,deleted			;AN007;no codepage stuff legal
 	       MOV   REF_str,deleted				;AN007;
@@ -3923,7 +3923,7 @@ PUBLIC	 dummy5
 	       BREAK 21 					;AN000;
 
 		  .ELSE 		  ;AN000;clean up after dorking the next parameter
-		     ADD   DI,TYPE parm_list_entry	;AN000;point to next entry, the one that needs to be reinitialized
+		     ADD   DI,SIZE parm_list_entry	;AN000;point to next entry, the one that needs to be reinitialized
 		     CALL  reset_parm_pointer		;AN000;reinitialize the second parm entry, DEC DI
 		  .ENDIF
 
@@ -3996,7 +3996,7 @@ PUBLIC	 dummy5
 	       MOV   PREP_equal,deleted 			;AN007;
 	       MOV   PREPARE_equal,deleted			;AN007;
 	       MOV   ordinal,1					;AN000;new parmsx, skip chars per line positional
-	       ADD   DI,TYPE parm_list_entry			;create entry for skipped chars per line     ;AN000;
+	       ADD   DI,SIZE parm_list_entry			;create entry for skipped chars per line     ;AN000;
 	       MOV   looking_for,li_or_null			;AN000;
 	       MOV   device_type,LPTX				;for rescode
 	       MOV   request_type,old_initialize_printer_port	;AN000;
@@ -4488,7 +4488,7 @@ parse_parm  PROC
 
 PUBLIC	 PARSE_PARM
 
-   ADD	 current_parm_DI, TYPE parm_list_entry
+   ADD	 current_parm_DI, SIZE parm_list_entry
 
    PUSH  current_parm_DI	  ;save index into parsed parms list
    PUSH  BX			 ;save the address of the parsed parms list
@@ -4611,7 +4611,7 @@ reset_parm_pointer  PROC
    MOV	 parm_list[current_parm_DI].value1,bogus			;AN000;
    MOV	 parm_list[current_parm_DI].value2,bogus			;AN000;
    MOV	 parm_list[current_parm_DI].keyword_switch_ptr,0		;AN000;
-   SUB	 current_parm_DI,TYPE parm_list_entry				;AN000;
+   SUB	 current_parm_DI,SIZE parm_list_entry				;AN000;
    DEC	 ordinal							;AN000;
 
 

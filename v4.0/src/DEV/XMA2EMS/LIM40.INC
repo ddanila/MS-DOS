@@ -209,7 +209,7 @@ ppm_inner_copy_loop:
 	jmp	ppm_entry_done		; done with this copy, go on
 
 ppm_not_yet:
-	add	si,type mappable_phys_page_struct	; point to next entry
+	add	si,SIZE mappable_phys_page_struct	; point to next entry
 	loop	ppm_inner_copy_loop	; try some more
 
 	pop	cx			; restore counter for outer loop
@@ -308,7 +308,7 @@ pm01_loop:
 	call	map_l_to_p		; make the mapping call
 
 no_map:
-	add	si,type ppm_struct	; point to next entry
+	add	si,SIZE ppm_struct	; point to next entry
 
 	loop	pm01_loop		;
 
@@ -676,7 +676,7 @@ hn_range_ok:
 	push	dx			; save handle
 
 	MOV	AX,DX			;DX = handle id
-	MOV	DX,TYPE H_LOOKUP_STRUC	;DI = entry's offset into
+	MOV	DX,SIZE H_LOOKUP_STRUC	;DI = entry's offset into
 	MUL	DX			; the handle lookup table
 	MOV	DI,AX			;
 	POP	DX			; restore handle
@@ -964,7 +964,7 @@ rep	movsb				; copy the string
 
 hd_next_hndl:
 	inc	dx			; update handle index
-	add	si,type h_lookup_struc	; point to next entry in lookup table
+	add	si,SIZE h_lookup_struc	; point to next entry in lookup table
 	loop	hd_loop 		; look for more
 
 	xor	ah,ah			; good return code
@@ -1079,7 +1079,7 @@ REPE	cmpsb				; compare the strings
 
 hd1_next_hndl:
 	inc	dx			; update handle index
-	add	di,type h_lookup_struc	; point to next entry in lookup table
+	add	di,SIZE h_lookup_struc	; point to next entry in lookup table
 	loop	hd1_loop		; look for more
 
 
@@ -1206,7 +1206,7 @@ copy_address_array:
 	mov	ax,DS:[si+phys_page_number]
 	mov	ES:[di],ax
 
-	add	si,type mappable_phys_page_struct ; increment pointer
+	add	si,SIZE mappable_phys_page_struct ; increment pointer
 	add	di,2			; increment destination pointer
 
 	loop	copy_address_array
@@ -1272,7 +1272,7 @@ hi_info_fcn:
 
 	mov	es:word ptr[di+0],1024	; raw page size = 16KB
 	mov	es:word ptr[di+2],0	; number of alternate register sets
-	mov	es:word ptr[di+4],type H_SAVE_STRUC ; size of save array
+	mov	es:word ptr[di+4],SIZE H_SAVE_STRUC ; size of save array
 	mov	es:word ptr[di+6],0	; number of DMA register sets
 	mov	es:word ptr[di+8],1	; 1 = no special DMA register sets
 
@@ -1431,7 +1431,7 @@ _am_set_exit:
 ;-------------------------------------------------------------------
 _am_size:
 
-	mov	dx,type h_save_struc	; get size requirements for save area
+	mov	dx,SIZE h_save_struc	; get size requirements for save area
 
 	xor	ah,ah			; good return code
 

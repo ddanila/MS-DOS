@@ -73,7 +73,7 @@ DHS     ENDS                            ; end of common portion
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 RH0     STRUC                           ;
-        DB      (TYPE RHC) DUP (?)      ;
+        DB      (SIZE RHC) DUP (?)      ;
                                         ;
 RH0_UNIT DB     ?                       ; not used for CHAR devices
 RH0_ENDO DW     ?                       ; offset  of ending address
@@ -87,7 +87,7 @@ RH0     ENDS                            ;
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 RH3     STRUC                           ;
-        DB      (TYPE RHC) DUP (?)      ; common portion
+        DB      (SIZE RHC) DUP (?)      ; common portion
                                         ;
                                         ;
         DB      ?                       ; media descriptor

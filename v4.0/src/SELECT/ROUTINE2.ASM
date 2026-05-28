@@ -1291,7 +1291,7 @@ SCAN_DISK_TABLE_ROUTINE PROC FAR							     ;AN000;
     .IF < AX BE BX >				 ;AN000;
 						 ; AX contains the index
 	 DEC  AX				 ;AN000; Make the first index a 0
-	 MOV  DX, TYPE DISK_STATUS		 ;AN000; Number of bytes in the structure
+	 MOV  DX, SIZE DISK_STATUS		 ;AN000; Number of bytes in the structure
 	 MUL  DX				 ;AN000; Calculate the offset into the table
 	 ADD  SI, AX				 ;AN000; Add to the address of the table
 	 COPY_BYTE	 N_NAME_PART,	[SI].N_PART_NAME   ;AN000; Copy the table entries
@@ -1347,7 +1347,7 @@ UPDATE_DISK_TABLE_ROUTINE    PROC FAR		 ;AN000;
     .ENDIF					 ;AN000;
 						 ; AX contains the index.
     DEC  AX					 ;AN000; Make the first index a 0
-    MOV  DX, TYPE DISK_STATUS			 ;AN000; Number of bytes in the structure
+    MOV  DX, SIZE DISK_STATUS			 ;AN000; Number of bytes in the structure
     MUL  DX					 ;AN000; Calculate the offset into the table
     ADD  SI, AX 				 ;AN000; Add to the address of the table
     .IF < VAR_INDEX BE BX >			 ;AN000;

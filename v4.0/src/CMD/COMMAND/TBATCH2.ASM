@@ -647,7 +647,7 @@ GOTO_HELP_STR	DB	"Directs MS-DOS to a labeled line in a batch program.", 0DH, 0A
 		DB	0DH, 0AH
 		DB	"  label  Specifies a text string used in the batch program as a label.", 0DH, 0AH
 		DB	0DH, 0AH
-		DB	"You type a label on a line by itself, beginning with a colon.", 0DH, 0AH, "$"
+		DB	"You SIZE a label on a line by itself, beginning with a colon.", 0DH, 0AH, "$"
 
 GOTO:
 

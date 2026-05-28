@@ -132,7 +132,7 @@ HLST_CHECK:
 
 	ADD	TOTAL_SYS_PAGES,BX		   ;Add card's pgs to tot. @RH5
 	INC	NUM_MEM_CARDS			   ;Inc # of cards found   @RH5
-	ADD	DI,TYPE MEM_CARD_STRUC		   ;Next entry in card	   @RH5
+	ADD	DI,SIZE MEM_CARD_STRUC		   ;Next entry in card	   @RH5
 						   ; descriptor table	    RH5
 
 H_NEXT_SLOT:
@@ -179,7 +179,7 @@ XMAA_CHECK:
 
 	ADD	TOTAL_SYS_PAGES,BX		   ;Add card's pgs to tot. @RH5
 	INC	NUM_MEM_CARDS			   ;Inc # of cards found   @RH5
-	ADD	DI,TYPE MEM_CARD_STRUC		   ;Next entry in card	   @RH5
+	ADD	DI,SIZE MEM_CARD_STRUC		   ;Next entry in card	   @RH5
 						   ; descriptor table	    RH5
 
 X_NEXT_SLOT:
@@ -303,13 +303,13 @@ MARK_NEW_IN_PAL:
 	JE	MARK_PREV_IN_PAL	; using extended memory after us   @RH4
 MARK_NEW_LP:				; will take it from the top	   @RH4
 	MOV	PAGE_ALLOC_LIST[DI],RESR_EXT	 ;Place a 'RE' in the PAL  @RH4
-	ADD	DI,TYPE PAGE_ALLOC_LIST 	 ; (Reserved Extended) for @RH4
+	ADD	DI,SIZE PAGE_ALLOC_LIST 	 ; (Reserved Extended) for @RH4
 	LOOP	MARK_NEW_LP			 ; these entries	   @RH4
 
 MARK_PREV_IN_PAL:
 	MOV	AX,NEEDED_EMS_PGS	;Set offset into Page Alloc List   @RH4
 	add	ax,Resr_Ext_Pgs 	;get end of area for EMS pages		;an002; dms;
-	MOV	DX,TYPE PAGE_ALLOC_LIST ; for the page where extended mem  @RH4
+	MOV	DX,SIZE PAGE_ALLOC_LIST ; for the page where extended mem  @RH4
 	MUL	DX			; starts.  This is done by skipping@RH4
 	MOV	DI,AX			; over the EMS pages on bottom	   @RH4
 	MOV	CX,PREV_EXT_PGS 	;Loop for the previous extended    @RH4
@@ -317,7 +317,7 @@ MARK_PREV_IN_PAL:
 	JE	DIS_EMS_TT		; ext mem claimed before we load   @RH4
 MARK_PREV_LP:				;				   @RH4
 	MOV	PAGE_ALLOC_LIST[DI],PREV_EXT	 ;Place a 'PE' in the PAL  @RH4
-	ADD	DI,TYPE PAGE_ALLOC_LIST 	 ; (Previous Extended) for @RH4
+	ADD	DI,SIZE PAGE_ALLOC_LIST 	 ; (Previous Extended) for @RH4
 	LOOP	MARK_PREV_LP			 ; these entries	   @RH4
 					;旼컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴커
 					;� Disable translate table entries    �
@@ -344,7 +344,7 @@ Card_Find_Chk:
 
 Card_Find_Loop:
 
-	add	di,Type Mem_Card_Struc		;next pointer			;an002; dms;
+	add	di,SIZE Mem_Card_Struc		;next pointer			;an002; dms;
 	jmp	Card_Find_Chk			;continue loop			;an002; dms;
 
 
@@ -396,7 +396,7 @@ NEXT_CARD_EMS:
 	MOV	AX,CARDS_PGS		; to where next card's ext mem     @RH4
 	ADD	CARD_EXT_S16K,AX	; starts (in units of 16K) and save@RH4
 
-	ADD	DI,TYPE MEM_CARD_STRUC	;Next entry in the memory card	   @RH4
+	ADD	DI,SIZE MEM_CARD_STRUC	;Next entry in the memory card	   @RH4
 
 	mov	cx,Mem_Card_Table.End_Pg_Num[di]	;calc pages on		;an002; dms;
 	sub	cx,Mem_Card_Table.Start_Pg_Num[di]	;card			;an002; dms;

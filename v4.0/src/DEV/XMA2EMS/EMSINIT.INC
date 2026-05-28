@@ -551,14 +551,14 @@ BACK_CONV_MEM	PROC
 	MOV	AX,START_BACMEM_SEG	;Convert the segment value for the
 	MOV	CL,10			; start of backed memory to its
 	SHR	AX,CL			; corresponding page number
-	MOV	DX,TYPE PAGE_ALLOC_LIST ; then convert to the correct	   @RH8
+	MOV	DX,SIZE PAGE_ALLOC_LIST ; then convert to the correct	   @RH8
 	MUL	DX			; entry in the page alloc list	   @RH8
 	MOV	SI,AX			; store PAL offset into SI
 	POP	CX			;recover loop counter for # backed
 ;mark these pages used in page list but do not assign a handle
 BACK_MEM_PAL:
 	MOV	PAGE_LIST_ENTRY,BACMEM_ALLOC	 ;Mark the PAL with ascii  @RH8
-	ADD	SI,TYPE PAGE_ALLOC_LIST 	 ;Next entry in PAL	   @RH8
+	ADD	SI,SIZE PAGE_ALLOC_LIST 	 ;Next entry in PAL	   @RH8
 	LOOP	BACK_MEM_PAL
 			;Remove code here that used to reserve pages for
 			; WSP by reading a value on the CONFIG.SYS line.

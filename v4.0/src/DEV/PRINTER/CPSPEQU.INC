@@ -62,7 +62,7 @@ STAT_ERROR EQU	8000H			;; error returned by normal driver
 					;;
 					;;
 RH0	STRUC				;;
-	DB	(TYPE RHC) DUP (?)	;; common portion
+	DB	(SIZE RHC) DUP (?)	;; common portion
 					;;
 	DB	?			;; not used for CHAR devices
 RH0_ENDO DW	?			;; offset  of ending address
@@ -79,7 +79,7 @@ RH0	ENDS				;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 					;;
 RH3	STRUC				;;
-	DB	(TYPE RHC) DUP (?)	;; common portion
+	DB	(SIZE RHC) DUP (?)	;; common portion
 					;;
 					;;
 	DB	?			;; media descriptor
@@ -96,7 +96,7 @@ RH3	ENDS				;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 					;;
 GIH	STRUC				;;
-	DB	(TYPE RHC) DUP (?)	;; common portion
+	DB	(SIZE RHC) DUP (?)	;; common portion
 					;;
 					;;
 GIH_MAF DB	?			;; major function
@@ -215,7 +215,7 @@ FPKT	EQU	DS:[SI] 		;;
 FTP	EQU	ES:[BX] 		;;
 					;; ( I=Input  O=Output )
 FTBLK	STRUC				;;
-FTB_LENGTH DW	TYPE FTBLK		;; (NOT TO BE CHANGED)
+FTB_LENGTH DW	SIZE FTBLK		;; (NOT TO BE CHANGED)
 FTB_STATUS DW	0FFFFH			;; (O) parsing compelte
 FTB_TYPE DW	0			;; (O)
 FTB_TID DB	8   DUP(?)		;; (I)
@@ -423,7 +423,7 @@ FSELEN	DW	0			;; length of selection control copied
 FSELMAX DW	0			;; max. room reserved for selection
 					;; controls.
 					;;
-PAR_EXTRACTO DB (TYPE PAR_DEVOT) DUP (-1);; Offset to parameter extracts
+PAR_EXTRACTO DB (SIZE PAR_DEVOT) DUP (-1);; Offset to parameter extracts
 SAVED_CP    DW	-1			;; WGR saved code page during lock	    ;AN000;
 BUFEND	DW	0			;; END OF BUFFER, for LPT1 copy.
 BUF_DATA ENDS				;;
@@ -451,7 +451,7 @@ PDSH	ENDS				;; the SELH_O, and SELR_O are defined
 					;;
 					;;
 PDS	STRUC				;;
-	DB	(TYPE PDSH) DUP (?)	;; common portion
+	DB	(SIZE PDSH) DUP (?)	;; common portion
 SELH_O	DW	?			;; offset to select controls on Hslots
 SELR_O	DW	?			;; offset to select controls on Rslots
 SELB_O	DW	?			;; offset to buffered select controls

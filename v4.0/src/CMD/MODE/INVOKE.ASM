@@ -1002,7 +1002,7 @@ analyze_and_invoke  PROC  NEAR	    ;AX000;										   ;AN000;
 
       .IF <parms_form EQ keyword> THEN	      ;IF the parms were input as keywords THEN 				   ;AN000;
 															   ;AN000;
-	 MOV   DI,TYPE parm_list_entry		;skip COMN parm 							   ;AN000;
+	 MOV   DI,SIZE parm_list_entry		;skip COMN parm 							   ;AN000;
 															   ;AN000;
 	 .WHILE <parm_list_BX[DI].parm_type NE bogus> DO NEAR ;the entry after the last has parm_type of bogus		   ;AN000;
 															   ;AN000;
@@ -1070,27 +1070,27 @@ analyze_and_invoke  PROC  NEAR	    ;AX000;										   ;AN000;
 															   ;AN000;
 	    ENDCASE_3:													   ;AN000;
 															   ;AN000;
-	    ADD   DI,TYPE parm_list_entry										   ;AN000;
+	    ADD   DI,SIZE parm_list_entry										   ;AN000;
 															   ;AN000;
 															   ;AN000;
 	 .ENDWHILE													   ;AN000;
 															   ;AN000;
       .ELSE			    ;the parms were entered as positionals (the old form)				   ;AN000;
 															   ;AN000;
-	 MOV   baud_index,TYPE parm_list_entry										   ;AN000;
-	 MOV   DI,2 * (TYPE parm_list_entry)									 ;AN000;
+	 MOV   baud_index,SIZE parm_list_entry										   ;AN000;
+	 MOV   DI,2 * (SIZE parm_list_entry)									 ;AN000;
 	 .IF <parm_list_BX[DI].item_tag NE unspecified> THEN				   ;AN000;IF stopbits requested THEN
 	    MOV   parity_index,DI								      ;AN000;
 	 .ENDIF
-	 MOV   DI,3 * (TYPE parm_list_entry)								      ;AN000;
+	 MOV   DI,3 * (SIZE parm_list_entry)								      ;AN000;
 	 .IF <parm_list_BX[DI].item_tag NE unspecified> THEN				   ;AN000;IF stopbits requested THEN
 	    MOV   data_bits_index,DI											;AN000;
 	 .ENDIF
-	 MOV   DI,4 * (TYPE parm_list_entry)						   ;DI=stopbits index  ;AN000;
+	 MOV   DI,4 * (SIZE parm_list_entry)						   ;DI=stopbits index  ;AN000;
 	 .IF <parm_list_BX[DI].item_tag NE unspecified> THEN				   ;AN000;IF stopbits requested THEN
 	    MOV   stop_bits_index,DI								    ;AN000;
 	 .ENDIF
-	 MOV   DI,5 * (TYPE parm_list_entry)		      ;AN000;DI=index of retry parm
+	 MOV   DI,5 * (SIZE parm_list_entry)		      ;AN000;DI=index of retry parm
 	 .IF <parm_list_BX[DI].item_tag NE unspecified> THEN				   ;AN000;IF retry requested THEN
 	    MOV   retry_index,DI							   ;AN000;set up index for modecom
 	 .ENDIF 													   ;AN000;
@@ -1114,14 +1114,14 @@ analyze_and_invoke  PROC  NEAR	    ;AX000;										   ;AN000;
 PUBLIC	 old_initialize_printer_port_case
 
       MOV   BX,parm_list_holder 	     ;restore parm_list_BX							;AN000;
-      MOV   DI,TYPE parm_list_entry	     ;skip LPTN parm, point at chars per line				  ;AN000;
+      MOV   DI,SIZE parm_list_entry	     ;skip LPTN parm, point at chars per line				  ;AN000;
 
       .IF <parm_list_BX[DI].item_tag EQ onethirtytwo_item_tag> THEN						  ;AN000;
 	 MOV   columns_holder,132										  ;AN000;
       .ELSEIF <parm_list_BX[DI].item_tag EQ eighty_item_tag> THEN						;AN000;
 	 MOV   columns_holder,80										  ;AN000;
       .ENDIF				     ;if not 80 or 132 modeprin assumes not specified, and makes no change;AN000;
-      ADD   DI,TYPE parm_list_entry	     ;look at lines per inch							   ;AN000;
+      ADD   DI,SIZE parm_list_entry	     ;look at lines per inch							   ;AN000;
 
       .IF <parm_list_BX[DI].item_tag NE unspecified> THEN	;IF chars per line specified THEN	      ;AN000;
 	 MOV   SI,parm_list_BX[DI].value1	  ;SI=>"6" or "8"                                         ;AN000;
@@ -1129,7 +1129,7 @@ PUBLIC	 old_initialize_printer_port_case
 	 MOV   parm2,AL 		      ;parm2="6" or "8"                                                 ;AN000;
       .ENDIF   ;otherwise leave parm2=0FFH (unspecified)  ;AN000;
 
-      ADD   DI,TYPE parm_list_entry	     ;look at retry request							  ;AN000;
+      ADD   DI,SIZE parm_list_entry	     ;look at retry request							  ;AN000;
       .IF <parm_list_BX[DI].item_tag NE unspecified> THEN							  ;AN000;
 	 MOV   retry_index,DI		     ;AN000;let modeprin know retry was requested and the index of it.
       .ENDIF				     ;AN000;
@@ -1147,7 +1147,7 @@ PUBLIC	 old_initialize_printer_port_case
 				    ;need to set retry_index								   ;AN000;
 															   ;AN000;
       MOV   BX,parm_list_holder 		;restore parm_list_BX							   ;AN000;
-      MOV   DI,TYPE parm_list_entry	     ;skip LPTN parm								   ;AN000;
+      MOV   DI,SIZE parm_list_entry	     ;skip LPTN parm								   ;AN000;
 
       .WHILE <parm_list_BX[DI].parm_type NE bogus> DO	   ;the entry after the last has parm_type of bogus		   ;AN000;
 															   ;AN000;
@@ -1193,7 +1193,7 @@ PUBLIC	 old_initialize_printer_port_case
 															   ;AN000;
 	 ENDCASE_4:													   ;AN000;
 															   ;AN000;
-	 ADD   DI,TYPE parm_list_entry											   ;AN000;
+	 ADD   DI,SIZE parm_list_entry											   ;AN000;
 															   ;AN000;
 															   ;AN000;
       .ENDWHILE 													   ;AN000;
@@ -1260,13 +1260,13 @@ PUBLIC dummy9
 
       .IF <NOERROR EQ TRUE> AND 	     ;process ,r ³ l,[T]							 ;AN000;
       MOV   BX,parm_list_holder 		;restore parm_list_BX							   ;AN000;
-      ADD   DI,TYPE parm_list_entry	  ;process second parm, shift direction 					   ;AN000;
+      ADD   DI,SIZE parm_list_entry	  ;process second parm, shift direction 					   ;AN000;
       .IF <parm_list_BX[DI].item_tag NE unspecified> THEN								   ;AN000;
 	 .IF <parm_list_BX[DI].item_tag EQ R_item_tag> OR								   ;AN000;
 	 .IF <parm_list_BX[DI].item_tag EQ L_item_tag> THEN								   ;AN000;
 	    MOV   CL,parm_list_BX[DI].item_tag										   ;AN000;
 	    MOV   PARM2,CL	    ;set up for SHIFT_SCREEN								   ;AN000;
-	    ADD   DI,TYPE parm_list_entry	;look at third parm							   ;AN000;
+	    ADD   DI,SIZE parm_list_entry	;look at third parm							   ;AN000;
 	    MOV   CL,parm_list_BX[DI].item_tag	;CL=T_item_tag or bogus 						;AN000;
 	    MOV   PARM3,CL	    ;may be bogus, but shift_screen will handle it correctly				   ;AN000;
 	    CALL  SHIFT_SCREEN												   ;AN000;
@@ -1378,7 +1378,7 @@ PUBLIC	 printer_status_case
       .ENDIF   ;ANSI.SYS installed											   ;AN000;
 															   ;AN000;
       MOV   BX,parm_list_holder 		;restore parm_list_BX							   ;AN000;
-      ADD   DI,TYPE parm_list_entry		;skip CON parm								   ;AN000;
+      ADD   DI,SIZE parm_list_entry		;skip CON parm								   ;AN000;
       .WHILE <parm_list_BX[DI].parm_type NE bogus> DO NEAR ;the entry after the last has parm_type of bogus		   ;AN000;
 															   ;AN000;
 	 ;CASE parm_list_BX[DI].keyword_switch_ptr=									   ;AN000;
@@ -1443,7 +1443,7 @@ PUBLIC	 printer_status_case
 															   ;AN000;
 	 ENDCASE_1:													   ;AN000;
 															   ;AN000;
-	 ADD   DI,TYPE parm_list_entry	     ;address next parm 							   ;AN000;
+	 ADD   DI,SIZE parm_list_entry	     ;address next parm 							   ;AN000;
 															   ;AN000;
       .ENDWHILE 													   ;AN000;
 															   ;AN000;

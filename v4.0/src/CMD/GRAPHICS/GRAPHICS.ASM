@@ -81,7 +81,7 @@ GR_NO_HELP:			       ;;					;AN000;
 	JMP   GRAPHICS_INSTALL	       ;;					;AN000;
 GR_HELP_STR DB "GRAPHICS [type] [[drive:][path]filename] [/R] [/B] [/LCD] [/PB:id]",0Dh,0Ah
 	    DB 0Dh,0Ah
-	    DB "  type      Printer type",0Dh,0Ah
+	    DB "  SIZE Printer type",0Dh,0Ah
 	    DB "  filename  Graphics profile file",0Dh,0Ah
 	    DB "  /R        Print black/white reversed",0Dh,0Ah
 	    DB "  /B        Print background colour",0Dh,0Ah

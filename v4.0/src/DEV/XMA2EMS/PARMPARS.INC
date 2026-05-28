@@ -299,26 +299,26 @@ cmd_line_args:
 							;  diags.
 
 	add	ax,400h 		; increase segment ID by 16K
-	add	di,type mappable_phys_page_struct
+	add	di,SIZE mappable_phys_page_struct
 
 	mov	map_table.phys_page_segment[di],ax	; store p1 segment
 	mov	map_table.phys_page_number[di],1	    ; p1 page number
 
 	add	ax,400h 		; increase segment ID by 16K
-	add	di,type mappable_phys_page_struct
+	add	di,SIZE mappable_phys_page_struct
 
 	mov	map_table.phys_page_segment[di],ax	; store p2 segment
 	mov	map_table.phys_page_number[di],2	    ; p2 page number
 
 	add	ax,400h 		; increase segment ID by 16K
-	add	di,type mappable_phys_page_struct
+	add	di,SIZE mappable_phys_page_struct
 
 	mov	map_table.phys_page_segment[di],ax	; store p3 segment
 	mov	map_table.phys_page_number[di],3	    ; p3 page number
 
 ;	do some math with di, this will be used as a pointer into map_table
 
-	add	di,type mappable_phys_page_struct
+	add	di,SIZE mappable_phys_page_struct
 
 	jmp	chk_p254		; FRAME= implies that p0 - p3 were not present,
 					; skip ahead and look for p254 and p255
@@ -351,7 +351,7 @@ chk_p0:
 
 ;	do some math with di, this will be used as a pointer into map_table
 
-	add	di,type mappable_phys_page_struct
+	add	di,SIZE mappable_phys_page_struct
 
 ;------------------------
 ;	check for p1
@@ -383,7 +383,7 @@ chk_p1:
 
 ;	do some math with di, this will be used as a pointer into map_table
 
-	add	di,type mappable_phys_page_struct
+	add	di,SIZE mappable_phys_page_struct
 
 ;------------------------
 ;	check for p2
@@ -415,7 +415,7 @@ chk_p2:
 
 ;	do some math with di, this will be used as a pointer into map_table
 
-	add	di,type mappable_phys_page_struct
+	add	di,SIZE mappable_phys_page_struct
 
 ;------------------------
 ;	check for p3
@@ -447,7 +447,7 @@ chk_p3:
 
 ;	do some math with di, this will be used as a pointer into map_table
 
-	add	di,type mappable_phys_page_struct
+	add	di,SIZE mappable_phys_page_struct
 
 ;------------------------
 ;	check for p254
@@ -479,7 +479,7 @@ chk_p254:
 
 ;	do some math with di, this will be used as a pointer into map_table
 
-	add	di,type mappable_phys_page_struct
+	add	di,SIZE mappable_phys_page_struct
 
 ;------------------------
 ;	check for p255
@@ -511,7 +511,7 @@ chk_p255:
 
 ;	do some math with di, this will be used as a pointer into map_table
 
-	add	di,type mappable_phys_page_struct
+	add	di,SIZE mappable_phys_page_struct
 
 Chk_X:
 

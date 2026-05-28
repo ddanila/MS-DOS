@@ -1253,7 +1253,7 @@ PUSH  DS				  ;DS is used to address the DBCS vector table which is somewhere in
 MOV   AX,6507H				  ;get ext country info, DBCS info
 MOV   BX,-1				  ;use codepage currently active for CON
 MOV   DX,-1				  ;use default contry ID
-MOV   CX,TYPE DBCS_head 		  ;length of data to be returned
+MOV   CX,SIZE DBCS_head 		  ;length of data to be returned
 MOV   DI,OFFSET DBCS_headr		  ;DI=>buffer to fill with info ID and pointer to table
 INT   21H
 

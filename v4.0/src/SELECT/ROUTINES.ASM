@@ -836,7 +836,7 @@ PUBLIC	 GET_CNTY_DEF_ROUTINE			;AN000;
 GET_CNTY_DEF_ROUTINE	PROC FAR		;AN000;
 						; AX contains the search's start index
     SUB  AX, 1					;AN000; Make the first index 0
-    MOV  DX, TYPE CTY_DEF			;AN000; There are 9 bytes per entry
+    MOV  DX, SIZE CTY_DEF			;AN000; There are 9 bytes per entry
     MUL  DX					;AN000; Calculate the starting offset
     MOV  SI, AX 				;AN000; Move the address into an index reg
 						;
@@ -899,7 +899,7 @@ GET_CNTY_INDEX_ROUTINE	PROC FAR		;AN000;
 	 .WHILE < <WORD PTR [SI]> NE CX> AND	;AN000; Search until this code is found
 	 .WHILE < BX LE AX >			;AN000; And while there are still table entries
 	      INC     BX			;AN000; Increment the index into the table
-	      ADD     SI, TYPE CTY_DEF		;AN000; Point to the next table record
+	      ADD     SI, SIZE CTY_DEF		;AN000; Point to the next table record
 	 .ENDWHILE				;AN000;
 						;
 	 .IF < BX GT AX >			;AN000; Index is finished for this table
@@ -953,7 +953,7 @@ GET_KYBD_INDEX_ROUTINE	PROC FAR		;AN000;
 	 .WHILE < <WORD PTR [SI]> NE CX> AND	;AN000;
 	 .WHILE < BX LE AX >			;AN000;
 	      INC     BX			;AN000;
-	      ADD     SI, TYPE KYB_DEF		;AN000;
+	      ADD     SI, SIZE KYB_DEF		;AN000;
 	 .ENDWHILE				;AN000;
 						;
 	 .IF < BX GT AX >			;AN000; Index is finished for this table
@@ -994,7 +994,7 @@ PUBLIC	 GET_KYBD_ROUTINE			;AN000;
 GET_KYBD_ROUTINE   PROC FAR			;AN000;
 						; AX contins the search's start index
     SUB  AX, 1					;AN000; Make the first index 0
-    MOV  DX, TYPE KYB_DEF			;AN000; There are 3 bytes per entry
+    MOV  DX, SIZE KYB_DEF			;AN000; There are 3 bytes per entry
     MUL  DX					;AN000; Calculate the offset into the table
     MOV  SI, AX 				;AN000; Move the address into an index reg
     .IF < CX EQ 1>				;AN000; CX Contains which table to search
@@ -1189,7 +1189,7 @@ GET_PRINTER_PARAMS_ROUTINE   PROC FAR		;AN000;
 
     .IF < BX NE 0 >				;AN000;
 	 DEC  BX				;AN000;
-	 MOV  AX, TYPE PRINTER_DEF		;AN000;
+	 MOV  AX, SIZE PRINTER_DEF		;AN000;
 	 MUL  BX				;AN000;
 	 MOV  SI, AX				;AN000;
 	 .IF < PRINTER_TABLES[SI].PRINTER_DATA_VALID EQ 1 > ;AN000;
@@ -1205,7 +1205,7 @@ GET_PRINTER_PARAMS_ROUTINE   PROC FAR		;AN000;
 	      .IF < PRINTER_TABLES[SI].PRINTER_DATA_VALID EQ 1 >     ;AN000; And is this data valid?
 		   JMP	COPY_INFO		;AN000;
 	      .ENDIF				;AN000;
-	      ADD  SI, TYPE PRINTER_DEF 	;AN000; Search the next structure
+	      ADD  SI, SIZE PRINTER_DEF 	;AN000; Search the next structure
 	      INC  BX				;AN000;
 	 .ENDWHILE				;AN000;
 RETURN_DEFAULTS:				;AN000;
@@ -1274,7 +1274,7 @@ PUBLIC	 SAVE_PRINTER_PARAMS_ROUTINE		;AN000;
 SAVE_PRINTER_PARAMS_ROUTINE  PROC FAR		;AN000;
 
     PUSH AX					;AN000; Save the printer number
-    MOV  AX, TYPE PRINTER_DEF			;AN000; Get the size of each structure
+    MOV  AX, SIZE PRINTER_DEF			;AN000; Get the size of each structure
     MOV  SI, I_PORT				;AN000; Get the port number
     .IF < N_PRINTER_TYPE EQ 'S'>                ;AN000; Is this a serial port?
 	 ADD  SI, 3				;AN000; Yes! Store in the later 4 structures
@@ -1304,7 +1304,7 @@ SAVE_PRINTER_PARAMS_ROUTINE  PROC FAR		;AN000;
 	 .IF < SI NE BX >			;AN000;
 	      MOV  PRINTER_TABLES[SI].PRINTER_DATA_VALID, 0 ;AN000;
 	 .ENDIF 				;AN000;
-	 ADD  SI, TYPE PRINTER_DEF		;AN000;
+	 ADD  SI, SIZE PRINTER_DEF		;AN000;
 	 INC  CX				;AN000;
     .ENDWHILE					;AN000;
 

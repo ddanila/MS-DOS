@@ -108,7 +108,7 @@ I13_Target_Source_Loop:
 	cmp	bx,ax				;source/target < end of EMS pg? ;an000; dms;
 	jb	I13_Target_Source_In_EMS_Page	;yes - we are in a page 	;an000; dms;
 
-	add	si,type Mappable_Phys_Page_Struct ;adjust pointer to next page	;an000; dms;
+	add	si,SIZE Mappable_Phys_Page_Struct ;adjust pointer to next page	;an000; dms;
 	dec	cx				;dec counter			;an000; dms;
 
 	jmp	I13_Target_Source_Loop		;continue loop			;an000; dms;
