@@ -3,7 +3,7 @@
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 IF1                                            ;
-        ;%OUT .               ®WRITE   .INC¯
+        ;%OUT .               ï¿½WRITE   .INCï¿½
 ENDIF                                          ;
         PUBLIC  REDUCED_SUPPORT                ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -93,7 +93,7 @@ W_3:    CMP     AX,FSTAT_FONT           ;
         MOV     AX,DS:[SI].FTB_DLEN     ;
         CALL    HANDLE_DATA_WRITE       ;
                                         ;
-W_6:    ADD     SI,TYPE FTBLK           ; ADVANCE SI POINTER TO NEXT TABLE
+W_6:    ADD     SI,SIZE FTBLK           ; ADVANCE SI POINTER TO NEXT TABLE -- WASM: TYPE->SIZE
         LOOP    W_1                     ; CHECK OUT ALL PARSING TABLES
                                         ;
 W_7:    CLI                           ;S;

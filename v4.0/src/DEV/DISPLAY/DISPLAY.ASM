@@ -77,8 +77,8 @@ TITLE	DOS - CONSOLE Code Page Switching Device Driver
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 IF1					;
 	;%OUT .Compiling:     DISPLAY.ASM
-	;%OUT .		     ô CPS-CON driver
-	;%OUT .		     õ Version 3.30
+	;%OUT .		     ï¿½ CPS-CON driver
+	;%OUT .		     ï¿½ Version 3.30
 	;%OUT .Include Files:
 ENDIF					;
 	INCLUDE MACROS.INC		;
@@ -363,11 +363,15 @@ NO_OPERATION	ENDP			;
 ;	PULL IN THE CODE PAGE FUNCTION CODE
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	INCLUDE F-PARSER.INC		; WASM: moved first so FBUFS/FTBLK
+					;       STRUCs are defined before
+					;       WRITE.INC/CPS-FUNC.INC use
+					;       their fields (MASM 5 was
+					;       two-pass; WASM is single-pass)
 	INCLUDE INT2FCOM.INC		;
 	INCLUDE INT10COM.INC		;
 	INCLUDE CPS-FUNC.INC		;
 	INCLUDE WRITE.INC		; SPECIAL MARKER IN WRITE.INC
-	INCLUDE F-PARSER.INC		;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
 ;      Adjust the assembly-time instruction counter to a paragraph

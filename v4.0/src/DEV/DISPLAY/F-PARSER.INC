@@ -2,7 +2,7 @@
 	PAGE	,132
 
 IF1
-	;%OUT .		     ®F-PARSER.SRC¯
+	;%OUT .		     ï¿½F-PARSER.SRCï¿½
 ENDIF
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -58,7 +58,7 @@ FPKT	EQU	DS:[SI] 		;
 FTP	EQU	ES:[BX] 		;
 					; ( I=Input  O=Output )
 FTBLK	STRUC				;
-FTB_LENGTH DW	TYPE FTBLK		; (NOT TO BE CHANGED)
+FTB_LENGTH DW	SIZE FTBLK		; (NOT TO BE CHANGED)
 FTB_STATUS DW	0FFFFH			; (O) parsing compelte
 FTB_TYPE DW	0			; (O)
 FTB_TID DB	'........'              ; (I)
@@ -438,7 +438,7 @@ RESET_FTB :				;;
 	MOV	FTP.TARGET_LO,AX	;;
 	MOV	FTP.TARGET_HI,AX	;;
 					;;
-	ADD	BX, TYPE FTBLK		;;
+	ADD	BX, SIZE FTBLK		;;
 					;;
 	DEC	DX			;;
 	AND	DX,DX			;;
@@ -467,7 +467,7 @@ SET_COMPLETE :				;;
 					;;
 SET_NEXT :				;;
 					;;
-	ADD	BX,TYPE FTBLK		;;
+	ADD	BX,SIZE FTBLK		;;
 					;;
 	DEC	DX			;;
 	AND	DX,DX			;;

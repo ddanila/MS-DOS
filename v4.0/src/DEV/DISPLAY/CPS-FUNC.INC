@@ -4,7 +4,7 @@
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 IF1                                     ;
-        ;%OUT .               ®CPS-FUNC.INC¯
+        ;%OUT .               ï¿½CPS-FUNC.INCï¿½
 ENDIF                                   ;
                                         ;
 CP_FUNCTION     LABEL   BYTE            ;
@@ -266,7 +266,7 @@ DB_4:   MOV     AX,CPD_REQ_DESG[BX]     ;
         POP     SI                      ;
         POP     CX                      ;
                                         ;
-        ADD     DI,TYPE FTBLK           ; MOVE POINTERS TO NEXT PARSING TABLE
+        ADD     DI,SIZE FTBLK           ; MOVE POINTERS TO NEXT PARSING TABLE -- WASM: TYPE->SIZE
 DB_5:   INC     BX                      ;
         INC     BX                      ; ADVANCE BX TO NEXT DESG CP
         LOOP    DB_4                    ;
@@ -658,7 +658,7 @@ FCP_3:  XOR     CX,CX                   ; SET RETURN VALUES TO ZERO
         POP     AX                      ;
         STC                             ; CY=1 FOR ERROR
         RET                             ; EXIT
-FCP_4:  MOV     CX,ONE                  ; ®®DESIGNATED CODE PAGE FOUND¯¯
+FCP_4:  MOV     CX,ONE                  ; ï¿½ï¿½DESIGNATED CODE PAGE FOUNDï¿½ï¿½
         CALL    GET_FONT_CP             ; SET THE BX VALUE TO THE FONT DATA
         SUB     BX,2                    ; NORMALIZE BX VALUE;;;;;;;;;;;;;;;
         ADD     SI,BX                   ; FORMULATE THE SI INDEX BY ADDING
@@ -670,7 +670,7 @@ FCP_4:  MOV     CX,ONE                  ; ®®DESIGNATED CODE PAGE FOUND¯¯
         POP     AX                      ;
         CLC                             ; CY=0 FOR OK!
         RET                             ; EXIT
-FCP_5:  XOR     CX,CX                   ; ®®HARDWARE CODE PAGE FOUND¯¯
+FCP_5:  XOR     CX,CX                   ; ï¿½ï¿½HARDWARE CODE PAGE FOUNDï¿½ï¿½
         XOR     DI,DI                   ;
         POP     SI                      ;
         POP     BX                      ;
