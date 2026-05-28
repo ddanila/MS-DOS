@@ -1988,33 +1988,12 @@ PoolSize = 2048
 MFT DB	0				; free
    DW	PoolSize			; PoolSize bytes long
 
-   IF	not  Installed
-
-       DB   (PoolSize-3) DUP(0) 	; leave rest of record
-MEND   DB   -1				; END record
-
-lck1   DW   0				; link
-       DB   SIZE RLR_entry-2 DUP(0)
-lck2   DW   OFFSET DOSGROUP:lck1	; link
-       DB   SIZE RLR_entry-2 DUP(0)
-lck3   DW   OFFSET DOSGROUP:lck2	; link
-       DB   SIZE RLR_entry-2 DUP(0)
-lck4   DW   OFFSET DOSGROUP:lck3	; link
-       DB   SIZE RLR_entry-2 DUP(0)
-lck5   DW   OFFSET DOSGROUP:lck4	; link
-       DB   SIZE RLR_entry-2 DUP(0)
-lck6   DW   OFFSET DOSGROUP:lck5	; link
-       DB   SIZE RLR_entry-2 DUP(0)
-lck7   DW   OFFSET DOSGROUP:lck6	; link
-       DB   SIZE RLR_entry-2 DUP(0)
-lck8   DW   OFFSET DOSGROUP:lck7	; link
-       DB   SIZE RLR_entry-2 DUP(0)
-
-       CODE ENDS
-
-       ;%out Ignore this END error (blasted assembler)
-
-   ENDIF
+; WASM: dead-code branch removed.  `Installed = TRUE` is hardcoded at
+;       the top of this file, so the `IF not Installed` body never
+;       assembled; it also contained a `CODE ENDS` that WASM's IF/ENDIF
+;       block-nesting tracker rejected (E206) even when the branch was
+;       inactive.  Original MASM-5 build had a "Ignore this END error
+;       (blasted assembler)" comment hinting at the same problem.
 
 IF Installed
 

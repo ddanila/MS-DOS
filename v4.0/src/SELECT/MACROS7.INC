@@ -1,3 +1,8 @@
+; WASM: double-include guard.  MACROS7.INC is reached both directly
+; (SELECT6/7/9.ASM) and transitively via MACROS.INC -> MACROS6.INC.
+IFNDEF MACROS7_INC_
+MACROS7_INC_ EQU 1
+
 PROCESS_ESC MACRO				;;AN000;
 	.IF < N_USER_FUNC eq E_ESCAPE > 	;;AN000;
 	.THEN					;;AN000;
@@ -123,3 +128,5 @@ UNHOOK_2F	MACRO				;;AN000;
 		ENDM				;;AN000;
 
 INCLUDE MACROS8.INC				;AN000;
+
+ENDIF	;; MACROS7_INC_

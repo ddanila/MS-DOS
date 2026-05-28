@@ -1,3 +1,8 @@
+; WASM: double-include guard.  MACROS8.INC is reached both directly
+; (SELECT9.ASM, INTVEC.ASM) and transitively via MACROS7.INC.
+IFNDEF MACROS8_INC_
+MACROS8_INC_ EQU 1
+
 ;DSKCPY_ERR	DB	  0
 DSKCPY_EXIT	EQU	  1	  ;AN000;DT user chose to exit diskcopy
 
@@ -45,3 +50,5 @@ FORERR1:	CMP	SUB_ERROR,7		     ;;AN000;
 FORERR2:	MOV	AX,ERR_GENERAL		     ;;AN000;
 FORERR3:	HANDLE_ERROR AX,E_RETURN	     ;;AN000;
 		ENDM				     ;;AN000;
+
+ENDIF	;; MACROS8_INC_
