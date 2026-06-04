@@ -26,7 +26,7 @@
 ;
 ;******************************************************************************
 ifndef INC_LIST
-.xlist
+;; .xlist
 endif
 ;
 ;	Master interrupt controller parameters
@@ -75,4 +75,4 @@ IRQ13_ENABLE	=	11011111B	; Mask to enable IRQ13.
 IRQ14_ENABLE	=	10111111B	; Mask to enable IRQ14.
 IRQ15_ENABLE	=	01111111B	; Mask to enable IRQ15.
 ;
-.list	; end of PIC_DEF.EQU
+;; .list	; end of PIC_DEF.EQU

@@ -25,7 +25,7 @@
 ;
 ;******************************************************************************
 ifndef INC_LIST
-.xlist
+;; .xlist
 endif
 
 OPTION_ROM	STRUC
@@ -34,4 +34,4 @@ ROM_LEN		DB	?		; BYTE HOLDING ROM SIZE / 512
 ROM_ENTRY	DB	?		; WHERE CODE STARTS IN OPTION ROM
 OPTION_ROM	ENDS
 
-.list 	; end of ROMSTRUC.EQU
+;; .list 	; end of ROMSTRUC.EQU

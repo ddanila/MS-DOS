@@ -25,7 +25,7 @@
 ;
 ;******************************************************************************
 ifndef INC_LIST
-.xlist
+;; .xlist
 endif
 ;
 ;    Device driver attribute equates
@@ -102,4 +102,4 @@ TRANS_COUNT		EQU		WORD PTR 12H
 TRANS_ADDR		EQU		WORD PTR 14H
 BYTE_READ		EQU		BYTE PTR 0DH
 
-.list	; end of DRIVER.EQU
+;; .list	; end of DRIVER.EQU

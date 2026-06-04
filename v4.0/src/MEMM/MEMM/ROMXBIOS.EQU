@@ -25,7 +25,7 @@
 ;
 ;******************************************************************************
 ifndef INC_LIST
-.xlist
+;; .xlist
 endif
 
 XBIOS			equ	15h	; Extra BIOS functions
@@ -42,4 +42,4 @@ XBIOS			equ	15h	; Extra BIOS functions
     DEV_WAIT		equ	90h	;   - Device Wait
     DEV_POST		equ	91h	;   - Device Post
 
-.list		; end of ROMXBIOS.EQU
+;; .list		; end of ROMXBIOS.EQU
