@@ -325,7 +325,9 @@ endm
 
 
 $CondLoop macro l,c
-					loop&c $l&l
+;; WASM: '&' can't form 'loop' instruction mnemonic; emit explicitly.
+;; (no conditional .LOOP exists in the tree; bare .LOOP -> plain LOOP)
+					loop $l&l
 endm
 
 $Test	macro	tgt,a1,a2,a3,a4,x
