@@ -57,7 +57,7 @@ curr_cents      dw      ?
 tformat         dw      ?
 map_call        dd      ?
 data_sep        dw      ?
-ra                      5  dup(?)
+ra              db      5  dup(?)
 cntry       ends
 ;
 
@@ -73,7 +73,7 @@ Doscntry       struc                       ;country info. sturctrue
  Dtformat         db      ?
  Dmap_call        dd      ?
  Ddata_sep        dw      ?
- DResv                    5  dup(?)
+ DResv            db      5  dup(?)
 Doscntry       ends
 
 
