@@ -118,6 +118,7 @@ _DATA	segment
 				    ;  deals with memory so oem dependent
 	extrn	ext_size:word	    ; size of extended memory allocated
 	extrn	sys_size:word	    ; size of system memory allocated
+	extrn	hi_size:word	    ; size of hi memory allocated (oemproc.asm); WASM: was missing extrn
 
 _DATA	ends
 
