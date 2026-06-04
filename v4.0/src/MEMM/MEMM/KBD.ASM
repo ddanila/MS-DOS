@@ -1329,7 +1329,7 @@ UpdateLeds	proc	near
 	and	ATKbFlags, 0F8h
 	or	ATKbFlags, ah		; Record indicators
 Updn2:
-	and	ATKbFlags, Not (KBSndLed + KBErr)
+	and	ATKbFlags, (Not (KBSndLed + KBErr)) AND 0FFh	;WASM: mask NOT to 8 bits
 Updn1:
 	pop	ax
 	popf				;* restore original interrupt status
@@ -1362,7 +1362,7 @@ SendByte	proc near
 Sen1:
 	pushf				;* save interrupt status
 	cli
-	and	ATKbFlags, Not (KBResend + KBAck + KBErr)
+	and	ATKbFlags, (Not (KBResend + KBAck + KBErr)) AND 0FFh	;WASM: mask NOT to 8 bits
 	push	ax		; save byte to send
 	call	WaitStatus	; Wait for keyboard ready
 	pop	ax
