@@ -137,10 +137,10 @@ ifndef	NoBugMode
 	mov	[di].CSseg, bx
 	mov	bx, ddata
 	mov	[di].DSseg, bx
-	mov	[di].CSsel, DEBC_GSEL
-	mov	[di].DSsel, DEBD_GSEL
-	mov	[di].SpareSel1, DEBW1_GSEL
-	mov	[di].SpareSel2, DEBW2_GSEL
+	mov	[di].CSsel, DEB1_GSEL
+	mov	[di].DSsel, DEB2_GSEL
+	mov	[di].SpareSel1, DEB3_GSEL
+	mov	[di].SpareSel2, DEB4_GSEL
 	mov	[di].GDTalias, GDTD_GSEL
 	mov	[di].BrkFlag, al		; ? break on entry ?
 	mov	[di].ComFlag, FALSE		; com2
