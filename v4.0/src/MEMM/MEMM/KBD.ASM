@@ -756,8 +756,8 @@ XBoot:					; Reboot system.
 ;
 ;   Set up entry point after the reset
 ;
-	mov	ds:[67h],0EA81h 	; offset of CTRL-ALT-DEL entry point
-	mov	ds:[67h+2],0F000h	; segment of CTRL-ALT-DEL entry point
+	mov	WORD PTR ds:[67h],0EA81h	; offset of CTRL-ALT-DEL entry point
+	mov	WORD PTR ds:[67h+2],0F000h	; segment of CTRL-ALT-DEL entry point
 ;
 ;   Reset the CPU
 ;
