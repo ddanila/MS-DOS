@@ -546,18 +546,18 @@ RIMUL   MACRO   REG,OPND
         LOCAL   L1,L2
         _2BYTEOP = 1
         DB      0FH
-        .XLIST
+        ;; .XLIST
 L1       LABEL   BYTE
-        .LIST
+        ;; .LIST
         CMP    &REG,&OPND
-        .XLIST
+        ;; .XLIST
 L2      LABEL  BYTE
         ORG    OFFSET CS:L1
-        .LIST
+        ;; .LIST
         DB     0AFH
-        .XLIST
+        ;; .XLIST
         ORG    OFFSET CS:L2
-        .LIST
+        ;; .LIST
         ENDM
 
 ; ERIMUL - 32 bit Uncharacterized Signed Multiply
@@ -576,18 +576,18 @@ PAGE
 NEWLS   MACRO   OP,REG,OPND
         LOCAL   L1,L2
          DB      0FH
-        .XLIST
+        ;; .XLIST
 L1      LABEL   BYTE
-        .LIST
+        ;; .LIST
          LDS     &REG,DWORD PTR &OPND
-        .XLIST
+        ;; .XLIST
 L2      LABEL   BYTE
         ORG     OFFSET CS:L1
-        .LIST
+        ;; .LIST
          DB      &OP
-        .XLIST
+        ;; .XLIST
         ORG     OFFSET CS:L2
-        .LIST
+        ;; .LIST
         ENDM
 
 ;       LFS     REG,OPND
@@ -712,18 +712,18 @@ SHDOP   MACRO   OP,OPND,REG
         LOCAL   L1,L2
         _2BYTEOP = 1
          DB      0FH
-        .XLIST
+        ;; .XLIST
 L1      LABEL   BYTE
-        .LIST
+        ;; .LIST
          OR      &REG,&OPND
-        .XLIST
+        ;; .XLIST
 L2      LABEL   BYTE
         ORG     OFFSET CS:L1
-        .LIST
+        ;; .LIST
          DB      &OP
-        .XLIST
+        ;; .XLIST
         ORG     OFFSET CS:L2
-        .LIST
+        ;; .LIST
         ENDM
 
 PAGE
