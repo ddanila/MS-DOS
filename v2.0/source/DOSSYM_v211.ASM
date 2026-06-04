@@ -1,6 +1,6 @@
 include DOSMAC.ASM
 IF2
-    %OUT    DOSSYM in Pass 2
+;    %OUT    DOSSYM in Pass 2			;WASM: %OUT unsupported
 ENDIF
 
 IFNDEF  ALTVECT

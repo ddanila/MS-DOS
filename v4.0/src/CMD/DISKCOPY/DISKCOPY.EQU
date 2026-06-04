@@ -1,5 +1,5 @@
 	IF1				;
-	    %OUT    COMPONENT=DISKCOPY, INCLUDING DISKCOPY.EQU... ;
+;	    %OUT    COMPONENT=DISKCOPY, INCLUDING DISKCOPY.EQU... ;	;WASM: %OUT unsupported
 	ENDIF				;
 ;		    $SALUT (4,21,26,36)
 ;---------------------------------------------------------------------------;

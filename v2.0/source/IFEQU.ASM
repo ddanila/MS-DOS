@@ -3,16 +3,16 @@
 
 IF1
     IF IBM
-        %OUT IBM version
+;        %OUT IBM version			;WASM: %OUT unsupported
     ELSE
-        %OUT Normal version
+;        %OUT Normal version			;WASM: %OUT unsupported
     ENDIF
 
     IF   HIGHMEM
-        %OUT Highmem version
+;        %OUT Highmem version			;WASM: %OUT unsupported
     ENDIF
 
     IF   KANJI
-        %OUT Kanji version
+;        %OUT Kanji version			;WASM: %OUT unsupported
     ENDIF
 ENDIF

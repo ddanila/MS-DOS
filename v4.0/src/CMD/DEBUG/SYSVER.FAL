@@ -1,7 +1,7 @@
 
 
 		   IF1
-		       %OUT Including ..SYSVER.FAL..
+;		       %OUT Including ..SYSVER.FAL..	;WASM: %OUT unsupported
 		   ENDIF
 
 SYSVER		   EQU	FALSE		; if true, i/o direct to bios
