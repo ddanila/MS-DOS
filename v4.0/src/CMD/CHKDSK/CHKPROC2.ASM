@@ -239,7 +239,7 @@ CHKCROSS:
 	JZ $$IF13
 $$LL13:
 	    CALL    DOCRLF		;display another line
-	    MOV     SecondPass,True	;	     ;				     ;AC000;
+	    MOV     SecondPass,(True) AND 0FFh	;	     ;				     ;AC000;
 	    XOR     AX,AX		;
 	    PUSH    AX
 	    PUSH    AX

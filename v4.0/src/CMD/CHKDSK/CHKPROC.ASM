@@ -320,7 +320,7 @@ DOEXTMES3:
 DOTSBAD:					;Can't recover
 	mov	[file_arg2],offset dg:badtarg2
 	inc	byte ptr [nul_arg]
-	MOV	fTrunc,TRUE
+	MOV	fTrunc,(TRUE) AND 0FFh
 	CALL	EPRINT
 dotsbad2:
 	CALL	DOTDOTHARDWAY
@@ -410,7 +410,7 @@ $$IF18:
 JOINERR:
 	MOV	SI,OFFSET DG:NUL
 	CALL	get_currdir
-	mov	fTrunc,TRUE
+	mov	fTrunc,(TRUE) AND 0FFh
 	mov	dx,offset dg:joinmes		;				;AC000;
 	call	Printf_Crlf			;				;AC000;
 	mov	dx,offset dg:badtarg2		;				;AC000;
@@ -703,7 +703,7 @@ CANTTARG:
 	mov	SI,dx				; Pointer to bad DIR
 	CALL	get_currdirERR
 	MOV	DX,OFFSET DG:BADTarg_PTR
-	mov	fTrunc,TRUE
+	mov	fTrunc,(TRUE) AND 0FFh
 	call	printf_crlf
 	JMP	ddsizok 			;Next
 BogusDir:
@@ -1343,8 +1343,8 @@ $$DO48:
 	      pop     ax			;Get haed mark back		;AN000;
 ;	   $EXITIF C				;Quit if crosslink		;AC000;
 	   JNC $$IF48
-	      mov     IsCross,True		;Set crosslink flag		;AC000;
-	      cmp     SecondPass,True		;Handle crosslink 2nd pass only ;AC000;
+	      mov     IsCross,(True) AND 0FFh		;Set crosslink flag		;AC000;
+	      cmp     SecondPass,(True) AND 0FFh		;Handle crosslink 2nd pass only ;AC000;
 ;	      $IF     E 			;This is first pass		;AC000;
 	      JNE $$IF50
 		 mov	 Cross_Clus,di		;Put cluster in message 	;AN000;
@@ -1473,7 +1473,7 @@ $$LL62:
 		mov	dx,offset DG:NulNZ	  ;1st cluster number is invalid;an025;bgb
 		call	EPrint			  ;Go print file and error	;an025;bgb
 		mov	word ptr [si].dirclus,0   ;set cluster number to 0	;an025;bgb
-		mov	zerotrunc,true	;modified the file size 		;an026;bgb
+		mov	zerotrunc,(true) AND 0FFh	;modified the file size 		;an026;bgb
 ;	    $ENDIF			;already set to 0, dont print err msg	;an025;bgb
 $$IF63:
 	    mov     word ptr [si].DIRESIZ,0   ;set file size to 0	      ;Kill the file size	      ;AC000;
