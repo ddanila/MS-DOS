@@ -1,6 +1,7 @@
 ;;STRUC--Stucture Macro Library
 ;;Optimizing Version 2.30  03/31/87
 
+	OPTION NOKEYWORD:<.IF .ELSE .ELSEIF .ENDIF .WHILE .REPEAT .UNTIL>	;; JWASM: free dotted names for STRUC.INC macros
 if1
 $NoConj 	equ	0
 $And		equ	1
@@ -68,28 +69,30 @@ endm
 purge	$BuildJump
 
 $GetConj macro	p1,p2
+;; JWASM: dispatch with ifidni instead of '$&&&x' concat (jwasm rejects '&' after '$')
 	$AndOr	= $NoConj
 	irp	parm,<p1,p2>
-	    ifnb    <&parm>
-		irp	x,<and,AND,or,OR>
-		    ifidn   <parm>,<x>
-			 $AndOr = $&&&x
-			 exitm
-		    endif
-		endm
+	    ifnb    <parm>
+		ifidni  <parm>,<and>
+		    $AndOr = $And
+		endif
+		ifidni  <parm>,<or>
+		    $AndOr = $Or
+		endif
 	    endif
 	endm
 endm
 
 $GetDist macro	p1,p2
+;; JWASM: dispatch with ifidni instead of '$&&&x' concat
 	irp	parm,<p1,p2>
 	    ifnb    <parm>
-		irp	x,<short,SHORT,near,NEAR>
-		    ifidn   <parm>,<x>
-			$Dist	= $&&&x
-			 exitm
-		     endif
-		endm
+		ifidni  <parm>,<short>
+		    $Dist = $Short
+		endif
+		ifidni  <parm>,<near>
+		    $Dist = $Near
+		endif
 	    endif
 	endm
 endm
@@ -119,10 +122,9 @@ $Pop	macro	x
 endm
 
 $EquateLabel macro last,this
-	if	$LastLabelOrg eq $
-	    $ll&last = this
-	    .xcref  $ll&last
-	endif
+;; JWASM: skip the 'eq $' label-coalescing optimization -- jwasm rejects
+;; comparing a variable with the $ location counter (A2065). Correctness is
+;; unaffected; only a minor same-location label-equate optimization is lost.
 endm
 
 $TraceLabel macro n,a,b
@@ -697,6 +699,6 @@ $OrFound = 0
 $LoopEnd = 0
 $LeaveFound = 0
 $LastLabel = -1
-$LastLabelOrg = $
+$LastLabelOrg = 0		;; JWASM: $ invalid outside a segment at include time
 $DefDist= $Short
 $Push	%$NoType
