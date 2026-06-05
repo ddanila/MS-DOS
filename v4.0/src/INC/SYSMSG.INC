@@ -49,8 +49,12 @@
 				       ;;
 INCLUDE        VERSIONA.INC	       ;;AN003;;
 
-FALSE	       = 0		       ;;
-TRUE	       = NOT FALSE	       ;;    List message services and flags
+ifndef FALSE
+FALSE	       = 0		       ;; JWASM: guard (DOSSYM/VERSION may define it)
+endif
+ifndef TRUE
+TRUE	       = (NOT FALSE) AND 0FFFFh   ;; JWASM: guard + 16-bit mask (vs DOSSYM TRUE EQU 0FFFFh)
+endif
 				       ;;
 
 ; Control Characters For Message Skeleton file
