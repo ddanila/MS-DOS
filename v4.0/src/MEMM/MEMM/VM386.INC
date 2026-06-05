@@ -37,6 +37,7 @@ endif
 ;
 ;   Structures for accessing memory
 ;
+	OPTION NOKEYWORD:<LowWord HighWord>	;JWASM: free reserved LOWWORD/HIGHWORD operators (used as struct field names)
 WordS	struc
 	LowByte 	db	?
 	HighByte	db	?
