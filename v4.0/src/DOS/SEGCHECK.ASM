@@ -277,7 +277,7 @@ BUFLoop:CMP     DI,-1
 	JNZ     BufNext
 	JMP     DPBRet
 BufNext:
-	LES     DI,ES:[DI.buf_link]
+	MOV     DI,ES:[DI.buf_next]
 	JMP     BUFLoop
 EndProc BUFCheck
 
