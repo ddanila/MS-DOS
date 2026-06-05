@@ -243,7 +243,7 @@ PARSE_PARAMETERS       PROC	NEAR						    ;AN000
 	  POP AX				 ;AN003;Restore the environment
 
 ;***CNS
-	.ELSE					 ;AN000;;				   ;AN000
+	.ELSE near					 ;AN000;;				   ;AN000
 	  .IF <RESULT_SYN_PTR NE 0>		 ;AN000;; was the switch found? 	   ;AN000
 	    MOV    AX,WORD PTR RESULT_VAL+2	 ;AN000;; is it valid?			   ;AN000
 	    OR	   AX,AX			 ;AN000;;				   ;AN000
