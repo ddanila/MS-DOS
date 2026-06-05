@@ -870,7 +870,7 @@ DESG_PARMS      PROC
                 MOV     COMMA_FLAG,00H          ; Set comma flag off.
 
                 cmp     al,'('
-                je      df
+                je      DF_LBL
                 cmp     al,')'
                 je      right_br2
 
@@ -885,7 +885,7 @@ DESG_PARM1:     CALL    GET_CHAR                ; Get character in AL.
                 CMP     AL,')'                  ; If a ')', then
                 JE      RIGHT_BR2               ; end of parameters.
                 CMP     AL,'('                  ; If a '(' then
-                JE      DF                      ; parse desg and font.
+                JE      DF_LBL                      ; parse desg and font.
                 CMP     AL,','                  ; If a comma then
                 JE      DP3                     ; set flag.
                 CALL    IS_DELIM                ; If not a delimiter
@@ -899,7 +899,7 @@ RIGHT_BR2:      CMP     RIGHT_FLAG,01H          ; IF no '(' encountered,
 EXIT_3:         MOV     ERROR_FLAG,01H          ; Set error flag on
                 JMP     DP_X                    ; Exit.
 
-DF:             CMP     RIGHT_FLAG,01H          ; If no '(' encountered
+DF_LBL:             CMP     RIGHT_FLAG,01H          ; If no '(' encountered
                 JB      EXIT_3                  ; then error, exit
                 CALL    DESG_FONT               ; Parse desg and font.
                 JMP     DP1                     ; Jump to DP1.

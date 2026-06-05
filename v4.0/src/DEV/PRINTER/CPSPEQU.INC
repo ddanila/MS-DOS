@@ -1,5 +1,6 @@
 
 	PAGE	,132
+	OPTION NOKEYWORD:<invoke>	;JWASM: free INVOKE (reserved kw) -- used as a proc name (PUBLIC/EXTRN INVOKE)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
