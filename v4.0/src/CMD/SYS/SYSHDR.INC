@@ -1,3 +1,8 @@
+BREAK   MACRO   subtitle	;JWASM: SYS lacks a BREAK def (was stripped by the WASM preprocessor); define the listing helper
+	SUBTTL  subtitle
+	PAGE
+	ENDM
+
         page    80,132
 ;******************* START OF SPECIFICATIONS ***********************************
 ;
