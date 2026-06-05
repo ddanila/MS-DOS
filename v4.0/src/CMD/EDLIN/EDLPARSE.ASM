@@ -184,7 +184,7 @@ parse_continue: 				;an000;loop return point
 ;	$else					;an000;
 	JMP SHORT $$EN1
 $$IF1:
-		cmp  parse_switch_b,true	;an000;see if already set
+		cmp  parse_switch_b,(true) AND 0FFh	;an000;see if already set
 ;		$if  nz 			;an000;if not
 		JZ $$IF3
 		     call val_sw		;an000;see which switch
@@ -260,7 +260,7 @@ build_fs	endp				;an000;end proc
 
 val_sw		proc	near			;an000;switch determination
 	assume	ds:nothing			;DS is org_ds at runtime, not DG
-	mov	byte ptr cs:[parse_switch_b],true ;CS: override - writes to DG group
+	mov	byte ptr cs:[parse_switch_b],(true) AND 0FFh ;CS: override - writes to DG group
 	assume	ds:dg				;restore for following code
 	ret					;an000;return to caller
 

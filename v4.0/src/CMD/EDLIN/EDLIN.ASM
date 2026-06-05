@@ -565,7 +565,7 @@ NOTBAK:
 $$IF12:
 
 	mov	bx,RD_Handle		;an000; dms;set up for call
-	mov	EA_Flag,True		;an000; dms;
+	mov	EA_Flag,(True) AND 0FFh		;an000; dms;
 	call	Get_Extended_Attrib	;an000; dms;get attribs
 
 	Jmp	HavFil			;work with the opened file
@@ -729,7 +729,7 @@ MAKFIL:
 	mov	bx,RW			;an000;open for read/write
 	mov	cx,ATTR 		;an000;file attributes
 	mov	dx,Creat_Open_Flag	;an000;action to take on open
-	cmp	EA_Flag,True		;an000;EA_Buffer used?
+	cmp	EA_Flag,(True) AND 0FFh		;an000;EA_Buffer used?
 ;	$if	e			;an000;yes
 	JNE $$IF14
 		mov	di,offset dg:EA_Parm_List ;an000; point to buffer
@@ -1740,7 +1740,7 @@ EDLIN_COMMAND		proc	near		;an000;interface parser
 
 	mov	cx,00h				;an000;cx will count filespec
 						;      length
-	cmp	parse_switch_b,true		;an000;do we have /B switch
+	cmp	parse_switch_b,(true) AND 0FFh		;an000;do we have /B switch
 ;	$if	z				;an000;we have the switch
 	JNZ $$IF20
 		mov	[LOADMOD],01h		;an000;signal switch found

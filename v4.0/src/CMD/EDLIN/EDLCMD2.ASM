@@ -1060,7 +1060,7 @@ EDLIN_PG_COUNT		proc	near		;an000;track remaining lines
 
 	push	ax				;an000;save affected regs
 
-	mov	lc_flag,true			;an000;init. flag to signal
+	mov	lc_flag,(true) AND 0FFh			;an000;init. flag to signal
 						;      continue printing
 
 	mov	al,pg_count			;an000;set up for page adj.
@@ -1085,7 +1085,7 @@ $$EN15:
 	    JNBE $$IF19
 		   call    EDLIN_PG_PROMPT	;an000;prompt the user to
 						;      "Continue(Y/N)?"
-		   cmp	  continue,true 	;an000;did user say continue
+		   cmp	  continue,(true) AND 0FFh 	;an000;did user say continue
 ;		   $if	  z			;an000;continue
 		   JNZ $$IF20
 			  mov	al,dg:disp_len	;an000;begin init of screen
@@ -1149,7 +1149,7 @@ EPP_Reprompt:
 
 EPP_True_Exit:
 
-	mov	Continue,True			;an000;flag Y found
+	mov	Continue,(True) AND 0FFh			;an000;flag Y found
 	jmp	EPP_Exit			;an000;exit routine
 
 EPP_False_Exit:
