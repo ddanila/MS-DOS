@@ -1345,7 +1345,7 @@ PUBLIC	 printer_status_case
 ;AC002;PUSH  AX 	 ;AN000;save
 															   ;AN000;
       display  status_for_device											   ;AN000;
-      display  long_underline				      "Status for device LPTX?"                                    ;AN000;
+      display  long_underline				      ;JWASM: stranded string -> "Status for device LPTX?"                                    ;AN000;
       display  five_char_underline	     ;has CRLF on it   -----------------------					   ;AN000;
       call  display_printer_reroute_status		 ;see modeecho.asm					       ;AN000;
 ;AC002;POP   AX 					 ;restore "device_request"                                          ;AN000;
