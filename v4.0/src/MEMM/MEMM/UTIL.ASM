@@ -193,8 +193,8 @@ endif
 ;
 	mov	ax,[GDT_Seg]
 	mov	ds, ax			; DS:0 = ptr to gdt
-	lgdt	qword ptr ds:[GDTD_GSEL]
-	lidt	qword ptr ds:[IDTD_GSEL]
+	lgdt	fword ptr ds:[GDTD_GSEL]
+	lidt	fword ptr ds:[IDTD_GSEL]
 ;
 ;   go protected and enable paging - turn on bits in CR0
 ;
