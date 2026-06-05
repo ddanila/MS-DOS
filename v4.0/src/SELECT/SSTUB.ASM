@@ -22,11 +22,11 @@ prognm	 DB	 "SELECT.EXE",0      ;AN000; EXEC this program
 
 execparm DW	0		;AN000; environment string
 	 DW	 80H		 ;AN000; command string offset
-comseg	 DW	 (?)		 ;AN000; command string segment
+comseg	 DW	 ?		 ;AN000; command string segment
 	 DW	 5CH		 ;AN000; use the FCB's from this program
-seg1	 DW	 (?)		 ;AN000; .
+seg1	 DW	 ?		 ;AN000; .
 	 DW	 6CH		 ;AN000; use the FCB's from this program
-seg2	 DW	 (?)		 ;AN000; .
+seg2	 DW	 ?		 ;AN000; .
 
 enter	 equ	 13		 ;AN000;ENTER key
 escape	 equ	 27		 ;AN000;ESC key
