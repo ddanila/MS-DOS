@@ -124,7 +124,7 @@
 ;*	       "Licensed Material - Program Property of Microsoft"		     *
 ;*									     *
 ;*****************************************************************************
-	HEADER	<DEFINITIONS - LOCAL MACROS AND LOCAL EQUATES>
+;JWASM (HEADER macro defined just below; this call precedes its def) 	HEADER	<DEFINITIONS - LOCAL MACROS AND LOCAL EQUATES>
 IF1
 	%OUT	COMPONENT=LABEL, MODULE=LABEL.SAL
 ENDIF

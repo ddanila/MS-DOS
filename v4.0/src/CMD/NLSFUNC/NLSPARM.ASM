@@ -93,7 +93,7 @@
 	    %OUT    COMPONENT=NLSFUNC, MODULE=NLSPARM.SAL...
 	ENDIF
 ; =  =	=  =  =  =  =  =  =  =	=  =
-	HEADER	<MACRO DEFINITION>
+;JWASM (HEADER macro defined just below; this call precedes its def) 	HEADER	<MACRO DEFINITION>
 ; =  =	=  =  =  =  =  =  =  =	=  =
 
 HEADER	MACRO	TEXT

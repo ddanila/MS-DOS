@@ -1,9 +1,4 @@
 CallInstall MACRO   name,mpx,fn,save,restore
-BREAK	MACRO	subtitle
-	SUBTTL	subtitle
-	PAGE
-ENDM
-.xcref	break
 IF Installed
     IFNB    <save>
 	SaveReg <save>
@@ -17,6 +12,11 @@ ELSE
 	Invoke	name
 ENDIF
 ENDM
+BREAK	MACRO	subtitle
+	SUBTTL	subtitle
+	PAGE
+ENDM
+.xcref	break
 
 BREAK <SaveReg - save a set of registers>
 
