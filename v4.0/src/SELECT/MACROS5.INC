@@ -483,6 +483,7 @@ BEEP	MACRO	FREQ,DUR		;;AN000;
 ;;
 ;;
 ;;**************************************************************************
+	OPTION NOKEYWORD:<GOTO>	;;JWASM: free GOTO (reserved macro-flow directive) for the GOTO macro
 GOTO	MACRO	LABEL				;;AN000;
 	JMP	LABEL				;;AN000; jump to label
 	ENDM					;;AN000;
