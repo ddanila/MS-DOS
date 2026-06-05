@@ -91,13 +91,13 @@ msg_tbl 	label	word		; table of final messages to display
 ;	the valid arguments
 ;
 on_arg		db	"on"
-on_len		equ	(this byte - on_arg)
+on_len		equ	($ - on_arg)
 
 off_arg 	db	"off"
-off_len 	equ	(this byte - off_arg)
+off_len 	equ	($ - off_arg)
 
 auto_arg	db	"auto"
-auto_len	equ	(this byte - auto_arg)
+auto_len	equ	($ - auto_arg)
 
 null_arg	db	" "
 null_len	equ	1
@@ -109,9 +109,9 @@ arg_tbl 	label	word		; table of valid arguments
 		dw	offset	off_arg
 		dw	offset	auto_arg
 ;
-no_arg		equ	(this byte - arg_tbl)
+no_arg		equ	($ - arg_tbl)
 		dw	offset null_arg 	; should be last entry
-max_args	equ	(this byte - arg_tbl)
+max_args	equ	($ - arg_tbl)
 ;
 arg_len 	label	word		; table of argument lengths
 		dw	on_len

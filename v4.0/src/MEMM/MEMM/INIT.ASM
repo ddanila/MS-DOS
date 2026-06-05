@@ -924,8 +924,8 @@ kill_end	label	word		; End of messages that kill driver
 		dw	offset LAST:InvMRA	; Map Register Adjusted
 		dw	offset LAST:InvParm	; Invalid Parameter msg
 		dw	offset LAST:PFWarning	; Page Frame warning message
-MAX_MSG 	equ	(this byte - msg_tbl)/2 ; # of messages to display
-KILL_MSG	equ	(this byte - kill_end)/2; 1st four will abort driver
+MAX_MSG 	equ	($ - msg_tbl)/2 ; # of messages to display
+KILL_MSG	equ	($ - kill_end)/2; 1st four will abort driver
 ;
 
 page

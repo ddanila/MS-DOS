@@ -130,7 +130,7 @@ Map_tbl 	label	word
 		dw	0d400h
 		dw	0d800h
 		dw	0dc00h
-max_PF		equ	(this byte - Map_tbl)
+max_PF		equ	($ - Map_tbl)
 		dw	0e000h
 
 	page
