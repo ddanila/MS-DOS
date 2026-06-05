@@ -770,7 +770,7 @@ HWCP_PARMS	PROC
 		CMP	RIGHT_FLAG,01H		; If no left brackets then
 		JNE	LEFT_BR 		; Exit parse.
 
-HWCP_1: 	CALL	GET_CHAR		; Load character in AL.
+HWCP_LP1: 	CALL	GET_CHAR		; Load character in AL.
 		JZ	LEFT_BR 		; Exit, if end of line.
 		CALL	IS_DIGIT		; Check if digit, then
 		JE	HP1			; Parse hwcp parms.
@@ -779,10 +779,10 @@ HWCP_1: 	CALL	GET_CHAR		; Load character in AL.
 		CMP	AL,')'                  ; If a ')' then
 		JE	RIGHT_BR		; end of current dev parms.
 		CMP	AL,'('                  ; If a '(' then
-		JE	HWCP_2			; There are multible hwcp.
+		JE	HWCP_LP2			; There are multible hwcp.
 		CALL	IS_DELIM		; Else, if not a delimiter
 		JNE	EXIT_2			; Then error, exit
-		JMP	HWCP_1			; Get another character.
+		JMP	HWCP_LP1			; Get another character.
 
 LEFT_BR:	CMP	RIGHT_FLAG,01H		; If no left bracket
 		JE	EXIT_2			; Then error, exit
@@ -791,9 +791,9 @@ LEFT_BR:	CMP	RIGHT_FLAG,01H		; If no left bracket
 COMMA_1:	CMP	COMMA_FLAG,01H		; If comma flag set
 		JE	COM_2_HC		; Then exit hwcp parse.
 		MOV	COMMA_FLAG,01H		; Else set comma flag.
-JMP HWCP_1 ; Get another character.
+JMP HWCP_LP1 ; Get another character.
 
-HWCP_2: 	CMP	RIGHT_FLAG,01H		; If left bracket not set
+HWCP_LP2: 	CMP	RIGHT_FLAG,01H		; If left bracket not set
 		JNE	EXIT_2			; then error.
 		CALL	MUL_HWCP		; else call multiple hwcp
 		ADD	DI,02H			; routine.  Increment DI
@@ -923,7 +923,7 @@ DESG_PARMS	PROC
 		MOV	COMMA_FLAG,00H		; Set comma flag off.
 
 		cmp	al,'('
-		je	df
+		je	DF_LBL
 		cmp	al,')'
 		je	right_br2
 
@@ -938,7 +938,7 @@ DESG_PARM1:	CALL	GET_CHAR		; Get character in AL.
 		CMP	AL,')'                  ; If a ')', then
 		JE	RIGHT_BR2		; end of parameters.
 		CMP	AL,'('                  ; If a '(' then
-		JE	DF			; parse desg and font.
+		JE	DF_LBL			; parse desg and font.
 		CMP	AL,','                  ; If a comma then
 		JE	DP3			; set flag.
 		CALL	IS_DELIM		; If not a delimiter
@@ -952,7 +952,7 @@ RIGHT_BR2:	CMP	RIGHT_FLAG,01H		; IF no '(' encountered,
 EXIT_3: 	MOV	ERROR_FLAG,01H		; Set error flag on
 		JMP	DP_X			; Exit.
 
-DF:		CMP	RIGHT_FLAG,01H		; If no '(' encountered
+DF_LBL:		CMP	RIGHT_FLAG,01H		; If no '(' encountered
 		JB	EXIT_3			; then error, exit
 		CALL	DESG_FONT		; Parse desg and font.
 		JMP	DP1			; Jump to DP1.
