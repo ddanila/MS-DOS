@@ -69,7 +69,7 @@
 ;******************************************************************************
 ;  	Externs
 ;******************************************************************************
-LAST	segment
+LAST	SEGMENT PARA USE16 PUBLIC 'LAST'	;JWASM: explicit attrs (opened before vdmseg.inc)
 	extrn	Map_tbl:word
 	extrn	max_PF:abs
 	extrn	mappable_segs:byte

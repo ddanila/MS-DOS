@@ -80,12 +80,12 @@ page	58,132
 ;			E X T E R N A L   R E F E R E N C E S
 ;******************************************************************************
 ;
-R_CODE	segment
+R_CODE	SEGMENT PARA USE16 PUBLIC 'R_CODE'	;JWASM: explicit attrs (opened before vdmseg.inc; match it)
 	extrn	JumpReal:far		; cont client in RM (rrtrap.asm)
 	extrn	MB_Flag:byte		; non-zero => do move block
 R_CODE	ends
 
-_TEXT	 segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'	;JWASM: explicit attrs (opened before vdmseg.inc; match it)
 	extrn	IO_Trap:near		; I/O Trap Dispatcher
 	extrn	EM286ll:near		; 286 loadall emulator (EM286LL)
 	extrn	EM386ll:near		; 386 loadall emulator (EM386LL)

@@ -101,7 +101,7 @@ page	58,132
 ;			E X T E R N A L   R E F E R E N C E S
 ;******************************************************************************
 ;
-_TEXT	 segment
+_TEXT	SEGMENT BYTE USE16 PUBLIC 'CODE'	;JWASM: explicit attrs (opened before vdmseg.inc)
 	extrn	VmFault:near		; V Mode GP fault handler (VMINST)
 	extrn	ErrHndlr:near		; Error Handler (ERRHNDLR)
 	extrn	DisableNMI:near 	; Disable NMI for NMI trap handler
