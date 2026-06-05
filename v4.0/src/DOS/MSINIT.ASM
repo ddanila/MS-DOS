@@ -531,6 +531,7 @@ OUTMES:
 	LODS	CS:BYTE PTR [SI]
 	CMP	AL,"$"
 	JZ	OUTDONE
+	OPTION NOKEYWORD:<OUT>	;JWASM: free OUT (reserved instruction) for the external proc call
 	invoke	OUT
 	JMP	SHORT OUTMES
 OUTDONE:
