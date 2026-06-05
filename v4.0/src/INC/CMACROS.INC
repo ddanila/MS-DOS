@@ -566,9 +566,9 @@ endm
  .xcref
  .xcref ?ALI&i
  .cref
-?ALI&i &macro
+?ALI&i macro
 ?AP n
-&endm
+endm
 endm
 ?AP macro n
 ?argl = ?argl + 2
@@ -718,7 +718,7 @@ endif
 endm
 ?pg macro n,p,c,a
     .xcref
-    cBegin &macro g
+    cBegin macro g
 	.xcref
 	?pg1 <n>,c,a,%?PO
 	?CPD = 0
@@ -757,15 +757,15 @@ endm
 	endif
 	.cref
 	purge cBegin
-    &endm
-    ?UTPE &macro
+    endm
+    ?UTPE macro
 	%out Unterminated Procedure Definition: "&n"
-    &endm
+    endm
 endm
 
 ?pg1 macro n,c,a,o
     .xcref
-    cEnd &macro g
+    cEnd macro g
 	.xcref
 	?BA = 0
 	ifidn <g>,<nogen>
@@ -793,7 +793,7 @@ endm
 	n endp
 	.cref
 	purge cEnd
-    &endm
+    endm
     .cref
 endm
 
@@ -857,18 +857,18 @@ ifndef def_&grp
 def_&grp= 0
 endif
 if def_&grp ne ASMpass
-add_&grp &macro s
+add_&grp macro s
 in_&grp <seg>,s
-&endm
-in_&grp &macro sl,s
+endm
+in_&grp macro sl,s
 ifb <s>
 grp group sl
 else
-add_&grp &macro ns
+add_&grp macro ns
 in_&grp <sl,s>,ns
-&endm
+endm
 endif
-&endm
+endm
 def_&grp=ASMpass
 else
 add_&grp seg
@@ -878,16 +878,16 @@ defGrp macro nam
 addSeg nam
 endm
 ?cs1 macro n,ln
-begin&ln &macro
+begin&ln macro
 ?cs2 <n>
 n segment
-&endm
+endm
 endm
 
 ?cs2 macro n
-    sEnd &macro
+    sEnd macro
 	n ends
-    &endm
+    endm
 endm
 
 sBegin macro ln
