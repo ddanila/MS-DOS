@@ -60,7 +60,7 @@ invoke  MACRO   name
 .xcref
 	IF2
 	    IFNDEF name
-	EXTRN   name:NEAR
+	EXTERNDEF name:NEAR
 	    ENDIF
 	ENDIF
 .cref
@@ -76,7 +76,7 @@ transfer    MACRO   name
 .xcref
 	IF2
 	    IFNDEF name
-	EXTRN   name:NEAR
+	EXTERNDEF name:NEAR
 	    ENDIF
 	ENDIF
 .cref
@@ -92,7 +92,7 @@ short_addr  MACRO   name
 .xcref
 	IF2
 	    IFNDEF name
-	EXTRN   name:NEAR
+	EXTERNDEF name:NEAR
 	    ENDIF
 	ENDIF
 .cref
@@ -110,7 +110,7 @@ long_addr   MACRO   name
 .xcref
 	IF2
 	    IFNDEF name
-	EXTRN   name:NEAR
+	EXTERNDEF name:NEAR
 	    ENDIF
 	ENDIF
 .cref
