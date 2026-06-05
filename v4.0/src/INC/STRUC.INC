@@ -159,7 +159,7 @@ $CondJump macro l,tf,c
 	    ifb     <c>
 		$EquateLabel %$LastLabel,l
 	    endif
-	    ifndef  <$ll&l>
+	    ifndef  $ll&l		;; JWASM: plain symbol, not <$ll&l> (A4248)
 		$ll&l	= l
 		.xcref	$ll&l
 	    endif
