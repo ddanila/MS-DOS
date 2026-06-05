@@ -314,7 +314,7 @@ TESTER:
 RES_MODEFLAG EQU $			;WHEN THIS CODE IS RESIDENT THE FLAG WILL BE
 					; ACCESSABLE BY MODECOM AS AN OFFSET FROM ADDRESS
 					; POINTED TO BY VECT14H AND RESSEG
-res_com_retry_type equ $
+res_com_retry_type LABEL BYTE	; JWASM: was equ $, for ES: memory write
 
 	    DB	  0			;AN665;no retry of any type active for any port
 ;

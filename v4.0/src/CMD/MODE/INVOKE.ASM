@@ -334,7 +334,7 @@ EXTRN	 row_type:WORD				;see modesubs.inc							   ;AN000;
 EXTRN	 R_item_tag:ABS 		     ;see MODEPARS.ASM								   ;AN000;
 EXTRN	 R_str:BYTE			     ;see MODEPARS.ASM								   ;AN000;
 EXTRN	 Required_font_not_loaded:BYTE	  ;see modedefs.asm								   ;AN000;
-EXTRN	 res_com_retry_type:ABS 	     ;see RESCODE.SAL								   ;AN000;
+EXTRN	 res_com_retry_type:BYTE 	     ;see RESCODE.SAL								   ;AN000;
 ;EXTRN	  res_lpt_retry_type:ABS	      ;see RESCODE.SAL								    ;AN000;
 EXTRN	 select:ABS			      ;request type for 'modecp'                                                   ;AN000;
 EXTRN	 select_item_tag:ABS		   ;see MODEPARS.ASM								   ;AN000;

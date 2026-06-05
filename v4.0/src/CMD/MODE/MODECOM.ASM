@@ -139,7 +139,7 @@ EXTRN  R_item_tag:ABS													   ;AN000;
 EXTRN  RATEMSG:WORD	  ;CR,LF,"Invalid baud rate specified",BEEP,CR,LF,"$"                                              ;AN000;
 EXTRN  ready_retry_active:ABS	 ;see invoke.asm									   ;AN000;
 ;EXTRN	RES_MODEFLAG:ABS	;RETRY FLAG IN RESIDENT CODE, (OFFSET FROM						   ;AN000;
-EXTRN  res_com_retry_type:ABS	 ;retry type flag, displacement from address pointed to by 50:30 when code is resident, see rescode
+EXTRN  res_com_retry_type:BYTE	 ;retry type flag, displacement from address pointed to by 50:30 when code is resident, see rescode
 EXTRN  seven_item_tag:ABS	  ;see modepars 									   ;AN000;
 EXTRN  sixhundred_item_tag:ABS	   ;see modepars.asm									   ;AN000;
 EXTRN  sixhundred_str:BYTE												   ;AN000;
