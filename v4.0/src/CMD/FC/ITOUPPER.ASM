@@ -2,6 +2,7 @@
 include version.inc
 include cmacros.inc
 .list
+	OPTION NOKEYWORD:<C>	;JWASM: free C (reserved calling-convention kw) -- used as a parm name
 
 sBegin  code
 assumes cs,code
