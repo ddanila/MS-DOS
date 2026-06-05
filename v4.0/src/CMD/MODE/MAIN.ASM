@@ -101,7 +101,7 @@ close_handles  PROC  NEAR		  ;AN002;close all standard device handles
 					  ;AN002;
 MOV   AH,3EH				  ;AN002;
 					  ;AN002;
-.FOR BX = STDIN TO STDPRN		  ;AN002;
+.FOR BX,=,STDIN,TO,STDPRN		  ;AN002;	;JWASM: explicit commas (.FOR args)
    INT	 21H				  ;AN002;
 .NEXT BX				  ;AN002;
 					  ;AN002;

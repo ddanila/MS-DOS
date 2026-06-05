@@ -547,7 +547,7 @@ check_com_ports_attached   PROC  NEAR
 MOV   SI,0
 MOV   ES,SI	  ;now ES:SERIAL_BASE addresses 40:0=0:400
 
-.FOR SI = 0 TO 6 STEP 2
+.FOR SI,=,0,TO,6,STEP,2	;JWASM: explicit commas (.FOR args)
 
    .IF <<WORD PTR ES:SERIAL_BASE[SI]> NE 0> THEN       ;SEE IF THE COM PORT EXISTS
       INC   com_ports_attached
@@ -599,7 +599,7 @@ check_prn_ports_attached   PROC  NEAR
 MOV   SI,0
 MOV   ES,SI	  ;now ES:printr addresses 40:8=0:408
 
-.FOR SI = 0 TO 4 STEP 2       ;for each of 3 printer port address holder words
+.FOR SI,=,0,TO,4,STEP,2       ;for each of 3 printer port address holder words	;JWASM: explicit commas (.FOR args)
 
    .IF <<WORD PTR ES:printr[SI]> GT redirected> THEN	   ;SEE IF THE PORT EXISTS
       INC   prn_ports_attached
@@ -1496,7 +1496,7 @@ PUBLIC DUMMY3														   ;AN000;
 
       MOV   request_type,com_status											   ;AN000;
       MOV   CL,com_ports_attached											   ;AN000;
-      .FOR  i = 1 TO CL 												   ;AN000;
+      .FOR i,=,1,TO,CL 												   ;AN000;	;JWASM: explicit commas (.FOR args)
 
 	 .SELECT													   ;AN000;
 

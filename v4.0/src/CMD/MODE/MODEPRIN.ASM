@@ -619,7 +619,7 @@ modify_resident_code PROC  NEAR 											   ;AN000;
 ;		     MODIFY LOADED CODE TO REFLECT WHO GETS RETRIED NOW
 	   MOV	BX,OFFSET lpt1_retry_type    ;BX=> first of 3 retry mask bytes						   ;AC000;
 	   XOR	SI,SI	 ;clear code modification index 						    ;AN000;
-	   .FOR DI = 0 TO 2    ;FOR LPT1 TO LPT3 check the retry mask byte						  ;AN000;
+	   .FOR DI,=,0,TO,2    ;FOR LPT1 TO LPT3 check the retry mask byte						  ;AN000;	;JWASM: explicit commas (.FOR args)
 	     .IF <<BYTE PTR ES:[BX][DI]> NE no_retry_flag> THEN    ;IF at least one type of retry on THEN	  ;AN000;
 		OR SI,8     ;OR in 00001000 which shifts into proper position						   ;AN000;
 	     .ENDIF													   ;AN000;
