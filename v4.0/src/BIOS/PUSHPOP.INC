@@ -1,3 +1,6 @@
+?stackdepth = 0				;; JWASM: init stack-depth counter (DOSMAC.INC inits
+					;; it for DOS; BIOS PUSHPOP.INC relied on MASM
+					;; treating the undefined symbol as 0)
 	IF1								  ;3.30
 
 SaveReg MACRO	reglist 		;; push those registers
