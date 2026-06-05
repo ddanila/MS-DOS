@@ -116,6 +116,13 @@ page
 DEBUG	=	0
 
 .xlist
+BREAK	MACRO	subtitle
+.XLIST
+	SUBTTL	subtitle
+.LIST
+	PAGE
+	ENDM
+.xcref	break
 	INCLUDE SYSMSG.INC		;AN000;
 	INCLUDE SYSVAR.INC
 	INCLUDE CURDIR.INC
@@ -128,13 +135,6 @@ MSG_UTILNAME <ASSIGN>
 
 ; = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 	BREAK	<MACRO DEFINITIONS>
-BREAK	MACRO	subtitle
-.XLIST
-	SUBTTL	subtitle
-.LIST
-	PAGE
-	ENDM
-.xcref	break
 ; = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 CallOperRange macro low,high,routine	;;NS-macro to call subroutines
 ?call	=	low			;;NS-in the given call range
