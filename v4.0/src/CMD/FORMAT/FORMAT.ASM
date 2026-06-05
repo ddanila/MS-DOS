@@ -694,7 +694,7 @@ BadClus 	proc		near		;an000; mark bad clusters
 	push	es
 
 	mov	es, word ptr fatSpace + 2	;an005; obtain seg of FAT
-	CMP	fBigFat,TRUE			;an005; 16 bit fat?
+	CMP	fBigFat,(TRUE) AND 0FFh			;an005; 16 bit fat?
 ;	$if	ne				;an005; no - 12-bit fat
 	JE $$IF8
 		push	ax			;an000; save ax - contains low cluster number
@@ -1058,7 +1058,7 @@ NotRemove:
 ;				Flags
 ;
 DSKPRM:
-	CMP	fLastChance,TRUE
+	CMP	fLastChance,(TRUE) AND 0FFh
 	JE	PrmptRet
 
 	CMP	deviceParameters.DP_DeviceType, DEV_HARDDISK
@@ -2081,7 +2081,7 @@ SetfBigFat proc near
 	cmp	deviceParameters.DP_BPB.BPB_BigTotalSectors+2,0 ; > 32mb part?	;AN000;
 ;	$IF	NE				;Yes, big FAT	;AC000;
 	JE $$IF21
-	   mov	   fBigFat, TRUE		;Set flag	;AN000;
+	   mov	   fBigFat, (TRUE) AND 0FFh		;Set flag	;AN000;
 ;	$ELSE					;Nope, < 32,b	 ;AC000;
 	JMP SHORT $$EN21
 $$IF21:
@@ -2101,7 +2101,7 @@ $$IF23:
 	   cmp	   ax,BIG_FAT_THRESHOLD 	;Is clusters >= 4086?
 ;	   $IF	   AE
 	   JNAE $$IF25
-	      mov     fBigFAT,TRUE		;16 bit FAT if >=4096
+	      mov     fBigFAT,(TRUE) AND 0FFh		;16 bit FAT if >=4096
 						;** END fix for PTM PCDOS P51
 ;	   $ENDIF
 $$IF25:
@@ -2167,7 +2167,7 @@ NotBigTotalSectors:
 	les	bx, directorySector
 ; If Old_Dir = TRUE then put the first letter of each directory entry must be 0E5H
 	xor	al, al
-	cmp	old_Dir, TRUE
+	cmp	old_Dir, (TRUE) AND 0FFh
 	jne	StickE5
 	mov	al, 0e5H
 StickE5:
@@ -2258,7 +2258,7 @@ DiskFormat proc near
 	mov	ah, 0ffH
 	stosw
 	mov	ax, 00ffH
-	test	fBigFat, TRUE
+	test	fBigFat, (TRUE) AND 0FFh
 	jz	NotBig
 	mov	ax, 0ffffH
 NotBig: stosw
@@ -2352,7 +2352,7 @@ StdBPB:
 FormatLoop:
 	call	Format_Loop							;an015; dms;Format until CY occurs
 
-	cmp	Format_End,True 						;an015; dms;End of Format?
+	cmp	Format_End,(True) AND 0FFh 						;an015; dms;End of Format?
 ;	$if	e								;an015; dms;yes
 	JNE $$IF36
 		mov	FormatError,0						;an015; dms;signal good format
@@ -2432,11 +2432,11 @@ BadSector proc	near
 ContinueFormat:
 	call	Adj_Track_Count 						;an015; dms;decrease track counter
 	call	NextTrack							;an015; dms;adjust head and cylinder
-	cmp	Format_End,True 						;an015; dms;end of format?
+	cmp	Format_End,(True) AND 0FFh 						;an015; dms;end of format?
 ;	$if	ne								;an015; dms;no
 	JE $$IF44
 		call	Format_Loop						;an015; dms;format until CY
-		cmp	Format_End,True 					;an015; dms;end of format?
+		cmp	Format_End,(True) AND 0FFh 					;an015; dms;end of format?
 ;		$if	ne							;an015; dms;no
 		JE $$IF45
 			call	CheckError					;an015; dms;must be error - which error?
@@ -3559,7 +3559,7 @@ $$DO115:
 		JA $$EN115
 		push	cx							;an000; dms;save cx
 
-		cmp	Cluster_Boundary_Flag,True				;an000; dms;full buffer there?
+		cmp	Cluster_Boundary_Flag,(True) AND 0FFh				;an000; dms;full buffer there?
 ;		$if	e							;an000; dms;yes
 		JNE $$IF117
 			call	Calc_Cluster_Boundary				;an000; dms;see if on boundary
@@ -3961,7 +3961,7 @@ Procedure Cluster_Buffer_Allocate						;an000; dms;
 		mov	ax,(Alloc shl 8)					;an000; dms;
 		int	21h							;an000; dms;
 		mov	Cluster_Boundary_Buffer_Seg,ax				;an000; dms;save pointer to buffer
-		mov	Cluster_Boundary_Flag,True				;an000; dms;signal space available
+		mov	Cluster_Boundary_Flag,(True) AND 0FFh				;an000; dms;signal space available
 ;	$else									;an000; dms;not enough room
 	JMP SHORT $$EN137
 $$IF137:
@@ -4114,7 +4114,7 @@ Procedure NextTrack								;an015; dms;
 ;	$if	e								;an015; dms;yes
 	JNE $$IF149
 		stc								;an015; dms;signal end of format
-		mov	Format_End,True
+		mov	Format_End,(True) AND 0FFh
 ;	$else
 	JMP SHORT $$EN149
 $$IF149:

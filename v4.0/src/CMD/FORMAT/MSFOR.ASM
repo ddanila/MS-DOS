@@ -513,7 +513,7 @@ NotSingleSided:
 	jz	Not8SectorsPerTrack
 	add	ax, 2
 ; /8 implies Old_Dir = TRUE
-	mov	Old_Dir,TRUE
+	mov	Old_Dir,(TRUE) AND 0FFh
 Not8SectorsPerTrack:
 
 ; Ok now we know which BPB to use so lets move it to the device parameters
@@ -526,7 +526,7 @@ Not8SectorsPerTrack:
 	mov	cx, size a_BPB
 	push	ds
 	pop	es
-	repnz	movsb
+	rep	movsb
 
 ;*****************************************************************
 ;*  /N/T DCR stuff.  Possible flaw exists if we are dealing with a
@@ -1013,7 +1013,7 @@ LastChanceToSaveIt proc near
 	cmp	deviceParameters.DP_DeviceType, DEV_5INCH
 	ja	WeCanNotIgnoreThisError
 
-	mov	fLastChance, TRUE
+	mov	fLastChance, (TRUE) AND 0FFh
 
 	or	switchmap, SWITCH_1
 	call	CheckSwitches
@@ -1081,7 +1081,7 @@ Procedure WriteBootSector			;				;AN000;
 	mov	cx, size EXT_BPB_INFO		;  "  " 	"  "		;AC000:
 	push	ds				;Set ES=DS (data segment)	;     ;
 	pop	es				;  "  " 	"  "		;     ;
-	repnz	movsb				;Do the copy			;     ;
+	rep	movsb				;Do the copy			;     ;
 						;Write out the boot record	;     ;
 	mov	al, drive			;Get drive letter		;     ;
 	mov	cx, 1				;Specify 1 sector		;     ;
@@ -1103,7 +1103,7 @@ $$IF62:
 	   rep	   movsb			;  "  "       "  "		;AN000;
 	   call    Create_Serial_ID		;Go create unique ID number	;AN000;
 	   lea	   si,FAT12_String		;Assume 12 bit FAT		;AN000;
-	   cmp	   fBigFAT,TRUE 		;Is it? 			;AN000;
+	   cmp	   fBigFAT,(TRUE) AND 0FFh 		;Is it? 			;AN000;
 ;	   $IF	   E				;Not if fBigFat is set....	;AN000;
 	   JNE $$IF64
 	      lea     si,FAT16_String		;Got 16 bit FAT 		;AN000;
@@ -1112,7 +1112,7 @@ $$IF64:
 						;Copy file system string	;     ;
 	   mov	   cx,8 			; to buffer			;AN000;
 	   lea	   di,Media_ID_Buffer.Media_ID_File_System ;	 "  "		;AN000;
-	   repnz   movsb			;    "   "	  "  "		;AN000;
+	   rep   movsb			;    "   "	  "  "		;AN000;
 	   mov	   al,Generic_IOCtl		;Generic IOCtl call		;AN000;
 	   mov	   bl,Drive			;Get drive			;AN000;
 	   inc	   bl				;Make it 1 based		;AN000;
@@ -1598,7 +1598,7 @@ $$IF89:
 ;			$else							;an000; dms; < 32 Mb partition
 			JMP SHORT $$EN91
 $$IF91:
-				cmp	fBigFat,True				;an000;    ;16 bit FAT
+				cmp	fBigFat,(True) AND 0FFh				;an000;    ;16 bit FAT
 ;				$IF	E					;AC000;    ;yes
 				JNE $$IF93
 					mov	[BX].SysInd,FAT16_File_System	;an000;    ;type 4
