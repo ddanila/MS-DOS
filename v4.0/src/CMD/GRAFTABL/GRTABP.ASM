@@ -88,7 +88,7 @@
 	    %OUT    COMPONENT=GRAFTABL, MODULE=GRTABP.SAL... ;AN000;
 	ENDIF				;AN000;
 ; =  =	=  =  =  =  =  =  =  =	=  =
-	HEADER	<MACRO DEFINITION>	;AN000;
+;JWASM (HEADER macro defined later in file; this section-header call precedes its def) 	HEADER	<MACRO DEFINITION>	;AN000;
 	INCLUDE PATHMAC.INC		;AN006;
 ; =  =	=  =  =  =  =  =  =  =	=  =
 

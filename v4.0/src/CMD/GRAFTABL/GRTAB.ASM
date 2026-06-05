@@ -168,7 +168,7 @@ LISTPARM =	1			;0=SUPPRESS LIST; 1=ALLOW LIST		;AN000;
 ;	     "Licensed Material - Program Property of Microsoft"
 
 ;****************** END OF SPECIFICATIONS *****************************
-	HEADER	<MACRO DEFINITIONS, LOCAL EQUATES>
+;JWASM (HEADER macro defined later in file; this section-header call precedes its def) 	HEADER	<MACRO DEFINITIONS, LOCAL EQUATES>
 	INCLUDE PATHMAC.INC		;AN006;
 ;				   $SALUT (0,36,41,52)
 DOSCALL 			   MACRO FN,SF	   ;;				;AN000;
