@@ -170,7 +170,7 @@ public	SysReq
 
 
 
-DCODE	 segment
+DCODE	 segment use16	;JWASM: explicit USE16 (.386p makes bare segs USE32 -> 32-bit OFFSET)
 	assume	cs:DCODE,ds:romdata,es:nothing
 
 

@@ -126,10 +126,10 @@ egetc	endp
 WaitKBD proc	near
 	push	cx
 	xor	cx,cx			; do 65536 times
-wait:
+wait_loop:
 	in	al,KbStatus
 	test	al,BufFull		; q: busy?
-	loopnz	wait			; y: try again
+	loopnz	wait_loop			; y: try again
 ;
 	pop	cx			; n: return
 	ret
