@@ -2,8 +2,9 @@
 	title   LOCATE (EXE2BIN) Messages
 
 FALSE   EQU     0
-TRUE    EQU     NOT FALSE
+TRUE    EQU     (NOT FALSE) AND 0FFFFh	;JWASM: 16-bit NOT mask
 
+	OPTION NOKEYWORD:<addr>	;JWASM: free ADDR operator -- used as a macro name
 addr macro sym,name
     public name
     ifidn <name>,<>
