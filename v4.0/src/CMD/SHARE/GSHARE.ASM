@@ -186,7 +186,7 @@ FRAME	ends
 
    EnterCrit critShare
 
-   DOSAssume SS <DS>,"MFT_Enter entry"
+   DOSAssume SS,<DS>,"MFT_Enter entry"
    ASSUME ES:NOTHING,SS:DOSGROUP
    push ds
 
