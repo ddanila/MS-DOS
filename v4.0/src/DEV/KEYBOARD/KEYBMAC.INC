@@ -260,6 +260,7 @@ PUT_ERROR_CHAR	MACRO STATE
        ENDM
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	OPTION NOKEYWORD:<OPTION GOTO>	;JWASM: free OPTION + GOTO (reserved) -- used as keyboard-def macro names
 OPTION MACRO MASK,MASK_TYPE
     MAC_OK = 1
     IFB  <MASK_TYPE>

@@ -718,7 +718,7 @@ COM_NA_UP_K1_END:		       ;;
 				       ;;
    DW	 COM_NA_UP_K2_END-$	       ;; length of state section
    DB	 NON_ALPHA_UPPER	       ;; State ID
-   DW	 XT_KB + _KB		     ;; Keyboard Type
+   DW	 XT_KB + AT_KB		     ;; Keyboard Type
    DB	 -1,-1			       ;; Buffer entry for error character
 				       ;;
    DW	 COM_NA_UP_K2_T1_END-$	       ;; Size of xlat table
