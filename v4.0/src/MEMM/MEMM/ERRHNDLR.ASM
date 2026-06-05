@@ -89,6 +89,7 @@ NMI     	=	070H		; Non-Maskable interrupt i/o port
 DIS_MSTSLV  	=	00H		; Value to write to disable master/slave
 DIS_NMI         =	080H		; Value to write to disable NMI
 ENA_NMI		=	008H		; Value to write to enable NMI
+	OPTION NOKEYWORD:<C ENTER>	;JWASM: free C (C-conv kw) + ENTER (instr) used as scan-code constants
 B		=	48 		; make code for B
 C		=	46 		; make code for C
 ENTER		=	28 		; make code for enter key
