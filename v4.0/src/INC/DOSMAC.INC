@@ -55,6 +55,7 @@ ENDM
 ;
 ; call a procedure that may be external.  The call will be short.
 ;
+	OPTION NOKEYWORD:<invoke>	;JWASM: free invoke (reserved INVOKE directive) for the DOS macro
 invoke  MACRO   name
 .xcref
 	IF2
