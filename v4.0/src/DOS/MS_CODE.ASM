@@ -148,7 +148,7 @@ ASSUME	SS:DOSGROUP
 	PUSH	ES
 	CALL	AbsSetup
 	JC	ILEAVE
-if not ibmcopyright
+if (not ibmcopyright) AND 0FFFFh
 ; Here is a gross temporary fix to get around a serious design flaw in
 ;  the secondary cache.  The secondary cache does not check for media
 ;  changed (it should).  Hence, you can change disks, do an absolute

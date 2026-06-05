@@ -8,7 +8,7 @@ INCLUDE DEVSYM.INC
 
 ShareF  = FALSE
 
-IF NOT SHAREF
+IF (NOT SHAREF) AND 0FFFFh
 include dosseg.asm
 ENDIF
 .list
@@ -17,7 +17,7 @@ AsmVars <NET, DEBUG>
 
 DEBUG   = FALSE
 
-IF NOT SHAREF
+IF (NOT SHAREF) AND 0FFFFh
 CODE    SEGMENT BYTE PUBLIC  'CODE'
 ASSUME  CS:DOSGroup
 ELSE
@@ -127,7 +127,7 @@ SegTestDone:
 EndProc SegCheck
 
 
-IF NOT SHAREF
+IF (NOT SHAREF) AND 0FFFFh
 I_need  DPBHead,DWORD
 I_need  BuffHead,DWORD
 I_need  sftFCB,DWORD

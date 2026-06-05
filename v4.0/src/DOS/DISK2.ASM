@@ -484,7 +484,7 @@ READ_OK:
 	MOV	CX,[CLUSNUM]
 	invoke	FNDCLUS
 ;------------------------------------------------------------------------
-IF	NOT IBMCOPYRIGHT
+IF	(NOT IBMCOPYRIGHT) AND 0FFFFh
 	JC	SET_ACC_ERR_DS		; fix to take care of I24 fail
 					; migrated from 330a - HKN
 ENDIF
@@ -595,7 +595,7 @@ SCAN_NEXT:
 	POP	AX			  ;LB.					;AN000;
 	POP	DX			  ;LB.					;AN000;
 
-IF	NOT	BUFFERFLAG
+IF	(NOT	BUFFERFLAG) AND 0FFFFh
 	JMP	SHORT end_scan		  ;LB.					;AN000;
 ELSE
 	JMP	END_SCAN
@@ -607,7 +607,7 @@ yesdirty:
 	MOV	WORD PTR [LASTBUFFER],-1   ;LB. invalidate last buffer		;AN000;
 	MOV	BX,[DI.EMS_PAGE_NUM]	  ;LB. logical page			;AN000;
 
-IF	NOT	BUFFERFLAG
+IF	(NOT	BUFFERFLAG) AND 0FFFFh
 	LDS	DI,[DI.BUFFER_BUCKET]	  ;LB. ds:di is 1st buffer addr 	;AN000;
 	MOV	[FIRST_BUFF_ADDR],DI	  ;LB. save first buff addr 1/19/88	;AN000;
 	invoke	SET_MAP_PAGE		  ;LB. activate handle if EMS there	;AN000;

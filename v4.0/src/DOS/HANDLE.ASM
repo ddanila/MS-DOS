@@ -408,7 +408,7 @@ dos_call_done:
 	popf
 ENDIF
 
-IF	NOT	BUFFERFLAG
+IF	(NOT	BUFFERFLAG) AND 0FFFFh
 	JC	ReadError		; if error, say bye bye
 ELSE
 	jmp	tmp_rerr

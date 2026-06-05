@@ -502,7 +502,7 @@ Header  LABEL   BYTE
         DB      (MINOR_VERSION MOD 10) + "0"
         ENDIF
 
-        IF      NOT IBM
+        IF      (NOT IBM) AND 0FFFFh
         DB      13,10,"MS-DOS version "
         DB      MAJOR_VERSION + "0"
         DB      "."

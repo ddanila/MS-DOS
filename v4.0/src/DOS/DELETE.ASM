@@ -135,7 +135,7 @@ nofiles:
 ifsshare:
 
 
-IF NOT Installed
+IF (NOT Installed) AND 0FFFFh
 	transfer NET_DELETE
 ELSE
 	MOV	AX,(multNET SHL 8) OR 19

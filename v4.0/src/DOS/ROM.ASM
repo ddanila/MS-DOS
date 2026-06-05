@@ -780,7 +780,7 @@ do_norm5:
 ;   of the disk...
 
 ads7:   cmp     es:[bp.dpb_next_free],2
-if not debug
+if (not debug) AND 0FFFFh
         jz      tmplab2         ;
         jmp     ads1            ; start scan from front of disk
 tmplab2:

@@ -166,7 +166,7 @@ chk08:										;AN000;
 	CMP	AL,8				      ; reset inuse ?		;AN000;
 	JZ	srinuse 			      ; yes			;AN000;
 
-	IF	NOT INSTALLED
+	IF	(NOT INSTALLED) AND 0FFFFh
 	transfer NET_ASSOPER
 	ELSE
 	PUSH	AX
@@ -313,7 +313,7 @@ ASSUME	DS:NOTHING
 
 UserPrint:
 	ASSUME	ES:NOTHING
-IF NOT Installed
+IF (NOT Installed) AND 0FFFFh
 	transfer PRINTER_GETSET_STRING
 ELSE
 	PUSH	AX

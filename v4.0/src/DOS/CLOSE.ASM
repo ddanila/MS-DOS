@@ -358,7 +358,7 @@ Break	<DOS_Commit - update directory entries>
 	retnz
 	TEST	BX,sf_isnet
 	JZ	LOCAL_COMMIT
-IF NOT Installed
+IF (NOT Installed) AND 0FFFFh
 	transfer NET_COMMIT
 ELSE
 	MOV	AX,(multNET SHL 8) OR 7

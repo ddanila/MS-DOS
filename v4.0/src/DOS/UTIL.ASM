@@ -190,7 +190,7 @@ SFNFreeLoop:
 	JMP     SFNDone
 SFNCheck:
 	CMP     ES:[DI.sf_Ref_Count],0  ; free?
-IF NOT DEBUG
+IF (NOT DEBUG) AND 0FFFFh
 	JZ      SFNGot                  ; yep, got return him
 ELSE
 	JNZ     NoGot
