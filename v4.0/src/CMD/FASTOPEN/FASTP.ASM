@@ -87,7 +87,7 @@
 	    %OUT    COMPONENT=fastopen, MODULE=fastp.asm...
 	ENDIF				;					;AN000;
 ; =  =	=  =  =  =  =  =  =  =	=  =
-	HEADER	<MACRO DEFINITION>	;					;AN000;
+;JWASM (HEADER macro defined at line 93, after this call) 	HEADER	<MACRO DEFINITION>	;					;AN000;
 ; =  =	=  =  =  =  =  =  =  =	=  =
 
 HEADER	MACRO	TEXT			;;					;AN000;
