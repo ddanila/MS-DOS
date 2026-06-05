@@ -98,7 +98,7 @@
 	    %OUT    COMPONENT=DISKCOMP, MODULE=DCOMPSM.SAL... ;AN000;
 	ENDIF				;AN000;
 ; =  =	=  =  =  =  =  =  =  =	=  =
-	HEADER	<LOCAL MACRO DEFINITIONS> ;AN000;
+;JWASM (HEADER macro defined below; call precedes def) 	HEADER	<LOCAL MACRO DEFINITIONS> ;AN000;
 	INCLUDE PATHMAC.INC		;AN013;
 ; =  =	=  =  =  =  =  =  =  =	=  =
 HEADER	MACRO	TEXT			;;AN000;

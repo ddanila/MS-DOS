@@ -90,7 +90,7 @@
 	    %OUT    COMPONENT=DISKCOPY, MODULE=DCOPYP.SAL... ;AN000;
 	ENDIF				;AN000;
 ; =  =	=  =  =  =  =  =  =  =	=  =
-	HEADER	<MACRO DEFINITION>	;AN000;
+;JWASM (HEADER macro defined below; call precedes def) 	HEADER	<MACRO DEFINITION>	;AN000;
 ; =  =	=  =  =  =  =  =  =  =	=  =
 	INCLUDE PATHMAC.INC		;AN015;PATHGEN MACRO
 ; =  =	=  =  =  =  =  =  =  =	=  =
