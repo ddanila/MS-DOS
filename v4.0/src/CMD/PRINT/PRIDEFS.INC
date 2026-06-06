@@ -176,7 +176,7 @@
 INCLUDE SYSVAR.INC
 
 FALSE                   EQU  0
-TRUE                    EQU  NOT FALSE
+TRUE                    EQU  (NOT FALSE) AND 0FFFFh	;JWASM: 16-bit mask (vs DOSSYM TRUE EQU 0FFFFh)
 
 IBM                      EQU  IBMVER
 ;IBMVER                  EQU  IBM
