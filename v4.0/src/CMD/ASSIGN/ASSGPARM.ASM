@@ -94,7 +94,7 @@
 	    %OUT    COMPONENT=ASSIGN, MODULE=ASSPARM.SAL...
 	ENDIF
 ; =  =	=  =  =  =  =  =  =  =	=  =
-	HEADER	<MACRO DEFINITION>
+;JWASM (HEADER macro defined just below; call precedes def) 	HEADER	<MACRO DEFINITION>
 ; =  =	=  =  =  =  =  =  =  =	=  =
 
 HEADER	MACRO	TEXT
