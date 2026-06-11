@@ -1053,7 +1053,7 @@ ems_trf proc	near			;an000; dms;transfer data
 	lds	si,cs:io_srca		;an000; dms;get src address
 	les	di,cs:io_tgta		;an000; dms;get tgt address
 
-	CMP	CS:PC_386,TRUE		;AN000; DO WE HAVE A 386 MACHINE?
+	CMP	CS:PC_386,(TRUE) AND 0FFh		;AN000; DO WE HAVE A 386 MACHINE?
 ;	$IF	E			;AN000; YES
 	JNE $$IF9
 	    SHR     CX,1		;AN000; /2 = DW COUNT
@@ -1100,7 +1100,7 @@ INOUT_D_LOW_MEM PROC NEAR		;AN000; LOW MEMORY TRANSFER
 	LDS	SI,CS:IO_SRCA		;source segment/offset to DS:SI
 	LES	DI,CS:IO_TGTA		;target segment/offset to ES:DI
 
-	CMP	CS:PC_386,TRUE		;AN000; DO WE HAVE A 386 MACHINE?
+	CMP	CS:PC_386,(TRUE) AND 0FFh		;AN000; DO WE HAVE A 386 MACHINE?
 ;	$IF	E			;AN000; YES
 	JNE $$IF11
 	    SHR     CX,1		;AN000; /2 = DW COUNT
@@ -1592,7 +1592,7 @@ PC_386_CHK PROC NEAR			;AN000;DETERMINE MACHINE TYPE
 		CMP	AL,0F8H 	;AN000;IS IT A 386 MACHINE?
 ;		$IF	E		;AN000;YES
 		JNE $$IF15
-		    MOV     CS:PC_386,TRUE ;AN000;SIGNAL A 386
+		    MOV     CS:PC_386,(TRUE) AND 0FFh ;AN000;SIGNAL A 386
 ;		$ENDIF			;AN000;
 $$IF15:
 ;	    $ENDIF			;AN000;
