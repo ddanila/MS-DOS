@@ -283,7 +283,7 @@ DMAOUT:
         MOV     AX,SYS_PATCH_DS         ; Load DS with the selector for our data
         MOV     DS,AX                   ;   segment
         CMP     WORD_FLAG,0             ; Is this a word operation?
-       LJNE     DISPLAY                 ; No?  Sorry.  We don't support word DMA
+       LJX      <JE>,DISPLAY            ; No?  Sorry.  We don't support word DMA
                                         ;   yet.  We'll just have to signal an
                                         ;   error.
         LEA     BX,DMATABLE             ; Point BX to the base of our channel
@@ -309,7 +309,7 @@ CHK_CHN_0:
         CMP     DX,0083H                ; Is it the page port for channel 1?
         JB      SET_CHN_3               ; No.  It's below that.  Then it must
                                         ;   be the page port for channel 3!
-       LJA      DISPLAY                 ; No.  It's above it.  We don't know any
+       LJX      <JBE>,DISPLAY           ; No.  It's above it.  We don't know any
                                         ;   ports between 83H and 87H.  Go
                                         ;   signal an error.
         ADD     BX,DMAENTRYLEN*1        ; Yes.  It's the page port for channel 1

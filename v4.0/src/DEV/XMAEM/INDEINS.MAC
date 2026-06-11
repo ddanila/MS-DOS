@@ -764,6 +764,19 @@ TEMP    =       $ + 4
          DW      (OFFSET &DISPL)-(TEMP)	;JWASM: TEMP is a local = symbol, not a macro param -- drop &
         ENDM
 
+;JWASM: LJCOND's `DW (OFFSET DISPL)-(TEMP)` is rejected (A2193) when DISPL is
+;JWASM: an EXTERNAL near symbol -- jwasm won't do offset arithmetic on an
+;JWASM: external. LJX emits the behaviourally identical inverse-short-jump-
+;JWASM: over-near-JMP idiom using a REAL `JMP DISPL`, which forms a proper
+;JWASM: external relocation. INVJMP is the SHORT inverse-condition mnemonic
+;JWASM: (e.g. JE for LJNE, JBE for LJA). Use only for external LJ targets.
+LJX     MACRO   INVJMP,DISPL
+        LOCAL   over
+        INVJMP  over
+        JMP     DISPL
+over:
+        ENDM
+
 ;       LJO     DISPL  (Long Jump on Overflow)
 LJO     MACRO   DISPL
         LJCOND  80H,<&DISPL>
