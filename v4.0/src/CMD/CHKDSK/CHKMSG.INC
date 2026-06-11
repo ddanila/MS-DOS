@@ -387,7 +387,7 @@ movsi   dw              dg:command_line_buffer  ;off                            
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 1                             ; AN000;SM                      ;an000;bgb
 Handle          = STDERR                        ; AN000;SM                      ;an000;bgb
-Sublist         = None                          ; AN000;SM                      ;an000;bgb
+Sublist         EQU <None>                          ; AN000;SM                      ;an000;bgb
 Count           = None                          ; AN000;SM                      ;an000;bgb
 Class           = EXT_ERR_CLASS                 ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -396,7 +396,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 19                            ; AN000;SM                      ;an000;bgb
 Handle          = STDERR                        ; AN000;SM                      ;an000;bgb
-Sublist         = None                          ; AN000;SM                      ;an000;bgb
+Sublist         EQU <None>                          ; AN000;SM                      ;an000;bgb
 Count           = N_A                           ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -405,7 +405,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 3                             ; AN000;SM                      ;an000;bgb
 Handle          = STDOUT                        ; AN000;SM                      ;an000;bgb
-Sublist         = None                          ; AN000;SM                      ;an000;bgb
+Sublist         EQU <None>                          ; AN000;SM                      ;an000;bgb
 Count           = N_A                           ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -414,7 +414,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 4                             ; AN000;SM                      ;an000;bgb
 Handle          = STDOUT                        ; AN000;SM                      ;an000;bgb
-Sublist         = None                          ; AN000;SM                      ;an000;bgb
+Sublist         EQU <None>                          ; AN000;SM                      ;an000;bgb
 Count           = N_A                           ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -423,7 +423,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 5                             ; AN000;SM                      ;an000;bgb
 Handle          = STDOUT                        ; AN000;SM                      ;an000;bgb
-Sublist         = None                          ; AN000;SM                      ;an000;bgb
+Sublist         EQU <None>                          ; AN000;SM                      ;an000;bgb
 Count           = N_A                           ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -432,7 +432,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 7                             ; AN000;SM                      ;an000;bgb
 Handle          = STDOUT                        ; AN000;SM                      ;an000;bgb
-Sublist         = dg:Sublist_msg_dskspc         ; AN000;SM                      ;an000;bgb
+Sublist         EQU <dg>:Sublist_msg_dskspc         ; AN000;SM                      ;an000;bgb
 Count           = 1                             ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -441,7 +441,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 8                             ; AN000;SM                      ;an000;bgb
 Handle          = STDOUT                        ; AN000;SM                      ;an000;bgb
-Sublist         = dg:Sublist_msg_badspc         ; AN000;SM                      ;an000;bgb
+Sublist         EQU <dg>:Sublist_msg_badspc         ; AN000;SM                      ;an000;bgb
 Count           = 1                             ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -450,7 +450,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  =  9                            ; AN000;SM                      ;an000;bgb
 Handle          = STDOUT                        ; AN000;SM                      ;an000;bgb
-Sublist         = dg:Sublist_msg_hidmes         ; AN000;SM                      ;an000;bgb
+Sublist         EQU <dg>:Sublist_msg_hidmes         ; AN000;SM                      ;an000;bgb
 Count           = 2                             ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -459,7 +459,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 10                            ; AN000;SM                      ;an000;bgb
 Handle          = STDOUT                        ; AN000;SM                      ;an000;bgb
-Sublist         = dg:Sublist_msg_dirmes         ; AN000;SM                      ;an000;bgb
+Sublist         EQU <dg>:Sublist_msg_dirmes         ; AN000;SM                      ;an000;bgb
 Count           = 2                             ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -468,7 +468,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 11                            ; message number 11             ;an000;bgb
 Handle          = STDOUT                        ; crt                           ;an000;bgb
-Sublist         = dg:Sublist_msg_filemes        ; location of sublist           ;an000;bgb
+Sublist         EQU <dg>:Sublist_msg_filemes        ; location of sublist           ;an000;bgb
 Count           = 2                             ; caontains 2 parameters        ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; type of msg                   ;an000;bgb
 Function        = NO_INPUT                      ; no input from user            ;an000;bgb
@@ -477,7 +477,7 @@ Input           = N_A                           ; not applicable              ;a
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 12                            ; AN000;SM                      ;an000;bgb
 Handle          = STDOUT                        ; AN000;SM                      ;an000;bgb
-Sublist         = dg:Sublist_msg_orphmes2       ; AN000;SM                      ;an000;bgb
+Sublist         EQU <dg>:Sublist_msg_orphmes2       ; AN000;SM                      ;an000;bgb
 Count           = 2                             ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -486,7 +486,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 13                            ; AN000;SM                      ;an000;bgb
 Handle          = STDOUT                        ; AN000;SM                      ;an000;bgb
-Sublist         = dg:Sublist_msg_orphmes3       ; AN000;SM                      ;an000;bgb
+Sublist         EQU <dg>:Sublist_msg_orphmes3       ; AN000;SM                      ;an000;bgb
 Count           = 2                             ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -495,7 +495,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 14                            ; AN000;SM                      ;an000;bgb
 Handle          = STDOUT                        ; AN000;SM                      ;an000;bgb
-Sublist         = dg:Sublist_msg_frespc         ; AN000;SM                      ;an000;bgb
+Sublist         EQU <dg>:Sublist_msg_frespc         ; AN000;SM                      ;an000;bgb
 Count           = 1                             ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -504,7 +504,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 15                            ; AN000;SM                      ;an000;bgb
 Handle          = STDOUT                        ; AN000;SM                      ;an000;bgb
-Sublist         = dg:Sublist_msg_totmem         ; AN000;SM                      ;an000;bgb
+Sublist         EQU <dg>:Sublist_msg_totmem         ; AN000;SM                      ;an000;bgb
 Count           = 1                             ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -513,7 +513,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 16                            ; AN000;SM                      ;an000;bgb
 Handle          = STDOUT                        ; AN000;SM                      ;an000;bgb
-Sublist         = dg:Sublist_msg_fremem         ; AN000;SM                      ;an000;bgb
+Sublist         EQU <dg>:Sublist_msg_fremem         ; AN000;SM                      ;an000;bgb
 Count           = 1                             ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -522,7 +522,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 17                            ; AN000;SM                      ;an000;bgb
 Handle          = STDERR                        ; AN000;SM                      ;an000;bgb
-Sublist         = None                          ; AN000;SM                      ;an000;bgb
+Sublist         EQU <None>                          ; AN000;SM                      ;an000;bgb
 Count           = None                          ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -531,7 +531,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 18                            ; AN000;SM                      ;an000;bgb
 Handle          = STDERR                        ; AN000;SM                      ;an000;bgb
-Sublist         = None                          ; AN000;SM                      ;an000;bgb
+Sublist         EQU <None>                          ; AN000;SM                      ;an000;bgb
 Count           = None                          ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -540,7 +540,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 20                            ; AN000;SM                      ;an000;bgb
 Handle          = STDERR                        ; AN000;SM                      ;an000;bgb
-Sublist         = dg:Sublist_msg_badr_arg       ; AN000;SM                      ;an000;bgb
+Sublist         EQU <dg>:Sublist_msg_badr_arg       ; AN000;SM                      ;an000;bgb
 Count           = 2                             ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -549,7 +549,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 21                            ; AN000;SM                      ;an000;bgb
 Handle          = STDOUT                        ; AN000;SM                      ;an000;bgb
-Sublist         = dg:Sublist_msg_direcmes       ; AN000;SM                      ;an000;bgb
+Sublist         EQU <dg>:Sublist_msg_direcmes       ; AN000;SM                      ;an000;bgb
 Count           = 1                             ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -558,7 +558,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 22                            ; AN000;SM                      ;an000;bgb
 Handle          = STDOUT                        ; AN000;SM                      ;an000;bgb
-Sublist         = dg:Sublist_msg_extents        ; AN000;SM                      ;an000;bgb
+Sublist         EQU <dg>:Sublist_msg_extents        ; AN000;SM                      ;an000;bgb
 Count           = 2                             ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -567,7 +567,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 23                            ; AN000;SM                      ;an000;bgb
 Handle          = STDOUT                        ; AN000;SM                      ;an000;bgb
-Sublist         = None                          ; AN000;SM                      ;an000;bgb
+Sublist         EQU <None>                          ; AN000;SM                      ;an000;bgb
 Count           = None                          ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -576,7 +576,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 24                            ; AN000;SM                      ;an000;bgb
 Handle          = STDOUT                        ; AN000;SM                      ;an000;bgb
-Sublist         = None                          ; AN000;SM                      ;an000;bgb
+Sublist         EQU <None>                          ; AN000;SM                      ;an000;bgb
 Count           = None                          ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -585,7 +585,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;          Corrections will not ;an000;bgbbe written to disk
 Message_Number  = 25                            ; AN000;SM                      ;an000;bgb
 Handle          = STDERR                        ; AN000;SM                      ;an000;bgb
-Sublist         = dg:Sublist_msg_fatalmes       ; AN000;SM                      ;an000;bgb
+Sublist         EQU <dg>:Sublist_msg_fatalmes       ; AN000;SM                      ;an000;bgb
 Count           = 2                             ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -594,7 +594,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 26                            ; AN000;SM                      ;an000;bgb
 Handle          = STDOUT                        ; AN000;SM                      ;an000;bgb
-Sublist         = dg:Sublist_msg_badrdmes       ; AN000;SM                      ;an000;bgb
+Sublist         EQU <dg>:Sublist_msg_badrdmes       ; AN000;SM                      ;an000;bgb
 Count           = 2                             ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -603,7 +603,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 2                             ; AN000;SM                      ;an000;bgb
 Handle          = STDERR                        ; AN000;SM                      ;an000;bgb
-Sublist         = None                          ; AN000;SM                      ;an000;bgb
+Sublist         EQU <None>                          ; AN000;SM                      ;an000;bgb
 Count           = None                          ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -613,7 +613,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;          Move files from root ;an000;bgbdirectory and repeat CHKDSK
 Message_Number  = 29                            ; AN000;SM                      ;an000;bgb
 Handle          = STDOUT                        ; AN000;SM                      ;an000;bgb
-Sublist         = None                          ; AN000;SM                      ;an000;bgb
+Sublist         EQU <None>                          ; AN000;SM                      ;an000;bgb
 Count           = None                          ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -622,7 +622,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 30                            ; AN000;SM                      ;an000;bgb
 Handle          = STDOUT                        ; AN000;SM                      ;an000;bgb
-Sublist         = None                          ; AN000;SM                      ;an000;bgb
+Sublist         EQU <None>                          ; AN000;SM                      ;an000;bgb
 Count           = None                          ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -631,7 +631,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 31                            ; AN000;SM                      ;an000;bgb
 Handle          = STDERR                        ; AN000;SM                      ;an000;bgb
-Sublist         = None                          ; AN000;SM                      ;an000;bgb
+Sublist         EQU <None>                          ; AN000;SM                      ;an000;bgb
 Count           = None                          ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -640,7 +640,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 32                            ; AN000;SM                      ;an000;bgb
 Handle          = STDERR                        ; AN000;SM                      ;an000;bgb
-Sublist         = None                          ; AN000;SM                      ;an000;bgb
+Sublist         EQU <None>                          ; AN000;SM                      ;an000;bgb
 Count           = None                          ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -649,7 +649,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 33                            ; AN000;SM                      ;an000;bgb
 Handle          = STDOUT                        ; AN000;SM                      ;an000;bgb
-Sublist         = None                          ; AN000;SM                      ;an000;bgb
+Sublist         EQU <None>                          ; AN000;SM                      ;an000;bgb
 Count           = None                          ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -658,7 +658,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 34                            ; AN000;SM                      ;an000;bgb
 Handle          = STDOUT                        ; AN000;SM                      ;an000;bgb
-Sublist         = None                          ; AN000;SM                      ;an000;bgb
+Sublist         EQU <None>                          ; AN000;SM                      ;an000;bgb
 Count           = None                          ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -667,7 +667,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 35                            ; AN000;SM                      ;an000;bgb
 Handle          = STDOUT                        ; AN000;SM                      ;an000;bgb
-Sublist         = None                          ; AN000;SM                      ;an000;bgb
+Sublist         EQU <None>                          ; AN000;SM                      ;an000;bgb
 Count           = None                          ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -676,7 +676,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 36                            ; AN000;SM                      ;an000;bgb
 Handle          = STDOUT                        ; AN000;SM                      ;an000;bgb
-Sublist         = None                          ; AN000;SM                      ;an000;bgb
+Sublist         EQU <None>                          ; AN000;SM                      ;an000;bgb
 Count           = None                          ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -685,7 +685,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 37                            ; AN000;SM                      ;an000;bgb
 Handle          = STDERR                        ; AN000;SM                      ;an000;bgb
-Sublist         = None                          ; AN000;SM                      ;an000;bgb
+Sublist         EQU <None>                          ; AN000;SM                      ;an000;bgb
 Count           = None                          ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -694,7 +694,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 38                            ; AN000;SM                      ;an000;bgb
 Handle          = STDOUT                        ; AN000;SM                      ;an000;bgb
-Sublist         = None                          ; AN000;SM                      ;an000;bgb
+Sublist         EQU <None>                          ; AN000;SM                      ;an000;bgb
 Count           = None                          ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -703,7 +703,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 39                            ; AN000;SM                      ;an000;bgb
 Handle          = STDOUT                        ; AN000;SM                      ;an000;bgb
-Sublist         = None                          ; AN000;SM                      ;an000;bgb
+Sublist         EQU <None>                          ; AN000;SM                      ;an000;bgb
 Count           = None                          ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -712,7 +712,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 40                            ; AN000;SM                      ;an000;bgb
 Handle          = STDOUT                        ; AN000;SM                      ;an000;bgb
-Sublist         = None                          ; AN000;SM                      ;an000;bgb
+Sublist         EQU <None>                          ; AN000;SM                      ;an000;bgb
 Count           = None                          ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -721,7 +721,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 41                            ; AN000;SM                      ;an000;bgb
 Handle          = STDOUT                        ; AN000;SM                      ;an000;bgb
-Sublist         = None                          ; AN000;SM                      ;an000;bgb
+Sublist         EQU <None>                          ; AN000;SM                      ;an000;bgb
 Count           = None                          ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -730,7 +730,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 42                            ; AN000;SM                      ;an000;bgb
 Handle          = STDOUT                        ; AN000;SM                      ;an000;bgb
-Sublist         = dg:Sublist_msg_crossmes       ; AN000;SM                      ;an000;bgb
+Sublist         EQU <dg>:Sublist_msg_crossmes       ; AN000;SM                      ;an000;bgb
 Count           = 1                             ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -739,7 +739,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 43                            ; AN000;SM                      ;an000;bgb
 Handle          = STDOUT                        ; AN000;SM                      ;an000;bgb
-Sublist         = dg:Sublist_msg_badtarg        ; AN000;SM                      ;an000;bgb
+Sublist         EQU <dg>:Sublist_msg_badtarg        ; AN000;SM                      ;an000;bgb
 Count           = 1                             ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -748,7 +748,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;          tree past this point ;an000;bgbnot processed
 Message_Number  = 44                            ; AN000;SM                      ;an000;bgb
 Handle          = STDOUT                        ; AN000;SM                      ;an000;bgb
-Sublist         = None                          ; AN000;SM                      ;an000;bgb
+Sublist         EQU <None>                          ; AN000;SM                      ;an000;bgb
 Count           = None                          ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -757,7 +757,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 45                            ; AN000;SM                      ;an000;bgb
 Handle          = STDOUT                        ; AN000;SM                      ;an000;bgb
-Sublist         = dg:Sublist_msg_freebymes      ; AN000;SM                      ;an000;bgb
+Sublist         EQU <dg>:Sublist_msg_freebymes      ; AN000;SM                      ;an000;bgb
 Count           = 1                             ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -766,7 +766,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 46                            ; AN000;SM                      ;an000;bgb
 Handle          = STDOUT                        ; AN000;SM                      ;an000;bgb
-Sublist         = dg:Sublist_msg_freebymes      ; AN000;SM                      ;an000;bgb
+Sublist         EQU <dg>:Sublist_msg_freebymes      ; AN000;SM                      ;an000;bgb
 Count           = 1                             ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -775,7 +775,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 47                            ; AN000;SM                      ;an000;bgb
 Handle          = STDOUT                        ; AN000;SM                      ;an000;bgb
-Sublist         = dg:Sublist_msg_idmes          ; AN000;SM                      ;an000;bgb
+Sublist         EQU <dg>:Sublist_msg_idmes          ; AN000;SM                      ;an000;bgb
 Count           = 3                             ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -784,7 +784,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 48                            ; AN000;SM                      ;an000;bgb
 Handle          = STDOUT                        ; AN000;SM                      ;an000;bgb
-Sublist         = dg:Sublist_msg_alloc          ; AN000;SM                      ;an000;bgb
+Sublist         EQU <dg>:Sublist_msg_alloc          ; AN000;SM                      ;an000;bgb
 Count           = 1                             ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -793,7 +793,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 49                            ; AN000;SM                      ;an000;bgb
 Handle          = STDOUT                        ; AN000;SM                      ;an000;bgb
-Sublist         = dg:Sublist_msg_alloc          ; AN000;SM                      ;an000;bgb
+Sublist         EQU <dg>:Sublist_msg_alloc          ; AN000;SM                      ;an000;bgb
 Count           = 1                             ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -803,7 +803,7 @@ Input           = N_A                           ; AN000;SM                      
 ifdef   fsexec                                                                  ;an038;bgb
 Message_Number  = 50                            ; AN000;SM                      ;an038;bgb;an000;bgb
 Handle          = STDERR                        ; AN000;SM                      ;an038;bgb;an000;bgb
-Sublist         = dg:Sublist_msg_ExecFailure    ; AN000;SM                      ;an038;bgb;an000;bgb
+Sublist         EQU <dg>:Sublist_msg_ExecFailure    ; AN000;SM                      ;an038;bgb;an000;bgb
 Count           = 1                             ; AN000;SM                      ;an038;bgb;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an038;bgb;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an038;bgb;an000;bgb
@@ -813,7 +813,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 51                            ; AN000;SM                      ;an000;bgb
 Handle          = STDOUT                        ; AN000;SM                      ;an000;bgb
-Sublist         = None                          ; AN000;SM                      ;an000;bgb
+Sublist         EQU <None>                          ; AN000;SM                      ;an000;bgb
 Count           = None                          ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -822,7 +822,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;          attributes truncated ;an000;bgb
 Message_Number  = 52                            ; AN000;SM                      ;an000;bgb
 Handle          = STDOUT                        ; AN000;SM                      ;an000;bgb
-Sublist         = None                          ; AN000;SM                      ;an000;bgb
+Sublist         EQU <None>                          ; AN000;SM                      ;an000;bgb
 Count           = None                          ; AN000;SM                      ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -831,7 +831,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;          attributes truncated ;an000;bgb
 Message_Number  = 53                            ; AN000;SM                      ;an000;bgb
 Handle          = STDERR                        ; AN000;SM                      ;an000;bgb
-Sublist         = dg:sublist_msg_parserr        ; AN000;SM                      ;an046;bgb;an000;bgb
+Sublist         EQU <dg>:sublist_msg_parserr        ; AN000;SM                      ;an046;bgb;an000;bgb
 Count           = 1                             ; AN000;SM                      ;an046;bgb;an000;bgb
 Class           = PARSE_ERR_CLASS               ; AN000;SM                      ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -840,7 +840,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 54                            ; AN000;SM                      ;an000;bgb
 Handle          = STDERR                        ; AN000;SM                      ;an000;bgb
-Sublist         = None                          ; AN000;SM                      ;an000;bgb
+Sublist         EQU <None>                          ; AN000;SM                      ;an000;bgb
 Count           = None                          ; AN000;SM                      ;an000;bgb
 Class           = utility_msg_class             ; AN000;bgb                     ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -849,7 +849,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 55                            ; AN000;SM                      ;an000;bgb
 Handle          = STDERR                        ; AN000;SM                      ;an000;bgb
-Sublist         = None                          ; AN000;SM                      ;an000;bgb
+Sublist         EQU <None>                          ; AN000;SM                      ;an000;bgb
 Count           = None                          ; AN000;SM                      ;an000;bgb
 Class           = utility_msg_class             ; AN017;bgb                     ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -858,7 +858,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 56                            ; AN000;SM                      ;an000;bgb
 Handle          = STDERR                        ; AN000;SM                      ;an000;bgb
-Sublist         = None                          ; AN000;SM                      ;an000;bgb
+Sublist         EQU <None>                          ; AN000;SM                      ;an000;bgb
 Count           = None                          ; AN000;SM                      ;an000;bgb
 Class           = utility_msg_class             ; AN017;bgb                     ;an000;bgb
 Function        = NO_INPUT                      ; AN000;SM                      ;an000;bgb
@@ -867,7 +867,7 @@ Input           = N_A                           ; AN000;SM                      
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 0                             ;                               ;an000;bgb;AN000;
 Handle          = STDERR                        ;                               ;an000;bgb;AN000;
-Sublist         = No_Replace                    ;                               ;AN;an000;bgb000;
+Sublist         EQU <No_Replace>                    ;                               ;AN;an000;bgb000;
 Count           = N_A                           ;                               ;an000;bgb;AN000;
 Class           = Ext_Err_Class                 ;                               ;an000;bgb;AN000;
 Function        = No_Function                   ;                               ;an000;bgb;AN000;
@@ -876,7 +876,7 @@ Input           = N_A                           ;                               
 ;-----------------------                                                        ;an000;bgb
 Message_Number  = 0                             ;                               ;an000;bgb
 Handle          = STDERR                        ;                               ;an000;bgb;AN000;
-Sublist         = dg:sublist_msg_parserr        ;                               ;an046;bgbbgb000;
+Sublist         EQU <dg>:sublist_msg_parserr        ;                               ;an046;bgbbgb000;
 Count           = 1                             ;                               ;an046;bgb;AN000;
 Class           = Parse_Err_Class               ;                               ;an000;bgb;AN000;
 Function        = No_Function                   ;                               ;an000;bgb;AN000;
@@ -885,7 +885,7 @@ Input           = N_A                           ;                               
 ;-----------------------                                                        ;an000;bgb
 Message_Number  = 58                            ; AN000;dms                     ;an000;bgb
 Handle          = STDERR                        ; AN000;dms                     ;an000;bgb
-Sublist         = dg:Sublist_msg_orphmes           ; AN000;dms                  ;an000;bgb
+Sublist         EQU <dg>:Sublist_msg_orphmes           ; AN000;dms                  ;an000;bgb
 Count           = 2                             ; AN000;dms                     ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;dms                     ;an000;bgb
 Function        = NO_INPUT                      ; AN000;dms                     ;an000;bgb
@@ -894,7 +894,7 @@ Input           = N_A                           ; AN000;dms                     
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 59                            ; AN000;dms                     ;an000;bgb
 Handle          = STDout                        ; AN000;bgb                     ;an000;bgb
-Sublist         = none                          ; AN000;dms                     ;an000;bgb
+Sublist         EQU <none>                          ; AN000;dms                     ;an000;bgb
 Count           = none                          ; AN000;dms                     ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;dms                     ;an000;bgb
 Function        = NO_INPUT                      ; AN000;dms                     ;an000;bgb
@@ -903,7 +903,7 @@ Input           = N_A                           ; AN000;dms                     
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 60                            ; AN000;dms                     ;an000;bgb
 Handle          = STDERR                        ; AN000;dms                     ;an000;bgb
-Sublist         = none                          ; AN000;dms                     ;an000;bgb
+Sublist         EQU <none>                          ; AN000;dms                     ;an000;bgb
 Count           = none                          ; AN000;dms                     ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;dms                     ;an000;bgb
 Function        = NO_INPUT                      ; AN000;dms                     ;an000;bgb
@@ -912,7 +912,7 @@ Input           = N_A                           ; AN000;dms                     
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 61                            ; AN000;dms                     ;an000;bgb
 Handle          = STDERR                        ; AN000;dms                     ;an000;bgb
-Sublist         = dg:Sublist_Msg_Badw_arg          ; AN000;dms                  ;an000;bgb
+Sublist         EQU <dg>:Sublist_Msg_Badw_arg          ; AN000;dms                  ;an000;bgb
 Count           = 1                             ; AN000;dms                     ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;dms                     ;an000;bgb
 Function        = NO_INPUT                      ; AN000;dms                     ;an000;bgb
@@ -921,7 +921,7 @@ Input           = N_A                           ; AN000;dms                     
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 62                            ; AN000;dms                     ;an000;bgb
 Handle          = STDOUT                        ; AN000;dms                     ;an042;bgb;an000;bgb
-Sublist         = dg:Sublist_Msg_Noisy             ; AN000;dms                  ;an000;bgb
+Sublist         EQU <dg>:Sublist_Msg_Noisy             ; AN000;dms                  ;an000;bgb
 Count           = 1                             ; AN000;dms                     ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;dms                     ;an000;bgb
 Function        = NO_INPUT                      ; AN000;dms                     ;an000;bgb
@@ -930,7 +930,7 @@ Input           = N_A                           ; AN000;dms                     
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 63                            ; AN000;dms                     ;an000;bgb
 Handle          = STDERR                        ; AN000;dms                     ;an000;bgb
-Sublist         = none                          ; AN000;dms                     ;an000;bgb
+Sublist         EQU <none>                          ; AN000;dms                     ;an000;bgb
 Count           = none                          ; AN000;dms                     ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;dms                     ;an000;bgb
 Function        = NO_INPUT                      ; AN000;dms                     ;an000;bgb
@@ -939,7 +939,7 @@ Input           = N_A                           ; AN000;dms                     
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 64                            ; AN000;dms                     ;an000;bgb
 Handle          = STDERR                        ; AN000;dms                     ;an000;bgb
-Sublist         = dg:Sublist_Msg_File_Arg          ; AN000;dms                  ;an000;bgb
+Sublist         EQU <dg>:Sublist_Msg_File_Arg          ; AN000;dms                  ;an000;bgb
 Count           = 1                             ; AN000;dms                     ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;dms                     ;an000;bgb
 Function        = NO_INPUT                      ; AN000;dms                     ;an000;bgb
@@ -948,7 +948,7 @@ Input           = N_A                           ; AN000;dms                     
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 65                            ; AN000;dms                     ;an000;bgb
 Handle          = STDERR                        ; AN000;dms                     ;an000;bgb
-Sublist         = none                          ; AN000;dms                     ;an000;bgb
+Sublist         EQU <none>                          ; AN000;dms                     ;an000;bgb
 Count           = none                          ; AN000;dms                     ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN000;dms                     ;an000;bgb
 Function        = NO_INPUT                      ; AN000;dms                     ;an000;bgb
@@ -957,7 +957,7 @@ Input           = N_A                           ; AN000;dms                     
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 70                            ; AN017;bgb                     ;an000;bgb
 Handle          = STDOUT                        ; AN017;bgb                     ;an000;bgb
-Sublist         = dg:Sublist_msg_alloc          ; AN017;bgb                     ;an000;bgb
+Sublist         EQU <dg>:Sublist_msg_alloc          ; AN017;bgb                     ;an000;bgb
 Count           = 1                             ; AN017;bgb                     ;an000;bgb
 Class           = UTILITY_MSG_CLASS             ; AN017;bgb                     ;an000;bgb
 Function        = NO_INPUT                      ; AN017;bgb                     ;an000;bgb
@@ -966,7 +966,7 @@ Input           = N_A                           ; AN017;bgb                     
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 71                            ;                               ;an000;bgb;an024;bgb
 Handle          = STDOUT                        ;                               ;an000;bgb;an024;bgb
-Sublist         = Sublist_msgSerialNumber       ;                               ;an000;bgb;an024;bgb
+Sublist         EQU <Sublist_msgSerialNumber>       ;                               ;an000;bgb;an024;bgb
 Count           = 2                             ;                               ;an000;bgb;an024;bgb
 Class           = Utility_Msg_Class             ;                               ;an000;bgb;an024;bgb
 Function        = No_Function                   ;                               ;an000;bgb;an024;bgb
@@ -975,7 +975,7 @@ Input           = N_A                           ;                               
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 72                            ; AN030;bgb                     ;an000;bgb
 Handle          = STDERR                        ; AN030;bgb                     ;an000;bgb
-Sublist         = None                          ; AN030;bgb                     ;an000;bgb
+Sublist         EQU <None>                          ; AN030;bgb                     ;an000;bgb
 Count           = None                          ; AN030;bgb                     ;an000;bgb
 Class           = utility_msg_class             ; AN030;bgb                     ;an000;bgb
 Function        = NO_INPUT                      ; AN030;bgb                     ;an000;bgb
@@ -984,7 +984,7 @@ Input           = N_A                           ; AN030;bgb                     
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 73                            ; AN033;bgb                     ;an000;bgb
 Handle          = STDERR                        ; AN033;bgb                     ;an000;bgb
-Sublist         = None                          ; AN033;bgb                     ;an000;bgb
+Sublist         EQU <None>                          ; AN033;bgb                     ;an000;bgb
 Count           = None                          ; AN033;bgb                     ;an000;bgb
 Class           = utility_msg_class             ; AN033;bgb                     ;an000;bgb
 Function        = NO_INPUT                      ; AN033;bgb                     ;an000;bgb
@@ -993,7 +993,7 @@ Input           = N_A                           ; AN033;bgb                     
 ;----------------------                         ;                               ;an000;bgb
 Message_Number  = 74                            ; AN045;bgb                     ;an000;bgb
 Handle          = STDERR                        ; AN045;bgb                     ;an000;bgb
-Sublist         = None                          ; AN045;bgb                     ;an000;bgb
+Sublist         EQU <None>                          ; AN045;bgb                     ;an000;bgb
 Count           = None                          ; AN045;bgb                     ;an000;bgb
 Class           = utility_msg_class             ; AN045;bgb                     ;an000;bgb
 Function        = NO_INPUT                      ; AN045;bgb                     ;an000;bgb

@@ -165,7 +165,7 @@ movsi	dw		dg:command_line_buffer	;off				;an031;bgb
 ;---------------------- 			;
 Message_Number	= 2				; AN000;SM
 Handle		= STDERR			; AN000;SM
-Sublist 	= Sublist_Opnerr		; AN000;SM
+Sublist 	EQU <Sublist_Opnerr>		; AN000;SM
 Count		= N_A				; AN000;SM
 Class		= EXT_ERR_CLASS 		; AN000;SM
 Function	= NO_INPUT			; AN000;SM
@@ -174,7 +174,7 @@ Input		= N_A				; AN000;SM
 ;---------------------- 			;
 Message_Number	= 3				; AN000;SM
 Handle		= STDERR			; AN000;SM
-Sublist 	= None				; AN000;SM
+Sublist 	EQU <None>				; AN000;SM
 Count		= N_A				; AN000;SM
 Class		= Utility_Msg_Class		; AN000;SM
 Function	= NO_INPUT			; AN000;SM
@@ -183,7 +183,7 @@ Input		= N_A				; AN000;SM
 ;---------------------- 			;
 Message_Number	= 4				; AN000;SM
 Handle		= STDERR			; AN000;SM
-Sublist 	= sublist_baddrv		; AN000;SM
+Sublist 	EQU <sublist_baddrv>		; AN000;SM
 Count		= N_A				; AN000;SM
 Class		= UTILITY_MSG_CLASS		; AN000;SM
 Function	= NO_INPUT			; AN000;SM
@@ -192,7 +192,7 @@ Input		= N_A				; AN000;SM
 ;---------------------- 			;
 Message_Number	= 5				; AN000;SM
 Handle		= STDERR			; AN000;SM
-Sublist 	= None				; AN000;SM
+Sublist 	EQU <None>				; AN000;SM
 Count		= N_A				; AN000;SM
 Class		= UTILITY_MSG_CLASS		; AN000;SM
 Function	= NO_INPUT			; AN000;SM
@@ -201,7 +201,7 @@ Input		= N_A				; AN000;SM
 ;---------------------- 			;
 Message_Number	= 6				; AN000;SM
 Handle		= STDERR			; AN000;SM
-Sublist 	= None				; AN000;SM
+Sublist 	EQU <None>				; AN000;SM
 Count		= N_A				; AN000;SM
 Class		= UTILITY_MSG_CLASS		; AN000;SM
 Function	= NO_INPUT			; AN000;SM
@@ -221,7 +221,7 @@ endif								       ;an022;bgb
 ;---------------------- 			;
 Message_Number	= 8				; AN000;SM
 Handle		= STDout			; AN007;bgb
-Sublist 	= Sublist_msg_recmsg		; AN000;SM
+Sublist 	EQU <Sublist_msg_recmsg>		; AN000;SM
 Count		= 1				; AN000;SM
 Class		= UTILITY_MSG_CLASS		; AN000;SM
 Function	= NO_INPUT			; AN000;SM
@@ -230,7 +230,7 @@ Input		= N_A				; AN000;SM
 ;---------------------- 			;
 Message_Number	= 9				; AN000;SM
 Handle		= STDout			; AN007;bgb
-Sublist 	= Sublist_msg_ofmsg		; AN000;SM
+Sublist 	EQU <Sublist_msg_ofmsg>		; AN000;SM
 Count		= 2				; AN000;SM
 Class		= UTILITY_MSG_CLASS		; AN000;SM
 Function	= NO_INPUT			; AN000;SM
@@ -239,7 +239,7 @@ Input		= N_A				; AN000;SM
 ;---------------------- 			;
 Message_Number	=  10				; AN000;bgb
 Handle		= STDout			; AN007;bgb
-Sublist 	= drive_sublist 		; AN000;bgb
+Sublist 	EQU <drive_sublist> 		; AN000;bgb
 Count		= 1				; AN000;SM
 Class		= UTILITY_MSG_CLASS		; AN000;SM
 Function	= NO_INPUT			; AN000;SM
@@ -248,7 +248,7 @@ Input		= N_A				; AN000;SM
 ;---------------------- 			;
 Message_Number	= 11				; AN000;SM
 Handle		= STDERR			; AN000;SM
-Sublist 	= None				; AN000;SM
+Sublist 	EQU <None>				; AN000;SM
 Count		= N_A				; AN000;SM
 Class		= Utility_Msg_Class		; AN000;SM
 Function	= NO_INPUT			; AN000;SM
@@ -257,7 +257,7 @@ Input		= N_A				; AN000;SM
 ;---------------------- 			;
 Message_Number	= 12				; AN000;SM
 Handle		= STDERR			; AN000;SM
-Sublist 	= None				; AN000;SM
+Sublist 	EQU <None>				; AN000;SM
 Count		= N_A				; AN000;SM
 Class		= Utility_Msg_Class		; AN000;SM
 Function	= NO_INPUT			; AN000;SM
@@ -266,7 +266,7 @@ Input		= N_A				; AN000;SM
 ;---------------------- 			;
 Message_Number	= 13				; AN000;MT
 Handle		= STDout			; AN000;MT
-Sublist 	= None				; AN000;MT
+Sublist 	EQU <None>				; AN000;MT
 Count		= N_A				; AN000;MT
 Class		= Utility_Msg_Class		; AN000;MT
 Function	= NO_INPUT			; AN000;MT
@@ -275,7 +275,7 @@ Input		= N_A				; AN000;MT
 ;---------------------------			;
 Message_Number	= 0				;				;AN000;
 Handle		= STDERR			;				;AN000;
-Sublist 	= None				;				;AN000;
+Sublist 	EQU <None>				;				;AN000;
 Count		= N_A				;				;AN000;
 Class		= Ext_Err_Class 		;				;AN000;
 Function	= No_Input			;				;AN000;
@@ -285,7 +285,7 @@ Input		=N_A				;				;AN000;
 ;-----------------------							;an000;bgb
 Message_Number	= 0				;				;an000;bgb
 Handle		= STDERR			;				;an000;bgb;AN000;
-Sublist 	= dg:sublist_msg_parserr	;				;an031;bgbbgb000;
+Sublist 	EQU <dg>:sublist_msg_parserr	;				;an031;bgbbgb000;
 Count		= 1				;				;an031;bgb;AN000;
 Class		= Parse_Err_Class		;				;an000;bgb;AN000;
 Function	= No_Function			;				;an000;bgb;AN000;
@@ -294,7 +294,7 @@ Input		= N_A				;				;an000;bgb;AN000;
 ;---------------------- 			;
 Message_Number	= 14				; AN013;bgb
 Handle		= STDERR			; AN013;bgb
-Sublist 	= None				; AN013;bgb
+Sublist 	EQU <None>				; AN013;bgb
 Count		= None				; AN013;bgb
 Class		= utility_msg_class		; AN013;bgb
 Function	= NO_INPUT			; AN013;bgb

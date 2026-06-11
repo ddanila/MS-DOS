@@ -69,7 +69,7 @@ Parm1	label	word				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 3				;CR,LF,"Invalid switch - %1",BEEP,CR,LF,EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= sublist_invalid_switch
+Sublist 	EQU <sublist_invalid_switch>
 Count		= 1				;				;AN000;
 Class		= Parse_Error_Class		;resident in COMMAND		;AN000;
 Function	= No_Function			;				;AN000;
@@ -78,7 +78,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 1				;COMMON1 "Incorrect DOS Version"
 Handle		= STDERR			;				;AN000;
-Sublist 	= No_Replace		;			       ;AN000;
+Sublist 	EQU <No_Replace>		;			       ;AN000;
 Count		= N_A				;				;AN000;
 Class		= msg_ser_Class 	    ;				    ;AN000;
 Function	= No_Input			;				;AN000;
@@ -87,7 +87,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 2				;				;AN000;
 Handle		= STDERR			;extend1			;AN000;
-Sublist 	= No_Replace			;				;AN000;
+Sublist 	EQU <No_Replace>			;				;AN000;
 Count		= N_A				;				;AN000;
 Class		= ext_err_Class 	    ;				    ;AN000;
 Function	= No_Input			;				;AN000;
@@ -96,7 +96,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 3				;CR,LF,"Must specify COM1, COM2, COM3 or COM4",CR,LF,EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace			;				;AN000;
+Sublist 	EQU <No_Replace>			;				;AN000;
 Count		= N_A				;				;AN000;
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Input			;				;AN000;
@@ -105,7 +105,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 4				;CR,LF,"Resident portion of MODE loaded",CR,LF,EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace			;				;AN000;
+Sublist 	EQU <No_Replace>			;				;AN000;
 Count		= N_A				;				;AN000;
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Input			;				;AN000;
@@ -114,7 +114,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 5				;CR,LF,"Illegal device name",BEEP,CR,LF,EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= sublist_err1			;				;AN000;
+Sublist 	EQU <sublist_err1>			;				;AN000;
 Count		= 1				;				;AN000;
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Input			;				;AN000;
@@ -123,7 +123,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 6				;CR,LF,"Printer error",BEEP,CR,LF,EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace			;				;AN000;
+Sublist 	EQU <No_Replace>			;				;AN000;
 Count		= N_A				;				;AN000;
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Input			;				;AN000;
@@ -132,7 +132,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 7				;CR,LF,"LPT%1: set for 80",CR,LF,EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= sublist_PT80			;				;AN000;
+Sublist 	EQU <sublist_PT80>			;				;AN000;
 Count		= 1				;				;AN000;
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Input			;				;AN000;
@@ -141,7 +141,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 8				;CR,LF,"LPT%1: set for 132",CR,LF,EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= sublist_PT132 		;				;AN000;
+Sublist 	EQU <sublist_PT132> 		;				;AN000;
 Count		= 1				;				;AN000;
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -150,7 +150,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 9				;CR,LF,"Printer lines per inch set",CR,LF,EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_replace			;				;AN000;
+Sublist 	EQU <No_replace>			;				;AN000;
 Count		= N_A				;				;AN000;
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -159,7 +159,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 10				;CR,LF,"Invalid baud rate specified",BEEP,CR,LF,EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace			;				;AN000;
+Sublist 	EQU <No_Replace>			;				;AN000;
 Count		= N_A				;				;AN000;
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -168,7 +168,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 11				;CR,LF,"COM%1: %2,%3,%4,%5,%6",CR,LF,EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= sublist_INITMSG		;				;AN000;
+Sublist 	EQU <sublist_INITMSG>		;				;AN000;
 Count		= 6				;				;AN000;
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -177,7 +177,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 12				;"0123456789",EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_replace			;				;AN000;
+Sublist 	EQU <No_replace>			;				;AN000;
 Count		= N_A				;				;AN000;
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -186,7 +186,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 13				;CR,LF,"Do you see the %1? (",YES,"/",NO,")",CR,LF,EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= sublist_SHIFT_MSG		;				;AN000;
+Sublist 	EQU <sublist_SHIFT_MSG>		;				;AN000;
 Count		= 1				;				;AN000;
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= clear_buffer+DOS_keyb_input	;				;AN000;
@@ -204,7 +204,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 15				;CR,LF,"LPT%1: rerouted to COM%2:",CR,LF,EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= sublist_REDIRMSG		;				;AN000;
+Sublist 	EQU <sublist_REDIRMSG>		;				;AN000;
 Count		= 2				;				;AN000;
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -213,7 +213,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 16				;CR,LF,"LPT%1: not rerouted",CR,LF,EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= sublist_NOTREMSG		;				;AN000;
+Sublist 	EQU <sublist_NOTREMSG>		;				;AN000;
 Count		= 1				;				;AN000;
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -222,7 +222,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 17				;CR,LF,"%1 retry on parallel printer time-out",CR,LF,EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= sublist_RETPARTO		;				;AN000;
+Sublist 	EQU <sublist_RETPARTO>		;				;AN000;
 Count		= 1				;				;AN000;
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -231,7 +231,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 18				;CR,LF,"      Unable to shift screen %1",CR,LF,BEEP,EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= sublist_CANT_SHIFT		;				;AN000;
+Sublist 	EQU <sublist_CANT_SHIFT>		;				;AN000;
 Count		= 1				;				;AN000;
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -240,7 +240,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 19				;CR,LF,"Invalid parameter - %1",BEEP,CR,LF,EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= sublist_invalid_parameter
+Sublist 	EQU <sublist_invalid_parameter>
 Count		= 1				;				;AN000;
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -249,7 +249,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 20				;CR,LF,'Invalid number of parameters',BEEP,CR,LF,EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace			;				;AN000;
+Sublist 	EQU <No_Replace>			;				;AN000;
 Count		= N_A				;				;AN000;
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -258,7 +258,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 21				;CR,LF,'NET 042: Unable to do requested command',BEEP,CR,LF,EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace			;				;AN000;
+Sublist 	EQU <No_Replace>			;				;AN000;
 Count		= N_A				;				;AN000;
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -267,7 +267,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 22				;CR,LF,'Infinite retry not supported on Network printer',beep,cr,lf,eom
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace			;				;AN000;
+Sublist 	EQU <No_Replace>			;				;AN000;
 Count		= N_A				;				;AN000;
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -276,7 +276,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 23				;CR,LF,"Failure to access Codepage Font File",BEEP,CR,LF,EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace			;				;AN000;
+Sublist 	EQU <No_Replace>			;				;AN000;
 Count		= N_A				;				;AN000;
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -285,7 +285,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 24				;CR,LF,"Failure to access device: %1",BEEP,CR,LF,EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= sublist_cpmsg2		;				;AN000;
+Sublist 	EQU <sublist_cpmsg2>		;				;AN000;
 Count		= 1				;				;AN000;
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -294,7 +294,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 25				;CR,LF,"Device or codepage missing from font file",BEEP,CR,LF,EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace			;				;AN000;
+Sublist 	EQU <No_Replace>			;				;AN000;
 Count		= N_A				;				;AN000;
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -303,7 +303,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 26				;CR,LF,"Font file contents invalid",BEEP,CR,LF,EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace			;				;AN000;
+Sublist 	EQU <No_Replace>			;				;AN000;
 Count		= N_A				;				;AN000;
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -312,7 +312,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 27				;CR,LF,"Previously prepared codepage replaced",BEEP,CR,LF,EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace			;				;AN000;
+Sublist 	EQU <No_Replace>			;				;AN000;
 Count		= N_A				;				;AN000;
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -321,7 +321,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 28				;CR,LF,"Active codepage for device %1 is %2",CR,LF,EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= sublist_cpmsg6		;				;AN000;
+Sublist 	EQU <sublist_cpmsg6>		;				;AN000;
 Count		= 2				;				;AN000;
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -330,7 +330,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 29				;CR,LF,"Device %1 not prepared",CR,LF,EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= sublist_cpmsg7		;				;AN000;
+Sublist 	EQU <sublist_cpmsg7>		;				;AN000;
 Count		= 1
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -339,7 +339,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 30				;"%1 codepages:",CR,LF,EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= sublist_cpmsg8
+Sublist 	EQU <sublist_cpmsg8>
 Count		= 1
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -348,7 +348,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 31				;"  Codepage %1",CR,LF,EOM       ;FILLED IN BY "QUERY" ROUTINE WITH CODEPAGE ID
 Handle		= STDOUT			;				;AN000;
-Sublist 	= sublist_cpmsg9
+Sublist 	EQU <sublist_cpmsg9>
 Count		= 1
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -357,7 +357,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 32				;CR,LF,"MODE %1 Codepage function completed",CR,LF,EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= sublist_cpmsg10		;				;AN000;
+Sublist 	EQU <sublist_cpmsg10>		;				;AN000;
 Count		= 1
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -366,7 +366,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 33				;CR,LF,"Current Codepage settings:",CR,LF,EOM  ;table header
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace			;				;AN000;
+Sublist 	EQU <No_Replace>			;				;AN000;
 Count		= N_A				;				;AN000;
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -375,7 +375,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 34				;"   %1 - %2 Codepage",CR,LF,EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= sublist_cpmsg13
+Sublist 	EQU <sublist_cpmsg13>
 Count		= 2
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -384,7 +384,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 35				;"  Codepage not prepared",CR,LF,EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= no_replace
+Sublist 	EQU <no_replace>
 Count		= N_A				;				;AN000;
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -393,7 +393,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 36				;"Codepage operation not supported on this device",BEEP,CR,LF,EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace			;				;AN000;
+Sublist 	EQU <No_Replace>			;				;AN000;
 Count		= N_A				;				;AN000;
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -402,7 +402,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 37				;"No codepage has been SELECTED",BEEP,CR,LF,EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace			;				;AN000;
+Sublist 	EQU <No_Replace>			;				;AN000;
 Count		= N_A				;				;AN000;
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -411,7 +411,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 38				;"Device error during %1",BEEP,CR,LF,EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= sublist_cpmsg17
+Sublist 	EQU <sublist_cpmsg17>
 Count		= 1
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -420,7 +420,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 39				;"Codepage not prepared",BEEP,CR,LF,EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace			;				;AN000;
+Sublist 	EQU <No_Replace>			;				;AN000;
 Count		= N_A				;				;AN000;
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -429,7 +429,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 40				;CR,LF,"Current keyboard does not support this Codepage",BEEP,CR,LF,EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace			;				;AN000;
+Sublist 	EQU <No_Replace>			;				;AN000;
 Count		= N_A				;				;AN000;
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -438,7 +438,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 41				;CR,LF,"Error during read of font file",BEEP,CR,LF,EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace
+Sublist 	EQU <No_Replace>
 Count		= N_A				;				;AN000;
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -447,7 +447,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 42				;CR,LF,"Unable to perform REFRESH operation",BEEP,CR,LF,EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace			;				;AN000;
+Sublist 	EQU <No_Replace>			;				;AN000;
 Count		= N_A				;				;AN000;
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -456,7 +456,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 43				;CR,LF
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace			;				;AN000;
+Sublist 	EQU <No_Replace>			;				;AN000;
 Count		= N_A				;				;AN000;
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -465,7 +465,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 44				;"Status for device %1:",CR,LF,EOM
 Handle		= STDOUT			;				;AN000;
-Sublist 	= sublist_status_for_device
+Sublist 	EQU <sublist_status_for_device>
 Count		= 1
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -474,7 +474,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 45				;"------------------" underline for status report header
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace			;				;AN000;
+Sublist 	EQU <No_Replace>			;				;AN000;
 Count		= N_A
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -483,7 +483,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 46				;"----" underline for "CON:"
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace			;				;AN000;
+Sublist 	EQU <No_Replace>			;				;AN000;
 Count		= N_A
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -492,7 +492,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 47				;"-----" underline for "COMX:" and "LPTX:"
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace			;				;AN000;
+Sublist 	EQU <No_Replace>			;				;AN000;
 Count		= N_A
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -501,7 +501,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 48				;"LINES=%1"
 Handle		= STDOUT			;				;AN000;
-Sublist 	= sublist_LINES_equal		;				;AN000;
+Sublist 	EQU <sublist_LINES_equal>		;				;AN000;
 Count		= 1
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -510,7 +510,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 49				;"COLUMNS=%1"
 Handle		= STDOUT			;				;AN000;
-Sublist 	= sublist_COLUMNS_equal 		;				;AN000;
+Sublist 	EQU <sublist_COLUMNS_equal> 		;				;AN000;
 Count		= 1
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -519,7 +519,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 50				;CR,LF,"RATE and DELAY must be specified together",BELL,CR,LF
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace			;				;AN000;
+Sublist 	EQU <No_Replace>			;				;AN000;
 Count		= N_A
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -528,7 +528,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 51				;"RATE=%1"
 Handle		= STDOUT			;				;AN000;
-Sublist 	= sublist_RATE_equal		       ;			       ;AN000;
+Sublist 	EQU <sublist_RATE_equal>		       ;			       ;AN000;
 Count		= 1
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -537,7 +537,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 52				;"DELAY=%1"
 Handle		= STDOUT			;				;AN000;
-Sublist 	= sublist_DELAY_equal			;				;AN000;
+Sublist 	EQU <sublist_DELAY_equal>			;				;AN000;
 Count		= 1
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -546,7 +546,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 53				;"Function not supported on this machine"
 Handle		= STDOUT			;				;AN000;
-Sublist 	= Sublist_Not_supported       ; 			      ;AN000;
+Sublist 	EQU <Sublist_Not_supported>       ; 			      ;AN000;
 Count		= 1
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -555,7 +555,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 54				;"Required font not loaded"
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace		      ; 			      ;AN000;
+Sublist 	EQU <No_Replace>		      ; 			      ;AN000;
 Count		= N_A
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -564,7 +564,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 55				;"ANSI.SYS must be installed to perform requested function",BELL,CR,LF
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace		      ; 			      ;AN000;
+Sublist 	EQU <No_Replace>		      ; 			      ;AN000;
 Count		= N_A
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -573,7 +573,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 56				;CR,LF,"Baud rate required",BELL,CR,LF
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace		      ; 			      ;AN000;
+Sublist 	EQU <No_Replace>		      ; 			      ;AN000;
 Count		= N_A
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -582,7 +582,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 57				;"RETRY=%1",CR,LF
 Handle		= STDOUT			;				;AN000;
-Sublist 	= Sublist_retry_equal	      ; 			      ;AN000;
+Sublist 	EQU <Sublist_retry_equal>	      ; 			      ;AN000;
 Count		= 1
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -591,7 +591,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 58				;"Syntax error - ",CR,LF
 Handle		= STDOUT			;				;AN000;
-Sublist 	= Sublist_syntax_error	      ; 			      ;AN000;
+Sublist 	EQU <Sublist_syntax_error>	      ; 			      ;AN000;
 Count		= 1
 Class		= Utility_msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -601,7 +601,7 @@ Input		= N_A				;				;AN000;
 
 Message_Number	= 59 ;"rightmost 9"                  ;AN001;
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace		      ; 			      ;AN000;
+Sublist 	EQU <No_Replace>		      ; 			      ;AN000;
 Count		= N_A
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -610,7 +610,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 60 ;"leftmost 0"                   ;AN001;LEFTMOST        DB
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace		      ; 			      ;AN000;
+Sublist 	EQU <No_Replace>		      ; 			      ;AN000;
 Count		= N_A
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -621,7 +621,7 @@ Input		= N_A				;				;AN000;
 
 Message_Number	= 61 ;"No"                           ;AN001;NORETRY         DB
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace		      ; 			      ;AN000;
+Sublist 	EQU <No_Replace>		      ; 			      ;AN000;
 Count		= N_A
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -630,7 +630,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 62 ;"Infinite"                     ;AN001;INFINITE        DB
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace		      ; 			      ;AN000;
+Sublist 	EQU <No_Replace>		      ; 			      ;AN000;
 Count		= N_A
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -641,7 +641,7 @@ Input		= N_A				;				;AN000;
 
 Message_Number	= 63 ;"left"                                ;AN001;LEFT            DB
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace		      ; 			      ;AN000;
+Sublist 	EQU <No_Replace>		      ; 			      ;AN000;
 Count		= N_A
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -650,7 +650,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 64 ;"right"                               ;AN001;RIGHT           DB
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace		      ; 			      ;AN000;
+Sublist 	EQU <No_Replace>		      ; 			      ;AN000;
 Count		= N_A
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -661,7 +661,7 @@ Input		= N_A				;				;AN000;
 
 Message_Number	= 65 ;"Hardware"             ;AN001;CPMSG8_HW      DB
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace		      ; 			      ;AN000;
+Sublist 	EQU <No_Replace>		      ; 			      ;AN000;
 Count		= N_A
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -670,7 +670,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 66 ;"Prepared"             ;AN001;CPMSG8_PR      DB
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace		      ; 			      ;AN000;
+Sublist 	EQU <No_Replace>		      ; 			      ;AN000;
 Count		= N_A
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -682,7 +682,7 @@ Input		= N_A				;				;AN000;
 
 Message_Number	= 67 ;"status"          ;AN001;CPMSG17_QUERY   CPMSG10_QUERY
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace		      ; 			      ;AN000;
+Sublist 	EQU <No_Replace>		      ; 			      ;AN000;
 Count		= N_A
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -691,7 +691,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 68 ;"prepare"         ;AN001;CPMSG17_PREP    CPMSG10_DES
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace		      ; 			      ;AN000;
+Sublist 	EQU <No_Replace>		      ; 			      ;AN000;
 Count		= N_A
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -700,7 +700,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 69 ;"select"          ;AN001;CPMSG17_ACT     CPMSG10_SELECT
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace		      ; 			      ;AN000;
+Sublist 	EQU <No_Replace>		      ; 			      ;AN000;
 Count		= N_A
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -709,7 +709,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 70 ;"refresh"         ;AN001;CPMSG17_REFRESH CPMSG10_REFRESH
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace		      ; 			      ;AN000;
+Sublist 	EQU <No_Replace>		      ; 			      ;AN000;
 Count		= N_A
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -721,7 +721,7 @@ Input		= N_A				;				;AN000;
 
 Message_Number	= 71 ;"write of font file to device",EOM   ;AN001;CPMSG17_WRIT
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace		      ; 			      ;AN000;
+Sublist 	EQU <No_Replace>		      ; 			      ;AN000;
 Count		= N_A
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -732,7 +732,7 @@ Input		= N_A				;				;AN000;
 
 Message_Number	= 72 ;"selected"        ;AN001;CPMSG13_ACT
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace		      ; 			      ;AN000;
+Sublist 	EQU <No_Replace>		      ; 			      ;AN000;
 Count		= N_A
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
@@ -741,7 +741,7 @@ Input		= N_A				;				;AN000;
 ;---------------------- 			;
 Message_Number	= 73 ;"system"          ;AN001;CPMSG13_SYS
 Handle		= STDOUT			;				;AN000;
-Sublist 	= No_Replace		      ; 			      ;AN000;
+Sublist 	EQU <No_Replace>		      ; 			      ;AN000;
 Count		= N_A
 Class		= Utility_Msg_Class		;				;AN000;
 Function	= No_Function			;				;AN000;
