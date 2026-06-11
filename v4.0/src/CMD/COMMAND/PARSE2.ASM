@@ -342,8 +342,8 @@ break <Arg_Switch>
 ;---------------
 
 TRANSPACE	SEGMENT PUBLIC BYTE		;AC000;
-    extrn   switch_list:byte
-    switch_count    EQU     $-switch_list
+;JWASM     extrn   switch_list:byte  ; dead: switch_count is unused, and $-OFFSET<extern> is uncomputable
+;JWASM     switch_count    EQU     $-switch_list
 transpace   ends
 
 ;---------------
