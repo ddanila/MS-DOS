@@ -88,6 +88,9 @@ Setblock			EQU 74	; 74	 4A
 ;    Process Group
 Exec				EQU 75	; 75	 4B
 Exit				EQU 76	; 76	 4C
+;JWASM: WAIT is a reserved x86 mnemonic in jwasm -Zm; free it so the
+;JWASM: syscall constant below parses as a symbol (Wait EQU 77), not an instr.
+OPTION NOKEYWORD:<Wait>
 Wait				EQU 77	; 77	 4D
 Find_First			EQU 78	; 78	 4E
 ;   Special Group
