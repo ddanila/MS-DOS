@@ -1052,7 +1052,7 @@ Set_RecBPB:
 	add	di,RBytePerSec		; es:di -> Recommended BPB
 	mov	cx,BPBSIZ
 	cld
-	repe	movsb			; move BPBSIZ bytes
+	rep	movsb			; move BPBSIZ bytes  ;JWASM: REPE->REP (REPE invalid on MOVS in jwasm; same F3 prefix)
 
 	call	Handle_Switches 	; replace with 'new' values as
 					; specified in switches.
