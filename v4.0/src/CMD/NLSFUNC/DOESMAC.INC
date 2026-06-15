@@ -20,6 +20,7 @@ ENDM
 
 BREAK <SaveReg - save a set of registers>
 
+?stackdepth = 0			; init stack-depth tracker (jwasm: MASM left it implicit 0)
 SaveReg MACRO	reglist 		;; push those registers
 IRP reg,<reglist>
 	?stackdepth = ?stackdepth + 1

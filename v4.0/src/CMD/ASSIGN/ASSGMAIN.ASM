@@ -164,6 +164,7 @@ MyINT21 macro				;;NS-macro used to save
 	call	system			;;NS-DOS environment
 	endm
 ; = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+?stackdepth = 0			; init stack-depth tracker (jwasm: MASM left it implicit 0)
 SaveReg MACRO	reglist 		;; push those registers
 IRP	reg,<reglist>
 	?stackdepth = ?stackdepth + 1
