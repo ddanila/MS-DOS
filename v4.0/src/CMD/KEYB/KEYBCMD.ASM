@@ -1836,7 +1836,7 @@ BUILD_PATH    PROC  NEAR	       ;;
 	JE	APPEND_KEYB_SYS        ;;
 	MOV	SI,[BP].PATH_OFFSET    ;;   Get the offset of the path
 				       ;;
-	REPE	MOVSB		       ;AC000;;;   Copy each char of the specified
+	REP	MOVSB		       ;AC000;;;   Copy each char of the specified
 	MOV	AX,3D00H	       ;AC000;;; WGR Open the KEYBOARD.SYS file 	   ;AN000
 	MOV	DX,OFFSET FILE_NAME    ;AC000;;; WGR					   ;AN000
 	INT	21H		       ;AC000;;; WGR					   ;AN000
@@ -1845,7 +1845,7 @@ BUILD_PATH    PROC  NEAR	       ;;
 APPEND_KEYB_SYS:		       ;;;;;
 	MOV	SI,OFFSET KEYB_SYS_ACTIVE ;AC000;;; WGR  copy name for active directory    ;AN000
 	MOV	CX,KEYB_SYS_A_LENG     ;AC000;;;;;; WGR  to file name variable. 	   ;AN000
-	REPE	MOVSB		       ;AC000;;; WGR					   ;AN000
+	REP	MOVSB		       ;AC000;;; WGR					   ;AN000
 	MOV	AX,3D00H	       ;AC000;;; WGR try to open it.			   ;AN000
 	MOV	DX,OFFSET FILE_NAME    ;AC000;;; WGR					   ;AN000
 	INT	21H		       ;AC000;;; WGR					   ;AN000
@@ -1862,7 +1862,7 @@ APPEND_KEYB_SYS:		       ;;;;;
 		MOV	SI,OFFSET KEYBOARD_SYS ;AC000;;; WGR try ROOT directory.	   ;AN000
 		MOV	DI,OFFSET FILE_NAME    ;AC000;;; WGR				   ;AN000
 		MOV	CX,KEYB_SYS_LENG       ;AC000;;; WGR				   ;AN000
-		REPE	MOVSB		       ;AC000;;; WGR				   ;AN000
+		REP	MOVSB		       ;AC000;;; WGR				   ;AN000
 		MOV	AX,3D00H	       ;AC000;;; WGR				   ;AN000
 		MOV	DX,OFFSET FILE_NAME    ;AC000;;; WGR				   ;AN000
 		INT	21H		       ;AC000;;; WGR				   ;AN000
@@ -1917,7 +1917,7 @@ COPY_ARGV0  PROC		       ;; WGR					    ;AN000
   POP	 ES			       ;AN000;;; WGR					   ;AN000
   LEA	 SI,KEYB_SYS_ACTIVE	       ;AN000;;; WGR copy in "KEYBOARD.SYS"                ;AN000
   MOV	 CX,KEYB_SYS_A_LENG	       ;AN000;;; WGR					   ;AN000
-  REPE	 MOVSB			       ;AN000;;; WGR					   ;AN000
+  REP	 MOVSB			       ;AN000;;; WGR					   ;AN000
 				       ;AN000;;; WGR					   ;AN000
   POP	    CX			       ;AN000;;; WGR					   ;AN000
   POP	    SI			       ;AN000;;; WGR					   ;AN000

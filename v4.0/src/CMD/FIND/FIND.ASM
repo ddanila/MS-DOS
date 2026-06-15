@@ -129,7 +129,7 @@ MSG_UTILNAME <FIND>             ;AN000;
 ;-      EQUATES
 ;--------------------------
 FALSE           equ     0
-TRUE            equ     NOT FALSE
+TRUE            equ     (NOT FALSE) AND 0FFFFh
 
 CR              equ     0dh             ;A Carriage Return
 LF              equ     0ah             ;A Line Feed
@@ -598,7 +598,7 @@ save_src_cp:
 open_read:
         push    cs                      ;Load new DS with CS
         pop     ds
-        cmp     cs:got_filename,TRUE    ;AN004; using STDIN
+        cmp     cs:got_filename,(TRUE) AND 0FFh    ;AN004; using STDIN
         je      o_cont                  ;AN004; no, open the file
         xor     ax,ax                   ;AN007; ;AN004; file handle (ax) = STDIN
         jmp     short cp_check          ;AN007; ;AN004; skip open of file
@@ -650,7 +650,7 @@ say_name:
         mov     cx,cs:file_name_len
         call    prout
 
-        cmp     cs:c_flag,TRUE          ;count only flag set?
+        cmp     cs:c_flag,(TRUE) AND 0FFh          ;count only flag set?
         je      xx1
 
         mov     dx,offset crlf
@@ -675,7 +675,7 @@ no_read_error:
         or      ax,ax                   ;if ax=0 then all done
         jnz     Truncate
 DoNullRead:
-        cmp     cs:c_flag,TRUE          ;count only flag set?
+        cmp     cs:c_flag,(TRUE) AND 0FFh          ;count only flag set?
         jne     sj2
         call    print_count
 sj2:
@@ -876,7 +876,7 @@ kmatch:
 
 a_matchk:
         pop     dx
-        cmp     cs:v_flag,TRUE          ;is flag set?
+        cmp     cs:v_flag,(TRUE) AND 0FFh          ;is flag set?
         jne     prt_line                ;no, print the line
         jmp     try_again
 
@@ -884,7 +884,7 @@ a_matchk:
 ;-      NO MATCH: CHECK FOR THE v OPTION
 ;---------------------------
 try_again_opt:
-        cmp     cs:v_flag,TRUE          ;is flag set?
+        cmp     cs:v_flag,(TRUE) AND 0FFh          ;is flag set?
         jne     try_again               ;no goto next line
 
 ;---------------------------
@@ -898,14 +898,14 @@ try_again_opt:
 ;---------------------------
 
 prt_line:
-        cmp     cs:c_flag,TRUE          ;is count only flag set?
+        cmp     cs:c_flag,(TRUE) AND 0FFh          ;is count only flag set?
         jne     no_c_flg
         inc     cs:mtch_cntr            ;yes, increment counter
         jmp     try_again
 
 no_c_flg:
         push    dx                      ;save the adjusted string arg. length
-        cmp     cs:n_flag,TRUE           ;is line number flag set?
+        cmp     cs:n_flag,(TRUE) AND 0FFh           ;is line number flag set?
         jne     no_n_flg
         call    prt_lcntr
 no_n_flg:
@@ -983,8 +983,8 @@ r_error:
 scan_rest:
         pop     ds                      ;restore pointer to comm. line
         pop     si                      ;restore pointer to next comm.
-        mov     cs:did_file,TRUE        ;AN004; tell parser we did a file, so if it doesn't find another, ok!
-        cmp     cs:got_eol,TRUE         ;AN004; Check if nothing left on command line
+        mov     cs:did_file,(TRUE) AND 0FFh        ;AN004; tell parser we did a file, so if it doesn't find another, ok!
+        cmp     cs:got_eol,(TRUE) AND 0FFh         ;AN004; Check if nothing left on command line
         je      foo                     ;AN004; no, nothing left on command line, exit
         jmp     parser
 
@@ -1418,8 +1418,8 @@ parse_loop:                                             ;AN000;
         call    sysparse                                ;AN000; Parse parm at DS:SI
         cmp     ax,EOL                                  ;AN000; Are we at End Of Line ??
         jne     p_next                                  ;AN004; No eol found
-        mov     cs:got_eol,TRUE                         ;AN004; no more filenames to get!
-        cmp     cs:did_file,TRUE                        ;AN004; did we do a file already ?
+        mov     cs:got_eol,(TRUE) AND 0FFh                         ;AN004; no more filenames to get!
+        cmp     cs:did_file,(TRUE) AND 0FFh                        ;AN004; did we do a file already ?
         lje     doexit                                  ;AN004; yes, exit
         jmp     end_parse                               ;AN004; Yes, done here
 p_next:                                                 ;AN004; continue
@@ -1434,7 +1434,7 @@ CONT2:                                                  ;AN000; Something valid 
         cmp     cs:rb_type,FILESPEC                     ;AN000; Is it a filespec?
         jne     cont3                                   ;AN000;
         mov     di,cs:rb_value_lo                       ;AN000;  Look for another
-        mov     cs:got_filename,TRUE                    ;AN004;  got a filename
+        mov     cs:got_filename,(TRUE) AND 0FFh                    ;AN004;  got a filename
         jmp     short end_parse                         ;AN007; ;AN000;  Look for another
 cont3:
         cmp     cs:rb_type,SWITCH                       ;AN000; Is it a switch ?
@@ -1447,7 +1447,7 @@ cont3:
 ;- The search string was entered
 ;-----------------------------
 its_a_quoted_string:                                    ;AN000; Found a quoted string
-        cmp     cs:got_srch_str,TRUE                    ;AN000; Do we already have one?
+        cmp     cs:got_srch_str,(TRUE) AND 0FFh                    ;AN000; Do we already have one?
         jne     its_ok                                  ;AN000; No, it's ok
         mov     ax,msg_inv_parm                         ;AN000; Yes, Invalid parm!
         mov     dh,2                                    ;AN005; message class
@@ -1457,7 +1457,7 @@ its_ok:                                                 ;AN000;
         mov     bx,offset st_buffer                     ;AN000; save buffer offset
         call    get_length                              ;AN000; get string length
         mov     cs:st_length,ax                         ;AN000; save length
-        mov     cs:got_srch_str,TRUE                    ;AN000; Indicate that we have it
+        mov     cs:got_srch_str,(TRUE) AND 0FFh                    ;AN000; Indicate that we have it
         jmp     parse_loop                              ;AN000;
 
 ;-----------------------------
@@ -1482,7 +1482,7 @@ whoops:                                                 ;AN000; None of the abov
         call    display_and_die                         ;AN000; Yes, tell the poor user and terminate
 
 end_parse:                                              ;AN000; A filename should be next
-        cmp     cs:got_srch_str,TRUE                    ;AN000; Do we already have one?
+        cmp     cs:got_srch_str,(TRUE) AND 0FFh                    ;AN000; Do we already have one?
         je      rett                                    ;AN000;
         mov     ax,msg_required_missing                 ;AN005;
         mov     dh,-1                                   ;AN005; message class
@@ -1543,17 +1543,17 @@ pp_next:
         mov     bx,cs:rb_synonym        ;AN005; Get offset of switch entered
         cmp     bx,offset n_swch        ;AN005; Is it the /N switch?
         jne     pp_chek_v               ;AN005:  Yes, process it.
-        mov     cs:n_flag,TRUE          ;AN005;  Set the corresponding flag
+        mov     cs:n_flag,(TRUE) AND 0FFh          ;AN005;  Set the corresponding flag
         jmp     pp_loop                 ;AN005;  Look for another
 pp_chek_v:                              ;AN005;
         cmp     bx,offset v_swch        ;AN005; Is it the /N switch?
         jne     pp_chek_c               ;AN005:  Yes, process it.
-        mov     cs:v_flag,TRUE          ;AN005;  Set the corresponding flag
+        mov     cs:v_flag,(TRUE) AND 0FFh          ;AN005;  Set the corresponding flag
         jmp     pp_loop                 ;AN005;  Look for another
 pp_chek_c:                              ;AN005;
         cmp     bx,offset c_swch        ;AN005; Is it the /N switch?
         jne     pp_error                ;AN005:  Yes, process it.
-        mov     cs:c_flag,TRUE          ;AN005;  Set the corresponding flag
+        mov     cs:c_flag,(TRUE) AND 0FFh          ;AN005;  Set the corresponding flag
         jmp     pp_loop                 ;AN005;  Look for another
 
 pp_error:                               ;AN005; None of the above (can we ever get here?)
@@ -1587,7 +1587,7 @@ pre_parse endp                          ;AN005;
 ;-
 ;------------------------------------
 prt_find proc near                      ;AN005;
-        cmp     cs:got_filename,TRUE    ;AN005; Check if should print "FIND:"
+        cmp     cs:got_filename,(TRUE) AND 0FFh    ;AN005; Check if should print "FIND:"
         je      prt_ret                 ;AN005;
         push    ax                      ;AN005; Save error
         push    dx                      ;AN005;

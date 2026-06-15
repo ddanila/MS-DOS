@@ -1233,7 +1233,7 @@ AA_40:						; ** Loop here on ifs drivers		 ;AN000;
 	JZ	AA_100				; ifs driver needs share		 ;AN000;
 ;; D526   CallInstall SHAREInstall,multSHARE,0	  ;   check that share loaded		   ;AN000;
 	CallInstall SHAREInstall,multSHARE,40H	;   check that share loaded		 ;AN013;
-	CMP	AL,INSTALLED			;   if not generate warning		 ;AN000;
+	CMP	AL,(INSTALLED) AND 0FFh			;   if not generate warning		 ;AN000;
 	JE	AA_50									 ;AN000;
 	SaveReg <DS,SI,CX,DX>								 ;AN000;
 	MOV	AX,COMMON_ERR_3 		; "SHARE not installed"                  ;AN000;
