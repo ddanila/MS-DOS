@@ -285,7 +285,7 @@ Input		=N_A				;				;AN000;
 ;-----------------------							;an000;bgb
 Message_Number	= 0				;				;an000;bgb
 Handle		= STDERR			;				;an000;bgb;AN000;
-Sublist 	EQU <dg>:sublist_msg_parserr	;				;an031;bgbbgb000;
+Sublist 	EQU <dg:sublist_msg_parserr>	;				;an031;bgbbgb000;
 Count		= 1				;				;an031;bgb;AN000;
 Class		= Parse_Err_Class		;				;an000;bgb;AN000;
 Function	= No_Function			;				;an000;bgb;AN000;
