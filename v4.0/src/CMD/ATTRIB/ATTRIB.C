@@ -105,7 +105,7 @@ inmain(line)                                                           /*;AN000;
       printf("  /S  Process files in subdirectories\r\n");
       exit(0);
       }                                                                /*;AN000;*/
-   main(line);                                                         /*;AN000;*/
+   do_attrib(line);                                                         /*;AN000;*/
 }                                                                      /*;AN000;*/
 
 
@@ -133,7 +133,7 @@ inmain(line)                                                           /*;AN000;
 /*                                                                           */
 /*���������������������������������������������������������������������������*/
 
-main(line)                                                             /*;AN000;*/
+do_attrib(line)                                                             /*;AN000;*/
    char *line;                                                         /*;AN000;*/
 {                                                                      /*;AN000;*/
    WORD status;                                                        /*;AN000;*/
