@@ -81,7 +81,7 @@ pad_zero	equ	30h		;an000;zero pad
 
 
 FALSE	EQU	0
-TRUE	EQU	NOT FALSE
+TRUE	EQU	(NOT FALSE) AND 0FFFFh	;JWASM: 16-bit mask (vs sysmsg.inc TRUE EQU 0FFFFh)
 
 ;SYSVER 	 EQU FALSE		 ;if true, i/o direct to bios
 	INCLUDE SYSVER.INC
