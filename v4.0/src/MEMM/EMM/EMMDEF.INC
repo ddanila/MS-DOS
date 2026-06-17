@@ -273,10 +273,7 @@ FRS_struc	ends
 ;****************************************************************************
 
 Dword_Align MACRO Seg_Name
-IF (($ - OFFSET Seg_Name:0) MOD 4)
-	db	90h		     ;; Nop in code / else byte of 90h in data
-	Dword_Align Seg_Name
-ENDIF
+	ALIGN 4			     ;; JWASM: native dword align (was $-OFFSET seg:0 MOD 4, A2065)
 	    ENDM
 
 	page
