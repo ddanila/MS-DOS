@@ -74,7 +74,8 @@
 /*     if the environment is > 32k, STACK OVERFLOW will occur.               */
 /*���������������������������������������������������������������������������*/
 
-#include <stdio.h>                                                     /*;AN000;*/
+#include <stdio.h>
+#include <stdlib.h>                                                     /*;AN000;*/
 #include <io.h>                                                        /*;AN000;*/
 #include <dos.h>                                                       /*;AN000;*/
 #include <string.h>                                                    /*;AN000;*/
@@ -430,7 +431,7 @@ Dexit(s)                                                               /*;AN000;
 /* intdos(&inregs,&outregs);        /*terminate*/                      /*;AN003; ;AN000;*/
 
    /* if it didn't work - kill it */
-   exit();                                                             /*;AN000;*/
+   exit(0);                                                             /*;AN000;*/
 }                                                                      /*;AN000;*/
 
 
