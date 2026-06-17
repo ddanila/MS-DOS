@@ -17,6 +17,7 @@ BREAK			<Transient Messages>
 ;
 
 
+OPTION NOKEYWORD:<ADDR NAME>	;JWASM: free reserved ADDR/NAME -- macro name + parameter
 addr			macro sym,name
 			public name
 			ifidn <name>,<>
