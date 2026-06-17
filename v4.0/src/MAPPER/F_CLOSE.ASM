@@ -90,7 +90,7 @@ CheckForClose:
         jmp     ErrorExit                  ; return
 
 OkToClose:
-        and     ds:[si],not OpenedHandle   ; set close flag
+        and     word ptr ds:[si],(not OpenedHandle) AND 0FFFFh   ; set close flag
         xor     ax,ax                      ; set good return code
 
 ErrorExit:
