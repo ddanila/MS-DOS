@@ -81,6 +81,8 @@ _sysloadmsg proc near							 ;AN000;
 ;	copy C inregs into proper registers				 ;AN000;
 ;									 ;AN000;
 	mov	di,[bp+4]		; fix di (arg 0)		 ;AN000;
+	push	ds			; SAL routines read ES:DI --		 ;OW
+	pop	es			; force ES=DGROUP (wcc ES handling)	 ;OW
 ;									 ;AN000;
 	mov	ax,[di+0ah]		; load di			 ;AN000;
 	push	ax			; the di value from inregs is now on stack ;AN000;
@@ -132,6 +134,8 @@ _sysgetmsg proc near							 ;AN000;
 ;	copy C inregs into proper registers				 ;AN000;
 ;									 ;AN000;
 	mov	di,[bp+4]		; fix di (arg 0)		 ;AN000;
+	push	ds			; SAL routines read ES:DI --		 ;OW
+	pop	es			; force ES=DGROUP (wcc ES handling)	 ;OW
 ;									 ;AN000;
 	mov	ax,[di+0ah]		; load di			 ;AN000;
 	push	ax			; the di value from inregs is now on stack ;AN000;
@@ -183,6 +187,8 @@ _sysdispmsg proc near							 ;AN000;
 ;	copy C inregs into proper registers				 ;AN000;
 ;									 ;AN000;
 	mov	di,[bp+4]		; fix di (arg 0)		 ;AN000;
+	push	ds			; SAL routines read ES:DI --		 ;OW
+	pop	es			; force ES=DGROUP (wcc ES handling)	 ;OW
 ;									 ;AN000;
 	mov	ax,[di+0ah]		; load di			 ;AN000;
 	push	ax			; the di value from inregs is now on stack ;AN000;
