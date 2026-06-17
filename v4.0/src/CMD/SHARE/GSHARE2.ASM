@@ -950,7 +950,7 @@ cps3:
 
 cps31:
 
-   RestoreReg <
+   RestoreReg <>
 
    RestoreReg <CX,BX,AX,DI,ES,SI,DS>
 
