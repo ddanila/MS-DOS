@@ -1,17 +1,29 @@
-/* OW-compat shim: MS C 5.10 SLIBCE PSP-byte accessors (getpspbyte/putpspbyte),
-   which Open Watcom's clib lacks. PSP segment fetched via INT 21h AH=62h so
-   the functions need no C-runtime startup init. Compiled cdecl (-ecc) to match
-   the MS-C ABI of the callers. */
+/* OW-compat module for ATTRIB (option b: OW cstart is the entry).
+   - getpspbyte/putpspbyte: MS-C SLIBCE PSP-byte accessors OW's clib lacks,
+     using OW's _psp (set by cstart).
+   - main(): the C entry cstart calls; reconstructs the DOS command tail
+     (PSP:0x80) and hands it to the utility's inmain(), replacing the old
+     MS-C XCMAIN asm startup. */
 #include <dos.h>
+extern unsigned _psp;
+
 unsigned char getpspbyte(unsigned off)
 {
-    union REGS r; struct SREGS s;
-    r.h.ah = 0x62; intdosx(&r, &r, &s);          /* BX <- PSP segment */
-    return *(unsigned char __far *)MK_FP(r.x.bx, off);
+    return *(unsigned char __far *)MK_FP(_psp, off);
 }
 void putpspbyte(unsigned off, unsigned char val)
 {
-    union REGS r; struct SREGS s;
-    r.h.ah = 0x62; intdosx(&r, &r, &s);
-    *(unsigned char __far *)MK_FP(r.x.bx, off) = val;
+    *(unsigned char __far *)MK_FP(_psp, off) = val;
+}
+
+extern int inmain(char *line);
+static char _ow_cmdtail[130];
+int main(void)
+{
+    unsigned n = getpspbyte(0x80), i;
+    if (n > 128) n = 128;
+    for (i = 0; i < n; i++) _ow_cmdtail[i] = getpspbyte(0x81 + i);
+    _ow_cmdtail[n] = '\0';
+    inmain(_ow_cmdtail);
+    return 0;
 }
