@@ -36,6 +36,8 @@ vioxxx  segment byte public 'vio'
 full_scr_err equ 0001h
 error_bvs_parameter     equ 0002h
 
+	OPTION NOKEYWORD:<addr>	;JWASM: free reserved ADDR operator -- used as a STRUC field name
+
 str     struc
 old_bp  dw      ?
 return  dd      ?
