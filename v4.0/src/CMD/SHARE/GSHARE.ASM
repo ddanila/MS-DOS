@@ -88,7 +88,7 @@ DATA	ENDS
 ;   MSDOS code segment otherwise, define our own code segment
 
 	.sall
-	IF	NOT INSTALLED
+	IF	Installed EQ 0
 CODE	    SEGMENT BYTE PUBLIC 'CODE'
 	    ASSUME  SS:DOSGROUP,CS:DOSGROUP
 	ELSE

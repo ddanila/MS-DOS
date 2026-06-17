@@ -104,7 +104,7 @@ ERRNZ				   Macro x
 				   ;---------------------------------------
 
 	.sall
-	IF	NOT	INSTALLED
+	IF	Installed EQ 0
 
 	    CODE    SEGMENT BYTE PUBLIC 'CODE'
 
@@ -1988,7 +1988,7 @@ PoolSize = 2048
 MFT DB	0				; free
    DW	PoolSize			; PoolSize bytes long
 
-   IF	not  Installed
+   IF	Installed EQ 0
 
        DB   (PoolSize-3) DUP(0) 	; leave rest of record
 MEND   DB   -1				; END record
@@ -2636,7 +2636,7 @@ msg_offset		  dw	 offset SHARE_Name ; insert 'SHARE'
 
 msg_segment		  LABEL  WORD
 
-IF			  NOT	 INSTALLED
+IF	Installed EQ 0
 
 			  dw	 CODE
 
