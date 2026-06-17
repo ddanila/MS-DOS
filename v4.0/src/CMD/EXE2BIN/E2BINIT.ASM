@@ -199,7 +199,7 @@ MSG_SERVICES <EXE2BIN.CTL>						;AN000;
 
 E2B_HELP_STR	DB  "EXE2BIN [drive:][path]input[.EXE] [[drive:][path]output[.BIN]]",0Dh,0Ah,"$"
 
-procedure Main_Init near		;				;AN000;
+procedure Main_Init		;				;AN000;
 
 	ASSUME	DS:NOTHING		; THIS IS WHAT dos GIVES YOU	;AN000;
 	ASSUME	ES:NOTHING						;AN000;
@@ -270,7 +270,7 @@ Main_Init endp								;AN000;
 ;
 ;*****************************************************************************
 
-procedure Init_Input_Output near					;AN000;
+procedure Init_Input_Output					;AN000;
 
 	call	Preload_Messages	;Load up message retriever	;AN000;
 	cmp	Fatal_Error,YES 	;Quit?				;AN000;
@@ -300,7 +300,7 @@ Init_Input_Output endp							;AN000;
 ;
 ;*****************************************************************************
 
-procedure Preload_Messages near 					;AN000;
+procedure Preload_Messages 					;AN000;
 
 	call	SYSLOADMSG		;Preload the messages		;AN000;
 ;	$IF	C			;Error? 			;AN000;
@@ -458,7 +458,7 @@ INCLUDE PARSE.ASM
 ;*****************************************************************************
 
 
-procedure LOCATE near
+procedure LOCATE
 
 	push	ds							;AN000;
 	ASSUME	ES:NOTHING		; THIS IS THE WAY IT GETS HERE! ;AN000;
@@ -1060,7 +1060,7 @@ IsBlank proc	near
 IsBlank Endp
 
 
-procedure copyfs near
+procedure copyfs
 
 	push	ax							;AN000;
 
@@ -1083,7 +1083,7 @@ $$EN16:
 copyfs	endp								;AN000;
 
 
-procedure dbcs_check near
+procedure dbcs_check
 
 	push	ds				;Save registers 	;AC000;
 	push	si				; "  "	  "  "		;AC000;
