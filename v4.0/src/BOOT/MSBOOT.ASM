@@ -89,7 +89,8 @@ DSKADR	=	1EH*4			;POINTER TO DRIVE PARAMETERS
 
 Public $START
 $START:
-	JMP	START
+	JMP	SHORT START		;AN058; 3-byte boot JMP (EB xx 90) so BPB lands at offset 11
+	NOP
 ;----------------------------------------------------------
 ;
 ;	THE FOLLOWING DATA CONFIGURES THE BOOT PROGRAM
