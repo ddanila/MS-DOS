@@ -68,6 +68,7 @@ data	ends
 
 code	segment public para 'CODE'
 	assume	cs:code,ds:data
+	extrn	AddToSystemSize:near
 
 	Public	AccessDisk
 	public	CheckSwitches
@@ -77,7 +78,6 @@ code	segment public para 'CODE'
 	public	DosFile
 
 data	segment public	para	'DATA'
-	extrn	AddToSystemSize:near
 	extrn	currentCylinder:word
 	extrn	currentHead:word
 	extrn	deviceParameters:byte
