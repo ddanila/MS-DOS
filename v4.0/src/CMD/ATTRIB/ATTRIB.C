@@ -292,7 +292,7 @@ Display_msg(msgnum,msghan,msgparms,msgsub,msginput)                    /*;AN000;
    int   msgnum;                                                       /*;AN000;*/
    int   msghan;                                                       /*;AN000;*/
    int   msgparms;                                                     /*;AN000;*/
-   int   *msgsub;                                                      /*;AN000;*/
+   void  *msgsub;                                                      /*;AN000;*/
    char  msginput;                                                     /*;AN000;*/
 {
    inregs.x.ax = msgnum;                                               /*;AN000;*/
@@ -373,7 +373,7 @@ Ext_translation()                                                      /*;AN000;
 
 Get_far_str(target,source,length)                                      /*;AN000;*/
    char *target;                                                       /*;AN000;*/
-   DWORD *source;               /* segment = cs register */            /*;AN000;*/
+   void  *source;               /* segment = cs register */            /*;AN000;*/
    WORD  length;                                                       /*;AN000;*/
 {                                                                      /*;AN000;*/
    char far *fptr;                                                     /*;AN000;*/
@@ -612,7 +612,7 @@ WORD Parse_it(line)                                                    /*;AN000;
 
          /* check if first positional */
          if (outregs.x.dx == (WORD)&pos1_buff) {                       /*;AN000;*/
-            if (*(char *)pos1_buff.p_result_buff[0] == '+')  {         /*;AN000;*/
+            if (*(char *)(DWORD *)pos1_buff.p_result_buff[0] == '+')  {         /*;AN000;*/
                p_mask[0] |= pos1_buff.p_item_tag;                      /*;AN000;*/
                }                                                       /*;AN000;*/
             else {                                                     /*;AN000;*/
@@ -624,7 +624,7 @@ WORD Parse_it(line)                                                    /*;AN000;
 
          /* check if second positional */
          if (outregs.x.dx == (WORD)&pos2_buff) {                       /*;AN000;*/
-            if (*(char *)pos2_buff.p_result_buff[0] == '+') {          /*;AN000;*/
+            if (*(char *)(DWORD *)pos2_buff.p_result_buff[0] == '+') {          /*;AN000;*/
                p_mask[1] |= pos2_buff.p_item_tag;                      /*;AN000;*/
                }                                                       /*;AN000;*/
             else {                                                     /*;AN000;*/
@@ -638,13 +638,13 @@ WORD Parse_it(line)                                                    /*;AN000;
          if (outregs.x.dx == (WORD)&pos3_buff) {                       /*;AN000;*/
 
             /* copy filename from far string to data segment string */
-            Get_far_str(fspec,pos3_buff.p_result_buff,0);              /*;AN000;*/
+            Get_far_str(fspec,(DWORD *)pos3_buff.p_result_buff,0);              /*;AN000;*/
             got_fn = TRUE;                                             /*;AN000;*/
             }                                                          /*;AN000;*/
 
          /* check if fourth positional */
          if (outregs.x.dx == (WORD)&pos4_buff) {                       /*;AN000;*/
-            if (*(char *)pos4_buff.p_result_buff[0] == '+')  {         /*;AN000;*/
+            if (*(char *)(DWORD *)pos4_buff.p_result_buff[0] == '+')  {         /*;AN000;*/
                p_mask[2] |= pos4_buff.p_item_tag;                      /*;AN000;*/
                }                                                       /*;AN000;*/
             else {                                                     /*;AN000;*/
@@ -656,7 +656,7 @@ WORD Parse_it(line)                                                    /*;AN000;
 
          /* check if fifth positional */
          if (outregs.x.dx == (WORD)&pos5_buff) {                       /*;AN000;*/
-            if (*(char *)pos5_buff.p_result_buff[0] == '+') {          /*;AN000;*/
+            if (*(char *)(DWORD *)pos5_buff.p_result_buff[0] == '+') {          /*;AN000;*/
                p_mask[3] |= pos5_buff.p_item_tag;                      /*;AN000;*/
                }                                                       /*;AN000;*/
             else {                                                     /*;AN000;*/
@@ -670,7 +670,7 @@ WORD Parse_it(line)                                                    /*;AN000;
          if (outregs.x.dx == (WORD)&pos6_buff) {                       /*;AN000;*/
 
             /* copy attribute name from far string to data segment string */
-            Get_far_str(ext_attr,pos6_buff.p_result_buff,0);           /*;AN000;*/
+            Get_far_str(ext_attr,(DWORD *)pos6_buff.p_result_buff,0);           /*;AN000;*/
             do_ext_attr = TRUE;                                        /*;AN000;*/
             do_reg_attr = FALSE;                                       /*;AN000;*/
             }                                                          /*;AN000;*/
@@ -691,7 +691,7 @@ WORD Parse_it(line)                                                    /*;AN000;
                      status = p_syntax;                                /*;AN000;*/
                      break;                                            /*;AN000;*/
                      }                                                 /*;AN000;*/
-                  Get_far_str(string,pos6b_buff.p_result_buff,0);      /*;AN000;*/
+                  Get_far_str(string,(DWORD *)pos6b_buff.p_result_buff,0);      /*;AN000;*/
                   strcat(ext_attr_value.ea_ascii,string);              /*;AN000;*/
                   inregs.x.si = outregs.x.si; /* update SI for parser */ /*;AN000;*/
                   }                                                    /*;AN000;*/
@@ -699,7 +699,7 @@ WORD Parse_it(line)                                                    /*;AN000;
                ext_attr_value_type = EAISASCII;                        /*;AN000;*/
                }                                                       /*;AN000;*/
             else                                                       /*;AN000;*/
-               Determine_type((WORD)pos6b_buff.p_type,pos6b_buff.p_result_buff); /*;AN000;*/
+               Determine_type((WORD)pos6b_buff.p_type,(unsigned short *)pos6b_buff.p_result_buff); /*;AN000;*/
             set_ext_attr = TRUE;                                       /*;AN000;*/
             do_reg_attr = FALSE;                                       /*;AN000;*/
             do_ext_attr = FALSE;                                       /*;AN000;*/
@@ -2041,13 +2041,13 @@ WORD Extended_attrib(handle,fspec)                                     /*;AN000;
       set_ext_attr = FALSE;                                            /*;AN000;*/
       nptr = name_ptr;                                                 /*;AN000;*/
       type = EANAMES;                                                  /*;AN000;*/
-      status = Print_ext_attrib(fspec,type,name_ptr,num,list_ptr);     /*;AN004;*/
+      status = Print_ext_attrib(fspec,type,(struct name_list far *)name_ptr,num,(struct attr_list far *)list_ptr);     /*;AN004;*/
       did_attrib_ok = TRUE;                                            /*;AN004;*/
       return(status);                                                  /*;AN004;*/
       }                                                                /*;AN000;*/
 
    /* find if extended attribute name is in list */
-   else if (!Find_ext_attrib(name_ptr,ext_attr,num,&nptr)) {           /*;AN000;*/
+   else if (!Find_ext_attrib(name_ptr,ext_attr,num,(struct name_list far **)&nptr)) {           /*;AN000;*/
       return(EARCNOTFOUND+200);                                        /*;AN000;*/
       }                                                                /*;AN000;*/
    else                                                                /*;AN000;*/
@@ -2067,13 +2067,13 @@ WORD Extended_attrib(handle,fspec)                                     /*;AN000;
    cptr = (char far *)((BYTE far *)nptr + 4);                          /*;AN000;*/
    Get_far_str(qlist.ql_name,&cptr,qlist.ql_name_len);                 /*;AN000;*/
 
-   if ((status = Get_ext_attrib(handle,&list_ptr,&qlist)) != NOERROR) { /*;AN000;*/
+   if ((status = Get_ext_attrib(handle,&list_ptr,(unsigned short *)&qlist)) != NOERROR) { /*;AN000;*/
       return(status);                                                  /*;AN000;*/
       }                                                                /*;AN000;*/
 
    /* Check if doing a display or set, and go do it */
    if (do_ext_attr) {                                                  /*;AN000;*/
-      status = Print_ext_attrib(fspec,type,name_ptr,num,list_ptr);     /*;AN000;*/
+      status = Print_ext_attrib(fspec,type,(struct name_list far *)name_ptr,num,(struct attr_list far *)list_ptr);     /*;AN000;*/
       }                                                                /*;AN000;*/
    else {                                                              /*;AN000;*/
 
