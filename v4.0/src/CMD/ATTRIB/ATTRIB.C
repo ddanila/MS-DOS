@@ -394,7 +394,7 @@ Get_far_str(target,source,length)                                      /*;AN000;
          *target++ = (char) *fptr++;                                   /*;AN000;*/
       *target = 0x0;    /*EOS character */                             /*;AN000;*/
       }
-   strcpy(fix_es_reg,NUL); /* fix for es reg. after using far ptr */   /*;AN000;*/
+   strcpy(fix_es_reg, ""); /* fix for es reg. after using far ptr */   /*;AN000;*/
 }                                                                      /*;AN000;*/
 
 
@@ -506,7 +506,7 @@ Dfree(segment)                                                         /*;AN000;
    if (outregs.x.cflag & CARRY) {                                      /*;AN000;*/
       Error_exit(ERR_EXTENDED,8,NOSUBCNT);                             /*;AN000;*/
       }                                                                /*;AN000;*/
-   strcpy(fix_es_reg,NUL); /* fix for es reg. after using far ptr */   /*;AN000;*/
+   strcpy(fix_es_reg, ""); /* fix for es reg. after using far ptr */   /*;AN000;*/
 }                                                                      /*;AN000;*/
 
 
@@ -544,7 +544,7 @@ Copy_far_ptr(p1_addr, p2_addr)                                         /*;AN000;
 
    *tptr++ = *dptr++;                                                  /*;AN000;*/
    *tptr = *dptr;                                                      /*;AN000;*/
-   strcpy(fix_es_reg,NUL);       /* fix ES register */                 /*;AN000;*/
+   strcpy(fix_es_reg, "");       /* fix ES register */                 /*;AN000;*/
 }                                                                      /*;AN000;*/
 
 /*���������������������������������������������������������������������������*/
@@ -732,7 +732,7 @@ WORD Parse_it(line)                                                    /*;AN000;
             status = p_syntax;                                         /*;AN000;*/
          else                                                          /*;AN000;*/
             status = p_no_error;                                       /*;AN000;*/
-         strcpy(fix_es_reg,NUL);                                       /*;AN000;*/
+         strcpy(fix_es_reg, "");                                       /*;AN000;*/
 
          continue;  /* go back up to while loop */                     /*;AN000;*/
          }                                                             /*;AN000;*/
@@ -1284,7 +1284,7 @@ WORD Get_ext_attrib(handle,list_ptr,qlist_ptr)                         /*;AN000;
       inregs.x.cx = attr_size;    /* size to get all attributes */     /*;AN000;*/
       segregs.es = (WORD)list_seg; /* segment of ea list to return */  /*;AN000;*/
       intdosx(&inregs,&outregs,&segregs);                              /*;AN000;*/
-      strcpy(fix_es_reg,NUL);    /* restores original ES reg. value */ /*;AN000;*/
+      strcpy(fix_es_reg, "");    /* restores original ES reg. value */ /*;AN000;*/
       status = outregs.x.ax;                                           /*;AN000;*/
 
       /* if no errors then fix up far pointer to list */
@@ -1296,7 +1296,7 @@ WORD Get_ext_attrib(handle,list_ptr,qlist_ptr)                         /*;AN000;
          ptr++;                                                        /*;AN000;*/
          *ptr = (WORD)list_seg;                                        /*;AN000;*/
          (*list_ptr)++;                                                /*;AN000;*/
-         strcpy(fix_es_reg,NUL);  /* restores ES register value */     /*;AN000;*/
+         strcpy(fix_es_reg, "");  /* restores ES register value */     /*;AN000;*/
          status = NOERROR;                                             /*;AN000;*/
          }                                                             /*;AN000;*/
       }                                                                /*;AN000;*/
@@ -1359,7 +1359,7 @@ WORD Get_ext_attr_names(handle,list_ptr,num_entries)                   /*;AN000;
       inregs.x.cx = attr_size;    /* size to get all names */          /*;AN000;*/
       segregs.es = (WORD)list_seg; /* segment of ea list to return */  /*;AN000;*/
       intdosx(&inregs,&outregs,&segregs);                              /*;AN000;*/
-      strcpy(fix_es_reg,NUL);    /* restores original ES reg. value */ /*;AN000;*/
+      strcpy(fix_es_reg, "");    /* restores original ES reg. value */ /*;AN000;*/
       status = outregs.x.ax;                                           /*;AN000;*/
       *num_entries = 0;                                                /*;AN000;*/
 
@@ -1373,7 +1373,7 @@ WORD Get_ext_attr_names(handle,list_ptr,num_entries)                   /*;AN000;
          *ptr = (WORD)list_seg;                                        /*;AN000;*/
          *num_entries = (WORD)*(WORD far *)*list_ptr;                  /*;AN000;*/
          (*list_ptr)++;                                                /*;AN000;*/
-         strcpy(fix_es_reg,NUL);  /* restores ES register value */     /*;AN000;*/
+         strcpy(fix_es_reg, "");  /* restores ES register value */     /*;AN000;*/
          status = NOERROR;                                             /*;AN000;*/
          }                                                             /*;AN000;*/
       }                                                                /*;AN000;*/
@@ -1576,14 +1576,14 @@ WORD Find_ext_attrib(lptr,attribute,num,addr)                          /*;AN000;
       /* advance ptr to next extended attr. structure */
       length = NAME_SIZE + ptr->nl_name_len;                           /*;AN000;*/
       ptr = (struct name_list far *)((BYTE far *)ptr + length);        /*;AN000;*/
-      strcpy(fix_es_reg,NUL);                                          /*;AN000;*/
+      strcpy(fix_es_reg, "");                                          /*;AN000;*/
       }                                                                /*;AN000;*/
 
    /* found the extended attribute wanted, pass addr back */
    if (found) {                                                        /*;AN000;*/
       *addr = ptr;                                                     /*;AN000;*/
       }                                                                /*;AN000;*/
-   strcpy(fix_es_reg,NUL);                                             /*;AN000;*/
+   strcpy(fix_es_reg, "");                                             /*;AN000;*/
    return(found);                                                      /*;AN000;*/
 }                                                                      /*;AN000;*/
 
@@ -1633,7 +1633,7 @@ WORD Print_ext_attrib(fspec,type,name_ptr,num,attr_ptr)                /*;AN000;
    length = ATTR_SIZE + attr_ptr->at_name_len;                         /*;AN000;*/
    value_ptr = (BYTE far *)((BYTE far *)attr_ptr + length);            /*;AN000;*/
    length = attr_ptr->at_value_len;                                    /*;AN000;*/
-   strcpy(fix_es_reg,NUL);                                             /*;AN000;*/
+   strcpy(fix_es_reg, "");                                             /*;AN000;*/
 
    status = NOERROR;                                                   /*;AN000;*/
    switch (type) {                                                     /*;AN000;*/
@@ -1715,7 +1715,7 @@ WORD Print_ext_attrib(fspec,type,name_ptr,num,attr_ptr)                /*;AN000;
             /* advance ptr to next extended attr. structure */
             length = NAME_SIZE + ptr->nl_name_len;                     /*;AN000;*/
             ptr = (struct name_list far *)((BYTE far *)ptr + length);  /*;AN000;*/
-            strcpy(fix_es_reg,NUL);                                    /*;AN000;*/
+            strcpy(fix_es_reg, "");                                    /*;AN000;*/
             }                                                          /*;AN000;*/
          Display_msg(14,STDOUT,NOSUBPTR,NOSUBCNT,NOINPUT);             /*;AN000;*/
          Display_msg(14,STDOUT,NOSUBPTR,NOSUBCNT,NOINPUT);             /*;AN000;*/
@@ -2095,7 +2095,7 @@ WORD Extended_attrib(handle,fspec)                                     /*;AN000;
       length = ATTR_SIZE + qlist.ql_name_len;                          /*;AN000;*/
       value_ptr = (BYTE far *)((BYTE far *)list_ptr + length);         /*;AN000;*/
       length = ((struct attr_list far *)list_ptr)->at_value_len;       /*;AN000;*/
-      strcpy(fix_es_reg,NUL);                                          /*;AN000;*/
+      strcpy(fix_es_reg, "");                                          /*;AN000;*/
 
       /* CODEPAGE attrbute only - display Y/N message if changing codepage */
       /* to a new value and cp != 0, ask for confirmation.                 */
@@ -2399,7 +2399,7 @@ Check_appendx()                                                        /*;AN000;
    inregs.x.dx = (WORD) crit_err_handler;                              /*;AN000;*/
    segregs.ds = (WORD) segregs.cs;                                     /*;AN000;*/
    intdosx(&inregs,&outregs,&segregs);                                 /*;AN000;*/
-   strcpy(fix_es_reg,NUL);      /* restore ES register */              /*;AN000;*/
+   strcpy(fix_es_reg, "");      /* restore ES register */              /*;AN000;*/
 }                                                                      /*;AN000;*/
 
 
@@ -2541,7 +2541,7 @@ Get_DBCS_vector()                                                      /*;AN000;
     inregs.x.di = 0;              /* buffer offset */                  /*;AN000;*/
     segregs.es = (WORD)buffer;    /* buffer segment */                 /*;AN000;*/
     intdosx(&inregs,&outregs,&segregs);                                /*;AN000;*/
-    strcpy(fix_es_reg,NUL);                                            /*;AN000;*/
+    strcpy(fix_es_reg, "");                                            /*;AN000;*/
 
     outregs.x.di++;            /* skip over id byte */                 /*;AN000;*/
 
@@ -2555,7 +2555,7 @@ Get_DBCS_vector()                                                      /*;AN000;
     DBCS_ptr += 2;               /* skip over table length */          /*;AN000;*/
 
     /* DBCS_ptr points to DBCS table */                                /*;AN000;*/
-    strcpy(fix_es_reg,NUL);                                            /*;AN000;*/
+    strcpy(fix_es_reg, "");                                            /*;AN000;*/
 }                                                                      /*;AN000;*/
 
 
