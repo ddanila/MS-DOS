@@ -62,8 +62,6 @@ _parse	proc	near							 ;AN000;
 ;	copy C inregs into proper registers				 ;AN000;
 ;									 ;AN000;
 	mov	di,[bp+4]		; fix di (arg 0)		 ;AN000;
-	push	ds			; parser reads parmlist at ES:DI --	 ;OW
-	pop	es			; force ES=DGROUP (wcc doesn't keep ES=DS) ;OW
 ;									 ;AN000;
 	mov	ax,[di+0ah]		; load di			 ;AN000;
 	push	ax			; the di value from inregs is now on stack ;AN000;

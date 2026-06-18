@@ -74,8 +74,7 @@
 /*     if the environment is > 32k, STACK OVERFLOW will occur.               */
 /*���������������������������������������������������������������������������*/
 
-#include <stdio.h>
-#include <stdlib.h>                                                     /*;AN000;*/
+#include <stdio.h>                                                     /*;AN000;*/
 #include <io.h>                                                        /*;AN000;*/
 #include <dos.h>                                                       /*;AN000;*/
 #include <string.h>                                                    /*;AN000;*/
@@ -105,7 +104,7 @@ inmain(line)                                                           /*;AN000;
       printf("  /S  Process files in subdirectories\r\n");
       exit(0);
       }                                                                /*;AN000;*/
-   do_attrib(line);                                                         /*;AN000;*/
+   main(line);                                                         /*;AN000;*/
 }                                                                      /*;AN000;*/
 
 
@@ -133,7 +132,7 @@ inmain(line)                                                           /*;AN000;
 /*                                                                           */
 /*���������������������������������������������������������������������������*/
 
-do_attrib(line)                                                             /*;AN000;*/
+main(line)                                                             /*;AN000;*/
    char *line;                                                         /*;AN000;*/
 {                                                                      /*;AN000;*/
    WORD status;                                                        /*;AN000;*/
@@ -293,7 +292,7 @@ Display_msg(msgnum,msghan,msgparms,msgsub,msginput)                    /*;AN000;
    int   msgnum;                                                       /*;AN000;*/
    int   msghan;                                                       /*;AN000;*/
    int   msgparms;                                                     /*;AN000;*/
-   void  *msgsub;                                                      /*;AN000;*/
+   int   *msgsub;                                                      /*;AN000;*/
    char  msginput;                                                     /*;AN000;*/
 {
    inregs.x.ax = msgnum;                                               /*;AN000;*/
@@ -374,7 +373,7 @@ Ext_translation()                                                      /*;AN000;
 
 Get_far_str(target,source,length)                                      /*;AN000;*/
    char *target;                                                       /*;AN000;*/
-   void  *source;               /* segment = cs register */            /*;AN000;*/
+   DWORD *source;               /* segment = cs register */            /*;AN000;*/
    WORD  length;                                                       /*;AN000;*/
 {                                                                      /*;AN000;*/
    char far *fptr;                                                     /*;AN000;*/
@@ -394,7 +393,7 @@ Get_far_str(target,source,length)                                      /*;AN000;
          *target++ = (char) *fptr++;                                   /*;AN000;*/
       *target = 0x0;    /*EOS character */                             /*;AN000;*/
       }
-   strcpy(fix_es_reg, ""); /* fix for es reg. after using far ptr */   /*;AN000;*/
+   strcpy(fix_es_reg,NUL); /* fix for es reg. after using far ptr */   /*;AN000;*/
 }                                                                      /*;AN000;*/
 
 
@@ -431,7 +430,7 @@ Dexit(s)                                                               /*;AN000;
 /* intdos(&inregs,&outregs);        /*terminate*/                      /*;AN003; ;AN000;*/
 
    /* if it didn't work - kill it */
-   exit(0);                                                             /*;AN000;*/
+   exit();                                                             /*;AN000;*/
 }                                                                      /*;AN000;*/
 
 
@@ -506,7 +505,7 @@ Dfree(segment)                                                         /*;AN000;
    if (outregs.x.cflag & CARRY) {                                      /*;AN000;*/
       Error_exit(ERR_EXTENDED,8,NOSUBCNT);                             /*;AN000;*/
       }                                                                /*;AN000;*/
-   strcpy(fix_es_reg, ""); /* fix for es reg. after using far ptr */   /*;AN000;*/
+   strcpy(fix_es_reg,NUL); /* fix for es reg. after using far ptr */   /*;AN000;*/
 }                                                                      /*;AN000;*/
 
 
@@ -544,7 +543,7 @@ Copy_far_ptr(p1_addr, p2_addr)                                         /*;AN000;
 
    *tptr++ = *dptr++;                                                  /*;AN000;*/
    *tptr = *dptr;                                                      /*;AN000;*/
-   strcpy(fix_es_reg, "");       /* fix ES register */                 /*;AN000;*/
+   strcpy(fix_es_reg,NUL);       /* fix ES register */                 /*;AN000;*/
 }                                                                      /*;AN000;*/
 
 /*���������������������������������������������������������������������������*/
@@ -613,7 +612,7 @@ WORD Parse_it(line)                                                    /*;AN000;
 
          /* check if first positional */
          if (outregs.x.dx == (WORD)&pos1_buff) {                       /*;AN000;*/
-            if (*(char *)(DWORD *)pos1_buff.p_result_buff[0] == '+')  {         /*;AN000;*/
+            if (*(char *)pos1_buff.p_result_buff[0] == '+')  {         /*;AN000;*/
                p_mask[0] |= pos1_buff.p_item_tag;                      /*;AN000;*/
                }                                                       /*;AN000;*/
             else {                                                     /*;AN000;*/
@@ -625,7 +624,7 @@ WORD Parse_it(line)                                                    /*;AN000;
 
          /* check if second positional */
          if (outregs.x.dx == (WORD)&pos2_buff) {                       /*;AN000;*/
-            if (*(char *)(DWORD *)pos2_buff.p_result_buff[0] == '+') {          /*;AN000;*/
+            if (*(char *)pos2_buff.p_result_buff[0] == '+') {          /*;AN000;*/
                p_mask[1] |= pos2_buff.p_item_tag;                      /*;AN000;*/
                }                                                       /*;AN000;*/
             else {                                                     /*;AN000;*/
@@ -639,13 +638,13 @@ WORD Parse_it(line)                                                    /*;AN000;
          if (outregs.x.dx == (WORD)&pos3_buff) {                       /*;AN000;*/
 
             /* copy filename from far string to data segment string */
-            Get_far_str(fspec,(DWORD *)pos3_buff.p_result_buff,0);              /*;AN000;*/
+            Get_far_str(fspec,pos3_buff.p_result_buff,0);              /*;AN000;*/
             got_fn = TRUE;                                             /*;AN000;*/
             }                                                          /*;AN000;*/
 
          /* check if fourth positional */
          if (outregs.x.dx == (WORD)&pos4_buff) {                       /*;AN000;*/
-            if (*(char *)(DWORD *)pos4_buff.p_result_buff[0] == '+')  {         /*;AN000;*/
+            if (*(char *)pos4_buff.p_result_buff[0] == '+')  {         /*;AN000;*/
                p_mask[2] |= pos4_buff.p_item_tag;                      /*;AN000;*/
                }                                                       /*;AN000;*/
             else {                                                     /*;AN000;*/
@@ -657,7 +656,7 @@ WORD Parse_it(line)                                                    /*;AN000;
 
          /* check if fifth positional */
          if (outregs.x.dx == (WORD)&pos5_buff) {                       /*;AN000;*/
-            if (*(char *)(DWORD *)pos5_buff.p_result_buff[0] == '+') {          /*;AN000;*/
+            if (*(char *)pos5_buff.p_result_buff[0] == '+') {          /*;AN000;*/
                p_mask[3] |= pos5_buff.p_item_tag;                      /*;AN000;*/
                }                                                       /*;AN000;*/
             else {                                                     /*;AN000;*/
@@ -671,7 +670,7 @@ WORD Parse_it(line)                                                    /*;AN000;
          if (outregs.x.dx == (WORD)&pos6_buff) {                       /*;AN000;*/
 
             /* copy attribute name from far string to data segment string */
-            Get_far_str(ext_attr,(DWORD *)pos6_buff.p_result_buff,0);           /*;AN000;*/
+            Get_far_str(ext_attr,pos6_buff.p_result_buff,0);           /*;AN000;*/
             do_ext_attr = TRUE;                                        /*;AN000;*/
             do_reg_attr = FALSE;                                       /*;AN000;*/
             }                                                          /*;AN000;*/
@@ -692,7 +691,7 @@ WORD Parse_it(line)                                                    /*;AN000;
                      status = p_syntax;                                /*;AN000;*/
                      break;                                            /*;AN000;*/
                      }                                                 /*;AN000;*/
-                  Get_far_str(string,(DWORD *)pos6b_buff.p_result_buff,0);      /*;AN000;*/
+                  Get_far_str(string,pos6b_buff.p_result_buff,0);      /*;AN000;*/
                   strcat(ext_attr_value.ea_ascii,string);              /*;AN000;*/
                   inregs.x.si = outregs.x.si; /* update SI for parser */ /*;AN000;*/
                   }                                                    /*;AN000;*/
@@ -700,7 +699,7 @@ WORD Parse_it(line)                                                    /*;AN000;
                ext_attr_value_type = EAISASCII;                        /*;AN000;*/
                }                                                       /*;AN000;*/
             else                                                       /*;AN000;*/
-               Determine_type((WORD)pos6b_buff.p_type,(unsigned short *)pos6b_buff.p_result_buff); /*;AN000;*/
+               Determine_type((WORD)pos6b_buff.p_type,pos6b_buff.p_result_buff); /*;AN000;*/
             set_ext_attr = TRUE;                                       /*;AN000;*/
             do_reg_attr = FALSE;                                       /*;AN000;*/
             do_ext_attr = FALSE;                                       /*;AN000;*/
@@ -732,7 +731,7 @@ WORD Parse_it(line)                                                    /*;AN000;
             status = p_syntax;                                         /*;AN000;*/
          else                                                          /*;AN000;*/
             status = p_no_error;                                       /*;AN000;*/
-         strcpy(fix_es_reg, "");                                       /*;AN000;*/
+         strcpy(fix_es_reg,NUL);                                       /*;AN000;*/
 
          continue;  /* go back up to while loop */                     /*;AN000;*/
          }                                                             /*;AN000;*/
@@ -1284,7 +1283,7 @@ WORD Get_ext_attrib(handle,list_ptr,qlist_ptr)                         /*;AN000;
       inregs.x.cx = attr_size;    /* size to get all attributes */     /*;AN000;*/
       segregs.es = (WORD)list_seg; /* segment of ea list to return */  /*;AN000;*/
       intdosx(&inregs,&outregs,&segregs);                              /*;AN000;*/
-      strcpy(fix_es_reg, "");    /* restores original ES reg. value */ /*;AN000;*/
+      strcpy(fix_es_reg,NUL);    /* restores original ES reg. value */ /*;AN000;*/
       status = outregs.x.ax;                                           /*;AN000;*/
 
       /* if no errors then fix up far pointer to list */
@@ -1296,7 +1295,7 @@ WORD Get_ext_attrib(handle,list_ptr,qlist_ptr)                         /*;AN000;
          ptr++;                                                        /*;AN000;*/
          *ptr = (WORD)list_seg;                                        /*;AN000;*/
          (*list_ptr)++;                                                /*;AN000;*/
-         strcpy(fix_es_reg, "");  /* restores ES register value */     /*;AN000;*/
+         strcpy(fix_es_reg,NUL);  /* restores ES register value */     /*;AN000;*/
          status = NOERROR;                                             /*;AN000;*/
          }                                                             /*;AN000;*/
       }                                                                /*;AN000;*/
@@ -1359,7 +1358,7 @@ WORD Get_ext_attr_names(handle,list_ptr,num_entries)                   /*;AN000;
       inregs.x.cx = attr_size;    /* size to get all names */          /*;AN000;*/
       segregs.es = (WORD)list_seg; /* segment of ea list to return */  /*;AN000;*/
       intdosx(&inregs,&outregs,&segregs);                              /*;AN000;*/
-      strcpy(fix_es_reg, "");    /* restores original ES reg. value */ /*;AN000;*/
+      strcpy(fix_es_reg,NUL);    /* restores original ES reg. value */ /*;AN000;*/
       status = outregs.x.ax;                                           /*;AN000;*/
       *num_entries = 0;                                                /*;AN000;*/
 
@@ -1373,7 +1372,7 @@ WORD Get_ext_attr_names(handle,list_ptr,num_entries)                   /*;AN000;
          *ptr = (WORD)list_seg;                                        /*;AN000;*/
          *num_entries = (WORD)*(WORD far *)*list_ptr;                  /*;AN000;*/
          (*list_ptr)++;                                                /*;AN000;*/
-         strcpy(fix_es_reg, "");  /* restores ES register value */     /*;AN000;*/
+         strcpy(fix_es_reg,NUL);  /* restores ES register value */     /*;AN000;*/
          status = NOERROR;                                             /*;AN000;*/
          }                                                             /*;AN000;*/
       }                                                                /*;AN000;*/
@@ -1576,14 +1575,14 @@ WORD Find_ext_attrib(lptr,attribute,num,addr)                          /*;AN000;
       /* advance ptr to next extended attr. structure */
       length = NAME_SIZE + ptr->nl_name_len;                           /*;AN000;*/
       ptr = (struct name_list far *)((BYTE far *)ptr + length);        /*;AN000;*/
-      strcpy(fix_es_reg, "");                                          /*;AN000;*/
+      strcpy(fix_es_reg,NUL);                                          /*;AN000;*/
       }                                                                /*;AN000;*/
 
    /* found the extended attribute wanted, pass addr back */
    if (found) {                                                        /*;AN000;*/
       *addr = ptr;                                                     /*;AN000;*/
       }                                                                /*;AN000;*/
-   strcpy(fix_es_reg, "");                                             /*;AN000;*/
+   strcpy(fix_es_reg,NUL);                                             /*;AN000;*/
    return(found);                                                      /*;AN000;*/
 }                                                                      /*;AN000;*/
 
@@ -1633,7 +1632,7 @@ WORD Print_ext_attrib(fspec,type,name_ptr,num,attr_ptr)                /*;AN000;
    length = ATTR_SIZE + attr_ptr->at_name_len;                         /*;AN000;*/
    value_ptr = (BYTE far *)((BYTE far *)attr_ptr + length);            /*;AN000;*/
    length = attr_ptr->at_value_len;                                    /*;AN000;*/
-   strcpy(fix_es_reg, "");                                             /*;AN000;*/
+   strcpy(fix_es_reg,NUL);                                             /*;AN000;*/
 
    status = NOERROR;                                                   /*;AN000;*/
    switch (type) {                                                     /*;AN000;*/
@@ -1715,7 +1714,7 @@ WORD Print_ext_attrib(fspec,type,name_ptr,num,attr_ptr)                /*;AN000;
             /* advance ptr to next extended attr. structure */
             length = NAME_SIZE + ptr->nl_name_len;                     /*;AN000;*/
             ptr = (struct name_list far *)((BYTE far *)ptr + length);  /*;AN000;*/
-            strcpy(fix_es_reg, "");                                    /*;AN000;*/
+            strcpy(fix_es_reg,NUL);                                    /*;AN000;*/
             }                                                          /*;AN000;*/
          Display_msg(14,STDOUT,NOSUBPTR,NOSUBCNT,NOINPUT);             /*;AN000;*/
          Display_msg(14,STDOUT,NOSUBPTR,NOSUBCNT,NOINPUT);             /*;AN000;*/
@@ -2042,13 +2041,13 @@ WORD Extended_attrib(handle,fspec)                                     /*;AN000;
       set_ext_attr = FALSE;                                            /*;AN000;*/
       nptr = name_ptr;                                                 /*;AN000;*/
       type = EANAMES;                                                  /*;AN000;*/
-      status = Print_ext_attrib(fspec,type,(struct name_list far *)name_ptr,num,(struct attr_list far *)list_ptr);     /*;AN004;*/
+      status = Print_ext_attrib(fspec,type,name_ptr,num,list_ptr);     /*;AN004;*/
       did_attrib_ok = TRUE;                                            /*;AN004;*/
       return(status);                                                  /*;AN004;*/
       }                                                                /*;AN000;*/
 
    /* find if extended attribute name is in list */
-   else if (!Find_ext_attrib(name_ptr,ext_attr,num,(struct name_list far **)&nptr)) {           /*;AN000;*/
+   else if (!Find_ext_attrib(name_ptr,ext_attr,num,&nptr)) {           /*;AN000;*/
       return(EARCNOTFOUND+200);                                        /*;AN000;*/
       }                                                                /*;AN000;*/
    else                                                                /*;AN000;*/
@@ -2068,13 +2067,13 @@ WORD Extended_attrib(handle,fspec)                                     /*;AN000;
    cptr = (char far *)((BYTE far *)nptr + 4);                          /*;AN000;*/
    Get_far_str(qlist.ql_name,&cptr,qlist.ql_name_len);                 /*;AN000;*/
 
-   if ((status = Get_ext_attrib(handle,&list_ptr,(unsigned short *)&qlist)) != NOERROR) { /*;AN000;*/
+   if ((status = Get_ext_attrib(handle,&list_ptr,&qlist)) != NOERROR) { /*;AN000;*/
       return(status);                                                  /*;AN000;*/
       }                                                                /*;AN000;*/
 
    /* Check if doing a display or set, and go do it */
    if (do_ext_attr) {                                                  /*;AN000;*/
-      status = Print_ext_attrib(fspec,type,(struct name_list far *)name_ptr,num,(struct attr_list far *)list_ptr);     /*;AN000;*/
+      status = Print_ext_attrib(fspec,type,name_ptr,num,list_ptr);     /*;AN000;*/
       }                                                                /*;AN000;*/
    else {                                                              /*;AN000;*/
 
@@ -2095,7 +2094,7 @@ WORD Extended_attrib(handle,fspec)                                     /*;AN000;
       length = ATTR_SIZE + qlist.ql_name_len;                          /*;AN000;*/
       value_ptr = (BYTE far *)((BYTE far *)list_ptr + length);         /*;AN000;*/
       length = ((struct attr_list far *)list_ptr)->at_value_len;       /*;AN000;*/
-      strcpy(fix_es_reg, "");                                          /*;AN000;*/
+      strcpy(fix_es_reg,NUL);                                          /*;AN000;*/
 
       /* CODEPAGE attrbute only - display Y/N message if changing codepage */
       /* to a new value and cp != 0, ask for confirmation.                 */
@@ -2399,7 +2398,7 @@ Check_appendx()                                                        /*;AN000;
    inregs.x.dx = (WORD) crit_err_handler;                              /*;AN000;*/
    segregs.ds = (WORD) segregs.cs;                                     /*;AN000;*/
    intdosx(&inregs,&outregs,&segregs);                                 /*;AN000;*/
-   strcpy(fix_es_reg, "");      /* restore ES register */              /*;AN000;*/
+   strcpy(fix_es_reg,NUL);      /* restore ES register */              /*;AN000;*/
 }                                                                      /*;AN000;*/
 
 
@@ -2541,7 +2540,7 @@ Get_DBCS_vector()                                                      /*;AN000;
     inregs.x.di = 0;              /* buffer offset */                  /*;AN000;*/
     segregs.es = (WORD)buffer;    /* buffer segment */                 /*;AN000;*/
     intdosx(&inregs,&outregs,&segregs);                                /*;AN000;*/
-    strcpy(fix_es_reg, "");                                            /*;AN000;*/
+    strcpy(fix_es_reg,NUL);                                            /*;AN000;*/
 
     outregs.x.di++;            /* skip over id byte */                 /*;AN000;*/
 
@@ -2555,7 +2554,7 @@ Get_DBCS_vector()                                                      /*;AN000;
     DBCS_ptr += 2;               /* skip over table length */          /*;AN000;*/
 
     /* DBCS_ptr points to DBCS table */                                /*;AN000;*/
-    strcpy(fix_es_reg, "");                                            /*;AN000;*/
+    strcpy(fix_es_reg,NUL);                                            /*;AN000;*/
 }                                                                      /*;AN000;*/
 
 
