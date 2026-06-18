@@ -930,7 +930,7 @@ INT2F_COM  PROC   NEAR                                                          
                    .IF <[SI].D_MODE EQ TEXT_MODE> ; this is a text mode then..                     ;AN000;
                      .if <cs:Switch_L EQ 1> OR                ;AN010;
                      .if <cs:ANSI_SetMode_Call_Flag NE 1> OR  ;AN008; if not originated by ANSI thru. AH=0, INT10,
-                     .if <cs:Display_Loaded_Before_me NE 1>   ;AN008;  or Display.sys not loaded before ANSI,
+                     .if <cs:Display_Loaded_Before_Me NE 1>   ;AN008;  or Display.sys not loaded before ANSI,
                          MOV    BX,REQ_TXT_LENGTH    ; then use REQ_TXT_LENGTH instead..           ;AN000;
                          MOV    ES:[DI].RP_ROWS,BX   ;
                      .endif

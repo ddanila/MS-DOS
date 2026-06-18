@@ -55,7 +55,7 @@ EXTRN	INT10_COM:NEAR		       ; WGR						 ;AN000;
 EXTRN	ROM_INT2F:WORD		       ; WGR						 ;AN000;
 EXTRN	INT2F_COM:NEAR		       ; WGR						 ;AN000;
 EXTRN	ABORT:BYTE		       ; WGR						 ;AN000;
-extrn	Display_Loaded_Before_me:byte  ;AN002;Defined in IOCTL.ASM
+extrn	Display_Loaded_Before_Me:byte  ;AN002;Defined in IOCTL.ASM
 extrn	Switch_K:Byte		       ;AN003;
 
 INCLUDE   ANSIVID.INC		       ; WGR video tables data				 ;AN000;
