@@ -9,7 +9,7 @@
 ;
 ;********************************************************************************
 PAGE	, 132				   ;AN000;
-.ALPHA					;AN000;
+.SEQ					;AN000;
 .XLIST					;AN000;
 INCLUDE MACROS.INC			;AN000;
 INCLUDE STRUC.INC			;AN000;

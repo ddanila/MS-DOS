@@ -2,7 +2,7 @@ PAGE	60,132				   ;AN000;
 NAME	SELECT				   ;AN000;
 TITLE	VARIABLES - DOS - SELECT.EXE	   ;AN000;
 SUBTTL	var.asm				   ;AN000;
-.ALPHA					   ;AN000;
+.SEQ					   ;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
 ;	VAR.ASM:  Copyright 1988 Microsoft

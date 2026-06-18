@@ -13,7 +13,7 @@ SUBTTL	sel-pan.asm			;AN000;
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-	.alpha		; arrange segments alphabetically
+	.SEQ		; arrange segments alphabetically
 
 	EXTRN	PCB_VECTOR:WORD 	;AN000;
 	EXTRN	NUM_PCB:ABS		;AN000;

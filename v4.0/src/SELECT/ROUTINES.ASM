@@ -6,7 +6,7 @@
 ; program.
 ;
 ;***************************************************************************
-.ALPHA						;AN000;
+.SEQ						;AN000;
 INCLUDE  MAC_EQU.INC				;AN000;
 INCLUDE  PAN-LIST.INC				;AN000;
 INCLUDE  PANEL.MAC				;AN000;

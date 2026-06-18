@@ -20,7 +20,7 @@
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-	.alpha		; arrange segments alphabetically
+	.SEQ		; arrange segments alphabetically
 
 	INCLUDE SEL-PAN.INC		;AN024;
 	EXTRN	WR_CIS:WORD		;AN024;

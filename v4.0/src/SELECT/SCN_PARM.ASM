@@ -5,7 +5,7 @@
 ; parameter is specified, additional information is read from the disk.
 ;
 ;********************************************************************************
-.ALPHA					;AN000;
+.SEQ					;AN000;
 .XLIST					;AN000;
 INCLUDE  MACROS.INC			;AN000;
 INCLUDE  STRUC.INC			;AN000;

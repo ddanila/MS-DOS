@@ -31,7 +31,7 @@
 ;		 selection is made by numeric input.
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-.ALPHA					;AN000;
+.SEQ					;AN000;
 	INCLUDE    STRUC.INC		;AN000;
 	INCLUDE    MACROS.INC		;AN006;JW
 	INCLUDE    PANEL.MAC		;AN000;

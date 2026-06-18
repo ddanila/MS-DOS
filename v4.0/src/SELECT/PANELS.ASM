@@ -13,7 +13,7 @@
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-	.alpha		; arrange segments alphabetically
+	.SEQ		; arrange segments alphabetically
 
 	INCLUDE SEL-PAN.INC		;AN024;
 	INCLUDE PAN-LIST.INC		;AN024;

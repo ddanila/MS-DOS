@@ -4,7 +4,7 @@ PAGE 55,132
 NAME	SELECT
 TITLE	SELECT - DOS - SELECT.EXE
 SUBTTL	SELECT9.asm
-.ALPHA
+.SEQ
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
 ;	SELECT9.ASM : Copyright 1988 Microsoft
