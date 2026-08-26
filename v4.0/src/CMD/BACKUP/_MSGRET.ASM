@@ -78,6 +78,8 @@ _sysloadmsg proc near
 ;	copy C inregs into proper registers
 
 	mov	di,[bp+4]		; fix di (arg 0)
+	push	ds
+	pop	es
 
 ;-------------------------------------------------------------------
 
@@ -138,6 +140,8 @@ _update_logfile proc near
 	push	si
 
 	mov	di,[bp+4]		; fix di (arg 0)
+	push	ds
+	pop	es
 ;-------------------------------------------------------------------
 	mov	ax,[di+0ah]		; load di
 	push	ax			; the di value from inregs is now on stack
@@ -211,6 +215,8 @@ _sysdispmsg proc near
 ;	copy C inregs into proper registers
 
 	mov	di,[bp+4]		; fix di (arg 0)
+	push	ds
+	pop	es
 ;-------------------------------------------------------------------
 	mov	ax,[di+0ah]		; load di
 	push	ax			; the di value from inregs is now on stack

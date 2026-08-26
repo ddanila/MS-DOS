@@ -1,4 +1,8 @@
-/* Source replacement for the two COMSUBS.LIB routines REPLACE uses. */
+/*
+ * Open-source replacements for the COMSUBS.LIB routines used by the
+ * migrated Open Watcom utilities.  String searches skip complete DBCS
+ * characters so a trail byte is never mistaken for an ASCII delimiter.
+ */
 
 #include <dos.h>
 
@@ -19,6 +23,17 @@ unsigned char c;
         ranges += 2;
     }
     return 0;
+}
+
+int com_toupper(c)
+unsigned char c;
+{
+    union REGS inregs, outregs;
+
+    inregs.x.ax = 0x6520;
+    inregs.h.dl = c;
+    intdos(&inregs, &outregs);
+    return outregs.h.dl;
 }
 
 char *com_strchr(string, target)

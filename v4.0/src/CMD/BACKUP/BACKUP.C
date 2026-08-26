@@ -352,10 +352,10 @@ char	*argv[];						      /*;AN000;4*/
 
 		/* Copy command line parameters to local area */
 	cmd_line[0] = NUL;					      /*;AN000;4*/
-	for (x=1; x<=argc; x++) 				      /*;AN000;4*/
+	for (x=1; x<argc; x++) 				      /*;AN000;4*/
 	{							      /*;AN000;4*/
 	 strcat(cmd_line,argv[x]);				      /*;AN000;4*/
-	 if (x != argc) strcat(cmd_line," ");                         /*;AN000;4*/
+	 if (x != argc-1) strcat(cmd_line," ");                         /*;AN000;4*/
 	}							      /*;AN000;4*/
 
 	strcat(cmd_line,"\r");  /*;AN004;*/
@@ -372,9 +372,9 @@ char	*argv[];						      /*;AN000;4*/
 	  parse(&inregs,&outregs);				      /*;AN000;4 Call DOS SYSPARSE service routines*/
 
 	  x=0;			/* Save the parsed parameter */       /*;AN009;*/
-	  for (inregs.x.si; inregs.x.si<outregs.x.si; inregs.x.si++)  /*;AN009;*/
+	  for (; inregs.x.si<outregs.x.si; inregs.x.si++)  /*;AN009;*/
 	   {							      /*;AN009;*/
-	     curr_parm[x] = *(char *)inregs.x.si;		      /*;AN009;*/
+	     curr_parm[x] = *(char *)(unsigned)inregs.x.si;		      /*;AN009;*/
 	     x++;						      /*;AN009;*/
 	   }							      /*;AN009;*/
 
@@ -2078,7 +2078,7 @@ void check_last_target()
 	if (target_removable)		/* Build path to control file */
 	  sprintf(path,"%c:\\CONTROL.*",tgt_drive_letter);
 	 else
-	  sprintf(path,"%c:\\BACKUP\CONTROL.*",tgt_drive_letter);
+	  sprintf(path,"%c:\\BACKUP\\CONTROL.*",tgt_drive_letter);
 
 	find_first			/* Find the control file */
 	 (

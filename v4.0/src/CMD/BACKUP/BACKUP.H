@@ -367,8 +367,6 @@ struct File_Header
 /*----------------------------------------------------*/
 /*-	SUBROUTINE DECLARATIONS 		     -*/
 /*----------------------------------------------------*/
-	int cdecl	sprintf(char *, char *, ...);
-	int cdecl	 printf(char *,...);
 
 	void	alloc_buffer(void);
 	void	alloc_first_node(void);
