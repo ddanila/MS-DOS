@@ -3,22 +3,12 @@
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 IF1                                     ;
-        %OUT .               ®MACROS  .INC¯
+        %OUT .               -MACROS  .INC-
 ENDIF                                   ;
                                         ;
 JUMP    MACRO   LBL                     ;
-        LOCAL   A                       ;
 .XCREF                                  ;
-      IFNDEF LBL&_J                     ; IS THIS FIRST INVOKATION
-A:       JMP     LBL                    ;
-      ELSE                              ;
-         IF (LBL&_J GE $) OR ($-LBL&_J GT 126)
-A:          JMP     LBL                 ; IS THE JUMP TOO FAR AWAY?
-         ELSE                           ;
-A:          JMP     LBL&_J              ; PERFORM SHORT JUMP
-         ENDIF                          ;
-      ENDIF                             ;
-LBL&_J=A                                ;
+        JMP     LBL                     ; JWasm selects the valid displacement.
 .CREF                                   ;
         ENDM                            ;
 .XCREF JUMP                             ;
@@ -26,4 +16,3 @@ LBL&_J=A                                ;
 ;
 ; *** MACROS **** MACROS **** MACROS ****
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
