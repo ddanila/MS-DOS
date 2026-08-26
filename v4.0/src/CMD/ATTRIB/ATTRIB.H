@@ -380,7 +380,16 @@ struct m_sublist msg_time =            /*;AN000; describes substitutions   */
        9,                              /*;AN000;  NN-NN-NNa (9 characters) */
        9,                              /*;AN000;                           */
        0 };                            /*;AN000;                           */
-struct m_sublist msg_str =             /*;AN000; describes substitutions   */
+/* SYSDispMsg follows the 12-byte offsets stored in sub_size.  The C
+ * record is packed to 11 bytes, while MS C placed independent globals on
+ * word boundaries.  Model that ABI explicitly instead of relying on linker
+ * placement. */
+struct message_pair {
+       struct m_sublist first;
+       BYTE first_pad;
+       struct m_sublist second;
+       BYTE second_pad;
+       } msg_pair = {
      { 12,                             /*;AN000;   for parm one of message */
        0,                              /*;AN000;                           */
        0,                              /*;AN000;                           */
@@ -389,8 +398,8 @@ struct m_sublist msg_str =             /*;AN000; describes substitutions   */
        sf_left | sf_char | sf_asciiz,  /*;AN000;  string                   */
        9,                              /*;AN000;  null string              */
        9,                              /*;AN000;                           */
-       (BYTE)' ' };                    /*;AN000;                           */
-struct m_sublist msg_str1 =            /*;AN000; describes substitutions   */
+       (BYTE)' ' },                    /*;AN000;                           */
+       0,
      { 12,                             /*;AN000;   for parm two of message */
        0,                              /*;AN000;                           */
        0,                              /*;AN000;                           */
@@ -399,7 +408,10 @@ struct m_sublist msg_str1 =            /*;AN000; describes substitutions   */
        sf_left | sf_char | sf_asciiz,  /*;AN000;  string                   */
        0,                              /*;AN000;  null string              */
        0,                              /*;AN000;                           */
-       (BYTE)' ' };                    /*;AN000;                           */
+       (BYTE)' ' },                    /*;AN000;                           */
+       0 };
+#define msg_str  msg_pair.first
+#define msg_str1 msg_pair.second
 struct m_sublist msg_error =           /*;AN000; describes substitutions   */
      { 12,                             /*;AN000;   for extended error messages*/
        0,                              /*;AN000;                           */

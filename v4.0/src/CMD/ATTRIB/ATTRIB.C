@@ -1868,7 +1868,7 @@ WORD Regular_attrib(fspec)                                             /*;AN000;
 {                                                                      /*;AN000;*/
    WORD status;                                                        /*;AN000;*/
    WORD i;                                                             /*;AN000;*/
-   char string[16];                                                    /*;AN000;*/
+   char string[17];                                                    /*;AN000;*/
 
    /* get attributes */
    if ((status = Get_reg_attrib(fspec,&attr)) != NOERROR) {            /*;AN000;*/
