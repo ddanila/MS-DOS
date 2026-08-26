@@ -851,5 +851,7 @@ FIND_CP_ERROR4:                        ;;
 FIND_CP_TABLE         ENDP             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 CODE   ENDS
-       END    TABLE_BUILD
+       ; KEYB.ASM owns the program entry point. This is a library-style
+       ; module; naming TABLE_BUILD here emits a second MODEND start address.
+       END
 
