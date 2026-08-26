@@ -368,5 +368,4 @@ SELECT	ENDS							;AN000;
 
 include msgdcl.inc
 
-	END	INSTALL 					;AN000;
-
+	END	SELECT:INSTALL					;AN000;

@@ -55,6 +55,7 @@ endif
 ifndef TRUE
 TRUE	       = (NOT FALSE) AND 0FFFFh   ;; JWASM: guard + 16-bit mask (vs DOSSYM TRUE EQU 0FFFFh)
 endif
+$M_TRUE       = 0FFFFh                  ;; Message-service flags always use MASM's full-word TRUE
 				       ;;
 
 ; Control Characters For Message Skeleton file
@@ -227,7 +228,7 @@ STDPRN			EQU	0004H  ;; Standard Printer device handle
 
 ; Reserved Message Service equates
 
-NEARmsg 		 =	TRUE   ;; \
+NEARmsg 		 =	$M_TRUE ;; \
 NOVERCHECKmsg		 =	FALSE  ;;  |
 MSGDATA 		 =	FALSE  ;;  |
 FARmsg			 =	FALSE  ;;  |
@@ -249,18 +250,18 @@ COMR			 =	FALSE  ;;  COMMAND.COM Cases (resident)
 COMT			 =	FALSE  ;;		     (transient)
 ENDIF				       ;;
 
-$M_STRUC		 =	TRUE   ;; Internal message service defaults
-$M_LOAD 		 =	TRUE   ;;
-$M_SUBS 		 =	TRUE   ;;
-$M_REPLACE		 =	TRUE   ;;
+$M_STRUC		 =	$M_TRUE ;; Internal message service defaults
+$M_LOAD 		 =	$M_TRUE ;;
+$M_SUBS 		 =	$M_TRUE ;;
+$M_REPLACE		 =	$M_TRUE ;;
 $M_REPL_DONE		 =	FALSE  ;;
-$M_CHAR_ONLY		 =	TRUE   ;;
-$M_PARSE_FLAG		 =	TRUE   ;;
-$M_EXT_ERR_FLAG 	 =	TRUE   ;;
-$M_MSGDATA_ONLY 	 =	TRUE   ;;
+$M_CHAR_ONLY		 =	$M_TRUE ;;
+$M_PARSE_FLAG		 =	$M_TRUE ;;
+$M_EXT_ERR_FLAG 	 =	$M_TRUE ;;
+$M_MSGDATA_ONLY 	 =	$M_TRUE ;;
 $M_END			 =	FALSE  ;;
-$M_EXT_CLS		 =	TRUE   ;;
-$M_PAR_CLS		 =	TRUE   ;;
+$M_EXT_CLS		 =	$M_TRUE ;;
+$M_PAR_CLS		 =	$M_TRUE ;;
 				       ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;	$M_POPF 	     Macro
@@ -284,7 +285,7 @@ ENDM
 MSG_UTILNAME  Macro   utilname	       ;
 				       ;
    INCLUDE &utilname.CTL	       ;  Include the control file for the utility
-   $M_STRUC = TRUE		       ;
+   $M_STRUC = $M_TRUE		       ;
    INCLUDE MSGSERV.ASM		       ;  Get structure definitions
 				       ;
 ENDM				       ;
@@ -297,7 +298,7 @@ MSG_SERVICES Macro   varlist		  ;  MACRO used in source routine
 					  ;
    $M_SERVICE = FALSE			  ;  Reset service flag
    IRP	   var,<varlist>		  ;  FOR each variable in the list
-     $M_INCLUDE = TRUE			  ;  Reset include flag
+     $M_INCLUDE = $M_TRUE		  ;  Reset include flag
 					  ;	For each service predefined
 
 IRP  serv,<MSGDATA,LOADmsg,NOVERCHECKmsg,DISPLAYmsg,GETmsg,INPUTmsg,CHARmsg,NUMmsg,TIMEmsg,DATEmsg,NEARmsg,FARmsg,COMR,COMT>
@@ -309,11 +310,11 @@ IRP  serv,<MSGDATA,LOADmsg,NOVERCHECKmsg,DISPLAYmsg,GETmsg,INPUTmsg,CHARmsg,NUMm
 	   ENDIF			  ;	    ENDIF
 	   IRP	repl,<CHARmsg,NUMmsg,TIMEmsg,DATEmsg>  ; IF it is a replace service
 	     IFIDN  <var>,<repl>	  ;
-	       $M_REPLACE = TRUE	  ;	       Set replace flag
+	       $M_REPLACE = $M_TRUE	  ;	       Set replace flag
 	     ENDIF			  ;
 	   ENDM 			  ;
-	   serv = TRUE			  ;	    Let the assembler know about the service
-	   $M_SERVICE = TRUE		  ;	    Let the macro know it was a service
+	   serv = $M_TRUE		  ;	    Let the assembler know about the service
+	   $M_SERVICE = $M_TRUE		  ;	    Let the macro know it was a service
 	   $M_INCLUDE = FALSE		  ;	    Let the macro know it wasn't a class
 	 ENDIF				  ;	  ENDIF
       ENDM				  ;	NEXT service
@@ -347,8 +348,8 @@ MSG_SERVICES2 Macro   varlist2		  ;  MACRO used in source routine
 					    ;AN003; IF it IS a service (defined above)
 	 IFDIF <var2>,<serv2>
 	 ELSE				  ;
-	   serv2 = TRUE 		   ;	     Let the assembler know about the service
-	   $M_SERVICE = TRUE		  ;	    Let the macro know it was a service
+	   serv2 = $M_TRUE 		   ;	     Let the assembler know about the service
+	   $M_SERVICE = $M_TRUE		  ;	    Let the macro know it was a service
 	   $M_INCLUDE = FALSE		  ;	    Let the macro know it wasn't a class
 	 ENDIF				  ;	  ENDIF
       ENDM				  ;	NEXT service

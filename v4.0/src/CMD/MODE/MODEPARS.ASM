@@ -2525,9 +2525,14 @@ PUBLIC com_keyword_case
 
 	 MOV   parms.parmsx_ptr,OFFSET com_keywords_parmsx ;AN000;only com keywords are in the control blocks
 	 MOV   i_CL,1					   ;AN000;
-	 .WHILE <i_CL LE number_of_com_keywords> AND NEAR  ;AN000;one iteration more than number of parms left so will find eol
-	 .WHILE <eol_found EQ false> AND NEAR			      ;AN000;
-	 .WHILE <noerror EQ true> DO NEAR			;AN000;
+
+com_keyword_loop:
+	 CMP   i_CL,number_of_com_keywords		   ;AN000;one iteration more than number of parms left so will find eol
+	 JG    com_keyword_loop_done
+	 CMP   eol_found,false
+	 JNE   com_keyword_loop_done
+	 CMP   noerror,true
+	 JNE   com_keyword_loop_done
 
 	    .SELECT		       ;AC002;check for PS/2 specific parms
 	    .WHEN <parm_list[current_parm_DI].keyword_switch_ptr EQ <OFFSET baud_equal>> THEN	;AC002;IF synonym ptr=> BAUD= THEN
@@ -2574,6 +2579,7 @@ PUBLIC com_keyword_case
 	       .ENDIF							;AN000;
 	       delete_parser_value_list_entry keywords,current_parm ;AN000;
 	       INC   i_CL						;AN000;
+	       JMP   com_keyword_loop
 
 	    .ELSEIF <parser_return_code_AX EQ end_of_command_line> THEN ;AN000;
 
@@ -2591,7 +2597,9 @@ PUBLIC com_keyword_case
 
 	    .ENDIF					;AN000;
 
-	 .ENDWHILE							;AN000;
+	 JMP   com_keyword_loop
+
+com_keyword_loop_done:
 
 	 MOV   looking_for,eol		 ;AN000;if haven't already encountered an error then check for extraneous parms
 

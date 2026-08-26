@@ -190,7 +190,7 @@ ELSE							     ;;AN000;;	ELSE if we have already included the STRUCTURES
 IF    COMR						     ;;AN000;; Since COMMAND.COM includes this twice
       $M_RT   EQU	       $M_RT2			     ;;AN000;;	we must redefine the label so no
       $M_RT2  LABEL  BYTE				     ;;AN000;;	 assembly errors occur
-      $M_ALTLABEL = TRUE				     ;;AN000;; Flag that label was changed
+      $M_ALTLABEL = $M_TRUE				     ;;AN000;; Flag that label was changed
 ELSE							     ;;AN000;;
       $M_RT   LABEL   BYTE				     ;;AN000;;
 ENDIF							     ;;AN000;;
@@ -2577,8 +2577,8 @@ $M_FLUSH_BUF ENDP					     ;;AN000;;
 							     ;;
 							     ;;
 	  IF	  CHARmsg				     ;;AN000;; Is the request to include the code for CHAR replace?
-	    $M_REPLACE =  TRUE				     ;;AN000;; Yes, THEN include it and flag that we will need common
-	    $M_CHAR_ONLY = TRUE 			     ;;AN000;;	 replacement code later
+	    $M_REPLACE =  $M_TRUE			     ;;AN000;; Yes, THEN include it and flag that we will need common
+	    $M_CHAR_ONLY = $M_TRUE 			     ;;AN000;;	 replacement code later
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;;	PROC NAME: $M_CHAR_REPLACE
@@ -2639,7 +2639,7 @@ $M_CHAR_REPLACE ENDP					     ;;AN000;;
 	  ENDIF 					     ;;AN000;; END of include of CHAR replace code
 ; 
 	  IF	  NUMmsg				     ;;AN000;; Is the request to include the code for NUM replace?
-	    $M_REPLACE =  TRUE				     ;;AN000;; Yes, THEN include it and flag that we will need common
+	    $M_REPLACE =  $M_TRUE			     ;;AN000;; Yes, THEN include it and flag that we will need common
 	    $M_CHAR_ONLY = FALSE			     ;;AN000;;	 replacement code later
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -2768,7 +2768,7 @@ $M_BIN2ASC_REPLACE ENDP 				     ;;AN000;;
 	  ENDIF 					     ;;AN000;; END of include of NUM replace code
 ; 
 	  IF	  DATEmsg				     ;;AN000;; Is the request to include the code for DATE replace?
-	    $M_REPLACE =  TRUE				     ;;AN000;; Yes, THEN include it and flag that we will need common
+	    $M_REPLACE =  $M_TRUE			     ;;AN000;; Yes, THEN include it and flag that we will need common
 	    $M_CHAR_ONLY = FALSE			     ;;AN000;;	  replacement code later
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
@@ -2901,7 +2901,7 @@ $M_CONVERTDATE ENDP					     ;;AN000;;
 	  ENDIF 					     ;;AN000;; END of include of DATE replace code
 ; 
 	  IF	  TIMEmsg				     ;;AN000;; Is the request to include the code for TIME replace?
-	    $M_REPLACE =  TRUE				     ;;AN000;; Yes, THEN include it and flag that we will need common
+	    $M_REPLACE =  $M_TRUE			     ;;AN000;; Yes, THEN include it and flag that we will need common
 	    $M_CHAR_ONLY = FALSE			     ;;AN000;;	  replacement code later
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
