@@ -239,24 +239,14 @@ ENDM
 
 BREAK <JUMP - real jump that links up shortwise>
 ;
-; given a label <lbl> either 2 byte jump to another label <lbl>_J
-; if it is near enough or 3 byte jump to <lbl>
+; Jump directly to the requested label.  The original MASM-era implementation
+; chained nearby calls through a mutable <lbl>_J equate to save one byte.  JWasm
+; resolves that history differently and can turn the chain into `JMP $`.
 ;
 
 jump    macro lbl
-    local a
 .xcref
-
-    ifndef lbl&_J                       ;; is this the first invocation
-a:      JMP lbl
-    ELSE
-	IF (lbl&_J GE $) OR ($-lbl&_J GT 126)
-a:      JMP lbl                         ;; is the jump too far away?
-	ELSE
-a:      JMP lbl&_J                      ;; do the short one...
-	ENDIF
-    ENDIF
-    lbl&_j = a
+	JMP lbl
 .cref
 endm
 .xcref  jump
@@ -277,29 +267,9 @@ BREAK <CONDRET - conditional return>
 
 condret macro   cc,ncc
     local   a
-.xcref
-.xcref a
-.cref
-    ifdef   ret_l                       ;; if ret_l is defined
-	if (($ - ret_l) le 126) and ($ gt ret_l)
-					;;     if ret_l is near enough then
-	    a:  j&cc    ret_l           ;;         a: j<CC> to ret_l
-	    ret_&cc = a                 ;;         define ret_<CC> to be a:
-	    exitm
-	endif
-    endif
-    ifdef   ret_&cc                     ;; if ret_<CC> defined
-	if (($ - ret_&cc) le 126) and ($ gt ret_&cc)
-					;;     if ret_<CC> is near enough
-	    a:  j&cc    ret_&cc         ;;         a: j<CC> to ret_<CC>
-	    ret_&cc = a                 ;;         define ret_<CC> to be a:
-	    exitm
-	endif
-    endif
-    j&ncc   a                           ;; j<NCC> a:
-    return                              ;; return
-    a:                                  ;; a:
-    ret_&cc = ret_l                     ;; define ret_<CC> to be ret_l
+    j&ncc   a                           ;; opposite condition skips return
+    RET                                 ;; return when condition is true
+a:                                      ;; continuation
 endm
 .xcref  condret
 
