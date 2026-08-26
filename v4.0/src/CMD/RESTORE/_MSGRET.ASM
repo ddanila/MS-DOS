@@ -75,6 +75,8 @@ _sysloadmsg proc near
 ;	copy C inregs into proper registers
 
 	mov	di,[bp+4]		; fix di (arg 0)
+	push	ds
+	pop	es
 
 ;-------------------------------------------------------------------
 
@@ -132,6 +134,8 @@ _sysloadmsg endp
 ;;	 copy C inregs into proper registers
 ;
 ;	 mov	 di,[bp+4]		 ; fix di (arg 0)
+	push	ds
+	pop	es
 ;
 ;;-------------------------------------------------------------------
 ;
@@ -188,6 +192,8 @@ _sysdispmsg proc near
 ;	copy C inregs into proper registers
 
 	mov	di,[bp+4]		; fix di (arg 0)
+	push	ds
+	pop	es
 
 ;-------------------------------------------------------------------
 

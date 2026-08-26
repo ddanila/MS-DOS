@@ -36,6 +36,13 @@ unsigned char c;
     return outregs.h.dl;
 }
 
+/* COMSUBS maps DOS return codes directly to extended-error message IDs. */
+unsigned rctomid(return_code)
+unsigned return_code;
+{
+    return return_code;
+}
+
 char *com_strchr(string, target)
 unsigned char *string;
 unsigned char target;

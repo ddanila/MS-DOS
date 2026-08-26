@@ -16,12 +16,12 @@
 #include "doscalls.h"
 #include "error.h"
 
-BYTE		   *buf_pointer;
+extern BYTE far *buf_pointer;
 unsigned	   control_file_pointer;
 unsigned	   src_file_handle;
 struct FileFindBuf filefindbuf;
 struct FileFindBuf dfilefindbuf;
-BYTE	      far  *control_buf_pointer;
+extern BYTE far *control_buf_pointer;
 unsigned int	   control_bufsize;				       /* !wrw */
 
 extern unsigned    char srcddir[MAXPATH+3];

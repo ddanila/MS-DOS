@@ -1,4 +1,5 @@
 /*  0 */
+#include <direct.h>
 /*---------------------------------------------------------
 /*-
 /*- RESTORE Utility include file RT2.H
@@ -54,7 +55,7 @@
 /*----------------------------------*/
 /*-    SUBROUTINE DECLARATIONS	    */
 /*----------------------------------*/
-void   main(int ,char *[0]);
+void   main(int, char **);
 void   set_input_switches(WORD,BYTE * *,WORD *,struct timedate *);
 void   verify_input_switches(BYTE *,struct timedate   *);
 int    set_reset_test_flag(BYTE *,BYTE ,int );
@@ -108,8 +109,7 @@ void   restore_a_file(struct file_info *,struct disk_info *,unsigned long,unsign
 /*----------------------------------------
 /*-  ADDED FOR DOS 4.00
 /*----------------------------------------*/
-int  cdecl	sprintf(char *,const char *, ...);
-int  cdecl	printf(const char *,...);
+
 void check_time(BYTE,BYTE,BYTE,BYTE);				      /*;AN000;4*//*;AC002;*/
 void check_date(WORD,BYTE,BYTE);				      /*;AN000;4*//*;AC002;*/
 void parse_error(WORD,BYTE);					      /*;AN000;4*//*;AC002;*/

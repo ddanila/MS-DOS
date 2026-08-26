@@ -110,7 +110,8 @@ BYTE srcddir[MAXPATH+3] = {'\0'};
 BYTE rtswitch=0;
 BYTE control_flag=0;
 BYTE control_flag2=0;
-BYTE *buf_pointer;
+BYTE far *buf_pointer;
+BYTE far *control_buf_pointer;
 
 /*=============================*/
 BYTE srcd;							      /*;AN000;4*/

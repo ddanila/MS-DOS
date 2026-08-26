@@ -71,10 +71,10 @@ char	*argv[];						      /*;AN000;4 */
 
 		/* Copy command line parameters to local area */
 	cmd_line[0] = NUL;					      /*;AN000;4*/
-	for (x=1; x<=argc; x++) 				      /*;AN000;4*/
+	for (x=1; x<argc; x++) 				      /*;AN000;4*/
 	 {							      /*;AN000;4*/
 	  strcat(cmd_line,argv[x]);				      /*;AN000;4*/
-	  if (x!=argc) strcat(cmd_line," ");                          /*;AN000;4*/
+	  if (x != argc-1) strcat(cmd_line," ");                          /*;AN000;4*/
 	 }							      /*;AN000;4*/
 
 	strcat(cmd_line,"\r");             /* Add CR, LF */           /*;AN004;*/
@@ -118,9 +118,9 @@ char	*argv[];						      /*;AN000;4 */
 	  parse(&inregs,&outregs);				      /*;AN000;4 Call DOS PARSE service routines*/
 
 	  x=0;			/* Save the parsed parameter */       /*;AN004;*/
-	  for (inregs.x.si; inregs.x.si<outregs.x.si; inregs.x.si++)  /*;AN004;*/
+	  for (; inregs.x.si<outregs.x.si; inregs.x.si++)  /*;AN004;*/
 	   {							      /*;AN004;*/
-	     curr_parm[x] = *(char *)inregs.x.si;		      /*;AN004;*/
+	     curr_parm[x] = *(char *)(unsigned)inregs.x.si;		      /*;AN004;*/
 	     x++;						      /*;AN004;*/
 	   }							      /*;AN004;*/
 

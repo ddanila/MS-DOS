@@ -21,8 +21,8 @@ extern BYTE srcddir[MAXPATH+3];
 extern BYTE rtswitch;
 extern BYTE control_flag;
 extern BYTE control_flag2;
-char far *buf_pointer;
-char far *control_buf_pointer;
+extern char far *buf_pointer;
+extern char far *control_buf_pointer;
 unsigned control_selector;
 extern BYTE dest_file_spec[MAXFSPEC];
 extern unsigned dest_file_handle;
@@ -128,7 +128,7 @@ BYTE *filespec; 	/* point to beginning of file spec    */
 {
 	BYTE *iptr;	 /* working pointer */
 	BYTE *fptr;	 /* working pointer */
-	WORD i; 						       /*;AN005;*/
+	int i; 						       /*;AN005;*/
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 		/* Find last non-DBCS backslash character */
@@ -234,8 +234,7 @@ void initbuf(bufsize_long)
       usererror(INSUFMEM);
     }
 
-    FP_SEG( buf_pointer ) = selector;
-    FP_OFF( buf_pointer ) = 0 ;
+    buf_pointer = (char far *)MK_FP(selector, 0);
 
     if (bufsize == 0)
        *bufsize_long = (DWORD)MAXBUF;
@@ -277,8 +276,7 @@ void init_control_buf(control_file_len,control_bufsize) 	   /* !wrw */
      usererror(INSUFMEM);
     }								   /* !wrw */
 
-    FP_SEG( control_buf_pointer ) = control_selector;		   /* !wrw */
-    FP_OFF( control_buf_pointer ) = 0 ; 			   /* !wrw */
+    control_buf_pointer = (char far *)MK_FP(control_selector, 0);
 
     *control_bufsize = bufsize; 				   /* !wrw */
 
@@ -559,7 +557,8 @@ char character; 						       /*;AN005;*/
    }								       /*;AN005;*/
 
    /* if character is not DBCS then check to see if it is == to character */
-   if (darray[position-1] != 'D' && character == array[position])      /*;AN005;*/
+   if ((position == 0 || darray[position-1] != 'D') &&
+       character == array[position])      /*;AN005;*/
       return (TTRUE);						       /*;AN005;*/
    else 							       /*;AN005;*/
       return (FFALSE);						       /*;AN005;*/
@@ -598,7 +597,7 @@ void Get_DBCS_vector()						       /*;AN005;*/
     segregs.es = (WORD)buffer;	  /* buffer segment */		       /*;AN005;*/
     segregs.ds = (WORD)buffer;	  /* buffer segment */		       /*;AN005;*/
     intdosx(&inregs,&outregs,&segregs); 			       /*;AN005;*/
-    strcpy(fix_es_reg,NUL);					       /*;AN005;*/
+    strcpy(fix_es_reg,"");					       /*;AN005;*/
 
     outregs.x.di++;		  /* skip over id byte */	       /*;AN005;*/
 
@@ -612,7 +611,7 @@ void Get_DBCS_vector()						       /*;AN005;*/
     DBCS_ptr += 2;		  /* skip over table length */	       /*;AN005;*/
 
     /* DBCS_ptr points to DBCS table */
-    strcpy(fix_es_reg,NUL);					       /*;AN005;*/
+    strcpy(fix_es_reg,"");					       /*;AN005;*/
     got_dbcs_vector = TTRUE;					       /*;AN005;*/
     return;							       /*;AN005;*/
 }								       /*;AN005;*/
