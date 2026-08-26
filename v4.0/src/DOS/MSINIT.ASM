@@ -524,7 +524,9 @@ ASSUME	ES:DOSGROUP
 ; After this points the char device functions for CON will work for
 ; printing messages
 
-	IF	(NOT IBM) OR (DEBUG)
+	; JWasm evaluates NOT at host integer width. Test the Boolean directly so
+	; this remains equivalent to MASM's 16-bit NOT when IBM is TRUE (0FFFFh).
+	IF	(IBM EQ 0) OR (DEBUG)
 	IF	(NOT ALTVECT) AND 0FFFFh
 	MOV	SI,OFFSET DOSGROUP:HEADER
 OUTMES:
