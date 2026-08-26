@@ -18,7 +18,7 @@ sEnd
 sBegin	code
 assumes cs,code
 
-externP strlen
+externP fc_strlen
 
 ;
 ; strbscan (string, set) returns pointer to 1st char in set or end
@@ -29,7 +29,7 @@ parmW	set
 cBegin
 	push	ds
 	pop	es
-	cCall	strlen,<set>
+	cCall	fc_strlen,<set>
 	inc	ax
 	mov	bx, ax
 	mov	si,str
@@ -55,7 +55,7 @@ parmW	set
 cBegin
 	push	ds
 	pop	es
-	cCall	strlen,<set>
+	cCall	fc_strlen,<set>
 	inc	ax
 	mov	bx, ax
 	mov	si,str

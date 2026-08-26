@@ -207,18 +207,23 @@ WARNING:
  */
 
 
+#include <stdlib.h>
+#include <string.h>
 #include "tools.h"
 #include "fc.h"
 
 /* #define  DEBUG  FALSE */
 
-extern int  fgetl(),
-            strcmp ();
-
-extern byte toupper ();
+extern int  fgetl();
 
 int (*funcRead) (),                     /* function to use to read lines     */
     (*fCmp) ();                         /* function to use to compare lines  */
+
+static int fc_strcmp (s1, s2)
+unsigned char *s1, *s2;
+{
+        return strcmp ((char *)s1, (char *)s2);
+}
 
 extern byte BadSw[],
             Bad_ver[],
@@ -393,7 +398,7 @@ byte *v[];
         extention (n[0], line);
 
         for (i = 0; extBin[i]; i++)
-            if (!strcmpi (extBin[i], line))
+            if (!fc_strcmpi (extBin[i], line))
                 fBinary = TRUE;
 
         if (!fBinary)
@@ -413,9 +418,9 @@ byte *v[];
     else
     {
         if (fCase)
-            fCmp = FNADDR(strcmp);
+            fCmp = FNADDR(fc_strcmp);
         else
-            fCmp = FNADDR(strcmpi);
+            fCmp = FNADDR(fc_strcmpi);
     }
 
     if (fBinary)
@@ -563,7 +568,7 @@ unsigned char *f1, *f2;
 
     if ((buffer1 = (struct lineType *)malloc (cLine * (sizeof *buffer1))) == NULL ||
         (buffer2 = (struct lineType *)malloc (cLine * (sizeof *buffer1))) == NULL)
-        usage (NoMem);
+        usage (NoMem, 1);
 
     l1 = l2 = 0;
     line1 = line2 = 0;
@@ -819,7 +824,7 @@ struct lineType *pl;
  *  This version relies on a version of toupper which uses IToupper.
  */
 
-int strcmpi(str1, str2)
+int fc_strcmpi(str1, str2)
 unsigned char *str1, *str2;
 {
    unsigned char c1, c2;

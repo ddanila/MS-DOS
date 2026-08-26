@@ -9,6 +9,7 @@
  *
  */
 
+#include <string.h>
 #include "tools.h"
 
 int upd (def, update, dst)
