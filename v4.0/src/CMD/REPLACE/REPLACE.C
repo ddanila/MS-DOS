@@ -105,6 +105,9 @@
 #include "replacep.h"                                                          /* ;AN000;P Parser structures */
 #include "stdio.h"                                                             /* printf for /? help */
 #include "stdlib.h"                                                            /* exit for /? help */
+#include "string.h"
+#undef NULL
+#define NULL 0
 
 /* ------------- ERRORLEVEL CODES ---------------*/
 #define ERRLEVELNEG1      -1                                                   /* ;AC000; */
@@ -194,7 +197,6 @@
 #define INACTIVE          0x0000                                               /* ;AN000;A Append/x inactive status */
 #define MAX               256                                                  /* ;AC000; */
 #define MAXMINUS1         255                                                  /* ;AC000; */
-#define NULL              0
 #define SATTRIB           0
 #define SUBDIR            0x10
 #define TATTRIB           SUBDIR
@@ -270,7 +272,7 @@ unsigned segment ;
 unsigned update     = FALSE ;                                                  /* ;AN000;U /U switch */
 unsigned wait       = FALSE ;                                                  /* /W switch */
 unsigned x_status   = 0 ;                                                      /* ;AN000;A Original append/x state */
-unsigned _psp ;
+extern unsigned _psp ;
 
 long oldint24 ;                                                                /* ;AN000; Rcv cntrl from, then ret to */
 
@@ -416,7 +418,7 @@ char *argv[] ;
     }                                                                          /* /? help */
 
   load_msg() ;                                                                 /* ;AN000;M Point to msgs & chk DOS ver */
-  for (index = 1; index <= argc; index++)                                      /* ;AN000;P Form string for parser */
+  for (index = 1; index < argc; index++)                                      /* ;AN000;P Form string for parser */
   {                                                                            /* ;AN000;P */
     strcat(source,argv[index]) ;                                               /* ;AN000;P Add the argument */
     strcat(source," ") ;                                                       /* ;AN000;P Separate with a space */
@@ -436,7 +438,7 @@ char *argv[] ;
           p_sfilespec[fchar] = (char)*fptr ;                                   /* ;AN000;P get the character */
           fchar++ ;                                                            /* ;AN000;P Move the char ptr */
         }                                                                      /* ;AN000;P */
-        strcpy(fix_es_reg,NULL) ;                                              /* ;AN000;P (Set es reg correct) */
+        strcpy(fix_es_reg,"") ;                                              /* ;AN000;P (Set es reg correct) */
         have_source = TRUE ;                                                   /* ;AN000;P Set the flag */
         fchar       = 0 ;                                                      /* ;AN000;P Reset char ptr */
       }                                                                        /* ;AN000;P */
@@ -449,7 +451,7 @@ char *argv[] ;
             p_path[fchar] = (char)*fptr ;                                      /* ;AN000;P get the character */
             fchar++ ;                                                          /* ;AN000;P Move the char ptr */
           }                                                                    /* ;AN000;P */
-          strcpy(fix_es_reg,NULL) ;                                            /* ;AN000;P (Set es reg correct) */
+          strcpy(fix_es_reg,"") ;                                            /* ;AN000;P (Set es reg correct) */
           have_target = TRUE ;                                                 /* ;AN000;P Set the flag */
         }                                                                      /* ;AN000;P */
         else                                                                   /* ;AN000;P */
@@ -459,7 +461,7 @@ char *argv[] ;
             cmdln_switch[index] = *(char *)inregs.x.si ;                       /* ;AN006; */
             index++ ;                                                          /* ;AN006; */
           }                                                                    /* ;AN006; */
-          strcpy(switch_buffer,rslt2.P_SYNONYM_Ptr) ;                          /* ;AN000;P Else copy switch into buf */
+          strcpy(switch_buffer,(char *)rslt2.P_SYNONYM_Ptr) ;                          /* ;AN000;P Else copy switch into buf */
           switch (switch_buffer[1])                                            /* ;AN000;P Verify which switch */
           {                                                                    /* ;AN000;P */
             case 'A'   :  if (!add)                                            /* ;AN000;P /A switch */
@@ -512,7 +514,7 @@ char *argv[] ;
                                break ;                                         /* ;AN000;P More_to_parse = FALSE */
           case P_Not_In_SW  :  display_exit(MSG_BADSWTCH,cmdln_invalid,ERRLEVEL11) ;/* ;AN005;P Invalid switch */
                                break ;                                         /* ;AN000;P More_to_parse = FALSE */
-          case P_Op_Missing :  display_msg(MSG_NOSOURCE) ;                     /* ;AN000;P Source required */
+          case P_Op_Missing :  display_msg(MSG_NOSOURCE,(char *)NULL) ;                     /* ;AN000;P Source required */
                                dexit(ERRLEVEL11) ;                             /* ;AN000;P */
                                break ;                                         /* ;AN000;P More_to_parse = FALSE */
         }                                                                      /* ;AN000;P */
@@ -527,7 +529,7 @@ char *argv[] ;
 
   if ((add && descending) || (add && update))                                  /* ;AC000;P A+S or A+U */
   {
-    display_msg(MSG_INCOMPAT) ;                                                /* ;AN000;P Incompatible switches */
+    display_msg(MSG_INCOMPAT,(char *)NULL) ;                                                /* ;AN000;P Incompatible switches */
     dexit(ERRLEVEL11) ;                                                        /* ;AC000; */
   }
 
@@ -543,7 +545,7 @@ char *argv[] ;
 
   if (status != 0)                                                             /* If can't alloc at all */
   {                                                                            /* something's wrong */
-    display_msg(MSG_NOMEM) ;                                                   /* ;AC000; no space for copies */
+    display_msg(MSG_NOMEM,(char *)NULL) ;                                                   /* ;AC000; no space for copies */
     dexit(ERRLEVEL8) ;                                                         /* ;AC000; */
   }
 
@@ -555,7 +557,7 @@ char *argv[] ;
 
   if (wait)
   {
-    display_msg(MSG_START) ;                                                   /* ;AC000; Press any key... */
+    display_msg(MSG_START,(char *)NULL) ;                                                   /* ;AC000; Press any key... */
     inregs.x.ax = 0x0C08 ;                                                     /* ;AC000; */
     intdos(&inregs,&outregs) ;                                                 /* ;AC000; */
     status = (outregs.x.cflag & CARRY) ;                                       /* ;AC000; */
@@ -807,12 +809,12 @@ char *argv[] ;
 
   if (add)
     if (counted == 0)
-      display_msg(MSG_NONEADDE) ;                                              /* ;AC000; no files added */
+      display_msg(MSG_NONEADDE,(char *)NULL) ;                                              /* ;AC000; no files added */
     else
       display_msg(MSG_SOMEADDE,(char *)&counted) ;                             /* ;AC000; %1 files added */
   else
     if (counted == 0)
-      display_msg(MSG_NONEREPL) ;                                              /* ;AC000; no files replaced */
+      display_msg(MSG_NONEREPL,(char *)NULL) ;                                              /* ;AC000; no files replaced */
     else
       display_msg(MSG_SOMEREPL,(char *)&counted) ;                             /* ;AC000; %1 files replaced */
 
@@ -1024,7 +1026,7 @@ unsigned date ;
   }
 
   if (ea_flag)                                                                 /* ;AN000;EA If extd attrs exist */
-    status = dcreate(target,&eaparm_list) ;                                    /* ;AN000;EA   open trgt w/extd attrs */
+    status = dcreate(target,(unsigned)&eaparm_list) ;                                    /* ;AN000;EA   open trgt w/extd attrs */
   else                                                                         /* ;AN000;EA */
     status = dcreate(target,-1) ;                                              /* ;AC000;EA Create the target file */
 
@@ -1147,7 +1149,7 @@ unsigned s ;
     status = outregs.x.ax ;                                                    /* ;AC000;   get returned error */
   else                                                                         /* ;AC000; else                 */
     status = (outregs.x.cflag & CARRY) ;                                       /* ;AC000;   set status to NOERROR */
-  strcpy(fix_es_reg,NULL) ;                                                    /* ;AN000; */
+  strcpy(fix_es_reg,"") ;                                                    /* ;AN000; */
   return(status) ;
 }
 /*����������������������������������������������������������������������������*/
@@ -1315,7 +1317,7 @@ unsigned a ;
     t->size      = getdword(_psp,0x80+26) ;
     for (i = 0; i < 15; i++)
       t->name[i] = getbyte(_psp,0x80+30+i) ;
-    strcpy(fix_es_reg,NULL) ;                                                  /* ;AN000; */
+    strcpy(fix_es_reg,"") ;                                                  /* ;AN000; */
   }
   return(status) ;
 }
@@ -1341,7 +1343,7 @@ struct filedata *t ;
     t->size      = getdword(_psp,0x80+26) ;
     for (i = 0; i < 15; i++)
       t->name[i] = getbyte(_psp,0x80+30+i) ;
-    strcpy(fix_es_reg,NULL) ;                                                  /* ;AN000; */
+    strcpy(fix_es_reg,"") ;                                                  /* ;AN000; */
   }
   return(status) ;
 }
@@ -1365,7 +1367,7 @@ unsigned l ;
 
   for (i = 0; i < l; i++)
     *(t+i) = getbyte(_psp,0x80+i) ;
-  strcpy(fix_es_reg,NULL) ;                                                    /* ;AN000; */
+  strcpy(fix_es_reg,"") ;                                                    /* ;AN000; */
   return ;                                                                     /* ;AC000; */
 }
 /*����������������������������������������������������������������������������*/
@@ -1378,7 +1380,7 @@ unsigned l ;
 
   for (i = 0; i < l; i++)
     putbyte(_psp,0x80+i,*(t+i)) ;
-  strcpy(fix_es_reg,NULL) ;                                                    /* ;AN000; */
+  strcpy(fix_es_reg,"") ;                                                    /* ;AN000; */
   return ;                                                                     /* ;AC000; */
 }
 /*����������������������������������������������������������������������������*/
@@ -1389,9 +1391,8 @@ unsigned int moffset ;                                                         /
 {                                                                              /* ;AN000; */
   char far * cPtr ;                                                            /* ;AN000; */
 
-  FP_SEG(cPtr) = msegment ;                                                    /* ;AN000; */
-  FP_OFF(cPtr) = moffset ;                                                     /* ;AN000; */
-  strcpy(fix_es_reg,NULL) ;                                                    /* ;AN000; */
+  cPtr = (char far *)MK_FP(msegment,moffset) ;                                                     /* ;AN000; */
+  strcpy(fix_es_reg,"") ;                                                    /* ;AN000; */
   return(*cPtr) ;                                                              /* ;AN000; */
 }                                                                              /* ;AN000; */
 /*����������������������������������������������������������������������������*/
@@ -1402,9 +1403,8 @@ unsigned int moffset ;                                                         /
 {                                                                              /* ;AN000; */
   unsigned far * uPtr ;                                                        /* ;AN000; */
 
-  FP_SEG(uPtr) = msegment ;                                                    /* ;AN000; */
-  FP_OFF(uPtr) = moffset ;                                                     /* ;AN000; */
-  strcpy(fix_es_reg,NULL) ;                                                    /* ;AN000; */
+  uPtr = (unsigned far *)MK_FP(msegment,moffset) ;                                                     /* ;AN000; */
+  strcpy(fix_es_reg,"") ;                                                    /* ;AN000; */
   return(*uPtr) ;                                                              /* ;AN000; */
 }                                                                              /* ;AN000; */
 /*����������������������������������������������������������������������������*/
@@ -1415,9 +1415,8 @@ unsigned int moffset ;                                                         /
 {                                                                              /* ;AN000; */
   long far * lPtr ;                                                            /* ;AN000; */
 
-  FP_SEG(lPtr) = msegment ;                                                    /* ;AN000; */
-  FP_OFF(lPtr) = moffset ;                                                     /* ;AN000; */
-  strcpy(fix_es_reg,NULL) ;                                                    /* ;AN000; */
+  lPtr = (long far *)MK_FP(msegment,moffset) ;                                                     /* ;AN000; */
+  strcpy(fix_es_reg,"") ;                                                    /* ;AN000; */
   return(*lPtr) ;                                                              /* ;AN000; */
 }                                                                              /* ;AN000; */
 /*����������������������������������������������������������������������������*/
@@ -1429,10 +1428,9 @@ char     value ;                                                               /
 {                                                                              /* ;AN000; */
   char far * cPtr ;                                                            /* ;AN000; */
 
-  FP_SEG(cPtr) = msegment ;                                                    /* ;AN000; */
-  FP_OFF(cPtr) = moffset ;                                                     /* ;AN000; */
+  cPtr = (char far *)MK_FP(msegment,moffset) ;                                                     /* ;AN000; */
   *cPtr        = value ;                                                       /* ;AN000; */
-  strcpy(fix_es_reg,NULL) ;                                                    /* ;AN000; */
+  strcpy(fix_es_reg,"") ;                                                    /* ;AN000; */
   return ;                                                                     /* ;AN000; */
 }                                                                              /* ;AN000; */
 /*����������������������������������������������������������������������������*/
@@ -1444,10 +1442,9 @@ unsigned value ;                                                               /
 {                                                                              /* ;AN000; */
   unsigned far * uPtr ;                                                        /* ;AN000; */
 
-  FP_SEG(uPtr) = msegment ;                                                    /* ;AN000; */
-  FP_OFF(uPtr) = moffset ;                                                     /* ;AN000; */
+  uPtr = (unsigned far *)MK_FP(msegment,moffset) ;                                                     /* ;AN000; */
   *uPtr        = value ;                                                       /* ;AN000; */
-  strcpy(fix_es_reg,NULL) ;                                                    /* ;AN000; */
+  strcpy(fix_es_reg,"") ;                                                    /* ;AN000; */
   return ;                                                                     /* ;AN000; */
 }                                                                              /* ;AN000; */
 /*����������������������������������������������������������������������������*/
@@ -1459,10 +1456,9 @@ long     value ;                                                               /
 {                                                                              /* ;AN000; */
   long far * lPtr ;                                                            /* ;AN000; */
 
-  FP_SEG(lPtr) = msegment ;                                                    /* ;AN000; */
-  FP_OFF(lPtr) = moffset ;                                                     /* ;AN000; */
+  lPtr = (long far *)MK_FP(msegment,moffset) ;                                                     /* ;AN000; */
   *lPtr        = value ;                                                       /* ;AN000; */
-  strcpy(fix_es_reg,NULL) ;                                                    /* ;AN000; */
+  strcpy(fix_es_reg,"") ;                                                    /* ;AN000; */
   return ;                                                                     /* ;AN000; */
 }                                                                              /* ;AN000; */
 /*����������������������������������������������������������������������������*/
@@ -1789,7 +1785,7 @@ char *outline ;                                                                /
                          break ;                                               /* ;AN000;M */
   }                                                                            /* ;AN000;M */
 
-  strcpy(fix_es_reg,NULL) ;                                                    /* ;AN000;P (Set es reg correct) */
+  strcpy(fix_es_reg,"") ;                                                    /* ;AN000;P (Set es reg correct) */
   if (outregs.x.cflag & CARRY)                                                 /* ;AN000;M Is the carry flag set? */
   {                                                                            /* ;AN000;M Setup regs for extd-err */
     inregs.x.bx = STDERR ;                                                     /* ;AN000;M */
@@ -1831,7 +1827,7 @@ unsigned size_buffer ;                                                         /
   inregs.x.si = -1 ;                                                           /* ;AN000;EA Select all attributes */
   intdosx(&inregs,&outregs,&segregs) ;                                         /* ;AN000;EA Int 21 */
   status = (outregs.x.cflag & CARRY) ;                                         /* ;AN000;EA Make the call */
-  strcpy(fix_es_reg,NULL) ;                                                    /* ;AN000; */
+  strcpy(fix_es_reg,"") ;                                                    /* ;AN000; */
   return(status) ;                                                             /* ;AN000;EA */
 }                                                                              /* ;AN000;EA */
 /*����������������������������������������������������������������������������*/
@@ -2028,7 +2024,7 @@ void setup_crit_err()                                                          /
   intdosx(&inregs,&outregs,&segregs) ;                                         /* ;AN000; Int 21 */
   oldint24 = outregs.x.bx ;                                                    /* ;AN000; Save orig offset */
   *((unsigned *)(&oldint24)+1) = segregs.es ;                                  /* ;AN000; */
-  strcpy(fix_es_reg,NULL) ;                                                    /* ;AN000; */
+  strcpy(fix_es_reg,"") ;                                                    /* ;AN000; */
 
   /* set the crit err vector to point to us */
   segread(&segregs) ;                                                          /* ;AN000; */
@@ -2036,7 +2032,7 @@ void setup_crit_err()                                                          /
   inregs.x.dx = (unsigned)crit_err_handler ;                                   /* ;AN000; Offset points to us */
   segregs.ds  = segregs.cs ;                                                   /* ;AN000; */
   intdosx(&inregs,&outregs,&segregs) ;                                         /* ;AN000; Int 21 */
-  strcpy(fix_es_reg,NULL) ;                                                    /* ;AN000; */
+  strcpy(fix_es_reg,"") ;                                                    /* ;AN000; */
   return ;                                                                     /* ;AN000; */
 }                                                                              /* ;AN000; */
 /*����������������������������������������������������������������������������*/

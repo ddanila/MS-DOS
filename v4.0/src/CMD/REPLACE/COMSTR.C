@@ -1,0 +1,59 @@
+/* Source replacement for the two COMSUBS.LIB routines REPLACE uses. */
+
+#include <dos.h>
+
+static int dbcs_lead(c)
+unsigned char c;
+{
+    union REGS inregs, outregs;
+    struct SREGS segregs;
+    unsigned char far *ranges;
+
+    segread(&segregs);
+    inregs.x.ax = 0x6300;
+    intdosx(&inregs, &outregs, &segregs);
+    ranges = (unsigned char far *)MK_FP(segregs.ds, outregs.x.si);
+    while (ranges[0] || ranges[1]) {
+        if (c >= ranges[0] && c <= ranges[1])
+            return 1;
+        ranges += 2;
+    }
+    return 0;
+}
+
+char *com_strchr(string, target)
+unsigned char *string;
+unsigned char target;
+{
+    unsigned char *scan = string;
+
+    while (*scan) {
+        if (dbcs_lead(*scan) && scan[1]) {
+            scan += 2;
+            continue;
+        }
+        if (*scan == target)
+            return (char *)scan;
+        scan++;
+    }
+    return target == 0 ? (char *)scan : 0;
+}
+
+unsigned char *com_strrchr(string, target)
+unsigned char *string;
+unsigned char target;
+{
+    unsigned char *last = 0;
+    unsigned char *scan = string;
+
+    while (*scan) {
+        if (dbcs_lead(*scan) && scan[1]) {
+            scan += 2;
+            continue;
+        }
+        if (*scan == target)
+            last = scan;
+        scan++;
+    }
+    return target == 0 ? scan : last;
+}

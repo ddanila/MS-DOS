@@ -84,6 +84,8 @@ _sysloadmsg proc near								;AN000;
 ;	copy C inregs into proper registers					;AN000;
 
 	mov	di,[bp+4]		; fix di (arg 0)			;AN000;
+	push	ds
+	pop	es
 
 ;-------------------------------------------------------------------
 
@@ -141,6 +143,8 @@ _sysgetmsg proc near								;AN000;
 ;	copy C inregs into proper registers					;AN000;
 
 	mov	di,[bp+4]		; fix di (arg 0)			;AN000;
+	push	ds
+	pop	es
 
 ;-------------------------------------------------------------------
 
@@ -197,6 +201,8 @@ _sysdispmsg proc near								;AN000;
 ;	copy C inregs into proper registers					;AN000;
 
 	mov	di,[bp+4]		; fix di (arg 0)			;AN000;
+	push	ds
+	pop	es
 
 ;-------------------------------------------------------------------
 
