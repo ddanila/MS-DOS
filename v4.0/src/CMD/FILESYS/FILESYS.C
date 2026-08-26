@@ -202,8 +202,7 @@ char    *argv[];                /* array of pointer to arguments */             
         inregs.h.ah = (unsigned char) 0x62;                                                                                      /* ;an000; */
         intdosx(&inregs, &inregs, &segregs);                                                                                     /* ;an000; */
                                                                                                                                  /* ;an000; */
-        FP_OFF(cmdline) = 0x81;                                                                                                  /* ;an000; */
-        FP_SEG(cmdline) = inregs.x.bx;                                                                                           /* ;an000; */
+        cmdline = (char far *)MK_FP(inregs.x.bx, 0x81);                                                                                           /* ;an000; */
                                                                                                                                  /* ;an000; */
         i = 0;                                                                                                                   /* ;an000; */
         while ( *cmdline != (char) '\x0d' ) cmd_line[i++] = *cmdline++;                                                          /* ;an000; */
