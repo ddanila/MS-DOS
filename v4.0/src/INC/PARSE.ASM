@@ -938,7 +938,11 @@ ENDIF					;AN000;(of TimeSW)  (tm04)
 $P_Bridge:				;AN000;
 ;	jmp	short $P_Match_Exit (tm02)
 
-	jmp	$P_Match_Exit		;AN000; (tm02)
+IFDEF TPARSE_SHORT_JUMPS
+       jmp	short $P_Match_Exit	; JWasm: COMMAND transient layout
+ELSE
+       jmp	$P_Match_Exit		;AN000; (tm02)
+ENDIF
 
 $P_Match03:				;AN000;
 ; ENDIF ;AN000;(of TimeSW) (tm04)
@@ -1317,7 +1321,11 @@ $P_Value01:				;AN000; / nval =0
 
 	mov	al,$P_Number		;AN000; Set type
 	mov	ah,$P_No_Tag		;AN000; No ITEM_TAG set
+IFDEF TPARSE_SHORT_JUMPS
+	jmp	short $P_Value_Exit	; JWasm: COMMAND transient layout
+ELSE
 	jmp	$P_Value_Exit		;AN000;
+ENDIF
 
 $P_Value02:				;AN000; / nval = 1
 IF	Val1SW				;AN000;(Check if value list id #1 is supported)

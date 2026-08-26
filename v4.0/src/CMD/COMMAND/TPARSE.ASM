@@ -17,6 +17,7 @@ TRANSPACE	SEGMENT PUBLIC BYTE	;AN000;
 	IncSW	equ	0		;AN000; do not include psdata.inc
 	QusSW	equ	0		;AN025; do not include quoted string
 	LFEOLSW equ	0		;AN044; do not use 0ah as line terminator
+	TPARSE_SHORT_JUMPS equ 1	; JWasm: preserve COMMAND transient layout
 
 .xlist
 .xcref

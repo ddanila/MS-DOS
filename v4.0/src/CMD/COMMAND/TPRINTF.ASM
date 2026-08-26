@@ -293,7 +293,7 @@ assume	es:resgroup				;  right error msg, and jmp to cerror.
 	jz	go_to_error
 	invoke	PipeOff
 	mov	dx,offset trangroup:pipeemes_ptr
-	jmp	print_err_exit			;AC000;
+	jmp	SHORT print_err_exit		;AC000; JWasm: preserve transient layout
 
 go_to_error:
 	mov	msg_disp_class,ext_msg_class	;AN000; set up extended error msg class

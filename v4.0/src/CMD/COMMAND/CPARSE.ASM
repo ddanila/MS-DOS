@@ -230,7 +230,7 @@ testsplat:
 	jmp	SHORT testpath
 
 badperr2j:
-	jmp	badperr2
+	jmp	SHORT badperr2			; JWasm: preserve transient layout
 
 expand_filename:
 	mov	ah,7
