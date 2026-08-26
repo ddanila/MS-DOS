@@ -583,8 +583,9 @@ ASSUME DS:RESGROUP,ES:RESGROUP,CS:RESGROUP
 
 MSG_UTILNAME <COMMAND>				;AN000; define utility name
 
-;AD054; MSG_SERVICES <COMR,MSGDATA,COMMAND.CLA,COMMAND.CL3,COMMAND.CL4>  ;AN000; get message services data and resident messages
-MSG_SERVICES <COMR,MSGDATA,COMMAND.CLA>  ;AN054; get message services data and resident messages
+; CL3 and CL4 define $M_CLS_1/$M_CLS_2, which the resident message
+; dispatcher references. Omitting them leaves COMMAND.COM partially linked.
+MSG_SERVICES <COMR,MSGDATA,COMMAND.CLA,COMMAND.CL3,COMMAND.CL4>
 
 
 CRITICAL_MSG_START	LABEL	BYTE		;AN000; start of critical error messages
