@@ -44,12 +44,12 @@
 
 /*���������������������������������������������������������������������������*/
 
-#include "ctype.h"                                                                                           /* ;an000; */
-#include "conio.h"                      /* need for kbhit prototype */                                       /* ;an000; */
-#include "stdio.h"                                                                                           /* ;an000; */
-#include "dos.h"                                                                                             /* ;an000; */
-#include "string.h"                                                                                          /* ;an000; */
-#include "stdlib.h"                                                                                          /* ;an000; */
+#include <ctype.h>                                                                                           /* ;an000; */
+#include <conio.h>                      /* need for kbhit prototype */                                       /* ;an000; */
+#include <stdio.h>                                                                                           /* ;an000; */
+#include <dos.h>                                                                                             /* ;an000; */
+#include <string.h>                                                                                          /* ;an000; */
+#include <stdlib.h>                                                                                          /* ;an000; */
 #include "msgdef.h"                                                                                          /* ;an000; */
 #include "parse.h"                                                                                           /* ;an000; */
 
@@ -175,9 +175,9 @@ struct p_value_blk p_noval;                                                     
 #define NUL      (char) '\0'                                                                                                     /* ;an000; */
 #define TAB      '\x09'                                                                                                          /* ;an000; */
 #define BLANK   ' '                                                                                                              /* ;an000; */
-                                                                                                                                 /* ;an000; */
-extern  unsigned DOS_TopOfMemory;         /* PSP Top of memory from 'C' init code  */                                            /* ;an005; */
 
+#define SET_FP(pointer, segment, offset) ((pointer) = MK_FP((segment), (offset)))
+                                                                                                                                 /* ;an000; */
 /*���������������������������������������������������������������������������*/                                                  /* ;an000; */
                                                                                                                                  /* ;an000; */
         unsigned far         *ArenaHeadPtr;                                                                                      /* ;an000; */
@@ -205,12 +205,6 @@ extern  unsigned DOS_TopOfMemory;         /* PSP Top of memory from 'C' init cod
                                                                                                                                  /* ;an000; */
 void     main(int, char *[]);                                                                                                    /* ;an000; */
                                                                                                                                  /* ;an000; */
-int      printf();
-int      sprintf();
-int      strcmp(const char *, const char *);
-int      sscanf();                                                                                                               /* ;an000; */
-void     exit(int);                                                                                                              /* ;an000; */
-int      kbhit();                                                                                                                /* ;an000; */
 char     *OwnerOf(struct ARENA far *);                                                                                           /* ;an000; */
 char     *TypeOf(struct ARENA far *);                                                                                            /* ;an000; */
 unsigned long AddressOf(char far *);                                                                                             /* ;an000; */
@@ -290,8 +284,7 @@ char     *argv[];                                                               
         InRegs.h.ah = (unsigned char) 0x62;                                     /* an000; dms; get the PSP              */       /* ;an000; */
         intdosx(&InRegs, &InRegs, &SegRegs);                                    /* an000; dms; invoke the INT 21        */       /* ;an000; */
                                                                                                                                  /* ;an000; */
-        FP_OFF(cmdline) = 0x81;                                                 /* an000; dms; offset of command line   */       /* ;an000; */
-        FP_SEG(cmdline) = InRegs.x.bx;                                          /* an000; dms; segment of command line  */       /* ;an000; */
+        SET_FP(cmdline, InRegs.x.bx, 0x81);                                     /* an000; dms; PSP command line         */       /* ;an000; */
                                                                                                                                  /* ;an000; */
         i = 0;                                                                  /* an000; dms; init index               */       /* ;an000; */
         while ( *cmdline != (char) '\x0d' ) cmd_line[i++] = *cmdline++;         /* an000; dms; while no CR              */       /* ;an000; */
@@ -421,8 +414,7 @@ void    DisplayBaseDetail()                                                     
         InRegs.h.ah = (unsigned char) 0x52;                                                                                      /* ;an000; */
         intdosx(&InRegs,&OutRegs,&SegRegs);                                                                                      /* ;an000; */
                                                                                                                                  /* ;an000; */
-        FP_SEG(SysVarsPtr) = SegRegs.es;                                                                                         /* ;an000; */
-        FP_OFF(SysVarsPtr) = OutRegs.x.bx;                                                                                       /* ;an000; */
+        SET_FP(SysVarsPtr, SegRegs.es, OutRegs.x.bx);                                                                            /* ;an000; */
                                                                                                                                  /* ;an000; */
         /* Display the BIO location and size */                                                                                  /* ;an000; */
                                                                                                                                  /* ;an000; */
@@ -453,11 +445,9 @@ void    DisplayBaseDetail()                                                     
                                                                                                                                  /* ;an000; */
         /* Display the DOS location and size */                                                                                  /* ;an000; */
 
-        FP_SEG(ArenaHeadPtr) = FP_SEG(SysVarsPtr);                                                                               /* ;an004; */
-        FP_OFF(ArenaHeadPtr) = FP_OFF(SysVarsPtr) - 2;                                                                           /* ;an004; */
+        SET_FP(ArenaHeadPtr, FP_SEG(SysVarsPtr), FP_OFF(SysVarsPtr) - 2);                                                        /* ;an004; */
                                                                                                                                  /* ;an004; */
-        FP_SEG(ThisArenaPtr) = *ArenaHeadPtr;                                                                                    /* ;an004; */
-        FP_OFF(ThisArenaPtr) = 0;                                                                                                /* ;an004; */
+        SET_FP(ThisArenaPtr, *ArenaHeadPtr, 0);                                                                                  /* ;an004; */
                                                                                                                                  /* ;an000; */
         Sub0_Message(NewLineMsg,STDOUT,Utility_Msg_Class);                                                                       /* ;an000; */
                                                                                                                                  /* ;an000; */
@@ -492,11 +482,9 @@ void    DisplayBaseDetail()                                                     
                                      &Out_Var2,                                                                                  /* ;an000; */
                                      SystemDataMsg);                                                                             /* ;an000; */
                                                                                                                                  /* ;an000; */
-                        FP_SEG(NextArenaPtr) = FP_SEG(ThisArenaPtr) + ThisArenaPtr -> Paragraphs + 1;                            /* ;an000; */
-                        FP_OFF(NextArenaPtr) = 0;                                                                                /* ;an000; */
+                        SET_FP(NextArenaPtr, FP_SEG(ThisArenaPtr) + ThisArenaPtr -> Paragraphs + 1, 0);                         /* ;an000; */
                                                                                                                                  /* ;an000; */
-                        FP_SEG(ThisConfigArenaPtr) = FP_SEG(ThisArenaPtr) + 1;                                                   /* ;an000; */
-                        FP_OFF(ThisConfigArenaPtr) = 0;                                                                          /* ;an000; */
+                        SET_FP(ThisConfigArenaPtr, FP_SEG(ThisArenaPtr) + 1, 0);                                                 /* ;an000; */
                                                                                                                                  /* ;an000; */
                                                                                                                                  /* ;an000; */
                         while ( (FP_SEG(ThisConfigArenaPtr) > FP_SEG(ThisArenaPtr)) &&                                           /* ;an000; */
@@ -544,18 +532,19 @@ void    DisplayBaseDetail()                                                     
                                              SystemDataType );                                                                   /* ;an000; */
                                                                                                                                  /* ;an000; */
                                 NextConfigArenaPtr = ThisConfigArenaPtr;                                                         /* ;an000; */
-                                FP_SEG(NextConfigArenaPtr) += NextConfigArenaPtr -> Paragraphs + 1;                              /* ;an000; */
+                                SET_FP(NextConfigArenaPtr, FP_SEG(NextConfigArenaPtr) + NextConfigArenaPtr -> Paragraphs + 1,
+                                       FP_OFF(NextConfigArenaPtr));                                                              /* ;an000; */
                                 if (ThisConfigArenaPtr -> Signature == (char) 'D')                                               /* ;an000; */
                                       {                                                                                          /* ;an000; */
                                                                                                                                  /* ;an000; */
-                                        FP_SEG(ThisDeviceDriver) = FP_SEG(ThisConfigArenaPtr) + 1;                               /* ;an000; */
-                                        FP_OFF(ThisDeviceDriver) = 0;                                                            /* ;an000; */
+                                        SET_FP(ThisDeviceDriver, FP_SEG(ThisConfigArenaPtr) + 1, 0);                            /* ;an000; */
                                         while ( (a(ThisDeviceDriver) > a(ThisConfigArenaPtr)) &&                                 /* ;an000; */
                                                 (a(ThisDeviceDriver) < a(NextConfigArenaPtr))    )                               /* ;an000; */
                                                 DisplayDeviceDriver(ThisDeviceDriver,InstalledDeviceDriverMsg);                  /* ;an000; */
                                         }                                                                                        /* ;an000; */
                                                                                                                                  /* ;an000; */
-                                FP_SEG(ThisConfigArenaPtr) += ThisConfigArenaPtr -> Paragraphs + 1;                              /* ;an000; */
+                                SET_FP(ThisConfigArenaPtr, FP_SEG(ThisConfigArenaPtr) + ThisConfigArenaPtr -> Paragraphs + 1,
+                                       FP_OFF(ThisConfigArenaPtr));                                                              /* ;an000; */
                                                                                                                                  /* ;an000; */
                                 }                                                                                                /* ;an000; */
                                                                                                                                  /* ;an000; */
@@ -575,7 +564,8 @@ void    DisplayBaseDetail()                                                     
                                    Out_Str2);                                                                                    /* ;an000; */
                         }                                                                                                        /* ;an000; */
                                                                                                                                  /* ;an000; */
-                FP_SEG(ThisArenaPtr) += ThisArenaPtr -> Paragraphs + 1;                                                          /* ;an000; */
+                SET_FP(ThisArenaPtr, FP_SEG(ThisArenaPtr) + ThisArenaPtr -> Paragraphs + 1,
+                       FP_OFF(ThisArenaPtr));                                                                                    /* ;an000; */
                                                                                                                                  /* ;an000; */
                 }                                                                                                                /* ;an000; */
         Out_Var1 = AddressOf((char far *)ThisArenaPtr);                                                                          /* ;an000; */
@@ -667,8 +657,7 @@ void DisplayBaseSummary()                                                       
         InRegs.h.ah = GET_PSP;                  /* get PSP function call */                                                      /* ;an000; */
         intdos(&InRegs,&OutRegs);                                                                                                /* ;an000; */
                                                                                                                                  /* ;an000; */
-        FP_SEG(PSPptr) = OutRegs.x.bx;          /* PSP segment */                                                                /* ;an000; */
-        FP_OFF(PSPptr) = 0;                     /* offset 0 */                                                                   /* ;an000; */
+        SET_FP(PSPptr, OutRegs.x.bx, 0);        /* PSP segment, offset 0 */                                                      /* ;an000; */
 
 /* Get total memory in system */                                                                                                 /* ;an000; */
         int86(MEMORY_DET,&InRegs,&OutRegs);                                                                                      /* ;an000; */
@@ -681,8 +670,7 @@ void DisplayBaseSummary()                                                       
         int86x(0x15, &InRegs, &OutRegs, &SegRegs);                                                                               /* ;an000; */
         if (OutRegs.x.cflag == 0)                                                                                                /* ;an000; */
               {                                                                                                                  /* ;an000; */
-                FP_SEG(CarvedPtr) = SegRegs.es;                                                                                  /* ;an000; */
-                FP_OFF(CarvedPtr) = 0;                                                                                           /* ;an000; */
+                SET_FP(CarvedPtr, SegRegs.es, 0);                                                                                /* ;an000; */
                 total_mem = total_mem + ( (unsigned long int) (*CarvedPtr) * 1024l) ;   /* ;an002; dms;adjust total for */
                 }                                                                       /*             RAM carve value  */
                                                                                                                                  /* ;an000; */
@@ -691,7 +679,7 @@ void DisplayBaseSummary()                                                       
         Sub1_Message(AvailableMemoryMsg,STDOUT,Utility_Msg_Class,&avail_mem);                                                    /* ;an000; */
                                                                                                                                  /* ;an000; */
 /* Calculate the total memory used.   PSP segment * 16. Subtract from total to get free_mem */                                   /* ;an000; */
-        free_mem = (DOS_TopOfMemory * 16l) - (FP_SEG(PSPptr)*16l);                                                               /* ;an000;ac005; */
+        free_mem = (PSPptr->top_of_memory * 16l) - (FP_SEG(PSPptr)*16l);                                                         /* ;an000;ac005; */
                                                                                                                                  /* ;an000; */
         Sub1_Message(FreeMemoryMsg,STDOUT,Utility_Msg_Class,&free_mem);                                                          /* ;an000; */
                                                                                                                                  /* ;an000; */
@@ -777,8 +765,7 @@ void DisplayExtendedSummary()                                                   
   InRegs.h.ah = (unsigned char) 0x52;                                           /* Get SysVar Pointer   ;an001; dms;*/
   intdosx(&InRegs,&OutRegs,&SegRegs);                                           /* Invoke interrupt     ;an001; dms;*/
                                                                                                                                                          /* ;an000; */
-  FP_SEG(SysVarsPtr) = SegRegs.es;                                              /* put pointer in var   ;an001; dms;*/
-  FP_OFF(SysVarsPtr) = OutRegs.x.bx;                                            /*                      ;an001; dms;*/
+  SET_FP(SysVarsPtr, SegRegs.es, OutRegs.x.bx);                                 /* put pointer in var   ;an001; dms;*/
   if ((SysVarsPtr) -> ExtendedMemory != 0)                                      /* extended memory?     ;an001; dms;*/
   {                                                                             /* yes                  ;an001; dms;*/
       EXTMemoryTot = (long) (SysVarsPtr) -> ExtendedMemory;                     /* get total EM size    ;an001; dms;*/
@@ -903,7 +890,7 @@ struct ARENA far *ArenaPtr;                                                     
         if (PspSegment == 0) sprintf(o,Ibmdos);                                                                                  /* ;an000; */
          else if (PspSegment == 8) sprintf(o,Ibmbio);                                                                            /* ;an000; */
           else {                                                                                                                 /* ;an000; */
-                FP_SEG(ArenaPtr) = PspSegment-1;        /* -1 'cause Arena is 16 bytes before PSP */                             /* ;an000; */
+                SET_FP(ArenaPtr, PspSegment-1, FP_OFF(ArenaPtr)); /* -1 'cause Arena is 16 bytes before PSP */                    /* ;an000; */
                 StringPtr = (char far *) &(ArenaPtr -> OwnerName[0]);                                                            /* ;an000; */
                 for (i = 0; i < 8; i++) *o++ = *StringPtr++;                                                                     /* ;an000; */
                 *o = (char) '\0';                                                                                                /* ;an000; */
@@ -936,12 +923,10 @@ unsigned far *EnvironmentSegmentPtr;                                            
                         if (*OutputPtr == NUL) sprintf(OutputPtr,Ibmdos);                                                        /* ;an000; */
                         }                                                                                                        /* ;an000; */
                  else {                                                                                                          /* ;an000; */
-                        FP_SEG(EnvironmentSegmentPtr) = PspSegment;                                                              /* ;an000; */
-                        FP_OFF(EnvironmentSegmentPtr) = 44;                                                                      /* ;an000; */
+                        SET_FP(EnvironmentSegmentPtr, PspSegment, 44);                                                           /* ;an000; */
                                                                                                                                  /* ;an000; */
 /*                         FP_SEG(StringPtr) = *EnvironmentSegmentPtr;  */                                                          /* ;an000; */
-                        FP_SEG(StringPtr) = FP_SEG(EnvironmentSegmentPtr);                                                              /* ;an000; */
-                        FP_OFF(StringPtr) = 0;                                                                                   /* ;an000; */
+                        SET_FP(StringPtr, FP_SEG(EnvironmentSegmentPtr), 0);                                                     /* ;an000; */
                                                                                                                                  /* ;an000; */
                         while ( (*StringPtr != NUL) || (*(StringPtr+1) != NUL) ) StringPtr++;                                    /* ;an000; */
                                                                                                                                  /* ;an000; */
@@ -1003,8 +988,7 @@ struct ARENA far *Header;                                                       
                 if (Message_Number == 0xff) Message_Number = BlankMsg;
                 }                                                                            /* ;an000; */
         else {                                                                              /* ;an000; */
-                FP_SEG(EnvironmentSegmentPtr) = PspSegment;                                  /* ;an000; */
-                FP_OFF(EnvironmentSegmentPtr) = 44;                                          /* ;an000; */
+                SET_FP(EnvironmentSegmentPtr, PspSegment, 44);                               /* ;an000; */
                                                                                                                                  /* ;an000; */
                                                                                                                                  /* ;an000; */
                 if (PspSegment == FP_SEG(Header)+1)
@@ -1020,8 +1004,7 @@ struct ARENA far *Header;                                                       
         InRegs.h.dh = Utility_Msg_Class;                             /* ;an000; */
         sysgetmsg(&InRegs,&SegRegs,&OutRegs);                        /* ;an000; */
 
-        FP_OFF(Message_Buf)    = OutRegs.x.si;                                                      /* ;an000; */
-        FP_SEG(Message_Buf)    = SegRegs.ds;                                                        /* ;an000; */
+        SET_FP(Message_Buf, SegRegs.ds, OutRegs.x.si);                                               /* ;an000; */
 
         i = 0;
         while ( *Message_Buf != (char) '\x0' )
@@ -1178,8 +1161,7 @@ char    *Replace_Parm1;                                                         
                                 InRegs.h.dh = Message_Type;                                                                      /* ;an000; */
                                 sysgetmsg(&InRegs,&SegRegs,&OutRegs);                                                            /* ;an000; */
                                                                                                                                  /* ;an000; */
-                                FP_OFF(sublist[2].value)    = OutRegs.x.si;                                                      /* ;an000; */
-                                FP_SEG(sublist[2].value)    = SegRegs.ds;                                                        /* ;an000; */
+                                SET_FP(sublist[2].value, SegRegs.ds, OutRegs.x.si);                                              /* ;an000; */
                                 sublist[2].size      = Sublist_Length;                                                           /* ;an000; */
                                 sublist[2].reserved  = Reserved;                                                                 /* ;an000; */
                                 sublist[2].id        = 2;                                                                        /* ;an000; */
@@ -1259,8 +1241,7 @@ int               Replace_Message1;                                             
                                 InRegs.h.dh = Message_Type;                                                                      /* ;an000; */
                                 sysgetmsg(&InRegs,&SegRegs,&OutRegs);                                                            /* ;an000; */
                                                                                                                                  /* ;an000; */
-                                FP_OFF(sublist[3].value)    = OutRegs.x.si;                                                      /* ;an000; */
-                                FP_SEG(sublist[3].value)    = SegRegs.ds;                                                        /* ;an000; */
+                                SET_FP(sublist[3].value, SegRegs.ds, OutRegs.x.si);                                              /* ;an000; */
                                 sublist[3].size      = Sublist_Length;                                                           /* ;an000; */
                                 sublist[3].reserved  = Reserved;                                                                 /* ;an000; */
                                 sublist[3].id        = 3;                                                                        /* ;an000; */
@@ -1293,8 +1274,7 @@ int               Replace_Message1;                                             
                                 InRegs.h.dh = Message_Type;                                                                      /* ;an000; */
                                 sysgetmsg(&InRegs,&SegRegs,&OutRegs);                                                            /* ;an000; */
                                                                                                                                  /* ;an000; */
-                                FP_OFF(sublist[3].value)    = OutRegs.x.si;                                                      /* ;an000; */
-                                FP_SEG(sublist[3].value)    = SegRegs.ds;                                                        /* ;an000; */
+                                SET_FP(sublist[3].value, SegRegs.ds, OutRegs.x.si);                                              /* ;an000; */
                                 sublist[3].size      = Sublist_Length;                                                           /* ;an000; */
                                 sublist[3].reserved  = Reserved;                                                                 /* ;an000; */
                                 sublist[3].id        = 3;                                                                        /* ;an000; */
@@ -1370,8 +1350,7 @@ int                     Replace_Message2;                                       
                                 InRegs.h.dh        = Message_Type;                                                               /* ;an000; */
                                 sysgetmsg(&InRegs,&SegRegs,&OutRegs);                                                            /* ;an000; */
                                                                                                                                  /* ;an000; */
-                                FP_OFF(sublist[2].value)    = OutRegs.x.si;                                                      /* ;an000; */
-                                FP_SEG(sublist[2].value)    = SegRegs.ds;                                                        /* ;an000; */
+                                SET_FP(sublist[2].value, SegRegs.ds, OutRegs.x.si);                                              /* ;an000; */
                                 sublist[2].size      = Sublist_Length;                                                           /* ;an000; */
                                 sublist[2].reserved  = Reserved;                                                                 /* ;an000; */
                                 sublist[2].id        = 2;                                                                        /* ;an000; */
@@ -1393,8 +1372,7 @@ int                     Replace_Message2;                                       
                                 InRegs.h.dh = Message_Type;                                                                      /* ;an000; */
                                 sysgetmsg(&InRegs,&SegRegs,&OutRegs);                                                            /* ;an000; */
                                                                                                                                  /* ;an000; */
-                                FP_OFF(sublist[4].value)    = OutRegs.x.si;                                                      /* ;an000; */
-                                FP_SEG(sublist[4].value)    = SegRegs.ds;                                                        /* ;an000; */
+                                SET_FP(sublist[4].value, SegRegs.ds, OutRegs.x.si);                                              /* ;an000; */
                                 sublist[4].size      = Sublist_Length;                                                           /* ;an000; */
                                 sublist[4].reserved  = Reserved;                                                                 /* ;an000; */
                                 sublist[4].id        = 4;                                                                        /* ;an000; */
@@ -1653,12 +1631,10 @@ char    far *Cmd_Ptr;                                                           
                                                                                 /*;an003; dms;                          */
         {                                                                       /*;an003; dms;                          */
         segread(&SegRegs);                                                      /*;an003; dms;                          */
-        FP_SEG(Cmd_Ptr) = SegRegs.ds;                                           /*;an003; dms;                          */
-        FP_OFF(Cmd_Ptr) = OutRegs.x.si;                                         /*;an003; dms;                          */
+        SET_FP(Cmd_Ptr, SegRegs.ds, OutRegs.x.si);                              /*;an003; dms;                          */
         *Cmd_Ptr        = '\0';                                                 /*;an003; dms;                          */
                                                                                 /*;an003; dms;                          */
-        FP_SEG(sublist[1].value) = SegRegs.ds;                                  /*;an003; dms;                          */
-        FP_OFF(sublist[1].value) = Parse_Ptr;                                   /*;an003; dms;                          */
+        SET_FP(sublist[1].value, SegRegs.ds, Parse_Ptr);                        /*;an003; dms;                          */
         sublist[1].size      = Sublist_Length;                                  /*;an003; dms;                          */
         sublist[1].reserved  = Reserved;                                        /*;an003; dms;                          */
         sublist[1].id        = 0;                                               /*;an003; dms;                          */
@@ -1677,5 +1653,3 @@ char    far *Cmd_Ptr;                                                           
         }                                                                       /*;an003; dms;                          */
         return;                                                                 /*;an003; dms;                          */
 }                                                                               /*;an003; dms;                          */
-
-
