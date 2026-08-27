@@ -569,11 +569,11 @@ void get_fileheader_length()
 	(						/*;AN000;3*/
 	  control_file_handle,				/*;AN000;3*/
 	  (char far *)&fileheader_length,		/*;AN000;3*/
-	  (unsigned short)2,				/*;AN000;3*/
+	  (unsigned short)1,				/*;AN000;3*/
 	  (unsigned far *)&read_count			/*;AN000;3*/
 	 );						/*;AN000;3*/
 
-	if (retcode != 0 || read_count != 2)		/*;AN000;3*/
+	if (retcode != 0 || read_count != 1)		/*;AN000;3*/
 	 {						/*;AN000;3*/
 	  display_it(SOURCE_NO_BACKUP_FILE,STND_ERR_DEV,0,NO_RESPTYPE,(BYTE)UTIL_MSG); /*;AN000;6*/
 	  unexperror(NOBACKUPFILE);			/*;AN000;3*/

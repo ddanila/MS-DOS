@@ -275,12 +275,7 @@ struct timedate *td;
 	unexperror(retcode);
    }
 
-   if ((retcode = DOSQFILEMODE((char far *)&search_string[0],
-		  (unsigned far *) &attributes,
-		  (DWORD) 0)) !=0) {
-	com_msg(retcode);
-	unexperror(retcode);
-   }
+   attributes = fileinfo_buf.attributes;
 
 
    DOSCLOSE(file_pointer);
@@ -654,4 +649,3 @@ int readonly_or_changed(attrib,destd,fspec,fpath)
      }
      /* endif  */
 } /* end of subroutine readonly_or_changed */
-
