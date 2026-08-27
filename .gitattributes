@@ -11,6 +11,7 @@
 *.BAT   text eol=crlf
 *.INI   text eol=crlf
 *.IDX   text eol=crlf
+*.PRO   text eol=crlf
 
 # Source files: LF only — CRLF corrupts MASM THEADR records in .OBJ output
 *.ASM   text eol=lf
