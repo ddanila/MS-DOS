@@ -66,7 +66,7 @@
 /*      Define subroutines                                              */                                                       /* ;an000; */
 /*                                                                      */                                                       /* ;an000; */
 /************************************************************************/                                                       /* ;an000; */
-void    main(int, char *[]);                                                                                                     /* ;an000; */
+int     main(int, char *[]);                                                                                                     /* ;an000; */
 void    parse_init(void);                                                                                                        /* ;an000; */
 void    device_attach(int, char *, char *, char *);                                                                              /* ;an000; */
 void    device_detach(char *);                                                                                                   /* ;an000; */
@@ -131,6 +131,7 @@ struct                                                                          
         unsigned int    target_count;                                                                                            /* ;an000; */
         char            target_string[128];                                                                                      /* ;an000; */
         } GAL_Target;                                                                                                            /* ;an000; */
+char    fs_name_array[9];            /* Keep the near target pointer in DGROUP. */                                               /* ;an000; */
                                                                                                                                  /* ;an000; */
 struct                                                                                                                           /* ;an000; */
         {                                                                                                                        /* ;an000; */
@@ -161,7 +162,7 @@ struct   SREGS   segregs;                                                       
 |                                                                       |
 +----------------------------------------------------------------------*/
                                                                                                                                  /* ;an000; */
-void main(argc,argv)                                                                                                             /* ;an000; */
+int main(argc,argv)                                                                                                              /* ;an000; */
                                                                                                                                  /* ;an000; */
 int     argc;                   /* number of arguments passed on command line */                                                 /* ;an000; */
 char    *argv[];                /* array of pointer to arguments */                                                              /* ;an000; */
@@ -291,6 +292,7 @@ char    *argv[];                /* array of pointer to arguments */             
                                                                                                                                  /* ;an000; */
                                                                                                                                  /* ;an000; */
        }                                     /* end FILESYS MAIN */                                                              /* ;an000; */
+  return(0);                                                                                                                     /* ;an000; */
   }                                                                                                                              /* ;an000; */
                                                                                                                                  /* ;an000; */
                                                                                                                                 /* ;an000; */
@@ -438,7 +440,9 @@ void device_attach(parm_cnt, drive_ptr, fs_name_ptr, parm_ptr)                  
   inregs.x.di = (unsigned int) &Attach_block;          /* point to dest */                                                       /* ;an000; */
   inregs.x.cx = 0;                      /* = 0 for network compat. */                                                            /* ;an000; */
                                                                                                                                  /* ;an000; */
-  intdos(&inregs, &outregs);            /* make the call */                                                                      /* ;an000; */
+  segread(&segregs);                    /* DS:SI and ES:DI address near data. */                                                  /* ;an000; */
+  segregs.es = segregs.ds;                                                                                                      /* ;an000; */
+  intdosx(&inregs, &outregs, &segregs); /* make the call */                                                                      /* ;an000; */
                                                                                                                                  /* ;an000; */
   if ((outregs.x.cflag & CARRY_FLAG) == CARRY_FLAG) fs_error(outregs.x.ax);                                                      /* ;an000; */
   return;                                                                                                                        /* ;an000; */
@@ -467,7 +471,9 @@ void device_detach(char *rd_source)          /* source for detach (e.g. LPT1:, E
   inregs.x.ax = CANCEL_REDIRECTION;     /* fcn code for cancel redir */                                                          /* ;an000; */
   inregs.x.si = (unsigned int) rd_source;              /* point to source */                                                     /* ;an000; */
                                                                                                                                  /* ;an000; */
-  intdos(&inregs, &outregs);            /* make the call */                                                                      /* ;an000; */
+  segread(&segregs);                    /* DS:SI addresses near data. */                                                         /* ;an000; */
+  segregs.es = segregs.ds;                                                                                                      /* ;an000; */
+  intdosx(&inregs, &outregs, &segregs); /* make the call */                                                                      /* ;an000; */
                                                                                                                                  /* ;an000; */
                                                                                                                                  /* ;an000; */
   if ((outregs.x.cflag & CARRY_FLAG) == CARRY_FLAG) fs_error(outregs.x.ax);                                                      /* ;an000; */
@@ -494,8 +500,6 @@ void fs_status(char *name)                                                      
   int   message_type;                   /* value of message to build*/                                                           /* ;an000; */
   int   search_flag;                    /* flag */                                                                               /* ;an000; */
   int   header_flag;                    /* flag used to help decide if header should be displayed */                             /* ;an000; */
-  char  fs_name_array[9];                                                                                                        /* ;an000; */
-                                                                                                                                 /* ;an000; */
   /* initialize some things */                                                                                                   /* ;an000; */
                                                                                                                                  /* ;an000; */
   GAL_Target.target_fs_name = (char *)fs_name_array;                                                                             /* ;an000; */
@@ -519,7 +523,9 @@ void fs_status(char *name)                                                      
         inregs.x.bx = redir_index;                                              /* an000; dms;list entry number         */       /* ;an000; */
         inregs.x.si = (unsigned int)&GAL_Device;                                /* an000; dms;point to device buffer    */       /* ;an000; */
         inregs.x.di = (unsigned int)&GAL_Target;                                /* an000; dms;point to target buffer    */       /* ;an000; */
-        intdos(&inregs,&outregs);                                               /* an000; dms;invoke call               */       /* ;an000; */
+        segread(&segregs);                                                      /* an000; DS:SI and ES:DI are near data */       /* ;an000; */
+        segregs.es = segregs.ds;                                                                                                 /* ;an000; */
+        intdosx(&inregs,&outregs,&segregs);                                      /* an000; dms;invoke call               */       /* ;an000; */
         while ((outregs.x.ax != NO_MORE_FILES) &&                                                                                /* ;an000; */
               ((outregs.x.cflag & CARRY_FLAG) != CARRY_FLAG))                                                                    /* ;an000; */
         {                                                                                                                        /* ;an000; */
@@ -584,7 +590,9 @@ void fs_status(char *name)                                                      
                 inregs.x.bx = redir_index;                                      /* an000; dms;list entry number         */       /* ;an000; */
                 inregs.x.si = (unsigned int)&GAL_Device;                        /* an000; dms;point to device buffer    */       /* ;an000; */
                 inregs.x.di = (unsigned int)&GAL_Target;                        /* an000; dms;point to target buffer    */       /* ;an000; */
-                intdos(&inregs,&outregs);                                       /* an000; dms;invoke call               */       /* ;an000; */
+                segread(&segregs);                                              /* an000; DS:SI and ES:DI are near data */       /* ;an000; */
+                segregs.es = segregs.ds;                                                                                         /* ;an000; */
+                intdosx(&inregs,&outregs,&segregs);                              /* an000; dms;invoke call               */       /* ;an000; */
         }                                                                                                                        /* ;an000; */
                                                                                                                                  /* ;an000; */
         if (header_flag == FALSE)                                                                                                /* ;an000; */
