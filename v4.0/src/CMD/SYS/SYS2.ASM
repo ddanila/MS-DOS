@@ -208,13 +208,13 @@ BUF			LABEL BYTE	; beginning of area for file reads
 
 					; initalize current_entry to #3
 
-   ASSUME ds:nothing,es:DATA
+   ASSUME ds:nothing,ES:DGROUP
 
    MOV	WORD PTR [THIS_DPB+2],DS	;				       ;AN004;
    push es				;				       ;AN004;
    pop	ds				;				       ;AN004;
 
-   ASSUME ds:DATA
+   ASSUME DS:DGROUP
 
    mov	WORD PTR [THIS_DPB],bx		;				       ;AN004;
    lds	bx,[THIS_DPB]			;				       ;AN004;
@@ -380,7 +380,7 @@ $$IF7:
 
    Move_DIR_Entry PROC NEAR
 
-   ASSUME ds:DATA			;  must ensure this is true xxxxxxxxxxxxxxxxx
+   ASSUME DS:DGROUP			;  must ensure this is true xxxxxxxxxxxxxxxxx
 
 					; source = source entry (#1 or #2) DS:SI
    lea	di,ENTRY_BUF			; dest	 = entry_buffer 	       ;AN004;
@@ -1135,7 +1135,7 @@ $$EN88:
        mov  es,bx			;				       ;AN004;
        lds  bx,[THIS_DPB]		;				       ;AN004;
 
-       ASSUME ds:nothing,es:DATA
+       ASSUME ds:nothing,ES:DGROUP
 
        mov  [bx.dpb_next_free],2	;				       ;AN004;
        mov  ax,es			;				       ;AN004;
@@ -1143,7 +1143,7 @@ $$EN88:
        pop  es				;				       ;AN004;
        xor  ax,ax			; signal success (ax = 0 , cf = 0)     ;AN004;
 
-       ASSUME DS:data, es:nothing
+       ASSUME DS:DGROUP, es:nothing
 
 ;  $endif				;				       ;AN004;
 $$IF87:
@@ -1896,14 +1896,14 @@ $$IF154:
 		       mov  es,bx	;				       ;AN004;
 		       lds  bx,[THIS_DPB] ;				       ;AN004;
 
-		       ASSUME ds:nothing,es:DATA
+		       ASSUME ds:nothing,ES:DGROUP
 
 		       mov  [bx.dpb_next_free],2 ;			       ;AN004;
 		       mov  ax,es	;				       ;AN004;
 		       mov  ds,ax	;				       ;AN004;
 		       pop  es		;				       ;AN004;
 
-		       ASSUME DS:data, es:nothing
+		       ASSUME DS:DGROUP, es:nothing
 
 ;		   $endif		;				       ;AN004;
 $$IF156:

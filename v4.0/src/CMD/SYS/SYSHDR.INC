@@ -247,6 +247,7 @@ CODE    ENDS
 
 DATA    SEGMENT PARA PUBLIC
 DATA    ENDS
+DGROUP  GROUP DATA
 
 ;                       $SALUT (4,25,30,41)
                                         ;--------------------------------------

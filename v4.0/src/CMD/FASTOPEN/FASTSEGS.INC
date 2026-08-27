@@ -17,4 +17,9 @@ cseg_seek   ends                                                             ;AN
 cseg_init   segment  Public 'CODE' ; represents INIT
 cseg_init   ends
 
+GMAIN      GROUP cseg_main
+GOPEN      GROUP cseg_open
+GSEEK      GROUP cseg_seek
+GINIT      GROUP cseg_init
+
 

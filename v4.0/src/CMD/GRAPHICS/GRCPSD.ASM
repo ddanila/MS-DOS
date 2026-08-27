@@ -106,4 +106,4 @@ COPY_SHARED_DATA  ENDP		       ;;					;AN000;
 				       ;;					;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;					;AN000;
 CODE	ENDS									;AN000;
-	END COPY_SHARED_DATA							;AN000;
+	END									;AN000; linked helper module, no program entry

@@ -404,7 +404,7 @@ BEGIN			PROC NEAR
    add	ax,cx				; generate DATA segment value
    mov	ds,ax
 
-   ASSUME DS:DATA,ES:NOTHING
+   ASSUME DS:DGROUP,ES:NOTHING
 
    mov	cx,sp				; get lowest available spot
    mov	sp,OFFSET EOS			; set up internal stack
@@ -690,7 +690,7 @@ $$IF15:
 	   mov	ax,POS_SEG		;				       ;AN021;
 	   mov	ds,ax			;				       ;AN021;
 
-	   ASSUME ds:nothing,es:DATA
+	   ASSUME ds:nothing,ES:DGROUP
 
 	   xor	bx,bx			;				       ;AN021;
 
@@ -700,7 +700,7 @@ $$IF15:
 	   pop	di			;				       ;AN021;
 	   pop	ds			;				       ;AN021;
 
-	   ASSUME ds:DATA,es:nothing
+	   ASSUME DS:DGROUP,es:nothing
 
 	   mov	SourceSize,bx		;				       ;AN021;
 	   mov	Spec_Flag,1		; set spec flag 		       ;AN021;
@@ -804,14 +804,14 @@ $$SR35:
    pop	ds				;				       ;AN000;
    xor	dx,dx				;				       ;AN021;
 
-   ASSUME ds:nothing,es:DATA
+   ASSUME ds:nothing,ES:DGROUP
 
    call SysParse			; parse command line		       ;AN000;
 
    push es				;				       ;AN000;
    pop	ds				;				       ;AN000;
 
-   ASSUME ds:DATA,es:nothing
+   ASSUME DS:DGROUP,es:nothing
 
 
    ret					;				       ;AN021;
@@ -964,7 +964,7 @@ public Check_Default_Drive
    push ds
    pop	es
 
-   ASSUME DS:DATA,ES:DATA
+   ASSUME DS:DGROUP,ES:DGROUP
 
    mov	DOSEntFree,1			; set to not found		       ;AC021;
    mov	BIOSEntFree,1			; set to not found		       ;AC021;
