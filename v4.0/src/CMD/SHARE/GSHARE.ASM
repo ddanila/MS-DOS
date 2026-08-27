@@ -647,15 +647,10 @@ mclo9: pop si				; clean stack
 ;  $else				;an000;cx was 0 - this is an error
    JMP SHORT $$EN1
 $$IF1:
+       MOV  AX,error_lock_violation	; invalid range count
        stc				;an000;signal an error occurred
 ;  $endif				;				       ;an000;
 $$EN1:
-
-;  $if	c				; if there was an error 	       ;AN000;
-   JNC $$IF4
-       MOV  AX,error_lock_violation	; load the return code		       ;AN000;
-;  $endif				; endif there was an error	       ;AN000;
-$$IF4:
 
    LeaveCrit critShare			;				       ;AN000;
 
@@ -1194,7 +1189,7 @@ $$IF9:
 
    call OFL				; (ds:di) = pointer to new, orphan lock record
 ;  $if	nc				; if space available		       ;AC000;
-   JC $$IF11
+   JC $$EN11				; preserve sharing-buffer-exceeded
        mov  WORD PTR [di].rlr_sptr,bp	; store SFT offset
        mov  WORD PTR [di].rlr_sptr+2,es ; store SFT offset
        mov  [di].rlr_fba+2,ax
