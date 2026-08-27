@@ -407,7 +407,7 @@ char **envp;
 			cptr = GetNum(cptr,&tickvalue);
 			tickpacket.tickvall = (unsigned char) tickvalue;
 			tickpacket.tickvalh = (unsigned char) (tickvalue >> 8);
-			tickpacket.Tchar = '\x0B';	 /* set tick is call 5 */
+			tickpacket.Tchar = '\x05';	 /* set tick is call 5 */
 			switches.SWITCH_T = 1;
 			break;
 
