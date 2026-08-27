@@ -69,6 +69,8 @@ _parse	proc	near								;AN000;
 ;	copy C inregs into proper registers
 
 	mov	di,[bp+4]		; fix di (arg 0)			;AN000;
+	push	ds
+	pop	es
 
 ;-------------------------------------------------------------------
 

@@ -79,3 +79,31 @@ unsigned char target;
     }
     return target == 0 ? scan : last;
 }
+
+unsigned char *com_substr(string, pattern)
+unsigned char *string;
+unsigned char *pattern;
+{
+    unsigned char *scan = string;
+    unsigned char *left;
+    unsigned char *right;
+
+    if (!*pattern)
+        return string;
+    while (*scan) {
+        if (dbcs_lead(*scan) && scan[1]) {
+            scan += 2;
+            continue;
+        }
+        left = scan;
+        right = pattern;
+        while (*right && *left == *right) {
+            left++;
+            right++;
+        }
+        if (!*right)
+            return scan;
+        scan++;
+    }
+    return 0;
+}

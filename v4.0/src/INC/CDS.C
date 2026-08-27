@@ -16,7 +16,11 @@ struct CDSType *pLCDS ;
         int j ;
                                                 /* Get pointer to CDS */
         if (i >= 0 && i < SysVars.cCDS) {
+#ifdef __WATCOMC__
+                cptr = (struct CDSType far *) MK_FP((unsigned)(SysVars.pCDS >> 16), (unsigned)SysVars.pCDS + (i * sizeof(*pLCDS))) ;
+#else
                 *(long *)(&cptr) = SysVars.pCDS + (i * sizeof(*pLCDS)) ;
+#endif
 
                                                 /* Copy CDS to our program */
                 for (j=0 ; j < sizeof(*pLCDS) ; j++)
@@ -38,7 +42,11 @@ struct CDSType *pLCDS ;
         int j ;
 
         if (i >= 0 && i < SysVars.cCDS) {
+#ifdef __WATCOMC__
+                cptr = (struct CDSType far *) MK_FP((unsigned)(SysVars.pCDS >> 16), (unsigned)SysVars.pCDS + (i * sizeof(*pLCDS))) ;
+#else
                 *(long *)(&cptr) = SysVars.pCDS + (i * sizeof(*pLCDS)) ;
+#endif
 
                 for (j=0 ; j < sizeof(*pLCDS) ; j++)
                         *((char far *)cptr+j) = *((char *)pLCDS+j) ;
@@ -69,8 +77,11 @@ int i ;
 
         if (TESTFLAG(CDS.flags,CDSNET | CDSSPLICE | CDSLOCAL))
                 return FALSE ;
-
+#ifdef __WATCOMC__
+        dptr = (struct DPBType far *) MK_FP((unsigned)(CDS.pDPB >> 16), (unsigned)CDS.pDPB) ;
+#else
         *(long *)(&dptr) = CDS.pDPB ;
+#endif
 
         for (j=0 ; j < sizeof(DPB) ; j++)
                  *((char *)pd+j) = *((char far *)dptr+j) ;

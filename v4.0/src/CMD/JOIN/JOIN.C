@@ -94,11 +94,14 @@
 /**************************************************************************/
 
 #include "cds.h"
-#include "ctype.h"
-#include "dos.h"
+#include <ctype.h>
+#include <dos.h>
 #include "joinpars.h"                                                          /* ;AN000;P Parser structures */
 #include "jointype.h"
-#include "stdio.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <direct.h>
 #include "sysvar.h"
 
 /*����������������������� PARSE EQUATES ��������������������������������������*/
@@ -146,6 +149,9 @@
 /*����������������������� MISCELLANEOUS ��������������������������������������*/
 extern char *strchr() ;                                                        /* M003 */
 extern char *strbscan() ;                                                      /* SM extern'd */
+extern char fGetCDS(), fPutCDS(), fPhysical(), fNet(), fShared(), fPathErr(), getdrv() ;
+extern int rootpath(), ffirst() ;
+extern void GetVars(), PutVars() ;
 
 char cmdln_drive[64]   = {0} ;                                                 /* ;AN002; Save user's input in   */
 char cmdln_flspec[64]  = {0} ;                                                 /* ;AN002; order to pass to error */
@@ -232,7 +238,7 @@ char *v[] ;
 
   load_msg() ;                                                                 /* ;AN000;M Point to msgs & chks DOS ver */
 
-  for (index = 1; index <= c; index++)                                         /* ;AN000;P Loop through end of cmd line */
+  for (index = 1; index < c; index++)                                         /* ;AN000;P Loop through end of cmd line */
   {                                                                            /* ;AN000;P */
     strcat(source,v[index]) ;                                                  /* ;AN000;P Add the argument */
     strcat(source," ") ;                                                       /* ;AN000;P Separate with a space */
@@ -265,7 +271,7 @@ char *v[] ;
             p_filespec[fchar] = (char)*fptr ;                                  /* ;AN000;P Copy char */
             fchar++ ;                                                          /* ;AN000;P */
           }                                                                    /* ;AN000;P */
-          strcpy(fix_es_reg,NULL) ;                                            /* ;AN000;P (Set es reg correct) */
+          fix_es_reg[0] = 0 ;                                            /* ;AN000;P (Set es reg correct) */
           pflspec_flg = TRUE ;                                                 /* ;AN000;P and set the flag */
           for (inregs.x.si ; inregs.x.si < outregs.x.si ; inregs.x.si++)       /* ;AN002; Copy whatever */
           {                                                                    /* ;AN002; parser just parsed */
@@ -330,7 +336,7 @@ char *v[] ;
     dispmsg_terminate(MSG_PARMNUM,cmdln_switch) ;                              /* ;AN000;P display error msg & exit utility */
 
   GetVars(&SysVars) ;                                                          /* Access to DOS data structures */
-  strcpy(fix_es_reg,NULL) ;                                                    /* ;AN000;P (Set es reg correct) */
+  fix_es_reg[0] = 0 ;                                                    /* ;AN000;P (Set es reg correct) */
 
   if (c == 1)
     DoList() ;                                                                 /* list splices */
@@ -340,7 +346,7 @@ char *v[] ;
     if (!fGetCDS(i, &CDS))
       dispmsg_terminate(MSG_BADPARM,cmdln_drive) ;                             /* ;AC000;M display error msg & exit utility */
 
-    strcpy(fix_es_reg,NULL) ;                                                  /* ;AN000;P (Set es reg correct) */
+    fix_es_reg[0] = 0 ;                                                  /* ;AN000;P (Set es reg correct) */
     if (delflag == TRUE)                                                       /* Deassigning perhaps? */
     {
       if (!TESTFLAG(CDS.flags, CDSSPLICE))
@@ -360,12 +366,12 @@ char *v[] ;
       else
         CDS.flags = CDSINUSE ;
       GetVars(&SysVars) ;
-      strcpy(fix_es_reg,NULL) ;                                                /* ;AN000;P (Set es reg correct) */
+      fix_es_reg[0] = 0 ;                                                /* ;AN000;P (Set es reg correct) */
       SysVars.fSplice-- ;
       PutVars(&SysVars) ;
-      strcpy(fix_es_reg,NULL) ;                                                /* ;AN000;P (Set es reg correct) */
+      fix_es_reg[0] = 0 ;                                                /* ;AN000;P (Set es reg correct) */
       fPutCDS(i, &CDS) ;
-      strcpy(fix_es_reg,NULL) ;                                                /* ;AN000;P (Set es reg correct) */
+      fix_es_reg[0] = 0 ;                                                /* ;AN000;P (Set es reg correct) */
     }
     else
     {
@@ -374,24 +380,24 @@ char *v[] ;
 
       rootpath(p_filespec,path) ;                                              /* Get root path */
 
-      if (i == getdrv() ||                                                     /* M004 Start */ /* Can't mov curdrv */
+            if (i == getdrv() ||                                                     /* M004 Start */ /* Can't mov curdrv */
          !fPhysical(i)  ||                                                     /* ;AC000; */
          fShared(i))                                                           /* 33D0016   RG    */
       {                                                                        /* Determine if it was a NET error */
         if (fNet(i) || fShared(i))
-          dispmsg_terminate(MSG_NETERR) ;                                      /* ;AC000;M display error msg & exit utility */
+          dispmsg_terminate(MSG_NETERR,replparm_JOIN) ;                                      /* ;AC000;M display error msg & exit utility */
         dispmsg_terminate(MSG_BADPARM,cmdln_drive) ;                           /* ;AC000;M display error msg & exit utility */
       }
 
-      strcpy(fix_es_reg,NULL) ;                                                /* ;AN000;P (Set es reg correct) */
+      fix_es_reg[0] = 0 ;                                                /* ;AN000;P (Set es reg correct) */
       if (fPathErr(path) || *strbscan(path+3, "/\\") != 0)                     /* or curdir prefix */
         dispmsg_terminate(MSG_BADPARM,cmdln_flspec) ;                          /* ;AC000; */
 
-      strcpy(fix_es_reg,NULL) ;                                                /* ;AN000;P (Set es reg correct) */
+      fix_es_reg[0] = 0 ;                                                /* ;AN000;P (Set es reg correct) */
       if (fNet(path[0] - 'A') || fShared(path[0] - 'A'))
-        dispmsg_terminate(MSG_NETERR) ;                                        /* ;AC000;M display error msg & exit utility */
+        dispmsg_terminate(MSG_NETERR,replparm_JOIN) ;                                        /* ;AC000;M display error msg & exit utility */
 
-      strcpy(fix_es_reg,NULL) ;                                                /* ;AN000;P (Set es reg correct) */
+      fix_es_reg[0] = 0 ;                                                /* ;AN000;P (Set es reg correct) */
       dstdrv = *path - 'A' ;                                                   /* M000 Check src and dst drvs ar not same */
       if (i == dstdrv)                                                         /* M000 */
         dispmsg_terminate (MSG_BADPARM,cmdln_flspec) ;                         /* M000 */ /* ;AC000; */
@@ -413,12 +419,12 @@ char *v[] ;
       strcpy(CDS.text, path) ;
       CDS.flags = CDSINUSE | CDSSPLICE ;
       fPutCDS(i, &CDS) ;
-      strcpy(fix_es_reg,NULL) ;                                                /* ;AN000;P (Set es reg correct) */
+      fix_es_reg[0] = 0 ;                                                /* ;AN000;P (Set es reg correct) */
       GetVars(&SysVars) ;
-      strcpy(fix_es_reg,NULL) ;                                                /* ;AN000;P (Set es reg correct) */
+      fix_es_reg[0] = 0 ;                                                /* ;AN000;P (Set es reg correct) */
       SysVars.fSplice++ ;
       PutVars(&SysVars) ;
-      strcpy(fix_es_reg,NULL) ;                                                /* ;AN000;P (Set es reg correct) */
+      fix_es_reg[0] = 0 ;                                                /* ;AN000;P (Set es reg correct) */
     }
   }
   exit(0) ;

@@ -16,10 +16,13 @@ struct sysVarsType *pSVars ;
 
         iregs->h.ah = GETVARS ;                 /* Function 0x52           */
         intdosx(iregs, iregs, &syssegs) ;
-
+#ifdef __WATCOMC__
+        vptr = (struct sysVarsType far *) MK_FP(syssegs.es, iregs->x.bx) ;
+#else
         *(long *)(&vptr) = (((long)syssegs.es) << 16)+(iregs->x.bx & 0xffffL) ;
+#endif
 
-        for (i=0 ; i <= sizeof(*pSVars) ; i++)
+        for (i=0 ; i < sizeof(*pSVars) ; i++)
                 *((char *)pSVars+i) = *((char far *)vptr+i) ;
 
 }
@@ -39,10 +42,13 @@ struct sysVarsType *pSVars ;
 
         iregs->h.ah = GETVARS ;                 /* Function 0x52           */
         intdosx(iregs, iregs, &syssegs) ;
-
+#ifdef __WATCOMC__
+        vptr = (struct sysVarsType far *) MK_FP(syssegs.es, iregs->x.bx) ;
+#else
         *(long *)(&vptr) = (((long)syssegs.es) << 16)+(iregs->x.bx & 0xffffL) ;
+#endif
 
-        for (i=0 ; i <= sizeof(*pSVars) ; i++)
+        for (i=0 ; i < sizeof(*pSVars) ; i++)
                 *((char far *)vptr+i) = *((char *)pSVars+i) ;
 
 }

@@ -2,6 +2,9 @@
 #include "comsub.h"
 #include "dpb.h"
 #include <dos.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "jointype.h"
 
 extern unsigned char *com_substr() ;            /* ;AN000; DBCS enabled */
