@@ -69,6 +69,7 @@
 ;
 LAST	SEGMENT
 	extrn	    get_buffer:near
+	extrn	    LAST_start:byte
 LAST	ENDS
 
 	page
@@ -310,9 +311,11 @@ MEMREQ	    proc    near
 					    ; one which is discarded.
 	sub	ax,seg PAGESEG		    ; this is the first segment of the
 					    ; region which is to be moved.
+	shl	ax,4
+	add	ax,offset LAST_start	    ; include combined segment offset
 
-	add	ax, (P_SIZE/16 -1)	     ; to round it up to next page bdry
-	shr	ax, 6			    ; find the size in K
+	add	ax, (P_SIZE - 1)	     ; round byte span up to next page
+	shr	ax, 10			    ; find the size in K
 	add	ax,16			    ; throw in 4 more pages for safety
 	mov	cx,ax			    ; and return the size needed
 ;

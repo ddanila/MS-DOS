@@ -208,9 +208,7 @@ ifndef NOHIMEM
 IEP_hloop:
 	db	66h
 	stosw				; set this table entry
-	db	66h
-	add	ax,4000h		; ADD EAX,4000h
-	dw	0000h			;   EAX = addr of next EMM page
+	add	eax,4000h		; EAX = addr of next EMM page
 	inc	bx			; increment EMM page #
 	loop	IEP_hloop		; set all high memory entries
 
@@ -225,9 +223,7 @@ IEP_ext:
 	jz	IEP_Dpages		;  N: all done - leave
 	db	66h			;  Y: set ext memory pointers
 	mov	ax,[xbase_addr_l]	;   get pointer to ext memory pool
-	db	66h
-	and	ax,0FFFFh		; AND EAX,00FFFFFFh
-	dw	00FFh			;   clear highest nibble
+	and	eax,00FFFFFFh		; clear highest byte
 ;
 ;  check for contiguous EMM pages
 ;
@@ -244,9 +240,7 @@ IEP_ext:
 IEP_xloop:
 	db	66h
 	stosw				; set this table entry
-	db	66h
-	add	ax,4000h		; ADD EAX,4000h
-	dw	0000h			;   EAX = addr of next EMM page
+	add	eax,4000h		; EAX = addr of next EMM page
 	inc	bx			; increment EMM page #
 	loop	IEP_xloop		; set all ext memory entries
 ;

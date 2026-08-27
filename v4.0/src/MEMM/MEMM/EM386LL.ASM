@@ -247,9 +247,7 @@ EM386ll proc	near
 ;
 CR0_OK:
 	MOV_ECX_CR0
-	OP32
-	and	cx,0011h		; and ECX,80000011h
-	dw	8000h			; save only PG,ET, & PE bits
+	and	ecx,80000011h		; save only PG,ET, & PE bits
 	OP32
 	or	ax,cx			; or EAX,ECX
 	OP32
@@ -262,16 +260,12 @@ CR0_OK:
 	OP32
 	lodsw				; get EFLAGS
 ;
-	OP32
-	test	ax,0000h
-	dw	0002h			;Q: client's VM bit set ?
+	test	eax,00020000h		;Q: client's VM bit set ?
 	jz	EF_OK			;  N: continue
 	jmp	Em386_Err		;  Y: error handler - won't return here
 EF_OK:
 	and	ax,0FFFh		; clear IOPL & NT bits
-	OP32
-	or	ax,3000h
-	dw	0002h			; set VM bit and IOPL = 3
+	or	eax,00023000h		; set VM bit and IOPL = 3
 	OP32
 	stosw				;  store EFLAGS for 386 buffer
 ;

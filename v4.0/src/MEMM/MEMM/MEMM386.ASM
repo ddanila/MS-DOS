@@ -186,6 +186,8 @@ int67	dw	?		; offset of vector
 abs0	ends
 
 LAST	segment
+	public	LAST_start
+LAST_start	label	byte
 extrn	Init_MEMM386:far		; initializes VDM,EMM, and driver
 LAST	ends
 

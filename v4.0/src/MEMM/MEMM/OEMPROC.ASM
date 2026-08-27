@@ -344,14 +344,10 @@ endif				;end of "high" memory routines(ifndef NOHIMEM)
 ;
 	assume	cs:_TEXT, ds:NOTHING, es:NOTHING
 Map_Lin_OEM	proc	near
-	OP32
-	cmp	ax,0000h
-	dw	OEM_MEM_HI	;Q: Addr in diags byte region ?
+	cmp	eax,OEM_MEM_HI SHL 16	;Q: Addr in diags byte region ?
 	clc
 	jne	Mp_Lin_Exit	;  N: return, CF = 0(no mapping done)
-	OP32			;  Y: set EAX to proper seg address for diags
-	sub	ax,0000h
-	dw	(OEM_MEM_HI - 0100h); move to 0100h segment
+	sub	eax,(OEM_MEM_HI - 0100h) SHL 16 ; move to 0100h segment
 ifndef	NOHIMEM
 ;    set write to diag byte flag
 	push	ds		; save DS
@@ -388,9 +384,7 @@ Map_Lin_OEM	endp
 ;
 	assume	cs:_TEXT, ds:NOTHING, es:NOTHING
 UMap_Lin_OEM	proc	near
-	OP32			;  Y: set EAX to physical address for diags
-	add	ax,0000h
-	dw	(OEM_MEM_HI - 0100h) ; move to OEM_MEM_HI segment
+	add	eax,(OEM_MEM_HI - 0100h) SHL 16 ; move to OEM_MEM_HI segment
 	ret
 UMap_Lin_OEM	endp
 
@@ -710,9 +704,7 @@ Hi_Mem_Size	proc	near
 	jz	Hi_Mem_SXit		;  N: Exit with ZF = 1
 	db	66h			;  Y: get high memory pointers
 	mov	ax,[hbase_addr_l]	;   get pointer to high memory pool
-	db	66h
-	and	ax,0FFFFh		; AND EAX,00FFFFFFh
-	dw	00FFh			;   clear highest nibble
+	and	eax,00FFFFFFh		; clear highest byte
 Hi_Mem_SXit:
 	ret
 Hi_Mem_Size	endp

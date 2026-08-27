@@ -200,9 +200,7 @@ endif
 ;
 	MOV_EAX_CR0
 
-	OP32
-	or	ax,MSW_PROTECT	; or EAX,imm32	- enable PE bit - PROT MODE
-	dw	8000h		;		- enable PG bit - PAGING
+	or	eax,80000000h OR MSW_PROTECT ; enable PE bit and paging
 
 	MOV_CR0_EAX
 

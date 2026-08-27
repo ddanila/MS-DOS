@@ -66,7 +66,11 @@ extern Exchange16K();                  /* exchange page contents */
 extern FatalError();
 
 /* forward declarations */
-long GetPteFromIndex();
+long GetPteFromIndex(unsigned);
+void SetPteFromIndex(unsigned, long);
+void SwapAPage(long, unsigned);
+void UpdateUserPTE(long, unsigned);
+void ExchangePTEs(long, long);
 
 /* 
  * SwapDMAPages()
@@ -260,7 +264,7 @@ FromAdr64_128k-|        |       DMAPage[0]  -->|        |
  * Update the Emm Data Structures to reflect this remapping.
  * Update the Page Table too.
  */
-SwapAPage(LinAdr, k)
+void SwapAPage(LinAdr, k)
 long LinAdr;
 unsigned k;
 {
@@ -344,7 +348,7 @@ int i, j;
 }
 
 /* Update PT entry for LinAdr to map to pft386[UserPFTIndex] */
-UpdateUserPTE(LinAdr, UserPFTIndex)
+void UpdateUserPTE(LinAdr, UserPFTIndex)
 long LinAdr;
 unsigned UserPFTIndex;
 {
@@ -362,7 +366,7 @@ long pte;
 }
 
 /* exchange 4 ptes at LinAdr1 and LinAdr2 */
-ExchangePTEs(LinAdr1, LinAdr2)
+void ExchangePTEs(LinAdr1, LinAdr2)
 long LinAdr1, LinAdr2;
 {
 unsigned index1, index2;
@@ -400,7 +404,7 @@ long PhyAdr;
 }
 
 /* sanity check on the index and then call SetPte */
-SetPteFromIndex(index, pte)
+void SetPteFromIndex(index, pte)
 unsigned index;
 long pte;
 {
@@ -415,11 +419,5 @@ long PhyAdr;
    i = EMM_MPindex[DOSPHYPAGE(PhyAdr)];
 
    if (i != -1)
-      return SetPte(index, pte);
-   else  
-      return;
+      SetPte(index, pte);
 }
-
-
-
-

@@ -1459,9 +1459,7 @@ CR0FltrL:
 ;	test	AX, 0FFFEh		; Is Client trying to set the
 ;	dw	7FFFh			; PE bit or the PG bit?
 ;	jnz	ExitxCRer		; Y: go tell him he can't
-	OP32
-	or	AX, 0001h		; set PE bit
-	dw	8000h			; and PG bit if they weren't
+	or	EAX, 80000001h		; set PE and PG bits if they weren't
 ExCDTR1:
 ;   Execute MOV CDTRn, EAX  (Finally!)
 	db	0Fh
@@ -1495,9 +1493,7 @@ NotDRS3:
 
 ;   Because SMSW shows the PE bit, we let it go through here also
 CR0FltrS:
-	OP32
-	and	AX, 0FFFFh		; Y: clear
-	dw	7FFFh			; PG bit if it was set
+	and	EAX, 7FFFFFFFh		; Y: clear PG bit if it was set
 ChkDstBX:
 	cmp	bh, 3
 	jne	ChkDstBP

@@ -44,6 +44,10 @@ page	58,132
 	include page.inc
 	include	emmdef.inc
 
+; Open Watcom small-model objects reference this absolute model marker.
+	PUBLIC	_small_code_
+_small_code_	EQU	0
+
 _DATA	SEGMENT
 
 	public	EMM_PAGE_CNT

@@ -105,6 +105,7 @@ _DATA	segment
 _DATA	ends
 
 LAST	segment
+	extrn	LAST_start:byte
 ifndef	NOHIMEM
 	extrn	HiSysAlloc:near 	; allocate high system memory
 	extrn	UnLockROM:near
@@ -500,6 +501,7 @@ else
 	mov	ax,seg LAST
 	sub	ax,seg PAGESEG
 	shl	ax,4
+	add	ax,offset LAST_start
 	mov	cx,ax
     ;
     ; we need to allocate enough to have a page aligned page directory. so

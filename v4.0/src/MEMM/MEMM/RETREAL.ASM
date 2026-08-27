@@ -187,9 +187,7 @@ rl386_a:
 ;
 	MOV_EAX_CR0			;  get CR0
 
-	OP32
-	and	ax,0FFFEh		; force real mode and shut down paging
-	dw	07FFFh			; (mov eax,07FFFFFFEh)
+	and	eax,07FFFFFFEh		; force real mode and shut down paging
 
 	MOV_CR0_EAX			; set CR0
 

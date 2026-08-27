@@ -88,9 +88,7 @@ DescCopy	MACRO
 	stosw				; store: junk->AR1,AR->AR2,0->AR3 & AR4
 	OP32
 	mov	ax,[si] 		; 24 bits of Base Addr from 286 entry
-	OP32
-	and	ax,0FFFFh		; AND EAX,00FFFFFFh
-	dw	000FFh			; clear high byte of base addr
+	and	eax,00FFFFFFh		; clear high byte of base addr
 	call	MapLinear		; Map address according to page tables
 	OP32
 	stosw				; store Base Addr for 386 entry
@@ -217,11 +215,9 @@ EM286ll proc	near
 	OP32
 	stosw				;  store CR0 for 386 buffer
 ;
-	OP32
-	mov	ax,0000h
-	dw	0002h			; VM bit on
+	mov	eax,00020000h		; VM bit on
 	mov	ax,[SLBuff.ll2_FLAGS]	; get low word of flags
-	or	ax,3000h		; set IOPL to 3
+	or	eax,00003000h		; set IOPL to 3
 	OP32
 	stosw				;  store EFLAGS for 386 buffer
 ;
