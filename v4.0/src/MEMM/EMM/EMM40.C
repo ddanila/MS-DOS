@@ -232,7 +232,7 @@ UndefinedFunction()
  */
 GetMappablePAddrArray() 
 {
-	struct mappable_page far *u_ptr;
+	unsigned char far *u_ptr;
 	int	n_pages;
 	int	i;
 	struct mappable_page *mp = mappable_pages;
@@ -241,12 +241,15 @@ GetMappablePAddrArray()
 
 	if ( regp->hregs.h.ral == 0 ) {
 		if ( n_pages > 0 ) {
-			u_ptr = (struct mappable_page far *)dest_addr(); /* ES:DI */
-			for (i=0 ; i < 48 ; i++)
-				if ((unsigned char)EMM_MPindex[i] != 0xff)
-					copyout(u_ptr++,
+			u_ptr = (unsigned char far *)dest_addr(); /* ES:DI */
+			for (i=0 ; i < 48 ; i++) {
+				if ((unsigned char)EMM_MPindex[i] != 0xff) {
+					copyout(u_ptr,
 						mp + EMM_MPindex[i],
 						sizeof(struct mappable_page) );
+					u_ptr += sizeof(struct mappable_page);
+				}
+			}
 		}
 	} else if ( regp->hregs.h.ral != 1 ) {
 		setAH(INVALID_SUBFUNCTION);
