@@ -216,8 +216,7 @@ WARNING:
 
 extern int  fgetl();
 
-int (*funcRead) (),                     /* function to use to read lines     */
-    (*fCmp) ();                         /* function to use to compare lines  */
+int (*fCmp) ();                         /* function to use to compare lines  */
 
 static int fc_strcmp (s1, s2)
 unsigned char *s1, *s2;
@@ -242,7 +241,8 @@ flagType fAbbrev = FALSE,               /* abbreviated output                */
          fLine   = FALSE,               /* line comparison                   */
          fNumb   = FALSE,               /* display line numbers              */
          fCase   = TRUE,                /* case is significant               */
-         fIgnore = FALSE;               /* ignore spaces and blank lines     */
+         fIgnore = FALSE,               /* ignore spaces and blank lines     */
+         fNoTabs = FALSE;               /* preserve tabs instead of expanding */
 
 #ifdef  DEBUG
 
@@ -301,8 +301,6 @@ byte *v[];
         {
             usage (Bad_ver, 1);
         }
-
-        funcRead = (int (*) ())FNADDR(fgetl);
 
         fileargs=0;
 
@@ -364,7 +362,7 @@ byte *v[];
                                              fNumb = TRUE;
                                          break;
                                      case 'T' :
-                                             funcRead =(int (*) ())FNADDR(fgets);
+                                             fNoTabs = TRUE;
                                          break;
                                      default:
                                              if (*strbskip((v[i]+j+1),"0123456789") == 0)
@@ -706,7 +704,7 @@ FILE *fh;
 int ct;
 int *plnum;
 {
-    int i;
+    int i, length;
 
 #ifdef  DEBUG
     if (fDebug)
@@ -714,10 +712,15 @@ int *plnum;
 #endif
 
     i = 0;
-    while (ct-- && (*funcRead) (pl->text, MAXARG, fh) != NULL)
+    while (ct-- && (fNoTabs
+                    ? fgets (pl->text, MAXARG, fh) != NULL
+                    : fgetl (pl->text, MAXARG, fh) != 0))
     {
-        if (funcRead == (int (*) ())FNADDR(fgets))
-            pl->text[strlen(pl->text)-1] = 0;
+        if (fNoTabs) {
+            length = strlen(pl->text);
+            if (length && pl->text[length-1] == '\n')
+                pl->text[length-1] = 0;
+        }
         if (fIgnore && !strcmps (pl->text, ""))
             pl->text[0] = 0;
         if (strlen (pl->text) != 0 || !fIgnore)
