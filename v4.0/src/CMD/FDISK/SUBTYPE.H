@@ -149,10 +149,12 @@ char     get_yes_no_values(void);                                       /* AN012
 /* C ROUTINES                                                */
 /*************************************************************/
 
+#ifdef __WATCOMC__
+#include <conio.h>
+#else
 int      getch(void);
 void     putch(int);
-
 int      int86x(int, union REGS *, union REGS *, struct SREGS *);
 int      int86(int, union REGS *, union REGS *);
 int      intdos(union REGS *, union REGS *);
-
+#endif

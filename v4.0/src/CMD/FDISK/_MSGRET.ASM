@@ -57,6 +57,8 @@ data_sysloadmsg proc far
 ;	copy C inregs into proper registers
 
 	mov	di,[bp+4+4]		  ; fix di (arg 0)		;AC010;
+	push	ds
+	pop	es
 
 ;-------------------------------------------------------------------
 
@@ -116,6 +118,8 @@ data_sysdispmsg proc far						;AC010;
 ;	copy C inregs into proper registers
 
 	mov	di,[bp+4+4]		  ; fix di (arg 0)		;AC010;
+	push	ds
+	pop	es
 
 ;-------------------------------------------------------------------
 
@@ -175,6 +179,8 @@ data_sysgetmsg	proc far						;AC010;
 ;	copy C inregs into proper registers
 
 	mov	di,[bp+4+4]		  ; fix di (arg 0)		;AC010;
+	push	ds
+	pop	es
 
 ;-------------------------------------------------------------------
 

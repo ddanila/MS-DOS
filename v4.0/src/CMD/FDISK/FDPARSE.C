@@ -1,5 +1,5 @@
 
-#include "dos.h"                                                        /* AN000 */
+#include <dos.h>                                                        /* AN000 */
 #include "fdisk.h"                                                      /* AN000 */
 #include "extern.h"                                                     /* AN000 */
 #include "parse.h"                                                      /* AN000 */
@@ -49,8 +49,7 @@ BEGIN                                                                   /* AN000
         regs.h.ah = (unsigned char) 0x62;
         intdosx(&regs, &regs, &segregs);
 
-        FP_OFF(cmdline) = 0x81;
-        FP_SEG(cmdline) = regs.x.bx;
+        cmdline = MK_FP(regs.x.bx, 0x81);
 
         i = 0;
         while ( *cmdline != (char) '\x0d' ) cmd_line[i++] = *cmdline++;
@@ -285,12 +284,10 @@ char    far *Cmd_Ptr;                                                   /* AN010
 
         BEGIN                                                           /* AN010 */
         segread(&segregs);                                              /* AN010 */
-        FP_SEG(Cmd_Ptr) = segregs.ds;                                   /* AN010 */
-        FP_OFF(Cmd_Ptr) = regs.x.si;                                    /* AN010 */
+        Cmd_Ptr = MK_FP(segregs.ds, regs.x.si);                          /* AN010 */
         *Cmd_Ptr        = '\0';                                         /* AN010 */
 
-        FP_SEG(sublistp[0].value) = segregs.ds;                         /* AN010 */
-        FP_OFF(sublistp[0].value) = Parse_Ptr;                          /* AN010 */
+        sublistp[0].value = MK_FP(segregs.ds, Parse_Ptr);               /* AN010 */
         sublistp[0].size      = Sublist_Length;                         /* AN010 */
         sublistp[0].reserved  = Reserved;                               /* AN010 */
         sublistp[0].id        = 0;                                      /* AN010 */
@@ -309,4 +306,3 @@ char    far *Cmd_Ptr;                                                   /* AN010
         END                                                             /* AN010 */
         return;                                                         /* AN010 */
 END                                                                     /* AN010 */
-

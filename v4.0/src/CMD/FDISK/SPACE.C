@@ -1,5 +1,5 @@
 
-#include "dos.h"
+#include <dos.h>
 #include "fdisk.h"
 #include "extern.h"
 #include "subtype.h"

@@ -1,5 +1,5 @@
 
-#include "dos.h"                                                        /* AN000 */
+#include <dos.h>                                                        /* AN000 */
 #include "fdisk.h"                                                      /* AN000 */
 #include "subtype.h"                                                    /* AN000 */
 #include "extern.h"                                                     /* AN000 */
@@ -71,6 +71,7 @@ BEGIN
     END
  /* Did not find one, something bad wrong happened */
  internal_program_error();
+ return(0);
 END
 
 /*  */
@@ -258,5 +259,3 @@ char   i;
         internal_program_error();
         return(c(INVALID));                                             /* AC000 */
 END
-
-

@@ -1,7 +1,7 @@
 
 #include "fdisk.h"                                                      /* AN000 */
 #include "subtype.h"                                                    /* AN000 */
-#include "dos.h"                                                        /* AN000 */
+#include <dos.h>                                                        /* AN000 */
 #include "extern.h"                                                     /* AN000 */
 #include "string.h"
 #include "ctype.h"

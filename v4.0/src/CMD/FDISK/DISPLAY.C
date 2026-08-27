@@ -1,6 +1,6 @@
 
 
-#include "dos.h"                                                        /* AN000 */
+#include <dos.h>                                                        /* AN000 */
 #include "fdisk.h"                                                      /* AN000 */
 #include "subtype.h"                                                    /* AN000 */
 #include "stdio.h"                                                      /* AN000 */
