@@ -67,7 +67,7 @@ option_0      dw   0
 OPTION_1      DW   0		  ;AN000;
 OPTION_2      DW   0		  ;AN000;
 OPTION_3      DW   0		  ;AN033;SEH
-FILE_HANDLE   DW   0		  ;AN000;
+FILE_HANDLE   DW   -1		  ; No open file
 
 DATA	 ENDS			  ;AN000;
 
@@ -201,6 +201,7 @@ SCAN_INFO_FILE_ROUTINE	PROC	FAR		 ;AN000;
     MOV  OPTION_1, E_SELECT_INV 		 ;AN000;
     MOV  OPTION_2, E_SELECT_INV 		 ;AN000;
     MOV  OPTION_3, E_SELECT_INV 		 ;AN033;SEH
+    MOV  FILE_HANDLE, -1			 ; No file has been opened yet
     PUSH ES					 ;AN000; Save the extra register
 						 ;
     .IF < MODE NE E_SELECT_INV> AND NEAR	 ;AN000; If no error has occured yet,
@@ -281,8 +282,10 @@ FILE_ERROR:					 ;AN000; Here if there has been an error
 	 MOV  BX, PATH				 ;AN000;
 	 MOV  WORD PTR [BX], 0			 ;AN000;
 CLOSE_THE_FILE: 				 ;AN000; Close the file
-	 MOV  BX, FILE_HANDLE			 ;AN000; Get the file handle
-	 CLOSE_FILE BX				 ;AN000; Close the file
+	 .IF < FILE_HANDLE NE -1 >		 ; Only close an opened file
+	      MOV  BX, FILE_HANDLE		 ;AN000; Get the file handle
+	      CLOSE_FILE BX			 ;AN000; Close the file
+	 .ENDIF
     .ENDIF					 ;AN000;
     MOV  AX, option_0				 ;AN000; Return the parameters
     MOV  BX, OPTION_1				 ;AN000;
