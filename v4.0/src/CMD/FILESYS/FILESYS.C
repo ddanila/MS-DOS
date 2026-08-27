@@ -48,7 +48,6 @@
 #define REDIRECT_DEVICE         0x5f03  /* DOS call to redir device */                                                           /* ;an000; */
 #define CANCEL_REDIRECTION      0x5f04  /* DOS call to cancel redirection */                                                     /* ;an000; */
 #define GET_ATTACH_LIST         0x5f06  /* DOS call to get attached devices*/                                                    /* ;an000; */
-#define GET_EXTENDED_ERROR      0x5900  /* DOS call to get extended error */                                                     /* ;an000; */
                                                                                                                                  /* ;an000; */
 #define CARRY_FLAG              0x0001  /* mask for carry flag */                                                                /* ;an000; */
 #define PARITY_FLAG             0x0004  /* mask for parity flag */                                                               /* ;an000; */
@@ -152,6 +151,7 @@ struct                                                                          
 +----------------------------------------------------------------------*/
 union REGS inregs, outregs;                                                                                                      /* ;an000; */
 struct   SREGS   segregs;                                                                                                        /* ;an000; */
+int      filesys_exit_status;                                                                                                    /* ;an000; */
                                                                                                                                  /* ;an000; */
                                                                                                                                 /* ;an000; */
 /*----------------------------------------------------------------------+
@@ -292,7 +292,7 @@ char    *argv[];                /* array of pointer to arguments */             
                                                                                                                                  /* ;an000; */
                                                                                                                                  /* ;an000; */
        }                                     /* end FILESYS MAIN */                                                              /* ;an000; */
-  return(0);                                                                                                                     /* ;an000; */
+  return(filesys_exit_status);                                                                                                   /* ;an000; */
   }                                                                                                                              /* ;an000; */
                                                                                                                                  /* ;an000; */
                                                                                                                                 /* ;an000; */
@@ -644,11 +644,8 @@ get_pause_stat (unsigned char type)                                             
 void fs_error(int error_ax)                                                          /* error_ax holds error code            */  /* ;an000; */
                                                                                                                                  /* ;an000; */
   {                                                                                                                              /* ;an000; */
-        inregs.x.ax = GET_EXTENDED_ERROR;                                       /* get the extended error               */       /* ;an000; */
-        inregs.x.bx = NULL;                                                     /* clear bx to signal > DOS 3.0         */       /* ;an000; */
-        intdos(&inregs, &outregs);                                              /* INT 21h call                         */       /* ;an000; */
-                                                                                                                                 /* ;an000; */
-        inregs.x.ax = outregs.x.ax;                                             /* get extended error in AX             */       /* ;an000; */
+        filesys_exit_status = 1;                                             /* report the failed operation to COMMAND */       /* ;an000; */
+        inregs.x.ax = error_ax;                                                 /* use the failing call's DOS error     */       /* ;an000; */
         inregs.x.bx = STDERR;                                                   /* output to standard error             */       /* ;an000; */
         inregs.x.cx = SubCnt0;                                                  /* no replaceables                      */       /* ;an000; */
         inregs.h.dl = No_Input;                                                 /* no keyboard input                    */       /* ;an000; */
