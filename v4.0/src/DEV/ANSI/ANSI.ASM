@@ -291,7 +291,7 @@ L4:                                     ; WGR                                   
         ADD     SI,AX
         ADD     SI,AX
         CMP     AL,MAX_CMD              ; WGR not a call for ANSI...chain to lower device;AC000;
-        JA      NO_OPERATION
+        JAE     NO_OPERATION
 
         LES     DI,DWORD PTR DS:[BX].TRANS
 
