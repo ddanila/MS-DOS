@@ -667,6 +667,7 @@ Current_Sibling      DW    ?	     ;address of current sibling node entry buffer	
 Current_Drive	     DW    ?	     ;address of current drive header			     ;AN000;
 Matching_Node	     DW    -1	     ;flag						       ;AN000;
 From_Delete	     DW    0	     ;= 1 if call is from DELETE function		    ;AN000;
+Delete_Drive	     DB    0	     ;drive to purge when deleting a cached subtree
 Old_SI		     DW    0	     ;SI save area				     ;AN000;
 Flag		     DB    0									;AN000;
 Level		     DB    0	     ;depth level of the path					;AN000;
@@ -979,6 +980,7 @@ DELETE	 PROC	FAR
 
 	mov	cs:func_cod,al		   ; save function code
 	CALL	PACK_DIR_NAME		   ;drive letter => DL, 				      ;AN000;
+	mov	cs:Delete_Drive,dl	   ;preserve it across the lookup
 
 	CALL	FIND_DRIVE_CACHE_HEADER    ;find drive header address
 					   ;on return ES:BP-->drive header
@@ -1010,7 +1012,22 @@ DELETE	 PROC	FAR
 
 Delete_Node:
 	cmp	es:[bp.nChild_ptr], -1	   ;No children?
-	jne	D_err_Exit
+	je	Delete_Leaf
+
+; A cached directory can have descendants.  Removing only the directory node
+; would leave those pathname records reachable under a stale name, while the
+; old code declined to invalidate anything.  Purge this drive's name cache;
+; DOS will repopulate it on subsequent opens.
+	mov	dl,cs:Delete_Drive
+	sub	dl,'A'			   ;FP_PURGE expects A:=0, B:=1, ...
+	push	ds
+	push	cs
+	pop	ds
+	CALL	FP_PURGE
+	pop	ds
+	jmp	short D_Exit
+
+Delete_Leaf:
 	CALL	REMOVEFROMTREE		   ;remove the node while maintaing the
 					   ;integrity of the tree.
 
