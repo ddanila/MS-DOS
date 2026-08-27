@@ -233,7 +233,7 @@ SELECT	  ENDS							;AN000;
 SERVICE   SEGMENT PARA PUBLIC 'SERVICE'                         ;AN000; Segment for CAS_SERVICE routines
 SERVICE   ENDS							;AN000;
 								;
-OUR_STACK SEGMENT BYTE	STACK					;AN000; Segment for Local Stack
+OUR_STACK SEGMENT BYTE	STACK				;AN000; Segment for Local Stack
 	  DB   512  DUP('IBM ')                                 ;AN000;
 LAST_STACK EQU $						;AN000;
 OUR_STACK ENDS							;AN000;
@@ -291,16 +291,24 @@ OLD_STACK_OFF	DW	?					;AN000;
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 INSTALL PROC	FAR						;AN000;
+	; WLINK may express a grouped entry as AGROUP:offset.  Normalize CS to
+	; the SELECT segment before any CS-relative data or near control flow.
+	MOV	AX,SEG SELECT
+	PUSH	AX
+	MOV	AX,OFFSET INSTALL_CANONICAL_CS
+	PUSH	AX
+	RETF
+INSTALL_CANONICAL_CS:
 	CLI							;AN000;
 	MOV	AX,SS						;AN000;
 	MOV	OLD_STACK_SEG,AX				;AN000;
 	MOV	OLD_STACK_OFF,SP				;AN000;
-	mov	ax,our_stack					;AN000;
+	mov	ax,SEG our_stack				;AN000;
 	mov	ss,ax						;AN000;
 	mov	sp,512*4					;AN000;
 	STI							;AN000;
 								;
-	MOV	AX,DATA 					;AN000;
+	MOV	AX,SEG DATA 					;AN000;
 	MOV	DS,AX						;AN000;
 	JMP	INITIALIZATION					;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

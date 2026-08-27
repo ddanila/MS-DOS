@@ -264,7 +264,7 @@ INIT	MACRO				;;AN000;
 	PUSH	DS			;;AN000;
 	XOR	AX,AX			;;AN000; make AX = 0
 	PUSH	AX			;;AN000;
-	MOV	AX,DATA 		;;AN000;
+	MOV	AX,SEG DATA 		;;AN000;
 	MOV	DS,AX			;;AN000; initialize DS reg to beginning of data
 	ENDM				;;AN000;
 ;;**************************************************************************

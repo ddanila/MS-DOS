@@ -31,7 +31,7 @@
 ;		 selection is made by numeric input.
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-.SEQ					;AN000;
+.ALPHA					;AN000;
 	INCLUDE    STRUC.INC		;AN000;
 	INCLUDE    MACROS.INC		;AN006;JW
 	INCLUDE    PANEL.MAC		;AN000;
@@ -1298,7 +1298,7 @@ PH10:	       CALL INIT_HELP_TITLE	;AN000;** GG
 	       MOV  AX,WR_RETHLPLEN	;AN000;
 	       MOV  WR_DRETLEN,AX	;AN000;
 					;
-	       MOV  AX,DATA		;AN000;
+	       MOV  AX,SEG DATA		;AN000;
 	       MOV  WR_DRETSEG,AX	;AN000;
 					;
 	       CALL SET_RETKEYS 	;AN000;create complete return string
@@ -2221,7 +2221,7 @@ INITIALIZE     PROC NEAR		;AN000;
 	INT  21H			;AN024;
 					;AN024;
 	PUSH DS 			;AN024;save source segment
-	MOV  AX,DATA			;AN024;
+	MOV  AX,SEG DATA			;AN024;
 	MOV  DS,AX			;AN024;get DATA segment
 	MOV  AX,WR_DATA2SEG		;AN024;ES:DI = target
 	MOV  ES,AX			;AN024;
@@ -2322,7 +2322,7 @@ EC8:	REP  STOSB			;AN024;store char
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 					;
 DONE1:					;AN024;
-	MOV  AX,DATA			;AN024;restore DATA segment
+	MOV  AX,SEG DATA			;AN024;restore DATA segment
 	MOV  DS,AX			;AN024;
 					;AN024;
 	MOV  DI,WR_DATA2OFF		;AN024;restore pointer to start

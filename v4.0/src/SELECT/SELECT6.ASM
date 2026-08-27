@@ -4,7 +4,7 @@ PAGE 55,132							;AN000;
 NAME	SELECT							;AN000;
 TITLE	SELECT - DOS - SELECT.EXE				;AN000;
 SUBTTL	SELECT6.asm						;AN000;
-.SEQ								;AN000;
+.ALPHA								;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
 ;	SELECT6.ASM : Copyright 1988 Microsoft
@@ -394,7 +394,7 @@ FORMAT_DISK_SCREEN:						;AN000;
 	    MOV   AH,62H				      ;AN072;Get the PSP segment
 	    INT   21H					      ;AN072;
 	    MOV   AX,BX 				      ;AN072;save the PSP segment of SELECT
-	    MOV   BX,PARSER				      ;AN072;get last address of code
+	    MOV   BX,SEG PARSER				      ;AN072;get last address of code
 	    MOV   ES,AX 				      ;AN072;set PSP segment in ES
 	    SUB   BX,AX 				      ;AN072;calc # of paragraphs in the program
 	    MOV   AH,SET_BLOCK				      ;AN072;setblock function number

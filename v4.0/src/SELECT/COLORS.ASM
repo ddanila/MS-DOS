@@ -8,7 +8,7 @@
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-	.SEQ		; arrange segments alphabetically
+	.ALPHA		; arrange segments alphabetically
 
 	INCLUDE    SEL-PAN.INC		;AN000;
 					;

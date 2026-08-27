@@ -228,6 +228,5 @@ GET_HELP_ID	ENDP			;AN000;
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 SELECT	ENDS				;AN000;
-	END	GET_HELP_ID		;AN000;
+	END				; Library module: SELECT0 owns the entry point.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-

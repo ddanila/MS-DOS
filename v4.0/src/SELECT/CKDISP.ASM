@@ -2,7 +2,7 @@
 ;
 ;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-.SEQ					;AN000;
+.ALPHA					;AN000;
 .XLIST					;AN000;
 INCLUDE    STRUC.INC			;AN000;
 .LIST					;AN000;

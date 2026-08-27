@@ -4,7 +4,7 @@ PAGE 55,132							;AN000;
 NAME	SELECT							;AN000;
 TITLE	SELECT - DOS - SELECT.EXE				;AN000;
 SUBTTL	SELECT7.asm						;AN000;
-.SEQ								;AN000;
+.ALPHA								;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
 ;	SELECT7.ASM : Copyright 1988 Microsoft

@@ -4,7 +4,7 @@ PAGE	60,132							;AN000;
 NAME	SELECT							;AN000;
 TITLE	SELECT1 - DOS - SELECT.EXE				;AN000;
 SUBTTL	select1.asm						;AN000;
-.SEQ								;AN000;
+.ALPHA								;AN000;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
 ;	SELECT1.ASM : Copyright 1988 Microsoft
@@ -112,6 +112,13 @@ CHECK_VERSION:							;AN000;
 		   GOTO 		EXIT_DOS_CONT		;AN000;
 		.ENDIF						;AN000;    EXIT
 								;
+	SCAN_PARAMETERS  N_SELECT_MODE				;AN000;
+		;;;scan command line before probing installation media ;
+	       .IF < N_SELECT_MODE EQ E_SELECT_INV >		;AN000;JW
+		   DISPLAY_MESSAGE	6			;AN000;JW
+		   GOTO 		EXIT_SELECT2		;AN000;JW
+		.ENDIF						;AN000;JW
+								;
 	CHECK_DISKETTE		N_DISKETTE_A,N_DISKETTE_B,N_DISKETTE_TOT,P_STR120_1			  ;AN000;
 		;;;get diskette media type and no of drives	;
 		;;;N_DISKETTE_A & B - media type 360k,720k, etc ;
@@ -145,14 +152,6 @@ CHECK_VERSION:							;AN000;
 	GET_INSTALLED_MEM   MEM_SIZE				;AN000;
 								;
 	CHECK_MACHINE	    MACHINE_TYPE, PS2_FLAG		;AN000;JW
-								;
-	SCAN_PARAMETERS  N_SELECT_MODE				;AN000;
-		;;;scan command line				;
-		;;;N_SELECT_MODE - MENU or FDISK		;
-	       .IF < N_SELECT_MODE EQ E_SELECT_INV >		;AN000;JW
-		   DISPLAY_MESSAGE	6			;AN000;JW
-		   GOTO 		EXIT_SELECT2		;AN000;JW
-		.ENDIF						;AN000;JW
 								;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;

@@ -611,7 +611,7 @@ MAIN_EXIT_A:		;AN000;
     STC 				;AN000; SAR
 
 RESTORE_DIRS:;AN000;
-	MOV	BX, DATA		;AN000; SAR
+	MOV	BX, SEG DATA		;AN000; SAR
 	MOV	DS, BX			;AN000;re initialize ds, es
 	MOV	ES, BX			;AN000;exit here if the status of source, target or default drv has been changed.
 ;;;;;	CALL	CHK_MKDIR_LVL		; SAR starting target directory has been created?
@@ -620,7 +620,7 @@ RESTORE_DIRS:;AN000;
     POPF				;AN000; SAR
     JMP  DO_DEALLOCATE			;AN000; SAR
 JUST_EXIT:				;AN000;unconditional immediate exit
-    MOV  AX, DATA			;AN000; SAR
+    MOV  AX, SEG DATA			;AN000; SAR
     MOV  DS, AX 			;AN000; SAR
     STC 				;AN000; SAR
 
@@ -1607,7 +1607,7 @@ WRITE_FROM_BUFFER PROC NEAR ;AN000;
 	JE	WFB_EXIT_BRIDGE        ;AN000;
 
 	PUSH	DS		     ;AN000;
-	MOV	DX,DATA 	      ;AN000;
+	MOV	DX,SEG DATA 	      ;AN000;
 	MOV	DS,DX		      ;AN000;
 	.IF < DEST eq 3 >	  ;AN000;
 	   CALL GET_DEST	  ;AN000;
@@ -2481,4 +2481,3 @@ INIT_BUFFER ENDP	    ;AN000;
 SELECT	    ENDS	     ;AN000;
 
 	END			   ;AN000;
-

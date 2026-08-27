@@ -9,7 +9,7 @@
 ;
 ;********************************************************************************
 PAGE	, 132				   ;AN000;
-.SEQ					;AN000;
+.ALPHA					;AN000;
 .XLIST					;AN000;
 INCLUDE MACROS.INC			;AN000;
 INCLUDE STRUC.INC			;AN000;
@@ -492,7 +492,7 @@ SEARCH_LINE   PROC NEAR 	    ;AN000;
     MOV  CX, CX_ORDINAL_VALUE			 ;AN000; The value returned by the parse last time.
     PUSH DS					 ;AN000; Save the current data segment
     PUSH ES					 ;AN000; Save the file data segment
-    MOV  AX, DATA				 ;AN000; Get the current data segment
+    MOV  AX, SEG DATA				 ;AN000; Get the current data segment
     MOV  ES, AX 				 ;AN000; This is the parser control blocks.
     MOV  AX, SEG_LOC			;AN000; Where the data to parse is located
     MOV  DS, AX 				 ;AN000;
@@ -1000,7 +1000,7 @@ PARSE_NEXT_PARM:		  ;AN000;
     MOV  CX, 0					 ;AN000; Tell the parser this is the first scan of this line
     PUSH DS					 ;AN000; Save the current data segment
     PUSH ES					 ;AN000; Save the file data segment
-    MOV  AX, DATA				 ;AN000; Get the current data segment
+    MOV  AX, SEG DATA				 ;AN000; Get the current data segment
     MOV  ES, AX 				 ;AN000; This is the parser control blocks.
     MOV  AX, SEG_LOC				 ;AN000; Where the data to parse is located
     MOV  DS, AX 				 ;AN000;

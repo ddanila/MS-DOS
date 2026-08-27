@@ -4,7 +4,7 @@ PAGE 55,132
 NAME	SELECT
 TITLE	SELECT - DOS - SELECT.EXE
 SUBTTL	SELECT9.asm
-.SEQ
+.ALPHA
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;
 ;	SELECT9.ASM : Copyright 1988 Microsoft
@@ -501,7 +501,7 @@ Free_Parser:
 	    MOV   AH,62H
 	    INT   21H
 	    MOV   AX,BX
-	    MOV   BX,PARSER
+	    MOV   BX,SEG PARSER
 	    MOV   ES,AX
 	    SUB   BX,AX
 	    MOV   AH,SET_BLOCK

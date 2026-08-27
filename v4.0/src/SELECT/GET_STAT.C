@@ -40,7 +40,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "string.h"
-#include "dos.h"
+#include <dos.h>
 #include "get_stat.h"
 #include "extern.h"
 
@@ -82,8 +82,7 @@ BEGIN
     /*  Make drive zero based               */
     /* -------------   drive--;             */
 
-    FP_SEG(Dptr) = SrPtr->es;
-    FP_OFF(Dptr) = RinPtr->x.di;
+    Dptr = MK_FP(SrPtr->es, RinPtr->x.di);
 
     RoutPtr->x.bx = 0;
     RoutPtr->x.cx = 0;

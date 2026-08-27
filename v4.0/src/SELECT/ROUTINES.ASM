@@ -6,7 +6,7 @@
 ; program.
 ;
 ;***************************************************************************
-.SEQ						;AN000;
+.ALPHA						;AN000;
 INCLUDE  MAC_EQU.INC				;AN000;
 INCLUDE  PAN-LIST.INC				;AN000;
 INCLUDE  PANEL.MAC				;AN000;
@@ -717,7 +717,7 @@ EXEC_PROGRAM_ROUTINE  PROC FAR			;AN000;
 						;
     MOV  [SI]+8, BX				;AN000; Store PSP segment in the parm block
     MOV  [SI]+12, BX				;AN000; These are the FCB segments
-    MOV  AX, DATA				;AN000; Get the address of the data segment
+    MOV  AX, SEG DATA				;AN000; Get the address of the data segment
     MOV  [SI]+4, AX				;AN000; Segment of the command line
 						;
     MOV  ES, BX 				;AN000; ES:DI points to the FCB to load
@@ -754,7 +754,7 @@ EXEC_PROGRAM_ROUTINE  PROC FAR			;AN000;
        MOV	EXEC_ERR,FALSE			;AN000;DT
     .ENDIF					;AN000;DT
 ;RESTORE REGISTERS				;
-    MOV  AX,DATA				;AN000; Restore the data register first
+    MOV  AX,SEG DATA				;AN000; Restore the data register first
     MOV  DS,AX					;AN000; Load the data segment register
     MOV  ES,AX					;AN000;
     CLI 					;AN000; Turn off interrupts while setting SS

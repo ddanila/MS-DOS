@@ -83,7 +83,7 @@ OLD_STACK_OFF	DW	?			;AN001;GHG
 INT_24_VECTOR:					;AN000;
 
     PUSHH     <BX,CX,DX,SI,DI,ES,DS>		;AN000;
-    MOV     AX,DATA				;AN000;
+    MOV     AX,SEG DATA				;AN000;
     MOV     DS,AX				;AN000;
     MOV     ES,AX				;AN000;
 						;
@@ -148,7 +148,7 @@ INT_2F_VECTOR:					;AN001;GHG
 	.IF < AX EQ 0ADC1H > near		;AN001;GHG
 						;GHG
 	   PUSHH   <BX,CX,DX,SI,DI,ES,DS>	;AN001;GHG
-	   MOV	   AX,DATA			;AN001;GHG
+	   MOV	   AX,SEG DATA			;AN001;GHG
 	   MOV	   DS,AX			;AN001;GHG
 	   MOV	   ES,AX			;AN001;GHG
 						   ;GHG
@@ -350,7 +350,7 @@ INT_2F_FORMAT:				       ;AN111;JW
 	.IF < AX EQ 0ADC1H > near	       ;AN111;JW
 					       ;AN111;JW
 	   PUSHH   <BX,CX,DX,SI,DI,ES,DS>      ;AN111;JW
-	   MOV	   AX,DATA		       ;AN111;JW
+	   MOV	   AX,SEG DATA		       ;AN111;JW
 	   MOV	   DS,AX		       ;AN111;JW
 	   MOV	   ES,AX		       ;AN111;JW
 					       ;AN111;JW
@@ -418,7 +418,7 @@ INT_2F_256KB:					   ;AN000;DT
 	.IF < AX EQ 0ADC1H > near		   ;AN000;DT
 						   ;AN000;DT
 	   PUSHH   <BX,CX,DX,SI,DI,ES,DS>	   ;AN000;DT
-	   MOV	   AX,DATA			   ;AN000;DT
+	   MOV	   AX,SEG DATA			   ;AN000;DT
 	   MOV	   DS,AX			   ;AN000;DT
 	   MOV	   ES,AX			   ;AN000;DT
 						   ;AN000;DT

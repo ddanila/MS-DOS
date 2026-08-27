@@ -2,7 +2,7 @@
 #include "stdio.h"                                                      /* ;AN000; */
 #include "stdlib.h"                                                     /* ;AN000; */
 #include "string.h"                                                     /* ;AN000; */
-#include "dos.h"                                                        /* ;AN000; */
+#include <dos.h>                                                          /* ;AN000; */
 #include "get_stat.h"                                                   /* ;AN000; */
 #include "extern.h"                                                     /* ;AN000; */
 									/* ;AN000; */
@@ -191,4 +191,3 @@ BEGIN									/* ;AN000; */
 									/* ;AN000; */
 END									/* ;AN000; */
 									/* ;AN000; */
-

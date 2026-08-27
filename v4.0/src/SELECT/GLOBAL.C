@@ -1,5 +1,5 @@
 
-#include "dos.h"                                                        /* ;AN000; */
+#include <dos.h>                                                          /* ;AN000; */
 #include "get_stat.h"                                                   /* ;AN000; */
 
 /*  */
@@ -76,4 +76,3 @@ char		*format_string = "NO FORMAT";                           /* ;AN000; */
 char far	*fat12_String = "FAT_12";                               /* ;AN000; */
 char far	*fat16_String = "FAT_12";                               /* ;AN000; */
 char far	*hilda_string = "HILDA";                                /* ;AN000; */
-

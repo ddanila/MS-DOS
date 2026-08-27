@@ -5,7 +5,7 @@
 ; parameter is specified, additional information is read from the disk.
 ;
 ;********************************************************************************
-.SEQ					;AN000;
+.ALPHA					;AN000;
 .XLIST					;AN000;
 INCLUDE  MACROS.INC			;AN000;
 INCLUDE  STRUC.INC			;AN000;
@@ -122,11 +122,12 @@ SCAN_PARAMETERS_ROUTINE PROC FAR		 ;AN000;
     PUSH BP					 ;AN000;
     MOV  BP, SP 				 ;AN000;
 						 ;
+    MOV  MODE, E_SELECT_INV			 ;AN000; No parameter is invalid.
     MOV  OPTION_1, E_SELECT_INV 		 ;AN000;
     MOV  OPTION_2, E_SELECT_INV 		 ;AN000;
 						 ;
     PUSH ES					 ;AN000; Save the extra register
-    MOV  AX, DATA				 ;AN000; ES contain control block segment
+    MOV  AX, SEG DATA				 ;AN000; ES contain control block segment
     MOV  ES, AX 				 ;AN000;
     MOV  DI, OFFSET PARMS			 ;AN000; DI contains offset of control block
     MOV  SI, 0081H				 ;AN000; SI contains offset of command line
