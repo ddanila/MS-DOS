@@ -123,7 +123,8 @@ dispatch_vector	label word
 	mkvect	AlterMapAndJump
 	mkvect	AlterMapAndCall
 	mkvect	MoveExchangeMemory
-	mkvect	GetMappablePAddrArray
+	extrn	_GetMappablePAddrArrayFixed:near
+	dw	offset _TEXT:_GetMappablePAddrArrayFixed
 	mkvect	GetInformation
 	mkvect	AllocateRawPages
 	mkvect	AlternateMapRegisterSet

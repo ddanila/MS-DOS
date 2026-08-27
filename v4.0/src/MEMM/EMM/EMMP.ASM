@@ -59,6 +59,7 @@ _TEXT	segment
 	public	_AlterMapAndCall
 ;	public	TS_VEMMD_MC_Ret
 	public	_MoveExchangeMemory
+	public	_GetMappablePAddrArrayFixed
 	public	_AlternateMapRegisterSet
 ;	public	VEMMD_Set_Map_Region
 ;	public	VEMMD_Unset_Map_Region
@@ -100,6 +101,7 @@ extrn	_OSEnabled:dword
 ;extrn	NullUnavailPTE:dword
 
 extrn	_total_pages:word			; total # of EMM pages in system
+extrn	_EMMstatus:word
 
 ;
 ; table of offsets into in to the first page table
@@ -938,6 +940,59 @@ _set_windows	endp
 ;	LIM 4.0 EXTRAS for Windows
 ;
 ;*******************************************************************************
+
+;***********************************************
+;
+; _GetMappablePAddrArrayFixed - get the LIM 4.0 physical-page array
+;
+; The original C used a post-increment on a cast far pointer and compared an
+; implementation-defined plain char with -1.  Keep that historical function in
+; the reproducible C object, but dispatch function 58h here so every four-byte
+; record advances exactly once and 0ffh indexes are skipped on every host.
+;
+; ENTRY: AL = 0 copies records to ES:DI; AL = 1 returns only the count
+; EXIT:  CX = number of mappable pages, AH = EMM status
+;
+;***********************************************
+_GetMappablePAddrArrayFixed proc near
+	cmp	al, 1
+	ja	gmpa_invalid
+	je	short gmpa_success
+
+	call	_dest_addr			; DX:AX = caller's ES:DI
+	mov	es, dx
+	mov	di, ax
+	xor	si, si
+	mov	cx, 48
+	cld
+gmpa_loop:
+	mov	bl, EMM_MPindex[si]
+	cmp	bl, 48				; 0ffh and every invalid index
+	jae	short gmpa_next
+	xor	bh, bh
+	shl	bx, 2				; sizeof mappable_page
+	add	bx, offset DGROUP:_mappable_pages
+	mov	ax, [bx]
+	stosw
+	mov	ax, [bx+2]
+	stosw
+gmpa_next:
+	inc	si
+	loop	gmpa_loop
+
+gmpa_success:
+	mov	bp, [_regp]
+	mov	cx, [_mappable_page_count]
+	mov	word ptr [bp.rCX], cx
+	mov	al, byte ptr [_EMMstatus]
+	mov	byte ptr [bp.rAX+1], al
+	ret
+
+gmpa_invalid:
+	mov	bp, [_regp]
+	mov	byte ptr [bp.rAX+1], INVALID_SUBFUNCTION
+	ret
+_GetMappablePAddrArrayFixed endp
 
 ;***********************************************
 ;
