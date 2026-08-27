@@ -260,7 +260,7 @@ LANID		  DW  ? 	   ;TWO BYTE CODEPAGE ID, TO MATCH
 LANNAME 	  DB  14 DUP(?)    ;ASCIIZ STRING NAME OF LANGUAGE
 LANGUAGE	  ENDS
 
-TABSIZE 	  EQU SIZE LANCHAR + SIZE LANID + SIZE LANNAME ;SIZE OF
+TABSIZE 	  EQU 1024 + 2 + 14                 ;SIZE OF
 				   ; EACH GRAPHIC CHAR TABLE + ID + NAME
 ; = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 ;		VALUES FOR THE MSG_DESC CONTROL BLOCK
