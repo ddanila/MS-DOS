@@ -173,6 +173,7 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 
 /*
  * Messages in flmes.asm
@@ -217,6 +218,9 @@ extern int	IOCTLOpen(char *);
 extern int	IOCTLWrite(int,char *,int);
 extern int	IOCTLRead(int,status *,int);
 extern int	IOCTLClose(int);
+
+void Fatal(char *);
+void FatalC(int,char *);
 
 /*
  *  GetNum - Read an unsigned 16 bit decimal number
@@ -304,7 +308,7 @@ char **envp;
     int handle,boolval;
     char *cptr;
     unsigned long total_hits,total_ops;
-    unsigned int minutes,seconds;
+    unsigned int minutes,seconds,tickvalue;
     struct {
 	unsigned    SWITCH_S : 1;
 	unsigned    SWITCH_I : 1;
@@ -400,7 +404,9 @@ char **envp;
 			    Fatal(SWTCH_CONF);
 			if(*cptr++ != ':')
 			    Fatal(BAD_PARM);
-			cptr = GetNum(cptr,&tickpacket.tickvall);
+			cptr = GetNum(cptr,&tickvalue);
+			tickpacket.tickvall = (unsigned char) tickvalue;
+			tickpacket.tickvalh = (unsigned char) (tickvalue >> 8);
 			tickpacket.Tchar = '\x0B';	 /* set tick is call 5 */
 			switches.SWITCH_T = 1;
 			break;
@@ -659,7 +665,7 @@ char **envp;
  *	EXIT: exit(-1)
  *
  */
-Fatal(p)
+void Fatal(p)
 char *p;
 {
 	fprintf(stderr,"\n%s\n",p);
@@ -677,7 +683,7 @@ char *p;
  *	EXIT: To Fatal
  *
  */
-FatalC(hand,p)
+void FatalC(hand,p)
 int hand;
 char *p;
 {
