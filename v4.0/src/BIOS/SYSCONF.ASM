@@ -375,6 +375,8 @@ DeviceHighRegionMask dw 0ffffh
 DeviceHighOldRegionMask dw 0ffffh
 DeviceHighRegionExplicit db 0
 DeviceHighShrink db 0
+DeviceHighCurrentRegion db 0
+DeviceHighMinimums dw 16 dup (0)
 InstallHighOldStrategy dw 0
 InstallHighOldLink db 0
 InstallHighScopeActive db 0
@@ -1867,6 +1869,8 @@ DeviceHighPrepare PROC NEAR
 	mov	ax,5807h
 	int	21h
 	jc	DeviceHighPrepareRestoreAll
+	call	DeviceHighApplyProfile
+	jc	DeviceHighPrepareRestoreAll
 
 DeviceHighPrepareAllocate:
 	mov	bx,0ffffh
@@ -1878,11 +1882,6 @@ DeviceHighPrepareAllocate:
 	jz	DeviceHighPrepareRestoreAll
 	cmp	bx,cs:[DeviceHighMinSize]
 	jb	DeviceHighPrepareRestoreAll
-	cmp	cs:[DeviceHighShrink],0
-	je	short DeviceHighPrepareRequestLargest
-	cmp	cs:[DeviceHighMinSize],0
-	je	short DeviceHighPrepareRequestLargest
-	mov	bx,cs:[DeviceHighMinSize]
 DeviceHighPrepareRequestLargest:
 	mov	cs:[DeviceHighBlockSize],bx
 	mov	ah,ALLOC
@@ -1901,6 +1900,7 @@ DeviceHighPrepareAllocated:
 	jmp	short DeviceHighPrepareDone
 
 DeviceHighPrepareRestoreAll:
+	call	DeviceHighResetLimits
 	cmp	cs:[DeviceHighRegionExplicit],0
 	je	short DeviceHighPrepareRestoreStrategy
 	mov	bx,cs:[DeviceHighOldRegionMask]
@@ -1940,6 +1940,12 @@ DeviceHighParseOptions PROC NEAR
 	mov	cs:[DeviceHighRegionMask],0ffffh
 	mov	cs:[DeviceHighRegionExplicit],0
 	mov	cs:[DeviceHighShrink],0
+	xor	bx,bx
+	mov	cx,16
+DeviceHighParseClearMinimums:
+	mov	word ptr cs:[DeviceHighMinimums+bx],0
+	add	bx,2
+	loop	DeviceHighParseClearMinimums
 
 	cmp	byte ptr es:[si],'S'
 	jne	DeviceHighParseCheckRegion
@@ -2034,6 +2040,8 @@ DeviceHighParseRegionPresent:
 	jb	DeviceHighParseError
 	cmp	ax,16
 	ja	DeviceHighParseError
+	mov	cs:[DeviceHighCurrentRegion],al
+	dec	cs:[DeviceHighCurrentRegion]
 	mov	cx,ax
 	dec	cx
 	mov	bx,1
@@ -2044,6 +2052,13 @@ DeviceHighParseRegionPresent:
 	inc	si
 	call	DeviceHighParseDecimalBytes
 	jc	DeviceHighParseError
+	xor	bx,bx
+	mov	bl,cs:[DeviceHighCurrentRegion]
+	shl	bx,1
+	cmp	ax,word ptr cs:[DeviceHighMinimums+bx]
+	jbe	short DeviceHighParseMinimumSaved
+	mov	word ptr cs:[DeviceHighMinimums+bx],ax
+DeviceHighParseMinimumSaved:
 	cmp	ax,cs:[DeviceHighMinSize]
 	jbe	short DeviceHighParseRegionSeparator
 	mov	cs:[DeviceHighMinSize],ax
@@ -2167,6 +2182,120 @@ DeviceHighBytesDone:
 	ret
 DeviceHighBytesToParagraphs ENDP
 
+; Validate every listed minimum against its own live region. With /S, cap
+; each region that has a minimum for the duration of the driver transaction.
+DeviceHighApplyProfile PROC NEAR
+	cmp	cs:[DeviceHighRegionExplicit],0
+	je	short DeviceHighApplyDone
+	push	ax
+	push	bx
+	push	cx
+	push	dx
+	push	si
+	push	di
+	push	bp
+	mov	bp,cs:[DeviceHighRegionMask]
+	xor	di,di
+DeviceHighApplyLoop:
+	test	bp,1
+	jz	short DeviceHighApplyNext
+	mov	dx,cs:[DeviceHighMinimums+di]
+	mov	bx,di
+	shr	bx,1
+	inc	bx
+	mov	cx,4d55h
+	mov	si,2142h
+	push	di
+	mov	di,0a55ah
+	mov	ax,5809h
+	int	21h
+	pop	di
+	jc	short DeviceHighApplyBad
+	cmp	ax,dx
+	jb	short DeviceHighApplyBad
+	cmp	cs:[DeviceHighShrink],0
+	je	short DeviceHighApplyNext
+	or	dx,dx
+	jz	short DeviceHighApplyNext
+	mov	bx,di
+	shr	bx,1
+	inc	bx
+	mov	cx,4d55h
+	mov	si,2142h
+	push	di
+	mov	di,0a55ah
+	mov	ax,580ah
+	int	21h
+	pop	di
+	jc	short DeviceHighApplyBad
+DeviceHighApplyNext:
+	shr	bp,1
+	add	di,2
+	cmp	di,32
+	jb	short DeviceHighApplyLoop
+	clc
+	jmp	short DeviceHighApplyPop
+DeviceHighApplyBad:
+	call	DeviceHighResetLimits
+	stc
+DeviceHighApplyPop:
+	pop	bp
+	pop	di
+	pop	si
+	pop	dx
+	pop	cx
+	pop	bx
+	pop	ax
+DeviceHighApplyDone:
+	ret
+DeviceHighApplyProfile ENDP
+
+DeviceHighResetLimits PROC NEAR
+	cmp	cs:[DeviceHighRegionExplicit],0
+	je	short DeviceHighResetLimitsDone
+	cmp	cs:[DeviceHighShrink],0
+	je	short DeviceHighResetLimitsDone
+	push	ax
+	push	bx
+	push	cx
+	push	dx
+	push	si
+	push	di
+	push	bp
+	mov	bp,cs:[DeviceHighRegionMask]
+	xor	di,di
+DeviceHighResetLimitLoop:
+	test	bp,1
+	jz	short DeviceHighResetLimitNext
+	cmp	word ptr cs:[DeviceHighMinimums+di],0
+	je	short DeviceHighResetLimitNext
+	mov	bx,di
+	shr	bx,1
+	inc	bx
+	mov	dx,0ffffh
+	mov	cx,4d55h
+	mov	si,2142h
+	push	di
+	mov	di,0a55ah
+	mov	ax,580ah
+	int	21h
+	pop	di
+DeviceHighResetLimitNext:
+	shr	bp,1
+	add	di,2
+	cmp	di,32
+	jb	short DeviceHighResetLimitLoop
+	pop	bp
+	pop	di
+	pop	si
+	pop	dx
+	pop	cx
+	pop	bx
+	pop	ax
+DeviceHighResetLimitsDone:
+	ret
+DeviceHighResetLimits ENDP
+
 DeviceHighCommit PROC NEAR
 	cmp	cs:[DeviceHighActive],0
 	je	DeviceHighCommitDone
@@ -2234,6 +2363,7 @@ DeviceHighRestore PROC NEAR
 	mov	cs:[MEMLO],ax
 	mov	ax,cs:[DeviceHighLowMemHi]
 	mov	cs:[MEMHI],ax
+	call	DeviceHighResetLimits
 	cmp	cs:[DeviceHighRegionExplicit],0
 	je	short DeviceHighRestoreStrategy
 	mov	bx,cs:[DeviceHighOldRegionMask]
