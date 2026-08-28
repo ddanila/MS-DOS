@@ -62,6 +62,7 @@
 	public	xbase_addr_h
 	public	ext_size
 	public	sys_size
+	public	xms_handle
 
 	page
 ;******************************************************************************
@@ -140,6 +141,8 @@ ext_size	dw	0	; size of extended memory allocated in kb
 sys_size	dw	0	; size of system memory from 4000h in emm pool
 total_mem	dw	0	; size of extended memory available at any moment
 avail_mem	dw	0	; total size (hi+ext) available for MEMM
+xms_entry	dd	0	; installed XMS manager control entry
+xms_handle	dw	0	; locked backing-store handle retained resident
 ;
 
 _DATA	ends
@@ -195,6 +198,8 @@ AllocMem	proc	near
 	push	dx
 	push	es
 
+	call	XMSAlloc
+	jnc	AM_exit			; XMS is the single extended-memory owner
 
 ;
 ; 1. Check available hi/extended memory
@@ -233,6 +238,62 @@ AM_exit:
 	pop	ax
 	ret
 AllocMem	endp				; End of procedure
+
+; Allocate and permanently lock the EMM backing pool through an installed XMS
+; manager. The historical INT 15h allocator remains the carry-set fallback.
+XMSAlloc proc near
+	push	ax
+	push	bx
+	push	cx
+	push	dx
+	push	es
+	mov	ax,4300h
+	int	2fh
+	cmp	al,80h
+	jne	short XA_fail
+	mov	ax,4310h
+	int	2fh
+	mov	word ptr [xms_entry],bx
+	mov	word ptr [xms_entry+2],es
+	mov	dx,[pool_size]
+	mov	ah,09h
+	call	dword ptr [xms_entry]
+	or	ax,ax
+	jz	short XA_fail
+	mov	[xms_handle],dx
+	mov	ah,0ch
+	call	dword ptr [xms_entry]
+	or	ax,ax
+	jz	short XA_release
+	or	dh,dh			; current paging tables address 24 bits
+	jnz	short XA_unlock_release
+	mov	[xbase_addr_l],bx
+	mov	[xbase_addr_h],dl
+	mov	ax,[pool_size]
+	mov	[ext_size],ax
+	mov	[avail_mem],ax
+	mov	[total_mem],0
+	clc
+	jmp	short XA_done
+XA_unlock_release:
+	mov	dx,[xms_handle]
+	mov	ah,0dh
+	call	dword ptr [xms_entry]
+XA_release:
+	mov	dx,[xms_handle]
+	mov	ah,0ah
+	call	dword ptr [xms_entry]
+	mov	[xms_handle],0
+XA_fail:
+	stc
+XA_done:
+	pop	es
+	pop	dx
+	pop	cx
+	pop	bx
+	pop	ax
+	ret
+XMSAlloc endp
 ;
 	page
 ;******************************************************************************
@@ -262,6 +323,17 @@ DeallocMem	proc	near
 	push	si
 	push	es
 ;
+	mov	dx,[xms_handle]
+	or	dx,dx
+	jz	short deall_no_xms
+	mov	ah,0dh
+	call	dword ptr [xms_entry]
+	mov	dx,[xms_handle]
+	mov	ah,0ah
+	call	dword ptr [xms_entry]
+	mov	[xms_handle],0
+	mov	[ext_size],0
+deall_no_xms:
 ifndef NOHIMEM			; if high memory in this model
 	mov	ax,[hi_alloc]		; get hi memory to deallocate
 	or	ax,ax			; q: did we ever get any?

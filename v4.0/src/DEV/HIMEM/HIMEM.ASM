@@ -195,6 +195,8 @@ multiplex_handler proc far
         je      short private_installed
         cmp     ax, 0e701h
         je      private_register
+        cmp     ax, 0e702h
+        je      private_unregister
         jmp     dword ptr cs:[old_int2f]
 multiplex_installed:
         mov     al, 080h
@@ -281,6 +283,35 @@ private_done:
         pop     di
         pop     si
         pop     dx
+        pop     cx
+        iret
+
+private_unregister:
+        push    cx
+        push    si
+        push    ds
+        push    cs
+        pop     ds
+        mov     si, offset umb_blocks
+        mov     cx, [umb_count]
+        jcxz    short private_unregister_clear
+private_unregister_scan:
+        cmp     byte ptr [si+4], 0
+        jne     short private_unregister_busy
+        add     si, UMB_BLOCK_SIZE
+        loop    private_unregister_scan
+private_unregister_clear:
+        mov     [umb_count], 0
+        mov     [umb_committed], 0
+        mov     ax, 1
+        xor     bx, bx
+        jmp     short private_unregister_done
+private_unregister_busy:
+        xor     ax, ax
+        mov     bl, 2
+private_unregister_done:
+        pop     ds
+        pop     si
         pop     cx
         iret
 

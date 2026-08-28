@@ -79,6 +79,8 @@
 	include driver.equ
 	include driver.str
 	include ascii_sm.equ
+	include emmdef.inc
+	include page.inc
 ;
 ;  maximum value for SIZE parameter
 ;
@@ -119,6 +121,12 @@ _DATA	segment
 				    ;  deals with memory so oem dependent
 	extrn	ext_size:word	    ; size of extended memory allocated
 	extrn	sys_size:word	    ; size of system memory allocated
+	extrn	_page_frame_pages:word
+	extrn	_free_count:word
+	extrn	_free_top:word
+	extrn	_emm_free:word
+	extrn	_pft386:word
+	extrn	PageT_Seg:word
 
 _DATA	ends
 
@@ -181,6 +189,7 @@ LAST	segment
 	extrn	find_phys_pages:near	; find the mappable pages in 0-1M range
 	extrn	exclude_segments:near	; exclude segments within a range
 	extrn	estb_mach_state:near	; establish machine environment
+	extrn	mappable_segs:byte
 
 LAST	ends
 
@@ -249,6 +258,15 @@ _TEXT	ends
 
 LAST	segment
 	assume	cs:LAST, ds:DGROUP, es:DGROUP
+
+UMB_FIRST_PAGE	equ	0a000h / 0400h
+UMB_PAGE_COUNT	equ	(0f000h - 0a000h) / 0400h
+umb_peer	db	0
+umb_candidates	db	UMB_PAGE_COUNT dup (0)
+umb_backing_count dw	0
+umb_registered	db	0
+umb_registration dw	1, 0
+		dw	UMB_PAGE_COUNT dup (0, 0)
 
 	page
 ;******************************************************************************
@@ -366,8 +384,11 @@ IE_find_phys:
 	call	find_phys_pages 	; find mappable physical pages
 					; and page frame
 	test	[msg_flag],KILLER_MSG	;Q: any killer messages
-	jz	IE_alloc		;  N: Go to find and allocate log. pages
-	jmp	IE_exit 		;  Y: exit with error
+	jnz	short IE_find_error
+	call	Prepare_UMB		; remove safe UMA candidates from EMS windows
+	jmp	IE_alloc		; Go allocate logical pages
+IE_find_error:
+	jmp	IE_exit 		; exit with error
 ;
 ;  find and allocate logical emm pages
 ;
@@ -402,8 +423,11 @@ IE_InitTAB:
 	or	[msg_flag],MEM_ERR_MSG	;  Y: Some serious memory error
 IE_InitT_Good:
 	test	[msg_flag],KILLER_MSG	;Q: any killer messages?
-	jz	IE_chkbase		;  N: check base memory left
-	jmp	IE_exit 		;  Y: exit
+	jnz	short IE_table_error
+	call	Commit_UMB		; map backing and publish atomically
+	jmp	IE_chkbase		; check base memory left
+IE_table_error:
+	jmp	IE_exit 		; exit
 ;
 ;	Verify that we will have at least 64k of base memory after MEMM
 ;	is loaded
@@ -612,6 +636,7 @@ IE_leave:
 	ret
 ;
 IE_not_installed:
+	call	Rollback_UMB		; undo provider state before releasing XMS
 	call	DeallocMem		; put back any memory we took
 	mov	ax,ERROR		; error return
 	jmp	IE_leave
@@ -1042,6 +1067,240 @@ htoi_done:
 	pop	bx
 	ret
 htoi	endp
+
+;=============================================================================
+; Repository HIMEM/EMM386 UMB peer integration
+;=============================================================================
+
+; Snapshot safe 16 KiB UMA windows after the existing ROM/video/exclusion scan
+; and remove them from the EMS mappable-window tables before those tables are
+; built. The EMS page frame always remains under EMS ownership.
+Prepare_UMB proc near
+	pusha
+	push	es
+	mov	ax,0e700h
+	int	2fh
+	cmp	ax,0e7ffh
+	jne	short PU_done
+	cmp	bx,04d55h
+	jne	short PU_done
+	mov	cs:[umb_peer],1
+	xor	di,di
+	mov	si,UMB_FIRST_PAGE
+	mov	bx,0a000h
+	mov	cx,UMB_PAGE_COUNT
+PU_scan:
+	cmp	cs:mappable_segs[si],PAGE_MAPPABLE
+	jne	short PU_next
+	mov	ax,[PF_Base]
+	cmp	ax,0ffffh
+	je	short PU_take
+	cmp	bx,ax
+	jb	short PU_take
+	mov	dx,[_page_frame_pages]
+	shl	dx,10
+	add	dx,ax
+	cmp	bx,dx
+	jb	short PU_next
+PU_take:
+	mov	cs:umb_candidates[di],1
+	mov	cs:mappable_segs[si],PAGE_NOT_MAPPABLE
+PU_next:
+	inc	di
+	inc	si
+	add	bx,0400h
+	loop	PU_scan
+PU_done:
+	pop	es
+	popa
+	ret
+Prepare_UMB endp
+
+; Reserve one EMS backing page per candidate, install stable PTEs, coalesce the
+; windows into extents, and commit the complete map to HIMEM. No window remains
+; backed if the peer rejects the transaction.
+Commit_UMB proc near
+	pusha
+	push	es
+	cmp	cs:[umb_peer],0
+	je	CU_done
+	mov	ax,[_free_count]
+	or	ax,ax
+	jz	CU_done
+	mov	cs:[umb_backing_count],0
+	mov	cs:[umb_registration+2],0
+	xor	si,si
+	mov	dx,0a000h
+	xor	bp,bp			; end segment of previous extent
+CU_scan:
+	cmp	cs:umb_candidates[si],0
+	je	short CU_next
+	cmp	[_free_count],0
+	je	short CU_publish
+	mov	bx,[_free_top]
+	shl	bx,1
+	add	bx,[_emm_free]
+	mov	ax,[bx]			; backing EMM page number
+	inc	[_free_top]
+	dec	[_free_count]
+	inc	cs:[umb_backing_count]
+	call	Map_UMB_Page
+
+	cmp	bp,dx
+	jne	short CU_new_extent
+	mov	bx,cs:[umb_registration+2]
+	dec	bx
+	shl	bx,1
+	shl	bx,1
+	add	bx,offset umb_registration+4
+	add	word ptr cs:[bx+2],0400h
+	jmp	short CU_extent_done
+CU_new_extent:
+	mov	bx,cs:[umb_registration+2]
+	shl	bx,1
+	shl	bx,1
+	add	bx,offset umb_registration+4
+	mov	word ptr cs:[bx],dx
+	mov	word ptr cs:[bx+2],0400h
+	inc	cs:[umb_registration+2]
+CU_extent_done:
+	mov	bp,dx
+	add	bp,0400h
+CU_next:
+	inc	si
+	add	dx,0400h
+	cmp	si,UMB_PAGE_COUNT
+	jb	short CU_scan
+CU_publish:
+	cmp	cs:[umb_registration+2],0
+	je	short CU_rollback
+	push	ds
+	push	cs
+	pop	ds
+	mov	si,offset umb_registration
+	mov	ax,0e701h
+	int	2fh
+	pop	ds
+	cmp	ax,1
+	jne	short CU_rollback
+	mov	cs:[umb_registered],1
+	jmp	short CU_done
+CU_rollback:
+	xor	si,si
+	mov	dx,0a000h
+CU_restore_scan:
+	cmp	cs:umb_candidates[si],0
+	je	short CU_restore_next
+	call	Restore_UMB_Page
+CU_restore_next:
+	inc	si
+	add	dx,0400h
+	cmp	si,UMB_PAGE_COUNT
+	jb	short CU_restore_scan
+	mov	ax,cs:[umb_backing_count]
+	sub	[_free_top],ax
+	add	[_free_count],ax
+	mov	cs:[umb_backing_count],0
+CU_done:
+	pop	es
+	popa
+	ret
+Commit_UMB endp
+
+Rollback_UMB proc near
+	cmp	cs:[umb_registered],0
+	je	short RU_done
+	mov	ax,0e702h
+	int	2fh
+	cmp	ax,1
+	jne	short RU_done
+	xor	si,si
+	mov	dx,0a000h
+RU_restore_scan:
+	cmp	cs:umb_candidates[si],0
+	je	short RU_restore_next
+	call	Restore_UMB_Page
+RU_restore_next:
+	inc	si
+	add	dx,0400h
+	cmp	si,UMB_PAGE_COUNT
+	jb	short RU_restore_scan
+	mov	ax,cs:[umb_backing_count]
+	sub	[_free_top],ax
+	add	[_free_count],ax
+	mov	cs:[umb_backing_count],0
+	mov	cs:[umb_registered],0
+RU_done:
+	ret
+Rollback_UMB endp
+
+; AX=EMM backing page, DX=16 KiB UMA segment.
+Map_UMB_Page proc near
+	push	eax
+	push	bx
+	push	cx
+	push	di
+	push	es
+	mov	bx,ax
+	shl	bx,1
+	shl	bx,1
+	add	bx,[_pft386]
+	mov	eax,[bx]
+	and	ax,0f000h
+	or	ax,P_AVAIL
+	mov	bx,[PageT_Seg]
+	mov	es,bx
+	mov	di,dx
+	shr	di,1
+	shr	di,1
+	shr	di,1
+	shr	di,1
+	shr	di,1
+	shr	di,1
+	mov	cx,4
+MUP_store:
+	stosd
+	add	eax,01000h
+	loop	MUP_store
+	pop	es
+	pop	di
+	pop	cx
+	pop	bx
+	pop	eax
+	ret
+Map_UMB_Page endp
+
+; DX=16 KiB UMA segment. Restore the original identity mapping.
+Restore_UMB_Page proc near
+	push	eax
+	push	bx
+	push	cx
+	push	di
+	push	es
+	movzx	eax,dx
+	shl	eax,4
+	or	ax,P_AVAIL
+	mov	bx,[PageT_Seg]
+	mov	es,bx
+	mov	di,dx
+	shr	di,1
+	shr	di,1
+	shr	di,1
+	shr	di,1
+	shr	di,1
+	shr	di,1
+	mov	cx,4
+RUP_store:
+	stosd
+	add	eax,01000h
+	loop	RUP_store
+	pop	es
+	pop	di
+	pop	cx
+	pop	bx
+	pop	eax
+	ret
+Restore_UMB_Page endp
 
 
 
