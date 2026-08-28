@@ -289,6 +289,8 @@ ZERO			DB	0
 SepChr			DB	0
 LineCount		dw	0	;AN000;  Line count in config.sys
 ShowCount		db	'     ',CR,LF,'$' ;AN000;  Used to convert Linecount to ASCII.
+HmaUnavailableMsg	db	'HMA not available',CR,LF
+			db	'Loading DOS low',CR,LF,'$'
 Buffer_LineNum		dw	0	;AN000; Line count for "BUFFERS=" command if entered.
 
 Sys_Model_Byte		db	0FFh	;model byte used in SYSINIT
@@ -854,9 +856,19 @@ OKLD:
 	mov	ax,1230h
 	int	2fh
 	cmp	ax,1
-	jne	short Dos_High_Done
+	jne	short Dos_High_Failed
 	mov	word ptr cs:[DosInfo+2],0ffffh
 	mov	word ptr cs:[SYSI_Country+2],0ffffh
+	jmp	short Dos_High_Done
+Dos_High_Failed:
+	push	dx
+	push	ds
+	push	cs
+	pop	ds
+	mov	dx,offset HmaUnavailableMsg
+	invoke	PRINT
+	pop	ds
+	pop	dx
 Dos_High_Done:
 	XOR	AX,AX
 	MOV	AH,EXEC
