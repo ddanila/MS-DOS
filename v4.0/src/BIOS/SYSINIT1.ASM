@@ -951,6 +951,13 @@ AcquireUmbsRegister:
 	SHL	AX,1
 	CMP	SI,AX
 	JB	AcquireUmbsRegister
+	MOV	CX,4D55H
+	MOV	SI,2142H
+	MOV	DI,0A55AH
+	MOV	AX,5806H
+	INT	21H
+	OR	AX,AX
+	JZ	AcquireUmbsRegistrationFailed
 	JMP	AcquireUmbsDone
 
 AcquireUmbsRegistrationFailed:

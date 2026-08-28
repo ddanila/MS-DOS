@@ -545,6 +545,8 @@ PAGE
 	JZ      AllocOperRegisterUmb
 	CMP     AL,5
 	JZ      AllocOperResetUmb
+	CMP     AL,6
+	JZ      AllocOperFinalizeUmb
 
 AllocOperError:
 	MOV     EXTERR_LOCUS,errLoc_mem ; Extended Error Locus
@@ -678,6 +680,57 @@ AllocOperResetDone:
 AllocOperResetBad:
 	POP     DS
 	JMP     AllocOperError
+
+AllocOperFinalizeUmb:
+; Reclaim the final in-extent guard: unlike interior guards, the last free MCB
+; can carry the Z signature itself without exposing a provider boundary.
+	CMP     CX,4D55H
+	JNZ     AllocOperError
+	CMP     SI,2142H
+	JNZ     AllocOperError
+	CMP     DI,0A55AH
+	JNZ     AllocOperError
+	CMP     [UmbLinked],0
+	JNZ     AllocOperError
+	MOV     DX,[UmbArenaTail]
+	OR      DX,DX
+	JZ      AllocOperError
+	PUSH    DS
+	PUSH    ES
+	MOV     DI,arena_signature
+	MOV     AX,[UmbArenaHead]
+	CALL    Check_Signature
+	JC      AllocOperFinalizeBad
+AllocOperFinalizeFind:
+	PUSH    ES
+	POP     DS
+	MOV     BX,AX
+	CALL    arena_next
+	JC      AllocOperFinalizeBad
+	CMP     AX,DX
+	JZ      AllocOperFinalizeFound
+	CMP     DS:[arena_signature],arena_signature_end
+	JZ      AllocOperFinalizeBad
+	JMP     AllocOperFinalizeFind
+AllocOperFinalizeFound:
+	CMP     ES:[arena_signature],arena_signature_end
+	JNZ     AllocOperFinalizeBad
+	CMP     ES:[arena_owner],arena_owner_dos
+	JNZ     AllocOperFinalizeBad
+	CMP     ES:[arena_size],0
+	JNZ     AllocOperFinalizeBad
+	INC     DS:[arena_size]
+	MOV     DS:[arena_signature],arena_signature_end
+	MOV     [UmbArenaTail],BX
+	POP     ES
+	POP     DS
+	MOV     AX,1
+	transfer    SYS_RET_OK
+AllocOperFinalizeBad:
+	POP     ES
+	POP     DS
+	XOR     AX,AX
+	transfer    SYS_RET_OK
 
 EndProc $AllocOper
 
