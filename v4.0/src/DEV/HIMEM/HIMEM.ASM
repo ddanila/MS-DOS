@@ -52,6 +52,7 @@ hma_owned       db      0
 a20_initial     db      0
 a20_local       dw      0
 a20_global      dw      0
+a20_target      db      0
 caller_ds       dw      0
 caller_si       dw      0
 move_length     dd      0
@@ -136,13 +137,15 @@ ifdef DEBUG
         call    debug_mark
 endif
 
-        ; Establish the XMS idle state. The repository's supported machines
-        ; have a controllable fast A20 gate; later hardware backends may mark
-        ; an irreversibly enabled gate as initial-on after an alias test.
-        in      al, 092h
-        and     al, 0fch
-        out     092h, al
+        ; Preserve the machine's incoming A20 state. Querying physical aliasing
+        ; avoids assuming that port 92h exists or accurately reports the gate.
+        call    query_a20_hardware
+        mov     [a20_initial], al
+        xor     al, al
+        call    set_a20_hardware
+        jc      short init_keep_a20
         mov     [a20_initial], 0
+init_keep_a20:
 
         push    ds
         push    cs
@@ -456,26 +459,14 @@ a20_underflow:
 xms_local_disable endp
 
 xms_a20_query proc near
-        xor     ax, ax
-        in      al, 092h
-        and     al, 2
-        shr     al, 1
+        call    query_a20_hardware
+        xor     bl, bl
         ret
 xms_a20_query endp
 
 enable_a20 proc near
-        in      al, 092h
-        or      al, 2
-        and     al, 0feh
-        out     092h, al
-        in      al, 092h
-        test    al, 2
-        jz      short enable_a20_fail
-        clc
-        ret
-enable_a20_fail:
-        stc
-        ret
+        mov     al, 1
+        jmp     set_a20_hardware
 enable_a20 endp
 
 reconcile_a20 proc near
@@ -485,20 +476,132 @@ reconcile_a20 proc near
         jne     short reconcile_on
         cmp     [a20_local], 0
         jne     short reconcile_on
-        in      al, 092h
-        and     al, 0fch
-        out     092h, al
-        in      al, 092h
-        test    al, 2
-        jnz     short reconcile_fail
-        clc
-        ret
+        xor     al, al
+        jmp     set_a20_hardware
 reconcile_on:
         jmp     enable_a20
-reconcile_fail:
+reconcile_a20 endp
+
+; Set A20 through the fast gate, BIOS service, then the 8042 controller. Every
+; backend is verified through physical aliasing; unsupported ports therefore
+; fail safely instead of being trusted by their readback value.
+set_a20_hardware proc near
+        mov     cs:[a20_target], al
+ifndef A20_TEST_SKIP_FAST
+        push    ax
+        in      al, 092h
+        and     al, 0fch               ; never assert the reset bit
+        cmp     cs:[a20_target], 0
+        je      short set_a20_fast_write
+        or      al, 2
+set_a20_fast_write:
+        out     092h, al
+        pop     ax
+        call    verify_a20_target
+        jnc     short set_a20_done
+endif
+
+ifndef A20_TEST_SKIP_BIOS
+        mov     ax, 02400h
+        cmp     cs:[a20_target], 0
+        je      short set_a20_bios
+        inc     ax
+set_a20_bios:
+        int     015h
+        call    verify_a20_target
+        jnc     short set_a20_done
+endif
+
+        call    kbc_wait_input
+        jc      short set_a20_fail
+        mov     al, 0d1h
+        out     064h, al
+        call    kbc_wait_input
+        jc      short set_a20_fail
+        mov     al, 0ddh
+        cmp     cs:[a20_target], 0
+        je      short set_a20_kbc_write
+        mov     al, 0dfh
+set_a20_kbc_write:
+        out     060h, al
+        call    kbc_wait_input
+        jc      short set_a20_fail
+        call    verify_a20_target
+        ret
+set_a20_done:
+        clc
+        ret
+set_a20_fail:
         stc
         ret
-reconcile_a20 endp
+set_a20_hardware endp
+
+verify_a20_target proc near
+        call    query_a20_hardware
+        cmp     al, cs:[a20_target]
+        jne     short verify_a20_failed
+        clc
+        ret
+verify_a20_failed:
+        stc
+        ret
+verify_a20_target endp
+
+kbc_wait_input proc near
+        push    ax
+        push    cx
+        mov     cx, 0ffffh
+kbc_wait_loop:
+        in      al, 064h
+        test    al, 2
+        jz      short kbc_wait_ready
+        loop    kbc_wait_loop
+        pop     cx
+        pop     ax
+        stc
+        ret
+kbc_wait_ready:
+        pop     cx
+        pop     ax
+        clc
+        ret
+kbc_wait_input endp
+
+; Return AL=1 when 0000:0500 and FFFF:0510 are distinct physical locations.
+; Both words are restored before interrupts resume, including in wrap mode.
+query_a20_hardware proc near
+        pushf
+        cli
+        push    bx
+        push    cx
+        push    dx
+        push    ds
+        push    es
+        xor     ax, ax
+        mov     ds, ax
+        dec     ax
+        mov     es, ax
+        mov     bx, word ptr ds:[0500h]
+        mov     dx, word ptr es:[0510h]
+        mov     word ptr ds:[0500h], 0000h
+        mov     word ptr es:[0510h], 0ffffh
+        xor     cx, cx
+        cmp     word ptr ds:[0500h], 0ffffh
+        je      short query_a20_restore
+        inc     cx
+query_a20_restore:
+        mov     word ptr es:[0510h], dx
+        mov     word ptr ds:[0500h], bx
+        xor     ax, ax
+        mov     al, cl
+        pop     es
+        pop     ds
+        pop     dx
+        pop     cx
+        pop     bx
+        popf
+        ret
+query_a20_hardware endp
 
 xms_query_free proc near
         call    largest_gap
