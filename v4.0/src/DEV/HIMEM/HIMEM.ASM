@@ -227,6 +227,9 @@ private_register:
         pop     es
         push    cs
         pop     ds
+ifdef UMB_TEST_REJECT
+        jmp     short private_bad
+endif
         cmp     [umb_committed], 0
         jne     short private_bad
         cmp     word ptr es:[si], 1
