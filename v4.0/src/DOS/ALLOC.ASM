@@ -55,6 +55,8 @@ PAGE
 	i_need  UmbRegionFilter,WORD    ; enabled provider region bitmap
 	i_need  UmbRegionStarts,BYTE    ; region start segment table
 	i_need  UmbRegionEnds,BYTE      ; exclusive region end table
+	i_need  UmbRegionLimits,BYTE    ; temporary per-region paragraph caps
+	i_need  UmbAllocLimit,WORD      ; cap end for current UMB candidate
 	i_need  AllocScanDomain,BYTE    ; allocator arena selector
 	i_need  ArenaFreeDomain,BYTE    ; process cleanup arena selector
 	I_need  EXTERR_LOCUS,BYTE       ; Extended Error Locus
@@ -262,13 +264,26 @@ alloc_fail:
 
 alloc_free:
 	CMP     [AllocScanDomain],0
-	JZ      alloc_free_visible
+	JNZ     alloc_free_upper
+	MOV     [UmbAllocLimit],0
+	JMP     SHORT alloc_free_visible
+alloc_free_upper:
 	CALL    UmbRegionAllowed
 	JC      alloc_next
 alloc_free_visible:
 	CALL    coalesce                ; add following free block to current
 	JC      alloc_err               ; IF error THEN GOTO err
 	MOV     CX,DS:[arena_size]
+	MOV     AX,[UmbAllocLimit]
+	OR      AX,AX
+	JZ      alloc_free_sized
+	MOV     DX,DS
+	INC     DX
+	SUB     AX,DX
+	CMP     CX,AX
+	JBE     alloc_free_sized
+	MOV     CX,AX
+alloc_free_sized:
 
 	POP     DX                      ; check for max found size
 	CMP     CX,DX
@@ -358,8 +373,7 @@ EndProc $alloc
 ; Carry clear when the current UMB MCB in DS belongs to an enabled provider
 ; region.  Conventional scans bypass this filter.
 UmbRegionAllowed PROC NEAR
-	CMP     [UmbRegionFilter],0FFFFH
-	JE      UmbRegionAllowedYes
+	MOV     [UmbAllocLimit],0
 	PUSH    AX
 	PUSH    BX
 	PUSH    CX
@@ -379,8 +393,25 @@ UmbRegionAllowedLoop:
 	CMP     DX,AX
 	JAE     UmbRegionAllowedNext
 	TEST    [UmbRegionFilter],BX
-	JNZ     UmbRegionAllowedPopYes
-	JMP     SHORT UmbRegionAllowedNo
+	JZ      UmbRegionAllowedNo
+	MOV     CX,WORD PTR [UmbRegionLimits+SI]
+	CMP     CX,0FFFFH
+	JE      UmbRegionAllowedUseEnd
+	MOV     AX,WORD PTR [UmbRegionStarts+SI]
+	ADD     AX,CX
+	INC     AX
+	JZ      UmbRegionAllowedUseEnd
+	CMP     AX,WORD PTR [UmbRegionEnds+SI]
+	JBE     UmbRegionAllowedCheckCap
+UmbRegionAllowedUseEnd:
+	MOV     AX,WORD PTR [UmbRegionEnds+SI]
+UmbRegionAllowedCheckCap:
+	MOV     CX,DX
+	INC     CX
+	CMP     CX,AX
+	JAE     UmbRegionAllowedNo
+	MOV     [UmbAllocLimit],AX
+	JMP     SHORT UmbRegionAllowedPopYes
 UmbRegionAllowedNext:
 	SHL     BX,1
 	ADD     SI,2
@@ -396,9 +427,6 @@ UmbRegionAllowedPop:
 	POP     CX
 	POP     BX
 	POP     AX
-	RET
-UmbRegionAllowedYes:
-	CLC
 	RET
 UmbRegionAllowed ENDP
 
@@ -574,6 +602,7 @@ RegisterUmbMakeExtent:
 	MOV     AX,BX
 	ADD     AX,DX
 	MOV     WORD PTR CS:[UmbRegionEnds+SI],AX
+	MOV     WORD PTR CS:[UmbRegionLimits+SI],0FFFFH
 	INC     CS:[UmbRegionCount]
 	POP     SI
 	POP     ES
@@ -623,6 +652,12 @@ PAGE
 	JZ      AllocOperSetRegionFilter
 	CMP     AL,8
 	JZ      AllocOperGetRegionFilter
+	CMP     AL,9
+	JZ      AllocOperGetRegionInfo
+	CMP     AL,0AH
+	JZ      AllocOperSetRegionLimit
+	CMP     AL,0BH
+	JZ      AllocOperGetRegionLimit
 
 AllocOperError:
 	MOV     EXTERR_LOCUS,errLoc_mem ; Extended Error Locus
@@ -754,6 +789,16 @@ AllocOperResetDone:
 	MOV     [UmbLinkMcb],0
 	MOV     [UmbRegionCount],0
 	MOV     [UmbRegionFilter],0FFFFH
+	PUSH    BX
+	PUSH    CX
+	XOR     BX,BX
+	MOV     CX,16
+AllocOperResetLimits:
+	MOV     WORD PTR [UmbRegionLimits+BX],0FFFFH
+	ADD     BX,2
+	LOOP    AllocOperResetLimits
+	POP     CX
+	POP     BX
 	transfer    SYS_RET_OK
 AllocOperResetBad:
 	POP     DS
@@ -829,6 +874,111 @@ AllocOperGetRegionFilter:
 	JNZ     AllocOperError
 	MOV     AX,[UmbRegionFilter]
 	transfer SYS_RET_OK
+
+; Private LOADHIGH/SYSINIT region profile calls.  The full signature prevents
+; applications from depending on these implementation details.
+AllocOperGetRegionInfo:
+	CMP     CX,4D55H
+	JNZ     AllocOperError
+	CMP     SI,2142H
+	JNZ     AllocOperError
+	CMP     DI,0A55AH
+	JNZ     AllocOperError
+	OR      BX,BX
+	JZ      AllocOperError
+	XOR     AX,AX
+	MOV     AL,[UmbRegionCount]
+	CMP     BX,AX
+	JA      AllocOperError
+	DEC     BX
+	SHL     BX,1
+	MOV     AX,WORD PTR [UmbRegionStarts+BX]
+	MOV     SI,WORD PTR [UmbRegionEnds+BX]
+	CALL    UmbRegionLargestFree
+	JC      AllocOperError
+	MOV     AX,DX
+	transfer SYS_RET_OK
+
+AllocOperSetRegionLimit:
+	CMP     CX,4D55H
+	JNZ     AllocOperError
+	CMP     SI,2142H
+	JNZ     AllocOperError
+	CMP     DI,0A55AH
+	JNZ     AllocOperError
+	OR      BX,BX
+	JZ      AllocOperError
+	XOR     AX,AX
+	MOV     AL,[UmbRegionCount]
+	CMP     BX,AX
+	JA      AllocOperError
+	DEC     BX
+	SHL     BX,1
+	MOV     WORD PTR [UmbRegionLimits+BX],DX
+	transfer SYS_RET_OK
+
+AllocOperGetRegionLimit:
+	CMP     CX,4D55H
+	JNZ     AllocOperError
+	CMP     SI,2142H
+	JNZ     AllocOperError
+	CMP     DI,0A55AH
+	JNZ     AllocOperError
+	OR      BX,BX
+	JZ      AllocOperError
+	XOR     AX,AX
+	MOV     AL,[UmbRegionCount]
+	CMP     BX,AX
+	JA      AllocOperError
+	DEC     BX
+	SHL     BX,1
+	MOV     AX,WORD PTR [UmbRegionLimits+BX]
+	transfer SYS_RET_OK
+
+; AX is the first MCB and SI is the exclusive provider end. Return the largest
+; currently coalescible free payload in DX without changing the arena.
+UmbRegionLargestFree PROC NEAR
+	PUSH    DS
+	XOR     CX,CX
+	XOR     DX,DX
+UmbRegionLargestLoop:
+	MOV     DS,AX
+	CMP     BYTE PTR DS:[arena_signature],arena_signature_normal
+	JE      UmbRegionLargestSignatureOk
+	CMP     BYTE PTR DS:[arena_signature],arena_signature_end
+	JNE     UmbRegionLargestBad
+UmbRegionLargestSignatureOk:
+	CMP     WORD PTR DS:[arena_owner],0
+	JNE     UmbRegionLargestUsed
+	OR      CX,CX
+	JZ      UmbRegionLargestAdd
+	INC     CX
+UmbRegionLargestAdd:
+	ADD     CX,WORD PTR DS:[arena_size]
+	JC      UmbRegionLargestBad
+	CMP     DX,CX
+	JAE     UmbRegionLargestNext
+	MOV     DX,CX
+	JMP     SHORT UmbRegionLargestNext
+UmbRegionLargestUsed:
+	XOR     CX,CX
+UmbRegionLargestNext:
+	MOV     BX,AX
+	ADD     BX,WORD PTR DS:[arena_size]
+	INC     BX
+	CMP     BX,SI
+	JAE     UmbRegionLargestDone
+	MOV     AX,BX
+	JMP     UmbRegionLargestLoop
+UmbRegionLargestDone:
+	POP     DS
+	CLC
+	RET
+UmbRegionLargestBad:
+	POP     DS
+	STC
+	RET
+UmbRegionLargestFree ENDP
 
 EndProc $AllocOper
 

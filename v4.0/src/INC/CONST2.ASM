@@ -209,6 +209,8 @@ IORCHR	LABEL	BYTE			;
 	I_am	UmbRegionFilter,WORD,<0FFFFh>; [SYSTEM] enabled UMB regions
 	I_am	UmbRegionStarts,32	; [SYSTEM] 16 region start segments
 	I_am	UmbRegionEnds,32	; [SYSTEM] 16 exclusive end segments
+	I_am	UmbRegionLimits,32	; [SYSTEM] temporary per-region paragraph caps
+	I_am	UmbAllocLimit,WORD,<0>; allocator cap end for current UMB candidate
 	I_am	AllocScanDomain,BYTE,<0>; allocator arena selector
 	I_am	ArenaFreeDomain,BYTE,<0>; process cleanup arena selector
 	PUBLIC	Lock_Buffer		;

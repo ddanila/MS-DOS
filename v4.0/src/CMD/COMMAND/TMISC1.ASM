@@ -26,6 +26,9 @@ DATARES 	SEGMENT PUBLIC BYTE	;AC000;
 	EXTRN	EXEC_BLOCK:BYTE
 	EXTRN	EXTCOM:BYTE
 	EXTRN	LOADHIGH_PENDING:BYTE
+	EXTRN	LOADHIGH_REGION_MASK:WORD
+	EXTRN	LOADHIGH_MINIMUMS:WORD
+	EXTRN	LOADHIGH_SHRINK:BYTE
 	EXTRN	PIPEFLAG:BYTE
 	EXTRN	PIPEPTR:WORD
 	EXTRN	PIPESTR:BYTE
@@ -381,27 +384,200 @@ CERROR:
 ; operand as the command line.  The resident EXEC wrapper applies DOS 5's
 ; upper-first/conventional-fallback allocation policy while the child runs.
 LOADHIGH:
+	push	bp
+	mov	es,[RESSEG]
+	mov	byte ptr es:[LOADHIGH_PENDING],1
+	mov	word ptr es:[LOADHIGH_REGION_MASK],0ffffh
+	mov	byte ptr es:[LOADHIGH_SHRINK],0
+	xor	di,di
+	mov	cx,16
+loadhigh_clear_minimums:
+	mov	word ptr es:[LOADHIGH_MINIMUMS+di],0
+	add	di,2
+	loop	loadhigh_clear_minimums
 	mov	si,81h
-	invoke	SCANOFF
+loadhigh_skip_spaces:
+	mov	al,[si]
+	cmp	al,' '
+	je	short loadhigh_skip_one
+	cmp	al,9
+	jne	short loadhigh_option
+loadhigh_skip_one:
+	inc	si
+	jmp	short loadhigh_skip_spaces
+loadhigh_option:
 	cmp	al,0dh
-	jne	short loadhigh_have_operand
+	jne	short loadhigh_check_switch
 	mov	msg_disp_class,parse_msg_class
 	mov	dx,offset TRANGROUP:Extend_Buf_ptr
 	mov	Extend_Buf_ptr,LessArgs_ptr
+	pop	bp
 	jmp	CERROR
+loadhigh_check_switch:
+	cmp	al,'/'
+	jne	loadhigh_have_operand
+	mov	al,[si+1]
+	and	al,0dfh
+	cmp	al,'S'
+	jne	short loadhigh_check_list
+	mov	al,[si+2]
+	cmp	al,' '
+	je	short loadhigh_set_shrink
+	cmp	al,9
+	je	short loadhigh_set_shrink
+	cmp	al,0dh
+	jne	loadhigh_have_operand
+loadhigh_set_shrink:
+	mov	byte ptr es:[LOADHIGH_SHRINK],1
+	add	si,2
+	jmp	loadhigh_skip_spaces
+loadhigh_check_list:
+	cmp	al,'L'
+	jne	loadhigh_have_operand
+	cmp	byte ptr [si+2],':'
+	jne	loadhigh_bad_region
+	mov	word ptr es:[LOADHIGH_REGION_MASK],0
+	add	si,3
+loadhigh_parse_region:
+	xor	ax,ax
+	xor	cx,cx
+loadhigh_region_digit:
+	mov	dl,[si]
+	cmp	dl,'0'
+	jb	short loadhigh_region_done
+	cmp	dl,'9'
+	ja	short loadhigh_region_done
+	sub	dl,'0'
+	mov	di,ax
+	shl	ax,1
+	shl	di,1
+	shl	di,1
+	shl	di,1
+	add	ax,di
+	xor	dh,dh
+	add	ax,dx
+	inc	si
+	inc	cx
+	jmp	short loadhigh_region_digit
+loadhigh_region_done:
+	or	cx,cx
+	jnz	short loadhigh_region_present
+	jmp	loadhigh_bad_region
+loadhigh_region_present:
+	cmp	ax,1
+	jb	loadhigh_bad_region
+	cmp	ax,16
+	ja	loadhigh_bad_region
+	mov	di,ax			; region number
+	xor	bp,bp			; minimum paragraphs
+	cmp	byte ptr [si],','
+	jne	short loadhigh_region_parsed
+	inc	si
+	xor	ax,ax
+	xor	cx,cx
+loadhigh_minimum_digit:
+	mov	dl,[si]
+	cmp	dl,'0'
+	jb	short loadhigh_minimum_done
+	cmp	dl,'9'
+	ja	short loadhigh_minimum_done
+	sub	dl,'0'
+	mov	bx,ax
+	shl	ax,1
+	shl	bx,1
+	shl	bx,1
+	shl	bx,1
+	add	ax,bx
+	jc	loadhigh_bad_region
+	xor	dh,dh
+	add	ax,dx
+	jc	loadhigh_bad_region
+	inc	si
+	inc	cx
+	jmp	short loadhigh_minimum_digit
+loadhigh_minimum_done:
+	or	cx,cx
+	jnz	short loadhigh_minimum_present
+	jmp	loadhigh_bad_region
+loadhigh_minimum_present:
+	mov	bp,ax
+	and	bp,15
+	mov	cl,4
+	shr	ax,cl
+	or	bp,bp
+	jz	short loadhigh_minimum_rounded
+	inc	ax
+loadhigh_minimum_rounded:
+	mov	bp,ax
+loadhigh_region_parsed:
+	; Reject nonexistent region numbers now, and remember a minimum that the
+	; current free region cannot satisfy so resident EXEC can use its exact
+	; ordinary-low fallback path.
+	push	si
+	push	di
+	mov	bx,di
+	mov	cx,4d55h
+	mov	si,2142h
+	mov	di,0a55ah
+	mov	ax,5809h
+	int	21h
+	pop	di
+	pop	si
+	jc	loadhigh_bad_region
+	cmp	ax,bp
+	jae	short loadhigh_region_fits
+	mov	byte ptr es:[LOADHIGH_PENDING],3
+loadhigh_region_fits:
+	mov	cx,di
+	dec	cx
+	mov	bx,1
+	shl	bx,cl
+	or	word ptr es:[LOADHIGH_REGION_MASK],bx
+	dec	di
+	shl	di,1
+	cmp	word ptr es:[LOADHIGH_MINIMUMS+di],bp
+	jae	short loadhigh_region_saved
+	mov	word ptr es:[LOADHIGH_MINIMUMS+di],bp
+loadhigh_region_saved:
+	cmp	byte ptr [si],';'
+	jne	loadhigh_skip_spaces
+	inc	si
+	jmp	loadhigh_parse_region
+
 loadhigh_have_operand:
-	mov	es,[RESSEG]
-	mov	byte ptr es:[LOADHIGH_PENDING],1
+	; Copy only the executable and its tail; LOADHIGH's own options are not
+	; visible in the child's command line.
+	mov	di,si
+	xor	cx,cx
+loadhigh_measure_operand:
+	cmp	byte ptr [di],0dh
+	je	short loadhigh_operand_measured
+	inc	di
+	inc	cx
+	cmp	cx,127
+	jb	short loadhigh_measure_operand
+loadhigh_operand_measured:
 	push	cs
 	pop	es
-	mov	si,81h
 	mov	di,offset TRANGROUP:COMBUF+2
-	xor	cx,cx
-	mov	cl,[80h]
 	mov	[COMBUF+1],cl
 	inc	cx				; include the terminating carriage return
 	rep	movsb
+	pop	bp
 	jmp	DOCOM1
+
+loadhigh_bad_region:
+	mov	es,[RESSEG]
+	mov	byte ptr es:[LOADHIGH_PENDING],0
+	pop	bp
+	push	cs
+	pop	ds
+	mov	dx,offset TRANGROUP:loadhigh_bad_umb_message
+	mov	ah,9
+	int	21h
+	jmp	TCOMMAND
+
+loadhigh_bad_umb_message db 'A bad UMB number has been specified',13,10,'$'
 
 ;
 ; Prescan converts the input buffer into a canonicalized form.	All

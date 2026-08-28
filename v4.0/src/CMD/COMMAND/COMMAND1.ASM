@@ -332,6 +332,10 @@ DATARES SEGMENT PUBLIC BYTE
 	EXTRN	LOADHIGH_PENDING:BYTE
 	EXTRN	LOADHIGH_SAVED_LINK:BYTE
 	EXTRN	LOADHIGH_SAVED_STRATEGY:WORD
+	EXTRN	LOADHIGH_REGION_MASK:WORD
+	EXTRN	LOADHIGH_MINIMUMS:WORD
+	EXTRN	LOADHIGH_SHRINK:BYTE
+	EXTRN	LOADHIGH_SAVED_FILTER:WORD
 	EXTRN	BATCH:WORD
 	EXTRN	ECHOFLAG:BYTE
 	EXTRN	disp_class:byte 	;AN055;
@@ -449,7 +453,7 @@ GOTEXECEMES:
 ASSUME	ES:RESGROUP				;AN000;
 	MOV	DX,BX				;AN000; get message number in DX
 	INVOKE	RPRINT
-	JMP	SHORT NOEXEC
+	JMP	NOEXEC
 ;
 ; The transient has set up everything for an EXEC system call.	For
 ; cleanliness, we issue the EXEC here in the resident so that we may be able
@@ -457,22 +461,72 @@ ASSUME	ES:RESGROUP				;AN000;
 ;
 EXT_EXEC:
 	cmp	byte ptr cs:[LOADHIGH_PENDING],0
-	je	short EXT_EXEC_CALL
+	je	EXT_EXEC_CALL
+	cmp	byte ptr cs:[LOADHIGH_PENDING],3
+	jne	short EXT_EXEC_HIGH
+	mov	byte ptr cs:[LOADHIGH_PENDING],0
+	jmp	EXT_EXEC_CALL
+EXT_EXEC_HIGH:
 	mov	byte ptr cs:[LOADHIGH_PENDING],2
 	push	ax
 	push	bx
+	push	cx
+	push	dx
+	push	si
+	push	di
+	push	bp
 	mov	ax,5800h
 	int	int_command
 	mov	cs:[LOADHIGH_SAVED_STRATEGY],ax
 	mov	ax,5802h
 	int	int_command
 	mov	cs:[LOADHIGH_SAVED_LINK],al
+	mov	cx,4d55h
+	mov	si,2142h
+	mov	di,0a55ah
+	mov	ax,5808h
+	int	int_command
+	mov	cs:[LOADHIGH_SAVED_FILTER],ax
+	mov	bx,cs:[LOADHIGH_REGION_MASK]
+	mov	ax,5807h
+	int	int_command
+	cmp	byte ptr cs:[LOADHIGH_SHRINK],0
+	je	short EXT_EXEC_PROFILE_READY
+	mov	bp,cs:[LOADHIGH_REGION_MASK]
+	xor	di,di
+EXT_EXEC_LIMIT_LOOP:
+	test	bp,1
+	jz	short EXT_EXEC_LIMIT_NEXT
+	mov	dx,cs:[LOADHIGH_MINIMUMS+di]
+	or	dx,dx
+	jz	short EXT_EXEC_LIMIT_NEXT
+	mov	bx,di
+	shr	bx,1
+	inc	bx
+	mov	cx,4d55h
+	mov	si,2142h
+	push	di
+	mov	di,0a55ah
+	mov	ax,580ah
+	int	int_command
+	pop	di
+EXT_EXEC_LIMIT_NEXT:
+	shr	bp,1
+	add	di,2
+	cmp	di,32
+	jb	short EXT_EXEC_LIMIT_LOOP
+EXT_EXEC_PROFILE_READY:
 	mov	bx,1
 	mov	ax,5803h
 	int	int_command
 	mov	bx,0080h			; upper memory first, then conventional
 	mov	ax,5801h
 	int	int_command
+	pop	bp
+	pop	di
+	pop	si
+	pop	dx
+	pop	cx
 	pop	bx
 	pop	ax
 EXT_EXEC_CALL:
@@ -481,10 +535,47 @@ EXT_EXEC_CALL:
 	pop	dx				;AN000; restore the command name offset
 	pushf
 	cmp	byte ptr cs:[LOADHIGH_PENDING],2
-	jne	short EXT_EXEC_RESTORED
+	jne	EXT_EXEC_RESTORED
 	mov	byte ptr cs:[LOADHIGH_PENDING],0
 	push	ax
 	push	bx
+	push	cx
+	push	dx
+	push	si
+	push	di
+	push	bp
+	cmp	byte ptr cs:[LOADHIGH_SHRINK],0
+	je	short EXT_EXEC_LIMITS_RESTORED
+	mov	bp,cs:[LOADHIGH_REGION_MASK]
+	xor	di,di
+EXT_EXEC_RESTORE_LIMIT_LOOP:
+	test	bp,1
+	jz	short EXT_EXEC_RESTORE_LIMIT_NEXT
+	cmp	word ptr cs:[LOADHIGH_MINIMUMS+di],0
+	je	short EXT_EXEC_RESTORE_LIMIT_NEXT
+	mov	bx,di
+	shr	bx,1
+	inc	bx
+	mov	dx,0ffffh
+	mov	cx,4d55h
+	mov	si,2142h
+	push	di
+	mov	di,0a55ah
+	mov	ax,580ah
+	int	int_command
+	pop	di
+EXT_EXEC_RESTORE_LIMIT_NEXT:
+	shr	bp,1
+	add	di,2
+	cmp	di,32
+	jb	short EXT_EXEC_RESTORE_LIMIT_LOOP
+EXT_EXEC_LIMITS_RESTORED:
+	mov	bx,cs:[LOADHIGH_SAVED_FILTER]
+	mov	cx,4d55h
+	mov	si,2142h
+	mov	di,0a55ah
+	mov	ax,5807h
+	int	int_command
 	mov	bx,cs:[LOADHIGH_SAVED_STRATEGY]
 	mov	ax,5801h
 	int	int_command
@@ -492,6 +583,11 @@ EXT_EXEC_CALL:
 	mov	bl,cs:[LOADHIGH_SAVED_LINK]
 	mov	ax,5803h
 	int	int_command
+	pop	bp
+	pop	di
+	pop	si
+	pop	dx
+	pop	cx
 	pop	bx
 	pop	ax
 EXT_EXEC_RESTORED:
