@@ -86,6 +86,7 @@ ASSUME	CS:SYSINITSEG,DS:NOTHING,ES:NOTHING,SS:NOTHING
 	EXTRN  bufptr:byte,memlo:word,prmblk:byte,memhi:word
 	EXTRN  ldoff:word,area:word,PACKET:BYTE,UNITCOUNT:BYTE
 	EXTRN  BREAK_ADDR:DWORD,BPB_ADDR:DWORD,drivenumber:byte
+	EXTRN	DeviceHighActive:BYTE
 	extrn  COM_Level:byte, CMMT:byte, CMMT1:byte, CMMT2:byte
 	extrn  Cmd_Indicator:byte
 	extrn  DoNotShowNum:byte
@@ -502,6 +503,8 @@ Org3:
 	je	Org_file		;AN000;
 	cmp	Cmd_Indicator, 'D'      ;AN000; Device= command?
 	je	Org_file		;AN000;
+	cmp	Cmd_Indicator, 'U'      ; DEVICEHIGH= uses the same file/tail layout.
+	je	Org_file
 	cmp	Cmd_Indicator, 'J'      ;AN000; IFS= command?
 	je	Org_file		;AN000;
 	cmp	Cmd_Indicator, 'S'      ;AN000; Shell= is a special one!!!
@@ -837,9 +840,12 @@ ROUND:
 
 	ADD	[MEMHI],AX
 	MOV	[MEMLO],0
+	cmp	cs:[DeviceHighActive],0
+	jne	short Round_Bounds_Ok
 	mov	ax,memhi		; ax = new memhi
 	CMP	AX,[ALLOCLIM]		; if new memhi >= alloclim, error
 	JAE	MEM_ERR
+Round_Bounds_Ok:
 	test	cs:[SetDevMarkFlag], FOR_DEVMARK	    ;AN005;
 	jz	Skip_Set_DEVMARKSIZE			;AN005;
 	push	es					;AN005;
@@ -1502,6 +1508,7 @@ COMTAB	LABEL	BYTE
 	DB	7,"BUFFERS",  'B'
 	DB	5,"BREAK",    'C'
 	DB	3,"DOS",      'H'
+	DB     10,"DEVICEHIGH",'U'
 	DB	6,"DEVICE",   'D'
 	DB	5,"FILES",    'F'
 	DB	4,"FCBS",     'X'

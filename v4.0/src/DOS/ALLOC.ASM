@@ -448,8 +448,10 @@ RegisterUmbFindLowTail:
 	JMP     RegisterUmbFindLowTail
 
 RegisterUmbLowTailFound:
-	CMP     DS:[arena_owner],arena_owner_system
-	JNZ     RegisterUmbError
+	; SYSINIT may register the provider while its temporary boot allocation
+	; still owns the conventional tail.  The signed 5804h gate guarantees that
+	; no application can shorten an arbitrary live arena this way; final boot
+	; cleanup retains the one-paragraph bridge boundary.
 	CMP     DS:[arena_size],0
 	JZ      RegisterUmbError
 	MOV     AX,DS

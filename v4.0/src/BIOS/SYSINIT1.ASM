@@ -694,6 +694,12 @@ DoLast:
 	pop	es			       ;AN013;
 Skip_Free_SYSINITBASE:			       ;AN013;
 	call	AcquireUmbs
+	cmp	cs:[DosUmbRequested],0
+	je	short DoLastUmbStateDone
+	mov	bx,1
+	mov	ax,5803h
+	int	21h
+DoLastUmbStateDone:
 	IF	NOEXEC
 	MOV	BP,DS			       ;SAVE COMMAND.COM SEGMENT
 	PUSH	DS
@@ -868,6 +874,7 @@ COMERR:
 	INVOKE	BADFIL
 STALL:	JMP	STALL
 
+	PUBLIC	AcquireUmbs
 AcquireUmbs PROC NEAR
 	PUSH	AX
 	PUSH	BX
@@ -877,6 +884,8 @@ AcquireUmbs PROC NEAR
 	PUSH	ES
 	CMP	CS:[DosUmbRequested],0
 	JZ	AcquireUmbsDone
+	CMP	CS:[UmbExtentCount],0
+	JNZ	AcquireUmbsDone
 	MOV	AX,4300H
 	INT	2FH
 	CMP	AL,80H

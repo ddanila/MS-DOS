@@ -157,6 +157,7 @@ ASSUME	CS:SYSINITSEG,DS:NOTHING,ES:NOTHING,SS:NOTHING
 	EXTRN	PARAROUND:NEAR,TEMPCDS:NEAR
 	EXTRN	Set_Country_Path:NEAR,Move_ASCIIZ:NEAR,DELIM:NEAR
 	EXTRN	BADFIL:NEAR,ROUND:NEAR
+	EXTRN	AcquireUmbs:NEAR
 	extrn	Do_Install_Exec:NEAR		;AN018;
 	extrn	SetDevMark:NEAR 		;AN030;
 
@@ -359,6 +360,16 @@ Dos_NoUmb_String db "NOUMB",0
 	PUBLIC	DosUmbRequested
 DosHighRequested db 0
 DosUmbRequested db 0
+
+	PUBLIC	DeviceHighActive
+DeviceHighActive db 0
+DeviceHighLine db 0
+DeviceHighBlock dw 0
+DeviceHighLowMemLo dw 0
+DeviceHighLowMemHi dw 0
+DeviceHighOldStrategy dw 0
+DeviceHighOldLink db 0
+DeviceHighMinSize dw 0
 
 ;--------------------------------
 
@@ -858,12 +869,16 @@ TRYI:
 	jmp	coff				;AN018; and handles the next command
 
 Multi_Try_XMAEM:				;AN029;
+	cmp	ah, 'H'			; DOS= is pre-scanned so its final
+	je	Multi_Try_Dos			; state applies regardless of line order.
 	cmp	ah, 'D' 			;AN029; device= command?
 	jne	Multi_Try_Buff			;AN029; no skip it.
 	call	Chk_XMAEM			;AN029; is it for XMAEM.SYS?
 	jnz	Multi_Pass_FIlter		;AN029; no skip it.
 	mov	byte ptr es:[si-1], 0FFh	;AN029; mark this command as a Null command for the next pass.
 	jmp	TryDJ				;AN029; execute this command.
+Multi_Try_Dos:
+	jmp	TryH
 Multi_Try_Buff: 				;AN030;
 	cmp	ah, 'B' 			;AN030; Buffers= command?
 	jne	Multi_Pass_Filter		;AN030;
@@ -1349,8 +1364,14 @@ Dos_Parse_Done:
 ;------------------------------------------------------------------------------
 TRYDJ:
 	and	cs:IFS_Flag, NOT_IFS	;AN000; Reset the flag
+	mov	cs:[DeviceHighLine],0
 	CMP	AH,'D'
 	JZ	GOTDJ
+	CMP	AH,'U'
+	JNZ	TRYDJ_Not_High
+	mov	cs:[DeviceHighLine],1
+	JMP	GOTDJ
+TRYDJ_Not_High:
 	CMP	AH,'J'
 	jz	GOTJ
 	JMP	TRYQ
@@ -1370,6 +1391,15 @@ GOTJ:					;AN000; IFS= command.
 GOTDJ:
 	MOV	BX,CS			;DEVICE= or IFS= command.
 	MOV	DS,BX
+	cmp	cs:[DeviceHighLine],0
+	je	short GOTDJ_Memory_Ready
+	call	DeviceHighParseOptions
+	jc	BADBRK_1
+	call	DeviceHighPrepare
+	jnc	short GOTDJ_Memory_Ready
+	; No usable UMB is available: DEVICEHIGH has DEVICE fallback semantics.
+	mov	cs:[DeviceHighLine],0
+GOTDJ_Memory_Ready:
 
 	MOV	WORD PTR [BPB_ADDR],SI
 	MOV	WORD PTR [BPB_ADDR+2],ES
@@ -1460,6 +1490,8 @@ GO_AHEAD_LOAD:
 	MOV	CX,ES			; CX:0 is xaddr
 	ADD	CX,AX			; New device will take up to here
 	JC	MEM_ERRJY		; WOW!!!!
+	cmp	cs:[DeviceHighActive],0
+	jne	short OKLDX
 	CMP	CX,CS:[ALLOCLIM]
 	JB	OKLDX
 MEM_ERRJY:
@@ -1492,8 +1524,10 @@ BADBRK:
 Skip0_ResetMEMHI:
 	cmp	byte ptr es:[si], CR	;file name is CR? (Somebody entered "device=" without filename)
 	jne	BADBRK_1
+	call	DeviceHighAbort
 	jmp	BADOP			;show "Unrecognized command in CONFIG.SYS"
 BADBRK_1:
+	call	DeviceHighAbort
 	invoke	BADLOAD
 	JMP	COFF
 
@@ -1603,10 +1637,13 @@ Skip1_ResetMEMHI:
 	call	Error_Line		;AN021; No "Error in CONFIG.SYS" msg for device driver. DCR D493
 	mov	ConfigMsgFlag, 0	;AN015;AN021;Set the default value again.
 No_Error_Line_Msg:			;AN015;
+	call	DeviceHighAbort
 	JMP	Coff
 
 Was_Device_Com: 			;AN000;
 	MOV	AX,WORD PTR [BREAK_ADDR+2]
+	cmp	cs:[DeviceHighActive],0
+	jne	short BREAKOK
 	CMP	AX,[MEMORY_SIZE]
 	JB	BREAKOK
 	POP	SI
@@ -1732,6 +1769,7 @@ ENDDEV:
 	inc	cs:MultDeviceFlag	;AN001; Possibly multiple device driver.
 	JMP	GOODLD			;OTHERWISE PRETEND WE LOADED IT IN
 COFFJ3: mov	cs:MultDeviceFlag, 0	;AN001; Reset the flag
+	call	DeviceHighCommit
 	JMP	COFF
 
 Bad_BPB_Size_Sector:
@@ -1745,7 +1783,260 @@ Bad_BPB_Size_Sector:
 	jnz	Skip2_ResetMEMHI	;AN004; then do not
 	dec	[MEMHI] 		;AN004;Adjust MEMHI by a paragrah of DEVMARK.
 Skip2_ResetMEMHI:
+	call	DeviceHighAbort
 	JMP	COFF
+
+;------------------------------------------------------------------------------
+; DEVICEHIGH allocator transaction
+;------------------------------------------------------------------------------
+DeviceHighPrepare PROC NEAR
+	push	ax
+	push	bx
+	push	cx
+	push	dx
+	push	ds
+	push	es
+	push	si
+	push	di
+
+	cmp	cs:[DosUmbRequested],0
+	je	DeviceHighPrepareFail
+	call	AcquireUmbs
+
+	mov	ax,5800h
+	int	21h
+	jc	DeviceHighPrepareFail
+	mov	cs:[DeviceHighOldStrategy],ax
+	mov	ax,5802h
+	int	21h
+	jc	DeviceHighPrepareFail
+	mov	cs:[DeviceHighOldLink],al
+
+	mov	bx,1
+	mov	ax,5803h
+	int	21h
+	jc	DeviceHighPrepareFail
+	mov	bx,0040h
+	mov	ax,5801h
+	int	21h
+	jc	DeviceHighPrepareRestoreLink
+
+	mov	bx,0ffffh
+	mov	ah,ALLOC
+	int	21h
+	jnc	short DeviceHighPrepareAllocated
+	or	bx,bx
+	jz	DeviceHighPrepareRestoreAll
+	cmp	bx,cs:[DeviceHighMinSize]
+	jb	DeviceHighPrepareRestoreAll
+	mov	ah,ALLOC
+	int	21h
+	jc	DeviceHighPrepareRestoreAll
+DeviceHighPrepareAllocated:
+	mov	cs:[DeviceHighBlock],ax
+	mov	bx,cs:[MEMLO]
+	mov	cs:[DeviceHighLowMemLo],bx
+	mov	bx,cs:[MEMHI]
+	mov	cs:[DeviceHighLowMemHi],bx
+	mov	cs:[MEMLO],0
+	mov	cs:[MEMHI],ax
+	mov	cs:[DeviceHighActive],1
+	clc
+	jmp	short DeviceHighPrepareDone
+
+DeviceHighPrepareRestoreAll:
+	mov	bx,cs:[DeviceHighOldStrategy]
+	mov	ax,5801h
+	int	21h
+DeviceHighPrepareRestoreLink:
+	xor	bh,bh
+	mov	bl,cs:[DeviceHighOldLink]
+	mov	ax,5803h
+	int	21h
+DeviceHighPrepareFail:
+	stc
+DeviceHighPrepareDone:
+	pop	di
+	pop	si
+	pop	es
+	pop	ds
+	pop	dx
+	pop	cx
+	pop	bx
+	pop	ax
+	ret
+DeviceHighPrepare ENDP
+
+; DEVICEHIGH SIZE=hhhh is the DOS 5 compatibility spelling.  ORGANIZE has
+; already uppercased the token and separated it from the real filename with a
+; NUL.  The value is hexadecimal bytes and is rounded up to paragraphs.
+DeviceHighParseOptions PROC NEAR
+	push	di
+	mov	cs:[DeviceHighMinSize],0
+	cmp	byte ptr es:[si],'S'
+	jne	DeviceHighParseDone
+	cmp	byte ptr es:[si+1],'I'
+	jne	DeviceHighParseDone
+	cmp	byte ptr es:[si+2],'Z'
+	jne	DeviceHighParseDone
+	cmp	byte ptr es:[si+3],'E'
+	jne	DeviceHighParseDone
+	; ORGANIZE treats '=' as the delimiter terminating the first token, so
+	; SIZE=hhhh arrives as "SIZE",NUL,"hhhh driver ...".
+	cmp	byte ptr es:[si+4],0
+	jne	DeviceHighParseDone
+	add	si,5
+	xor	ax,ax
+	xor	cx,cx
+DeviceHighParseHex:
+	mov	dl,es:[si]
+	cmp	dl,' '
+	je	DeviceHighParseHexDone
+	cmp	dl,TAB
+	je	DeviceHighParseHexDone
+	or	dl,dl
+	jz	DeviceHighParseError
+	cmp	dl,'0'
+	jb	DeviceHighParseError
+	cmp	dl,'9'
+	jbe	short DeviceHighParseDigit
+	cmp	dl,'A'
+	jb	DeviceHighParseError
+	cmp	dl,'F'
+	ja	DeviceHighParseError
+	sub	dl,'A'-10
+	jmp	short DeviceHighParseAccumulate
+DeviceHighParseDigit:
+	sub	dl,'0'
+DeviceHighParseAccumulate:
+	test	ax,0f000h
+	jnz	DeviceHighParseError
+	shl	ax,1
+	shl	ax,1
+	shl	ax,1
+	shl	ax,1
+	xor	dh,dh
+	add	ax,dx
+	inc	si
+	inc	cx
+	jmp	DeviceHighParseHex
+DeviceHighParseHexDone:
+	jcxz	DeviceHighParseError
+	add	ax,15
+	jc	DeviceHighParseError
+	mov	cl,4
+	shr	ax,cl
+	mov	cs:[DeviceHighMinSize],ax
+	; Skip the delimiter after the size and identify the actual driver token.
+DeviceHighParseSkipSpace:
+	mov	al,es:[si]
+	cmp	al,' '
+	je	short DeviceHighParseSkipOne
+	cmp	al,TAB
+	jne	short DeviceHighParseFindNameEnd
+DeviceHighParseSkipOne:
+	inc	si
+	jmp	short DeviceHighParseSkipSpace
+DeviceHighParseFindNameEnd:
+	cmp	al,CR
+	je	DeviceHighParseError
+	mov	di,si
+DeviceHighParseNameLoop:
+	mov	al,es:[di]
+	cmp	al,' '
+	je	short DeviceHighParseTerminateName
+	cmp	al,TAB
+	je	short DeviceHighParseTerminateName
+	cmp	al,CR
+	je	DeviceHighParseTerminateAtCr
+	cmp	al,LF
+	je	DeviceHighParseTerminateAtCr
+	or	al,al
+	jz	short DeviceHighParseDone
+	inc	di
+	jmp	short DeviceHighParseNameLoop
+DeviceHighParseTerminateName:
+	mov	byte ptr es:[di],0
+	jmp	short DeviceHighParseDone
+DeviceHighParseTerminateAtCr:
+	; Preserve a terminator after the temporary filename NUL; Restore changes
+	; that NUL back to a space immediately before calling the driver.
+	mov	byte ptr es:[di+1],CR
+	mov	byte ptr es:[di],0
+DeviceHighParseDone:
+	clc
+	pop	di
+	ret
+DeviceHighParseError:
+	stc
+	pop	di
+	ret
+DeviceHighParseOptions ENDP
+
+DeviceHighCommit PROC NEAR
+	cmp	cs:[DeviceHighActive],0
+	je	DeviceHighCommitDone
+	push	ax
+	push	bx
+	push	ds
+	push	es
+
+	mov	ax,cs:[MEMHI]
+	sub	ax,cs:[DeviceHighBlock]
+	mov	bx,ax
+	mov	es,cs:[DeviceHighBlock]
+	mov	ah,SETBLOCK
+	int	21h
+
+	; Boot-loaded drivers are permanent system allocations, not children of
+	; SYSINIT's temporary PSP.
+	mov	ax,cs:[DeviceHighBlock]
+	dec	ax
+	mov	es,ax
+	mov	word ptr es:[1],8
+
+	call	DeviceHighRestore
+	pop	es
+	pop	ds
+	pop	bx
+	pop	ax
+DeviceHighCommitDone:
+	ret
+DeviceHighCommit ENDP
+
+DeviceHighAbort PROC NEAR
+	cmp	cs:[DeviceHighActive],0
+	je	DeviceHighAbortDone
+	push	ax
+	push	ds
+	push	es
+	mov	es,cs:[DeviceHighBlock]
+	mov	ah,DEALLOC
+	int	21h
+	call	DeviceHighRestore
+	pop	es
+	pop	ds
+	pop	ax
+DeviceHighAbortDone:
+	ret
+DeviceHighAbort ENDP
+
+DeviceHighRestore PROC NEAR
+	mov	ax,cs:[DeviceHighLowMemLo]
+	mov	cs:[MEMLO],ax
+	mov	ax,cs:[DeviceHighLowMemHi]
+	mov	cs:[MEMHI],ax
+	mov	bx,cs:[DeviceHighOldStrategy]
+	mov	ax,5801h
+	int	21h
+	xor	bh,bh
+	mov	bl,cs:[DeviceHighOldLink]
+	mov	ax,5803h
+	int	21h
+	mov	cs:[DeviceHighActive],0
+	mov	cs:[DeviceHighBlock],0
+	ret
+DeviceHighRestore ENDP
 
 
 ;------------------------------------------------------------------------------
