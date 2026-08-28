@@ -542,6 +542,8 @@ PAGE
 	JZ      AllocOperSetLink
 	CMP     AL,4
 	JZ      AllocOperRegisterUmb
+	CMP     AL,5
+	JZ      AllocOperResetUmb
 
 AllocOperError:
 	MOV     EXTERR_LOCUS,errLoc_mem ; Extended Error Locus
@@ -646,6 +648,35 @@ AllocOperRegisterUmb:
 	JNZ     AllocOperError
 	CALL    RegisterUmb
 	transfer    SYS_RET_OK
+
+AllocOperResetUmb:
+; Boot-only transaction abort. SYSINIT is the sole signed caller and invokes
+; this before any UMB can have been linked or allocated.
+	CMP     CX,4D55H
+	JNZ     AllocOperError
+	CMP     SI,2142H
+	JNZ     AllocOperError
+	CMP     DI,0A55AH
+	JNZ     AllocOperError
+	CMP     [UmbLinked],0
+	JNZ     AllocOperError
+	MOV     AX,[UmbLinkMcb]
+	OR      AX,AX
+	JZ      AllocOperResetDone
+	PUSH    DS
+	MOV     DS,AX
+	CMP     DS:[arena_signature],arena_signature_end
+	JNZ     AllocOperResetBad
+	INC     DS:[arena_size]
+	POP     DS
+AllocOperResetDone:
+	MOV     [UmbArenaHead],0
+	MOV     [UmbArenaTail],0
+	MOV     [UmbLinkMcb],0
+	transfer    SYS_RET_OK
+AllocOperResetBad:
+	POP     DS
+	JMP     AllocOperError
 
 EndProc $AllocOper
 

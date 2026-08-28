@@ -237,8 +237,9 @@ SYSI_Country		LABEL	DWORD		;J.K. 5/29/86 Pointer to
 			DW	0000		;country table in DOS
 			DW	0000
 XmsControl		DD	00000000
-UmbExtentSegment	DW	0000
-UmbExtentSize		DW	0000
+MAX_UMB_EXTENTS		EQU	16
+UmbExtentSegments	DW	MAX_UMB_EXTENTS DUP (0)
+UmbExtentSizes		DW	MAX_UMB_EXTENTS DUP (0)
 UmbExtentCount		DB	0
 
 Fake_Floppy_Drv 	db	0		;AN001;Set to 1 if this machine
@@ -871,42 +872,106 @@ AcquireUmbs PROC NEAR
 	INT	2FH
 	MOV	WORD PTR CS:[XmsControl],BX
 	MOV	WORD PTR CS:[XmsControl+2],ES
-	MOV	CS:[UmbExtentCount],0
+	MOV	BYTE PTR CS:[UmbExtentCount],0
 
 AcquireUmbsQuery:
-	CMP	CS:[UmbExtentCount],16
-	JAE	AcquireUmbsDone
+	CMP	CS:[UmbExtentCount],MAX_UMB_EXTENTS
+	JAE	AcquireUmbsOverflowCheck
 	MOV	DX,0FFFFH
 	MOV	AH,10H
 	CALL	DWORD PTR CS:[XmsControl]
 	OR	AX,AX
 	JNZ	AcquireUmbsGotExtent
+	CMP	BL,0B1H
+	JE	AcquireUmbsValidate
 	CMP	BL,0B0H
-	JNE	AcquireUmbsDone
+	JNE	AcquireUmbsRollback
 	OR	DX,DX
-	JZ	AcquireUmbsDone
+	JZ	AcquireUmbsValidate
 	MOV	AH,10H
 	CALL	DWORD PTR CS:[XmsControl]
 	OR	AX,AX
-	JZ	AcquireUmbsDone
+	JZ	AcquireUmbsRollback
 
 AcquireUmbsGotExtent:
-	MOV	CS:[UmbExtentSegment],BX
-	MOV	CS:[UmbExtentSize],DX
+	XOR	AX,AX
+	MOV	AL,CS:[UmbExtentCount]
+	SHL	AX,1
+	MOV	SI,AX
+	MOV	CS:[UmbExtentSegments+SI],BX
+	MOV	CS:[UmbExtentSizes+SI],DX
+	INC	CS:[UmbExtentCount]
+	JMP	AcquireUmbsQuery
+
+AcquireUmbsOverflowCheck:
+; A fixed table is safe only if it can describe the provider's complete map.
+	MOV	DX,0FFFFH
+	MOV	AH,10H
+	CALL	DWORD PTR CS:[XmsControl]
+	OR	AX,AX
+	JNZ	AcquireUmbsOverflowOwned
+	CMP	BL,0B1H
+	JE	AcquireUmbsValidate
+	CMP	BL,0B0H
+	JNE	AcquireUmbsRollback
+	OR	DX,DX
+	JZ	AcquireUmbsValidate
+	JMP	AcquireUmbsRollback
+
+AcquireUmbsOverflowOwned:
+; A provider cannot normally satisfy FFFFh paragraphs below 1 MiB. Release it
+; nevertheless before rolling the transaction back.
+	MOV	DX,BX
+	MOV	AH,11H
+	CALL	DWORD PTR CS:[XmsControl]
+	JMP	AcquireUmbsRollback
+
+AcquireUmbsValidate:
+	CMP	CS:[UmbExtentCount],0
+	JZ	AcquireUmbsDone
+	CALL	SortUmbExtents
+	JC	AcquireUmbsRollback
+	XOR	SI,SI
+
+AcquireUmbsRegister:
+	MOV	BX,CS:[UmbExtentSegments+SI]
+	MOV	DX,CS:[UmbExtentSizes+SI]
 	MOV	CX,4D55H
+	PUSH	SI
 	MOV	SI,2142H
 	MOV	DI,0A55AH
 	MOV	AX,5804H
 	INT	21H
+	POP	SI
 	OR	AX,AX
-	JZ	AcquireUmbsRelease
-	INC	CS:[UmbExtentCount]
-	JMP	AcquireUmbsQuery
+	JZ	AcquireUmbsRegistrationFailed
+	ADD	SI,2
+	XOR	AX,AX
+	MOV	AL,CS:[UmbExtentCount]
+	SHL	AX,1
+	CMP	SI,AX
+	JB	AcquireUmbsRegister
+	JMP	AcquireUmbsDone
 
+AcquireUmbsRegistrationFailed:
+	MOV	CX,4D55H
+	MOV	SI,2142H
+	MOV	DI,0A55AH
+	MOV	AX,5805H
+	INT	21H
+
+AcquireUmbsRollback:
+	XOR	SI,SI
+	XOR	CX,CX
+	MOV	CL,CS:[UmbExtentCount]
+	JCXZ	AcquireUmbsDone
 AcquireUmbsRelease:
-	MOV	DX,CS:[UmbExtentSegment]
+	MOV	DX,CS:[UmbExtentSegments+SI]
 	MOV	AH,11H
 	CALL	DWORD PTR CS:[XmsControl]
+	ADD	SI,2
+	LOOP	AcquireUmbsRelease
+	MOV	CS:[UmbExtentCount],0
 
 AcquireUmbsDone:
 	POP	ES
@@ -917,6 +982,71 @@ AcquireUmbsDone:
 	POP	AX
 	RET
 AcquireUmbs ENDP
+
+SortUmbExtents PROC NEAR
+; Sort by segment, then reject malformed and overlapping provider ranges.
+	PUSH	AX
+	PUSH	BX
+	PUSH	CX
+	PUSH	DX
+	PUSH	SI
+	PUSH	DI
+	XOR	CX,CX
+	MOV	CL,CS:[UmbExtentCount]
+	DEC	CX
+	JCXZ	SortUmbValidate
+
+SortUmbOuter:
+	XOR	SI,SI
+	MOV	DI,CX
+SortUmbInner:
+	MOV	AX,CS:[UmbExtentSegments+SI]
+	CMP	AX,CS:[UmbExtentSegments+SI+2]
+	JBE	SortUmbNoSwap
+	XCHG	AX,CS:[UmbExtentSegments+SI+2]
+	MOV	CS:[UmbExtentSegments+SI],AX
+	MOV	AX,CS:[UmbExtentSizes+SI]
+	XCHG	AX,CS:[UmbExtentSizes+SI+2]
+	MOV	CS:[UmbExtentSizes+SI],AX
+SortUmbNoSwap:
+	ADD	SI,2
+	DEC	DI
+	JNZ	SortUmbInner
+	LOOP	SortUmbOuter
+
+SortUmbValidate:
+	XOR	SI,SI
+	XOR	CX,CX
+	MOV	CL,CS:[UmbExtentCount]
+	XOR	DI,DI
+SortUmbValidateNext:
+	MOV	AX,CS:[UmbExtentSegments+SI]
+	MOV	DX,CS:[UmbExtentSizes+SI]
+	CMP	DX,3
+	JB	SortUmbInvalid
+	OR	DI,DI
+	JZ	SortUmbNoPrevious
+	CMP	AX,DI
+	JB	SortUmbInvalid
+SortUmbNoPrevious:
+	ADD	AX,DX
+	JC	SortUmbInvalid
+	MOV	DI,AX
+	ADD	SI,2
+	LOOP	SortUmbValidateNext
+	CLC
+	JMP	SHORT SortUmbExit
+SortUmbInvalid:
+	STC
+SortUmbExit:
+	POP	DI
+	POP	SI
+	POP	DX
+	POP	CX
+	POP	BX
+	POP	AX
+	RET
+SortUmbExtents ENDP
 
 	PUBLIC	TEMPCDS
 TEMPCDS:
