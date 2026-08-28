@@ -66,9 +66,9 @@ PAGE
 	MOV     [ArenaFreeDomain],0
 	MOV     AX,[arena_head]
 	CALL    Check_Signature         ; ES <- AX, check for valid block
+	retc
 
 arena_free_process_loop:
-	retc
 	PUSH    ES
 	POP     DS
 	CMP     DS:[arena_owner],BX     ; is block owned by pid?
@@ -86,11 +86,12 @@ arena_free_next:
 	MOV     [ArenaFreeDomain],1
 	MOV     AX,[UmbArenaHead]
 	CALL    Check_Signature
+	retc
 	JMP     arena_free_process_loop
 
 arena_free_continue:
 	CALL    arena_next              ; next item in ES/AX carry set if trash
-	JC      arena_free_process_loop
+	retc
 	CMP     AX,[UmbArenaHead]
 	JNZ     arena_free_process_loop
 	MOV     [ArenaFreeDomain],1
