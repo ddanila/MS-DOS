@@ -99,7 +99,9 @@ ASSUME	DS:NOTHING,ES:NOTHING
 	PUSH	BX
 	PUSH	DS
 	PUSH	SI
-	PUSH	CS
+	; The request packet is retained DOS data.  CS may be FFFFh when DOS is
+	; resident in the HMA, while SS continues to address that low data.
+	PUSH	SS
 	POP	ES
 	Context DS
 	DOSAssume   CS,<DS>,"DskStatChk"

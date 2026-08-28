@@ -344,8 +344,8 @@ chk_dos:
 	int	MS_DOS			; get dos version #
 	mov	[dos_version],al	; save it.
 	pop	bx
-	cmp	ax,4			;Q: DOS 4.00
-	je	IE_parse		;  Y: OK - continue install
+	cmp	al,4			;Q: DOS 4.00 or later?
+	jae	IE_parse		;  Y: OK - continue install
 	cmp	al,3			;Q: DOS 3.xx ?
 	jl	IE_dos_err		;  N: return error
 	cmp	ah,10			;Q: current DOS >= 3.10 ?

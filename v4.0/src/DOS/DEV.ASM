@@ -494,13 +494,18 @@ chardev2:			       ;AN000;
 	push	si
 	push	di
 	push	cx
+	xor	cx,cx
+	mov	cl,es:[bx]
+	cmp	cx,30
+	jbe	short dev_packet_copy_length_ready
+	mov	cx,30
+dev_packet_copy_length_ready:
 	push	es
 	pop	ds
 	mov	ax,cs:[hma_low_segment]
 	mov	es,ax
 	mov	si,bx
 	mov	di,bx
-	mov	cx,30
 	cld
 	rep	movsb
 	pop	cx
@@ -532,13 +537,18 @@ dev_exit:
 	push	si
 	push	di
 	push	cx
+	xor	cx,cx
+	mov	cl,es:[bx]
+	cmp	cx,30
+	jbe	short dev_packet_return_length_ready
+	mov	cx,30
+dev_packet_return_length_ready:
 	push	es
 	pop	ds
 	push	cs
 	pop	es
 	mov	si,bx
 	mov	di,bx
-	mov	cx,30
 	cld
 	rep	movsb
 	pop	cx

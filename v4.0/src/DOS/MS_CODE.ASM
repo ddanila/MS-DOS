@@ -112,8 +112,17 @@ HMA_DRIVER_TRAMPOLINE proc far
         push    bp
         push    ds
         push    es
+        ; Reassert A20 through a balanced local-enable transaction.  DOS owns
+        ; one persistent local request while resident in the HMA; pairing the
+        ; calls preserves that nesting count while recovering if a driver
+        ; changed the physical gate behind the XMS manager's back.
         mov     ah, 03h
         call    dword ptr cs:[hma_xms_entry]
+        or      ax, ax
+        jz      short hma_driver_a20_done
+        mov     ah, 04h
+        call    dword ptr cs:[hma_xms_entry]
+hma_driver_a20_done:
         pop     es
         pop     ds
         pop     bp
