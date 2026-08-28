@@ -205,6 +205,10 @@ IORCHR	LABEL	BYTE			;
 	I_am	UmbLinkMcb,WORD,<0>	; [SYSTEM] conventional-to-UMB link MCB
 	I_am	UmbArenaTail,WORD,<0>	; [SYSTEM] final guarded UMB MCB
 	I_am	UmbLinked,BYTE,<0>	; [SYSTEM] UMB arena link state
+	I_am	UmbRegionCount,BYTE,<0>; [SYSTEM] provider extent/region count
+	I_am	UmbRegionFilter,WORD,<0FFFFh>; [SYSTEM] enabled UMB regions
+	I_am	UmbRegionStarts,32	; [SYSTEM] 16 region start segments
+	I_am	UmbRegionEnds,32	; [SYSTEM] 16 exclusive end segments
 	I_am	AllocScanDomain,BYTE,<0>; allocator arena selector
 	I_am	ArenaFreeDomain,BYTE,<0>; process cleanup arena selector
 	PUBLIC	Lock_Buffer		;

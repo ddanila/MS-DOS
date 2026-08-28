@@ -365,11 +365,16 @@ DosUmbRequested db 0
 DeviceHighActive db 0
 DeviceHighLine db 0
 DeviceHighBlock dw 0
+DeviceHighBlockSize dw 0
 DeviceHighLowMemLo dw 0
 DeviceHighLowMemHi dw 0
 DeviceHighOldStrategy dw 0
 DeviceHighOldLink db 0
 DeviceHighMinSize dw 0
+DeviceHighRegionMask dw 0ffffh
+DeviceHighOldRegionMask dw 0ffffh
+DeviceHighRegionExplicit db 0
+DeviceHighShrink db 0
 InstallHighOldStrategy dw 0
 InstallHighOldLink db 0
 InstallHighScopeActive db 0
@@ -1406,6 +1411,8 @@ GOTDJ:
 	je	short GOTDJ_Memory_Ready
 	call	DeviceHighParseOptions
 	jc	BADBRK_1
+	mov	word ptr cs:[BPB_ADDR],si
+	mov	word ptr cs:[BPB_ADDR+2],es
 	call	DeviceHighPrepare
 	jnc	short GOTDJ_Memory_Ready
 	; No usable UMB is available: DEVICEHIGH has DEVICE fallback semantics.
@@ -1502,7 +1509,23 @@ GO_AHEAD_LOAD:
 	ADD	CX,AX			; New device will take up to here
 	JC	MEM_ERRJY		; WOW!!!!
 	cmp	cs:[DeviceHighActive],0
-	jne	short OKLDX
+	je	short GO_AHEAD_LOAD_LOW_CHECK
+	mov	dx,cs:[DeviceHighBlock]
+	add	dx,cs:[DeviceHighBlockSize]
+	cmp	cx,dx
+	jbe	short OKLDX
+	; /S can deliberately make the selected UMB smaller than the load image.
+	; Roll back the untouched high attempt and retry through DEVICE semantics.
+	mov	ah,CLOSE
+	int	21h
+	pop	dx
+	call	DeviceHighAbort
+	les	si,dword ptr cs:[BPB_ADDR]
+	push	cs
+	pop	ds
+	mov	cs:[DeviceHighLine],0
+	jmp	GOTDJ_Memory_Ready
+GO_AHEAD_LOAD_LOW_CHECK:
 	CMP	CX,CS:[ALLOCLIM]
 	JB	OKLDX
 MEM_ERRJY:
@@ -1831,8 +1854,23 @@ DeviceHighPrepare PROC NEAR
 	mov	ax,5801h
 	int	21h
 	jc	DeviceHighPrepareRestoreLink
+	cmp	cs:[DeviceHighRegionExplicit],0
+	je	short DeviceHighPrepareAllocate
+	mov	cx,4d55h
+	mov	si,2142h
+	mov	di,0a55ah
+	mov	ax,5808h
+	int	21h
+	jc	DeviceHighPrepareRestoreStrategy
+	mov	cs:[DeviceHighOldRegionMask],ax
+	mov	bx,cs:[DeviceHighRegionMask]
+	mov	ax,5807h
+	int	21h
+	jc	DeviceHighPrepareRestoreAll
 
+DeviceHighPrepareAllocate:
 	mov	bx,0ffffh
+	mov	cs:[DeviceHighBlockSize],bx
 	mov	ah,ALLOC
 	int	21h
 	jnc	short DeviceHighPrepareAllocated
@@ -1840,6 +1878,13 @@ DeviceHighPrepare PROC NEAR
 	jz	DeviceHighPrepareRestoreAll
 	cmp	bx,cs:[DeviceHighMinSize]
 	jb	DeviceHighPrepareRestoreAll
+	cmp	cs:[DeviceHighShrink],0
+	je	short DeviceHighPrepareRequestLargest
+	cmp	cs:[DeviceHighMinSize],0
+	je	short DeviceHighPrepareRequestLargest
+	mov	bx,cs:[DeviceHighMinSize]
+DeviceHighPrepareRequestLargest:
+	mov	cs:[DeviceHighBlockSize],bx
 	mov	ah,ALLOC
 	int	21h
 	jc	DeviceHighPrepareRestoreAll
@@ -1856,6 +1901,15 @@ DeviceHighPrepareAllocated:
 	jmp	short DeviceHighPrepareDone
 
 DeviceHighPrepareRestoreAll:
+	cmp	cs:[DeviceHighRegionExplicit],0
+	je	short DeviceHighPrepareRestoreStrategy
+	mov	bx,cs:[DeviceHighOldRegionMask]
+	mov	cx,4d55h
+	mov	si,2142h
+	mov	di,0a55ah
+	mov	ax,5807h
+	int	21h
+DeviceHighPrepareRestoreStrategy:
 	mov	bx,cs:[DeviceHighOldStrategy]
 	mov	ax,5801h
 	int	21h
@@ -1878,48 +1932,47 @@ DeviceHighPrepareDone:
 	ret
 DeviceHighPrepare ENDP
 
-; DEVICEHIGH SIZE=hhhh is the DOS 5 compatibility spelling.  ORGANIZE has
-; already uppercased the token and separated it from the real filename with a
-; NUL.  The value is hexadecimal bytes and is rounded up to paragraphs.
+; Parse DOS 5 SIZE= and DOS 6 /L region syntax from ORGANIZE's preserved,
+; uppercased tail.  SI is returned at an ASCIIZ driver name; its terminating
+; delimiter is restored to a space by the existing INIT-tail path.
 DeviceHighParseOptions PROC NEAR
-	push	di
 	mov	cs:[DeviceHighMinSize],0
+	mov	cs:[DeviceHighRegionMask],0ffffh
+	mov	cs:[DeviceHighRegionExplicit],0
+	mov	cs:[DeviceHighShrink],0
+
 	cmp	byte ptr es:[si],'S'
-	jne	DeviceHighParseDone
+	jne	DeviceHighParseCheckRegion
 	cmp	byte ptr es:[si+1],'I'
-	jne	DeviceHighParseDone
+	jne	DeviceHighParseCheckRegion
 	cmp	byte ptr es:[si+2],'Z'
-	jne	DeviceHighParseDone
+	jne	DeviceHighParseCheckRegion
 	cmp	byte ptr es:[si+3],'E'
-	jne	DeviceHighParseDone
-	; ORGANIZE treats '=' as the delimiter terminating the first token, so
-	; SIZE=hhhh arrives as "SIZE",NUL,"hhhh driver ...".
-	cmp	byte ptr es:[si+4],0
-	jne	DeviceHighParseDone
+	jne	DeviceHighParseCheckRegion
+	cmp	byte ptr es:[si+4],'='
+	jne	DeviceHighParseCheckRegion
 	add	si,5
 	xor	ax,ax
 	xor	cx,cx
-DeviceHighParseHex:
+DeviceHighParseSizeHex:
 	mov	dl,es:[si]
 	cmp	dl,' '
-	je	DeviceHighParseHexDone
+	je	DeviceHighParseSizeDone
 	cmp	dl,TAB
-	je	DeviceHighParseHexDone
-	or	dl,dl
-	jz	DeviceHighParseError
+	je	DeviceHighParseSizeDone
 	cmp	dl,'0'
 	jb	DeviceHighParseError
 	cmp	dl,'9'
-	jbe	short DeviceHighParseDigit
+	jbe	short DeviceHighParseSizeDigit
 	cmp	dl,'A'
 	jb	DeviceHighParseError
 	cmp	dl,'F'
 	ja	DeviceHighParseError
 	sub	dl,'A'-10
-	jmp	short DeviceHighParseAccumulate
-DeviceHighParseDigit:
+	jmp	short DeviceHighParseSizeAdd
+DeviceHighParseSizeDigit:
 	sub	dl,'0'
-DeviceHighParseAccumulate:
+DeviceHighParseSizeAdd:
 	test	ax,0f000h
 	jnz	DeviceHighParseError
 	shl	ax,1
@@ -1930,27 +1983,99 @@ DeviceHighParseAccumulate:
 	add	ax,dx
 	inc	si
 	inc	cx
-	jmp	DeviceHighParseHex
-DeviceHighParseHexDone:
-	jcxz	DeviceHighParseError
-	add	ax,15
+	jmp	DeviceHighParseSizeHex
+DeviceHighParseSizeDone:
+	or	cx,cx
+	jnz	short DeviceHighParseSizePresent
+	jmp	DeviceHighParseError
+DeviceHighParseSizePresent:
+	call	DeviceHighBytesToParagraphs
 	jc	DeviceHighParseError
-	mov	cl,4
-	shr	ax,cl
 	mov	cs:[DeviceHighMinSize],ax
-	; Skip the delimiter after the size and identify the actual driver token.
-DeviceHighParseSkipSpace:
-	mov	al,es:[si]
-	cmp	al,' '
-	je	short DeviceHighParseSkipOne
-	cmp	al,TAB
-	jne	short DeviceHighParseFindNameEnd
-DeviceHighParseSkipOne:
+	jmp	DeviceHighParseSkipSpaces
+
+DeviceHighParseCheckRegion:
+	cmp	byte ptr es:[si],'/'
+	jne	DeviceHighParseFilename
+	cmp	byte ptr es:[si+1],'L'
+	jne	DeviceHighParseError
+	cmp	byte ptr es:[si+2],':'
+	jne	DeviceHighParseError
+	add	si,3
+	mov	cs:[DeviceHighRegionMask],0
+	mov	cs:[DeviceHighRegionExplicit],1
+DeviceHighParseRegion:
+	xor	ax,ax
+	xor	cx,cx
+DeviceHighParseRegionDigit:
+	mov	dl,es:[si]
+	cmp	dl,'0'
+	jb	DeviceHighParseRegionDone
+	cmp	dl,'9'
+	ja	DeviceHighParseRegionDone
+	sub	dl,'0'
+	mov	bx,ax
+	shl	ax,1
+	shl	bx,1
+	shl	bx,1
+	shl	bx,1
+	add	ax,bx
+	xor	dh,dh
+	add	ax,dx
 	inc	si
-	jmp	short DeviceHighParseSkipSpace
-DeviceHighParseFindNameEnd:
+	inc	cx
+	jmp	DeviceHighParseRegionDigit
+DeviceHighParseRegionDone:
+	or	cx,cx
+	jnz	short DeviceHighParseRegionPresent
+	jmp	DeviceHighParseError
+DeviceHighParseRegionPresent:
+	cmp	ax,1
+	jb	DeviceHighParseError
+	cmp	ax,16
+	ja	DeviceHighParseError
+	mov	cx,ax
+	dec	cx
+	mov	bx,1
+	shl	bx,cl
+	or	cs:[DeviceHighRegionMask],bx
+	cmp	byte ptr es:[si],','
+	jne	DeviceHighParseRegionSeparator
+	inc	si
+	call	DeviceHighParseDecimalBytes
+	jc	DeviceHighParseError
+	cmp	ax,cs:[DeviceHighMinSize]
+	jbe	short DeviceHighParseRegionSeparator
+	mov	cs:[DeviceHighMinSize],ax
+DeviceHighParseRegionSeparator:
+	cmp	byte ptr es:[si],';'
+	jne	DeviceHighParseAfterRegions
+	inc	si
+	jmp	DeviceHighParseRegion
+DeviceHighParseAfterRegions:
+	call	DeviceHighSkipSpaces
+	cmp	byte ptr es:[si],'/'
+	jne	short DeviceHighParseRegionEquals
+	cmp	byte ptr es:[si+1],'S'
+	jne	DeviceHighParseError
+	mov	cs:[DeviceHighShrink],1
+	add	si,2
+	call	DeviceHighSkipSpaces
+DeviceHighParseRegionEquals:
+	cmp	byte ptr es:[si],'='
+	jne	DeviceHighParseFilename
+	inc	si
+
+DeviceHighParseSkipSpaces:
+	call	DeviceHighSkipSpaces
+DeviceHighParseFilename:
+	mov	al,es:[si]
 	cmp	al,CR
 	je	DeviceHighParseError
+	cmp	al,LF
+	je	DeviceHighParseError
+	or	al,al
+	jz	DeviceHighParseError
 	mov	di,si
 DeviceHighParseNameLoop:
 	mov	al,es:[di]
@@ -1970,19 +2095,77 @@ DeviceHighParseTerminateName:
 	mov	byte ptr es:[di],0
 	jmp	short DeviceHighParseDone
 DeviceHighParseTerminateAtCr:
-	; Preserve a terminator after the temporary filename NUL; Restore changes
-	; that NUL back to a space immediately before calling the driver.
 	mov	byte ptr es:[di+1],CR
 	mov	byte ptr es:[di],0
 DeviceHighParseDone:
 	clc
-	pop	di
 	ret
 DeviceHighParseError:
 	stc
-	pop	di
 	ret
 DeviceHighParseOptions ENDP
+
+DeviceHighSkipSpaces PROC NEAR
+DeviceHighSkipSpaceLoop:
+	mov	al,es:[si]
+	cmp	al,' '
+	je	short DeviceHighSkipOneSpace
+	cmp	al,TAB
+	jne	short DeviceHighSkipSpacesDone
+DeviceHighSkipOneSpace:
+	inc	si
+	jmp	short DeviceHighSkipSpaceLoop
+DeviceHighSkipSpacesDone:
+	ret
+DeviceHighSkipSpaces ENDP
+
+; Parse a decimal byte count and return its paragraph ceiling in AX.
+DeviceHighParseDecimalBytes PROC NEAR
+	xor	ax,ax
+	xor	cx,cx
+DeviceHighParseDecimalLoop:
+	mov	dl,es:[si]
+	cmp	dl,'0'
+	jb	DeviceHighParseDecimalDone
+	cmp	dl,'9'
+	ja	DeviceHighParseDecimalDone
+	sub	dl,'0'
+	mov	bx,ax
+	shl	ax,1
+	shl	bx,1
+	shl	bx,1
+	shl	bx,1
+	add	ax,bx
+	jc	DeviceHighParseDecimalBad
+	xor	dh,dh
+	add	ax,dx
+	jc	DeviceHighParseDecimalBad
+	inc	si
+	inc	cx
+	jmp	short DeviceHighParseDecimalLoop
+DeviceHighParseDecimalDone:
+	jcxz	DeviceHighParseDecimalBad
+	call	DeviceHighBytesToParagraphs
+	ret
+DeviceHighParseDecimalBad:
+	stc
+	ret
+DeviceHighParseDecimalBytes ENDP
+
+DeviceHighBytesToParagraphs PROC NEAR
+	push	bx
+	mov	bx,ax
+	and	bx,15
+	mov	cl,4
+	shr	ax,cl
+	or	bx,bx
+	jz	short DeviceHighBytesDone
+	inc	ax
+DeviceHighBytesDone:
+	pop	bx
+	clc
+	ret
+DeviceHighBytesToParagraphs ENDP
 
 DeviceHighCommit PROC NEAR
 	cmp	cs:[DeviceHighActive],0
@@ -2019,24 +2202,47 @@ DeviceHighAbort PROC NEAR
 	cmp	cs:[DeviceHighActive],0
 	je	DeviceHighAbortDone
 	push	ax
+	push	bx
+	push	cx
+	push	dx
 	push	ds
 	push	es
+	push	si
+	push	di
 	mov	es,cs:[DeviceHighBlock]
 	mov	ah,DEALLOC
 	int	21h
 	call	DeviceHighRestore
+	pop	di
+	pop	si
 	pop	es
 	pop	ds
+	pop	dx
+	pop	cx
+	pop	bx
 	pop	ax
 DeviceHighAbortDone:
 	ret
 DeviceHighAbort ENDP
 
 DeviceHighRestore PROC NEAR
+	push	cx
+	push	dx
+	push	si
+	push	di
 	mov	ax,cs:[DeviceHighLowMemLo]
 	mov	cs:[MEMLO],ax
 	mov	ax,cs:[DeviceHighLowMemHi]
 	mov	cs:[MEMHI],ax
+	cmp	cs:[DeviceHighRegionExplicit],0
+	je	short DeviceHighRestoreStrategy
+	mov	bx,cs:[DeviceHighOldRegionMask]
+	mov	cx,4d55h
+	mov	si,2142h
+	mov	di,0a55ah
+	mov	ax,5807h
+	int	21h
+DeviceHighRestoreStrategy:
 	mov	bx,cs:[DeviceHighOldStrategy]
 	mov	ax,5801h
 	int	21h
@@ -2046,6 +2252,11 @@ DeviceHighRestore PROC NEAR
 	int	21h
 	mov	cs:[DeviceHighActive],0
 	mov	cs:[DeviceHighBlock],0
+	mov	cs:[DeviceHighBlockSize],0
+	pop	di
+	pop	si
+	pop	dx
+	pop	cx
 	ret
 DeviceHighRestore ENDP
 

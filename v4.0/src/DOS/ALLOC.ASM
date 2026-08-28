@@ -51,6 +51,10 @@ PAGE
 	i_need  UmbLinkMcb,WORD         ; conventional-to-UMB link MCB
 	i_need  UmbArenaTail,WORD       ; final guarded UMB MCB
 	i_need  UmbLinked,BYTE          ; UMB arena link state
+	i_need  UmbRegionCount,BYTE     ; number of provider UMB regions
+	i_need  UmbRegionFilter,WORD    ; enabled provider region bitmap
+	i_need  UmbRegionStarts,BYTE    ; region start segment table
+	i_need  UmbRegionEnds,BYTE      ; exclusive region end table
 	i_need  AllocScanDomain,BYTE    ; allocator arena selector
 	i_need  ArenaFreeDomain,BYTE    ; process cleanup arena selector
 	I_need  EXTERR_LOCUS,BYTE       ; Extended Error Locus
@@ -257,6 +261,11 @@ alloc_fail:
 	error   error_not_enough_memory
 
 alloc_free:
+	CMP     [AllocScanDomain],0
+	JZ      alloc_free_visible
+	CALL    UmbRegionAllowed
+	JC      alloc_next
+alloc_free_visible:
 	CALL    coalesce                ; add following free block to current
 	JC      alloc_err               ; IF error THEN GOTO err
 	MOV     CX,DS:[arena_size]
@@ -346,6 +355,53 @@ alloc_set_owner:
 
 EndProc $alloc
 
+; Carry clear when the current UMB MCB in DS belongs to an enabled provider
+; region.  Conventional scans bypass this filter.
+UmbRegionAllowed PROC NEAR
+	CMP     [UmbRegionFilter],0FFFFH
+	JE      UmbRegionAllowedYes
+	PUSH    AX
+	PUSH    BX
+	PUSH    CX
+	PUSH    DX
+	PUSH    SI
+	MOV     DX,DS
+	XOR     SI,SI
+	XOR     CX,CX
+	MOV     CL,[UmbRegionCount]
+	MOV     BX,1
+	JCXZ    UmbRegionAllowedNo
+UmbRegionAllowedLoop:
+	MOV     AX,WORD PTR [UmbRegionStarts+SI]
+	CMP     DX,AX
+	JB      UmbRegionAllowedNext
+	MOV     AX,WORD PTR [UmbRegionEnds+SI]
+	CMP     DX,AX
+	JAE     UmbRegionAllowedNext
+	TEST    [UmbRegionFilter],BX
+	JNZ     UmbRegionAllowedPopYes
+	JMP     SHORT UmbRegionAllowedNo
+UmbRegionAllowedNext:
+	SHL     BX,1
+	ADD     SI,2
+	LOOP    UmbRegionAllowedLoop
+UmbRegionAllowedNo:
+	STC
+	JMP     SHORT UmbRegionAllowedPop
+UmbRegionAllowedPopYes:
+	CLC
+UmbRegionAllowedPop:
+	POP     SI
+	POP     DX
+	POP     CX
+	POP     BX
+	POP     AX
+	RET
+UmbRegionAllowedYes:
+	CLC
+	RET
+UmbRegionAllowed ENDP
+
 SUBTTL $SETBLOCK - change size of an allocated block (if possible)
 PAGE
 ;
@@ -422,10 +478,13 @@ PAGE
 ;   Carry clear on success, set if the extent cannot be represented safely
 ;
 	PUBLIC  RegisterUmb
-	procedure RegisterUmb,NEAR
+procedure RegisterUmb,NEAR
 	ASSUME  DS:NOTHING,ES:NOTHING
 	PUSH    DS
 	PUSH    ES
+	PUSH    SI
+	CMP     CS:[UmbRegionCount],16
+	JAE     RegisterUmbError
 	CMP     DX,3
 	JB      RegisterUmbError
 	MOV     AX,BX
@@ -507,6 +566,16 @@ RegisterUmbMakeExtent:
 	MOV     BYTE PTR ES:[arena_name],'S'
 	MOV     BYTE PTR ES:[arena_name+1],'M'
 	MOV     CS:[UmbArenaTail],AX
+	XOR     AX,AX
+	MOV     AL,CS:[UmbRegionCount]
+	SHL     AX,1
+	MOV     SI,AX
+	MOV     WORD PTR CS:[UmbRegionStarts+SI],BX
+	MOV     AX,BX
+	ADD     AX,DX
+	MOV     WORD PTR CS:[UmbRegionEnds+SI],AX
+	INC     CS:[UmbRegionCount]
+	POP     SI
 	POP     ES
 	POP     DS
 	MOV     AX,1
@@ -514,6 +583,7 @@ RegisterUmbMakeExtent:
 	return
 
 RegisterUmbError:
+	POP     SI
 	POP     ES
 	POP     DS
 	XOR     AX,AX
@@ -549,6 +619,10 @@ PAGE
 	JZ      AllocOperResetUmb
 	CMP     AL,6
 	JZ      AllocOperFinalizeUmb
+	CMP     AL,7
+	JZ      AllocOperSetRegionFilter
+	CMP     AL,8
+	JZ      AllocOperGetRegionFilter
 
 AllocOperError:
 	MOV     EXTERR_LOCUS,errLoc_mem ; Extended Error Locus
@@ -678,6 +752,8 @@ AllocOperResetDone:
 	MOV     [UmbArenaHead],0
 	MOV     [UmbArenaTail],0
 	MOV     [UmbLinkMcb],0
+	MOV     [UmbRegionCount],0
+	MOV     [UmbRegionFilter],0FFFFH
 	transfer    SYS_RET_OK
 AllocOperResetBad:
 	POP     DS
@@ -733,6 +809,26 @@ AllocOperFinalizeBad:
 	POP     DS
 	XOR     AX,AX
 	transfer    SYS_RET_OK
+
+AllocOperSetRegionFilter:
+	CMP     CX,4D55H
+	JNZ     AllocOperError
+	CMP     SI,2142H
+	JNZ     AllocOperError
+	CMP     DI,0A55AH
+	JNZ     AllocOperError
+	MOV     [UmbRegionFilter],BX
+	transfer SYS_RET_OK
+
+AllocOperGetRegionFilter:
+	CMP     CX,4D55H
+	JNZ     AllocOperError
+	CMP     SI,2142H
+	JNZ     AllocOperError
+	CMP     DI,0A55AH
+	JNZ     AllocOperError
+	MOV     AX,[UmbRegionFilter]
+	transfer SYS_RET_OK
 
 EndProc $AllocOper
 

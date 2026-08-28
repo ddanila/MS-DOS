@@ -505,8 +505,8 @@ Org3:
 	je	Org_file
 	cmp	Cmd_Indicator, 'D'      ;AN000; Device= command?
 	je	Org_file		;AN000;
-	cmp	Cmd_Indicator, 'U'      ; DEVICEHIGH= uses the same file/tail layout.
-	je	Org_file
+	cmp	Cmd_Indicator, 'U'      ; Preserve DEVICEHIGH options for SYSINIT.
+	je	Org4
 	cmp	Cmd_Indicator, 'J'      ;AN000; IFS= command?
 	je	Org_file		;AN000;
 	cmp	Cmd_Indicator, 'S'      ;AN000; Shell= is a special one!!!
