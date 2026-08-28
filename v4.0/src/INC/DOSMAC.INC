@@ -310,6 +310,31 @@ context macro   r
 endm
 .xcref  context
 
+BREAK <HMAENTRYGATE - redirect a retained low interrupt entry to the HMA>
+
+HmaEntryGate macro target
+LOCAL hma_gate_low, hma_gate_high, hma_gate_pointer
+	PUSHF
+	CMP	CS:[hma_resident],0
+	JE	SHORT hma_gate_low
+	PUSH	AX
+	MOV	AX,CS
+	CMP	AX,0FFFFH
+	JE	SHORT hma_gate_high
+	POP	AX
+	POPF
+	JMP	DWORD PTR CS:[hma_gate_pointer]
+hma_gate_high:
+	POP	AX
+hma_gate_low:
+	POPF
+	JMP	SHORT target
+hma_gate_pointer LABEL DWORD
+	DW	OFFSET DOSGROUP:target,0FFFFH
+target LABEL NEAR
+endm
+.xcref  HmaEntryGate
+
 BREAK <SaveReg - save a set of registers>
 
 SaveReg MACRO   reglist                 ;; push those registers

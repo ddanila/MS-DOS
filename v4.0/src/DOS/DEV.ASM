@@ -71,6 +71,9 @@ include version.inc
 	i_need	InterCon,BYTE	;AN000; Console mode flag(1:interim mode) 2/13/KK
 	i_need	SaveCurFlg,BYTE ;AN000; Console out mode(1:print & don't adv cursor) 2 /13/KK
 	i_need	DDMOVE,BYTE	;AN000; flag for DWORD move
+	EXTRN	hma_low_segment:WORD
+	EXTRN	hma_resident:BYTE
+	EXTRN	hma_driver_trampoline_entry:DWORD
 	i_need	DOS34_FLAG,WORD ;AN000;
 	i_need	fshare,BYTE	;AN010; share flag
 
@@ -477,20 +480,87 @@ chksector:			       ;AN000; >32mb
 	JMP	SHORT dev_exit	       ;AN000; >32mb
 
 chardev2:			       ;AN000;
+	; Legacy real-mode drivers may not preserve access to an HMA request
+	; packet across their BIOS calls. Finish constructing the request in the
+	; high image, then mirror the complete extended workspace into retained low
+	; DOS data and copy the completed packet back at dev_exit.
+	mov	ax,es
+	cmp	ax,0ffffh
+	jne	short dev_packet_ready
+	mov	ax,cs
+	cmp	ax,0ffffh
+	jne	short dev_packet_ready
+	push	ds
+	push	si
+	push	di
+	push	cx
+	push	es
+	pop	ds
+	mov	ax,cs:[hma_low_segment]
+	mov	es,ax
+	mov	si,bx
+	mov	di,bx
+	mov	cx,30
+	cld
+	rep	movsb
+	pop	cx
+	pop	di
+	pop	si
+	pop	ds
+dev_packet_ready:
 ; As above only DS:SI points to device header on entry, and DS:SI is preserved
 	MOV	AX,[SI.SDEVSTRAT]
 	MOV	WORD PTR [CALLDEVAD],AX
 	MOV	WORD PTR [CALLDEVAD+2],DS
-	CALL	DWORD PTR [CALLDEVAD]
+	CALL	HMA_SAFE_DRIVER_CALL
 	MOV	AX,[SI.SDEVINT]
 	MOV	WORD PTR [CALLDEVAD],AX
-	CALL	DWORD PTR [CALLDEVAD]
+	CALL	HMA_SAFE_DRIVER_CALL
 	CALL	VIRREAD 		;AN000;LB. move data from SC to buffer
 	JC	chardev2		;AN000;LB. bad sector or exceeds max sec
 dev_exit:
+	mov	ax,cs
+	cmp	ax,0ffffh
+	jne	short dev_packet_done
+	mov	ax,cs:[hma_low_segment]
+	push	dx
+	mov	dx,es
+	cmp	ax,dx
+	pop	dx
+	jne	short dev_packet_done
+	push	ds
+	push	si
+	push	di
+	push	cx
+	push	es
+	pop	ds
+	push	cs
+	pop	es
+	mov	si,bx
+	mov	di,bx
+	mov	cx,30
+	cld
+	rep	movsb
+	pop	cx
+	pop	di
+	pop	si
+	pop	ds
+dev_packet_done:
 	LeaveCrit   critDevice
 	return
 EndProc DEVIOCALL
+
+; HMA code calls the retained-low trampoline so a driver that disables A20
+; cannot wrap the return into reclaimed kernel storage.
+HMA_SAFE_DRIVER_CALL proc near
+	cmp	cs:[hma_resident],0
+	je	short hma_driver_call_low
+	call	dword ptr cs:[hma_driver_trampoline_entry]
+	ret
+hma_driver_call_low:
+	call	dword ptr [CALLDEVAD]
+	ret
+HMA_SAFE_DRIVER_CALL endp
 
 Break	<SETREAD, SETWRITE -- SET UP HEADER BLOCK>
 

@@ -11,6 +11,7 @@ include dosseg.asm
 include ifssym.inc
 include fastopen.inc
 include fastxxxx.inc
+include doscntry.inc
 .cref
 .list
 
@@ -42,6 +43,19 @@ ASSUME	CS:DOSGROUP,DS:NOTHING,ES:NOTHING,SS:NOTHING
     I_need  FastOpenFlg,BYTE		;
     I_need  FastSeekFlg,BYTE		;
     I_need  CURSC_DRIVE,BYTE		;
+    I_need  SYSBUF,BYTE
+    I_need  sft_addr,DWORD
+    I_need  COUNTRY_CDPG,BYTE
+    I_need  SysInitTable,BYTE
+    I_need  SYSINITVAR,BYTE
+    I_need  IFS_DOS_CALL,DWORD
+    I_need  SWAP_ALWAYS_AREA,DWORD
+    I_need  SWAP_IN_DOS,DWORD
+    I_need  JShare,DWORD
+    I_need  CALLDEVAD,DWORD
+    I_need  arena_head,WORD
+
+    EXTRN   DOS_CODE_START:BYTE
 
 BREAK <NullDev -- Driver for null device>
 
@@ -79,6 +93,39 @@ ERROUT:
 NUMERR	EQU	$-ERROUT
 	ENDIF
 MSC001E label byte
+
+; This far-call trampoline deliberately lives before the CODE segment.  That
+; prefix remains allocated in conventional memory after DOS moves high, so a
+; legacy driver can return safely even if it disabled A20.  The trampoline
+; restores A20 through XMS before returning to its FFFFh caller and preserves
+; the driver's complete result.
+PUBLIC  HMA_DRIVER_TRAMPOLINE
+HMA_DRIVER_TRAMPOLINE proc far
+        call    dword ptr cs:[CALLDEVAD]
+        pushf
+        push    ax
+        push    bx
+        push    cx
+        push    dx
+        push    si
+        push    di
+        push    bp
+        push    ds
+        push    es
+        mov     ah, 03h
+        call    dword ptr cs:[hma_xms_entry]
+        pop     es
+        pop     ds
+        pop     bp
+        pop     di
+        pop     si
+        pop     dx
+        pop     cx
+        pop     bx
+        pop     ax
+        popf
+        retf
+HMA_DRIVER_TRAMPOLINE endp
 
 TABLE	ENDS
 
@@ -136,6 +183,7 @@ EndProc AbsSetup
 
 	procedure   ABSDRD,FAR
 	ASSUME	CS:DOSGroup,DS:NOTHING,ES:NOTHING,SS:NOTHING
+	HmaEntryGate absdrd_hma_ready
 
 	CLI
 	MOV	[user_SS],SS
@@ -204,6 +252,7 @@ EndProc ABSDRD
 
 	procedure   ABSDWRT,FAR
 ASSUME	DS:NOTHING,ES:NOTHING,SS:NOTHING
+	HmaEntryGate absdwrt_hma_ready
 
 	CLI
 	MOV	[user_SS],SS
@@ -273,6 +322,17 @@ GETBP_CDS:
 	entry	GOTDPB
 	DOSAssume   CS,<DS>,"GotDPB"
 ; Load THISDPB from ES:BP
+	; DPBs remain in the retained conventional-memory image.  Code running
+	; from the HMA can synthesize a same-offset DOSGROUP pointer while walking
+	; a CDS; canonicalize that alias before publishing the driver-visible DPB.
+	CMP	CS:[hma_resident],0
+	JE	SHORT gotdpb_segment_ready
+	MOV	AX,ES
+	CMP	AX,0FFFFH
+	JNE	SHORT gotdpb_segment_ready
+	MOV	AX,CS:[hma_low_segment]
+	MOV	ES,AX
+gotdpb_segment_ready:
 
 	MOV	WORD PTR [THISDPB],BP
 	MOV	WORD PTR [THISDPB+2],ES
@@ -479,6 +539,7 @@ EndProc OKCall
 
 PUBLIC	Int2F
 INT2F	PROC	FAR
+	HmaEntryGate int2f_hma_ready
 
 INT2FNT:
 	ASSUME	CS:DOSGROUP,DS:NOTHING,ES:NOTHING,SS:NOTHING
@@ -508,6 +569,9 @@ INT2FDOS:
 	IRET				; This assume that we are at the head
 					; of the list
 INT2F	ENDP
+
+PUBLIC  DOS_LOW_GATE_END
+DOS_LOW_GATE_END LABEL BYTE
 
 DispatchDOS:
 	PUSH	FOO			; push return address
@@ -539,6 +603,193 @@ Procedure   INT2F_etcetera,NEAR
 	MOV	AL,0FFh
 	return
 EndProc INT2F_etcetera
+
+; Internal SYSINIT callback (INT 2Fh/AX=1230h). The kernel layout reserves the
+; first 10h offsets for its one-time low entry, so the complete persistent
+; image can be copied byte-for-byte to FFFF:0010h. This stage switches DOS
+; execution to the HMA, retains the low data/entry prefix, and publishes the
+; relocated code tail as conventional free memory.
+PUBLIC  DOS_HMA_RELOCATE
+DOS_HMA_RELOCATE proc near
+        cmp     cs:[hma_resident], 0
+        jne     hma_already_high
+        push    bx
+        push    cx
+        push    dx
+        push    si
+        push    di
+        push    ds
+        push    es
+
+        mov     ax, 04300h
+        int     02fh
+        cmp     al, 080h
+        jne     hma_relocate_fail
+        mov     ax, 04310h
+        int     02fh
+        mov     word ptr cs:[hma_xms_entry], bx
+        mov     word ptr cs:[hma_xms_entry+2], es
+        mov     ah, 01h
+        mov     dx, 0ffffh
+        call    dword ptr cs:[hma_xms_entry]
+        or      ax, ax
+        jz      hma_relocate_fail
+        mov     cs:[hma_owned], 1
+        mov     ah, 03h
+        call    dword ptr cs:[hma_xms_entry]
+        or      ax, ax
+        jz      hma_relocate_release
+
+        cli
+        push    cs
+        pop     ds
+        mov     ax, 0ffffh
+        mov     es, ax
+        mov     si, 0010h
+        mov     di, si
+        mov     cx, offset DOSGROUP:SYSBUF
+        sub     cx, si
+        cld
+        shr     cx, 1
+        rep     movsw
+        jnc     short hma_copy_even
+        movsb
+hma_copy_even:
+        ; Patch fixed far pointers whose targets moved with DOSGROUP.
+        mov     si, offset DOSGROUP:hma_segment_fixups
+        mov     cx, hma_segment_fixup_count
+        mov     bx, cs
+hma_fixup_loop:
+        mov     di, cs:[si]
+        cmp     word ptr es:[di], bx
+        jne     short hma_fixup_next
+        cmp     word ptr es:[di-2], offset DOSGROUP:DOS_CODE_START
+        jb      short hma_fixup_next
+        mov     word ptr es:[di], 0ffffh
+hma_fixup_next:
+        add     si, 2
+        loop    hma_fixup_loop
+
+        ; The SHARE callback table contains fifteen far entry points.
+        mov     di, offset DOSGROUP:JShare+2
+        mov     cx, 15
+hma_share_fixups:
+        cmp     word ptr es:[di], bx
+        jne     short hma_share_fixup_next
+        cmp     word ptr es:[di-2], offset DOSGROUP:DOS_CODE_START
+        jb      short hma_share_fixup_next
+        mov     word ptr es:[di], 0ffffh
+hma_share_fixup_next:
+        add     di, 4
+        loop    hma_share_fixups
+
+        ; Redirect every DOS-owned interrupt vector atomically. Non-DOS
+        ; vectors retain their existing segment and chaining order.
+        xor     ax, ax
+        mov     ds, ax
+        mov     si, 2
+        mov     cx, 256
+        push    cs
+        pop     dx
+        mov     word ptr es:[hma_low_segment], dx
+        mov     word ptr es:[hma_driver_trampoline_entry], offset DOSGROUP:HMA_DRIVER_TRAMPOLINE
+        mov     word ptr es:[hma_driver_trampoline_entry+2], dx
+hma_vector_loop:
+        cmp     word ptr ds:[si], dx
+        jne     short hma_vector_next
+        mov     word ptr ds:[si], 0ffffh
+hma_vector_next:
+        add     si, 4
+        loop    hma_vector_loop
+
+        ; The DATA/TABLE prefix remains low.  Publish the relocated CODE/LAST
+        ; tail as a leading free arena block, immediately before the arena DOS
+        ; created at initialization.  Later allocator scans may coalesce it
+        ; with the existing first free block.
+        mov     ax, dx
+        mov     bx, offset DOSGROUP:DOS_LOW_GATE_END
+        add     bx, 0fh
+        mov     cl, 4
+        shr     bx, cl
+        add     ax, bx
+        mov     bx, cs:[arena_head]
+        mov     cx, bx
+        sub     cx, ax
+        cmp     cx, 2
+        jb      short hma_skip_low_reclaim
+        dec     cx
+        mov     ds, ax
+        mov     byte ptr ds:[arena_signature], arena_signature_normal
+        mov     word ptr ds:[arena_owner], 0
+        mov     word ptr ds:[arena_size], cx
+        mov     word ptr ds:[arena_name], 0
+        mov     word ptr ds:[arena_name+2], 0
+        mov     word ptr ds:[arena_name+4], 0
+        mov     word ptr ds:[arena_name+6], 0
+        push    cs
+        pop     ds
+        mov     cs:[arena_head], ax
+hma_skip_low_reclaim:
+
+        mov     byte ptr es:[hma_resident], 1
+        mov     byte ptr cs:[hma_resident], 1
+        pop     es
+        pop     ds
+        pop     di
+        pop     si
+        pop     dx
+        pop     cx
+        pop     bx
+        mov     ax, 1
+        ret
+
+hma_relocate_release:
+        mov     ah, 02h
+        call    dword ptr cs:[hma_xms_entry]
+        mov     cs:[hma_owned], 0
+hma_relocate_fail:
+        pop     es
+        pop     ds
+        pop     di
+        pop     si
+        pop     dx
+        pop     cx
+        pop     bx
+        xor     ax, ax
+        ret
+hma_already_high:
+        mov     ax, 1
+        ret
+DOS_HMA_RELOCATE endp
+
+PUBLIC  hma_xms_entry
+hma_xms_entry  dd      0
+hma_owned      db      0
+PUBLIC  hma_resident
+hma_resident   db      0
+PUBLIC  hma_low_segment
+hma_low_segment dw     0
+PUBLIC  hma_driver_trampoline_entry
+hma_driver_trampoline_entry dd offset DOSGROUP:HMA_DRIVER_TRAMPOLINE
+
+hma_segment_fixups:
+        dw      offset DOSGROUP:sft_addr+2
+        dw      offset DOSGROUP:COUNTRY_CDPG+ccUcase_ptr+2
+        dw      offset DOSGROUP:COUNTRY_CDPG+ccFileUcase_ptr+2
+        dw      offset DOSGROUP:COUNTRY_CDPG+ccFileChar_ptr+2
+        dw      offset DOSGROUP:COUNTRY_CDPG+ccCollate_ptr+2
+        dw      offset DOSGROUP:COUNTRY_CDPG+ccMono_ptr+2
+        dw      offset DOSGROUP:COUNTRY_CDPG+ccDBCS_ptr+2
+        dw      offset DOSGROUP:SysInitTable+SYSI_Country_Tab+2
+        dw      offset DOSGROUP:SysInitTable+SYSI_InitVars+2
+        dw      offset DOSGROUP:SYSINITVAR+SYSI_SFT+2
+        dw      offset DOSGROUP:SYSINITVAR+SYSI_BUF+2
+        dw      offset DOSGROUP:SYSINITVAR+SYSI_FCB+2
+        dw      offset DOSGROUP:SYSINITVAR+SYSI_IFS_DOSCALL@+2
+        dw      offset DOSGROUP:IFS_DOS_CALL+2
+        dw      offset DOSGROUP:SWAP_ALWAYS_AREA+2
+        dw      offset DOSGROUP:SWAP_IN_DOS+2
+hma_segment_fixup_count equ ($-hma_segment_fixups)/2
 
 ENDIF
 ;Input: same as ABSDRD and ABSDWRT

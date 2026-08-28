@@ -449,7 +449,8 @@ CreateStash:
 
 	MOV	BX,CurrentPDB		; get current process
 	MOV	ES:[PDB_Parent_PID],BX	; stash in child
-	MOV	[CurrentPDB],ES
+	MOV	SS:[CurrentPDB],ES
+	MOV	CS:[CurrentPDB],ES
 	ASSUME	DS:NOTHING
 	MOV	DS,BX
 ;

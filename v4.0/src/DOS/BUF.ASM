@@ -215,10 +215,8 @@ Procedure   SAVE_MAP,NEAR							 ;AN000;
 	MOV	SI,OFFSET DOSGROUP:BUF_EMS_SEG_CNT     ;LB.			;AN000;
 	MOV	DI,OFFSET DOSGROUP:BUF_EMS_MAP_BUF     ;LB.			;AN000;
 
-	PUSH	CS
-	POP	ES
-	PUSH	CS			  ;LB.					;AN000;
-	POP	DS			  ;LB. ds:si -> ems seg count		;AN000;
+	Context ES
+	Context DS			  ;LB. ds:si -> ems seg count		;AN000;
 
 	MOV	AX,4F00H		  ;LB. save map 			;AN000;
 	EnterCrit  critDisk		  ;LB. enter critical section		;AN000;
@@ -253,8 +251,7 @@ Procedure   RESTORE_MAP,NEAR							 ;AN000;
 	PUSH	SI			  ;LB.					;AN000;
 	MOV	SI,OFFSET DOSGROUP:BUF_EMS_MAP_BUF     ;LB.			;AN000;
 
-	PUSH	CS
-	POP	DS
+	Context DS
 	MOV	AX,4F01H		  ;LB. restore map			;AN000;
 	EnterCrit  critDisk		  ;LB. enter critical section		;AN000;
 	INT	67H			  ;LB.					;AN000;

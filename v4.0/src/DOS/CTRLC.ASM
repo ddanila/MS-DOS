@@ -644,7 +644,7 @@ NOSWAP2:
 	MOV	AH,82h
 	INT	int_IBM
 
-	MOV	fAborting,-1		; signal abort in progress
+	MOV	SS:[fAborting],-1	; signal abort in progress
 
 	CallInstall NetResetEnvironment, multNet, 34  ;DOS 4.00 doesn't need it
 					; Allow REDIR to clear some stuff
@@ -655,7 +655,7 @@ NOSWAP2:
 	POP	CX			; get ThisPDB
 	SaveReg <ES,BX> 		; save return address
 
-	MOV	BX,[CurrentPDB] 	; get currentPDB
+	MOV	BX,SS:[CurrentPDB] 	; get retained low currentPDB
 	MOV	DS,BX
 	MOV	AX,DS:[PDB_Parent_PID]	; get parentPDB
 
@@ -669,7 +669,7 @@ NOSWAP2:
 	CMP	BX,CX
 	JNZ	reset_return		; CurrentPDB <> ThisPDB
 	PUSH	AX			; save parent
-	CMP	BYTE PTR [exit_type],Exit_keep_process
+	CMP	BYTE PTR SS:[exit_type],Exit_keep_process
 	JZ	reset_to_parent 	; keeping this process
 ;
 ; We are truly removing a process.  Free all allocation blocks belonging to
@@ -684,11 +684,12 @@ NOSWAP2:
 	invoke	DOS_ABORT
 
 reset_to_parent:
-	POP	[CurrentPDB]		; set up process as parent
+	POP	AX
+	MOV	SS:[CurrentPDB],AX	; set up process as parent
+	MOV	CS:[CurrentPDB],AX	; keep legacy CS readers synchronized
 
 reset_return:				; come here for normal return
-	PUSH	CS
-	POP	DS
+	Context DS
 	ASSUME	DS:DOSGROUP
 	MOV	AL,-1
 ;
@@ -711,6 +712,10 @@ ENDIF
 	MOV	fAborting,0		; let aborts occur
 	POP	WORD PTR ExitHold
 	POP	WORD PTR ExitHold+2
+	MOV	AX,WORD PTR [ExitHold]
+	MOV	WORD PTR CS:[ExitHold],AX
+	MOV	AX,WORD PTR [ExitHold+2]
+	MOV	WORD PTR CS:[ExitHold+2],AX
 ;
 ; Snake into multitasking... Get stack from CurrentPDB person
 ;

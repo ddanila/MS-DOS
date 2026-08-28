@@ -345,8 +345,7 @@ EndProc DOS_SEARCH_NEXT
 	procedure   CHECK_QUESTION,NEAR ;AN000;
 	ASSUME	ES:NOTHING,DS:NOTHING	;AN000;
 
-	PUSH	CS			;AN000;;FO.
-	POP	DS			;AN000;;FO. ds:si -> final path
+	Context	DS			; DS:SI -> final path in retained DOS data
 	MOV	SI,[WFP_START]		;AN000;;FO.
 getnext:				;AN000;
 	LODSB				;AN000;;FO. get char

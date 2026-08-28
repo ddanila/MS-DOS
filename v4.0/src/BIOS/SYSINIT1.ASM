@@ -154,6 +154,7 @@ ASSUME	CS:SYSINITSEG,DS:NOTHING,ES:NOTHING,SS:NOTHING
 
 	EXTRN	INT24:NEAR,MEM_ERR:NEAR
 	EXTRN	DOCONF:NEAR
+	EXTRN	DosHighRequested:BYTE
 	EXTRN	DosUmbRequested:BYTE
 	extrn	Multi_Pass:NEAR 			;AN024;
 	extrn	BadLoad:near
@@ -843,9 +844,21 @@ OKLD:
 	MOV	WORD PTR [BX.EXEC0_COM_LINE+2],CS	; Set segments
 	MOV	WORD PTR [BX.EXEC0_5C_FCB+2],CS
 	MOV	WORD PTR [BX.EXEC0_6C_FCB+2],CS
-	XOR	AX,AX			;Load and go
+	; Switch the kernel to its HMA image only after CONFIG.SYS processing and
+	; boot-time driver initialization have completed.  SYSINIT's far pointers
+	; are updated before COMMAND.COM is executed through the relocated kernel.
+	cmp	cs:[DosHighRequested],0
+	je	short Dos_High_Done
+	mov	ax,1230h
+	int	2fh
+	cmp	ax,1
+	jne	short Dos_High_Done
+	mov	word ptr cs:[DosInfo+2],0ffffh
+	mov	word ptr cs:[SYSI_Country+2],0ffffh
+Dos_High_Done:
+	XOR	AX,AX
 	MOV	AH,EXEC
-	STC				;IN CASE OF INT 24
+	STC
 	INT	21H			;GO START UP COMMAND
 	ENDIF
 ; NOTE FALL THROUGH IF EXEC RETURNS (an error)

@@ -53,6 +53,8 @@ CODE    SEGMENT BYTE PUBLIC 'CODE'
         I_need  EXTOPEN_ON,BYTE            ;AN000;
         I_need  DOS34_FLAG,WORD            ;AN000;
         I_need  ACT_PAGE,WORD              ;AN000;
+	EXTRN	hma_low_segment:WORD
+	EXTRN	hma_resident:BYTE
 
         IF      (NOT IBM) AND 0FFFFh
         I_need  OEM_HANDLER,DWORD
@@ -66,6 +68,9 @@ CODE    SEGMENT BYTE PUBLIC 'CODE'
 	ENDIF
 
 ASSUME  CS:DOSGROUP,DS:NOTHING,ES:NOTHING,SS:NOTHING
+
+PUBLIC  DOS_CODE_START
+DOS_CODE_START LABEL BYTE
 
 BREAK   <System call entry points and dispatcher>
 ASSUME  CS:DOSGROUP,DS:NOTHING,ES:NOTHING,SS:NOTHING
@@ -152,6 +157,18 @@ BREAK <$Get_current_PDB -- Set/Get PDB value>
 ;
         procedure   $SET_CURRENT_PDB,NEAR
         ASSUME  DS:NOTHING,ES:NOTHING,SS:NOTHING
+	CMP	CS:[hma_resident],0
+	JE	SHORT set_current_pdb_conventional
+	PUSH	AX
+	PUSH	ES
+	MOV	AX,CS:[hma_low_segment]
+	MOV	ES,AX
+	MOV	ES:[CurrentPDB],BX
+	MOV	CS:[CurrentPDB],BX
+	POP	ES
+	POP	AX
+	IRET
+set_current_pdb_conventional:
         MOV     [CurrentPDB],BX
         IRET
 EndProc $SET_CURRENT_PDB
@@ -162,6 +179,17 @@ EndProc $SET_CURRENT_PDB
 ;
 procedure   $GET_CURRENT_PDB,NEAR
         ASSUME  DS:NOTHING,ES:NOTHING,SS:NOTHING
+	CMP	CS:[hma_resident],0
+	JE	SHORT get_current_pdb_conventional
+	PUSH	AX
+	PUSH	ES
+	MOV	AX,CS:[hma_low_segment]
+	MOV	ES,AX
+	MOV	BX,ES:[CurrentPDB]
+	POP	ES
+	POP	AX
+	IRET
+get_current_pdb_conventional:
         MOV     BX,[CurrentPDB]
         IRET
 EndProc $GET_CURRENT_PDB
@@ -205,9 +233,21 @@ BADCALL:
 ; only the CPM-compatible calls may get dispatched.
 ;
         entry   CALL_ENTRY              ; System call entry point and dispatcher
+	HmaEntryGate call_entry_hma_ready
         POP     AX                      ; IP from the long call at 5
         POP     AX                      ; Segment from the long call at 5
         POP     [User_SP]               ; IP from the CALL 5
+	CMP	CS:[hma_resident],0
+	JE	SHORT call_entry_stack_ready
+	PUSH	AX
+	PUSH	ES
+	MOV	AX,CS:[hma_low_segment]
+	MOV	ES,AX
+	MOV	AX,CS:[User_SP]
+	MOV	ES:[User_SP],AX
+	POP	ES
+	POP	AX
+call_entry_stack_ready:
 ;
 ; Re order the stack to simulate an interrupt 21.
 ;
@@ -226,6 +266,7 @@ BADCALL:
 ;
 
 entry   COMMAND                         ; Interrupt call entry point (INT 21H)
+	HmaEntryGate command_hma_ready
 
         IF      (NOT IBM) AND 0FFFFh
         CMP     AH,SET_OEM_HANDLER
@@ -259,11 +300,17 @@ chkprt:
 ; Preserve all user's registers on his own stack.
 ;
         CALL    save_world
-        MOV     [SaveDS],DS
-        MOV     [SaveBX],BX
-        MOV     BX,CS
-        MOV     DS,BX
+	PUSH	DS
+	PUSH	BX
+	MOV	BX,CS
+	CMP	CS:[hma_resident],0
+	JE	SHORT use_dos_data_segment
+	MOV	BX,CS:[hma_low_segment]
+use_dos_data_segment:
+	MOV	DS,BX
         ASSUME  DS:DOSGROUP
+	POP	[SaveBX]
+	POP	[SaveDS]
         INC     [INDOS]                 ; Flag that we're in the DOS
         XOR     AX,AX
         MOV     [USER_ID],AX
@@ -290,7 +337,11 @@ ASSUME  DS:NOTHING
 
         MOV     fSharing,0              ; allow redirection
 
-        MOV     BX,CS                   ; no holes here.
+	MOV	BX,CS
+	CMP	CS:[hma_resident],0
+	JE	SHORT use_dos_stack_segment
+	MOV	BX,CS:[hma_low_segment]
+use_dos_stack_segment:
         MOV     SS,BX
 ASSUME  SS:DOSGROUP
 
@@ -301,8 +352,8 @@ entry   REDISP
         MOV     BH, BYTE PTR DS:[PDB_InterCon]  ;AN000;; get interim mode  2/13/KK
         MOV     SS:[InterCon], BH               ;AN000;; 2/13/KK
  ENDIF                                          ;AN000;
-        MOV     BX,CS
-        MOV     DS,BX
+	PUSH	SS
+	POP	DS
         DOSAssume   CS,<DS>,"MSCODE/ReDisp"
 ;; DOS 3.4 INIT
 ;       MOV     BL,[CPSWSAVE]           ;AN000;;FT. DOS 3.4
@@ -404,16 +455,36 @@ ENDIF
 
         entry   LEAVEDOS
 ASSUME  SS:NOTHING                      ; User routines may misbehave
-        CLI
-        DEC     [INDOS]
-        MOV     SS,[user_SS]
-        MOV     SP,[user_SP]
+	CLI
+	CMP	CS:[hma_resident],0
+	JE	SHORT leave_dos_conventional
+	DEC	SS:[INDOS]
+	MOV	BX,SS:[user_SP]
+	MOV	DX,SS:[NSP]
+	MOV	CX,SS:[NSS]
+	MOV	SI,SS:[user_SS]
+	MOV	SS,SI
+	MOV	SP,BX
         MOV     BP,SP
         MOV     BYTE PTR [BP.user_AX],AL
-        MOV     AX,[NSP]
-        MOV     [user_SP],AX
-        MOV     AX,[NSS]
-        MOV     [user_SS],AX
+	PUSH	ES
+	MOV	SI,CS:[hma_low_segment]
+	MOV	ES,SI
+	MOV	ES:[user_SP],DX
+	MOV	ES:[user_SS],CX
+	POP	ES
+	JMP	SHORT leave_dos_restore
+leave_dos_conventional:
+	DEC	[INDOS]
+	MOV	SS,[user_SS]
+	MOV	SP,[user_SP]
+	MOV	BP,SP
+	MOV	BYTE PTR [BP.user_AX],AL
+	MOV	AX,[NSP]
+	MOV	[user_SP],AX
+	MOV	AX,[NSS]
+	MOV	[user_SS],AX
+leave_dos_restore:
         CALL    restore_world
         IRET
 EndProc SYSTEM_CALL
@@ -483,10 +554,8 @@ Procedure   SAVE_USER_MAP,NEAR							 ;AN000;
 	MOV	SI,OFFSET DOSGROUP:BUF_EMS_SEG_CNT     ;LB.			;AN000;
 	MOV	DI,OFFSET DOSGROUP:BUF_EMS_MAP_USER     ;LB.			;AN000;
 
-	PUSH	CS
-	POP	ES
-	PUSH	CS			  ;LB. ds:si -> ems seg cnt 		;AN000;
-	POP	DS			  ;LB.					;AN000;
+	Context ES
+	Context DS			  ;LB. ds:si -> ems seg cnt 		;AN000;
 
 	MOV	AX,4F00H		  ;LB. save map 			;AN000;
 	EnterCrit  critDisk		  ;LB. enter critical section		;AN000;
@@ -523,8 +592,7 @@ Procedure   RESTORE_USER_MAP,NEAR							 ;AN000;
 	PUSH	SI			  ;LB.					;AN000;
 	MOV	SI,OFFSET DOSGROUP:BUF_EMS_MAP_USER     ;LB.			;AN000;
 
-	PUSH	CS
-	POP	DS
+	Context DS
 
 	MOV	AX,4F01H		  ;LB. restore map			;AN000;
 	EnterCrit  critDisk		  ;LB. enter critical section		;AN000;
@@ -543,7 +611,7 @@ ENDIF
 ; get_user_stack returns the user's stack (and hence registers) in DS:SI
 ;
         procedure   get_user_stack,NEAR
-        LDS     SI,DWORD PTR [user_SP]
+        LDS     SI,DWORD PTR SS:[user_SP]
         return
 EndProc get_user_stack
 

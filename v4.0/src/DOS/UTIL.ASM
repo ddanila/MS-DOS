@@ -32,6 +32,8 @@ INCLUDE DEVSYM.INC
 .sall
 
 	I_need  CurrentPDB,WORD         ; current process data block location
+	EXTRN   hma_resident:BYTE
+	EXTRN   hma_low_segment:WORD
 	I_need  SFT_Addr,DWORD          ; pointer to beginning of table
 	I_Need  PROC_ID,WORD            ; current process ID
 	I_Need  USER_ID,WORD            ; current user ID
@@ -58,7 +60,18 @@ BREAK   <pJFNFromHandle - return pointer to JFN table entry>
 ;       at DOSINIT time with SS NOT DOSGROUP
 procedure   pJFNFromHandle,NEAR
 	ASSUME  CS:DOSGROUP,DS:NOTHING,ES:NOTHING,SS:NOTHING
-	MOV     ES,[CurrentPDB]         ; get user process data block
+	CMP     CS:[hma_resident],0
+	JE      SHORT JFNCurrentLowMode
+	PUSH    AX
+	MOV     AX,CS:[hma_low_segment]
+	MOV     ES,AX
+	MOV     AX,ES:[CurrentPDB]
+	MOV     ES,AX
+	POP     AX
+	JMP     SHORT JFNCurrentReady
+JFNCurrentLowMode:
+	MOV     ES,CS:[CurrentPDB]
+JFNCurrentReady:
 	CMP     BX,ES:[PDB_JFN_Length]  ; is handle greater than allocated
 	JB      JFNAdd                  ; no, get offset
 	fmt     TypAccess,LevSFN,<"$p: Illegal JFN %x\n">,<BX>
