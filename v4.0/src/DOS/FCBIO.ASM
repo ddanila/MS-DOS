@@ -513,7 +513,7 @@ SaveSFN:
 	MOV	BL,SIZE sf_entry
 	DIV	BL
 	MOV	[SI].FCB_sfn,AL 	; last used SFN
-	MOV	AX,FCBLRU		; get lru count
+	MOV	AX,SS:[FCBLRU]		; get retained DOS-group lru count
 	INC	AX
 	MOV	WORD PTR ES:[DI].sf_LRU,AX
 	JNZ	SimpleStuff
@@ -527,7 +527,7 @@ SaveSFN:
 ; Set new LRU to AX
 ;
 SimpleStuff:
-	MOV	FCBLRU,AX
+	MOV	SS:[FCBLRU],AX
 	return
 EndProc SaveFCBInfo
 
@@ -581,14 +581,14 @@ Break	<SetOpenAge - update the open age of a SFT>
 Procedure   SetOpenAge,NEAR
 	ASSUME CS:DOSGroup,DS:NOTHING,ES:NOTHING,SS:NOTHING
 	Assert	ISSFT,<ES,DI>,"SetOpenAge"
-	MOV	AX,OpenLRU
+	MOV	AX,SS:[OpenLRU]
 	INC	AX
 	MOV	ES:[DI].sf_OpenAge,AX
 	JNZ	SetDone
 	MOV	BX,sf_Position+2
 	invoke	ResetLRU
 SetDone:
-	MOV	OpenLRU,AX
+	MOV	SS:[OpenLRU],AX
 	return
 EndProc SetOpenAge
 
@@ -1147,8 +1147,8 @@ Procedure   SFTFromFCB,NEAR
 	MOV	AL,[SI].fcb_sfn 	; set SFN for check
 	invoke	CheckFCB
 	RestoreReg  <BX,AX>
-	MOV	WORD PTR ThisSFT,DI	; set thissft
-	MOV	WORD PTR ThisSFT+2,ES
+	MOV	WORD PTR SS:[ThisSFT],DI ; set thissft in DOS, not the caller's DS
+	MOV	WORD PTR SS:[ThisSFT+2],ES
 	JNC	SetSFT			; no problems, just set thissft
 
 	fmt	typFCB,LevCheck,<"FCB $x:$x does not match SFT $x:$x\n">,<DS,SI,ES,DI>
@@ -1161,7 +1161,7 @@ Procedure   SFTFromFCB,NEAR
 
 ;	Message 1,<"FCBRegen Succeeded",13,10>
 
-SetSFT: LES	DI,ThisSFT
+SetSFT: LES	DI,SS:[ThisSFT]
 	PUSH	Proc_ID 		; set process id
 	POP	ES:[DI].sf_PID
 	return				; carry is clear

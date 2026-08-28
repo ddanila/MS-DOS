@@ -255,7 +255,7 @@ OpenFail:
 	STI
 	RestoreReg  <CX>		; Clean stack
 OpenCritLeave:
-	MOV	SFN,-1			; remove mark.
+	MOV	SS:[SFN],-1		; remove kernel mark after LDS changed DS
 	fmt TypSysCall,LevLog,<"Open/CreateXX: error $x\n">,<AX>
 ;; File Tagging DOS 4.00
 	CMP	CS:[EXTERR],error_Code_Page_Mismatched	;AN000;;FT. code page mismatch

@@ -2790,8 +2790,7 @@ ASSUME	DS:RAMCODE,ES:NOTHING,SS:NOTHING
 	CMP	AX,(3 SHL 8) + 00
 	JB	VER2X			; 2.X requires some patches
 	CMP	AX,(4 SHL 8) + 00
-	je	ldl_buf_present 	; indicate that there is a hole for loadall
-	Ja	BADVER			; 3.X ok, 4.0 or above bad
+	JAE	ldl_buf_present 	; DOS 4 and later have the loadall hole
 	cmp	al,30			; 3.30
 	jb	ver_ok			; if below we cannot take advantage of 80:0
 ldl_buf_present:

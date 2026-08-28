@@ -5253,8 +5253,7 @@ ASSUME	DS:INT13CODE,ES:NOTHING,SS:NOTHING
 	JB	BADVER			; Below 2.00, BAD
 	CMP	AX,(3 SHL 8) + 00
 	JB	VER2X			; 2.X requires some patches
-	CMP	AX,(4 SHL 8) + 00
-	JBE	VER_OK			; 3.X or 4.0 OK
+	JMP	VER_OK			; DOS 3 and later use the same interface
 BADVER:
 	MOV	DX,OFFSET BADVERMES
 	JMP	DEVABORT
