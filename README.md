@@ -22,13 +22,6 @@ character-encoding requirements. Preserve the repository's `.gitattributes`
 policy and byte content when editing them. In particular, some assembly files
 contain CP437 bytes and some message/build-control files require CRLF on disk.
 
-## Branch policy
-
-Development lands on `main`. Historical migration branches were folded into
-`main` and removed; archive tags preserve their tips. Do not send changes from
-this fork to Microsoft's upstream repository without explicit permission from
-the fork owner.
-
 ## License and provenance
 
 Microsoft originally published the MS-DOS v1.25 and v2.0 files through the
