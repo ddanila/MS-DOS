@@ -103,7 +103,7 @@ if ibmcopyright
 else
 	  DB	  "MSDOS"
 endif
-	  DB	  "4.0"                 ;AN005;
+	  DB	  "5.0"                 ;maintained compatibility identity
 ByteSec   DW	  cbSec 		; SIZE OF A PHYSICAL SECTOR
 	  DB	  8			; SECTORS PER ALLOCATION UNIT
 cSecRes   DW	  1			; NUMBER OF RESERVED SECTORS

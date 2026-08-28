@@ -50,6 +50,7 @@ CODE    SEGMENT BYTE PUBLIC 'CODE'
         I_need  DISK_FULL,BYTE             ;AN000;
         I_need  InterCon,BYTE              ;AN000;
         I_need  BOOTDRIVE,BYTE             ;AN000;
+	I_need	MSVERS,WORD
         I_need  EXTOPEN_ON,BYTE            ;AN000;
         I_need  DOS34_FLAG,WORD            ;AN000;
         I_need  ACT_PAGE,WORD              ;AN000;
@@ -84,6 +85,7 @@ BREAK <$Set_CTRL_C_Trapping -- En/Disable ^C check in dispatcher>
 ;       AL = 3 Get CPSW state to DL        DOS 3.4
 ;       AL = 4 Set CPSW state from DL      DOS 3.4
 ;       AL = 5 get DOS boot drive
+;       AL = 6 get true DOS version (DOS 5+)
 ; Function:
 ;       Enable disable ^C checking in dispatcher
 ; Outputs:
@@ -135,10 +137,16 @@ CPSWset:                                ;AN000;
 ;;;;    MOV     [CPSWSAVE],DL            ;AN000;;FT. save one copy
         IRET                             ;AN000;;FT.
 QueryDOSboot:                            ;AN000;
-        CMP     AL,5                ;AN000;MS.
-        JA      BadVal              ;AN000;MS.
+	CMP	AL,6
+	JE	QueryTrueVersion
+	CMP     AL,5                ;AN000;MS.
+	JA      BadVal              ;AN000;MS.
         MOV     DL,[BOOTDRIVE]      ;AN000;;MS. put boot drive in DL
         IRET                        ;AN000;;MS.
+QueryTrueVersion:
+	MOV	BX,[MSVERS]		; BL major, BH minor; never fake this value
+	XOR	DX,DX			; revision 0, no ROM/version flags
+	IRET
 
 
 ;; DOS 4.00 File Tagging

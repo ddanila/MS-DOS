@@ -1,7 +1,7 @@
 
     #include <stdlib.h>     /* Declaration & init of DOS _osmajor & _osminor */
 
-    #define  expected_version_major	4	/* DOS Major Version 4 */
+    #define  expected_version_major	5	/* DOS Major Version 5 */
     #define  expected_version_minor	00	/* DOS Minor Version 00 */
 
        /********************************************/
@@ -12,4 +12,3 @@
        /*  exit(incorrect_dos_version); 	   */
        /*					   */
        /********************************************/
-

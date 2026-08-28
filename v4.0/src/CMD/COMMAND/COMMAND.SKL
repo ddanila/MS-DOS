@@ -60,7 +60,7 @@
 :use 461 COMMON1		;AC000; "Incorrect DOS version"
 :def 463 "Out of environment space",CR,LF               ;AC000;
 :def 464 CR,LF,CR,LF,"MS DOS                       ",CR,LF
-	 "Version 4.00 (C)Copyright International Business Machines Corp 1981,1988",CR,LF
+	 "Version 5.00 (C)Copyright International Business Machines Corp 1981,1988",CR,LF
 	 "             (C)Copyright Microsoft Corp 1981, 1988",CR,LF ;AC000;
 :def 465 "Specified COMMAND search directory bad",CR,LF ;AC025;
 :def 466 "Specified COMMAND search directory bad access denied",CR,LF ;AC025;

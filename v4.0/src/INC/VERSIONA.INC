@@ -1,11 +1,11 @@
 
-major_version	    equ     4	    ;Major DOS version
+major_version	    equ     5	    ;Major DOS version
 minor_version	    equ     00	    ;Minor DOS Version
 
 expected_version    equ     (MINOR_VERSION SHL 8)+MAJOR_VERSION
 
        if1
-       %OUT  ... for DOS Version 4.00 ...
+       %OUT  ... for DOS Version 5.00 ...
        endif
 
        ;******************************
@@ -15,4 +15,3 @@ expected_version    equ     (MINOR_VERSION SHL 8)+MAJOR_VERSION
        ;  cmp ax,expected_version	;ALL utilities should check for an
        ;  jne error_handler		; EXACT version match.
        ;******************************
-
