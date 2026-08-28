@@ -229,7 +229,7 @@ NoStash:
 	OR	ES:[DI].sf_Flags,sf_close_nodate
 	Context DS			; let Close see variables
 	invoke	DOS_Close		; wham
-	LES	DI,ThisSFT
+	LES	DI,SS:[ThisSFT]
 ;;; 9/8/86 F.C. restore SFT attribute
 	POP	CX
 	MOV	ES:[DI].sf_attr,CL
@@ -497,11 +497,19 @@ SaveSFN:
 	AND	AL,3Fh			; get real drive
 	OR	AL,BL
 	MOV	[SI].fcb_l_drive,AL
-	LEA	AX,[DI-SFTable]
+	MOV	AX,ES
+	SUB	AX,WORD PTR SS:[SftFCB+2]
+	SHL	AX,1
+	SHL	AX,1
+	SHL	AX,1
+	SHL	AX,1
+	ADD	AX,DI
+	SUB	AX,SFTable
 ;
-; Adjust for offset to table.
+; Far pointers to SFT entries may be normalized so their offset no longer has
+; the same base as SftFCB.  Include the segment delta before deriving the SFN.
 ;
-	SUB	AX,WORD PTR SftFCB
+	SUB	AX,WORD PTR SS:[SftFCB]
 	MOV	BL,SIZE sf_entry
 	DIV	BL
 	MOV	[SI].FCB_sfn,AL 	; last used SFN

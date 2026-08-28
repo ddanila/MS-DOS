@@ -486,7 +486,7 @@ FindFCB:
 	CALL	SI			; go open the file
 	RestoreReg  <BX,SI,DS>		; get fcb
 	ASSUME	DS:NOTHING
-	LES	DI,ThisSFT		; get sf pointer
+	LES	DI,SS:[ThisSFT]		; get sf pointer
 	JNC	FCBOK			; operation succeeded
 	Assert	ISSFT,<ES,DI>,"DeadFCB"
 failopen:
