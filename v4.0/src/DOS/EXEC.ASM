@@ -86,6 +86,7 @@ include version.inc
 	I_Need	   Temp_Var2,WORD	     ;AN000;file type from $open
 	I_Need	   Special_Entries,WORD      ;AN007;address of special entries
 	I_Need	   Special_Version,WORD      ;AN007;special version number
+	I_Need	   AllocMethod,BYTE
 	I_Need	   Fake_Count,BYTE	     ;AN008;fake version count
 
 IF	BUFFERFLAG
@@ -258,9 +259,18 @@ exec_get_environ_len:
 					; round up and remember argc
 	MOV	CL,4
 	SHR	BX,CL			; number of paragraphs needed
+	mov	dl,[AllocMethod]
+	push	dx
+	test	dl,alloc_domain_mask
+	jz	short exec_alloc_environment
+	and	dl,alloc_fit_mask		; keep the environment conventional
+	mov	[AllocMethod],dl
+exec_alloc_environment:
 	PUSH	ES
 	invoke	$ALLOC			; can we get the space?
 	POP	DS
+	pop	dx
+	mov	ss:[AllocMethod],dl
 	POP	CX
 	JNC	exec_save_environ
 	JMP	exec_no_mem		; nope... cry and sob
@@ -334,7 +344,7 @@ exec_save_start:
 IF DEBUG
 	JMP	exec_find_res
 ELSE
-	JMP	SHORT exec_find_res
+	JMP	exec_find_res
 ENDIF
 
 exec_no_mem:
@@ -356,6 +366,40 @@ exec_bomb:
 
 exec_allocate:
 	DOSAssume   CS,<DS>,"EXEC/exec_allocate"
+	; For LOADHIGH, size an EXE against the upper arena alone first.  A normal
+	; upper-first 0FFFFh probe reports the larger conventional fallback block,
+	; which would make an EXE requesting all available memory load low even
+	; when its minimum image fits in a UMB.
+	mov	dl,[AllocMethod]
+	test	dl,alloc_domain_mask
+	jz	short exec_allocate_visible
+	push	dx
+	and	dl,alloc_fit_mask
+	or	dl,40h
+	mov	[AllocMethod],dl
+	mov	bx,0ffffh
+	push	ds
+	invoke	$ALLOC
+	pop	ds
+	pop	dx
+	mov	[AllocMethod],dl
+	mov	ax,exec_res_len_para
+	add	ax,10h
+	jc	short exec_allocate_visible
+	cmp	bx,11h
+	jb	short exec_allocate_visible
+	push	ax
+	add	ax,exec_min_BSS
+	jc	short exec_allocate_upper_too_small
+	cmp	ax,bx
+	pop	ax
+	jbe	short exec_allocate_have_max
+	jmp	short exec_allocate_visible
+exec_allocate_upper_too_small:
+	pop	ax
+
+exec_allocate_visible:
+	mov	ax,exec_res_len_para
 	PUSH	AX
 	MOV	BX,0FFFFh		; see how much room in arena
 	PUSH	DS
@@ -367,6 +411,7 @@ exec_allocate:
 	JB	exec_no_mem
 	CMP	AX,BX			; is there enough for bare image?
 	JA	exec_no_mem
+exec_allocate_have_max:
 	TEST	exec_load_high,-1	; if load high, use max
 	JNZ	exec_BX_max		; use max
 	ADD	AX,exec_min_BSS 	; go for min allocation
@@ -553,16 +598,53 @@ exec_com_file:
 	LODSW				; get load address
 	MOV	exec_dma,AX
 	MOV	AX,0FFFFh
-	JMP	SHORT exec_read_block	; read it all!
+	JMP	exec_read_block		; read it all!
 
 ; We must allocate the max possible size block (ick!)  and set up
 ; CS=DS=ES=SS=PDB pointer, IP=100, SP=max size of block.
 ;
 exec_alloc_com_file:
+	; DOS 5 LOADHIGH leaves allocation strategy 80h visible to the child, but
+	; a COM image must be sized against the largest UMB before the conventional
+	; fallback is considered. Otherwise the traditional maximum-size request
+	; sees the much larger low arena and can never select a UMB.
+	mov	dl,[AllocMethod]
+	test	dl,alloc_domain_mask
+	jz	short exec_alloc_com_max
+	mov	bx,exec_fh
+	xor	cx,cx
+	xor	dx,dx
+	mov	al,2
+	invoke	$LSEEK
+	jc	exec_bad_filej
+	or	dx,dx
+	jnz	exec_no_memj
+	add	ax,0110h			; PSP plus one byte, rounded upward
+	jc	exec_no_memj
+	mov	cl,4
+	shr	ax,cl
+	mov	exec_res_len_para,ax
+
+	mov	dl,[AllocMethod]
+	push	dx
+	and	dl,alloc_fit_mask
+	or	dl,40h				; query the upper domain only
+	mov	[AllocMethod],dl
+	mov	bx,0ffffh
+	push	ds
+	invoke	$ALLOC
+	pop	ds
+	pop	dx
+	mov	[AllocMethod],dl
+	cmp	bx,exec_res_len_para
+	jae	short exec_alloc_com_have_max
+
+exec_alloc_com_max:
 	MOV	BX,0FFFFh
 	invoke	$ALLOC			; largest piece available as error
 	OR	BX,BX
 	JZ	exec_no_memj
+exec_alloc_com_have_max:
 	MOV	exec_size,BX		; save size of allocation block
 	PUSH	BX
 	invoke	$ALLOC			; largest piece available as error

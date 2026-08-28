@@ -13,6 +13,7 @@ MAX_HANDLES     equ     32
 HANDLE_SIZE     equ     8
 MAX_UMB_BLOCKS  equ     32
 UMB_BLOCK_SIZE  equ     6
+HMA_KB          equ     64
 
 ERR_NOT_IMPLEMENTED equ 080h
 ERR_A20         equ     082h
@@ -1152,9 +1153,11 @@ count_handles_used:
         ret
 count_free_handles endp
 
-; Find a first-fit gap of BX KiB. Returns AX=base KiB.
+; Find a first-fit gap of BX KiB. Returns AX=base KiB.  Handle offsets are
+; relative to physical 1 MiB, so the first 64 KiB must remain reserved for the
+; separately managed HMA and must never be returned as an ordinary XMS block.
 find_gap proc near
-        xor     ax, ax
+        mov     ax, HMA_KB
 find_gap_retry:
         mov     di, ax
         add     di, bx
@@ -1220,7 +1223,7 @@ largest_gap proc near
         push    di
         push    bp
         xor     ax, ax                  ; largest
-        xor     bx, bx                  ; candidate base
+        mov     bx, HMA_KB              ; candidate base after the HMA
 largest_retry:
         mov     dx, [extended_kb]       ; next used base, or pool end
         mov     di, 0ffffh              ; next handle offset
@@ -1263,6 +1266,13 @@ total_free proc near
         push    cx
         push    si
         mov     ax, [extended_kb]
+        cmp     ax, HMA_KB
+        jae     short total_free_has_xms
+        xor     ax, ax
+        jmp     short total_free_scan
+total_free_has_xms:
+        sub     ax, HMA_KB
+total_free_scan:
         mov     si, offset handles
         mov     cx, MAX_HANDLES
 total_free_loop:

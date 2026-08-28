@@ -264,7 +264,7 @@ IOTrap_Tab	label	word
 	dw	offset _TEXT:IOT_BadT  ; 8f
 	dw	offset _TEXT:IOT_BadT  ; 90
 	dw	offset _TEXT:DMAPg2    ; 91 DMA page register for Channel 2
-	dw	offset _TEXT:DMAPg3    ; 92 DMA page register for Channel 3
+	dw	offset _TEXT:A20_Handler ; 92 system control port A / fast A20
 	dw	offset _TEXT:DMAPg1    ; 93 DMA page register for Channel 1
 	dw	offset _TEXT:IOT_BadT  ; 94
 	dw	offset _TEXT:IOT_BadT  ; 95

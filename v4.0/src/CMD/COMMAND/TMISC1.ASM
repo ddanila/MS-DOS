@@ -25,6 +25,7 @@ DATARES 	SEGMENT PUBLIC BYTE	;AC000;
 	EXTRN	EchoFlag:BYTE
 	EXTRN	EXEC_BLOCK:BYTE
 	EXTRN	EXTCOM:BYTE
+	EXTRN	LOADHIGH_PENDING:BYTE
 	EXTRN	PIPEFLAG:BYTE
 	EXTRN	PIPEPTR:WORD
 	EXTRN	PIPESTR:BYTE
@@ -88,6 +89,7 @@ ASSUME	CS:TRANGROUP,DS:NOTHING,ES:NOTHING,SS:NOTHING
 	PUBLIC	DRVBAD
 	PUBLIC	EXTERNAL
 	PUBLIC	FNDCOM
+	PUBLIC	LOADHIGH
 	PUBLIC	PRESCAN
 	PUBLIC	SWITCH
 
@@ -140,6 +142,11 @@ externalj:
 	jmp	EXTERNAL
 
 fndcom: 					; search the internal command table
+	push	es
+	mov	es,[RESSEG]
+	cmp	byte ptr es:[LOADHIGH_PENDING],0
+	pop	es
+	jne	externalj
     OR	    AL,AL				; Get real length of first arg
     jz	    externalj				; If 0, it must begin with "\" so has
 						;  to be external.
@@ -352,6 +359,16 @@ ENDIF
 	JMP	[EXEC_ADDR]			; Jmp to the EXEC in the resident
 
 BADCOM:
+	push	es
+	mov	es,[RESSEG]
+	cmp	byte ptr es:[LOADHIGH_PENDING],0
+	pop	es
+	je	short badcom_standard
+	mov	msg_disp_class,ext_msg_class
+	mov	Extend_Buf_ptr,error_file_not_found
+	mov	dx,offset TRANGROUP:Extend_Buf_ptr
+	jmp	CERROR
+badcom_standard:
 	PUSH	CS
 	POP	DS
 	MOV	DX,OFFSET TRANGROUP:BADNAM_ptr
@@ -359,6 +376,32 @@ BADCOM:
 CERROR:
 	INVOKE	std_eprintf
 	JMP	TCOMMAND
+
+; LOADHIGH and LH re-enter the normal external-command parser with their
+; operand as the command line.  The resident EXEC wrapper applies DOS 5's
+; upper-first/conventional-fallback allocation policy while the child runs.
+LOADHIGH:
+	mov	si,81h
+	invoke	SCANOFF
+	cmp	al,0dh
+	jne	short loadhigh_have_operand
+	mov	msg_disp_class,parse_msg_class
+	mov	dx,offset TRANGROUP:Extend_Buf_ptr
+	mov	Extend_Buf_ptr,LessArgs_ptr
+	jmp	CERROR
+loadhigh_have_operand:
+	mov	es,[RESSEG]
+	mov	byte ptr es:[LOADHIGH_PENDING],1
+	push	cs
+	pop	es
+	mov	si,81h
+	mov	di,offset TRANGROUP:COMBUF+2
+	xor	cx,cx
+	mov	cl,[80h]
+	mov	[COMBUF+1],cl
+	inc	cx				; include the terminating carriage return
+	rep	movsb
+	jmp	DOCOM1
 
 ;
 ; Prescan converts the input buffer into a canonicalized form.	All

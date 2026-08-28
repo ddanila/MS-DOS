@@ -90,6 +90,7 @@ KbdWrtData	equ	0D1h		; Enable write to data port
 KbdDataPort	equ	60h		; 8042 data port
 KbdStatusPort	equ	64h		; 8042 cmd port
 KbdBufFull	equ	2		; Buffer bull(data not received) status
+FastA20Port	equ	92h		; system control port A fast gate
 
 ; equates for the state_a20 flag
 
@@ -145,6 +146,8 @@ _TEXT	segment
 ;   STACK:
 ;------------------------------------------------------------------------------
 A20_Handler	proc	near
+	cmp	bx,FastA20Port*2	;Q: fast A20 gate?
+	je	A20_Fast_Handler	;  Y: virtualize port 92h as well
 	or	dx,dx			;Q: Output ?
 	jnz	A20_Write		;  Y: check for write to output port
 	stc				;  N: don't bother to emulate it
@@ -186,6 +189,35 @@ Kbd_C_Handler:
 ;
 A20_Handler	endp
 
+; HIMEM and newer firmware commonly use system control port A instead of the
+; 8042. Keep EMM386's logical A20 state and 1 MiB page-table window in sync,
+; while leaving the physical gate enabled for protected-mode operation.
+A20_Fast_Handler:
+	or	dx,dx			;Q: Output ?
+	jz	A20_Fast_Read		;  N: report the virtual state
+	push	ax
+	call	check_a20_togl
+	jz	short A20_Fast_No_Toggle
+	call	togl_a20
+A20_Fast_No_Toggle:
+	or	al,A20CmdBit		; physical A20 must remain enabled
+	out	FastA20Port,al
+	pop	ax
+	clc
+	ret
+
+A20_Fast_Read:
+	in	al,FastA20Port
+	test	[state_a20],A20_ON
+	jz	short A20_Fast_Read_Off
+	or	al,A20CmdBit
+	clc
+	ret
+A20_Fast_Read_Off:
+	and	al,NOT A20CmdBit
+	clc
+	ret
+
 
 ;******************************************************************************
 ;   A20_Trap_Init - turn on I/O bit map trapping for A20 line watching
@@ -213,6 +245,8 @@ A20_Trap_Init  proc    near
 	call	PortTrap		    ; set traps on keyboard ports
 	mov	ax, KbdCmdPort		    ; in case client
 	call	PortTrap		    ; tries to disable A20
+	mov	ax, FastA20Port
+	call	PortTrap		    ; watch the fast A20 gate as well
 	ret
 ;
 A20_Trap_Init  endp

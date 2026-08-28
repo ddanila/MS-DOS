@@ -329,6 +329,9 @@ CODERES 	SEGMENT PUBLIC BYTE	;AC000;
 CODERES ENDS
 
 DATARES SEGMENT PUBLIC BYTE
+	EXTRN	LOADHIGH_PENDING:BYTE
+	EXTRN	LOADHIGH_SAVED_LINK:BYTE
+	EXTRN	LOADHIGH_SAVED_STRATEGY:WORD
 	EXTRN	BATCH:WORD
 	EXTRN	ECHOFLAG:BYTE
 	EXTRN	disp_class:byte 	;AN055;
@@ -453,9 +456,46 @@ ASSUME	ES:RESGROUP				;AN000;
 ; to recover cleanly upon success.
 ;
 EXT_EXEC:
+	cmp	byte ptr cs:[LOADHIGH_PENDING],0
+	je	short EXT_EXEC_CALL
+	mov	byte ptr cs:[LOADHIGH_PENDING],2
+	push	ax
+	push	bx
+	mov	ax,5800h
+	int	int_command
+	mov	cs:[LOADHIGH_SAVED_STRATEGY],ax
+	mov	ax,5802h
+	int	int_command
+	mov	cs:[LOADHIGH_SAVED_LINK],al
+	mov	bx,1
+	mov	ax,5803h
+	int	int_command
+	mov	bx,0080h			; upper memory first, then conventional
+	mov	ax,5801h
+	int	int_command
+	pop	bx
+	pop	ax
+EXT_EXEC_CALL:
 	push	dx				;AN000; save the command name offset
 	INT	int_command			; Do the EXEC
 	pop	dx				;AN000; restore the command name offset
+	pushf
+	cmp	byte ptr cs:[LOADHIGH_PENDING],2
+	jne	short EXT_EXEC_RESTORED
+	mov	byte ptr cs:[LOADHIGH_PENDING],0
+	push	ax
+	push	bx
+	mov	bx,cs:[LOADHIGH_SAVED_STRATEGY]
+	mov	ax,5801h
+	int	int_command
+	xor	bx,bx
+	mov	bl,cs:[LOADHIGH_SAVED_LINK]
+	mov	ax,5803h
+	int	int_command
+	pop	bx
+	pop	ax
+EXT_EXEC_RESTORED:
+	popf
 	JC	EXEC_ERR			; EXEC failed
 ;
 ; The exec has completed.  Retrieve the exit code.
