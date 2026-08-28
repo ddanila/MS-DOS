@@ -201,6 +201,11 @@ IORCHR	LABEL	BYTE			;
 	DW	0			;
 
 	I_am	CreatePDB,BYTE		; flag for creating a process
+	I_am	UmbArenaHead,WORD,<0>	; [SYSTEM] first UMB arena header
+	I_am	UmbLinkMcb,WORD,<0>	; [SYSTEM] conventional-to-UMB link MCB
+	I_am	UmbLinked,BYTE,<0>	; [SYSTEM] UMB arena link state
+	I_am	AllocScanDomain,BYTE,<0>; allocator arena selector
+	I_am	ArenaFreeDomain,BYTE,<0>; process cleanup arena selector
 	PUBLIC	Lock_Buffer		;
 Lock_Buffer LABEL    DWORD		;MS. DOS Lock Buffer for Ext Lock
 	    DD	    ?			;MS. position

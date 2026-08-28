@@ -47,6 +47,11 @@ PAGE
 	i_need  BestArena,WORD          ; best free block found
 	i_need  LastArena,WORD          ; last free block found
 	i_need  AllocMethod,BYTE        ; how to alloc first(best)last
+	i_need  UmbArenaHead,WORD       ; first UMB arena header
+	i_need  UmbLinkMcb,WORD         ; conventional-to-UMB link MCB
+	i_need  UmbLinked,BYTE          ; UMB arena link state
+	i_need  AllocScanDomain,BYTE    ; allocator arena selector
+	i_need  ArenaFreeDomain,BYTE    ; process cleanup arena selector
 	I_need  EXTERR_LOCUS,BYTE       ; Extended Error Locus
 
 ;
@@ -57,6 +62,7 @@ PAGE
 	procedure   arena_free_process,NEAR
 	ASSUME  DS:NOTHING,ES:NOTHING
 	MOV     DI,arena_signature
+	MOV     [ArenaFreeDomain],0
 	MOV     AX,[arena_head]
 	CALL    Check_Signature         ; ES <- AX, check for valid block
 
@@ -71,9 +77,26 @@ arena_free_process_loop:
 arena_free_next:
 	CMP     BYTE PTR DS:[DI],arena_signature_end
 					; end of road, Jack?
-	retz                            ; never come back no more
-	CALL    arena_next              ; next item in ES/AX carry set if trash
+	JNZ     arena_free_continue
+	CMP     [ArenaFreeDomain],0
+	JNZ     arena_free_done
+	CMP     [UmbArenaHead],0
+	JZ      arena_free_done
+	MOV     [ArenaFreeDomain],1
+	MOV     AX,[UmbArenaHead]
+	CALL    Check_Signature
 	JMP     arena_free_process_loop
+
+arena_free_continue:
+	CALL    arena_next              ; next item in ES/AX carry set if trash
+	JC      arena_free_process_loop
+	CMP     AX,[UmbArenaHead]
+	JNZ     arena_free_process_loop
+	MOV     [ArenaFreeDomain],1
+	JMP     arena_free_process_loop
+
+arena_free_done:
+	return
 
 EndProc arena_free_process
 
@@ -169,7 +192,20 @@ PAGE
 	MOV     [LastArena],AX
 
 	PUSH    AX                      ; alloc_max <- 0
-	MOV     AX,[arena_head]         ; AX <- beginning of arena
+	MOV     [AllocScanDomain],AL
+	CMP     [UmbLinked],AL
+	JZ      alloc_start_low
+	MOV     AL,[AllocMethod]
+	TEST    AL,alloc_domain_mask
+	JZ      alloc_start_low
+	INC     [AllocScanDomain]
+	MOV     AX,[UmbArenaHead]
+	JMP     alloc_start_scan
+
+alloc_start_low:
+	MOV     AX,[arena_head]
+
+alloc_start_scan:
 	CALL    Check_signature         ; ES <- AX, carry set if error
 	JC      alloc_err               ; IF error THEN GOTO err
 
@@ -184,7 +220,12 @@ alloc_next:
 					; IF current block is last THEN
 	JZ      alloc_end               ;   GOTO end
 	CALL    arena_next              ; AX, ES <- next block, Carry set if error
-	JNC     alloc_scan              ; IF no error THEN GOTO scan
+	JC      alloc_err
+	CMP     [AllocScanDomain],0
+	JNZ     alloc_scan
+	CMP     AX,[UmbArenaHead]
+	JNZ     alloc_scan
+	JMP     alloc_end
 
 alloc_err:
 	POP     AX
@@ -196,6 +237,15 @@ alloc_trashed:
 alloc_end:
 	CMP     [FirstArena],0
 	JNZ     alloc_do_split
+	CMP     [AllocScanDomain],0
+	JZ      alloc_fail
+	TEST    [AllocMethod],alloc_domain_fallback
+	JZ      alloc_fail
+	MOV     [AllocScanDomain],0
+	MOV     AX,[arena_head]
+	CALL    Check_signature
+	JC      alloc_err
+	JMP     alloc_scan
 
 alloc_fail:
 	invoke  get_user_stack
@@ -257,7 +307,9 @@ alloc_do_split_high:
 ; last must be split high
 ;
 alloc_do_split:
-	CMP     BYTE PTR [AllocMethod], 1
+	MOV     AL,[AllocMethod]
+	AND     AL,alloc_fit_mask
+	CMP     AL,1
 	JA      alloc_do_split_high
 	MOV     DS,[FirstArena]
 	JB      alloc_get_size
@@ -374,18 +426,81 @@ PAGE
 ;
 	procedure   $AllocOper,NEAR
 	ASSUME  DS:NOTHING,ES:NOTHING
+	OR      AL,AL
+	JZ      AllocOperGet
 	CMP     AL,1
-	JB      AllocOperGet
 	JZ      AllocOperSet
+	CMP     AL,2
+	JZ      AllocOperGetLink
+	CMP     AL,3
+	JZ      AllocOperSetLink
+
+AllocOperError:
 	MOV     EXTERR_LOCUS,errLoc_mem ; Extended Error Locus
 	error   error_invalid_function
+
 AllocOperGet:
 	MOV     AL,BYTE PTR [AllocMethod]
 	XOR     AH,AH
 	transfer    SYS_RET_OK
+
 AllocOperSet:
+	OR      BH,BH
+	JNZ     AllocOperError
+	MOV     AL,BL
+	AND     AL,NOT alloc_domain_mask
+	CMP     AL,2
+	JA      AllocOperError
+	MOV     AL,BL
+	AND     AL,alloc_domain_mask
+	CMP     AL,alloc_domain_mask
+	JZ      AllocOperError
 	MOV     [AllocMethod],BL
 	transfer    SYS_RET_OK
+
+AllocOperGetLink:
+	MOV     AL,[UmbLinked]
+	transfer    SYS_RET_OK
+
+AllocOperSetLink:
+	CMP     BX,1
+	JA      AllocOperError
+	CMP     [UmbArenaHead],0
+	JZ      AllocOperError
+	CMP     [UmbLinkMcb],0
+	JZ      AllocOperError
+	CMP     BL,[UmbLinked]
+	JZ      AllocOperLinkDone
+	PUSH    ES
+	MOV     AX,[UmbLinkMcb]
+	MOV     ES,AX
+	MOV     DX,AX
+	ADD     DX,ES:[arena_size]
+	INC     DX
+	CMP     DX,[UmbArenaHead]
+	JNZ     AllocOperLinkError
+	OR      BL,BL
+	JZ      AllocOperUnlink
+	CMP     ES:[arena_signature],arena_signature_end
+	JNZ     AllocOperLinkError
+	MOV     ES:[arena_signature],arena_signature_normal
+	JMP     AllocOperStoreLink
+
+AllocOperUnlink:
+	CMP     ES:[arena_signature],arena_signature_normal
+	JNZ     AllocOperLinkError
+	MOV     ES:[arena_signature],arena_signature_end
+
+AllocOperStoreLink:
+	MOV     [UmbLinked],BL
+	POP     ES
+
+AllocOperLinkDone:
+	transfer    SYS_RET_OK
+
+AllocOperLinkError:
+	POP     ES
+	JMP     AllocOperError
 EndProc $AllocOper
 
 CODE    ENDS

@@ -24,6 +24,11 @@ arena_owner_system  EQU 0		; free block indication
 
 arena_signature_normal	EQU 4Dh 	; valid signature, not end of arena
 arena_signature_end	EQU 5Ah 	; valid signature, last block in arena
+
+alloc_fit_mask		EQU 03h
+alloc_domain_mask	EQU 0C0h
+alloc_domain_upper	EQU 40h
+alloc_domain_fallback	EQU 80h
 ;									   ;
 ;	     C	A  V  E  A  T	  P  R	O  G  R  A  M  M  E  R		   ;
 ;----+----+----+----+----+----+----+----+----+----+----+----+----+----+----;
