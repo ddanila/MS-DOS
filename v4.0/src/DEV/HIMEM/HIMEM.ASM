@@ -30,9 +30,9 @@ ERR_BAD_DEST    equ     0a5h
 ERR_BAD_DST_OFF equ     0a6h
 ERR_BAD_LENGTH  equ     0a7h
 ERR_OVERLAP     equ     0a8h
+ERR_NOT_LOCKED  equ     0aah
 ERR_LOCKED      equ     0abh
 ERR_LOCK_OVER   equ     0ach
-ERR_LOCK_UNDER  equ     0adh
 ERR_UMB_SMALL   equ     0b0h
 ERR_NO_UMBS     equ     0b1h
 ERR_BAD_UMB     equ     0b2h
@@ -583,7 +583,7 @@ xms_unlock proc near
         dec     byte ptr [si+1]
         jmp     xms_success
 unlock_underflow:
-        mov     bl, ERR_LOCK_UNDER
+        mov     bl, ERR_NOT_LOCKED
         jmp     xms_failure
 xms_unlock endp
 
@@ -675,21 +675,6 @@ xms_move proc near
         jc      short move_bad_dest
         mov     [move_dest], eax
 
-        mov     eax, [move_source]
-        mov     ebx, eax
-        add     ebx, [move_length]
-        mov     ecx, [move_dest]
-        cmp     eax, ecx
-        jae     short move_check_reverse
-        cmp     ecx, ebx
-        jb      short move_overlap
-        jmp     short move_copy
-move_check_reverse:
-        mov     ebx, ecx
-        add     ebx, [move_length]
-        cmp     eax, ebx
-        jb      short move_overlap
-
 move_copy:
         call    copy_move_blocks
         jc      short move_general_failure
@@ -705,16 +690,13 @@ move_bad_source:
         mov     bl, ERR_BAD_SOURCE
         cmp     bh, ERR_BAD_SRC_OFF
         jne     short move_failure
-        mov     bl, ERR_BAD_SRC_OFF
+        mov     bl, ERR_BAD_LENGTH
         jmp     short move_failure
 move_bad_dest:
         mov     bl, ERR_BAD_DEST
         cmp     bh, ERR_BAD_SRC_OFF
         jne     short move_failure
-        mov     bl, ERR_BAD_DST_OFF
-        jmp     short move_failure
-move_overlap:
-        mov     bl, ERR_OVERLAP
+        mov     bl, ERR_BAD_LENGTH
         jmp     short move_failure
 move_general_failure:
         mov     bl, ERR_GENERAL
