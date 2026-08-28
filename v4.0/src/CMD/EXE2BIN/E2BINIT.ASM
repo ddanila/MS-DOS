@@ -692,7 +692,10 @@ file2_ok:
 	jmp	exeload
 
 bad_file:
-	jmp	DosError
+	pop	ds
+	ASSUME	DS:NOTHING
+	MESSAGE msgNoFile
+	jmp	getout
 
 BADEXE:
 	pop	ds

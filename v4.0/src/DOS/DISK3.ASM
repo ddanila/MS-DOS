@@ -413,7 +413,8 @@ Update_size:
 ;
 	MOV	AX,1
 if installed
-	call	JShare + 14 * 4
+	Context DS
+	call	DWORD PTR SS:[JShare + 14 * 4]
 else
 	Call	ShSU
 endif
@@ -461,7 +462,8 @@ UPDATE:
 ;
 	MOV	AX,2
 if installed
-	Call	JShare + 14 * 4
+	Context DS
+	Call	DWORD PTR SS:[JShare + 14 * 4]
 else
 	Call	ShSU
 endif

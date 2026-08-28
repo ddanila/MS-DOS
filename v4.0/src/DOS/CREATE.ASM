@@ -230,7 +230,8 @@ NoVolLabel:
 	MOV	ax,2
 	LES	DI,ThisSFT
 if installed
-	call	JShare + 14 * 4
+	Context DS
+	call	DWORD PTR SS:[JShare + 14 * 4]
 else
 	Call	ShSU
 endif

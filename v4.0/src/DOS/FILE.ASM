@@ -223,7 +223,8 @@ OpenOK:
 ;
 	MOV	AX,JFN
 if installed
-	Call	JShare + 12 * 4
+	Context DS
+	Call	DWORD PTR SS:[JShare + 12 * 4]
 else
 	Call	ShCol
 endif

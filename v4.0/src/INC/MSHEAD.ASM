@@ -127,10 +127,8 @@ AsmVar	<Installed>
 START		SEGMENT BYTE PUBLIC 'START'
 		ASSUME	CS:DOSGROUP,DS:NOTHING,ES:NOTHING,SS:NOTHING
 	JMP	near ptr DOSINIT
-	; Keep every persistent DOSGROUP symbol at offset 10h or above. A later
-	; runtime HMA copy can use segment FFFFh without relocating absolute
-	; offsets; this one-time low entry and padding occupy the wrap boundary.
-	db	10h dup (0)
+	; The HMA-addressability padding lives at the beginning of CONSTANTS so
+	; resident utilities which replicate DOS data receive identical offsets.
 START		ENDS
 
 LAST		SEGMENT PARA PUBLIC 'LAST'

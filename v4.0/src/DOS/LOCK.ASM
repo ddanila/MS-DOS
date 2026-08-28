@@ -191,7 +191,8 @@ DOS_Unlock:
 	JMP	SHORT ValChk
 LOCAL_UNLOCK:
 if installed
-	Call	JShare + 7 * 4
+	Context DS
+	Call	DWORD PTR SS:[JShare + 7 * 4]
 else
 	Call	clr_block
 endif
@@ -211,7 +212,8 @@ DOS_Lock:
 	JMP	ValChk
 LOCAL_LOCK:
 if installed
-	Call	JShare + 6 * 4
+	Context DS
+	Call	DWORD PTR SS:[JShare + 6 * 4]
 else
 	Call	Set_Block
 endif
@@ -307,7 +309,8 @@ BREAK <Set_Lock_Buffer>
 LockRetry:
 	SaveReg <BX,AX> 		; MS. save regs 			;AN000;
 if installed
-	call	JShare + 8 * 4
+	Context DS
+	call	DWORD PTR SS:[JShare + 8 * 4]
 else
 	Call	chk_block
 endif

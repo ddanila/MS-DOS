@@ -29,6 +29,11 @@ CONSTANTS	SEGMENT WORD PUBLIC 'CONST'
 	extrn	sfTabl:DWORD
 
 	ORG	0
+	; Keep every persistent DOSGROUP symbol at offset 10h or above.  Placing
+	; this padding inside the replicated CONSTANTS segment keeps SHARE and
+	; other resident DOS-data clients aligned with the kernel while allowing
+	; the runtime image to use segment FFFFh without offset relocation.
+	DB	10h DUP (0)
 
 	EVEN
 ;

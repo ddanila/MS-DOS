@@ -80,7 +80,8 @@ reset_free_jfn:
 	context DS
 	CallInstall Net_Abort, multNet, 29
 if installed
-	call    JShare + 4 * 4
+	Context DS
+	call    DWORD PTR SS:[JShare + 4 * 4]
 else
 	call    mftCloseP
 endif

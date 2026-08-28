@@ -484,7 +484,8 @@ SaveShare:
 ;----- In share support -----
 ;
 if installed
-	Call	JShare + 10 * 4
+	Context DS
+	Call	DWORD PTR SS:[JShare + 10 * 4]
 else
 	Call	ShSave
 endif
@@ -1024,7 +1025,8 @@ Procedure   CheckFCB,NEAR
 ;----- In share support -----
 ;
 if installed
-	Call	JShare + 11 * 4
+	Context DS
+	Call	DWORD PTR SS:[JShare + 11 * 4]
 else
 	Call	ShChk
 endif

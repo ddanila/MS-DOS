@@ -171,7 +171,8 @@ CLOSE_NAME:
 ASSUME	DS:NOTHING,ES:NOTHING
 
 if installed
-	Call	JShare + 5 * 4
+	Context DS
+	Call	DWORD PTR SS:[JShare + 5 * 4]
 else
 	Call	MFTcloN
 endif
@@ -185,7 +186,8 @@ CLOSE_UID:
 ASSUME	DS:NOTHING,ES:NOTHING
 
 if installed
-	Call	JShare + 3 * 4
+	Context DS
+	Call	DWORD PTR SS:[JShare + 3 * 4]
 else
 	Call	MFTclU
 endif
@@ -195,7 +197,8 @@ CLOSE_UID_PID:
 ASSUME	DS:NOTHING,ES:NOTHING
 
 if installed
-	Call	JShare + 4 * 4
+	Context DS
+	Call	DWORD PTR SS:[JShare + 4 * 4]
 else
 	Call	MFTCloseP
 endif
@@ -204,7 +207,8 @@ endif
 GET_LIST:
 ASSUME	DS:NOTHING,ES:NOTHING
 if installed
-	Call	JShare + 9 * 4
+	Context DS
+	Call	DWORD PTR SS:[JShare + 9 * 4]
 else
 	Call	MFT_get
 endif

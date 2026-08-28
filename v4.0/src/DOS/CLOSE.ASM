@@ -420,7 +420,8 @@ Procedure   SetSFTTimes,NEAR
 	MOV	ES:[DI.sf_time],DX
 	XOR	AX,AX
 if installed
-	call	JShare + 14 * 4
+	Context DS
+	call	DWORD PTR SS:[JShare + 14 * 4]
 else
 	call	ShSU
 endif

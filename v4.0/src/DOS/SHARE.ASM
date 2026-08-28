@@ -47,7 +47,10 @@ Installed = True
 	ASSUME  ES:NOTHING
 
 if installed
-	call    JShare + 1 * 4
+	push    ds
+	Context DS
+	call    DWORD PTR SS:[JShare + 1 * 4]
+	pop     ds
 else
 	Call    MFT_Enter
 endif
@@ -103,7 +106,10 @@ EndProc SHARE_VIOLATION
 	ASSUME  ES:NOTHING
 
 if installed
-	Call    JShare + 2 * 4
+	push    ds
+	Context DS
+	Call    DWORD PTR SS:[JShare + 2 * 4]
+	pop     ds
 else
 	Call    MFTClose
 endif

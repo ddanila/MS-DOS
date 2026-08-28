@@ -684,7 +684,8 @@ filetimes_set:
 	XOR	AX,AX
 do_share:
 if installed
-	Call	JShare + 14 * 4
+	Context DS
+	Call	DWORD PTR SS:[JShare + 14 * 4]
 else
 	Call	ShSU
 endif

@@ -402,7 +402,8 @@ ASSUME	DS:DOSGROUP
 ; Close the file if possible by us.
 ;
 if installed
-	Call	JShare + 13 * 4
+	Context DS
+	Call	DWORD PTR SS:[JShare + 13 * 4]
 else
 	Call	ShCloseFile
 endif
