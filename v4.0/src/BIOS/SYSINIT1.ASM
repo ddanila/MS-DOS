@@ -694,12 +694,8 @@ DoLast:
 	pop	es			       ;AN013;
 Skip_Free_SYSINITBASE:			       ;AN013;
 	call	AcquireUmbs
-	cmp	cs:[DosUmbRequested],0
-	je	short DoLastUmbStateDone
-	mov	bx,1
-	mov	ax,5803h
-	int	21h
-DoLastUmbStateDone:
+	; DOS=UMB makes the acquired upper arena available to scoped high loaders,
+	; but DOS 5/6 leave it unlinked from the public MCB chain at the prompt.
 	IF	NOEXEC
 	MOV	BP,DS			       ;SAVE COMMAND.COM SEGMENT
 	PUSH	DS
