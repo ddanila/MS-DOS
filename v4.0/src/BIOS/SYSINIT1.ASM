@@ -154,6 +154,7 @@ ASSUME	CS:SYSINITSEG,DS:NOTHING,ES:NOTHING,SS:NOTHING
 
 	EXTRN	INT24:NEAR,MEM_ERR:NEAR
 	EXTRN	DOCONF:NEAR
+	EXTRN	DosUmbRequested:BYTE
 	extrn	Multi_Pass:NEAR 			;AN024;
 	extrn	BadLoad:near
 	extrn	Error_Line:near
@@ -235,6 +236,10 @@ DEVICE_LIST		DD	00000000
 SYSI_Country		LABEL	DWORD		;J.K. 5/29/86 Pointer to
 			DW	0000		;country table in DOS
 			DW	0000
+XmsControl		DD	00000000
+UmbExtentSegment	DW	0000
+UmbExtentSize		DW	0000
+UmbExtentCount		DB	0
 
 Fake_Floppy_Drv 	db	0		;AN001;Set to 1 if this machine
 						;does not have any floppies!!!
@@ -686,6 +691,7 @@ DoLast:
 	pop	bx			       ;AN013;
 	pop	es			       ;AN013;
 Skip_Free_SYSINITBASE:			       ;AN013;
+	call	AcquireUmbs
 	IF	NOEXEC
 	MOV	BP,DS			       ;SAVE COMMAND.COM SEGMENT
 	PUSH	DS
@@ -847,6 +853,70 @@ COMERR:
 	MOV	DX,OFFSET BADCOM	;WANT TO PRINT COMMAND ERROR
 	INVOKE	BADFIL
 STALL:	JMP	STALL
+
+AcquireUmbs PROC NEAR
+	PUSH	AX
+	PUSH	BX
+	PUSH	CX
+	PUSH	DX
+	PUSH	DS
+	PUSH	ES
+	CMP	CS:[DosUmbRequested],0
+	JZ	AcquireUmbsDone
+	MOV	AX,4300H
+	INT	2FH
+	CMP	AL,80H
+	JNE	AcquireUmbsDone
+	MOV	AX,4310H
+	INT	2FH
+	MOV	WORD PTR CS:[XmsControl],BX
+	MOV	WORD PTR CS:[XmsControl+2],ES
+	MOV	CS:[UmbExtentCount],0
+
+AcquireUmbsQuery:
+	CMP	CS:[UmbExtentCount],16
+	JAE	AcquireUmbsDone
+	MOV	DX,0FFFFH
+	MOV	AH,10H
+	CALL	DWORD PTR CS:[XmsControl]
+	OR	AX,AX
+	JNZ	AcquireUmbsGotExtent
+	CMP	BL,0B0H
+	JNE	AcquireUmbsDone
+	OR	DX,DX
+	JZ	AcquireUmbsDone
+	MOV	AH,10H
+	CALL	DWORD PTR CS:[XmsControl]
+	OR	AX,AX
+	JZ	AcquireUmbsDone
+
+AcquireUmbsGotExtent:
+	MOV	CS:[UmbExtentSegment],BX
+	MOV	CS:[UmbExtentSize],DX
+	MOV	CX,4D55H
+	MOV	SI,2142H
+	MOV	DI,0A55AH
+	MOV	AX,5804H
+	INT	21H
+	OR	AX,AX
+	JZ	AcquireUmbsRelease
+	INC	CS:[UmbExtentCount]
+	JMP	AcquireUmbsQuery
+
+AcquireUmbsRelease:
+	MOV	DX,CS:[UmbExtentSegment]
+	MOV	AH,11H
+	CALL	DWORD PTR CS:[XmsControl]
+
+AcquireUmbsDone:
+	POP	ES
+	POP	DS
+	POP	DX
+	POP	CX
+	POP	BX
+	POP	AX
+	RET
+AcquireUmbs ENDP
 
 	PUBLIC	TEMPCDS
 TEMPCDS:

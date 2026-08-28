@@ -49,6 +49,7 @@ PAGE
 	i_need  AllocMethod,BYTE        ; how to alloc first(best)last
 	i_need  UmbArenaHead,WORD       ; first UMB arena header
 	i_need  UmbLinkMcb,WORD         ; conventional-to-UMB link MCB
+	i_need  UmbArenaTail,WORD       ; final guarded UMB MCB
 	i_need  UmbLinked,BYTE          ; UMB arena link state
 	i_need  AllocScanDomain,BYTE    ; allocator arena selector
 	i_need  ArenaFreeDomain,BYTE    ; process cleanup arena selector
@@ -412,6 +413,111 @@ dealloc_err:
 	error   error_invalid_block
 EndProc $DEALLOC
 
+SUBTTL RegisterUmb - add a provider-owned UMB extent
+PAGE
+;
+;   BX = first paragraph of provider extent
+;   DX = extent size in paragraphs
+;   Carry clear on success, set if the extent cannot be represented safely
+;
+	PUBLIC  RegisterUmb
+	procedure RegisterUmb,NEAR
+	ASSUME  DS:NOTHING,ES:NOTHING
+	PUSH    DS
+	PUSH    ES
+	CMP     DX,3
+	JB      RegisterUmbError
+	MOV     AX,BX
+	ADD     AX,DX
+	JC      RegisterUmbError
+	CMP     CS:[UmbArenaHead],0
+	JNZ     RegisterUmbAppend
+
+	MOV     DI,arena_signature
+	MOV     AX,CS:[arena_head]
+	CALL    Check_Signature
+	JC      RegisterUmbError
+RegisterUmbFindLowTail:
+	PUSH    ES
+	POP     DS
+	CMP     DS:[arena_signature],arena_signature_end
+	JZ      RegisterUmbLowTailFound
+	CALL    arena_next
+	JC      RegisterUmbError
+	JMP     RegisterUmbFindLowTail
+
+RegisterUmbLowTailFound:
+	CMP     DS:[arena_owner],arena_owner_system
+	JNZ     RegisterUmbError
+	CMP     DS:[arena_size],0
+	JZ      RegisterUmbError
+	MOV     AX,DS
+	ADD     AX,DS:[arena_size]
+	INC     AX
+	CMP     AX,BX
+	JA      RegisterUmbError
+	DEC     DS:[arena_size]
+	DEC     AX
+	MOV     CS:[UmbLinkMcb],DS
+	MOV     CS:[UmbArenaHead],AX
+	CMP     AX,BX
+	JZ      RegisterUmbMakeExtent
+	MOV     ES,AX
+	MOV     ES:[arena_signature],arena_signature_normal
+	MOV     ES:[arena_owner],arena_owner_dos
+	MOV     CX,BX
+	SUB     CX,AX
+	DEC     CX
+	MOV     ES:[arena_size],CX
+	MOV     BYTE PTR ES:[arena_name],'S'
+	MOV     BYTE PTR ES:[arena_name+1],'C'
+	JMP     RegisterUmbMakeExtent
+
+RegisterUmbAppend:
+	MOV     AX,CS:[UmbArenaTail]
+	OR      AX,AX
+	JZ      RegisterUmbError
+	MOV     ES,AX
+	MOV     CX,AX
+	INC     CX
+	CMP     CX,BX
+	JA      RegisterUmbError
+	MOV     AX,BX
+	SUB     AX,CX
+	MOV     ES:[arena_size],AX
+	MOV     ES:[arena_signature],arena_signature_normal
+
+RegisterUmbMakeExtent:
+	MOV     ES,BX
+	MOV     ES:[arena_signature],arena_signature_normal
+	MOV     ES:[arena_owner],arena_owner_system
+	MOV     AX,DX
+	SUB     AX,2
+	MOV     ES:[arena_size],AX
+	MOV     AX,BX
+	ADD     AX,DX
+	DEC     AX
+	MOV     ES,AX
+	MOV     ES:[arena_signature],arena_signature_end
+	MOV     ES:[arena_owner],arena_owner_dos
+	MOV     ES:[arena_size],0
+	MOV     BYTE PTR ES:[arena_name],'S'
+	MOV     BYTE PTR ES:[arena_name+1],'M'
+	MOV     CS:[UmbArenaTail],AX
+	POP     ES
+	POP     DS
+	MOV     AX,1
+	CLC
+	return
+
+RegisterUmbError:
+	POP     ES
+	POP     DS
+	XOR     AX,AX
+	STC
+	return
+EndProc RegisterUmb
+
 SUBTTL $AllocOper - get/set allocation mechanism
 PAGE
 ;
@@ -434,6 +540,8 @@ PAGE
 	JZ      AllocOperGetLink
 	CMP     AL,3
 	JZ      AllocOperSetLink
+	CMP     AL,4
+	JZ      AllocOperRegisterUmb
 
 AllocOperError:
 	MOV     EXTERR_LOCUS,errLoc_mem ; Extended Error Locus
@@ -447,14 +555,17 @@ AllocOperGet:
 AllocOperSet:
 	OR      BH,BH
 	JNZ     AllocOperError
-	MOV     AL,BL
-	AND     AL,NOT alloc_domain_mask
-	CMP     AL,2
+	CMP     BL,2
+	JBE     AllocOperSetValid
+	CMP     BL,40H
+	JB      AllocOperError
+	CMP     BL,42H
+	JBE     AllocOperSetValid
+	CMP     BL,80H
+	JB      AllocOperError
+	CMP     BL,82H
 	JA      AllocOperError
-	MOV     AL,BL
-	AND     AL,alloc_domain_mask
-	CMP     AL,alloc_domain_mask
-	JZ      AllocOperError
+AllocOperSetValid:
 	MOV     [AllocMethod],BL
 	transfer    SYS_RET_OK
 
@@ -467,40 +578,75 @@ AllocOperSetLink:
 	JA      AllocOperError
 	CMP     [UmbArenaHead],0
 	JZ      AllocOperError
-	CMP     [UmbLinkMcb],0
-	JZ      AllocOperError
 	CMP     BL,[UmbLinked]
 	JZ      AllocOperLinkDone
+	PUSH    AX
+	PUSH    DX
+	PUSH    DI
+	PUSH    DS
 	PUSH    ES
-	MOV     AX,[UmbLinkMcb]
-	MOV     ES,AX
+	MOV     DI,arena_signature
+	MOV     AX,[arena_head]
+	CALL    Check_Signature
+	JC      AllocOperLinkError
+AllocOperFindLinkMcb:
+	PUSH    ES
+	POP     DS
 	MOV     DX,AX
-	ADD     DX,ES:[arena_size]
+	ADD     DX,DS:[arena_size]
 	INC     DX
 	CMP     DX,[UmbArenaHead]
-	JNZ     AllocOperLinkError
+	JZ      AllocOperLinkMcbFound
+	CMP     DS:[arena_signature],arena_signature_end
+	JZ      AllocOperLinkError
+	CALL    arena_next
+	JC      AllocOperLinkError
+	JMP     AllocOperFindLinkMcb
+
+AllocOperLinkMcbFound:
+	MOV     [UmbLinkMcb],AX
 	OR      BL,BL
 	JZ      AllocOperUnlink
-	CMP     ES:[arena_signature],arena_signature_end
+	CMP     DS:[arena_signature],arena_signature_end
 	JNZ     AllocOperLinkError
-	MOV     ES:[arena_signature],arena_signature_normal
+	MOV     DS:[arena_signature],arena_signature_normal
 	JMP     AllocOperStoreLink
 
 AllocOperUnlink:
-	CMP     ES:[arena_signature],arena_signature_normal
+	CMP     DS:[arena_signature],arena_signature_normal
 	JNZ     AllocOperLinkError
-	MOV     ES:[arena_signature],arena_signature_end
+	MOV     DS:[arena_signature],arena_signature_end
 
 AllocOperStoreLink:
 	MOV     [UmbLinked],BL
 	POP     ES
+	POP     DS
+	POP     DI
+	POP     DX
+	POP     AX
 
 AllocOperLinkDone:
 	transfer    SYS_RET_OK
 
 AllocOperLinkError:
 	POP     ES
+	POP     DS
+	POP     DI
+	POP     DX
+	POP     AX
 	JMP     AllocOperError
+
+AllocOperRegisterUmb:
+; SYSINIT's full signature keeps ordinary 5804h calls on the public error path.
+	CMP     CX,4D55H
+	JNZ     AllocOperError
+	CMP     SI,2142H
+	JNZ     AllocOperError
+	CMP     DI,0A55AH
+	JNZ     AllocOperError
+	CALL    RegisterUmb
+	transfer    SYS_RET_OK
+
 EndProc $AllocOper
 
 CODE    ENDS

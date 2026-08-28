@@ -21,6 +21,7 @@ arena	ENDS
 ; them and change ALLOC.ASM.
 
 arena_owner_system  EQU 0		; free block indication
+arena_owner_dos     EQU 8		; DOS-owned, nonallocatable block
 
 arena_signature_normal	EQU 4Dh 	; valid signature, not end of arena
 arena_signature_end	EQU 5Ah 	; valid signature, last block in arena
