@@ -289,8 +289,7 @@ ZERO			DB	0
 SepChr			DB	0
 LineCount		dw	0	;AN000;  Line count in config.sys
 ShowCount		db	'     ',CR,LF,'$' ;AN000;  Used to convert Linecount to ASCII.
-HmaUnavailableMsg	db	'HMA not available',CR,LF
-			db	'Loading DOS low',CR,LF,'$'
+HmaUnavailableMsg	db	'HMA not available: Loading DOS low',CR,LF,'$'
 Buffer_LineNum		dw	0	;AN000; Line count for "BUFFERS=" command if entered.
 
 Sys_Model_Byte		db	0FFh	;model byte used in SYSINIT
