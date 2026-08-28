@@ -370,6 +370,9 @@ DeviceHighLowMemHi dw 0
 DeviceHighOldStrategy dw 0
 DeviceHighOldLink db 0
 DeviceHighMinSize dw 0
+InstallHighOldStrategy dw 0
+InstallHighOldLink db 0
+InstallHighScopeActive db 0
 
 ;--------------------------------
 
@@ -863,8 +866,11 @@ TRYI:
 	je	Multi_Try_J			;AN026;
 	cmp	Multi_Pass_Id, 3		;AN026; the third pass for INSTALL= ?
 	je	Multi_Try_I			;AN026;
+	cmp	ah, 'V'			; INSTALLHIGH= is deferred with INSTALL=.
+	je	short TryI_Record_Install
 	cmp	ah, 'I' 			;AN018; INSTALL= command?
 	jne	TryB				;AN018; the first pass is for normal operation.
+TryI_Record_Install:
 	or	Install_Flag, HAVE_INSTALL_CMD	;AN018; Set the flag
 	jmp	coff				;AN018; and handles the next command
 
@@ -892,7 +898,12 @@ Multi_Try_J:					;AN026;
 
 Multi_Try_I:					;AN026;
 	cmp	ah, 'I' 			;AN026; INSTALL= command?
+	je	short Multi_Do_Install
+	cmp	ah, 'V'
 	jne	Multi_Pass_Filter		;AN026; No. Ignore this.
+	call	Do_Install_High
+	jmp	Coff
+Multi_Do_Install:
 	call	Do_Install_Exec 		;Install it.
 	jmp	Coff				;to handle next Install= command.
 
@@ -2037,6 +2048,90 @@ DeviceHighRestore PROC NEAR
 	mov	cs:[DeviceHighBlock],0
 	ret
 DeviceHighRestore ENDP
+
+; INSTALLHIGH uses the same EXEC path as INSTALL, scoped to upper-first
+; allocation so the ordinary path remains the exact conventional fallback.
+Do_Install_High PROC NEAR
+	call	InstallHighScopeEnter
+	jc	short Do_Install_High_Low
+	call	Do_Install_Exec
+	pushf
+	call	InstallHighScopeLeave
+	popf
+	ret
+Do_Install_High_Low:
+	call	Do_Install_Exec
+	ret
+Do_Install_High ENDP
+
+InstallHighScopeEnter PROC NEAR
+	push	ax
+	push	bx
+	push	cx
+	push	dx
+	push	ds
+	push	es
+	push	si
+	push	di
+	cmp	cs:[DosUmbRequested],0
+	je	InstallHighScopeFail
+	call	AcquireUmbs
+	mov	ax,5800h
+	int	21h
+	jc	InstallHighScopeFail
+	mov	cs:[InstallHighOldStrategy],ax
+	mov	ax,5802h
+	int	21h
+	jc	InstallHighScopeFail
+	mov	cs:[InstallHighOldLink],al
+	mov	bx,1
+	mov	ax,5803h
+	int	21h
+	jc	InstallHighScopeFail
+	mov	bx,0080h
+	mov	ax,5801h
+	int	21h
+	jc	InstallHighScopeRestoreLink
+	mov	cs:[InstallHighScopeActive],1
+	clc
+	jmp	short InstallHighScopeDone
+InstallHighScopeRestoreLink:
+	xor	bh,bh
+	mov	bl,cs:[InstallHighOldLink]
+	mov	ax,5803h
+	int	21h
+InstallHighScopeFail:
+	stc
+InstallHighScopeDone:
+	pop	di
+	pop	si
+	pop	es
+	pop	ds
+	pop	dx
+	pop	cx
+	pop	bx
+	pop	ax
+	ret
+InstallHighScopeEnter ENDP
+
+InstallHighScopeLeave PROC NEAR
+	cmp	cs:[InstallHighScopeActive],0
+	je	InstallHighScopeLeaveDone
+	push	ax
+	push	bx
+	mov	bx,cs:[InstallHighOldStrategy]
+	mov	ax,5801h
+	int	21h
+	xor	bh,bh
+	mov	bl,cs:[InstallHighOldLink]
+	mov	ax,5803h
+	int	21h
+	mov	cs:[InstallHighScopeActive],0
+	pop	bx
+	pop	ax
+InstallHighScopeLeaveDone:
+	ret
+InstallHighScopeLeave ENDP
 
 
 ;------------------------------------------------------------------------------

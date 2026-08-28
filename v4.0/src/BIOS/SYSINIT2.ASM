@@ -501,6 +501,8 @@ Org3:
 	je	Get_Cmt_Token		;AN000;
 	cmp	Cmd_Indicator, 'I'      ;AN000; Install= command?
 	je	Org_file		;AN000;
+	cmp	Cmd_Indicator, 'V'      ; INSTALLHIGH= uses INSTALL's file/tail layout.
+	je	Org_file
 	cmp	Cmd_Indicator, 'D'      ;AN000; Device= command?
 	je	Org_file		;AN000;
 	cmp	Cmd_Indicator, 'U'      ; DEVICEHIGH= uses the same file/tail layout.
@@ -1520,6 +1522,7 @@ COMTAB	LABEL	BYTE
 		ENDIF
 	DB	7,"COUNTRY",  'Q'
 	DB	5,"SHELL",    'S'
+	db     11,"INSTALLHIGH",'V'
 	db	7,"INSTALL",  'I'       ;AN000;
 	db	3,"IFS",      'J'       ;AN000;
 	db	4,"CPSW",     'W'       ;AN000;
