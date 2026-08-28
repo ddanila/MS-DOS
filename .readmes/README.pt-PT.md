@@ -1,3 +1,7 @@
+> **Fork note:** This is an archived translation of Microsoft's original
+> repository description. See the current [fork README](../README.md) for
+> development, build, branch, and contribution policy.
+
 <img width="150" height="150" align="left" style="float: left; margin: 0 10px 0 0;" alt="Logotipo do MS-DOS" src="msdos-logo.png">
 
 # Código Fonte do MS-DOS v1.25 e v2.0
