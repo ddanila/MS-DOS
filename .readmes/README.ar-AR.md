@@ -1,4 +1,4 @@
-<img width="150" height="150" align="left" style="float: left; margin: 0 10px 0 0;" alt="MS-DOS logo" src="https://github.com/Microsoft/MS-DOS/blob/master/msdos-logo.png">   
+<img width="150" height="150" align="left" style="float: left; margin: 0 10px 0 0;" alt="MS-DOS logo" src="msdos-logo.png">
 
 # بالنسخة ١.٢٥ و ٢.٠ MS-DOS الكود المصدري لـ
 
@@ -10,7 +10,7 @@ MS-DOS هذي المجموعة تحتوي على الكود المصدري ال�
 
 # الرخصة
 [MIT (OSI)](https://en.wikipedia.org/wiki/MIT_License) جميع الملفات في هذه المجموعة تم نشرها تحت رخصة
-والموجود في قائمة الملفات كما هو مذكور في [ملف الرخصة](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md)
+والموجود في قائمة الملفات كما هو مذكور في [ملف الرخصة](../LICENSE)
 
 # !ساهم في المشروع
 

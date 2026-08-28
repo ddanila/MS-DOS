@@ -1,9 +1,10 @@
-## Security
+# Security policy
 
-**Since MS-DOS is historical reference software, this file is in place as a template only.**
+This repository contains historical MS-DOS source maintained for research,
+building, and testing. It is not a supported secure operating system and should
+not be used to protect modern or sensitive workloads.
 
-## Reporting Security Issues
-
-**Please do not report security vulnerabilities through public GitHub issues.**
-
-You can learn more about the security reporting process with the Microsoft Security Response Center (MSRC) at [https://msrc.microsoft.com/create-report](https://aka.ms/security.md/msrc/create-report).
+For defects in this fork or its build integration, use the issue tracker in the
+appropriate `ddanila` repository. Do not report fork-specific issues to
+Microsoft or another upstream project without explicit coordination with the
+fork owner. Avoid publishing sensitive information in a public issue.

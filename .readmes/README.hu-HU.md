@@ -1,5 +1,5 @@
 
-<img width="150" height="150" align="left" style="float: left; margin: 0 10px 0 0;" alt="MS-DOS logo" src="https://github.com/Microsoft/MS-DOS/blob/master/msdos-logo.png">   
+<img width="150" height="150" align="left" style="float: left; margin: 0 10px 0 0;" alt="MS-DOS logo" src="msdos-logo.png">
 
 # MS-DOS v1.25 és v2.0 Forráskód
 Ez a tároló tartalmazza az eredeti forráskódot és a futtatható bináris állományokat az MS-DOS v1.25-höz és az MS-DOS v2.0-hoz.
@@ -7,7 +7,7 @@ Ez a tároló tartalmazza az eredeti forráskódot és a futtatható bináris á
 Ezek a fájlok már korábban [megosztásra kerültek a Computer History Museum oldalán 2014. március 25-én](http://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/), és most itt is megjelennek az egyszerűbb elérhetőség érdekében olyanok számára, akik szeretnék felfedezni a korai számítógépes operációs rendszereket.
 
 # Licensz
-Az összes fájl ebben a tárolóban [MIT (OSI) licensz alatt kerültek publikálásra](https://en.wikipedia.org/wiki/MIT_License),  a [LICENSE fájl](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.m) megtalálható a tároló főkönyvtárában. 
+Az összes fájl ebben a tárolóban [MIT (OSI) licensz alatt kerültek publikálásra](https://en.wikipedia.org/wiki/MIT_License),  a [LICENSE fájl](../LICENSE) megtalálható a tároló főkönyvtárában.
 
 
 # Közreműködés

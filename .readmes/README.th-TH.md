@@ -1,4 +1,4 @@
-<img width="150" height="150" align="left" style="float: left; margin: 0 10px 0 0;" alt="MS-DOS logo" src="https://github.com/Microsoft/MS-DOS/blob/master/msdos-logo.png">   
+<img width="150" height="150" align="left" style="float: left; margin: 0 10px 0 0;" alt="MS-DOS logo" src="msdos-logo.png">
 
 # ซอร์สโค๊ด ของ MS-DOS เวอร์ชั่น 1.25 และ เวอร์ชั่น 2.0 
 Repo นี้ได้เก็บซอสโค๊ดต้นฉบับและไบนารี่ที่ถูกคอลไพลแล้วสำหรับ MS-DOS เวอชั่น 1.25 และ MS-DOS เวอร์ชั่น 2.0
@@ -6,7 +6,7 @@ Repo นี้ได้เก็บซอสโค๊ดต้นฉบับแ
 ไฟล์เหล่านี้เหมือนกับ [การเผยแพร่ครั้งแรกที่พิพิธภัณฑ์ประวัติศาสตร์คอมพิวเตอร์ในวันที่ 25 เดือนมีนาคม ปี 2014]( http://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/) และจะถูกเผยเผยแพร่ใน repo นี้เพื่อให้ง่ายต่อการค้นหาและการอ้างอิงถึงการเขียน และยังอนุญาตให้มีการสำรวจและทดลองสำหรับผู้ที่สนใจในระบบปฏิบัติการของ PC ในยุคเริ่มต้น
 
 # License
-ไฟล์ทั้งหมดที่อยู่ใน repo นี้จะเผยแพร่ภายใต้ [MIT (OSI) License]( https://en.wikipedia.org/wiki/MIT_License) ตามที่ [LICENSE file](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md) ถูกเก็บไว้ในไดเร็กทอรี่เริ่มต้นของ repo นี้
+ไฟล์ทั้งหมดที่อยู่ใน repo นี้จะเผยแพร่ภายใต้ [MIT (OSI) License]( https://en.wikipedia.org/wiki/MIT_License) ตามที่ [LICENSE file](../LICENSE) ถูกเก็บไว้ในไดเร็กทอรี่เริ่มต้นของ repo นี้
 
 # การสนับสนุน!
 ซอร์สไฟล์ใน repo นี้มีไว้สำหรับอ้างอิงถึงประวัติศาสตร์และจะถูกเก็บไว้อย่างคงที่ ดังนั้น **ห้ามส่ง** pull requests สำหรับการแนะนำใดๆในการดัดแปลงซอร์สไฟล์เหล่านี้ แต่ไม้ต้องรู้สึกอึดอัดที่จะ fork repo นี้ไปใช้ในการทดลอง 😊

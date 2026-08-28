@@ -1,4 +1,4 @@
-<img width="150" height="150" align="left" style="float: left; margin: 0 10px 0 0;" alt="MS-DOS logo" src="https://github.com/Microsoft/MS-DOS/blob/master/msdos-logo.png">   
+<img width="150" height="150" align="left" style="float: left; margin: 0 10px 0 0;" alt="MS-DOS logo" src="msdos-logo.png">
 
 # MS-DOS v1.25 und v2.0 Quellcode
 Dieses Repository enthält den ursprünglichen Quellcode, sowie die kompilierten Binärdateien für MS-DOS v1.25 und MS-DOS v2.0.
@@ -6,7 +6,7 @@ Dieses Repository enthält den ursprünglichen Quellcode, sowie die kompilierten
 Dabei handelt es sich um die gleichen Dateien, [welche ursprünglich am 25. März 2014 mit dem Computer History Museum geteilt wurden]( http://www.computerhistory.org/atchm/microsoft-ms-dos-early-source-code/). Die Wiederveröffentlichung in diesem Repository macht diese Dateien leichter auffindbar und vereinfacht das Referenzieren in Texten und Arbeiten. Außerdem ermöglicht diese Veröffentlichung denjenigen, welche sich für frühe PC-Betriebssysteme interessieren, die Auseinandersetzung mit dem Programmcode und den Binärdateien zu Untersuchungs- und Experimentierzwecken.
 
 # Lizenz
-Alle Dateien, welche in diesem Repository veröffentlich sind, fallen unter die [MIT (OSI) Lizenz](https://de.wikipedia.org/wiki/MIT-Lizenz) gemäß der [Lizenzdatei](https://github.com/Microsoft/MS-DOS/blob/master/LICENSE.md), welche sich im Stammverzeichnis dieses Repositorys befindet.
+Alle Dateien, welche in diesem Repository veröffentlich sind, fallen unter die [MIT (OSI) Lizenz](https://de.wikipedia.org/wiki/MIT-Lizenz) gemäß der [Lizenzdatei](../LICENSE), welche sich im Stammverzeichnis dieses Repositorys befindet.
 
 # Beitragen!
 Der Quellcode in diesem Repository dient als geschichtliche Referenz und bleibt deshalb unverändert. Bitte sende **keine Pull Requests**, welche Änderungen des Quellcodes beinhalten. Zögere aber nicht, dieses Repository abzuspalten (engl: to fork) um damit zu experimentieren 😊.  
