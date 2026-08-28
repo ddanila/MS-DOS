@@ -177,6 +177,14 @@ struct p_value_blk p_noval;                                                     
 #define BLANK   ' '                                                                                                              /* ;an000; */
 
 #define SET_FP(pointer, segment, offset) ((pointer) = MK_FP((segment), (offset)))
+
+#define MEM_MODE_SUMMARY  0
+#define MEM_MODE_DEBUG    2
+#define MEM_MODE_CLASSIFY 3
+#define MEM_MODE_FREE     4
+#define MEM_MODE_MODULE   5
+#define MAX_UMB_REGIONS   16
+#define MAX_MEM_MODULES   64
                                                                                                                                  /* ;an000; */
 /*���������������������������������������������������������������������������*/                                                  /* ;an000; */
                                                                                                                                  /* ;an000; */
@@ -200,6 +208,22 @@ struct p_value_blk p_noval;                                                     
                                                                                                                                  /* ;an000; */
         int      BlockDeviceNumber;                                                                                              /* ;an000; */
         unsigned Parse_Ptr;                                                     /* ;an003; dms; pointer to command      */
+
+        struct UMB_REGION {
+                unsigned Start;
+                unsigned End;
+                unsigned Largest;
+                } UmbRegions[MAX_UMB_REGIONS];
+
+        struct MEM_MODULE {
+                unsigned Owner;
+                char Name[9];
+                unsigned long Conventional;
+                unsigned long Upper;
+                } MemModules[MAX_MEM_MODULES];
+
+        int UmbRegionCount;
+        int MemModuleCount;
                                                                                                                                  /* ;an000; */
 /*���������������������������������������������������������������������������*/                                                  /* ;an000; */
                                                                                                                                  /* ;an000; */
@@ -218,6 +242,14 @@ void     DisplayExtendedSummary(void);                                          
 void     DisplayExpandedSummary(void);                                                                                           /* ;an000; */
                                                                                                                                  /* ;an000; */
 void     DisplayBaseDetail(void);                                                                                                /* ;an000; */
+void     DisplayUmbView(int,char *);
+int      LoadUmbRegions(void);
+int      UmbRegionOf(unsigned);
+int      SetUmbLink(unsigned);
+int      GetUmbLink(unsigned *);
+int      GetHmaState(unsigned *);
+void     GetArenaName(struct ARENA far *,char *);
+void     AddMemModule(char *,unsigned,unsigned long,unsigned long);
                                                                                                                                  /* ;an000; */
 void     GetFromArgvZero(unsigned,unsigned far *);                                                                               /* ;an000; */
                                                                                                                                  /* ;an000; */
@@ -263,15 +295,41 @@ void     main(argc,argv)                                                        
 int      argc;                                                                                                                   /* ;an000; */
 char     *argv[];                                                                                                                /* ;an000; */
 {                                                                                                                                /* ;an000; */
-                                                                                                                                 /* ;an000; */
-                                                                                                                                 /* ;an000; */
-                                                                                                                                 /* ;an000; */
+        int NewMode;
+        char *ModuleName;
+
+        NewMode = -1;
+        ModuleName = (char *)0;
         if (argc >= 2 && argv[1][0] == '/' && argv[1][1] == '?') {
                 printf("Displays amount of used and free memory.\r\n\r\n");
-                printf("MEM [/PROGRAM | /DEBUG]\r\n\r\n");
+                printf("MEM [/CLASSIFY | /DEBUG | /FREE | /MODULE name | /PROGRAM]\r\n\r\n");
+                printf("  /CLASSIFY  Classify programs by conventional and upper memory (/C)\r\n");
                 printf("  /PROGRAM   Display loaded programs and their memory use\r\n");
                 printf("  /DEBUG     Display programs, internal drivers, and other info\r\n");
+                printf("  /FREE      Display free conventional and upper memory (/F)\r\n");
+                printf("  /MODULE    Display memory used by one program or driver (/M)\r\n");
                 exit(0);
+                }
+        if (argc == 2 && (stricmp(argv[1],"/C") == 0 ||
+                          stricmp(argv[1],"/CLASSIFY") == 0))
+                NewMode = MEM_MODE_CLASSIFY;
+        if (argc == 2 && (stricmp(argv[1],"/D") == 0 ||
+                          stricmp(argv[1],"/DEBUG") == 0))
+                NewMode = MEM_MODE_DEBUG;
+        if (argc == 2 && (stricmp(argv[1],"/F") == 0 ||
+                          stricmp(argv[1],"/FREE") == 0))
+                NewMode = MEM_MODE_FREE;
+        if (argc == 3 && (stricmp(argv[1],"/M") == 0 ||
+                          stricmp(argv[1],"/MODULE") == 0)) {
+                NewMode = MEM_MODE_MODULE;
+                ModuleName = argv[2];
+                }
+        if (argc == 2 && (strnicmp(argv[1],"/M:",3) == 0 ||
+                          strnicmp(argv[1],"/MODULE:",8) == 0)) {
+                NewMode = MEM_MODE_MODULE;
+                ModuleName = strchr(argv[1],':') + 1;
+                if (*ModuleName == NUL)
+                        NewMode = -1;
                 }
         sysloadmsg(&InRegs,&OutRegs);                                                                                            /* ;an000; */
         if ((OutRegs.x.cflag & CarryFlag) == CarryFlag)                                                                          /* ;an000; */
@@ -279,6 +337,11 @@ char     *argv[];                                                               
                 sysdispmsg(&OutRegs,&OutRegs);                                                                                   /* ;an000; */
                 exit(1);                                                                                                         /* ;an000; */
                 }                                                                                                                /* ;an000; */
+
+        if (NewMode >= 0) {
+                DisplayUmbView(NewMode,ModuleName);
+                exit(0);
+                }
                                                                                                                                  /* ;an000; */
                                                                                                                                  /* ;an000; */
         InRegs.h.ah = (unsigned char) 0x62;                                     /* an000; dms; get the PSP              */       /* ;an000; */
@@ -328,6 +391,7 @@ char     *argv[];                                                               
                                                                                                                                  /* ;an000; */
         Sub0_Message(NewLineMsg,STDOUT,Utility_Msg_Class);                                                                       /* ;an000; */
         DisplayBaseSummary();           /* display low memory totals */                                                          /* ;an000; */
+        DisplayUmbView(MEM_MODE_SUMMARY,(char *)0);
                                                                                                                                  /* ;an000; */
         if (EMSInstalled() && (DataLevel > 1))                                                                                   /* ;an000; */
           DisplayEMSDetail();           /* display EMS memory totals */                                                          /* ;an000; */
@@ -341,6 +405,469 @@ char     *argv[];                                                               
         return;                         /* end of MEM main routine */                                                            /* ;an000; */
                                                                                                                                  /* ;an000; */
         }                                                                                                                        /* ;an000; */
+
+/*
+ * The public 58xx interface deliberately exposes only the DOS-compatible
+ * allocation controls.  MEM uses the signed extensions below to obtain the
+ * provider's exact region boundaries, rather than guessing from addresses.
+ */
+int UmbPrivate(Function,Region,Value)
+unsigned Function;
+unsigned Region;
+unsigned *Value;
+{
+        InRegs.x.ax = Function;
+        InRegs.x.bx = Region;
+        InRegs.x.cx = 0x4d55;
+        InRegs.x.si = 0x2142;
+        InRegs.x.di = 0xa55a;
+        intdos(&InRegs,&OutRegs);
+        if (OutRegs.x.cflag != 0)
+                return FALSE;
+        *Value = OutRegs.x.ax;
+        return TRUE;
+}
+
+int LoadUmbRegions()
+{
+        int Region;
+        unsigned Value;
+
+        UmbRegionCount = 0;
+        for (Region = 0; Region < MAX_UMB_REGIONS; Region++) {
+                if (!UmbPrivate(0x580c,Region + 1,&Value))
+                        break;
+                UmbRegions[Region].Start = Value;
+                if (!UmbPrivate(0x580d,Region + 1,&Value))
+                        break;
+                UmbRegions[Region].End = Value;
+                if (!UmbPrivate(0x5809,Region + 1,&Value))
+                        break;
+                UmbRegions[Region].Largest = Value;
+                UmbRegionCount++;
+                }
+        return UmbRegionCount;
+}
+
+int UmbRegionOf(Segment)
+unsigned Segment;
+{
+        int Region;
+
+        for (Region = 0; Region < UmbRegionCount; Region++)
+                if (Segment >= UmbRegions[Region].Start &&
+                    Segment < UmbRegions[Region].End)
+                        return Region + 1;
+        return 0;
+}
+
+int GetUmbLink(Link)
+unsigned *Link;
+{
+        InRegs.x.ax = 0x5802;
+        intdos(&InRegs,&OutRegs);
+        if (OutRegs.x.cflag != 0)
+                return FALSE;
+        *Link = (unsigned)OutRegs.h.al;
+        return TRUE;
+}
+
+int SetUmbLink(Link)
+unsigned Link;
+{
+        InRegs.x.ax = 0x5803;
+        InRegs.x.bx = Link;
+        intdos(&InRegs,&OutRegs);
+        return OutRegs.x.cflag == 0;
+}
+
+int GetHmaState(State)
+unsigned *State;
+{
+        return UmbPrivate(0x580e,0,State);
+}
+
+void GetArenaName(Arena,Name)
+struct ARENA far *Arena;
+char *Name;
+{
+        struct ARENA far *OwnerArena;
+        int Index;
+        int End;
+
+        if (Arena->Owner == 0) {
+                strcpy(Name,"FREE");
+                return;
+                }
+        if (Arena->Owner == 8) {
+                strcpy(Name,"SYSTEM");
+                return;
+                }
+        SET_FP(OwnerArena,Arena->Owner - 1,0);
+        End = 8;
+        while (End > 0 && OwnerArena->OwnerName[End - 1] == BLANK)
+                End--;
+        for (Index = 0; Index < End; Index++) {
+                Name[Index] = OwnerArena->OwnerName[Index];
+                if (Name[Index] == NUL)
+                        break;
+                }
+        Name[Index] = NUL;
+        if (Name[0] == NUL)
+                strcpy(Name,"PROGRAM");
+}
+
+void AddMemModule(Name,Owner,Conventional,Upper)
+char *Name;
+unsigned Owner;
+unsigned long Conventional;
+unsigned long Upper;
+{
+        int Module;
+
+        if (Conventional == 0l && Upper == 0l)
+                return;
+        for (Module = 0; Module < MemModuleCount; Module++)
+                if (stricmp(MemModules[Module].Name,Name) == 0) {
+                        MemModules[Module].Conventional += Conventional;
+                        MemModules[Module].Upper += Upper;
+                        return;
+                        }
+        if (MemModuleCount >= MAX_MEM_MODULES)
+                return;
+        Module = MemModuleCount++;
+        MemModules[Module].Owner = Owner;
+        strncpy(MemModules[Module].Name,Name,8);
+        MemModules[Module].Name[8] = NUL;
+        MemModules[Module].Conventional = Conventional;
+        MemModules[Module].Upper = Upper;
+}
+
+void DisplayUmbView(Mode,RequestedModule)
+int Mode;
+char *RequestedModule;
+{
+        struct ARENA far *Arena;
+        struct ARENA far *ConfigArena;
+        unsigned far *Head;
+        unsigned SavedLink;
+        unsigned Psp;
+        unsigned Segment;
+        unsigned NextSegment;
+        unsigned HmaState;
+        unsigned long Bytes;
+        unsigned long ConventionalTotal;
+        unsigned long ConventionalFree;
+        unsigned long ConventionalLargest;
+        unsigned long UpperTotal;
+        unsigned long UpperFree;
+        unsigned long UpperLargest;
+        unsigned long RegionFree[MAX_UMB_REGIONS];
+        unsigned long RegionLargest[MAX_UMB_REGIONS];
+        unsigned long ModuleBytes;
+        unsigned long ConventionalBytes;
+        unsigned long UpperBytes;
+        unsigned long SystemConventional;
+        unsigned long SystemUpper;
+        unsigned long ConfigBytes;
+        unsigned PayloadStart;
+        unsigned PayloadEnd;
+        unsigned OverlapStart;
+        unsigned OverlapEnd;
+        unsigned ConventionalEnd;
+        unsigned ConfigSegment;
+        unsigned ConfigEnd;
+        unsigned ConfigNext;
+        char Name[16];
+        char Type[16];
+        char far *CarvedPtr;
+        int Region;
+        int Index;
+        int Loops;
+        int Found;
+        int LinkChanged;
+
+        LoadUmbRegions();
+        ConventionalFree = 0l;
+        ConventionalLargest = 0l;
+        UpperTotal = 0l;
+        UpperFree = 0l;
+        UpperLargest = 0l;
+        MemModuleCount = 0;
+        for (Index = 0; Index < MAX_UMB_REGIONS; Index++) {
+                RegionFree[Index] = 0l;
+                RegionLargest[Index] = 0l;
+                }
+        for (Index = 0; Index < UmbRegionCount; Index++)
+                UpperTotal += ((unsigned long)(UmbRegions[Index].End -
+                               UmbRegions[Index].Start)) * 16l;
+
+        InRegs.h.ah = MEMORY_DET;
+        int86(MEMORY_DET,&InRegs,&OutRegs);
+        ConventionalTotal = ((unsigned long)OutRegs.x.ax) * 1024l;
+        InRegs.x.ax = 0xc100;
+        InRegs.x.bx = 0;
+        int86x(0x15,&InRegs,&OutRegs,&SegRegs);
+        if (OutRegs.x.cflag == 0) {
+                SET_FP(CarvedPtr,SegRegs.es,0);
+                ConventionalTotal += ((unsigned long)(*CarvedPtr)) * 1024l;
+                }
+        ConventionalEnd = (unsigned)(ConventionalTotal / 16l);
+
+        InRegs.h.ah = GET_PSP;
+        intdos(&InRegs,&OutRegs);
+        Psp = OutRegs.x.bx;
+
+        SavedLink = 0;
+        LinkChanged = FALSE;
+        if (GetUmbLink(&SavedLink) && SavedLink == 0 && UmbRegionCount != 0) {
+                if (SetUmbLink(1))
+                        LinkChanged = TRUE;
+                }
+
+        InRegs.h.ah = 0x52;
+        intdosx(&InRegs,&OutRegs,&SegRegs);
+        SET_FP(Head,SegRegs.es,OutRegs.x.bx - 2);
+        Segment = *Head;
+        Found = FALSE;
+
+        if (Mode == MEM_MODE_DEBUG) {
+                printf("\r\n  Address     Name          Size       Type       Region\r\n");
+                printf("  -------     --------      --------   --------   ------\r\n");
+                }
+        if (Mode == MEM_MODE_FREE) {
+                printf("\r\nFree Conventional Memory:\r\n");
+                printf("  Address       Size\r\n");
+                }
+        if (Mode == MEM_MODE_MODULE) {
+                printf("\r\n%s is using the following memory:\r\n\r\n",RequestedModule);
+                printf("  Segment  Region       Total        Type\r\n");
+                printf("  -------  ------  ----------------  --------\r\n");
+                }
+
+        for (Loops = 0; Loops < 512; Loops++) {
+                SET_FP(Arena,Segment,0);
+                if (Arena->Signature != 'M' && Arena->Signature != 'Z')
+                        break;
+                Region = UmbRegionOf(Segment);
+                Bytes = ((unsigned long)Arena->Paragraphs) * 16l;
+                PayloadStart = Segment + 1;
+                PayloadEnd = PayloadStart + Arena->Paragraphs;
+                ConventionalBytes = 0l;
+                UpperBytes = 0l;
+                if (PayloadStart < ConventionalEnd) {
+                        OverlapEnd = PayloadEnd;
+                        if (OverlapEnd > ConventionalEnd)
+                                OverlapEnd = ConventionalEnd;
+                        if (OverlapEnd > PayloadStart)
+                                ConventionalBytes = ((unsigned long)(OverlapEnd -
+                                                     PayloadStart)) * 16l;
+                        }
+                for (Index = 0; Index < UmbRegionCount; Index++) {
+                        OverlapStart = PayloadStart;
+                        if (OverlapStart < UmbRegions[Index].Start)
+                                OverlapStart = UmbRegions[Index].Start;
+                        OverlapEnd = PayloadEnd;
+                        if (OverlapEnd > UmbRegions[Index].End)
+                                OverlapEnd = UmbRegions[Index].End;
+                        if (OverlapEnd > OverlapStart) {
+                                ModuleBytes = ((unsigned long)(OverlapEnd -
+                                               OverlapStart)) * 16l;
+                                UpperBytes += ModuleBytes;
+                                if (Arena->Owner == 0 || Arena->Owner == Psp) {
+                                        RegionFree[Index] += ModuleBytes;
+                                        if (ModuleBytes > RegionLargest[Index])
+                                                RegionLargest[Index] = ModuleBytes;
+                                        }
+                                }
+                        }
+                GetArenaName(Arena,Name);
+                if (Mode == MEM_MODE_MODULE && Arena->Owner != 0 &&
+                    Arena->Owner != 8 &&
+                    Arena->Owner != Psp && stricmp(Name,RequestedModule) == 0) {
+                        Found = TRUE;
+                        if (Arena->Owner == 8)
+                                strcpy(Type,"System");
+                        else if (Arena->Owner == Segment + 1)
+                                strcpy(Type,"Program");
+                        else
+                                strcpy(Type,"Data");
+                        printf("   %05X  ",Segment);
+                        if (Region == 0)
+                                printf("        ");
+                        else
+                                printf("%6d  ",Region);
+                        printf("%10lu      %s\r\n",ConventionalBytes + UpperBytes,Type);
+                        }
+                if (Arena->Owner == 0 || Arena->Owner == Psp) {
+                        ConventionalFree += ConventionalBytes;
+                        UpperFree += UpperBytes;
+                        if (ConventionalBytes > ConventionalLargest)
+                                ConventionalLargest = ConventionalBytes;
+                        if (UpperBytes > UpperLargest)
+                                UpperLargest = UpperBytes;
+                        }
+
+                if (Arena->Owner != 0 && Arena->Owner != Psp &&
+                    Arena->Owner != 8) {
+                        if (Segment < ConventionalEnd)
+                                ConventionalBytes += 16l;
+                        else if (Region != 0)
+                                UpperBytes += 16l;
+                        AddMemModule(Name,Arena->Owner,ConventionalBytes,UpperBytes);
+                        }
+
+                if (Mode == MEM_MODE_DEBUG) {
+                        if (Arena->Owner == 0)
+                                strcpy(Type,"Free");
+                        else if (Arena->Owner == 8)
+                                strcpy(Type,"System");
+                        else
+                                strcpy(Type,"Program");
+                        printf("  %04X:0000  %-8s  %10lu   %-8s   ",
+                               Segment,Name,Bytes,Type);
+                        if (Region == 0)
+                                printf("-\r\n");
+                        else
+                                printf("%d\r\n",Region);
+                        }
+                if (Arena->Owner == 8 &&
+                    (ConventionalBytes != 0l || UpperBytes != 0l)) {
+                        SystemConventional = ConventionalBytes;
+                        SystemUpper = UpperBytes;
+                        if (Segment < ConventionalEnd)
+                                SystemConventional += 16l;
+                        else if (Region != 0)
+                                SystemUpper += 16l;
+                        ConfigSegment = Segment + 1;
+                        ConfigEnd = ConfigSegment + Arena->Paragraphs;
+                        for (Index = 0; Index < 128 && ConfigSegment < ConfigEnd;
+                             Index++) {
+                                SET_FP(ConfigArena,ConfigSegment,0);
+                                if (strchr("BDFILSTX",ConfigArena->Signature) == (char *)0)
+                                        break;
+                                ConfigNext = ConfigSegment + ConfigArena->Paragraphs + 1;
+                                if (ConfigNext <= ConfigSegment || ConfigNext > ConfigEnd)
+                                        break;
+                                if (ConfigArena->Signature == 'D' ||
+                                    ConfigArena->Signature == 'I' ||
+                                    ConfigArena->Signature == 'T')
+                                        GetArenaName(ConfigArena,Name);
+                                else
+                                        strcpy(Name,"MSDOS");
+                                ConfigBytes = ((unsigned long)(ConfigNext -
+                                               ConfigSegment)) * 16l;
+                                Region = UmbRegionOf(ConfigSegment);
+                                if (ConfigSegment < ConventionalEnd &&
+                                    ConfigNext <= ConventionalEnd) {
+                                        AddMemModule(Name,ConfigArena->Owner,ConfigBytes,0l);
+                                        if (ConfigBytes <= SystemConventional)
+                                                SystemConventional -= ConfigBytes;
+                                        }
+                                else if (Region != 0 &&
+                                         ConfigNext <= UmbRegions[Region - 1].End) {
+                                        AddMemModule(Name,ConfigArena->Owner,0l,ConfigBytes);
+                                        if (ConfigBytes <= SystemUpper)
+                                                SystemUpper -= ConfigBytes;
+                                        }
+                                if (Mode == MEM_MODE_DEBUG)
+                                        printf("               %-8s  %10lu   Config %c\r\n",
+                                               Name,((unsigned long)ConfigArena->Paragraphs) * 16l,
+                                               ConfigArena->Signature);
+                                if (Mode == MEM_MODE_MODULE &&
+                                    stricmp(Name,RequestedModule) == 0) {
+                                        Found = TRUE;
+                                        printf("   %05X  ",ConfigSegment);
+                                        if (Region == 0)
+                                                printf("        ");
+                                        else
+                                                printf("%6d  ",Region);
+                                        printf("%10lu      Driver\r\n",
+                                               ((unsigned long)ConfigArena->Paragraphs) * 16l);
+                                        }
+                                ConfigSegment = ConfigNext;
+                                }
+                        AddMemModule("MSDOS",8,SystemConventional,SystemUpper);
+                        }
+                if (Mode == MEM_MODE_FREE &&
+                    (Arena->Owner == 0 || Arena->Owner == Psp) &&
+                    ConventionalBytes != 0l)
+                        printf("  %04X:0000  %10lu\r\n",Segment,ConventionalBytes);
+
+                if (Arena->Signature == 'Z')
+                        break;
+                NextSegment = Segment + Arena->Paragraphs + 1;
+                if (NextSegment <= Segment)
+                        break;
+                Segment = NextSegment;
+                }
+
+        if (LinkChanged)
+                SetUmbLink(SavedLink);
+
+        if (Mode == MEM_MODE_CLASSIFY) {
+                printf("\r\nModules using memory below 1 MB:\r\n\r\n");
+                printf("  Name          Total     Conventional       Upper\r\n");
+                printf("  --------  ----------    ------------  ----------\r\n");
+                for (Index = 0; Index < MemModuleCount; Index++)
+                        printf("  %-8s  %10lu    %12lu  %10lu\r\n",
+                               MemModules[Index].Name,
+                               MemModules[Index].Conventional + MemModules[Index].Upper,
+                               MemModules[Index].Conventional,
+                               MemModules[Index].Upper);
+                printf("  %-8s  %10lu    %12lu  %10lu\r\n","Free",
+                       ConventionalFree + UpperFree,ConventionalFree,UpperFree);
+                }
+
+        if (Mode == MEM_MODE_FREE) {
+                printf("\r\nFree Upper Memory:\r\n\r\n");
+                printf("  Region   Largest free       Total free      Region size\r\n");
+                printf("  ------   ------------       ----------      -----------\r\n");
+                for (Index = 0; Index < UmbRegionCount; Index++)
+                        printf("  %6d   %12lu       %10lu      %11lu\r\n",Index + 1,
+                               RegionLargest[Index],RegionFree[Index],
+                               ((unsigned long)(UmbRegions[Index].End -
+                                UmbRegions[Index].Start)) * 16l);
+                }
+
+        if (Mode == MEM_MODE_MODULE) {
+                for (Index = 0; Index < MemModuleCount; Index++)
+                        if (stricmp(MemModules[Index].Name,RequestedModule) == 0) {
+                                printf("                   ----------------\r\n");
+                                printf("  Conventional  %10lu\r\n",MemModules[Index].Conventional);
+                                printf("  Upper         %10lu\r\n",MemModules[Index].Upper);
+                                printf("  Total Size:   %10lu\r\n",
+                                       MemModules[Index].Conventional + MemModules[Index].Upper);
+                                }
+                if (!Found) {
+                        printf("Module %s not found.\r\n",RequestedModule);
+                        exit(1);
+                        }
+                }
+
+        if (Mode == MEM_MODE_SUMMARY || Mode == MEM_MODE_CLASSIFY ||
+            Mode == MEM_MODE_DEBUG) {
+                printf("\r\nMemory Summary:\r\n\r\n");
+                printf("  Type              Total        Used        Free\r\n");
+                printf("  -------------  ----------  ----------  ----------\r\n");
+                printf("  Conventional   %10lu  %10lu  %10lu\r\n",
+                       ConventionalTotal,ConventionalTotal - ConventionalFree,
+                       ConventionalFree);
+                printf("  Upper          %10lu  %10lu  %10lu\r\n",
+                       UpperTotal,UpperTotal - UpperFree,UpperFree);
+                printf("  Reserved                0           0           0\r\n");
+                printf("  Total under 1 MB %9lu  %10lu  %10lu\r\n",
+                       ConventionalTotal + UpperTotal,
+                       ConventionalTotal + UpperTotal - ConventionalFree - UpperFree,
+                       ConventionalFree + UpperFree);
+                printf("\r\nLargest executable program size %10lu\r\n",ConventionalLargest);
+                printf("Largest free upper memory block %10lu\r\n",UpperLargest);
+                if (GetHmaState(&HmaState) && HmaState != 0)
+                        printf("MS-DOS is resident in the high memory area.\r\n");
+                else
+                        printf("The high memory area is available.\r\n");
+                }
+}
                                                                                                                                  /* ;an000; */
 /*���������������������������������������������������������������������������*/                                                  /* ;an000; */
                                                                                                                                  /* ;an000; */
