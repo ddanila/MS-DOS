@@ -59,6 +59,7 @@ PAGE
 	i_need  UmbAllocLimit,WORD      ; cap end for current UMB candidate
 	i_need  AllocScanDomain,BYTE    ; allocator arena selector
 	i_need  ArenaFreeDomain,BYTE    ; process cleanup arena selector
+	i_need  hma_resident,BYTE       ; DOS kernel HMA residency state
 	I_need  EXTERR_LOCUS,BYTE       ; Extended Error Locus
 
 ;
@@ -658,6 +659,12 @@ PAGE
 	JZ      AllocOperSetRegionLimit
 	CMP     AL,0BH
 	JZ      AllocOperGetRegionLimit
+	CMP     AL,0CH
+	JZ      AllocOperGetRegionStart
+	CMP     AL,0DH
+	JZ      AllocOperGetRegionEnd
+	CMP     AL,0EH
+	JZ      AllocOperGetHmaState
 
 AllocOperError:
 	MOV     EXTERR_LOCUS,errLoc_mem ; Extended Error Locus
@@ -933,6 +940,53 @@ AllocOperGetRegionLimit:
 	DEC     BX
 	SHL     BX,1
 	MOV     AX,WORD PTR [UmbRegionLimits+BX]
+	transfer SYS_RET_OK
+
+AllocOperGetRegionStart:
+	CMP     CX,4D55H
+	JNZ     AllocOperError
+	CMP     SI,2142H
+	JNZ     AllocOperError
+	CMP     DI,0A55AH
+	JNZ     AllocOperError
+	OR      BX,BX
+	JZ      AllocOperError
+	XOR     AX,AX
+	MOV     AL,[UmbRegionCount]
+	CMP     BX,AX
+	JA      AllocOperError
+	DEC     BX
+	SHL     BX,1
+	MOV     AX,WORD PTR [UmbRegionStarts+BX]
+	transfer SYS_RET_OK
+
+AllocOperGetRegionEnd:
+	CMP     CX,4D55H
+	JNZ     AllocOperError
+	CMP     SI,2142H
+	JNZ     AllocOperError
+	CMP     DI,0A55AH
+	JNZ     AllocOperError
+	OR      BX,BX
+	JZ      AllocOperError
+	XOR     AX,AX
+	MOV     AL,[UmbRegionCount]
+	CMP     BX,AX
+	JA      AllocOperError
+	DEC     BX
+	SHL     BX,1
+	MOV     AX,WORD PTR [UmbRegionEnds+BX]
+	transfer SYS_RET_OK
+
+AllocOperGetHmaState:
+	CMP     CX,4D55H
+	JNZ     AllocOperError
+	CMP     SI,2142H
+	JNZ     AllocOperError
+	CMP     DI,0A55AH
+	JNZ     AllocOperError
+	XOR     AX,AX
+	MOV     AL,[hma_resident]
 	transfer SYS_RET_OK
 
 ; AX is the first MCB and SI is the exclusive provider end. Return the largest
