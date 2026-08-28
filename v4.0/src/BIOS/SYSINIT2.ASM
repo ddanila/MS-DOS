@@ -1501,6 +1501,7 @@ COMTAB	LABEL	BYTE
 ;;;;	   DB	   8,"AVAILDEV",'A'     ; NO LONGER SUPPORTED
 	DB	7,"BUFFERS",  'B'
 	DB	5,"BREAK",    'C'
+	DB	3,"DOS",      'H'
 	DB	6,"DEVICE",   'D'
 	DB	5,"FILES",    'F'
 	DB	4,"FCBS",     'X'

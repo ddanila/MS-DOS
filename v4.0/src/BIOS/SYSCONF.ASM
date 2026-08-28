@@ -318,6 +318,48 @@ Off_String	db	"OFF",0 ;AN000;
 ;local variable
 P_Ctrl_Break	db	0	;AN000; local variable
 
+Dos_Parms	label	byte
+	dw	Dos_Parmsx
+	db	0
+
+Dos_Parmsx	label	byte
+	db	1,2
+	dw	Dos_Pos
+	dw	Dos_Pos
+	db	0
+	db	0
+
+Dos_Pos	label	word
+	dw	2000h
+	dw	0
+	dw	Result_Val
+	dw	Dos_Choices
+	db	0
+
+Dos_Choices	label	byte
+	db	3
+	db	0
+	db	0
+	db	4
+	db	1
+	dw	Dos_High_String
+	db	2
+	dw	Dos_Low_String
+	db	3
+	dw	Dos_Umb_String
+	db	4
+	dw	Dos_NoUmb_String
+
+Dos_High_String db "HIGH",0
+Dos_Low_String db "LOW",0
+Dos_Umb_String db "UMB",0
+Dos_NoUmb_String db "NOUMB",0
+
+	PUBLIC	DosHighRequested
+	PUBLIC	DosUmbRequested
+DosHighRequested db 0
+DosUmbRequested db 0
+
 ;--------------------------------
 
 ; COUNTRY = n {m {path}}
@@ -1231,7 +1273,7 @@ $$SR28:
 ;********************************************************************************
 TryW:					;AN002;
 	CMP	AH,'W'			;AN002;
-	JNZ	TRYDJ			;AN002;
+	JNZ	TRYH			;AN002;
 	mov	di, offset CPSW_Parms	;AN002;
 	xor	cx,cx			;AN002;
 	mov	dx,cx			;AN002;
@@ -1267,6 +1309,40 @@ $$EN40:
 ;	$ENDSRCH			;AN002;
 $$SR40:
 	jmp	Coff			;AN002;
+
+TryH:
+	CMP	AH,'H'
+	JNZ	TRYDJ
+	mov	di, offset Dos_Parms
+	xor	cx,cx
+	mov	dx,cx
+Dos_Parse_Loop:
+	call	Sysinit_Parse
+	jc	Dos_Parse_Error
+	cmp	ax,$P_RC_EOL
+	je	Dos_Parse_Done
+	mov	al,Result_Val.$P_ITEM_TAG
+	cmp	al,1
+	je	Dos_Set_High
+	cmp	al,2
+	je	Dos_Set_Low
+	cmp	al,3
+	je	Dos_Set_Umb
+	mov	DosUmbRequested,0
+	jmp	Dos_Parse_Loop
+Dos_Set_High:
+	mov	DosHighRequested,1
+	jmp	Dos_Parse_Loop
+Dos_Set_Low:
+	mov	DosHighRequested,0
+	jmp	Dos_Parse_Loop
+Dos_Set_Umb:
+	mov	DosUmbRequested,1
+	jmp	Dos_Parse_Loop
+Dos_Parse_Error:
+	call	Badparm_p
+Dos_Parse_Done:
+	jmp	Coff
 
 ;------------------------------------------------------------------------------
 ; Device command
