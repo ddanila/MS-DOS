@@ -110,6 +110,11 @@ endif
         int     02fh
         cmp     al, 0ffh
         je      init_fail
+
+        ; The clean-room move engine uses 80386 registers.  Reject earlier
+        ; processors before publishing any XMS vectors.
+        call    cpu_is_386
+        jc      init_fail
 ifdef DEBUG
         mov     al, 'B'
         call    debug_mark
@@ -174,11 +179,44 @@ endif
         ret
 init_fail:
         les     bx, cs:[request_ptr]
-        mov     word ptr es:[bx+14], 0
+        ; DOS 4 links character-device headers without consulting the INIT
+        ; error bit.  Keep the inert request stub resident so the device chain
+        ; never points into memory returned to the allocator.
+        mov     word ptr es:[bx+14], offset initialize
         mov     word ptr es:[bx+16], cs
-        mov     word ptr es:[bx+3], 08100h
+        mov     word ptr es:[bx+3], 00100h
         ret
 initialize endp
+
+; Carry clear on an 80386 or newer, carry set on an 8086/80186/80286.
+; This is the documented real-mode FLAGS test and contains no 386 opcodes.
+cpu_is_386 proc near
+        push    ax
+        pushf
+        xor     ax, ax
+        push    ax
+        popf
+        pushf
+        pop     ax
+        test    ax, 08000h
+        jnz     short cpu_not_386
+        mov     ax, 07000h
+        push    ax
+        popf
+        pushf
+        pop     ax
+        test    ax, 07000h
+        jz      short cpu_not_386
+        popf
+        pop     ax
+        clc
+        ret
+cpu_not_386:
+        popf
+        pop     ax
+        stc
+        ret
+cpu_is_386 endp
 
 ifdef DEBUG
 debug_mark proc near
