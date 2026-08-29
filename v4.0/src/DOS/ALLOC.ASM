@@ -230,11 +230,20 @@ alloc_next:
 	JZ      alloc_end               ;   GOTO end
 	CALL    arena_next              ; AX, ES <- next block, Carry set if error
 	JC      alloc_err
-	CMP     [AllocScanDomain],0
-	JNZ     alloc_scan
 	CMP     AX,[UmbArenaHead]
 	JNZ     alloc_scan
-	JMP     alloc_end
+	CMP     [AllocScanDomain],0
+	JZ      alloc_enter_linked_upper
+	CMP     [AllocScanDomain],2
+	JZ      alloc_end               ; upper-first conventional fallback is done
+	JMP     alloc_scan
+alloc_enter_linked_upper:
+	TEST    [AllocMethod],alloc_domain_conventional
+	JNZ     alloc_end
+	CMP     [UmbLinked],0
+	JZ      alloc_end
+	INC     [AllocScanDomain]       ; standard fits follow the linked public chain
+	JMP     alloc_scan
 
 alloc_err:
 	POP     AX
@@ -246,11 +255,11 @@ alloc_trashed:
 alloc_end:
 	CMP     [FirstArena],0
 	JNZ     alloc_do_split
-	CMP     [AllocScanDomain],0
-	JZ      alloc_fail
+	CMP     [AllocScanDomain],1
+	JNZ     alloc_fail
 	TEST    [AllocMethod],alloc_domain_fallback
 	JZ      alloc_fail
-	MOV     [AllocScanDomain],0
+	MOV     [AllocScanDomain],2     ; do not re-enter the UMB after fallback
 	MOV     AX,[arena_head]
 	CALL    Check_signature
 	JC      alloc_err
@@ -264,8 +273,8 @@ alloc_fail:
 	error   error_not_enough_memory
 
 alloc_free:
-	CMP     [AllocScanDomain],0
-	JNZ     alloc_free_upper
+	CMP     [AllocScanDomain],1
+	JE      alloc_free_upper
 	MOV     [UmbAllocLimit],0
 	JMP     SHORT alloc_free_visible
 alloc_free_upper:

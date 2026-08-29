@@ -211,7 +211,7 @@ IORCHR	LABEL	BYTE			;
 	I_am	UmbRegionEnds,32	; [SYSTEM] 16 exclusive end segments
 	I_am	UmbRegionLimits,32	; [SYSTEM] temporary per-region paragraph caps
 	I_am	UmbAllocLimit,WORD,<0>; allocator cap end for current UMB candidate
-	I_am	AllocScanDomain,BYTE,<0>; allocator arena selector
+	I_am	AllocScanDomain,BYTE,<0>; 0=public chain, 1=upper, 2=fallback low
 	I_am	ArenaFreeDomain,BYTE,<0>; process cleanup arena selector
 	PUBLIC	Lock_Buffer		;
 Lock_Buffer LABEL    DWORD		;MS. DOS Lock Buffer for Ext Lock

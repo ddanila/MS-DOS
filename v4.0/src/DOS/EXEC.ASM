@@ -261,9 +261,8 @@ exec_get_environ_len:
 	SHR	BX,CL			; number of paragraphs needed
 	mov	dl,[AllocMethod]
 	push	dx
-	test	dl,alloc_domain_mask
-	jz	short exec_alloc_environment
-	and	dl,alloc_fit_mask		; keep the environment conventional
+	and	dl,alloc_fit_mask
+	or	dl,alloc_domain_conventional ; keep the environment conventional
 	mov	[AllocMethod],dl
 exec_alloc_environment:
 	PUSH	ES

@@ -27,6 +27,7 @@ arena_signature_normal	EQU 4Dh 	; valid signature, not end of arena
 arena_signature_end	EQU 5Ah 	; valid signature, last block in arena
 
 alloc_fit_mask		EQU 03h
+alloc_domain_conventional EQU 20h ; internal: do not follow a linked UMB chain
 alloc_domain_mask	EQU 0C0h
 alloc_domain_upper	EQU 40h
 alloc_domain_fallback	EQU 80h
