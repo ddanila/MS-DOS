@@ -1896,6 +1896,12 @@ DeviceHighPrepareAllocated:
 	mov	cs:[MEMLO],0
 	mov	cs:[MEMHI],ax
 	mov	cs:[DeviceHighActive],1
+	; DOS 5 exposes the caller's ordinary allocation strategy and public UMB
+	; link state to the driver's INIT routine.  The driver image remains in
+	; the UMB block already allocated above, but any memory the driver requests
+	; during INIT must follow normal DOS allocation rules (and may therefore
+	; allocate conventionally).
+	call	DeviceHighRestoreAllocatorState
 	clc
 	jmp	short DeviceHighPrepareDone
 
@@ -2363,6 +2369,18 @@ DeviceHighRestore PROC NEAR
 	mov	cs:[MEMLO],ax
 	mov	ax,cs:[DeviceHighLowMemHi]
 	mov	cs:[MEMHI],ax
+	call	DeviceHighRestoreAllocatorState
+	mov	cs:[DeviceHighActive],0
+	mov	cs:[DeviceHighBlock],0
+	mov	cs:[DeviceHighBlockSize],0
+	pop	di
+	pop	si
+	pop	dx
+	pop	cx
+	ret
+DeviceHighRestore ENDP
+
+DeviceHighRestoreAllocatorState PROC NEAR
 	call	DeviceHighResetLimits
 	cmp	cs:[DeviceHighRegionExplicit],0
 	je	short DeviceHighRestoreStrategy
@@ -2380,15 +2398,8 @@ DeviceHighRestoreStrategy:
 	mov	bl,cs:[DeviceHighOldLink]
 	mov	ax,5803h
 	int	21h
-	mov	cs:[DeviceHighActive],0
-	mov	cs:[DeviceHighBlock],0
-	mov	cs:[DeviceHighBlockSize],0
-	pop	di
-	pop	si
-	pop	dx
-	pop	cx
 	ret
-DeviceHighRestore ENDP
+DeviceHighRestoreAllocatorState ENDP
 
 ; INSTALLHIGH uses the same EXEC path as INSTALL, scoped to upper-first
 ; allocation so the ordinary path remains the exact conventional fallback.
