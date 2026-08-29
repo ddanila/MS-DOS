@@ -323,7 +323,7 @@ Init_MEMM386	proc	far
 ;
 chk_pt:
 	call	Is386			;Q: is this a 386 ?
-	jnz	inc_prc 		;  N: no, set error
+	jc	inc_prc 		;  N: no, set error (Is386 returns carry)
 					;  Y: check machine type
 ;
 ;  verify machine type
