@@ -1311,6 +1311,7 @@ CU_scan:
 	dec	[_free_count]
 	inc	cs:[umb_backing_count]
 	call	Map_UMB_Page
+	mov	cs:umb_candidates[si],2 ; candidate now has backing installed
 
 	cmp	bp,dx
 	jne	short CU_new_extent
@@ -1355,9 +1356,10 @@ CU_rollback:
 	xor	si,si
 	mov	dx,0a000h
 CU_restore_scan:
-	cmp	cs:umb_candidates[si],0
-	je	short CU_restore_next
+	cmp	cs:umb_candidates[si],2
+	jne	short CU_restore_next
 	call	Restore_UMB_Page
+	mov	cs:umb_candidates[si],1
 CU_restore_next:
 	inc	si
 	add	dx,0400h
@@ -1383,9 +1385,10 @@ Rollback_UMB proc near
 	xor	si,si
 	mov	dx,0a000h
 RU_restore_scan:
-	cmp	cs:umb_candidates[si],0
-	je	short RU_restore_next
+	cmp	cs:umb_candidates[si],2
+	jne	short RU_restore_next
 	call	Restore_UMB_Page
+	mov	cs:umb_candidates[si],1
 RU_restore_next:
 	inc	si
 	add	dx,0400h
