@@ -1312,6 +1312,10 @@ CU_scan:
 	inc	cs:[umb_backing_count]
 	call	Map_UMB_Page
 	mov	cs:umb_candidates[si],2 ; candidate now has backing installed
+ifdef UMB_TEST_FAIL_AFTER_MAP
+	cmp	cs:[umb_backing_count],UMB_TEST_FAIL_AFTER_MAP
+	jae	CU_rollback
+endif
 
 	cmp	bp,dx
 	jne	short CU_new_extent
@@ -1339,6 +1343,9 @@ CU_next:
 	cmp	si,UMB_PAGE_COUNT
 	jb	short CU_scan
 CU_publish:
+ifdef UMB_TEST_FAIL_BEFORE_PUBLISH
+	jmp	CU_rollback
+endif
 	cmp	cs:[umb_registration+2],0
 	je	short CU_rollback
 	push	ds
