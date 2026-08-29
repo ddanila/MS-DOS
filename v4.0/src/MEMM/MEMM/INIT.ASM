@@ -207,6 +207,8 @@ _DATA	segment
 dos_version	db	0h	; MS-DOS version
 pool_size	dw	0	; size of EMM Pages Pool in kbytes
 msg_flag	dw	0	; Message flag byte
+umb_mode	db	0	; RAM or NOEMS requested paging-backed UMBs
+noems_mode	db	0	; NOEMS suppresses the EMS page frame
 
 driver_end	dw	0	; end of driver -> driver brk address
 		dw	seg LAST
@@ -263,6 +265,8 @@ UMB_FIRST_PAGE	equ	0a000h / 0400h
 UMB_PAGE_COUNT	equ	(0f000h - 0a000h) / 0400h
 umb_peer	db	0
 umb_candidates	db	UMB_PAGE_COUNT dup (0)
+umb_includes	db	UMB_PAGE_COUNT dup (0)
+umb_excludes	db	UMB_PAGE_COUNT dup (0)
 umb_backing_count dw	0
 umb_registered	db	0
 umb_registration dw	1, 0
@@ -385,7 +389,14 @@ IE_find_phys:
 					; and page frame
 	test	[msg_flag],KILLER_MSG	;Q: any killer messages
 	jnz	short IE_find_error
+	cmp	[noems_mode],0
+	je	short IE_prepare_umb
+	mov	[PF_Base],0ffffh	; EMM_Init converts this to no page frame
+IE_prepare_umb:
+	cmp	[umb_mode],0
+	je	short IE_skip_prepare_umb
 	call	Prepare_UMB		; remove safe UMA candidates from EMS windows
+IE_skip_prepare_umb:
 	jmp	IE_alloc		; Go allocate logical pages
 IE_find_error:
 	jmp	IE_exit 		; exit with error
@@ -424,7 +435,10 @@ IE_InitTAB:
 IE_InitT_Good:
 	test	[msg_flag],KILLER_MSG	;Q: any killer messages?
 	jnz	short IE_table_error
+	cmp	[umb_mode],0
+	je	short IE_skip_commit_umb
 	call	Commit_UMB		; map backing and publish atomically
+IE_skip_commit_umb:
 	jmp	IE_chkbase		; check base memory left
 IE_table_error:
 	jmp	IE_exit 		; exit
@@ -702,6 +716,8 @@ jmp_Hx:
 ;
 jmp_Xs:
 	jmp	chk_Xs
+jmp_Is:
+	jmp	chk_Is
 
 ploop1:
 	mov	si,offset DGROUP:arg_str; ds:si = storage for argument
@@ -716,6 +732,12 @@ ploop1:
 	je	jmp_Hx			;   maybe: go validate it
 	cmp	al,'x'			; q: Exclude segment parameter
 	je	jmp_Xs			;   maybe: go validate it
+	cmp	al,'i'			; q: Include segment parameter
+	je	jmp_Is			;   maybe: go validate it
+	cmp	al,'r'			; q: RAM activation mode?
+	je	short chk_RAM
+	cmp	al,'n'			; q: NOEMS activation mode?
+	je	short chk_NOEMS
 ;	 cmp	 al,'o' 		 ; q: ON/OFF?
 ;	 je	 jmp_onf		 ;   maybe: go validate it
 ;	 cmp	 al,'a' 		 ; q: AUTO?
@@ -728,6 +750,31 @@ ploop1:
 inv_parm:
 	or	[msg_flag],INV_PARM_MSG ; set invalid parameter flag
 	jmp	short ploop1		; continue
+
+chk_RAM:
+	cmp	cx,3
+	jne	inv_parm
+	cmp	byte ptr [si],'a'
+	jne	inv_parm
+	cmp	byte ptr [si+1],'m'
+	jne	inv_parm
+	mov	[umb_mode],1
+	jmp	ploop1
+
+chk_NOEMS:
+	cmp	cx,5
+	jne	inv_parm
+	cmp	byte ptr [si],'o'
+	jne	inv_parm
+	cmp	byte ptr [si+1],'e'
+	jne	inv_parm
+	cmp	byte ptr [si+2],'m'
+	jne	inv_parm
+	cmp	byte ptr [si+3],'s'
+	jne	inv_parm
+	mov	[umb_mode],1
+	mov	[noems_mode],1
+	jmp	ploop1
 chk_siz:
 	mov	bx,cx			; bx = number of digits
 	mov	byte ptr [bx+si-1],' '	; terminate string
@@ -845,6 +892,14 @@ chk_Xs:
 	call	handle_Xswitch
 	jc	inv_parm
 	jmp	ploop1
+
+; I= explicitly includes otherwise unused adapter space.  The recorded map is
+; applied after ROM discovery and before page-frame selection.  Explicit X=
+; ranges are recorded separately and always take precedence.
+chk_Is:
+	call	handle_Iswitch
+	jc	inv_parm
+	jmp	ploop1
 ;
 ;
 ;	Check for ON/OFF
@@ -957,7 +1012,8 @@ page
 ;******************************************************************************
 ; handle_Xswitch - processes the X switch to make some segments non-mappable  ;
 ;									      ;
-; entry: ds:di string with X switch parameters in form "X:nnnn-mmmm"	      ;
+; entry: ds:di string with X switch parameters in form "X:nnnn-mmmm" or      ;
+;        the DOS 5/6 form "X=nnnn-mmmm"                                      ;
 ;	 cx is length of string
 ;									      ;
 ; exit:  CY set if invalid parameter					      ;
@@ -977,8 +1033,11 @@ handle_XSwitch	proc	near
 	lodsb		    ; get the next letter ":"
 	sub	cx,2	    ;
 ;
-	cmp	al,":"	    ; is it ":"
-	jne	error_Xs    ; if not it is a bad parameter
+	cmp	al,":"	    ; accept the historical spelling
+	je	short Xs_delimiter_ok
+	cmp	al,"="	    ; and the DOS 5/6 public spelling
+	jne	error_Xs    ; if neither, it is a bad parameter
+Xs_delimiter_ok:
 ;
 	call	htoi	    ; convert hex to integer
 	jcxz	error_Xs    ; if we have run out we have a bad parameter
@@ -992,6 +1051,14 @@ handle_XSwitch	proc	near
 	jnz	error_Xs    ;
 ;
 	call	htoi	    ; convert hex to mappable
+	push	ax
+	push	bx
+	push	di
+	mov	di,offset LAST:umb_excludes
+	call	record_umb_range
+	pop	di
+	pop	bx
+	pop	ax
 	call	exclude_segments
 
 	clc		    ; set success and
@@ -1001,6 +1068,105 @@ error_Xs:
 	ret		    ; return
 ;
 handle_XSwitch	endp
+
+; Parse I= using the same public range syntax as X=.  Applying the range is
+; deferred until the normal firmware scan has completed.
+handle_ISwitch	proc	near
+	cmp	cx,5
+	jb	error_Is
+	lodsb
+	sub	cx,2
+	cmp	al,"="
+	jne	error_Is
+	call	htoi
+	jcxz	error_Is
+	mov	bx,ax
+	lodsb
+	dec	cx
+	jcxz	error_Is
+	cmp	al,"-"
+	jne	error_Is
+	call	htoi
+	push	di
+	mov	di,offset LAST:umb_includes
+	call	record_umb_range
+	pop	di
+	clc
+	ret
+error_Is:
+	stc
+	ret
+handle_ISwitch	endp
+
+; Record the 16 KiB pages in AX:BX (high:low) that intersect A000-EFFF.
+; Ranges outside that window remain syntactically valid but cannot become UMBs.
+record_umb_range proc near
+	push	ax
+	push	bx
+	push	cx
+	push	dx
+	push	di
+	cmp	ax,0a000h
+	jb	short record_umb_done
+	cmp	bx,0f000h
+	jae	short record_umb_done
+	cmp	bx,0a000h
+	jae	short record_low_ok
+	mov	bx,0a000h
+record_low_ok:
+	cmp	ax,0efffh
+	jbe	short record_high_ok
+	mov	ax,0efffh
+record_high_ok:
+	mov	cl,10
+	shr	ax,cl
+	shr	bx,cl
+	mov	dx,bx
+	sub	dx,UMB_FIRST_PAGE
+	add	di,dx
+	sub	ax,bx
+	inc	ax
+	mov	cx,ax
+	mov	al,1
+record_umb_loop:
+	mov	cs:[di],al
+	inc	di
+	loop	record_umb_loop
+record_umb_done:
+	pop	di
+	pop	dx
+	pop	cx
+	pop	bx
+	pop	ax
+	ret
+record_umb_range endp
+
+; Called by physical-page discovery after option-ROM scanning.  I= can reclaim
+; adapter ROM space C000-EFFF by explicit user request.  A000-BFFF video memory
+; and F000-FFFF system ROM are never candidates.  X= wins regardless of order.
+public Apply_User_UMA_Ranges
+Apply_User_UMA_Ranges proc near
+	push	ax
+	push	cx
+	push	si
+	mov	si,8			; C000 is page 8 within A000-EFFF
+	mov	cx,UMB_PAGE_COUNT-8
+apply_user_range_loop:
+	cmp	cs:umb_includes[si],0
+	je	short apply_user_exclude
+	mov	cs:mappable_segs[si+UMB_FIRST_PAGE],PAGE_MAPPABLE
+apply_user_exclude:
+	cmp	cs:umb_excludes[si],0
+	je	short apply_user_next
+	mov	cs:mappable_segs[si+UMB_FIRST_PAGE],PAGE_NOT_MAPPABLE
+apply_user_next:
+	inc	si
+	loop	apply_user_range_loop
+	pop	si
+	pop	cx
+	pop	ax
+	ret
+Apply_User_UMA_Ranges endp
 
 ;-----------------------------------------------------------------------;
 ; htoi									;

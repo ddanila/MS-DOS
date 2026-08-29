@@ -107,6 +107,7 @@ _TEXT	ends
 
 LAST	segment
 	assume	cs:LAST, ds:DGROUP, es:DGROUP
+	extrn	Apply_User_UMA_Ranges:near
 
 	page
 ;*************************************************************************
@@ -174,6 +175,7 @@ find_phys_pages proc	near
 	call	rom_srch		; this searches for option rom's and
 					; removes the segments of these from
 					; being mappable
+	call	Apply_User_UMA_Ranges ; apply explicit I= and X= precedence
 ;
 ; then find the page frame from the information of mappable segs from C000-E000
 ; and the user specified page frame (if any).
